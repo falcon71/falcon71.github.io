@@ -1,28 +1,28 @@
 var islands = [
-	  { name: 'Isla Matanceros', id: 'Matanceros', cages:[
+	  { name: 'Isla Matanceros', cages:[
 		{name: 'Cage', dinos:[]}
 	  ] },
-	  { name: 'Isla Muerta', id: 'Muerta' , cages:[
+	  { name: 'Isla Muerta', cages:[
 		{name: 'Cage', dinos:[]}
 	  ] },
-	  { name: 'Isla Tacano', id: 'Tacano' , cages:[
+	  { name: 'Isla Tacano' , cages:[
 		{name: 'Cage', dinos:[]}
 	  ] },
-	  { name: 'Isla Pena', id: 'Pena' , cages:[
+	  { name: 'Isla Pena', cages:[
 		{name: 'Cage', dinos:[]}
 	  ] },
-	  { name: 'Isla Sorna', id: 'Sorna' , cages:[
+	  { name: 'Isla Sorna', cages:[
 		{name: 'Cage', dinos:[]}
 	  ] },
-	  { name: 'Isla Nublar', id: 'Nublar' , cages:[
+	  { name: 'Isla Nublar', cages:[
 		{name: 'Cage', dinos:[]}
 	  ] },
 	]
 	
 var species = [
-		{id: '1', name: 'Tyrannosaurus Rex', type:'Large Carnivore', isCarnivore:true, baseStar:234, basePrice:1964000, comfort:85, socialMin: 0, socialMax: 1, popMin: 0, popMax: 15, grass: 211, forest: 52},
-		{id: '2', name: 'Velociraptor',      type:'Small Carnivore', isCarnivore:true, baseStar:74, basePrice:373000, comfort:80, socialMin: 2, socialMax: 6, popMin: 0, popMax: 20, grass: 148, forest: 52},
-		{id: '3', name: 'Ankylosaurus',      type:'Armored Herbivore', isCarnivore:false, baseStar:60, basePrice:315000, comfort:60, socialMin: 0, socialMax: 4, popMin: 0, popMax: 8, grass: 49, forest: 49}
+		{name: 'Tyrannosaurus Rex', type:'Large Carnivore', isCarnivore:true, baseStar:234, basePrice:1964000, comfort:85, socialMin: 0, socialMax: 1, popMin: 0, popMax: 15, grass: 211, forest: 52},
+		{name: 'Velociraptor',      type:'Small Carnivore', isCarnivore:true, baseStar:74, basePrice:373000, comfort:80, socialMin: 2, socialMax: 6, popMin: 0, popMax: 20, grass: 148, forest: 52},
+		{name: 'Ankylosaurus',      type:'Armored Herbivore', isCarnivore:false, baseStar:60, basePrice:315000, comfort:60, socialMin: 0, socialMax: 4, popMin: 0, popMax: 8, grass: 49, forest: 49}
 	]
 		
 		
@@ -62,7 +62,7 @@ new Vue({
 			return count >= min && count <= max;
 		},
 		docClose: function handler(event) {
-			document.cookie = JSON.stringify(this.$data.islands);
+			document.cookie = "islands=" + JSON.stringify(this.$data.islands);
 		}
   },
   watch: {
@@ -133,9 +133,9 @@ new Vue({
         window.addEventListener('beforeunload', this.docClose)  
 		var saved = document.cookie;
 		if(saved != ""){
-		  this.$data.islands = JSON.parse(saved);
-		  this.$data.currentIsland = this.$data.islands[0];
+			var islandJSON = saved.substr(saved.indexOf("=")+1);
+			this.$data.islands = JSON.parse(islandJSON);
+			this.$data.currentIsland = this.$data.islands[0];
 		}
-
   },
 });
