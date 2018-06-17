@@ -50,13 +50,7 @@ new Vue({
 		},
 		
 		addDino: function (event) {
-			this.$data.islands =  JSON.parse(prompt("Please enter your name", "Harry Potter"));
-			this.$data.currentIsland= this.$data.islands[0];
-			
-		 //this.$data.currentCage.dinos.push({target: 0, count: 0, species: species[0]});
-		  //console.log(JSON.stringify(this.$data.islands));
-		  
-
+		  this.$data.currentCage.dinos.push({target: 0, count: 0, species: species[0]});
 		},
 
 		formatPrice(value) {
@@ -68,8 +62,7 @@ new Vue({
 			return count >= min && count <= max;
 		},
 		docClose: function handler(event) {
-			document.cookie = "username=John Doe";
-			alert('close');
+			document.cookie = JSON.stringify(this.$data.islands);
 		}
   },
   watch: {
@@ -137,8 +130,9 @@ new Vue({
   },
   
   created() {
-	  document.cookie = "hello=world";
-	  console.log( document.cookie);
-        window.addEventListener('beforeunload', this.docClose)  
+        window.addEventListener('beforeunload', this.docClose)  	
+		this.$data.islands = JSON.parse( document.cookie);
+		this.$data.currentIsland= this.$data.islands[0];
+
   },
-  });
+});
