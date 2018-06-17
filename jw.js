@@ -137,6 +137,8 @@ new Vue({
   },
   
   created() {
+	  document.cookie = "hello=world";
+	  alert(document.cookie);
         window.addEventListener('beforeunload', this.docClose)  
   },
   });
