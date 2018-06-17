@@ -38,12 +38,16 @@ body {
 
 
 .closeTab{
-	position: absolute;
     background-color:#00000000;
 	border: none;
-	top: 4px;
-	right: 4px;
     color:#12c4d0;
+    font-size: 12px;
+	position: absolute;
+	top: 2px;
+	right: 2px;
+	width: 10px;
+	height: 10px;
+	padding: 0;
 }
 
 table{
