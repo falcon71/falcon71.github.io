@@ -104,7 +104,8 @@ new Vue({
       return count >= min && count <= max;
     },
     docClose: function handler(event) {
-      document.cookie = "islands=" + JSON.stringify(this.$data.islands);
+	  var jsonIslands = JSON.stringify(this.$data.islands);
+	  window.localStorage.setItem('islands', jsonIslands);
     }
   },
   watch: {
@@ -173,10 +174,10 @@ new Vue({
 
   created() {
     window.addEventListener('beforeunload', this.docClose)
-    var saved = document.cookie;
-    if (saved != "") {
-      var islandJSON = saved.substr(saved.indexOf("=") + 1);
-      this.$data.islands = JSON.parse(islandJSON);
+	var saved = window.localStorage.getItem('islands');
+    if (saved != null) {
+      var islands = JSON.parse(saved);
+      this.$data.islands = islands;
       this.$data.currentIsland = this.$data.islands[0];
     }
   },
