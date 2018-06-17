@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <meta>
+    <meta charset="UTF-8">
+    <title>JWE Park Planner</title>
+  </meta>
+  <head>
+	<link rel="stylesheet" href="jw.css">
+  </head>
+
+  <body>
+    <div id="app">
+		<div id="tab">
+			<label v-for="island in islands">
+				<input class="hide" type="radio" v-model="currentIsland" v-bind:value="island">
+				<span>{{island.name}}</span>
+			</label>
+		</div>
+		<div id="tab">
+			<label v-for="(cage, index) in currentIsland.cages">
+				<input class="hide" type="radio" v-model="currentCage" v-bind:value="cage">
+				<span>{{cage.name}}</span>
+				<button class="closeTab" v-on:click="currentIsland.cages.splice(index, 1)" v-if="currentIsland.cages.length > 1">X</button>
+			</label>
+			<label>
+				<input class="hide" type="button" v-on:click="addCage">
+				<span>+</span>
+			</label>
+		</div>
+		<h2><input type="text" name="format" v-model="currentCage.name" /></h2>
+		<table style="width:100%">
+			<tr>
+				<th>Target</th>
+				<th>Count</th> 
+				<th>Type</th> 
+				<th>Pop Min</th>
+				<th>Pop Max</th>
+				<th>Grass Area</th>
+				<th>Forest Area</th>
+				<th>Total Area</th>
+				<th>Total Price</th>
+				<th>Total Rating</th>
+			  </tr>
+			<tr>
+				<td v-bind:value="currentCageTarget" v-bind:class="{ err: !isInRange(currentCageTarget, currentCagePopMin, currentCagePopMax) }"><input class="rightAlign" readonly v-bind:value="currentCageTarget"></td>
+				<td v-bind:class="{ err: !isInRange(currentCageCount, currentCagePopMin, currentCagePopMax), warn: currentCageCount != currentCageTarget }"><input class="rightAlign" readonly v-bind:value="currentCageCount"></td>
+				<td><input readonly v-bind:value="currentCageType"></td>
+				<td><input class="rightAlign" readonly v-bind:value="currentCagePopMin"></td>
+				<td><input class="rightAlign" readonly v-bind:value="currentCagePopMax"></td>
+				<td><input class="rightAlign" readonly v-bind:value="currentCageGrass"></td>
+				<td><input class="rightAlign" readonly v-bind:value="currentCageForest"></td>
+				<td><input class="rightAlign" readonly v-bind:value="currentCageTotalArea"></td>
+				<td><input class="rightAlign" readonly v-bind:value="formatPrice(currentCagePrice)"></td>
+				<td><input class="rightAlign" readonly v-bind:value="currentCageRating"></td>
+			</tr>
+		</table>
+		<h2>Assets</h2>
+
+        <!--<input type="text" name="format" v-model="currentCage.name" />-->
+		<table style="width:100%">
+			<tr>
+				<th>Species</th>
+				<th>Target</th> 
+				<th>Count</th>
+				<th>Type</th>
+				<th>Base Star</th>
+				<th>Base Price</th>
+				<th>Comfort %</th>
+				<th>Social Min</th>
+				<th>Social Max</th>
+				<th>Pop Min</th>
+				<th>Pop Max</th>
+				<th>Grass Area</th>
+				<th>Forest Area</th>
+				<th>Total Area</th>
+				<th>Total Price</th>
+				<th>Total Rating</th>
+				<th>*</th>
+			  </tr>
+			<tr v-for="(dino, index) in currentCage.dinos">
+				<td><select v-model="dino.species" style="width: 200px">
+					<option v-for="spec in species" v-bind:value="spec">
+						{{ spec.name }}
+					</option>
+				</select>
+				</td>
+					<td v-bind:class="{ err: !isInRange(dino.target, dino.species.socialMin, dino.species.socialMax) }"><input class="rightAlign" type="number" min="0" v-model="dino.target"></td>
+					<td v-bind:class="{ err: !isInRange(dino.count, dino.species.socialMin, dino.species.socialMax), warn: dino.count != dino.target }"><input class="rightAlign" type="number" min="0" v-model="dino.count"></td>
+					<td><input readonly v-bind:value="dino.species.type"></td>
+					<td><input class="rightAlign" readonly v-bind:value="dino.species.baseStar"></td>
+					<td><input class="rightAlign" readonly v-bind:value="formatPrice(dino.species.basePrice)"></td>
+					<td><input class="rightAlign" readonly v-bind:value="dino.species.comfort"></td>
+					<td><input class="rightAlign" readonly v-bind:value="dino.species.socialMin"></td>
+					<td><input class="rightAlign" readonly v-bind:value="dino.species.socialMax"></td>
+					<td><input class="rightAlign" readonly v-bind:value="dino.species.popMin"></td>
+					<td><input class="rightAlign" readonly v-bind:value="dino.species.popMax"></td>
+					<td><input class="rightAlign" readonly v-bind:value="dino.species.grass"></td>
+					<td><input class="rightAlign" readonly v-bind:value="dino.species.forest"></td>
+					<td><input class="rightAlign" readonly v-bind:value="dino.species.grass + dino.species.forest"></td>
+					<td><input class="rightAlign" readonly v-bind:value="formatPrice(dino.species.basePrice * dino.target)"></td>
+					<td><input class="rightAlign" readonly v-bind:value="dino.species.baseStar * dino.target"></td>
+					<td><button type="button" v-on:click="currentCage.dinos.splice(index, 1)">Remove</button></td>
+			</tr>
+		</table>
+		<button class="greenbutton" type="button" v-on:click="addDino">+</button>
+    </div>
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="jw.js"> </script>
+
+  </body>
+</html>
