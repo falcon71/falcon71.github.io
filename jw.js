@@ -130,9 +130,12 @@ new Vue({
   },
   
   created() {
-        window.addEventListener('beforeunload', this.docClose)  	
-		this.$data.islands = JSON.parse( document.cookie);
-		this.$data.currentIsland= this.$data.islands[0];
+        window.addEventListener('beforeunload', this.docClose)  
+		var saved = document.cookie;
+		if(saved != ""){
+		  this.$data.islands = JSON.parse(saved);
+		  this.$data.currentIsland = this.$data.islands[0];
+		}
 
   },
 });
