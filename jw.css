@@ -153,3 +153,8 @@ h2{
 	margin: 0;
 	padding: 0px 25px;
 }
+
+select option {
+    background-color:#001534;
+	font-weight: inherit;
+}
