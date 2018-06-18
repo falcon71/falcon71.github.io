@@ -52,7 +52,7 @@ var species = [
   {name: 'Sauropelta',          type:'Armored Herbivore', isCarnivore:false,  baseStar:54,  basePrice:280757,   comfort:55, socialMin:0, socialMax:2,   popMin:0, popMax:4,   grass:98,   forest:3},
   {name: 'Spinosaurus',         type:'Large Carnivore',   isCarnivore:true,   baseStar:217, basePrice:2009196,  comfort:70, socialMin:0, socialMax:2,   popMin:0, popMax:13,  grass:223,  forest:54},
   {name: 'Stegosaurus',         type:'Armored Herbivore', isCarnivore:false,  baseStar:40,  basePrice:320000,   comfort:55, socialMin:5, socialMax:9,   popMin:5, popMax:15,  grass:137,  forest:111},
-  {name: 'Styracosaurus',       type:'',                  isCarnivore:true,   baseStar:41,  basePrice:315000,   comfort:0,  socialMin:2, socialMax:5,   popMin:2, popMax:14,  grass:66,   forest:25},
+  {name: 'Styracosaurus',       type:'Armored Herbivore', isCarnivore:false,  baseStar:41,  basePrice:315000,   comfort:45, socialMin:2, socialMax:5,   popMin:2, popMax:14,  grass:66,   forest:25},
   {name: 'Struthiomimus',       type:'Small Herbivore',   isCarnivore:false,  baseStar:9,   basePrice:30000,    comfort:10, socialMin:0, socialMax:20,  popMin:0, popMax:25,  grass:25,   forest:12},
   {name: 'Torosaurus',          type:'Armored Herbivore', isCarnivore:false,  baseStar:45,  basePrice:340000,   comfort:45, socialMin:2, socialMax:5,   popMin:2, popMax:13,  grass:67,   forest:30	},
   {name: 'Triceratops',         type:'Armored Herbivore', isCarnivore:false,  baseStar:39,  basePrice:230000,   comfort:40, socialMin:1, socialMax:6,   popMin:1, popMax:16,  grass:92,   forest:47},

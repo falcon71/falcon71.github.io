@@ -1,6 +1,7 @@
 body {
     font-family:sans-serif;
-    background-color:#0e1e35;
+    font-weight: bold;
+    background-color:#010f23;
 }
 
 
@@ -15,8 +16,8 @@ body {
 	display: inline-block;
     width:170px;
     margin:4px;
-    background-color:#053444;
-    color:#12c4d0;
+    background-color:#01273d;
+    color:#a1faff;
 }
 
 #tab label span{
@@ -31,7 +32,7 @@ body {
 }
 
 #tab input:checked + span  {
-    background-color:#0e1e35;
+    background-color:#010f23;
     color:#b1f0f5;
     border-color:#b1f0f5;
 }
@@ -40,7 +41,7 @@ body {
 .closeTab{
     background-color:#00000000;
 	border: none;
-    color:#12c4d0;
+    color:#a1faff;
     font-size: 12px;
 	position: absolute;
 	top: 2px;
@@ -64,13 +65,15 @@ th{
 	border: none;
 	margin: 0;
 	padding: 10px;
+    cursor: default;
 }
 
 td{
 	border: none;
 	margin: 0;
 	padding: 10px;
-    color:#12c4d0;
+    color:#a1faff;
+    cursor: default;
 }
 
 
@@ -81,25 +84,28 @@ tr{
 
 button{
     font-size: 16px;
+	font-weight:inherit;
     text-align:center;
-    border:2px solid #00000000;
+    border:4px solid #00000000;
     margin:4px;
-    padding:10px 20px;
+    padding:10px 40px;
 }
 
 .greenbutton{
-    background-color:#002a31;
-    border-color:#1e695b;
-    color:#1e695b;
+    border-color:#2cfe95;
+    background-color:#2cfe9570;
+    color:#2cfe95;
 }
 
 tr input, select{
+	font-size: inherit;
     background-color:#00000000;
 	border: none;
-    color:#12c4d0;
+    color:inherit;
 	width: 50px;
 	margin: 0;
 	padding: 0;
+    font-weight: inherit;
 }
 
 .rightAlign{
@@ -112,29 +118,30 @@ tr input, select{
 
 h2, h2 input{
     font-size: 24px;
-    background-color:#053444;
-    color:#12c4d0;
-    font-weight: bold;
+    background-color:#01273d;
+    color:#a1faff;
     border: none;
 	width: 100%;
+    font-weight: inherit;
 }
 
 h2{
 	padding: 10px;
+    cursor: default;
 }
 
 
 
 .warn{
-    background-color:#ffff00;
+    background-color:#ffdf2260;
     //border-color:#1e695b;
-    color:#1e695b;
+    color:#ffdf22;
 }
 
 .err{
-    background-color:#ff0000;
+    background-color:#ef353560;
     //border-color:#1e695b;
-    color:#1e695b;
+    color:#ef3535;
 }
 
 
@@ -142,7 +149,7 @@ h2{
     font-size: 12px;
     background-color:#00000000;
 	border: none;
-    color:#12c4d0;
+    color:#a1faff;
 	margin: 0;
 	padding: 0px 25px;
 }
