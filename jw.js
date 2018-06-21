@@ -22,6 +22,7 @@ var islands = [
 var species = [
   {name: 'Ankylosaurus',        type:'Armored Herbivore', isCarnivore:true,   baseStar:60,  basePrice:315000,   comfort:60, socialMin:0, socialMax:4,   popMin:0, popMax:8,   grass:49,   forest:49},
   {name: 'Apatosaurus',         type:'Giant Herbivore',   isCarnivore:false,  baseStar:96,  basePrice:675066,   comfort:45, socialMin:3, socialMax:7,   popMin:0, popMax:22,  grass:153,  forest:142},
+  {name: 'Archaeornithomimus',  type:'Small Herbivore',   isCarnivore:false,  baseStar:11,  basePrice:70000,    comfort:15, socialMin:0, socialMax:16,  popMin:0, popMax:21,  grass:48,   forest:16},
   {name: 'Brachiosaurus',       type:'Giant Herbivore',   isCarnivore:false,  baseStar:113, basePrice:686352,   comfort:50, socialMin:1, socialMax:5,   popMin:0, popMax:25,  grass:210,  forest:210},
   {name: 'Camarasaurus',        type:'Giant Herbivore',   isCarnivore:false,  baseStar:99,  basePrice:513351,   comfort:45, socialMin:2, socialMax:7,   popMin:0, popMax:23,  grass:147,  forest:248},
   {name: 'Ceratosaurus',        type:'Large Carnivore',   isCarnivore:true,   baseStar:102, basePrice:550000,   comfort:55, socialMin:0, socialMax:3,   popMin:0, popMax:20,  grass:177,  forest:44},
@@ -42,7 +43,7 @@ var species = [
   {name: 'Kentrosaurus',        type:'',                  isCarnivore:true,   baseStar:31,  basePrice:0,        comfort:55, socialMin:3, socialMax:11,  popMin:3, popMax:14,  grass:131,  forest:108},
   {name: 'Maiasaura',           type:'Medium Herbivore',  isCarnivore:false,  baseStar:28,  basePrice:165000,   comfort:25, socialMin:4, socialMax:12,  popMin:4, popMax:23,  grass:76,   forest:62},
   {name: 'Mamenchisaurus',      type:'Giant Herbivore',   isCarnivore:false,  baseStar:121, basePrice:0,        comfort:0,  socialMin:2, socialMax:4,   popMin:0, popMax:25,  grass:154,  forest:254},
-  {name: 'Metriachanthosaurus', type:'',                  isCarnivore:true,   baseStar: 0	, basePrice:0,        comfort:0,  socialMin:0, socialMax:2,   popMin:0, popMax:18,  grass:154,  forest:73},
+  {name: 'Metriachanthosaurus', type:'Large Carnivore',   isCarnivore:true,   baseStar:84,  basePrice:873000,   comfort:0,  socialMin:0, socialMax:2,   popMin:0, popMax:18,  grass:154,  forest:73},
   {name: 'Muttaburrasaurus',    type:'Medium Herbivore',  isCarnivore:false,  baseStar:28,  basePrice:225000,   comfort:30, socialMin:6, socialMax:12,  popMin:6, popMax:20,  grass:72,   forest:59},
   {name: 'Nodosaurus',          type:'',                  isCarnivore:true,   baseStar: 0,  basePrice:0,        comfort:0,  socialMin:0, socialMax:4,   popMin:0, popMax:7,   grass:28,   forest:26},
   {name: 'Pachycephalosaurus',  type:'Small Herbivore',   isCarnivore:false,  baseStar:34,  basePrice:195000,   comfort:25, socialMin:3, socialMax:6,   popMin:3, popMax:10,  grass:105,  forest:50},
