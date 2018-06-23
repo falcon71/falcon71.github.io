@@ -86,8 +86,8 @@
 					</option>
 				</select>
 				</td>
-					<td v-bind:class="{ err: !isInRange(dino.target, dino.species.socialMin, dino.species.socialMax) }"><input class="rightAlign" type="number" min="0" v-model="dino.target"></td>
-					<td v-bind:class="{ err: !isInRange(dino.count, dino.species.socialMin, dino.species.socialMax), warn: dino.count != dino.target }"><input class="rightAlign" type="number" min="0" v-model="dino.count"></td>
+					<td v-bind:class="{ err: dino.target > 0 &&!isInRange(dino.target, dino.species.socialMin, dino.species.socialMax) }"><input class="rightAlign" type="number" min="0" v-model="dino.target"></td>
+					<td v-bind:class="{ err: dino.target > 0 && !isInRange(dino.count, dino.species.socialMin, dino.species.socialMax), warn: dino.count != dino.target }"><input class="rightAlign" type="number" min="0" v-model="dino.count"></td>
 					<td class="centerAlign">{{dino.species.type}}</td>
 					<td class="rightAlign">{{dino.species.baseStar}}</td>
 					<td class="rightAlign">{{formatPrice(dino.species.basePrice)}}</td>
