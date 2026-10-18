@@ -1,0 +1,82 @@
+---
+/**
+ * Synthetic drawing: desired track between two waypoints, the aircraft off the track, cross-track error.
+ * Drawings use currentColor and the theme variables only, so they work in light and dark mode.
+ */
+interface Props {
+	caption: string;
+}
+const { caption } = Astro.props;
+---
+
+<figure class="kln-drawing">
+	<svg viewBox="0 0 560 240" role="img" aria-labelledby="cd-title">
+		<title id="cd-title">{caption}</title>
+		<!-- desired track -->
+		<line x1="60" y1="170" x2="500" y2="70" class="track" />
+		<!-- waypoints -->
+		<g class="wpt">
+			<circle cx="60" cy="170" r="7" />
+			<circle cx="500" cy="70" r="7" />
+		</g>
+		<text x="48" y="200" class="label">WPT A</text>
+		<text x="470" y="52" class="label">WPT B</text>
+		<!-- aircraft -->
+		<g transform="translate(250 175) rotate(-13)" class="aircraft">
+			<path d="M0 -16 L3 -4 L16 2 L16 5 L3 2 L2 11 L6 15 L6 17 L0 15 L-6 17 L-6 15 L-2 11 L-3 2 L-16 5 L-16 2 L-3 -4 Z" />
+		</g>
+		<!-- cross-track error -->
+		<line x1="250" y1="175" x2="228" y2="127" class="xtk" />
+		<text x="252" y="148" class="label accent">XTK</text>
+		<!-- desired track label -->
+		<text x="330" y="100" class="label" transform="rotate(-12.8 330 100)">DTK</text>
+	</svg>
+	<figcaption>{caption}</figcaption>
+</figure>
+
+<style>
+	.kln-drawing {
+		margin: 1.5rem 0 2rem;
+		max-width: 36rem;
+		padding: 1rem;
+		background: var(--kln-figure-bg);
+		border-radius: 6px;
+		color: var(--sl-color-gray-2);
+	}
+	svg {
+		width: 100%;
+		height: auto;
+		display: block;
+	}
+	.track {
+		stroke: currentColor;
+		stroke-width: 2.5;
+	}
+	.wpt circle {
+		fill: var(--kln-figure-bg);
+		stroke: currentColor;
+		stroke-width: 2.5;
+	}
+	.aircraft path {
+		fill: var(--sl-color-white);
+	}
+	.xtk {
+		stroke: var(--kln-affordance);
+		stroke-width: 2.5;
+		stroke-dasharray: 6 5;
+	}
+	.label {
+		fill: currentColor;
+		font-family: var(--kln-font-heading);
+		font-weight: 600;
+		font-size: 17px;
+	}
+	.accent {
+		fill: var(--kln-affordance);
+	}
+	figcaption {
+		margin-top: 0.5rem;
+		font-size: var(--sl-text-sm);
+		color: var(--sl-color-gray-3);
+	}
+</style>

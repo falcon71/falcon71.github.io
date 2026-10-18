@@ -1,0 +1,43 @@
+---
+title: SET pages
+description: SET 1 to SET 10, the settings of the unit.
+sidebar:
+  order: 7
+---
+
+import KlnScreen from '../../../components/KlnScreen.astro';
+import Field from '../../../components/Field.astro';
+import Callout from '../../../components/Callout.astro';
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+aliqua.
+
+## SET 1
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+## SET 2 to SET 9
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+## SET 10
+
+<Callout kind="sim-only">
+	Lorem ipsum: the real unit has no SET 10 page. It holds settings for the simulation.
+</Callout>
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+
+<KlnScreen
+	id="set-10"
+	title="SET 10 page"
+	left={`
+{gps:GPS:   FAST}
+`}
+	status={`{page:SET10}`}
+>
+	<Field id="gps" title="GPS acquisition time">
+		Lorem ipsum: REAL takes as long as the real unit, FAST finds a position within seconds. Dolor sit amet.
+	</Field>
+	<Field id="page" title="Page name">Lorem ipsum dolor sit amet, sed do eiusmod tempor.</Field>
+</KlnScreen>

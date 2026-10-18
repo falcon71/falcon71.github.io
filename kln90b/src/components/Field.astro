@@ -1,0 +1,17 @@
+---
+/**
+ * The explanation of one field of the enclosing <KlnScreen>. The id matches the {id:...} markup in the screen text.
+ */
+interface Props {
+	id: string;
+	/** What the field is, in words, e.g. "Distance to the active waypoint" */
+	title: string;
+}
+
+const { id, title } = Astro.props;
+---
+
+<div class="kln-field-doc" data-field={id} data-title={title}>
+	<dt>{title}</dt>
+	<dd><slot /></dd>
+</div>

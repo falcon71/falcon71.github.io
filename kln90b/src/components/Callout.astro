@@ -1,0 +1,47 @@
+---
+/**
+ * The recurring boxes of the manual. Each kind has one fixed title, so the reader learns to recognize them.
+ *   availability   the feature exists only in some installations
+ *   sim-only       exists only in the simulation, not in the real unit
+ */
+interface Props {
+	kind: 'availability' | 'sim-only';
+}
+
+const titles = {
+	availability: 'Availability',
+	'sim-only': 'Simulator only',
+};
+
+const { kind } = Astro.props;
+---
+
+<aside class={`kln-callout kln-callout-${kind}`} aria-label={titles[kind]}>
+	<p class="kln-callout-title">{titles[kind]}</p>
+	<div class="kln-callout-body"><slot /></div>
+</aside>
+
+<style>
+	.kln-callout {
+		margin-top: 1.5rem;
+		padding: 0.75rem 1rem;
+		border-left: 4px solid var(--kln-callout-color);
+		background: var(--kln-figure-bg);
+	}
+	.kln-callout-availability {
+		--kln-callout-color: var(--sl-color-accent);
+	}
+	.kln-callout-sim-only {
+		--kln-callout-color: #5f86a8;
+	}
+	.kln-callout-title {
+		margin: 0;
+		font-family: var(--kln-font-heading);
+		font-weight: 600;
+		font-size: var(--sl-text-lg);
+		color: var(--sl-color-white);
+	}
+	.kln-callout-body :global(> :first-child) {
+		margin-top: 0.25rem;
+	}
+</style>

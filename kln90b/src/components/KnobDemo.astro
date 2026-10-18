@@ -1,0 +1,180 @@
+---
+/**
+ * Interactive demo of page selection: the outer knob picks the page group, the inner knob the page in the group.
+ * Each group remembers its last page, as on the unit. Pages with more than one screen (e.g. ACT) are not modelled.
+ */
+import '../styles/kln-screen.css';
+import { leftTree, rightTree } from '../data/pageTree';
+
+const sides = [
+	{ key: 'left', label: 'Left knobs', tree: leftTree, start: 3 },
+	{ key: 'right', label: 'Right knobs', tree: rightTree, start: 5 },
+];
+---
+
+<div class="kln-knobdemo not-content" data-left={JSON.stringify(leftTree)} data-right={JSON.stringify(rightTree)}>
+	<figure class="kln-figure">
+		<div class="kln-bezel">
+			<div class="kln-screen" aria-hidden="true">
+				<div class="kln-status"><span class="kln-row"><span data-status="left">NAV 1</span>|enr-leg    |<span data-status="right">APT 1</span></span></div>
+			</div>
+		</div>
+	</figure>
+
+	<div class="kln-knob-grid">
+		{
+			sides.map((side) => (
+				<section class="kln-knob-side" data-side={side.key} data-start={side.start}>
+					<h3>{side.label}</h3>
+					<div class="kln-knob-buttons">
+						<span class="kln-knob-label">Outer knob</span>
+						<button type="button" data-knob="outer" data-dir="-1" aria-label={`${side.label}: outer knob counter-clockwise`}>⟲</button>
+						<button type="button" data-knob="outer" data-dir="1" aria-label={`${side.label}: outer knob clockwise`}>⟳</button>
+						<span class="kln-knob-label">Inner knob</span>
+						<button type="button" data-knob="inner" data-dir="-1" aria-label={`${side.label}: inner knob counter-clockwise`}>⟲</button>
+						<button type="button" data-knob="inner" data-dir="1" aria-label={`${side.label}: inner knob clockwise`}>⟳</button>
+					</div>
+					<ol class="kln-groups" aria-label="Page groups">
+						{side.tree.map((g, i) => (
+							<li data-group={i}>{g.name}</li>
+						))}
+					</ol>
+					<ol class="kln-pages" aria-label="Pages in this group" aria-live="polite" />
+				</section>
+			))
+		}
+	</div>
+	<p class="kln-knob-note">Dashed pages exist only in some installations.</p>
+</div>
+
+<style>
+	.kln-knobdemo .kln-figure {
+		margin-bottom: 1rem;
+	}
+	.kln-knobdemo .kln-screen {
+		aspect-ratio: 215 / 22;
+	}
+	.kln-knobdemo .kln-status {
+		top: calc(var(--u) * 3);
+	}
+	.kln-knob-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+		gap: 1.5rem;
+		max-width: 36rem;
+	}
+	.kln-knob-side h3 {
+		margin: 0 0 0.5rem;
+		font-family: var(--kln-font-heading);
+		font-weight: 600;
+		font-size: var(--sl-text-lg);
+		color: var(--sl-color-white);
+	}
+	.kln-knob-buttons {
+		display: grid;
+		grid-template-columns: auto 2.75rem 2.75rem;
+		gap: 0.4rem 0.5rem;
+		align-items: center;
+		margin-bottom: 0.75rem;
+	}
+	.kln-knob-label {
+		font-size: var(--sl-text-sm);
+		color: var(--sl-color-gray-2);
+	}
+	.kln-knob-buttons button {
+		height: 2.25rem;
+		border: 1px solid var(--sl-color-gray-4);
+		border-radius: 50%;
+		background: var(--sl-color-gray-6);
+		color: var(--sl-color-white);
+		font-size: 1.1rem;
+		cursor: pointer;
+	}
+	.kln-knob-buttons button:hover {
+		border-color: var(--kln-affordance);
+	}
+	.kln-groups,
+	.kln-pages {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.25rem;
+		margin: 0.4rem 0 0 !important;
+		padding: 0;
+		list-style: none;
+		font-family: var(--kln-font-heading);
+		font-size: var(--sl-text-sm);
+	}
+	.kln-groups :global(li),
+	.kln-pages :global(li) {
+		margin: 0 !important;
+		padding: 0.05rem 0.4rem;
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 3px;
+		color: var(--sl-color-gray-3);
+		white-space: pre;
+	}
+	.kln-groups :global(li.is-current),
+	.kln-pages :global(li.is-current) {
+		border-color: var(--kln-affordance);
+		background: var(--kln-affordance-bg);
+		color: var(--sl-color-white);
+		font-weight: 600;
+	}
+	.kln-pages :global(li.is-optional) {
+		border-style: dashed;
+	}
+	.kln-knob-note {
+		margin-top: 0.75rem;
+		font-size: var(--sl-text-sm);
+		color: var(--sl-color-gray-3);
+	}
+</style>
+
+<script>
+	interface PageGroup {
+		name: string;
+		pages: string[];
+		optional?: string[];
+	}
+
+	for (const demo of document.querySelectorAll<HTMLElement>('.kln-knobdemo')) {
+		for (const side of demo.querySelectorAll<HTMLElement>('.kln-knob-side')) {
+			const key = side.dataset.side as 'left' | 'right';
+			const tree: PageGroup[] = JSON.parse(demo.dataset[key]!);
+			let group = Number(side.dataset.start);
+			const subIndex = tree.map(() => 0);
+			const statusName = demo.querySelector<HTMLElement>(`[data-status="${key}"]`)!;
+			const groupItems = side.querySelectorAll<HTMLElement>('.kln-groups li');
+			const pageList = side.querySelector<HTMLElement>('.kln-pages')!;
+
+			const render = () => {
+				const g = tree[group];
+				statusName.textContent = g.pages[subIndex[group]];
+				groupItems.forEach((li, i) => li.classList.toggle('is-current', i === group));
+				pageList.replaceChildren(
+					...g.pages.map((p, i) => {
+						const li = document.createElement('li');
+						li.textContent = p;
+						li.classList.toggle('is-current', i === subIndex[group]);
+						li.classList.toggle('is-optional', g.optional?.includes(p) ?? false);
+						return li;
+					}),
+				);
+			};
+
+			side.addEventListener('click', (e) => {
+				const button = (e.target as HTMLElement).closest<HTMLButtonElement>('button[data-knob]');
+				if (!button) return;
+				const dir = Number(button.dataset.dir);
+				if (button.dataset.knob === 'outer') {
+					group = (group + dir + tree.length) % tree.length;
+				} else {
+					const n = tree[group].pages.length;
+					subIndex[group] = (subIndex[group] + dir + n) % n;
+				}
+				render();
+			});
+			render();
+		}
+	}
+</script>

@@ -1,0 +1,204 @@
+/*
+ * The KLN 90B screen, drawn with text in the unit's own font.
+ *
+ * Geometry follows the simulator: a 23 x 7 character grid, each character 9 x 13 screen pixels, with a 4 px side and
+ * 3 px top margin, 215 x 100 screen pixels in all. One screen pixel is --u, derived from the width of the container,
+ * so the screen scales from a phone to a desktop without images.
+ *
+ * The whole screen is always laid out on .kln-stage; a half screen is a 112 px wide window onto it that includes the
+ * middle line (x = 107.5).
+ */
+
+@font-face {
+	font-family: 'KLN90B';
+	src: url('../assets/fonts/kln90b.ttf') format('truetype');
+	font-display: block;
+}
+
+.kln-figure {
+	--kln-phosphor: #00d109;
+	margin: 1.5rem 0 2rem;
+	max-width: 36rem;
+	break-inside: avoid;
+}
+
+.kln-figure[data-crop] {
+	max-width: 20rem;
+}
+
+.kln-bezel {
+	padding: clamp(0.5rem, 2.2cqi, 1rem);
+	background: #2b2f34;
+	border-radius: 6px;
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), inset 0 -2px 0 rgba(0, 0, 0, 0.35);
+	container-type: inline-size;
+}
+
+.kln-screen {
+	--w: 215;
+	--offset: 0;
+	--u: calc(100cqi / var(--w));
+	position: relative;
+	aspect-ratio: var(--w) / 100;
+	background: #000;
+	color: var(--kln-phosphor);
+	font-family: 'KLN90B', monospace;
+	font-size: calc(var(--u) * 11);
+	line-height: calc(var(--u) * 13);
+	text-shadow: 0 0 calc(var(--u) * 1.2) rgba(0, 209, 9, 0.55);
+	overflow: hidden;
+}
+
+.kln-screen[data-crop='left'] {
+	--w: 112;
+}
+
+.kln-screen[data-crop='right'] {
+	--w: 112;
+	--offset: 103;
+}
+
+.kln-stage {
+	position: absolute;
+	top: 0;
+	left: calc(var(--u) * var(--offset) * -1);
+	width: calc(var(--u) * 215);
+	height: 100%;
+}
+
+.kln-stage .kln-half,
+.kln-stage .kln-full,
+.kln-stage .kln-status {
+	position: absolute;
+	margin: 0;
+	white-space: pre;
+}
+
+.kln-stage .kln-half-left,
+.kln-stage .kln-full {
+	top: calc(var(--u) * 3);
+	left: calc(var(--u) * 4);
+}
+
+.kln-stage .kln-half-right {
+	top: calc(var(--u) * 3);
+	left: calc(var(--u) * 107.5);
+	height: calc(var(--u) * 78);
+	padding-left: calc(var(--u) * 4.5);
+	border-left: var(--u) solid var(--kln-phosphor);
+}
+
+.kln-stage .kln-status {
+	top: calc(var(--u) * 81);
+	left: calc(var(--u) * 4);
+	width: calc(var(--u) * 207);
+	padding-top: var(--u);
+	border-top: var(--u) solid var(--kln-phosphor);
+}
+
+.kln-row {
+	display: block;
+	height: calc(var(--u) * 13);
+}
+
+.kln-inv {
+	background: var(--kln-phosphor);
+	color: #000;
+	text-shadow: none;
+}
+
+/* Static stand-in for text that flashes on the unit. The manual never animates the screen. */
+.kln-flash {
+	outline: calc(var(--u) * 0.8) dashed var(--kln-phosphor);
+	outline-offset: calc(var(--u) * -0.4);
+}
+
+/* On inverse text the box sits outside the character, or it would vanish in the green */
+.kln-inv.kln-flash {
+	outline-offset: calc(var(--u) * 0.8);
+}
+
+/* A field with an explanation. Unmarked at rest, since nearly everything on a screen is one. */
+.kln-field {
+	cursor: help;
+	border-radius: calc(var(--u) * 0.8);
+}
+
+.kln-field:hover,
+.kln-field:focus-visible,
+.kln-field[aria-describedby] {
+	background: rgba(0, 209, 9, 0.28);
+	outline: calc(var(--u) * 0.8) solid var(--kln-phosphor);
+	outline-offset: calc(var(--u) * 0.4);
+}
+
+.kln-field.kln-inv:hover,
+.kln-field.kln-inv:focus-visible,
+.kln-field.kln-inv[aria-describedby] {
+	background: var(--kln-phosphor);
+	outline-offset: calc(var(--u) * 1.2);
+}
+
+.kln-figure figcaption {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	gap: 0.25rem 1rem;
+	margin-top: 0.5rem;
+	font-size: var(--sl-text-sm);
+	color: var(--sl-color-gray-3);
+}
+
+.kln-figure figcaption .kln-caption-title {
+	color: var(--sl-color-gray-2);
+	font-weight: 600;
+}
+
+.kln-legend-flash {
+	display: inline-block;
+	width: 1.6em;
+	height: 0.9em;
+	margin-right: 0.35em;
+	vertical-align: -0.1em;
+	outline: 1px dashed currentColor;
+	outline-offset: -1px;
+}
+
+/* All fields of a screen as a list: searchable, printable, and the source of the help window text */
+.kln-field-list {
+	margin-top: 0.75rem;
+	font-size: var(--sl-text-sm);
+}
+
+.kln-field-list summary {
+	cursor: pointer;
+	color: var(--sl-color-text-accent);
+}
+
+.kln-field-list dl {
+	margin-top: 0.5rem;
+}
+
+.kln-field-list dt {
+	font-weight: 600;
+	margin-top: 0.75rem;
+}
+
+.kln-field-list dd {
+	margin-inline-start: 0;
+}
+
+/* The field's screen text, shown in the help window */
+.kln-chip {
+	display: block;
+	width: fit-content;
+	padding: 0 0.35em;
+	background: #000;
+	color: #00d109;
+	font-family: 'KLN90B', monospace;
+	font-weight: normal;
+	font-size: 1.25em;
+	line-height: 1.35;
+	white-space: pre;
+	border-radius: 2px;
+}

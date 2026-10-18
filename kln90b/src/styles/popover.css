@@ -1,0 +1,54 @@
+/* The shared help window of src/scripts/popover.ts */
+
+.kln-popover {
+	position: absolute;
+	z-index: 100;
+	max-width: min(22rem, calc(100vw - 1rem));
+	padding: 0.5rem 0.75rem;
+	border: 1px solid var(--sl-color-gray-5);
+	border-radius: 6px;
+	background: var(--sl-color-gray-6);
+	color: var(--sl-color-white);
+	font-size: var(--sl-text-sm);
+	line-height: 1.5;
+	box-shadow: var(--sl-shadow-md);
+	pointer-events: none;
+}
+
+.kln-popover[hidden] {
+	display: none;
+}
+
+.kln-popover-wide {
+	width: min(26rem, calc(100vw - 1rem));
+	max-width: none;
+	padding: 0;
+}
+
+.kln-popover-head {
+	display: flex;
+	flex-direction: column;
+	gap: 0.35rem;
+	padding: 0.6rem 0.9rem;
+	border-bottom: 1px solid var(--sl-color-gray-5);
+}
+
+.kln-popover-head strong {
+	font-family: var(--kln-font-heading);
+	font-size: var(--sl-text-lg);
+	font-weight: 600;
+	line-height: 1.2;
+}
+
+.kln-popover-body {
+	padding: 0.6rem 0.9rem 0.75rem;
+	color: var(--sl-color-gray-1);
+}
+
+.kln-popover-body > * {
+	margin: 0;
+}
+
+.kln-popover-body > * + * {
+	margin-top: 0.6rem;
+}

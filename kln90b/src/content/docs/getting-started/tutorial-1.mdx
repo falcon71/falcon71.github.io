@@ -1,0 +1,61 @@
+---
+title: Tutorial flight 1
+description: A short cross-country flight that uses direct-to navigation only.
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import KlnScreen from '../../../components/KlnScreen.astro';
+import Field from '../../../components/Field.astro';
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+aliqua.
+
+| Departure | Destination | Distance | Aircraft                  | Checked with |
+| --------- | ----------- | -------- | ------------------------- | ------------ |
+| KAAA      | KBBB        | 98 nm    | Any single-engine piston  | Default navdata, AIRAC 0000 |
+
+Charts for both airports: [FAA digital terminal procedures](https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/dtpp/).
+
+## Before engine start
+
+<Steps>
+
+1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Press the power button.
+
+2. Sed do eiusmod tempor incididunt ut labore. Wait for the self test and confirm it with <kbd>ENT</kbd>.
+
+3. Ut enim ad minim veniam, quis nostrud exercitation. Check the position on SET 1.
+
+</Steps>
+
+## Direct to the first waypoint
+
+<Steps>
+
+1. Press <kbd>D→</kbd>. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+2. Turn the left inner knob to enter the first letter, sed do eiusmod tempor.
+
+3. Press <kbd>ENT</kbd> twice. Ut enim ad minim veniam.
+
+</Steps>
+
+<KlnScreen
+	id="tut1-direct-to"
+	title="Entering the destination on the direct-to page"
+	left={`
+{title:DIRECT TO:}
+
+   {ident!~:K}
+`}
+	status={`{crsr!:CRSR}`}
+>
+	<Field id="title" title="Page title">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Field>
+	<Field id="ident" title="Waypoint identifier being entered">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Field>
+	<Field id="crsr" title="Cursor indication">Lorem ipsum dolor sit amet, sed do eiusmod tempor.</Field>
+</KlnScreen>
+
+## En route
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+aliqua.

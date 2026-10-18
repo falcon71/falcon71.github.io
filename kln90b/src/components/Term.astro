@@ -1,0 +1,41 @@
+---
+/**
+ * An abbreviation or concept with a short explanation on hover, focus or tap.
+ *
+ *   <Term t="XTK" />                   shows "XTK"
+ *   <Term t="XTK">cross-track</Term>   shows the slot text, explains XTK
+ *
+ * The explanation comes from src/data/glossary.ts. An unknown term fails the build.
+ */
+import '../styles/popover.css';
+import { glossary } from '../data/glossary';
+
+interface Props {
+	t: string;
+}
+
+const { t } = Astro.props;
+const entry = glossary[t];
+if (!entry) throw new Error(`<Term t="${t}">: no such entry in src/data/glossary.ts`);
+const tip = entry.expansion ? `${entry.expansion}. ${entry.text}` : entry.text;
+---
+
+<abbr class="kln-term" tabindex="0" data-tip={tip}>{Astro.slots.has('default') ? <slot /> : t}</abbr>
+
+<style is:global>
+	.kln-term {
+		text-decoration: underline dotted;
+		text-decoration-color: var(--kln-affordance);
+		text-decoration-thickness: 2px;
+		text-underline-offset: 0.2em;
+		cursor: help;
+	}
+</style>
+
+<script>
+	import { attachPopover } from '../scripts/popover';
+
+	for (const term of document.querySelectorAll<HTMLElement>('.kln-term')) {
+		attachPopover(term, () => [document.createTextNode(term.dataset.tip ?? '')]);
+	}
+</script>

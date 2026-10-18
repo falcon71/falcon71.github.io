@@ -1,0 +1,48 @@
+---
+/**
+ * Starlight's footer plus the license line and the simulation disclaimer, which stays visible on every page.
+ */
+import Default from '@astrojs/starlight/components/Footer.astro';
+---
+
+<Default />
+<p class="kln-license">
+	Describes KLN 90B version 2.x for Microsoft Flight Simulator 2024. Text and site:
+	<a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a>. KLN font: LGPL-3.0, from the
+	<a href="https://github.com/falcon71/kln90b">kln90b project</a>.
+</p>
+<div class="kln-disclaimer" role="note">
+	For flight simulation only. Not for real-world navigation or flight.
+</div>
+
+<style>
+	.kln-license {
+		margin-top: 2rem;
+		font-size: var(--sl-text-xs);
+		color: var(--sl-color-gray-3);
+	}
+
+	.kln-disclaimer {
+		position: fixed;
+		inset: auto 0 0 0;
+		z-index: 50;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-height: var(--kln-disclaimer-height);
+		padding: 0.25rem 1rem;
+		background: var(--sl-color-gray-6);
+		border-top: 2px solid var(--sl-color-accent);
+		color: var(--sl-color-white);
+		font-size: var(--sl-text-xs);
+		font-weight: 600;
+		text-align: center;
+	}
+
+	@media print {
+		.kln-disclaimer {
+			position: static;
+			margin-top: 1rem;
+		}
+	}
+</style>

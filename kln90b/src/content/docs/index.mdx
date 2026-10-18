@@ -1,0 +1,96 @@
+---
+title: KLN 90B Simulator Manual
+description: How to operate the KLN 90B GPS in Microsoft Flight Simulator.
+template: splash
+hero:
+  tagline: How to operate the KLN 90B GPS in Microsoft Flight Simulator, from the first power-on to a non-precision approach.
+  actions:
+    - text: Start with the quickstart
+      link: /kln90b/getting-started/quickstart/
+    - text: Install the unit
+      link: /kln90b/getting-started/installation/
+      variant: minimal
+---
+
+import KlnScreen from '../../components/KlnScreen.astro';
+import Field from '../../components/Field.astro';
+
+<KlnScreen
+	id="home-nav-1"
+	title="NAV 1 and APT 1, the most used pair of pages"
+	left={`
+{from:KPDX }{arrow:›}{to:KSEA }
+{cdi:ηηηΚΑθηηηηη}
+{dis:DIS  45.2nm}
+{gs:GS    123kt}
+{ete:ETE   0:21}
+{brg:BRG    012°}
+`}
+	right={`
+ {ident:KSEA}
+{name:SEATTLE-TAC}
+{name:OMA INTL}
+{pos:N 47°26.94'}
+{pos:W122°18.67'}
+`}
+	status={`{lpage:NAV 1}|{mode:enr-leg}    |{rpage:APT 1}`}
+>
+	<Field id="from" title="From waypoint">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Field>
+	<Field id="arrow" title="Active leg arrow">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Field>
+	<Field id="to" title="Active waypoint">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod.</Field>
+	<Field id="cdi" title="Course deviation indicator">Lorem ipsum dolor sit amet, ut enim ad minim veniam.</Field>
+	<Field id="dis" title="Distance to the active waypoint">Lorem ipsum dolor sit amet, quis nostrud exercitation.</Field>
+	<Field id="gs" title="Ground speed">Lorem ipsum dolor sit amet, ullamco laboris nisi ut aliquip.</Field>
+	<Field id="ete" title="Estimated time en route">Lorem ipsum dolor sit amet, ex ea commodo consequat.</Field>
+	<Field id="brg" title="Bearing to the active waypoint">Lorem ipsum dolor sit amet, duis aute irure dolor.</Field>
+	<Field id="ident" title="Airport identifier">Lorem ipsum dolor sit amet, in reprehenderit in voluptate.</Field>
+	<Field id="name" title="Airport name">Lorem ipsum dolor sit amet, sed do eiusmod tempor.</Field>
+	<Field id="pos" title="Airport position">Lorem ipsum dolor sit amet, ut enim ad minim veniam.</Field>
+	<Field id="lpage" title="Name of the left page">Lorem ipsum dolor sit amet, quis nostrud exercitation.</Field>
+	<Field id="mode" title="Navigation mode">Lorem ipsum dolor sit amet, ullamco laboris nisi.</Field>
+	<Field id="rpage" title="Name of the right page">Lorem ipsum dolor sit amet, ex ea commodo consequat.</Field>
+</KlnScreen>
+
+## Contents
+
+<div class="kln-toc">
+
+### Getting started
+
+- [Installation](/kln90b/getting-started/installation/): download the right release and put it in the community folder.
+- [Quickstart](/kln90b/getting-started/quickstart/): the two halves of the screen, the knobs and the cursor, in ten minutes.
+- [Tutorial flight 1](/kln90b/getting-started/tutorial-1/): a short cross-country flight with direct-to navigation.
+- [Tutorial flight 2](/kln90b/getting-started/tutorial-2/): a flight plan with departure, arrival and approach.
+
+### The unit
+
+- [Controls and display](/kln90b/unit/controls-and-display/): knobs, buttons, the screen layout and how data is entered.
+- [Keyboard mode](/kln90b/unit/keyboard-mode/): enter identifiers with the computer keyboard.
+- [Power-on and initialization](/kln90b/unit/power-on/): self test, database, position and GPS acquisition.
+
+### Operation
+
+- [Direct-to](/kln90b/operation/direct-to/): fly straight to any waypoint.
+- [Navigation modes](/kln90b/operation/navigation-modes/): leg and OBS mode, deviation and sequencing.
+
+### Page reference
+
+- [NAV pages](/kln90b/pages/nav/): every field of the navigation pages.
+- [APT pages](/kln90b/pages/apt/): airport information, departures, arrivals and approaches.
+- [SET pages](/kln90b/pages/set/): settings, including the simulator settings on SET 10.
+
+### Reference lists
+
+- [Messages](/kln90b/lists/messages/), [Glossary](/kln90b/lists/glossary/)
+
+### Help
+
+- [External hardware](/kln90b/help/external-hardware/), [FAQ and troubleshooting](/kln90b/help/faq/), [Known limitations](/kln90b/help/known-limitations/), [Contact](/kln90b/help/contact/)
+
+</div>
+
+<style>{`
+	.kln-toc { columns: 2 22rem; column-gap: 3rem; }
+	.kln-toc h3 { break-after: avoid; margin-top: 1.5rem; }
+	.kln-toc ul { break-inside: avoid; }
+`}</style>

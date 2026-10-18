@@ -1,0 +1,51 @@
+# Builds the KLN 90B manual and publishes the site to GitHub Pages.
+# Repository settings → Pages → Source must be "GitHub Actions".
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: kln90b/package-lock.json
+      - name: Build the manual
+        working-directory: kln90b
+        run: |
+          npm ci
+          npm run build
+      - name: Assemble the site
+        run: |
+          mkdir -p _site/kln90b
+          cp index.html _site/
+          cp -r kln90b/dist/. _site/kln90b/
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

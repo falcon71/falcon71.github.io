@@ -1,0 +1,31 @@
+---
+title: Glossary
+description: Abbreviations and terms used by the unit and this manual.
+sidebar:
+  order: 2
+---
+
+import { glossary, glossaryAnchor } from '../../../data/glossary';
+
+The explanations that appear when you point at an underlined term all come from this list.
+
+<dl class="kln-glossary">
+	{Object.entries(glossary)
+		.sort(([a], [b]) => a.localeCompare(b))
+		.map(([term, entry]) => (
+			<div id={glossaryAnchor(term)}>
+				<dt>
+					{term}
+					{entry.expansion && <span class="kln-expansion">{entry.expansion}</span>}
+				</dt>
+				<dd>{entry.text}</dd>
+			</div>
+		))}
+</dl>
+
+<style>{`
+	.kln-glossary > div { padding: 0.75rem 0; border-bottom: 1px solid var(--sl-color-gray-6); }
+	.kln-glossary dt { font-family: var(--kln-font-heading); font-weight: 600; font-size: var(--sl-text-lg); color: var(--sl-color-white); }
+	.kln-glossary .kln-expansion { margin-left: 0.75rem; font-family: var(--sl-font); font-size: var(--sl-text-sm); font-weight: 400; color: var(--sl-color-gray-3); }
+	.kln-glossary dd { margin: 0.25rem 0 0; }
+`}</style>

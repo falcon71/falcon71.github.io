@@ -1,0 +1,55 @@
+---
+title: APT pages
+description: APT 1 to APT 8, airport information, departures, arrivals and approaches.
+sidebar:
+  order: 6
+---
+
+import KlnScreen from '../../../components/KlnScreen.astro';
+import Field from '../../../components/Field.astro';
+import Callout from '../../../components/Callout.astro';
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+aliqua.
+
+## APT 1
+
+<KlnScreen
+	id="apt-1"
+	title="APT 1 page"
+	right={`
+ {ident:KSEA}
+{name:SEATTLE-TAC}
+{name2:OMA INTL}
+{lat:N 47°26.94'}
+{lon:W122°18.67'}
+`}
+	status={`{page:APT 1}`}
+>
+	<Field id="ident" title="Airport identifier">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Field>
+	<Field id="name" title="Airport name, first line">Lorem ipsum dolor sit amet, sed do eiusmod tempor.</Field>
+	<Field id="name2" title="Airport name, second line">Lorem ipsum dolor sit amet, ut enim ad minim veniam.</Field>
+	<Field id="lat" title="Latitude">Lorem ipsum dolor sit amet, quis nostrud exercitation.</Field>
+	<Field id="lon" title="Longitude">Lorem ipsum dolor sit amet, ullamco laboris nisi.</Field>
+	<Field id="page" title="Page name">Lorem ipsum dolor sit amet, sed do eiusmod tempor.</Field>
+</KlnScreen>
+
+## APT 2 to APT 6
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+aliqua.
+
+## APT 7: departures and arrivals
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+aliqua.
+
+## APT 8: approaches
+
+<Callout kind="availability">
+	Lorem ipsum: APT 8 exists only if the unit is installed in your aircraft for approaches. Without it, the APT
+	group ends at APT 7.
+</Callout>
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+aliqua.

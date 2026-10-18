@@ -1,0 +1,107 @@
+/*
+ * Site theme. One accent, a muted instrument green, for links and everything the reader can interact with.
+ * The bright phosphor green belongs to the unit's screen only and is defined in kln-screen.css.
+ */
+
+:root {
+	--sl-font: 'Public Sans Variable', system-ui, sans-serif;
+	--kln-font-heading: 'Barlow Semi Condensed', 'Arial Narrow', sans-serif;
+	--kln-disclaimer-height: 2rem;
+
+	/* Dark mode (Starlight's default scheme) */
+	--sl-color-white: #f3f5f7;
+	--sl-color-gray-1: #e2e6ea;
+	--sl-color-gray-2: #c4cad1;
+	--sl-color-gray-3: #8c949d;
+	--sl-color-gray-4: #5d646c;
+	--sl-color-gray-5: #3a4047;
+	--sl-color-gray-6: #262a2f;
+	--sl-color-black: #1b1e22;
+
+	--sl-color-accent-low: #173322;
+	--sl-color-accent: #4caf6e;
+	--sl-color-accent-high: #a3dcb4;
+
+	--kln-affordance: #6cc58b;
+	--kln-affordance-bg: rgba(108, 197, 139, 0.14);
+	--kln-figure-bg: #22262b;
+}
+
+:root[data-theme='light'] {
+	--sl-color-white: #141a21;
+	--sl-color-gray-1: #232b34;
+	--sl-color-gray-2: #333c46;
+	--sl-color-gray-3: #555e69;
+	--sl-color-gray-4: #87909a;
+	--sl-color-gray-5: #c3c9cf;
+	--sl-color-gray-6: #e6e9ec;
+	--sl-color-gray-7: #eff1f3;
+	--sl-color-black: #f8f9fa;
+
+	--sl-color-accent-low: #d5ecdc;
+	--sl-color-accent: #2c6e43;
+	--sl-color-accent-high: #1c4a2c;
+
+	--kln-affordance: #2f7a4a;
+	--kln-affordance-bg: rgba(47, 122, 74, 0.1);
+	--kln-figure-bg: #eceef1;
+}
+
+/* Headings read like panel placards: condensed, firm, never shouting */
+.sl-markdown-content :is(h1, h2, h3, h4),
+h1#_top,
+.site-title {
+	font-family: var(--kln-font-heading);
+	font-weight: 600;
+	letter-spacing: 0.01em;
+}
+
+h1#_top {
+	font-size: clamp(2rem, 4vw, 2.75rem);
+	line-height: 1.1;
+}
+
+.sl-markdown-content {
+	line-height: 1.65;
+}
+
+.sl-markdown-content :is(p, li) {
+	max-width: 70ch;
+}
+
+/* Key and knob names, e.g. <kbd>ENT</kbd> */
+.sl-markdown-content kbd {
+	font-family: var(--kln-font-heading);
+	font-weight: 600;
+	font-size: 0.9em;
+	padding: 0.05em 0.4em;
+	border: 1px solid var(--sl-color-gray-4);
+	border-bottom-width: 2px;
+	border-radius: 3px;
+	background: var(--sl-color-gray-6);
+	color: var(--sl-color-white);
+	white-space: nowrap;
+}
+
+/* The disclaimer takes two lines on a phone */
+@media (max-width: 30rem) {
+	:root {
+		--kln-disclaimer-height: 3.25rem;
+	}
+}
+
+/* Keep the content clear of the fixed simulation disclaimer */
+body {
+	padding-bottom: var(--kln-disclaimer-height);
+}
+
+:focus-visible {
+	outline: 2px solid var(--kln-affordance);
+	outline-offset: 2px;
+}
+
+@media print {
+	body {
+		padding-bottom: 0;
+	}
+}
