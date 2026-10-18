@@ -60,6 +60,13 @@ Build and deployment → Source must be set to "GitHub Actions" once.
   (or `full`) the whole screen is shown and `status` is the full 23-character status line.
 - The build fails when a row is wider than the screen.
 
+## Page links
+
+Page names in the text ("NAV 1", "SET10", "the VOR page", "the APT pages") become links to the page reference
+when the site is built (`kln90b/src/plugins/remarkPageLinks.ts`). Not linked: the page the current section
+describes, a page already linked since the last heading, and anything in headings, links and code. A name whose
+chapter or heading does not exist yet stays plain text, and the build prints a `[page links]` warning.
+
 ## License
 
 The manual and the site are released under [CC0 1.0 Universal](LICENSE). The KLN font

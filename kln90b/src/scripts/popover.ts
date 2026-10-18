@@ -19,7 +19,8 @@ function element(): HTMLDivElement {
 		document.body.append(popover);
 
 		document.addEventListener('click', (e) => {
-			if (pinned && anchor && !anchor.contains(e.target as Node)) hidePopover();
+			const target = e.target as Node;
+			if (pinned && anchor && !anchor.contains(target) && !popover!.contains(target)) hidePopover();
 		});
 		document.addEventListener('keydown', (e) => {
 			if (e.key === 'Escape') hidePopover();
@@ -43,6 +44,8 @@ export function showPopover(target: HTMLElement, content: Node[], options: Popov
 	pinned = options.pin ?? false;
 	p.replaceChildren(...content);
 	p.classList.toggle('kln-popover-wide', options.wide ?? false);
+	// Only a pinned window takes the pointer, so its links can be clicked; a hover window must not block the screen
+	p.classList.toggle('kln-popover-pinned', pinned);
 	p.hidden = false;
 	target.setAttribute('aria-describedby', p.id);
 

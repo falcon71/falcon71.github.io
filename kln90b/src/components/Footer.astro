@@ -7,9 +7,9 @@ import Default from '@astrojs/starlight/components/Footer.astro';
 
 <Default />
 <p class="kln-license">
-	Describes KLN 90B version 2.x for Microsoft Flight Simulator 2024. Text and site:
-	<a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a>. KLN font: LGPL-3.0, from the
-	<a href="https://github.com/falcon71/kln90b">kln90b project</a>.
+	Describes KLN 90B version 2.x for Microsoft Flight Simulator 2024.{' '}
+	Text and site:{' '}<a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a>.{' '}
+	KLN font: LGPL-3.0, from the{' '}<a href="https://github.com/falcon71/kln90b">kln90b project</a>.
 </p>
 <div class="kln-disclaimer" role="note">
 	For flight simulation only. Not for real-world navigation or flight.
@@ -22,6 +22,10 @@ import Default from '@astrojs/starlight/components/Footer.astro';
 		color: var(--sl-color-gray-3);
 	}
 
+	/*
+	 * Fixed to the bottom of the window. The site menu is drawn over its left part on wide screens, so the text is
+	 * centered in the area right of the menu (--sl-content-inline-start is 0 when the menu is hidden or on phones).
+	 */
 	.kln-disclaimer {
 		position: fixed;
 		inset: auto 0 0 0;
@@ -30,12 +34,14 @@ import Default from '@astrojs/starlight/components/Footer.astro';
 		align-items: center;
 		justify-content: center;
 		min-height: var(--kln-disclaimer-height);
-		padding: 0.25rem 1rem;
+		padding: 0.25rem 1rem calc(0.25rem + env(safe-area-inset-bottom, 0px));
+		padding-inline-start: calc(var(--sl-content-inline-start, 0rem) + 1rem);
 		background: var(--sl-color-gray-6);
 		border-top: 2px solid var(--sl-color-accent);
 		color: var(--sl-color-white);
 		font-size: var(--sl-text-xs);
 		font-weight: 600;
+		line-height: 1.4;
 		text-align: center;
 	}
 
@@ -43,6 +49,7 @@ import Default from '@astrojs/starlight/components/Footer.astro';
 		.kln-disclaimer {
 			position: static;
 			margin-top: 1rem;
+			padding-inline-start: 1rem;
 		}
 	}
 </style>

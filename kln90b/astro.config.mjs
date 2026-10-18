@@ -1,12 +1,18 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import { unified } from '@astrojs/markdown-remark';
+import remarkPageLinks from './src/plugins/remarkPageLinks';
 
 // The manual is served from https://falcon71.github.io/kln90b/
 export default defineConfig({
 	site: 'https://falcon71.github.io',
 	base: '/kln90b',
 	trailingSlash: 'always',
+	markdown: {
+		// The remark pipeline, for the plugin that links every page name in the text to the page reference
+		processor: unified({ remarkPlugins: [[remarkPageLinks, { base: '/kln90b' }]] }),
+	},
 	integrations: [
 		starlight({
 			title: 'KLN 90B Simulator Manual',
@@ -26,6 +32,7 @@ export default defineConfig({
 			],
 			components: {
 				Footer: './src/components/Footer.astro',
+				SiteTitle: './src/components/SiteTitle.astro',
 			},
 			sidebar: [
 				{
