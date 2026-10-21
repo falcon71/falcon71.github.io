@@ -142,6 +142,23 @@ turns the lit blocks into an inline SVG of rectangles in the screen's phosphor c
 unit draws, map labels included. The text rows over a map (orientation and range on NAV 5) stay text and can carry
 fields as on any screen.
 
+### Map fields
+
+Added 2026-10-21, after the maintainer's review of the first NAV 5 screen.
+
+Every element the unit draws on a map is a field, like nearly everything else on a screen:
+
+- While the map is drawn, the generator records each drawing call (an icon, a flight plan leg, an arrow, a line, a
+  label) and which pixels it lit. A call is described in words, with its points named after the facilities they
+  match (`icon % KSEA`), the way the harness's map recorder (`recordMap`) describes them.
+- The map's SVG holds one group per element, with the element's description and its pixels, so a diff shows which
+  element changed.
+- A map field names its map side and a regular expression over the element descriptions. It must match exactly one
+  element, unless the field claims several on purpose (all legs of the flight plan, say).
+- Generation fails when a drawn element belongs to no field, so no element of a map stays unexplained.
+- On the site a map element behaves like any field: it highlights when pointed at, is reached with Tab, opens its
+  explanation and has its direct link. Text over the map stays on top of it.
+
 ### Navdata
 
 The screens use real US places (KSEA, Seattle-Tacoma), from the FAA's public data only:
