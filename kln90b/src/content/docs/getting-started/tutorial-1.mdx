@@ -5,7 +5,6 @@ description: A short cross-country flight that uses direct-to navigation only.
 
 import { Steps } from '@astrojs/starlight/components';
 import KlnScreen from '../../../components/KlnScreen.astro';
-import Field from '../../../components/Field.astro';
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
 aliqua.
@@ -40,20 +39,7 @@ Charts for both airports: [FAA digital terminal procedures](https://www.faa.gov/
 
 </Steps>
 
-<KlnScreen
-	id="tut1-direct-to"
-	title="Entering the destination on the direct-to page"
-	left={`
-{title:DIRECT TO:}
-
-   {ident!~:K}
-`}
-	status={`{crsr!:CRSR}`}
->
-	<Field id="title" title="Page title">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Field>
-	<Field id="ident" title="Waypoint identifier being entered">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Field>
-	<Field id="crsr" title="Cursor indication">Lorem ipsum dolor sit amet, sed do eiusmod tempor.</Field>
-</KlnScreen>
+<KlnScreen screen="tut1-direct-to" />
 
 ## En route
 

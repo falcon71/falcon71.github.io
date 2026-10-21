@@ -40,6 +40,28 @@ working directory, because the harness resolves `resources/` from `process.cwd()
 - `tsconfig.json`: type check with `node ../vendor/kln90b/node_modules/typescript/bin/tsc -p generator --noEmit`.
 - `test/`: tests of the generator; `*.capture.test.ts` boots the unit and needs happy-dom.
 
+## Describing a screen
+
+`screens/<id>/screen.ts` calls `defineScreen(import.meta.url, {...})` from `generator/api.ts`, which also re-exports what a
+description needs from the harness. See `screens/apt-1-ksea/`, `screens/nav-5-ksea/` and `screens/home-nav-1/`.
+
+- `boot.position`: `place('KSEA')` is an airport, VOR, NDB or fix of the FAA extract by the ident the unit shows;
+  `pointFrom(place, bearingTrue, nm)` and `courseDeg(from, to)` place the aircraft relative to it.
+- `boot.storage`: `savedFlightplan(0, [facility('KPDX'), facility('KSEA')])` stores flight plans, which is how the unit
+  starts on a route (`facility(ident)` is the extract's facility of an ident).
+- `steps`: the front panel of the harness (`u.panel.selectPage`, `cursor`, `enterIdent`, `directTo`, ...), `moveAircraft`
+  to give the GPS a track and ground speed, `settle` and `wait` for simulated time. Screens are staged, not flown.
+- Steps that several screens share live in `screens/shared/`.
+
+### Messages
+
+The unit boots with a message pending (POSITION DIFFERS FROM LAST POSITION BY >2NM, because the stored last position
+is not the position of the boot), and the status line flashes `msg`. A pilot reads it right after power-on, so every screen reads the messages
+before its steps run. A step that raises another message (a Direct To or an active flight plan raises ADJ NAV IND CRS)
+answers it in the step: `adjustCourseIndicator(u)` turns the course of the external indicator the way a pilot does,
+`u.panel.readMessages()` reads any other. Generation fails when the captured screen still flashes `msg`, naming both.
+A screen that is meant to show `msg` or the MSG page sets `keepMessages: true`, which skips the first read and the check.
+
 ## Moving the pin
 
 1. Check out the new commit inside `vendor/kln90b` (it must exist on GitHub).

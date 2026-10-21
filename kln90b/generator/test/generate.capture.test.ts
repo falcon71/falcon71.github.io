@@ -3,6 +3,9 @@ import os from 'node:os';
 import path from 'node:path';
 import {afterEach, describe, expect, it} from 'vitest';
 import {generateScreen, type ScreenDescription} from '../lib/generate.ts';
+import {adjustCourseIndicator} from '../api.ts';
+import {facility} from '../lib/navdata.ts';
+import {savedFlightplan} from '../../../vendor/kln90b/test/harness/storage';
 import {parseScreenFile} from '../../src/lib/screenFile.ts';
 
 const FIXTURE = path.join(import.meta.dirname, 'fixtures', 'nav-1-smoke');
@@ -45,6 +48,51 @@ describe('generateScreen', () => {
 		expect(file.fields.get('dis')).toHaveLength(1);
 		expect(file.kln90b).toMatch(/^[0-9a-f]{40}$/);
 		expect(file.maps).toEqual([]);
+	});
+
+	it('reads the pending start-up message, so that the status line does not flash msg', async () => {
+		const dir = copyFixture();
+		await generateScreen(dir, nav1());
+		const file = parseScreenFile(fs.readFileSync(path.join(dir, 'screen.txt'), 'utf8'));
+		expect(file.text[6].includes('msg')).toBe(false);
+		expect(file.text[6].slice(0, 5)).toBe('NAV 1');
+	});
+
+	it('keeps the message pending with keepMessages, for a screen that shows it', async () => {
+		const dir = copyFixture();
+		await generateScreen(dir, nav1({keepMessages: true}));
+		const file = parseScreenFile(fs.readFileSync(path.join(dir, 'screen.txt'), 'utf8'));
+		expect(file.text[6]).toContain('msg');
+		expect(file.mask[6].slice(14, 17).join('')).toBe('FFF');
+	});
+
+	it('rejects a screen whose steps leave a message pending, unless keepMessages', async () => {
+		// Activating the flight plan raises a message of its own, after the one of the start-up was read
+		const plan = {boot: {position: {lat: 45.8, lon: -122.6}, storage: savedFlightplan(0, [facility('KPDX'), facility('KSEA')])}};
+		const dir = copyFixture();
+		await expect(generateScreen(dir, nav1(plan))).rejects.toThrow(/^screen nav-1-smoke: .*message.*pending.*readMessages.*keepMessages/);
+		expect(fs.existsSync(path.join(dir, 'screen.txt'))).toBe(false);
+	});
+
+	it('shows no msg once adjustCourseIndicator has answered the message of the flight plan', async () => {
+		const dir = copyFixture();
+		const plan = {boot: {position: {lat: 45.8, lon: -122.6}, storage: savedFlightplan(0, [facility('KPDX'), facility('KSEA')])}};
+		await generateScreen(dir, nav1({
+			...plan, steps: async u => {
+				await adjustCourseIndicator(u);
+				await u.panel.selectPage('L', 'NAV 1');
+			},
+		}));
+		const file = parseScreenFile(fs.readFileSync(path.join(dir, 'screen.txt'), 'utf8'));
+		expect(file.text[6].includes('msg')).toBe(false);
+		expect(file.text[0]).toMatch(/^KPDX/);
+	});
+
+	it('accepts the pending message of a flight plan with keepMessages', async () => {
+		const dir = copyFixture();
+		const plan = {boot: {position: {lat: 45.8, lon: -122.6}, storage: savedFlightplan(0, [facility('KPDX'), facility('KSEA')])}};
+		await generateScreen(dir, nav1({...plan, keepMessages: true}));
+		expect(parseScreenFile(fs.readFileSync(path.join(dir, 'screen.txt'), 'utf8')).text[6]).toContain('msg');
 	});
 
 	it('deletes a map file it did not write and keeps other files', async () => {
@@ -108,7 +156,7 @@ describe('generateScreen', () => {
 
 	it('writes a full page with show both', async () => {
 		const dir = copyFixture('');
-		await generateScreen(dir, nav1({show: 'both', steps: u => u.panel.msg(), fields: []}));
+		await generateScreen(dir, nav1({show: 'both', steps: u => u.panel.msg(), fields: [], keepMessages: true}));
 		expect(parseScreenFile(fs.readFileSync(path.join(dir, 'screen.txt'), 'utf8')).layout).toBe('full');
 	});
 });

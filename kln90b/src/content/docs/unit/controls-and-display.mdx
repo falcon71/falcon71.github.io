@@ -6,7 +6,6 @@ sidebar:
 ---
 
 import KlnScreen from '../../../components/KlnScreen.astro';
-import Field from '../../../components/Field.astro';
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
 aliqua.
@@ -15,48 +14,14 @@ aliqua.
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Each half shows one page; the bottom row is the status line.
 
-<KlnScreen
-	id="screen-layout"
-	title="Screen layout: left page, right page and status line"
-	left={`
-{left:LEFT  PAGE}
-`}
-	right={`
-{right:RIGHT PAGE}
-`}
-	status={`{lname:NAV 1}|{mode:enr-leg} {msg:   }|{rname:APT 1}`}
->
-	<Field id="left" title="Left page">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Field>
-	<Field id="right" title="Right page">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Field>
-	<Field id="lname" title="Name of the left page">Lorem ipsum dolor sit amet, sed do eiusmod tempor.</Field>
-	<Field id="mode" title="Navigation mode">Lorem ipsum dolor sit amet, ut enim ad minim veniam.</Field>
-	<Field id="msg" title="Message and ENT prompts">Lorem ipsum dolor sit amet, quis nostrud exercitation.</Field>
-	<Field id="rname" title="Name of the right page">Lorem ipsum dolor sit amet, ullamco laboris nisi.</Field>
-</KlnScreen>
+<KlnScreen screen="screen-layout" />
 
 ## Entering data with the cursor
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. While the cursor is on, the field under it is shown inverse,
 and the character being edited flashes.
 
-<KlnScreen
-	id="cursor-example"
-	title="Cursor on the right page"
-	right={`
- {ident!:KSE}{char!~:A}
-{name:SEATTLE-TAC}
-{name:OMA INTL}
-{pos:N 47°26.94'}
-{pos:W122°18.67'}
-`}
-	status={`{crsr!:CRSR}`}
->
-	<Field id="ident" title="Identifier under the cursor">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Field>
-	<Field id="char" title="Character being edited">Lorem ipsum dolor sit amet, sed do eiusmod tempor.</Field>
-	<Field id="name" title="Airport name">Lorem ipsum dolor sit amet, ut enim ad minim veniam.</Field>
-	<Field id="pos" title="Airport position">Lorem ipsum dolor sit amet, ullamco laboris nisi.</Field>
-	<Field id="crsr" title="Cursor indication">Lorem ipsum dolor sit amet, quis nostrud exercitation.</Field>
-</KlnScreen>
+<KlnScreen screen="cursor-example" />
 
 ## Knobs and buttons
 

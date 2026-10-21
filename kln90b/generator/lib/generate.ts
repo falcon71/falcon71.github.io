@@ -19,11 +19,20 @@ export interface ScreenDescription {
 	/** Which half of a split screen the manual shows; a full page needs 'both' */
 	show: Show;
 	boot?: Omit<BootOptions, 'facilities' | 'defaultNavdata' | 'magvar' | 'airspaces'>;
-	/** Brings the unit to the page, from the settled state */
+	/**
+	 * Leaves the messages pending, so that the status line flashes msg. Without it the screen reads the message of the
+	 * start-up right after the boot, as a pilot does, before it goes to its page, and generating fails when the steps
+	 * leave a message pending (a step that raises one, such as a moved aircraft on a flight plan, reads it with
+	 * `u.panel.readMessages()`). Only a screen that shows the MSG annunciator needs this.
+	 */
+	keepMessages?: boolean;
+	/** Brings the unit to the page, from the settled state (and, unless keepMessages, with the messages read) */
 	steps?: (unit: HeadlessUnit) => Promise<void>;
 	fields: FieldDef[];
 }
 
+const STATUS_ROW = 6;
+const MSG_ANNUNCIATOR = 'msg';
 const ID = /^[a-z0-9-]+$/;
 const MAP_FILE = /^map-.*\.svg$/;
 
@@ -51,12 +60,17 @@ async function generate(dir: string, id: string, d: ScreenDescription): Promise<
 		magvar: (lat, lon) => declination(screenModel(), lat, lon, year, 0, SCREEN_DEGREE),
 	});
 	await settle(unit);
+	if (!d.keepMessages) await unit.panel.readMessages();
 	await d.steps?.(unit);
 	const capture = await captureScreen();
 	if (capture.layout === 'full' && d.show !== 'both') {
 		throw new Error(`a full page needs show both, not ${d.show}`);
 	}
 	const text = capture.cells.map(row => row.map(c => c.ch).join(''));
+	if (!d.keepMessages && capture.status && text[STATUS_ROW].includes(MSG_ANNUNCIATOR)) {
+		throw new Error('a message is pending (the status line flashes msg): read it with `await u.panel.readMessages()` in the '
+			+ 'steps, after whatever raised it, or set keepMessages for a screen that shows it');
+	}
 	const mask = capture.cells.map(row => row.map(c => c.attr as CellAttr));
 	const fields = locateFields(text, capture.layout, d.show, d.fields, capture.status);
 	const maps = mapsOf(capture.canvases, d.show);

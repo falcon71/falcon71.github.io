@@ -6,7 +6,6 @@ sidebar:
 ---
 
 import KlnScreen from '../../../components/KlnScreen.astro';
-import Field from '../../../components/Field.astro';
 import Callout from '../../../components/Callout.astro';
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
@@ -28,16 +27,4 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
 
-<KlnScreen
-	id="set-10"
-	title="SET 10 page"
-	left={`
-{gps:GPS:   FAST}
-`}
-	status={`{page:SET10}`}
->
-	<Field id="gps" title="GPS acquisition time">
-		Lorem ipsum: REAL takes as long as the real unit, FAST finds a position within seconds. Dolor sit amet.
-	</Field>
-	<Field id="page" title="Page name">Lorem ipsum dolor sit amet, sed do eiusmod tempor.</Field>
-</KlnScreen>
+<KlnScreen screen="set-10" />

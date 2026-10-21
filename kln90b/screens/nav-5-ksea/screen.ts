@@ -1,4 +1,4 @@
-import {defineScreen, place, pointFrom} from '../../generator/api.ts';
+import {adjustCourseIndicator, defineScreen, place, pointFrom} from '../../generator/api.ts';
 
 defineScreen(import.meta.url, {
 	title: 'NAV 5 page',
@@ -7,6 +7,8 @@ defineScreen(import.meta.url, {
 	boot: {position: pointFrom(place('KSEA'), 180, 20)},
 	steps: async u => {
 		await u.panel.directTo('KSEA');
+		// The Direct To raises ADJ NAV IND CRS, which a pilot answers on the indicator
+		await adjustCourseIndicator(u);
 		await u.panel.selectPage('L', 'NAV 5');
 	},
 	fields: [

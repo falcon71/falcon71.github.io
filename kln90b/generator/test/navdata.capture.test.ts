@@ -3,7 +3,7 @@ import {
 	AirportFacility, FacilityFrequencyType, RunwayLightingType, RunwaySurfaceCategory, RunwaySurfaceType, RunwayUtils,
 	VorFacility,
 } from '@microsoft/msfs-sdk';
-import {facilitiesOf, loadExtract, place, placeIn, type NavdataExtract} from '../lib/navdata.ts';
+import {facilitiesOf, facility, facilityIn, loadExtract, place, placeIn, type NavdataExtract} from '../lib/navdata.ts';
 
 type Airport = NavdataExtract['airports'][number];
 
@@ -142,5 +142,23 @@ describe('loadExtract', () => {
 	it('reads the newest extract once', () => {
 		expect(loadExtract()).toBe(loadExtract());
 		expect(loadExtract().cycle).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+	});
+});
+
+describe('facility', () => {
+	it('finds the facility of an airport and of a VOR by ident', () => {
+		const x = extract({vors: [{ident: 'VVV', name: 'V', type: 'VOR', lat: 1, lon: 2, mhz: 112.8, declinationEast: 0, region: 'K1'}]});
+		expect(facilityIn(x, 'KAAA')).toMatchObject({lat: 47.5, lon: -122.3, icaoStruct: {type: 'A', ident: 'KAAA'}});
+		expect(facilityIn(x, 'VVV')).toMatchObject({lat: 1, lon: 2, icaoStruct: {type: 'V', ident: 'VVV'}});
+	});
+
+	it('throws for an unknown ident and for one that two facilities have', () => {
+		expect(() => facilityIn(extract(), 'KZZZ')).toThrow(/no airport, VOR, NDB or fix KZZZ/);
+		const x = extract({fixes: [{ident: 'KAAA', lat: 5, lon: 6, region: 'K1'}]});
+		expect(() => facilityIn(x, 'KAAA')).toThrow(/KAAA is ambiguous/);
+	});
+
+	it('finds KPDX in the extract', () => {
+		expect(facility('KPDX')).toMatchObject({icaoStruct: {ident: 'KPDX'}});
 	});
 });

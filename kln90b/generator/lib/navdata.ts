@@ -114,3 +114,20 @@ export function placeIn(x: NavdataExtract, ident: string): { lat: number; lon: n
 	if (found.length > 1) throw new Error(`${ident} is ambiguous in the navdata extract ${x.cycle}: ${found.length} places have it`);
 	return {lat: found[0].lat, lon: found[0].lon};
 }
+
+/**
+ * The facility of an airport, VOR, NDB or fix of the extract, by the ident the unit shows (`KSEA`), for
+ * `savedFlightplan`.
+ * @throws Error when no facility or more than one has the ident
+ */
+export function facility(ident: string): Facility {
+	return facilityIn(loadExtract(), ident);
+}
+
+/** `facility` in a given extract */
+export function facilityIn(x: NavdataExtract, ident: string): Facility {
+	const found = facilitiesOf(x).filter(f => f.icaoStruct.ident === ident);
+	if (found.length === 0) throw new Error(`no airport, VOR, NDB or fix ${ident} in the navdata extract ${x.cycle}`);
+	if (found.length > 1) throw new Error(`${ident} is ambiguous in the navdata extract ${x.cycle}: ${found.length} facilities have it`);
+	return found[0];
+}

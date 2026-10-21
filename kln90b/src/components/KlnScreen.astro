@@ -7,8 +7,9 @@
  * It does not repeat any text or field. `title` replaces the title of the generated file. The explanation file writes
  * <Field> and <Term> without imports.
  *
- * Hand-built screens (for the few that are no state of the unit) write the screen text as it appears on the unit, with
- * markup inside a line:
+ * Hand-built screens are the exception, for an illustration that is no state of the unit (a status line alone, say). They
+ * write the screen text as it appears on the unit, with markup inside a line, and their explanations as <Field> children
+ * (imported by the page):
  *   {dis:DIS  45.2nm}  a field with the id "dis", label and value together; pointing at it shows <Field id="dis">
  *   {to!:KSEA}         the field shown inverse (cursor on it)
  *   {to~:KSEA}         the field flashing on the unit (shown with a dashed box here, never animated)

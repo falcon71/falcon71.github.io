@@ -50,28 +50,29 @@ The folder `kln90b/screens/<id>/` holds the description (`screen.ts`), the expla
 generated or when the explanations and the fields of the screen differ. `title="..."` replaces the title of the generated
 file. A page name in an explanation becomes a link like anywhere else.
 
+The description is explained in `kln90b/generator/README.md` ("Describing a screen"). Screens that share a state import it
+from `kln90b/screens/shared/`, a folder without a `screen.ts`, which the generator skips.
+
 ### Hand-built screens
 
-The few screens that are no state of the unit are written by hand:
+A screen that is no state of the unit is written by hand: an illustration of a status line alone, say, or one that shows
+nothing the unit would display. A page that a draft drew wrongly is generated in the nearest real state instead, not
+written by hand. The knob demo of the quickstart is not a `<KlnScreen>` at all.
 
 ```mdx
 <KlnScreen
-	id="nav-1"
-	title="NAV 1 page"
-	left={`
-{from:KPDX }{arrow:›}{to:KSEA }
-{dis:DIS  45.2nm}
-`}
+	id="status-line-demo"
+	title="The status line"
 	status={`{page:NAV 1}`}
 >
-	<Field id="dis" title="Distance to the active waypoint">Explanation shown in the help window.</Field>
-	<Field id="page" title="Page name">...</Field>
+	<Field id="page" title="Page name">Explanation shown in the help window.</Field>
 </KlnScreen>
 ```
 
 - `{id:text}` marks a field, label and value together. `{id!:text}` shows it inverse, `{id~:text}` marks it as
-  flashing on the unit.
-- Pointing at a field shows its explanation; a click or tap keeps it open. `#screen-nav-1--dis` links straight to it.
+  flashing on the unit. `<Field>` needs `import Field from '../../components/Field.astro'`.
+- Pointing at a field shows its explanation; a click or tap keeps it open. `#screen-status-line-demo--page` links straight
+  to it.
 - With only `left` or only `right` the screen is cut in half, and `status` is just that side's page name. With both
   (or `full`) the whole screen is shown and `status` is the full 23-character status line.
 - The build fails when a row is wider than the screen.
