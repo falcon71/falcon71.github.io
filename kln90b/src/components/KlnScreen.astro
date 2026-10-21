@@ -24,7 +24,7 @@ import '../styles/kln-screen.css';
 import '../styles/popover.css';
 import Field from './Field.astro';
 import Term from './Term.astro';
-import { blocksFromCapture, blocksFromMarkup, screenHtml, type ScreenBlocks } from '../lib/screenHtml';
+import { blocksFromCapture, blocksFromMarkup, screenHtml, type Maps, type ScreenBlocks } from '../lib/screenHtml';
 import { checkExplanations, loadCapture } from '../lib/screens';
 
 interface Props {
@@ -49,13 +49,16 @@ let documented: Set<string>;
 // Generated screen: the explanations as a component. Hand-built: the rendered <Field> children.
 let Explanations: Awaited<ReturnType<typeof render>>['Content'] | undefined;
 let docsHtml = '';
+let maps: Maps = {};
 
 if (screen !== undefined) {
 	if ([id, left, right, full, status].some((v) => v !== undefined)) {
 		throw new Error(`KlnScreen screen="${screen}": a generated screen takes no id, left, right, full or status`);
 	}
 	name = screen;
-	const { capture } = loadCapture(screen);
+	const loaded = loadCapture(screen);
+	const { capture } = loaded;
+	maps = loaded.maps;
 	const entry = await getEntry('screenFields', screen);
 	if (!entry) {
 		throw new Error(`screen ${screen}: screens/${screen}/fields.mdx is missing; it needs a <Field> for each field, then run npm run screens -- ${screen}`);
@@ -85,7 +88,7 @@ const figureId = `screen-${name}`;
 const crop = blocks.crop;
 const hasFlash = blocks.blocks.some((b) => b.rows.some((row) => row.some((s) => s.flash)));
 const hasFields = documented.size > 0;
-const stageHtml = screenHtml(blocks, documented);
+const stageHtml = screenHtml(blocks, documented, maps);
 ---
 
 <figure class="kln-figure" id={figureId} data-crop={crop}>

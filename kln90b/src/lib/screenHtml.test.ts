@@ -130,4 +130,20 @@ describe('screenHtml', () => {
 		const html = screenHtml(blocksFromCapture(c, new Set(['a'])), new Set(['a']));
 		expect(html).toContain('class="kln-inv kln-flash kln-field" tabindex="0" data-field="a">A</span>');
 	});
+
+	it('puts the map of a side before the blocks, so that the text is drawn over it', () => {
+		const html = screenHtml(blocksFromCapture(capture({show: 'left'}), new Set()), new Set(), {L: '<svg>L</svg>'});
+		expect(html.startsWith('<div class="kln-map kln-map-left" aria-hidden="true"><svg>L</svg></div><div class="kln-half kln-half-left">')).toBe(true);
+		expect(html).not.toContain('kln-map-right');
+	});
+
+	it('puts a map on each side where both have one', () => {
+		const html = screenHtml(blocksFromCapture(capture(), new Set()), new Set(), {L: '<svg>L</svg>', R: '<svg>R</svg>'});
+		expect(html.indexOf('kln-map-left')).toBeLessThan(html.indexOf('kln-map-right'));
+		expect(html.indexOf('kln-map-right')).toBeLessThan(html.indexOf('kln-half-left'));
+	});
+
+	it('draws no map without one', () => {
+		expect(screenHtml(blocksFromCapture(capture(), new Set()), new Set())).not.toContain('kln-map');
+	});
 });

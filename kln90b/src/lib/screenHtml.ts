@@ -170,9 +170,21 @@ function segmentHtml(s: Segment, documented: Set<string>): string {
 	return cls ? `<span class="${cls}">${text}</span>` : text;
 }
 
-/** The inside of the stage of a screen. A field that is not `documented` is drawn as plain text. */
-export function screenHtml(b: ScreenBlocks, documented: Set<string>): string {
-	return b.blocks
+/** The maps of the half pages as inline SVG, which go under the text of their half. */
+export type Maps = Partial<Record<'L' | 'R', string>>;
+
+const MAP_CLASS = {L: 'kln-map kln-map-left', R: 'kln-map kln-map-right'} as const;
+
+/**
+ * The inside of the stage of a screen. A field that is not `documented` is drawn as plain text. A map comes first, so
+ * that the text of its half is drawn over it.
+ */
+export function screenHtml(b: ScreenBlocks, documented: Set<string>, maps: Maps = {}): string {
+	const mapHtml = (['L', 'R'] as const)
+		.filter(side => maps[side] !== undefined)
+		.map(side => `<div class="${MAP_CLASS[side]}" aria-hidden="true">${maps[side]}</div>`)
+		.join('');
+	return mapHtml + b.blocks
 		.map(block => `<div class="${block.cls}">${block.rows.map(row =>
 			`<span class="kln-row">${row.map(s => segmentHtml(s, documented)).join('')}</span>`).join('')}</div>`)
 		.join('');

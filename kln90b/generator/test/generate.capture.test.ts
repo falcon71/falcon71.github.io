@@ -55,6 +55,27 @@ describe('generateScreen', () => {
 		expect(fs.existsSync(path.join(dir, 'fields.mdx'))).toBe(true);
 	});
 
+	it('writes the map of a map page and lists its side, and deletes the other stale map', async () => {
+		const dir = copyFixture('');
+		fs.writeFileSync(path.join(dir, 'map-R.svg'), '<svg/>');
+		await generateScreen(dir, nav1({title: 'NAV 5 page', steps: u => u.panel.selectPage('L', 'NAV 5'), fields: []}));
+		const file = parseScreenFile(fs.readFileSync(path.join(dir, 'screen.txt'), 'utf8'));
+		expect(file.maps).toEqual(['L']);
+		const svg = fs.readFileSync(path.join(dir, 'map-L.svg'), 'utf8');
+		expect(svg).toContain('viewBox="0 0 99 78"');
+		// The aircraft symbol is at the center of the map (49, 39)
+		const runs = Array.from(svg.matchAll(/M(\d+) (\d+)h/g), m => [Number(m[1]), Number(m[2])]);
+		expect(runs.some(([x, y]) => Math.abs(x - 49) <= 4 && Math.abs(y - 39) <= 4)).toBe(true);
+		expect(fs.existsSync(path.join(dir, 'map-R.svg'))).toBe(false);
+	});
+
+	it('writes no map for a half the manual does not show', async () => {
+		const dir = copyFixture('');
+		await generateScreen(dir, nav1({show: 'right', steps: u => u.panel.selectPage('L', 'NAV 5'), fields: []}));
+		expect(parseScreenFile(fs.readFileSync(path.join(dir, 'screen.txt'), 'utf8')).maps).toEqual([]);
+		expect(fs.existsSync(path.join(dir, 'map-L.svg'))).toBe(false);
+	});
+
 	it('rejects an explanation that a field lacks, naming the screen', async () => {
 		const dir = copyFixture('<Field id="page" title="Page">x</Field>');
 		await expect(generateScreen(dir, nav1())).rejects.toThrow(/^screen nav-1-smoke: .*no explanation: dis/);

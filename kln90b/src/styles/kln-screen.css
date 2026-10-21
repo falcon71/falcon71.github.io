@@ -96,6 +96,29 @@
 	border-top: var(--u) solid var(--kln-phosphor);
 }
 
+/* The map of NAV 5 or APT 3 (an inline SVG in the phosphor color) fills the text area of its half, under the text */
+.kln-stage .kln-map {
+	position: absolute;
+	top: calc(var(--u) * 3);
+	width: calc(var(--u) * 99);
+	height: calc(var(--u) * 78);
+}
+
+.kln-stage .kln-map-left {
+	left: calc(var(--u) * 4);
+}
+
+/* The text area of the right half: its left edge 107.5, the middle line 1 and the padding 4.5 */
+.kln-stage .kln-map-right {
+	left: calc(var(--u) * 113);
+}
+
+.kln-map svg {
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
 .kln-row {
 	display: block;
 	height: calc(var(--u) * 13);
