@@ -63,24 +63,39 @@ describe('extract', () => {
 	});
 
 	it('keeps public airports and heliports inside a region only', () => {
-		expect(result.airports.map((a: any) => a.ident)).toEqual(['HEL1', 'SEA', 'SML']);
+		expect(result.airports.map((a: any) => a.ident)).toEqual(['HEL1', 'KSEA', 'SML']);
 	});
 
 	it('leaves out private airports, seaplane bases and airports outside the region', () => {
 		const idents = result.airports.map((a: any) => a.ident);
 		expect(idents.includes('PRV1')).toBe(false);
 		expect(idents.includes('SPB1')).toBe(false);
-		expect(idents.includes('MIA')).toBe(false);
+		expect(idents.includes('KMIA')).toBe(false);
 	});
 
 	it('includes what lies around any of the regions', () => {
 		const both = extract(FIXTURE, [{...SEATTLE, radiusNm: 20}, MIAMI]);
-		expect(both.airports.map((a: any) => a.ident)).toEqual(['HEL1', 'MIA', 'SEA']);
+		expect(both.airports.map((a: any) => a.ident)).toEqual(['HEL1', 'KMIA', 'KSEA']);
 		expect(both.vors.map((v: any) => v.ident)).toContain('MIA');
 	});
 
+	it('names an airport by its ICAO identifier where it has one and by its FAA identifier otherwise', () => {
+		expect(airport('KSEA')).toMatchObject({ident: 'KSEA', faaId: 'SEA'});
+		expect(airport('SML')).toMatchObject({ident: 'SML', faaId: 'SML'});
+		expect(airport('HEL1')).toMatchObject({ident: 'HEL1', faaId: 'HEL1'});
+		// the runways and frequencies are filed under the FAA identifier
+		expect(airport('KSEA').runways).toHaveLength(2);
+		expect(airport('KSEA').frequencies.length).toBeGreaterThan(0);
+	});
+
+	it('sorts airports by the identifier they carry', () => {
+		const dir = copyFixture();
+		edit(dir, 'APT_BASE.csv', text => text.replace('"SML","SMALLTON","SMALLTON, ""THE FIELD"" MUNI","PU",47.9,-122.0,120,20,"E","NON-ATCT",""', '"SML","SMALLTON","SMALLTON, ""THE FIELD"" MUNI","PU",47.9,-122.0,120,20,"E","NON-ATCT","KAAA"'));
+		expect(extract(dir, [SEATTLE]).airports.map((a: any) => a.ident)).toEqual(['HEL1', 'KAAA', 'KSEA']);
+	});
+
 	it('reads the airport record', () => {
-		expect(airport('SEA')).toMatchObject({
+		expect(airport('KSEA')).toMatchObject({
 			name: 'SEATTLE-TACOMA INTL', city: 'SEATTLE', lat: 47.449, lon: -122.3093, elevationFt: 432.7,
 			towered: true, heliport: false,
 		});
@@ -89,7 +104,7 @@ describe('extract', () => {
 	});
 
 	it('names a runway as published, headed by the lower-numbered end, at the midpoint of its ends', () => {
-		const sea = airport('SEA');
+		const sea = airport('KSEA');
 		expect(sea.runways.map((r: any) => r.designation)).toEqual(['16C-34C', '16L-34R']);
 		const runway = sea.runways.find((r: any) => r.designation === '16L-34R')!;
 		// the 34R end is listed first in the file, the heading is the one of 16L
@@ -105,7 +120,7 @@ describe('extract', () => {
 		edit(dir, 'APT_RWY_END.csv', text => text
 			.replace('"16L",179,47.46,-122.3076', '"16L",179,47.46,-122.4076')
 			.replace('"34R",359,47.43,-122.3076', '"34R",359,47.43,-122.2076'));
-		const runway = extract(dir, [SEATTLE]).airports.find((a: any) => a.ident === 'SEA')!.runways
+		const runway = extract(dir, [SEATTLE]).airports.find((a: any) => a.ident === 'KSEA')!.runways
 			.find((r: any) => r.designation === '16L-34R')!;
 		expect(runway.lon).toBeCloseTo(-122.3076, 3);
 		// the great circle bulges toward the pole: further north than the plain average of 47.445
@@ -138,7 +153,7 @@ describe('extract', () => {
 	});
 
 	it('attaches the frequencies of the airport once, sorted by use then frequency', () => {
-		expect(airport('SEA').frequencies).toEqual([
+		expect(airport('KSEA').frequencies).toEqual([
 			{use: 'APCH/P DEP/P', mhz: 119.2},
 			{use: 'D-ATIS', mhz: 118},
 			{use: 'GND/P', mhz: 121.7},

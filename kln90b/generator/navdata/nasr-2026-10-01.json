@@ -12,6 +12,7 @@
   "airports": [
     {
       "ident": "00S",
+      "faaId": "00S",
       "name": "MC KENZIE BRIDGE STATE",
       "city": "MC KENZIE BRIDGE",
       "lat": 44.18155555,
@@ -39,6 +40,7 @@
     },
     {
       "ident": "00W",
+      "faaId": "00W",
       "name": "LOWER GRANITE STATE",
       "city": "COLFAX",
       "lat": 46.67275,
@@ -66,6 +68,7 @@
     },
     {
       "ident": "03S",
+      "faaId": "03S",
       "name": "SANDY RIVER",
       "city": "SANDY",
       "lat": 45.40161111,
@@ -97,6 +100,7 @@
     },
     {
       "ident": "05S",
+      "faaId": "05S",
       "name": "VERNONIA MUNI",
       "city": "VERNONIA",
       "lat": 45.85210625,
@@ -124,6 +128,7 @@
     },
     {
       "ident": "09S",
+      "faaId": "09S",
       "name": "SULLIVAN LAKE STATE",
       "city": "METALINE FALLS",
       "lat": 48.84089527,
@@ -151,6 +156,7 @@
     },
     {
       "ident": "0S0",
+      "faaId": "0S0",
       "name": "LIND",
       "city": "LIND",
       "lat": 46.97684194,
@@ -178,6 +184,7 @@
     },
     {
       "ident": "0S7",
+      "faaId": "0S7",
       "name": "DOROTHY SCOTT INTL",
       "city": "OROVILLE",
       "lat": 48.95897222,
@@ -205,6 +212,7 @@
     },
     {
       "ident": "0S9",
+      "faaId": "0S9",
       "name": "JEFFERSON COUNTY INTL",
       "city": "PORT TOWNSEND",
       "lat": 48.05380555,
@@ -249,6 +257,7 @@
     },
     {
       "ident": "11S",
+      "faaId": "11S",
       "name": "SEKIU",
       "city": "SEKIU",
       "lat": 48.26611638,
@@ -276,6 +285,7 @@
     },
     {
       "ident": "12S",
+      "faaId": "12S",
       "name": "MONUMENT MUNI",
       "city": "MONUMENT",
       "lat": 44.83152777,
@@ -303,6 +313,7 @@
     },
     {
       "ident": "13W",
+      "faaId": "13W",
       "name": "CAMANO ISLAND AIRFIELD",
       "city": "STANWOOD",
       "lat": 48.25694444,
@@ -330,6 +341,7 @@
     },
     {
       "ident": "14S",
+      "faaId": "14S",
       "name": "WESTPORT",
       "city": "WESTPORT",
       "lat": 46.89695083,
@@ -357,6 +369,7 @@
     },
     {
       "ident": "16W",
+      "faaId": "16W",
       "name": "LITTLE GOOSE LOCK AND DAM",
       "city": "STARBUCK",
       "lat": 46.58394444,
@@ -384,6 +397,7 @@
     },
     {
       "ident": "17S",
+      "faaId": "17S",
       "name": "CHEHALEM AIRPARK",
       "city": "NEWBERG",
       "lat": 45.32372777,
@@ -411,6 +425,7 @@
     },
     {
       "ident": "1RL",
+      "faaId": "1RL",
       "name": "POINT ROBERTS AIRPARK",
       "city": "POINT ROBERTS",
       "lat": 48.97713888,
@@ -442,6 +457,7 @@
     },
     {
       "ident": "1S1",
+      "faaId": "1S1",
       "name": "ECKHART INTL",
       "city": "PORTHILL",
       "lat": 48.99047222,
@@ -473,6 +489,7 @@
     },
     {
       "ident": "1S2",
+      "faaId": "1S2",
       "name": "DARRINGTON MUNI",
       "city": "DARRINGTON",
       "lat": 48.2586125,
@@ -500,6 +517,7 @@
     },
     {
       "ident": "1S5",
+      "faaId": "1S5",
       "name": "SUNNYSIDE MUNI",
       "city": "SUNNYSIDE",
       "lat": 46.32707222,
@@ -527,6 +545,7 @@
     },
     {
       "ident": "1S6",
+      "faaId": "1S6",
       "name": "PRIEST RIVER",
       "city": "PRIEST RIVER",
       "lat": 48.19064611,
@@ -554,6 +573,7 @@
     },
     {
       "ident": "1S8",
+      "faaId": "1S8",
       "name": "ARLINGTON MUNI",
       "city": "ARLINGTON",
       "lat": 45.72255555,
@@ -581,6 +601,7 @@
     },
     {
       "ident": "1S9",
+      "faaId": "1S9",
       "name": "CHEWELAH MUNI",
       "city": "CHEWELAH",
       "lat": 48.31395819,
@@ -608,6 +629,7 @@
     },
     {
       "ident": "1W1",
+      "faaId": "1W1",
       "name": "GROVE FLD",
       "city": "CAMAS",
       "lat": 45.62782944,
@@ -639,6 +661,7 @@
     },
     {
       "ident": "21W",
+      "faaId": "21W",
       "name": "RANGER CREEK",
       "city": "GREENWATER",
       "lat": 47.01313888,
@@ -666,6 +689,7 @@
     },
     {
       "ident": "27W",
+      "faaId": "27W",
       "name": "LAKE WENATCHEE STATE",
       "city": "LEAVENWORTH",
       "lat": 47.81941361,
@@ -693,6 +717,7 @@
     },
     {
       "ident": "2S0",
+      "faaId": "2S0",
       "name": "TWISP MUNI",
       "city": "TWISP",
       "lat": 48.35058527,
@@ -720,6 +745,7 @@
     },
     {
       "ident": "2S1",
+      "faaId": "2S1",
       "name": "VASHON MUNI",
       "city": "VASHON",
       "lat": 47.45858861,
@@ -756,6 +782,7 @@
     },
     {
       "ident": "2S4",
+      "faaId": "2S4",
       "name": "WARDEN",
       "city": "WARDEN",
       "lat": 46.96581522,
@@ -783,6 +810,7 @@
     },
     {
       "ident": "2S5",
+      "faaId": "2S5",
       "name": "WATERVILLE",
       "city": "WATERVILLE",
       "lat": 47.65600444,
@@ -810,6 +838,7 @@
     },
     {
       "ident": "2S6",
+      "faaId": "2S6",
       "name": "SPORTSMAN AIRPARK",
       "city": "NEWBERG",
       "lat": 45.29567333,
@@ -841,6 +870,7 @@
     },
     {
       "ident": "2S8",
+      "faaId": "2S8",
       "name": "WILBUR",
       "city": "WILBUR",
       "lat": 47.75338888,
@@ -884,6 +914,7 @@
     },
     {
       "ident": "2S9",
+      "faaId": "2S9",
       "name": "WILLAPA HARBOR",
       "city": "SOUTH BEND/RAYMOND/",
       "lat": 46.69762055,
@@ -911,6 +942,7 @@
     },
     {
       "ident": "2W1",
+      "faaId": "2W1",
       "name": "DE VERE FLD",
       "city": "CLE ELUM",
       "lat": 47.17758111,
@@ -938,6 +970,7 @@
     },
     {
       "ident": "2W3",
+      "faaId": "2W3",
       "name": "SWANSON FLD",
       "city": "EATONVILLE",
       "lat": 46.87166666,
@@ -965,6 +998,7 @@
     },
     {
       "ident": "33S",
+      "faaId": "33S",
       "name": "PRU FLD",
       "city": "RITZVILLE",
       "lat": 47.12345277,
@@ -996,6 +1030,7 @@
     },
     {
       "ident": "35S",
+      "faaId": "35S",
       "name": "WASCO STATE",
       "city": "WASCO",
       "lat": 45.58920416,
@@ -1023,6 +1058,7 @@
     },
     {
       "ident": "38W",
+      "faaId": "38W",
       "name": "LYNDEN MUNI/JANSEN FLD",
       "city": "LYNDEN",
       "lat": 48.95589611,
@@ -1050,6 +1086,7 @@
     },
     {
       "ident": "39P",
+      "faaId": "39P",
       "name": "STROM FLD",
       "city": "MORTON",
       "lat": 46.55036083,
@@ -1077,6 +1114,7 @@
     },
     {
       "ident": "3B8",
+      "faaId": "3B8",
       "name": "SHADY ACRES",
       "city": "SPANAWAY",
       "lat": 47.07038888,
@@ -1104,6 +1142,7 @@
     },
     {
       "ident": "3S7",
+      "faaId": "3S7",
       "name": "NEHALEM BAY STATE",
       "city": "MANZANITA",
       "lat": 45.69813888,
@@ -1131,6 +1170,7 @@
     },
     {
       "ident": "3S9",
+      "faaId": "3S9",
       "name": "CONDON STATE PAULING FLD",
       "city": "CONDON",
       "lat": 45.24656666,
@@ -1158,6 +1198,7 @@
     },
     {
       "ident": "3W5",
+      "faaId": "3W5",
       "name": "MEARS FLD",
       "city": "CONCRETE",
       "lat": 48.52983833,
@@ -1194,6 +1235,7 @@
     },
     {
       "ident": "3W7",
+      "faaId": "3W7",
       "name": "GRAND COULEE DAM",
       "city": "ELECTRIC CITY",
       "lat": 47.92205555,
@@ -1229,6 +1271,7 @@
     },
     {
       "ident": "43D",
+      "faaId": "43D",
       "name": "ODESSA MUNI",
       "city": "ODESSA",
       "lat": 47.34758333,
@@ -1256,6 +1299,7 @@
     },
     {
       "ident": "44T",
+      "faaId": "44T",
       "name": "HOSKINS FLD",
       "city": "OLYMPIA",
       "lat": 46.99238888,
@@ -1283,6 +1327,7 @@
     },
     {
       "ident": "4S2",
+      "faaId": "4S2",
       "name": "KEN JERNSTEDT AIRFIELD",
       "city": "HOOD RIVER",
       "lat": 45.67277677,
@@ -1314,6 +1359,7 @@
     },
     {
       "ident": "4S4",
+      "faaId": "4S4",
       "name": "SKYPORT",
       "city": "CORNELIUS",
       "lat": 45.58261444,
@@ -1341,6 +1387,7 @@
     },
     {
       "ident": "4S6",
+      "faaId": "4S6",
       "name": "TIETON STATE",
       "city": "RIMROCK",
       "lat": 46.63755138,
@@ -1368,6 +1415,7 @@
     },
     {
       "ident": "4S9",
+      "faaId": "4S9",
       "name": "MULINO STATE",
       "city": "PORTLAND-MULINO",
       "lat": 45.21655555,
@@ -1403,6 +1451,7 @@
     },
     {
       "ident": "4W0",
+      "faaId": "4W0",
       "name": "BANDERA STATE",
       "city": "BANDERA",
       "lat": 47.39536888,
@@ -1430,6 +1479,7 @@
     },
     {
       "ident": "55S",
+      "faaId": "55S",
       "name": "PACKWOOD",
       "city": "PACKWOOD",
       "lat": 46.60382722,
@@ -1457,6 +1507,7 @@
     },
     {
       "ident": "56S",
+      "faaId": "56S",
       "name": "SEASIDE MUNI",
       "city": "SEASIDE",
       "lat": 46.01499583,
@@ -1484,6 +1535,7 @@
     },
     {
       "ident": "5S0",
+      "faaId": "5S0",
       "name": "OAKRIDGE STATE",
       "city": "OAKRIDGE",
       "lat": 43.75255555,
@@ -1511,6 +1563,7 @@
     },
     {
       "ident": "5S2",
+      "faaId": "5S2",
       "name": "CRESCENT LAKE STATE",
       "city": "CRESCENT LAKE",
       "lat": 43.53279002,
@@ -1538,6 +1591,7 @@
     },
     {
       "ident": "5S4",
+      "faaId": "5S4",
       "name": "TOLEDO STATE",
       "city": "TOLEDO",
       "lat": 44.60102777,
@@ -1565,6 +1619,7 @@
     },
     {
       "ident": "5S5",
+      "faaId": "5S5",
       "name": "LAKE BILLY CHINOOK",
       "city": "CULVER",
       "lat": 44.51928472,
@@ -1592,6 +1647,7 @@
     },
     {
       "ident": "5W1",
+      "faaId": "5W1",
       "name": "WILSON CREEK",
       "city": "WILSON CREEK",
       "lat": 47.41848333,
@@ -1619,6 +1675,7 @@
     },
     {
       "ident": "61S",
+      "faaId": "61S",
       "name": "COTTAGE GROVE STATE",
       "city": "COTTAGE GROVE",
       "lat": 43.80407052,
@@ -1650,6 +1707,7 @@
     },
     {
       "ident": "63S",
+      "faaId": "63S",
       "name": "COLVILLE MUNI",
       "city": "COLVILLE",
       "lat": 48.54416138,
@@ -1681,6 +1739,7 @@
     },
     {
       "ident": "66S",
+      "faaId": "66S",
       "name": "CAVANAUGH BAY",
       "city": "COOLIN",
       "lat": 48.51866666,
@@ -1708,6 +1767,7 @@
     },
     {
       "ident": "67S",
+      "faaId": "67S",
       "name": "PRIEST LAKE USFS",
       "city": "NORDMAN",
       "lat": 48.574,
@@ -1735,6 +1795,7 @@
     },
     {
       "ident": "68D",
+      "faaId": "68D",
       "name": "REDS HORSE RANCH USFS",
       "city": "ENTERPRISE",
       "lat": 45.34455972,
@@ -1762,6 +1823,7 @@
     },
     {
       "ident": "68S",
+      "faaId": "68S",
       "name": "DAVENPORT",
       "city": "DAVENPORT",
       "lat": 47.65206027,
@@ -1789,6 +1851,7 @@
     },
     {
       "ident": "69S",
+      "faaId": "69S",
       "name": "AVEY FLD",
       "city": "LAURIER",
       "lat": 48.99837944,
@@ -1816,6 +1879,7 @@
     },
     {
       "ident": "6K5",
+      "faaId": "6K5",
       "name": "SISTERS EAGLE AIR",
       "city": "SISTERS",
       "lat": 44.30445833,
@@ -1843,6 +1907,7 @@
     },
     {
       "ident": "6S2",
+      "faaId": "6S2",
       "name": "FLORENCE MUNI",
       "city": "FLORENCE",
       "lat": 43.98281833,
@@ -1874,6 +1939,7 @@
     },
     {
       "ident": "6S4",
+      "faaId": "6S4",
       "name": "DAVIS",
       "city": "GATES",
       "lat": 44.74588888,
@@ -1901,6 +1967,7 @@
     },
     {
       "ident": "6S9",
+      "faaId": "6S9",
       "name": "STEHEKIN STATE",
       "city": "STEHEKIN",
       "lat": 48.34577777,
@@ -1928,6 +1995,7 @@
     },
     {
       "ident": "70S",
+      "faaId": "70S",
       "name": "MEAD FLYING SERVICE",
       "city": "MEAD",
       "lat": 47.78718666,
@@ -1955,6 +2023,7 @@
     },
     {
       "ident": "72S",
+      "faaId": "72S",
       "name": "ROSALIA MUNI",
       "city": "ROSALIA",
       "lat": 47.23656783,
@@ -1982,6 +2051,7 @@
     },
     {
       "ident": "73S",
+      "faaId": "73S",
       "name": "WILLARD FLD",
       "city": "TEKOA",
       "lat": 47.23553388,
@@ -2009,6 +2079,7 @@
     },
     {
       "ident": "74S",
+      "faaId": "74S",
       "name": "ANACORTES",
       "city": "ANACORTES",
       "lat": 48.49850694,
@@ -2036,6 +2107,7 @@
     },
     {
       "ident": "77S",
+      "faaId": "77S",
       "name": "HOBBY FLD",
       "city": "CRESWELL",
       "lat": 43.93075,
@@ -2083,6 +2155,7 @@
     },
     {
       "ident": "7S3",
+      "faaId": "7S3",
       "name": "STARK'S TWIN OAKS AIRPARK",
       "city": "HILLSBORO",
       "lat": 45.42845027,
@@ -2118,6 +2191,7 @@
     },
     {
       "ident": "7S5",
+      "faaId": "7S5",
       "name": "INDEPENDENCE STATE",
       "city": "INDEPENDENCE",
       "lat": 44.86715155,
@@ -2149,6 +2223,7 @@
     },
     {
       "ident": "7S9",
+      "faaId": "7S9",
       "name": "LENHARDT AIRPARK",
       "city": "HUBBARD",
       "lat": 45.18039833,
@@ -2176,6 +2251,7 @@
     },
     {
       "ident": "7W1",
+      "faaId": "7W1",
       "name": "PORT OF ILWACO",
       "city": "ILWACO",
       "lat": 46.3149125,
@@ -2203,6 +2279,7 @@
     },
     {
       "ident": "80T",
+      "faaId": "80T",
       "name": "QUINCY MUNI",
       "city": "QUINCY",
       "lat": 47.21161111,
@@ -2238,6 +2315,7 @@
     },
     {
       "ident": "8S2",
+      "faaId": "8S2",
       "name": "CASHMERE-DRYDEN",
       "city": "CASHMERE",
       "lat": 47.51475,
@@ -2265,6 +2343,7 @@
     },
     {
       "ident": "8S3",
+      "faaId": "8S3",
       "name": "SANTIAM JUNCTION STATE",
       "city": "SANTIAM JUNCTION",
       "lat": 44.43455555,
@@ -2292,6 +2371,7 @@
     },
     {
       "ident": "8S4",
+      "faaId": "8S4",
       "name": "ENTERPRISE MUNI",
       "city": "ENTERPRISE",
       "lat": 45.42483333,
@@ -2323,6 +2403,7 @@
     },
     {
       "ident": "8W3",
+      "faaId": "8W3",
       "name": "MANSFIELD",
       "city": "MANSFIELD",
       "lat": 47.80938583,
@@ -2350,6 +2431,7 @@
     },
     {
       "ident": "8W5",
+      "faaId": "8W5",
       "name": "APEX AIRPARK",
       "city": "SILVERDALE",
       "lat": 47.65643194,
@@ -2381,6 +2463,7 @@
     },
     {
       "ident": "8W9",
+      "faaId": "8W9",
       "name": "R & K SKYRANCH",
       "city": "ROCHESTER",
       "lat": 46.83268277,
@@ -2408,6 +2491,7 @@
     },
     {
       "ident": "9S3",
+      "faaId": "9S3",
       "name": "LAKESIDE MUNI",
       "city": "LAKESIDE",
       "lat": 43.58317027,
@@ -2435,6 +2519,7 @@
     },
     {
       "ident": "9S9",
+      "faaId": "9S9",
       "name": "LEXINGTON",
       "city": "LEXINGTON",
       "lat": 45.45413888,
@@ -2469,7 +2554,474 @@
       ]
     },
     {
-      "ident": "ALW",
+      "ident": "CYAZ",
+      "faaId": "CYAZ",
+      "name": "TOFINO/LONG BEACH",
+      "city": "TOFINO",
+      "lat": 49.08222222,
+      "lon": -125.7725,
+      "elevationFt": 80,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "07-25",
+          "headingTrue": 89,
+          "lengthFt": 4999,
+          "surface": "CONC",
+          "lit": false,
+          "lat": 49.08222222,
+          "lon": -125.7725
+        },
+        {
+          "designation": "11-29",
+          "headingTrue": 129,
+          "lengthFt": 4997,
+          "surface": "CONC",
+          "lit": false,
+          "lat": 49.08222222,
+          "lon": -125.7725
+        },
+        {
+          "designation": "16-34",
+          "headingTrue": 179,
+          "lengthFt": 5000,
+          "surface": "CONC",
+          "lit": false,
+          "lat": 49.08222222,
+          "lon": -125.7725
+        }
+      ],
+      "frequencies": []
+    },
+    {
+      "ident": "CYCD",
+      "faaId": "CYCD",
+      "name": "NANAIMO",
+      "city": "NANAIMO",
+      "lat": 49.05444444,
+      "lon": -123.87,
+      "elevationFt": 92,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "16-34",
+          "headingTrue": 161,
+          "lengthFt": 6602,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 49.05444444,
+          "lon": -123.87
+        }
+      ],
+      "frequencies": []
+    },
+    {
+      "ident": "CYPK",
+      "faaId": "CYPK",
+      "name": "PITT MEADOWS",
+      "city": "PITT MEADOWS",
+      "lat": 49.21611111,
+      "lon": -122.71277777,
+      "elevationFt": 11,
+      "towered": true,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "08L-26R",
+          "headingTrue": 99,
+          "lengthFt": 2485,
+          "surface": "ASPH",
+          "lit": false,
+          "lat": 49.21611111,
+          "lon": -122.71277777
+        },
+        {
+          "designation": "08R-26L",
+          "headingTrue": 99,
+          "lengthFt": 4962,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 49.21611111,
+          "lon": -122.71277777
+        },
+        {
+          "designation": "18-36",
+          "headingTrue": 199,
+          "lengthFt": 2484,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 49.21611111,
+          "lon": -122.71277777
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "ATIS",
+          "mhz": 125
+        },
+        {
+          "use": "GND/P",
+          "mhz": 123.8
+        },
+        {
+          "use": "LCL/P",
+          "mhz": 126.3
+        }
+      ]
+    },
+    {
+      "ident": "CYPW",
+      "faaId": "CYPW",
+      "name": "POWELL RIVER",
+      "city": "POWELL RIVER",
+      "lat": 49.83416666,
+      "lon": -124.50027777,
+      "elevationFt": 425,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "09-27",
+          "headingTrue": 109,
+          "lengthFt": 3621,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 49.83416666,
+          "lon": -124.50027777
+        }
+      ],
+      "frequencies": []
+    },
+    {
+      "ident": "CYVR",
+      "faaId": "CYVR",
+      "name": "VANCOUVER INTL",
+      "city": "VANCOUVER",
+      "lat": 49.19472222,
+      "lon": -123.18388888,
+      "elevationFt": 14,
+      "towered": true,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "08L-26R",
+          "headingTrue": 81,
+          "lengthFt": 9940,
+          "surface": "CONC",
+          "lit": true,
+          "lat": 49.19472222,
+          "lon": -123.18388888
+        },
+        {
+          "designation": "08R-26L",
+          "headingTrue": 81,
+          "lengthFt": 11500,
+          "surface": "ASPH-CONC",
+          "lit": true,
+          "lat": 49.19472222,
+          "lon": -123.18388888
+        },
+        {
+          "designation": "13-31",
+          "headingTrue": 149,
+          "lengthFt": 7300,
+          "surface": "ASPH-CONC",
+          "lit": false,
+          "lat": 49.19472222,
+          "lon": -123.18388888
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "ATIS",
+          "mhz": 124.6
+        },
+        {
+          "use": "CD/P",
+          "mhz": 121.4
+        },
+        {
+          "use": "GND/P",
+          "mhz": 121.7
+        },
+        {
+          "use": "GND/P",
+          "mhz": 127.15
+        },
+        {
+          "use": "LCL/P",
+          "mhz": 118.7
+        },
+        {
+          "use": "LCL/P",
+          "mhz": 119.55
+        }
+      ]
+    },
+    {
+      "ident": "CYXX",
+      "faaId": "CYXX",
+      "name": "ABBOTSFORD",
+      "city": "ABBOTSFORD",
+      "lat": 49.02527777,
+      "lon": -122.36,
+      "elevationFt": 194,
+      "towered": true,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "01-19",
+          "headingTrue": 29,
+          "lengthFt": 5328,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 49.02527777,
+          "lon": -122.36
+        },
+        {
+          "designation": "07-25",
+          "headingTrue": 89,
+          "lengthFt": 9597,
+          "surface": "ASPH-CONC",
+          "lit": true,
+          "lat": 49.02527777,
+          "lon": -122.36
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "ATIS",
+          "mhz": 119.8
+        },
+        {
+          "use": "GND/P",
+          "mhz": 121.8
+        },
+        {
+          "use": "LCL/P",
+          "mhz": 119.4
+        },
+        {
+          "use": "LCL/P",
+          "mhz": 121
+        },
+        {
+          "use": "MADEE RNAV STAR",
+          "mhz": 118.2
+        },
+        {
+          "use": "MADEE RNAV STAR",
+          "mhz": 120.7
+        },
+        {
+          "use": "MADEE RNAV STAR",
+          "mhz": 270.8
+        },
+        {
+          "use": "MADEE RNAV STAR",
+          "mhz": 285.65
+        }
+      ]
+    },
+    {
+      "ident": "CYYF",
+      "faaId": "CYYF",
+      "name": "PENTICTON",
+      "city": "PENTICTON",
+      "lat": 49.46305555,
+      "lon": -119.60222222,
+      "elevationFt": 1129,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "16-34",
+          "headingTrue": 178,
+          "lengthFt": 6000,
+          "surface": "ASPH",
+          "lit": false,
+          "lat": 49.46305555,
+          "lon": -119.60222222
+        }
+      ],
+      "frequencies": []
+    },
+    {
+      "ident": "CYYJ",
+      "faaId": "CYYJ",
+      "name": "VICTORIA INTL",
+      "city": "VICTORIA",
+      "lat": 48.6480578,
+      "lon": -123.42744288,
+      "elevationFt": 64,
+      "towered": true,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "03-21",
+          "headingTrue": 44,
+          "lengthFt": 5026,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 48.64735022,
+          "lon": -123.42816182
+        },
+        {
+          "designation": "09-27",
+          "headingTrue": 106,
+          "lengthFt": 6998,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 48.64921472,
+          "lon": -123.42575899
+        },
+        {
+          "designation": "13-31",
+          "headingTrue": 152,
+          "lengthFt": 5001,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 48.64715149,
+          "lon": -123.4290758
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "ATIS",
+          "mhz": 118.8
+        },
+        {
+          "use": "GND/P",
+          "mhz": 121.9
+        }
+      ]
+    },
+    {
+      "ident": "CZBB",
+      "faaId": "CZBB",
+      "name": "VANCOUVER/BOUNDARY BAY",
+      "city": "BOUNDARY BAY",
+      "lat": 49.07577027,
+      "lon": -123.01021222,
+      "elevationFt": 6,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "07-25",
+          "headingTrue": 90,
+          "lengthFt": 6008,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 49.07790605,
+          "lon": -123.00671516
+        },
+        {
+          "designation": "13-31",
+          "headingTrue": 143,
+          "lengthFt": 5605,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 49.07347321,
+          "lon": -123.01397563
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "ATIS",
+          "mhz": 125.5
+        },
+        {
+          "use": "GND/P",
+          "mhz": 124.3
+        },
+        {
+          "use": "LCL/P",
+          "mhz": 118.1
+        },
+        {
+          "use": "LCL/P",
+          "mhz": 127.6
+        },
+        {
+          "use": "MADEE RNAV STAR",
+          "mhz": 118.2
+        },
+        {
+          "use": "MADEE RNAV STAR",
+          "mhz": 120.7
+        },
+        {
+          "use": "MADEE RNAV STAR",
+          "mhz": 270.8
+        },
+        {
+          "use": "MADEE RNAV STAR",
+          "mhz": 285.65
+        }
+      ]
+    },
+    {
+      "ident": "D69",
+      "faaId": "D69",
+      "name": "ROGERSBURG",
+      "city": "ANATONE",
+      "lat": 46.07413333,
+      "lon": -116.96487222,
+      "elevationFt": 869,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "09-27",
+          "headingTrue": 112,
+          "lengthFt": 1471,
+          "surface": "TURF",
+          "lit": false,
+          "lat": 46.07413336,
+          "lon": -116.96487218
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.9
+        }
+      ]
+    },
+    {
+      "ident": "I45",
+      "faaId": "I45",
+      "name": "WAPSHILLA",
+      "city": "WINCHESTER",
+      "lat": 45.94184722,
+      "lon": -116.76366944,
+      "elevationFt": 1415,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "15-33",
+          "headingTrue": 168,
+          "lengthFt": 1026,
+          "surface": "TURF-DIRT",
+          "lit": false,
+          "lat": 45.94184722,
+          "lon": -116.76366943
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.9
+        }
+      ]
+    },
+    {
+      "ident": "KALW",
+      "faaId": "ALW",
       "name": "WALLA WALLA RGNL",
       "city": "WALLA WALLA",
       "lat": 46.09254166,
@@ -2532,7 +3084,8 @@
       ]
     },
     {
-      "ident": "AST",
+      "ident": "KAST",
+      "faaId": "AST",
       "name": "ASTORIA RGNL",
       "city": "ASTORIA",
       "lat": 46.15797833,
@@ -2584,7 +3137,8 @@
       ]
     },
     {
-      "ident": "AWO",
+      "ident": "KAWO",
+      "faaId": "AWO",
       "name": "ARLINGTON MUNI",
       "city": "ARLINGTON",
       "lat": 48.16075,
@@ -2632,7 +3186,8 @@
       ]
     },
     {
-      "ident": "BDN",
+      "ident": "KBDN",
+      "faaId": "BDN",
       "name": "BEND MUNI",
       "city": "BEND",
       "lat": 44.09456083,
@@ -2671,7 +3226,8 @@
       ]
     },
     {
-      "ident": "BFI",
+      "ident": "KBFI",
+      "faaId": "BFI",
       "name": "BOEING FLD/KING COUNTY INTL",
       "city": "SEATTLE",
       "lat": 47.52997222,
@@ -2875,7 +3431,8 @@
       ]
     },
     {
-      "ident": "BKE",
+      "ident": "KBKE",
+      "faaId": "BKE",
       "name": "BAKER CITY MUNI",
       "city": "BAKER CITY",
       "lat": 44.83734583,
@@ -2932,7 +3489,8 @@
       ]
     },
     {
-      "ident": "BLI",
+      "ident": "KBLI",
+      "faaId": "BLI",
       "name": "BELLINGHAM INTL",
       "city": "BELLINGHAM",
       "lat": 48.79269444,
@@ -3003,7 +3561,8 @@
       ]
     },
     {
-      "ident": "BVS",
+      "ident": "KBVS",
+      "faaId": "BVS",
       "name": "SKAGIT RGNL",
       "city": "BURLINGTON/MOUNT VERNON",
       "lat": 48.47052611,
@@ -3051,7 +3610,8 @@
       ]
     },
     {
-      "ident": "CLM",
+      "ident": "KCLM",
+      "faaId": "CLM",
       "name": "WILLIAM R FAIRCHILD INTL",
       "city": "PORT ANGELES",
       "lat": 48.12019444,
@@ -3107,7 +3667,8 @@
       ]
     },
     {
-      "ident": "CLS",
+      "ident": "KCLS",
+      "faaId": "CLS",
       "name": "CHEHALIS-CENTRALIA",
       "city": "CHEHALIS",
       "lat": 46.67702777,
@@ -3154,7 +3715,8 @@
       ]
     },
     {
-      "ident": "COE",
+      "ident": "KCOE",
+      "faaId": "COE",
       "name": "COEUR D'ALENE",
       "city": "COEUR D'ALENE",
       "lat": 47.77430555,
@@ -3202,7 +3764,8 @@
       ]
     },
     {
-      "ident": "CVO",
+      "ident": "KCVO",
+      "faaId": "CVO",
       "name": "CORVALLIS MUNI",
       "city": "CORVALLIS",
       "lat": 44.49687583,
@@ -3270,408 +3833,8 @@
       ]
     },
     {
-      "ident": "CYAZ",
-      "name": "TOFINO/LONG BEACH",
-      "city": "TOFINO",
-      "lat": 49.08222222,
-      "lon": -125.7725,
-      "elevationFt": 80,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "07-25",
-          "headingTrue": 89,
-          "lengthFt": 4999,
-          "surface": "CONC",
-          "lit": false,
-          "lat": 49.08222222,
-          "lon": -125.7725
-        },
-        {
-          "designation": "11-29",
-          "headingTrue": 129,
-          "lengthFt": 4997,
-          "surface": "CONC",
-          "lit": false,
-          "lat": 49.08222222,
-          "lon": -125.7725
-        },
-        {
-          "designation": "16-34",
-          "headingTrue": 179,
-          "lengthFt": 5000,
-          "surface": "CONC",
-          "lit": false,
-          "lat": 49.08222222,
-          "lon": -125.7725
-        }
-      ],
-      "frequencies": []
-    },
-    {
-      "ident": "CYCD",
-      "name": "NANAIMO",
-      "city": "NANAIMO",
-      "lat": 49.05444444,
-      "lon": -123.87,
-      "elevationFt": 92,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "16-34",
-          "headingTrue": 161,
-          "lengthFt": 6602,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 49.05444444,
-          "lon": -123.87
-        }
-      ],
-      "frequencies": []
-    },
-    {
-      "ident": "CYPK",
-      "name": "PITT MEADOWS",
-      "city": "PITT MEADOWS",
-      "lat": 49.21611111,
-      "lon": -122.71277777,
-      "elevationFt": 11,
-      "towered": true,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "08L-26R",
-          "headingTrue": 99,
-          "lengthFt": 2485,
-          "surface": "ASPH",
-          "lit": false,
-          "lat": 49.21611111,
-          "lon": -122.71277777
-        },
-        {
-          "designation": "08R-26L",
-          "headingTrue": 99,
-          "lengthFt": 4962,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 49.21611111,
-          "lon": -122.71277777
-        },
-        {
-          "designation": "18-36",
-          "headingTrue": 199,
-          "lengthFt": 2484,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 49.21611111,
-          "lon": -122.71277777
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "ATIS",
-          "mhz": 125
-        },
-        {
-          "use": "GND/P",
-          "mhz": 123.8
-        },
-        {
-          "use": "LCL/P",
-          "mhz": 126.3
-        }
-      ]
-    },
-    {
-      "ident": "CYPW",
-      "name": "POWELL RIVER",
-      "city": "POWELL RIVER",
-      "lat": 49.83416666,
-      "lon": -124.50027777,
-      "elevationFt": 425,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "09-27",
-          "headingTrue": 109,
-          "lengthFt": 3621,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 49.83416666,
-          "lon": -124.50027777
-        }
-      ],
-      "frequencies": []
-    },
-    {
-      "ident": "CYVR",
-      "name": "VANCOUVER INTL",
-      "city": "VANCOUVER",
-      "lat": 49.19472222,
-      "lon": -123.18388888,
-      "elevationFt": 14,
-      "towered": true,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "08L-26R",
-          "headingTrue": 81,
-          "lengthFt": 9940,
-          "surface": "CONC",
-          "lit": true,
-          "lat": 49.19472222,
-          "lon": -123.18388888
-        },
-        {
-          "designation": "08R-26L",
-          "headingTrue": 81,
-          "lengthFt": 11500,
-          "surface": "ASPH-CONC",
-          "lit": true,
-          "lat": 49.19472222,
-          "lon": -123.18388888
-        },
-        {
-          "designation": "13-31",
-          "headingTrue": 149,
-          "lengthFt": 7300,
-          "surface": "ASPH-CONC",
-          "lit": false,
-          "lat": 49.19472222,
-          "lon": -123.18388888
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "ATIS",
-          "mhz": 124.6
-        },
-        {
-          "use": "CD/P",
-          "mhz": 121.4
-        },
-        {
-          "use": "GND/P",
-          "mhz": 121.7
-        },
-        {
-          "use": "GND/P",
-          "mhz": 127.15
-        },
-        {
-          "use": "LCL/P",
-          "mhz": 118.7
-        },
-        {
-          "use": "LCL/P",
-          "mhz": 119.55
-        }
-      ]
-    },
-    {
-      "ident": "CYXX",
-      "name": "ABBOTSFORD",
-      "city": "ABBOTSFORD",
-      "lat": 49.02527777,
-      "lon": -122.36,
-      "elevationFt": 194,
-      "towered": true,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "01-19",
-          "headingTrue": 29,
-          "lengthFt": 5328,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 49.02527777,
-          "lon": -122.36
-        },
-        {
-          "designation": "07-25",
-          "headingTrue": 89,
-          "lengthFt": 9597,
-          "surface": "ASPH-CONC",
-          "lit": true,
-          "lat": 49.02527777,
-          "lon": -122.36
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "ATIS",
-          "mhz": 119.8
-        },
-        {
-          "use": "GND/P",
-          "mhz": 121.8
-        },
-        {
-          "use": "LCL/P",
-          "mhz": 119.4
-        },
-        {
-          "use": "LCL/P",
-          "mhz": 121
-        },
-        {
-          "use": "MADEE RNAV STAR",
-          "mhz": 118.2
-        },
-        {
-          "use": "MADEE RNAV STAR",
-          "mhz": 120.7
-        },
-        {
-          "use": "MADEE RNAV STAR",
-          "mhz": 270.8
-        },
-        {
-          "use": "MADEE RNAV STAR",
-          "mhz": 285.65
-        }
-      ]
-    },
-    {
-      "ident": "CYYF",
-      "name": "PENTICTON",
-      "city": "PENTICTON",
-      "lat": 49.46305555,
-      "lon": -119.60222222,
-      "elevationFt": 1129,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "16-34",
-          "headingTrue": 178,
-          "lengthFt": 6000,
-          "surface": "ASPH",
-          "lit": false,
-          "lat": 49.46305555,
-          "lon": -119.60222222
-        }
-      ],
-      "frequencies": []
-    },
-    {
-      "ident": "CYYJ",
-      "name": "VICTORIA INTL",
-      "city": "VICTORIA",
-      "lat": 48.6480578,
-      "lon": -123.42744288,
-      "elevationFt": 64,
-      "towered": true,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "03-21",
-          "headingTrue": 44,
-          "lengthFt": 5026,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 48.64735022,
-          "lon": -123.42816182
-        },
-        {
-          "designation": "09-27",
-          "headingTrue": 106,
-          "lengthFt": 6998,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 48.64921472,
-          "lon": -123.42575899
-        },
-        {
-          "designation": "13-31",
-          "headingTrue": 152,
-          "lengthFt": 5001,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 48.64715149,
-          "lon": -123.4290758
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "ATIS",
-          "mhz": 118.8
-        },
-        {
-          "use": "GND/P",
-          "mhz": 121.9
-        }
-      ]
-    },
-    {
-      "ident": "CZBB",
-      "name": "VANCOUVER/BOUNDARY BAY",
-      "city": "BOUNDARY BAY",
-      "lat": 49.07577027,
-      "lon": -123.01021222,
-      "elevationFt": 6,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "07-25",
-          "headingTrue": 90,
-          "lengthFt": 6008,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 49.07790605,
-          "lon": -123.00671516
-        },
-        {
-          "designation": "13-31",
-          "headingTrue": 143,
-          "lengthFt": 5605,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 49.07347321,
-          "lon": -123.01397563
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "ATIS",
-          "mhz": 125.5
-        },
-        {
-          "use": "GND/P",
-          "mhz": 124.3
-        },
-        {
-          "use": "LCL/P",
-          "mhz": 118.1
-        },
-        {
-          "use": "LCL/P",
-          "mhz": 127.6
-        },
-        {
-          "use": "MADEE RNAV STAR",
-          "mhz": 118.2
-        },
-        {
-          "use": "MADEE RNAV STAR",
-          "mhz": 120.7
-        },
-        {
-          "use": "MADEE RNAV STAR",
-          "mhz": 270.8
-        },
-        {
-          "use": "MADEE RNAV STAR",
-          "mhz": 285.65
-        }
-      ]
-    },
-    {
-      "ident": "CZK",
+      "ident": "KCZK",
+      "faaId": "CZK",
       "name": "CASCADE LOCKS STATE",
       "city": "CASCADE LOCKS",
       "lat": 45.67694444,
@@ -3698,34 +3861,8 @@
       ]
     },
     {
-      "ident": "D69",
-      "name": "ROGERSBURG",
-      "city": "ANATONE",
-      "lat": 46.07413333,
-      "lon": -116.96487222,
-      "elevationFt": 869,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "09-27",
-          "headingTrue": 112,
-          "lengthFt": 1471,
-          "surface": "TURF",
-          "lit": false,
-          "lat": 46.07413336,
-          "lon": -116.96487218
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.9
-        }
-      ]
-    },
-    {
-      "ident": "DEW",
+      "ident": "KDEW",
+      "faaId": "DEW",
       "name": "DEER PARK",
       "city": "DEER PARK",
       "lat": 47.96705472,
@@ -3773,7 +3910,8 @@
       ]
     },
     {
-      "ident": "DLS",
+      "ident": "KDLS",
+      "faaId": "DLS",
       "name": "COLUMBIA GORGE RGNL/THE DALLES MUNI",
       "city": "THE DALLES",
       "lat": 45.61935516,
@@ -3821,7 +3959,8 @@
       ]
     },
     {
-      "ident": "EAT",
+      "ident": "KEAT",
+      "faaId": "EAT",
       "name": "PANGBORN MEML",
       "city": "WENATCHEE",
       "lat": 47.39880555,
@@ -3856,7 +3995,8 @@
       ]
     },
     {
-      "ident": "ELN",
+      "ident": "KELN",
+      "faaId": "ELN",
       "name": "BOWERS FLD",
       "city": "ELLENSBURG",
       "lat": 47.0348455,
@@ -3895,7 +4035,8 @@
       ]
     },
     {
-      "ident": "EPH",
+      "ident": "KEPH",
+      "faaId": "EPH",
       "name": "EPHRATA MUNI",
       "city": "EPHRATA",
       "lat": 47.30807166,
@@ -3960,7 +4101,8 @@
       ]
     },
     {
-      "ident": "ESW",
+      "ident": "KESW",
+      "faaId": "ESW",
       "name": "EASTON STATE",
       "city": "EASTON",
       "lat": 47.25418388,
@@ -3987,7 +4129,8 @@
       ]
     },
     {
-      "ident": "EUG",
+      "ident": "KEUG",
+      "faaId": "EUG",
       "name": "MAHLON SWEET FLD",
       "city": "EUGENE",
       "lat": 44.12458333,
@@ -4091,7 +4234,8 @@
       ]
     },
     {
-      "ident": "FHR",
+      "ident": "KFHR",
+      "faaId": "FHR",
       "name": "FRIDAY HARBOR",
       "city": "FRIDAY HARBOR",
       "lat": 48.52197222,
@@ -4126,7 +4270,8 @@
       ]
     },
     {
-      "ident": "GCD",
+      "ident": "KGCD",
+      "faaId": "GCD",
       "name": "GRANT COUNTY RGNL/OGILVIE FLD",
       "city": "JOHN DAY",
       "lat": 44.40298325,
@@ -4201,7 +4346,8 @@
       ]
     },
     {
-      "ident": "GEG",
+      "ident": "KGEG",
+      "faaId": "GEG",
       "name": "SPOKANE INTL",
       "city": "SPOKANE",
       "lat": 47.61902777,
@@ -4325,7 +4471,8 @@
       ]
     },
     {
-      "ident": "HIO",
+      "ident": "KHIO",
+      "faaId": "HIO",
       "name": "PORTLAND-HILLSBORO",
       "city": "PORTLAND",
       "lat": 45.54212175,
@@ -4426,7 +4573,8 @@
       ]
     },
     {
-      "ident": "HQM",
+      "ident": "KHQM",
+      "faaId": "HQM",
       "name": "BOWERMAN FLD",
       "city": "HOQUIAM",
       "lat": 46.97119444,
@@ -4465,7 +4613,8 @@
       ]
     },
     {
-      "ident": "HRI",
+      "ident": "KHRI",
+      "faaId": "HRI",
       "name": "HERMISTON MUNI",
       "city": "HERMISTON",
       "lat": 45.82822222,
@@ -4512,34 +4661,8 @@
       ]
     },
     {
-      "ident": "I45",
-      "name": "WAPSHILLA",
-      "city": "WINCHESTER",
-      "lat": 45.94184722,
-      "lon": -116.76366944,
-      "elevationFt": 1415,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "15-33",
-          "headingTrue": 168,
-          "lengthFt": 1026,
-          "surface": "TURF-DIRT",
-          "lit": false,
-          "lat": 45.94184722,
-          "lon": -116.76366943
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.9
-        }
-      ]
-    },
-    {
-      "ident": "JSY",
+      "ident": "KJSY",
+      "faaId": "JSY",
       "name": "JOSEPH STATE",
       "city": "JOSEPH",
       "lat": 45.35954972,
@@ -4578,7 +4701,8 @@
       ]
     },
     {
-      "ident": "KLS",
+      "ident": "KKLS",
+      "faaId": "KLS",
       "name": "SOUTHWEST WASHINGTON RGNL",
       "city": "KELSO",
       "lat": 46.118,
@@ -4617,7 +4741,8 @@
       ]
     },
     {
-      "ident": "LGD",
+      "ident": "KLGD",
+      "faaId": "LGD",
       "name": "LA GRANDE/UNION COUNTY",
       "city": "LA GRANDE",
       "lat": 45.28907805,
@@ -4665,7 +4790,8 @@
       ]
     },
     {
-      "ident": "LWS",
+      "ident": "KLWS",
+      "faaId": "LWS",
       "name": "LEWISTON/NEZ PERCE COUNTY",
       "city": "LEWISTON",
       "lat": 46.37449861,
@@ -4733,65 +4859,8 @@
       ]
     },
     {
-      "ident": "M50",
-      "name": "BOARDMAN",
-      "city": "BOARDMAN",
-      "lat": 45.814825,
-      "lon": -119.82050055,
-      "elevationFt": 395.5,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "04-22",
-          "headingTrue": 62,
-          "lengthFt": 4200,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 45.81482495,
-          "lon": -119.82050049
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.9
-        }
-      ]
-    },
-    {
-      "ident": "M94",
-      "name": "DESERT AIRE RGNL",
-      "city": "MATTAWA",
-      "lat": 46.68725111,
-      "lon": -119.91972611,
-      "elevationFt": 586,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "10-28",
-          "headingTrue": 116,
-          "lengthFt": 3665,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 46.68725116,
-          "lon": -119.91972612
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.8
-        },
-        {
-          "use": "UNICOM",
-          "mhz": 122.8
-        }
-      ]
-    },
-    {
-      "ident": "MMV",
+      "ident": "KMMV",
+      "faaId": "MMV",
       "name": "MC MINNVILLE MUNI",
       "city": "MC MINNVILLE",
       "lat": 45.19454805,
@@ -4855,7 +4924,8 @@
       ]
     },
     {
-      "ident": "MWH",
+      "ident": "KMWH",
+      "faaId": "MWH",
       "name": "GRANT COUNTY INTL",
       "city": "MOSES LAKE",
       "lat": 47.20858333,
@@ -4992,61 +5062,8 @@
       ]
     },
     {
-      "ident": "O48",
-      "name": "SALMON BAR",
-      "city": "IMNAHA",
-      "lat": 45.8602625,
-      "lon": -116.79781666,
-      "elevationFt": 947,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "14-32",
-          "headingTrue": 156,
-          "lengthFt": 762,
-          "surface": "TURF",
-          "lit": false,
-          "lat": 45.8602625,
-          "lon": -116.79781665
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.9
-        }
-      ]
-    },
-    {
-      "ident": "O62",
-      "name": "B & H USFS",
-      "city": "ENTERPRISE",
-      "lat": 45.72411666,
-      "lon": -117.077375,
-      "elevationFt": 4007,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "04-22",
-          "headingTrue": 44,
-          "lengthFt": 1850,
-          "surface": "TURF",
-          "lit": false,
-          "lat": 45.72411669,
-          "lon": -117.07737508
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.9
-        }
-      ]
-    },
-    {
-      "ident": "OKH",
+      "ident": "KOKH",
+      "faaId": "OKH",
       "name": "DELAURENTIS",
       "city": "OAK HARBOR",
       "lat": 48.25152777,
@@ -5085,7 +5102,8 @@
       ]
     },
     {
-      "ident": "OLM",
+      "ident": "KOLM",
+      "faaId": "OLM",
       "name": "OLYMPIA RGNL",
       "city": "OLYMPIA",
       "lat": 46.96940444,
@@ -5149,7 +5167,8 @@
       ]
     },
     {
-      "ident": "OMK",
+      "ident": "KOMK",
+      "faaId": "OMK",
       "name": "OMAK",
       "city": "OMAK",
       "lat": 48.46441222,
@@ -5188,7 +5207,8 @@
       ]
     },
     {
-      "ident": "ONP",
+      "ident": "KONP",
+      "faaId": "ONP",
       "name": "NEWPORT MUNI",
       "city": "NEWPORT",
       "lat": 44.58036111,
@@ -5236,7 +5256,8 @@
       ]
     },
     {
-      "ident": "ORS",
+      "ident": "KORS",
+      "faaId": "ORS",
       "name": "ORCAS ISLAND",
       "city": "EASTSOUND",
       "lat": 48.70833722,
@@ -5275,7 +5296,8 @@
       ]
     },
     {
-      "ident": "PAE",
+      "ident": "KPAE",
+      "faaId": "PAE",
       "name": "SEATTLE PAINE FLD INTL",
       "city": "EVERETT",
       "lat": 47.90505527,
@@ -5363,7 +5385,8 @@
       ]
     },
     {
-      "ident": "PDT",
+      "ident": "KPDT",
+      "faaId": "PDT",
       "name": "EASTERN OREGON RGNL AT PENDLETON",
       "city": "PENDLETON",
       "lat": 45.69509555,
@@ -5447,7 +5470,8 @@
       ]
     },
     {
-      "ident": "PDX",
+      "ident": "KPDX",
+      "faaId": "PDX",
       "name": "PORTLAND INTL",
       "city": "PORTLAND",
       "lat": 45.58870886,
@@ -5684,7 +5708,8 @@
       ]
     },
     {
-      "ident": "PFC",
+      "ident": "KPFC",
+      "faaId": "PFC",
       "name": "PACIFIC CITY STATE",
       "city": "PACIFIC CITY",
       "lat": 45.19936111,
@@ -5711,7 +5736,8 @@
       ]
     },
     {
-      "ident": "PLU",
+      "ident": "KPLU",
+      "faaId": "PLU",
       "name": "PIERCE COUNTY/THUN FLD",
       "city": "PUYALLUP",
       "lat": 47.10392,
@@ -5754,7 +5780,8 @@
       ]
     },
     {
-      "ident": "PSC",
+      "ident": "KPSC",
+      "faaId": "PSC",
       "name": "TRI-CITIES",
       "city": "PASCO",
       "lat": 46.26494833,
@@ -5847,7 +5874,8 @@
       ]
     },
     {
-      "ident": "PUW",
+      "ident": "KPUW",
+      "faaId": "PUW",
       "name": "PULLMAN/MOSCOW RGNL",
       "city": "PULLMAN/MOSCOW",
       "lat": 46.74169138,
@@ -5886,7 +5914,8 @@
       ]
     },
     {
-      "ident": "PWT",
+      "ident": "KPWT",
+      "faaId": "PWT",
       "name": "BREMERTON NTL",
       "city": "BREMERTON",
       "lat": 47.49025,
@@ -5937,79 +5966,8 @@
       ]
     },
     {
-      "ident": "R33",
-      "name": "WAKONDA BEACH STATE",
-      "city": "WALDPORT",
-      "lat": 44.38456388,
-      "lon": -124.08511944,
-      "elevationFt": 41,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "16-34",
-          "headingTrue": 179,
-          "lengthFt": 2000,
-          "surface": "TURF",
-          "lit": false,
-          "lat": 44.38456388,
-          "lon": -124.08511944
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.9
-        }
-      ]
-    },
-    {
-      "ident": "R49",
-      "name": "FERRY COUNTY",
-      "city": "REPUBLIC",
-      "lat": 48.71820583,
-      "lon": -118.65647138,
-      "elevationFt": 2522,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "17-35",
-          "headingTrue": 187,
-          "lengthFt": 3498,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 48.71820569,
-          "lon": -118.65647147
-        },
-        {
-          "designation": "H1",
-          "headingTrue": 0,
-          "lengthFt": 20,
-          "surface": "CONC",
-          "lit": false,
-          "lat": 48.71621666,
-          "lon": -118.65826111
-        },
-        {
-          "designation": "H2",
-          "headingTrue": 0,
-          "lengthFt": 20,
-          "surface": "CONC",
-          "lit": false,
-          "lat": 48.71584444,
-          "lon": -118.65810277
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.9
-        }
-      ]
-    },
-    {
-      "ident": "RDM",
+      "ident": "KRDM",
+      "faaId": "RDM",
       "name": "ROBERTS FLD/REDMOND MUNI",
       "city": "REDMOND",
       "lat": 44.25406888,
@@ -6082,7 +6040,8 @@
       ]
     },
     {
-      "ident": "RLD",
+      "ident": "KRLD",
+      "faaId": "RLD",
       "name": "RICHLAND",
       "city": "RICHLAND",
       "lat": 46.30563944,
@@ -6138,7 +6097,8 @@
       ]
     },
     {
-      "ident": "RNT",
+      "ident": "KRNT",
+      "faaId": "RNT",
       "name": "RENTON MUNI",
       "city": "RENTON",
       "lat": 47.49313888,
@@ -6321,953 +6281,8 @@
       ]
     },
     {
-      "ident": "S10",
-      "name": "LAKE CHELAN",
-      "city": "CHELAN",
-      "lat": 47.86601027,
-      "lon": -119.94270166,
-      "elevationFt": 1263.1,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "02-20",
-          "headingTrue": 44,
-          "lengthFt": 3506,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 47.86600817,
-          "lon": -119.94268486
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.9
-        },
-        {
-          "use": "UNICOM",
-          "mhz": 122.95
-        }
-      ]
-    },
-    {
-      "ident": "S12",
-      "name": "ALBANY MUNI",
-      "city": "ALBANY",
-      "lat": 44.63781527,
-      "lon": -123.05944888,
-      "elevationFt": 226.5,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "16-34",
-          "headingTrue": 180,
-          "lengthFt": 3004,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 44.63781862,
-          "lon": -123.05944735
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "APCH/P DEP/P",
-          "mhz": 120.25
-        },
-        {
-          "use": "APCH/P DEP/P",
-          "mhz": 298.9
-        },
-        {
-          "use": "APCH/P DEP/P IC",
-          "mhz": 119.6
-        },
-        {
-          "use": "APCH/P DEP/P IC",
-          "mhz": 348.7
-        },
-        {
-          "use": "CTAF",
-          "mhz": 122.725
-        },
-        {
-          "use": "HORTON RCAG",
-          "mhz": 125.8
-        },
-        {
-          "use": "HORTON RCAG",
-          "mhz": 291.7
-        },
-        {
-          "use": "UNICOM",
-          "mhz": 122.725
-        }
-      ]
-    },
-    {
-      "ident": "S16",
-      "name": "COPALIS STATE",
-      "city": "COPALIS",
-      "lat": 47.14485972,
-      "lon": -124.18925138,
-      "elevationFt": 1,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "14-32",
-          "headingTrue": 162,
-          "lengthFt": 3560,
-          "surface": "SAND",
-          "lit": false,
-          "lat": 47.14485974,
-          "lon": -124.18925119
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.9
-        }
-      ]
-    },
-    {
-      "ident": "S18",
-      "name": "FORKS",
-      "city": "FORKS",
-      "lat": 47.93771833,
-      "lon": -124.39592055,
-      "elevationFt": 299,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "04-22",
-          "headingTrue": 61,
-          "lengthFt": 2400,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 47.93771833,
-          "lon": -124.39592055
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.9
-        }
-      ]
-    },
-    {
-      "ident": "S20",
-      "name": "GOLDENDALE",
-      "city": "GOLDENDALE",
-      "lat": 45.83207388,
-      "lon": -120.84527472,
-      "elevationFt": 1678,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "07-25",
-          "headingTrue": 89,
-          "lengthFt": 3491,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 45.83207395,
-          "lon": -120.84527473
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.9
-        }
-      ]
-    },
-    {
-      "ident": "S21",
-      "name": "SUNRIVER",
-      "city": "SUNRIVER",
-      "lat": 43.8763125,
-      "lon": -121.45305138,
-      "elevationFt": 4163.5,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "18-36",
-          "headingTrue": 196,
-          "lengthFt": 5460,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 43.8763124,
-          "lon": -121.45305151
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.8
-        },
-        {
-          "use": "REDMOND RCAG",
-          "mhz": 126.15
-        },
-        {
-          "use": "REDMOND RCAG",
-          "mhz": 269.475
-        },
-        {
-          "use": "UNICOM",
-          "mhz": 122.8
-        }
-      ]
-    },
-    {
-      "ident": "S23",
-      "name": "IONE MUNI",
-      "city": "IONE",
-      "lat": 48.70843888,
-      "lon": -117.41313055,
-      "elevationFt": 2109.5,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "15-33",
-          "headingTrue": 167,
-          "lengthFt": 3643,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 48.7084389,
-          "lon": -117.41313039
-        },
-        {
-          "designation": "H1",
-          "headingTrue": 0,
-          "lengthFt": 60,
-          "surface": "CONC",
-          "lit": true,
-          "lat": 48.70843888,
-          "lon": -117.41313055
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.9
-        }
-      ]
-    },
-    {
-      "ident": "S30",
-      "name": "LEBANON STATE",
-      "city": "LEBANON",
-      "lat": 44.53113888,
-      "lon": -122.92972222,
-      "elevationFt": 348.5,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "16-34",
-          "headingTrue": 180,
-          "lengthFt": 2747,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 44.53115008,
-          "lon": -122.92972516
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.8
-        },
-        {
-          "use": "UNICOM",
-          "mhz": 122.8
-        }
-      ]
-    },
-    {
-      "ident": "S31",
-      "name": "LOPEZ ISLAND",
-      "city": "LOPEZ",
-      "lat": 48.48391666,
-      "lon": -122.93766666,
-      "elevationFt": 208.8,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "16-34",
-          "headingTrue": 180,
-          "lengthFt": 2905,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 48.48391287,
-          "lon": -122.93768054
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 128.25
-        }
-      ]
-    },
-    {
-      "ident": "S33",
-      "name": "MADRAS MUNI",
-      "city": "MADRAS",
-      "lat": 44.67016333,
-      "lon": -121.15514916,
-      "elevationFt": 2437.6,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "04-22",
-          "headingTrue": 55,
-          "lengthFt": 2701,
-          "surface": "ASPH",
-          "lit": false,
-          "lat": 44.67603053,
-          "lon": -121.15846894
-        },
-        {
-          "designation": "16-34",
-          "headingTrue": 180,
-          "lengthFt": 5091,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 44.66705059,
-          "lon": -121.15338834
-        },
-        {
-          "designation": "H1",
-          "headingTrue": 0,
-          "lengthFt": 100,
-          "surface": "ASPH",
-          "lit": false,
-          "lat": 44.67655,
-          "lon": -121.16749722
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.8
-        },
-        {
-          "use": "REDMOND RCAG",
-          "mhz": 126.15
-        },
-        {
-          "use": "REDMOND RCAG",
-          "mhz": 269.475
-        },
-        {
-          "use": "UNICOM",
-          "mhz": 122.8
-        }
-      ]
-    },
-    {
-      "ident": "S35",
-      "name": "OKANOGAN LEGION",
-      "city": "OKANOGAN",
-      "lat": 48.36191805,
-      "lon": -119.56756,
-      "elevationFt": 1042,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "04-22",
-          "headingTrue": 59,
-          "lengthFt": 2533,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 48.36190425,
-          "lon": -119.56755988
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.8
-        },
-        {
-          "use": "UNICOM",
-          "mhz": 122.8
-        }
-      ]
-    },
-    {
-      "ident": "S36",
-      "name": "CREST AIRFIELD",
-      "city": "COVINGTON",
-      "lat": 47.33709666,
-      "lon": -122.10353638,
-      "elevationFt": 472,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "16-34",
-          "headingTrue": 171,
-          "lengthFt": 3288,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 47.33709667,
-          "lon": -122.1035363
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 123
-        },
-        {
-          "use": "UNICOM",
-          "mhz": 123
-        }
-      ]
-    },
-    {
-      "ident": "S39",
-      "name": "PRINEVILLE",
-      "city": "PRINEVILLE",
-      "lat": 44.2882775,
-      "lon": -120.90557833,
-      "elevationFt": 3250.7,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "11-29",
-          "headingTrue": 119,
-          "lengthFt": 5405,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 44.28974635,
-          "lon": -120.90579208
-        },
-        {
-          "designation": "16-34",
-          "headingTrue": 171,
-          "lengthFt": 3536,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 44.28603249,
-          "lon": -120.90525168
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.7
-        },
-        {
-          "use": "REDMOND RCAG",
-          "mhz": 126.15
-        },
-        {
-          "use": "REDMOND RCAG",
-          "mhz": 269.475
-        },
-        {
-          "use": "UNICOM",
-          "mhz": 122.7
-        }
-      ]
-    },
-    {
-      "ident": "S40",
-      "name": "PROSSER",
-      "city": "PROSSER",
-      "lat": 46.21336111,
-      "lon": -119.79555555,
-      "elevationFt": 705.5,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "08-26",
-          "headingTrue": 90,
-          "lengthFt": 3452,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 46.21337192,
-          "lon": -119.79556198
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.8
-        },
-        {
-          "use": "UNICOM",
-          "mhz": 122.8
-        }
-      ]
-    },
-    {
-      "ident": "S43",
-      "name": "HARVEY FLD",
-      "city": "SNOHOMISH",
-      "lat": 47.90486802,
-      "lon": -122.10274361,
-      "elevationFt": 22.8,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "15L-33R",
-          "headingTrue": 165,
-          "lengthFt": 2672,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 47.90479222,
-          "lon": -122.10225519
-        },
-        {
-          "designation": "15R-33L",
-          "headingTrue": 165,
-          "lengthFt": 2430,
-          "surface": "TURF",
-          "lit": false,
-          "lat": 47.90495139,
-          "lon": -122.10328047
-        },
-        {
-          "designation": "H1",
-          "headingTrue": 0,
-          "lengthFt": 15,
-          "surface": "CONC",
-          "lit": false,
-          "lat": 47.90605277,
-          "lon": -122.10051666
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "APCH/P DEP/P",
-          "mhz": 128.5
-        },
-        {
-          "use": "APCH/P DEP/P",
-          "mhz": 306.9
-        },
-        {
-          "use": "CTAF",
-          "mhz": 123
-        },
-        {
-          "use": "UNICOM",
-          "mhz": 123
-        }
-      ]
-    },
-    {
-      "ident": "S45",
-      "name": "SILETZ BAY STATE",
-      "city": "GLENEDEN BEACH",
-      "lat": 44.87677777,
-      "lon": -124.02855555,
-      "elevationFt": 69.2,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "17-35",
-          "headingTrue": 191,
-          "lengthFt": 3297,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 44.87678754,
-          "lon": -124.02855688
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.7
-        },
-        {
-          "use": "UNICOM",
-          "mhz": 122.7
-        }
-      ]
-    },
-    {
-      "ident": "S50",
-      "name": "AUBURN MUNI",
-      "city": "AUBURN",
-      "lat": 47.327625,
-      "lon": -122.226655,
-      "elevationFt": 63,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "17-35",
-          "headingTrue": 180,
-          "lengthFt": 3842,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 47.32762486,
-          "lon": -122.22665508
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "APCH/P DEP/P",
-          "mhz": 123.85
-        },
-        {
-          "use": "CD/P",
-          "mhz": 123.85
-        },
-        {
-          "use": "CTAF",
-          "mhz": 122.975
-        },
-        {
-          "use": "UNICOM",
-          "mhz": 122.975
-        }
-      ]
-    },
-    {
-      "ident": "S52",
-      "name": "METHOW VALLEY STATE",
-      "city": "WINTHROP",
-      "lat": 48.42494833,
-      "lon": -120.14588555,
-      "elevationFt": 1706,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "13-31",
-          "headingTrue": 147,
-          "lengthFt": 5049,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 48.42494819,
-          "lon": -120.14588546
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.8
-        },
-        {
-          "use": "UNICOM",
-          "mhz": 122.8
-        }
-      ]
-    },
-    {
-      "ident": "S70",
-      "name": "OTHELLO MUNI",
-      "city": "OTHELLO",
-      "lat": 46.7942175,
-      "lon": -119.08010888,
-      "elevationFt": 1148.6,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "07-25",
-          "headingTrue": 91,
-          "lengthFt": 4000,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 46.79421749,
-          "lon": -119.08010885
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.9
-        }
-      ]
-    },
-    {
-      "ident": "S72",
-      "name": "JACK A BUELL",
-      "city": "ST MARIES",
-      "lat": 47.32581111,
-      "lon": -116.57667777,
-      "elevationFt": 2131.3,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "10-28",
-          "headingTrue": 115,
-          "lengthFt": 3354,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 47.32581127,
-          "lon": -116.57667755
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.8
-        },
-        {
-          "use": "UNICOM",
-          "mhz": 122.8
-        }
-      ]
-    },
-    {
-      "ident": "S77",
-      "name": "MAGEE",
-      "city": "COEUR D'ALENE",
-      "lat": 47.84155833,
-      "lon": -116.25199444,
-      "elevationFt": 3002,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "01-19",
-          "headingTrue": 29,
-          "lengthFt": 2200,
-          "surface": "TURF",
-          "lit": false,
-          "lat": 47.84155833,
-          "lon": -116.25199444
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.9
-        }
-      ]
-    },
-    {
-      "ident": "S83",
-      "name": "SHOSHONE COUNTY",
-      "city": "KELLOGG",
-      "lat": 47.54726111,
-      "lon": -116.18906388,
-      "elevationFt": 2227,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "07-25",
-          "headingTrue": 89,
-          "lengthFt": 5316,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 47.54726161,
-          "lon": -116.18906392
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.8
-        },
-        {
-          "use": "UNICOM",
-          "mhz": 122.8
-        }
-      ]
-    },
-    {
-      "ident": "S88",
-      "name": "SKYKOMISH STATE",
-      "city": "SKYKOMISH",
-      "lat": 47.71093555,
-      "lon": -121.33905638,
-      "elevationFt": 1002,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "06-24",
-          "headingTrue": 80,
-          "lengthFt": 2050,
-          "surface": "TURF",
-          "lit": false,
-          "lat": 47.71093555,
-          "lon": -121.33905638
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.9
-        }
-      ]
-    },
-    {
-      "ident": "S89",
-      "name": "CRAIGMONT MUNI",
-      "city": "CRAIGMONT",
-      "lat": 46.24772222,
-      "lon": -116.47936111,
-      "elevationFt": 3805,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "07-25",
-          "headingTrue": 87,
-          "lengthFt": 2800,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 46.24771401,
-          "lon": -116.47937085
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.9
-        }
-      ]
-    },
-    {
-      "ident": "S93",
-      "name": "CLE ELUM MUNI",
-      "city": "CLE ELUM",
-      "lat": 47.19424275,
-      "lon": -120.88403538,
-      "elevationFt": 1944.7,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "07-25",
-          "headingTrue": 88,
-          "lengthFt": 2379,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 47.19424283,
-          "lon": -120.8840354
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.9
-        }
-      ]
-    },
-    {
-      "ident": "S94",
-      "name": "PORT OF WHITMAN BUSINESS AIR CENTER",
-      "city": "COLFAX",
-      "lat": 46.85870722,
-      "lon": -117.41408111,
-      "elevationFt": 2181,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "08-26",
-          "headingTrue": 91,
-          "lengthFt": 3209,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 46.85870725,
-          "lon": -117.41408111
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.8
-        },
-        {
-          "use": "UNICOM",
-          "mhz": 122.8
-        }
-      ]
-    },
-    {
-      "ident": "S95",
-      "name": "MARTIN FLD",
-      "city": "COLLEGE PLACE",
-      "lat": 46.04693916,
-      "lon": -118.41717777,
-      "elevationFt": 750,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "05-23",
-          "headingTrue": 65,
-          "lengthFt": 3819,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 46.04693923,
-          "lon": -118.41717763
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.8
-        },
-        {
-          "use": "UNICOM",
-          "mhz": 122.8
-        }
-      ]
-    },
-    {
-      "ident": "S97",
-      "name": "ANDERSON FLD",
-      "city": "BREWSTER",
-      "lat": 48.10472861,
-      "lon": -119.71991555,
-      "elevationFt": 919.5,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "07-25",
-          "headingTrue": 87,
-          "lengthFt": 4000,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 48.10472866,
-          "lon": -119.71991563
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.8
-        },
-        {
-          "use": "UNICOM",
-          "mhz": 122.8
-        }
-      ]
-    },
-    {
-      "ident": "SEA",
+      "ident": "KSEA",
+      "faaId": "SEA",
       "name": "SEATTLE-TACOMA INTL",
       "city": "SEATTLE",
       "lat": 47.44988888,
@@ -7620,7 +6635,8 @@
       ]
     },
     {
-      "ident": "SFF",
+      "ident": "KSFF",
+      "faaId": "SFF",
       "name": "FELTS FLD",
       "city": "SPOKANE",
       "lat": 47.68294055,
@@ -7713,7 +6729,8 @@
       ]
     },
     {
-      "ident": "SHN",
+      "ident": "KSHN",
+      "faaId": "SHN",
       "name": "SANDERSON FLD",
       "city": "SHELTON",
       "lat": 47.23355555,
@@ -7752,7 +6769,8 @@
       ]
     },
     {
-      "ident": "SLE",
+      "ident": "KSLE",
+      "faaId": "SLE",
       "name": "MCNARY FLD",
       "city": "SALEM",
       "lat": 44.90952777,
@@ -7845,7 +6863,8 @@
       ]
     },
     {
-      "ident": "SPB",
+      "ident": "KSPB",
+      "faaId": "SPB",
       "name": "SCAPPOOSE",
       "city": "SCAPPOOSE",
       "lat": 45.77102777,
@@ -7892,7 +6911,8 @@
       ]
     },
     {
-      "ident": "SZT",
+      "ident": "KSZT",
+      "faaId": "SZT",
       "name": "SANDPOINT",
       "city": "SANDPOINT",
       "lat": 48.29952777,
@@ -7931,7 +6951,8 @@
       ]
     },
     {
-      "ident": "TDO",
+      "ident": "KTDO",
+      "faaId": "TDO",
       "name": "ED CARLSON MEML FLD/SOUTH LEWIS COUNTY",
       "city": "TOLEDO",
       "lat": 46.47716916,
@@ -7966,7 +6987,8 @@
       ]
     },
     {
-      "ident": "TIW",
+      "ident": "KTIW",
+      "faaId": "TIW",
       "name": "TACOMA NARROWS",
       "city": "TACOMA",
       "lat": 47.26794444,
@@ -8021,7 +7043,8 @@
       ]
     },
     {
-      "ident": "TMK",
+      "ident": "KTMK",
+      "faaId": "TMK",
       "name": "TILLAMOOK",
       "city": "TILLAMOOK",
       "lat": 45.41825,
@@ -8069,7 +7092,8 @@
       ]
     },
     {
-      "ident": "TTD",
+      "ident": "KTTD",
+      "faaId": "TTD",
       "name": "PORTLAND-TROUTDALE",
       "city": "PORTLAND",
       "lat": 45.54936111,
@@ -8152,7 +7176,8 @@
       ]
     },
     {
-      "ident": "UAO",
+      "ident": "KUAO",
+      "faaId": "UAO",
       "name": "AURORA STATE",
       "city": "AURORA",
       "lat": 45.24712638,
@@ -8223,7 +7248,8 @@
       ]
     },
     {
-      "ident": "UIL",
+      "ident": "KUIL",
+      "faaId": "UIL",
       "name": "QUILLAYUTE",
       "city": "QUILLAYUTE",
       "lat": 47.93658027,
@@ -8250,7 +7276,8 @@
       ]
     },
     {
-      "ident": "VUO",
+      "ident": "KVUO",
+      "faaId": "VUO",
       "name": "PEARSON FLD",
       "city": "VANCOUVER",
       "lat": 45.6204525,
@@ -8301,348 +7328,8 @@
       ]
     },
     {
-      "ident": "W01",
-      "name": "TONASKET MUNI",
-      "city": "TONASKET",
-      "lat": 48.72486833,
-      "lon": -119.46563472,
-      "elevationFt": 1311,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "15-33",
-          "headingTrue": 162,
-          "lengthFt": 3053,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 48.72486835,
-          "lon": -119.46563484
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.9
-        }
-      ]
-    },
-    {
-      "ident": "W04",
-      "name": "OCEAN SHORES MUNI",
-      "city": "OCEAN SHORES",
-      "lat": 46.99921997,
-      "lon": -124.1423825,
-      "elevationFt": 15,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "15-33",
-          "headingTrue": 170,
-          "lengthFt": 3100,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 46.99921997,
-          "lon": -124.14238241
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.9
-        }
-      ]
-    },
-    {
-      "ident": "W09",
-      "name": "LOWER MONUMENTAL STATE",
-      "city": "KAHLOTUS",
-      "lat": 46.54972222,
-      "lon": -118.53669583,
-      "elevationFt": 813,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "01-19",
-          "headingTrue": 29,
-          "lengthFt": 3300,
-          "surface": "GRAVEL",
-          "lit": false,
-          "lat": 46.54972226,
-          "lon": -118.53669606
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.9
-        }
-      ]
-    },
-    {
-      "ident": "W10",
-      "name": "WHIDBEY AIR PARK",
-      "city": "LANGLEY",
-      "lat": 48.01751225,
-      "lon": -122.4377275,
-      "elevationFt": 271,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "16-34",
-          "headingTrue": 174,
-          "lengthFt": 2470,
-          "surface": "ASPH",
-          "lit": false,
-          "lat": 48.0176225,
-          "lon": -122.4377276
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.9
-        }
-      ]
-    },
-    {
-      "ident": "W12",
-      "name": "LOST RIVER",
-      "city": "MAZAMA",
-      "lat": 48.64958416,
-      "lon": -120.50204444,
-      "elevationFt": 2415,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "11-29",
-          "headingTrue": 131,
-          "lengthFt": 3150,
-          "surface": "TURF-GRVL",
-          "lit": false,
-          "lat": 48.64958416,
-          "lon": -120.50204444
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.9
-        }
-      ]
-    },
-    {
-      "ident": "W16",
-      "name": "FIRST AIR FLD",
-      "city": "MONROE",
-      "lat": 47.87136361,
-      "lon": -121.99524388,
-      "elevationFt": 50,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "07-25",
-          "headingTrue": 92,
-          "lengthFt": 2087,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 47.87136355,
-          "lon": -121.99524387
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.9
-        }
-      ]
-    },
-    {
-      "ident": "W20",
-      "name": "MOSES LAKE MUNI",
-      "city": "MOSES LAKE",
-      "lat": 47.14200416,
-      "lon": -119.23788194,
-      "elevationFt": 1203,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "16-34",
-          "headingTrue": 180,
-          "lengthFt": 2513,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 47.14200416,
-          "lon": -119.2378818
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 123
-        },
-        {
-          "use": "UNICOM",
-          "mhz": 123
-        }
-      ]
-    },
-    {
-      "ident": "W27",
-      "name": "WOODLAND STATE",
-      "city": "WOODLAND",
-      "lat": 45.8991825,
-      "lon": -122.73751041,
-      "elevationFt": 29,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "14-32",
-          "headingTrue": 156,
-          "lengthFt": 2245,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 45.89918251,
-          "lon": -122.73751032
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.9
-        }
-      ]
-    },
-    {
-      "ident": "W28",
-      "name": "SEQUIM VALLEY",
-      "city": "SEQUIM",
-      "lat": 48.09792222,
-      "lon": -123.18792083,
-      "elevationFt": 151,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "09-27",
-          "headingTrue": 107,
-          "lengthFt": 3508,
-          "surface": "ASPH",
-          "lit": true,
-          "lat": 48.09792242,
-          "lon": -123.18792064
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.7
-        },
-        {
-          "use": "UNICOM",
-          "mhz": 122.7
-        }
-      ]
-    },
-    {
-      "ident": "W52",
-      "name": "GOHEEN",
-      "city": "BATTLE GROUND",
-      "lat": 45.82679638,
-      "lon": -122.57685611,
-      "elevationFt": 292,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "07-25",
-          "headingTrue": 90,
-          "lengthFt": 1500,
-          "surface": "TURF",
-          "lit": false,
-          "lat": 45.82679638,
-          "lon": -122.57685611
-        },
-        {
-          "designation": "15-33",
-          "headingTrue": 165,
-          "lengthFt": 2565,
-          "surface": "TURF",
-          "lit": true,
-          "lat": 45.82749875,
-          "lon": -122.57737394
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.9
-        }
-      ]
-    },
-    {
-      "ident": "W56",
-      "name": "FLY FOR FUN",
-      "city": "VANCOUVER",
-      "lat": 45.68728,
-      "lon": -122.52185305,
-      "elevationFt": 297,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "07-25",
-          "headingTrue": 90,
-          "lengthFt": 2434,
-          "surface": "TURF",
-          "lit": false,
-          "lat": 45.68727996,
-          "lon": -122.52185292
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.9
-        }
-      ]
-    },
-    {
-      "ident": "W58",
-      "name": "CEDARS NORTH",
-      "city": "BATTLE GROUND",
-      "lat": 45.76455555,
-      "lon": -122.51508333,
-      "elevationFt": 275,
-      "towered": false,
-      "heliport": false,
-      "runways": [
-        {
-          "designation": "08-26",
-          "headingTrue": 99,
-          "lengthFt": 1960,
-          "surface": "TURF",
-          "lit": false,
-          "lat": 45.76455555,
-          "lon": -122.51508333
-        }
-      ],
-      "frequencies": [
-        {
-          "use": "CTAF",
-          "mhz": 122.9
-        }
-      ]
-    },
-    {
-      "ident": "YKM",
+      "ident": "KYKM",
+      "faaId": "YKM",
       "name": "YAKIMA AIR TRML/MCALLISTER FLD",
       "city": "YAKIMA",
       "lat": 46.56816722,
@@ -8722,6 +7409,1523 @@
         {
           "use": "YAKIMA RCAG",
           "mhz": 269.35
+        }
+      ]
+    },
+    {
+      "ident": "M50",
+      "faaId": "M50",
+      "name": "BOARDMAN",
+      "city": "BOARDMAN",
+      "lat": 45.814825,
+      "lon": -119.82050055,
+      "elevationFt": 395.5,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "04-22",
+          "headingTrue": 62,
+          "lengthFt": 4200,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 45.81482495,
+          "lon": -119.82050049
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.9
+        }
+      ]
+    },
+    {
+      "ident": "M94",
+      "faaId": "M94",
+      "name": "DESERT AIRE RGNL",
+      "city": "MATTAWA",
+      "lat": 46.68725111,
+      "lon": -119.91972611,
+      "elevationFt": 586,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "10-28",
+          "headingTrue": 116,
+          "lengthFt": 3665,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 46.68725116,
+          "lon": -119.91972612
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.8
+        },
+        {
+          "use": "UNICOM",
+          "mhz": 122.8
+        }
+      ]
+    },
+    {
+      "ident": "O48",
+      "faaId": "O48",
+      "name": "SALMON BAR",
+      "city": "IMNAHA",
+      "lat": 45.8602625,
+      "lon": -116.79781666,
+      "elevationFt": 947,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "14-32",
+          "headingTrue": 156,
+          "lengthFt": 762,
+          "surface": "TURF",
+          "lit": false,
+          "lat": 45.8602625,
+          "lon": -116.79781665
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.9
+        }
+      ]
+    },
+    {
+      "ident": "O62",
+      "faaId": "O62",
+      "name": "B & H USFS",
+      "city": "ENTERPRISE",
+      "lat": 45.72411666,
+      "lon": -117.077375,
+      "elevationFt": 4007,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "04-22",
+          "headingTrue": 44,
+          "lengthFt": 1850,
+          "surface": "TURF",
+          "lit": false,
+          "lat": 45.72411669,
+          "lon": -117.07737508
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.9
+        }
+      ]
+    },
+    {
+      "ident": "R33",
+      "faaId": "R33",
+      "name": "WAKONDA BEACH STATE",
+      "city": "WALDPORT",
+      "lat": 44.38456388,
+      "lon": -124.08511944,
+      "elevationFt": 41,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "16-34",
+          "headingTrue": 179,
+          "lengthFt": 2000,
+          "surface": "TURF",
+          "lit": false,
+          "lat": 44.38456388,
+          "lon": -124.08511944
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.9
+        }
+      ]
+    },
+    {
+      "ident": "R49",
+      "faaId": "R49",
+      "name": "FERRY COUNTY",
+      "city": "REPUBLIC",
+      "lat": 48.71820583,
+      "lon": -118.65647138,
+      "elevationFt": 2522,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "17-35",
+          "headingTrue": 187,
+          "lengthFt": 3498,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 48.71820569,
+          "lon": -118.65647147
+        },
+        {
+          "designation": "H1",
+          "headingTrue": 0,
+          "lengthFt": 20,
+          "surface": "CONC",
+          "lit": false,
+          "lat": 48.71621666,
+          "lon": -118.65826111
+        },
+        {
+          "designation": "H2",
+          "headingTrue": 0,
+          "lengthFt": 20,
+          "surface": "CONC",
+          "lit": false,
+          "lat": 48.71584444,
+          "lon": -118.65810277
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.9
+        }
+      ]
+    },
+    {
+      "ident": "S10",
+      "faaId": "S10",
+      "name": "LAKE CHELAN",
+      "city": "CHELAN",
+      "lat": 47.86601027,
+      "lon": -119.94270166,
+      "elevationFt": 1263.1,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "02-20",
+          "headingTrue": 44,
+          "lengthFt": 3506,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 47.86600817,
+          "lon": -119.94268486
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.9
+        },
+        {
+          "use": "UNICOM",
+          "mhz": 122.95
+        }
+      ]
+    },
+    {
+      "ident": "S12",
+      "faaId": "S12",
+      "name": "ALBANY MUNI",
+      "city": "ALBANY",
+      "lat": 44.63781527,
+      "lon": -123.05944888,
+      "elevationFt": 226.5,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "16-34",
+          "headingTrue": 180,
+          "lengthFt": 3004,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 44.63781862,
+          "lon": -123.05944735
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "APCH/P DEP/P",
+          "mhz": 120.25
+        },
+        {
+          "use": "APCH/P DEP/P",
+          "mhz": 298.9
+        },
+        {
+          "use": "APCH/P DEP/P IC",
+          "mhz": 119.6
+        },
+        {
+          "use": "APCH/P DEP/P IC",
+          "mhz": 348.7
+        },
+        {
+          "use": "CTAF",
+          "mhz": 122.725
+        },
+        {
+          "use": "HORTON RCAG",
+          "mhz": 125.8
+        },
+        {
+          "use": "HORTON RCAG",
+          "mhz": 291.7
+        },
+        {
+          "use": "UNICOM",
+          "mhz": 122.725
+        }
+      ]
+    },
+    {
+      "ident": "S16",
+      "faaId": "S16",
+      "name": "COPALIS STATE",
+      "city": "COPALIS",
+      "lat": 47.14485972,
+      "lon": -124.18925138,
+      "elevationFt": 1,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "14-32",
+          "headingTrue": 162,
+          "lengthFt": 3560,
+          "surface": "SAND",
+          "lit": false,
+          "lat": 47.14485974,
+          "lon": -124.18925119
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.9
+        }
+      ]
+    },
+    {
+      "ident": "S18",
+      "faaId": "S18",
+      "name": "FORKS",
+      "city": "FORKS",
+      "lat": 47.93771833,
+      "lon": -124.39592055,
+      "elevationFt": 299,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "04-22",
+          "headingTrue": 61,
+          "lengthFt": 2400,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 47.93771833,
+          "lon": -124.39592055
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.9
+        }
+      ]
+    },
+    {
+      "ident": "S20",
+      "faaId": "S20",
+      "name": "GOLDENDALE",
+      "city": "GOLDENDALE",
+      "lat": 45.83207388,
+      "lon": -120.84527472,
+      "elevationFt": 1678,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "07-25",
+          "headingTrue": 89,
+          "lengthFt": 3491,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 45.83207395,
+          "lon": -120.84527473
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.9
+        }
+      ]
+    },
+    {
+      "ident": "S21",
+      "faaId": "S21",
+      "name": "SUNRIVER",
+      "city": "SUNRIVER",
+      "lat": 43.8763125,
+      "lon": -121.45305138,
+      "elevationFt": 4163.5,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "18-36",
+          "headingTrue": 196,
+          "lengthFt": 5460,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 43.8763124,
+          "lon": -121.45305151
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.8
+        },
+        {
+          "use": "REDMOND RCAG",
+          "mhz": 126.15
+        },
+        {
+          "use": "REDMOND RCAG",
+          "mhz": 269.475
+        },
+        {
+          "use": "UNICOM",
+          "mhz": 122.8
+        }
+      ]
+    },
+    {
+      "ident": "S23",
+      "faaId": "S23",
+      "name": "IONE MUNI",
+      "city": "IONE",
+      "lat": 48.70843888,
+      "lon": -117.41313055,
+      "elevationFt": 2109.5,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "15-33",
+          "headingTrue": 167,
+          "lengthFt": 3643,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 48.7084389,
+          "lon": -117.41313039
+        },
+        {
+          "designation": "H1",
+          "headingTrue": 0,
+          "lengthFt": 60,
+          "surface": "CONC",
+          "lit": true,
+          "lat": 48.70843888,
+          "lon": -117.41313055
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.9
+        }
+      ]
+    },
+    {
+      "ident": "S30",
+      "faaId": "S30",
+      "name": "LEBANON STATE",
+      "city": "LEBANON",
+      "lat": 44.53113888,
+      "lon": -122.92972222,
+      "elevationFt": 348.5,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "16-34",
+          "headingTrue": 180,
+          "lengthFt": 2747,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 44.53115008,
+          "lon": -122.92972516
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.8
+        },
+        {
+          "use": "UNICOM",
+          "mhz": 122.8
+        }
+      ]
+    },
+    {
+      "ident": "S31",
+      "faaId": "S31",
+      "name": "LOPEZ ISLAND",
+      "city": "LOPEZ",
+      "lat": 48.48391666,
+      "lon": -122.93766666,
+      "elevationFt": 208.8,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "16-34",
+          "headingTrue": 180,
+          "lengthFt": 2905,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 48.48391287,
+          "lon": -122.93768054
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 128.25
+        }
+      ]
+    },
+    {
+      "ident": "S33",
+      "faaId": "S33",
+      "name": "MADRAS MUNI",
+      "city": "MADRAS",
+      "lat": 44.67016333,
+      "lon": -121.15514916,
+      "elevationFt": 2437.6,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "04-22",
+          "headingTrue": 55,
+          "lengthFt": 2701,
+          "surface": "ASPH",
+          "lit": false,
+          "lat": 44.67603053,
+          "lon": -121.15846894
+        },
+        {
+          "designation": "16-34",
+          "headingTrue": 180,
+          "lengthFt": 5091,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 44.66705059,
+          "lon": -121.15338834
+        },
+        {
+          "designation": "H1",
+          "headingTrue": 0,
+          "lengthFt": 100,
+          "surface": "ASPH",
+          "lit": false,
+          "lat": 44.67655,
+          "lon": -121.16749722
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.8
+        },
+        {
+          "use": "REDMOND RCAG",
+          "mhz": 126.15
+        },
+        {
+          "use": "REDMOND RCAG",
+          "mhz": 269.475
+        },
+        {
+          "use": "UNICOM",
+          "mhz": 122.8
+        }
+      ]
+    },
+    {
+      "ident": "S35",
+      "faaId": "S35",
+      "name": "OKANOGAN LEGION",
+      "city": "OKANOGAN",
+      "lat": 48.36191805,
+      "lon": -119.56756,
+      "elevationFt": 1042,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "04-22",
+          "headingTrue": 59,
+          "lengthFt": 2533,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 48.36190425,
+          "lon": -119.56755988
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.8
+        },
+        {
+          "use": "UNICOM",
+          "mhz": 122.8
+        }
+      ]
+    },
+    {
+      "ident": "S36",
+      "faaId": "S36",
+      "name": "CREST AIRFIELD",
+      "city": "COVINGTON",
+      "lat": 47.33709666,
+      "lon": -122.10353638,
+      "elevationFt": 472,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "16-34",
+          "headingTrue": 171,
+          "lengthFt": 3288,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 47.33709667,
+          "lon": -122.1035363
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 123
+        },
+        {
+          "use": "UNICOM",
+          "mhz": 123
+        }
+      ]
+    },
+    {
+      "ident": "S39",
+      "faaId": "S39",
+      "name": "PRINEVILLE",
+      "city": "PRINEVILLE",
+      "lat": 44.2882775,
+      "lon": -120.90557833,
+      "elevationFt": 3250.7,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "11-29",
+          "headingTrue": 119,
+          "lengthFt": 5405,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 44.28974635,
+          "lon": -120.90579208
+        },
+        {
+          "designation": "16-34",
+          "headingTrue": 171,
+          "lengthFt": 3536,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 44.28603249,
+          "lon": -120.90525168
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.7
+        },
+        {
+          "use": "REDMOND RCAG",
+          "mhz": 126.15
+        },
+        {
+          "use": "REDMOND RCAG",
+          "mhz": 269.475
+        },
+        {
+          "use": "UNICOM",
+          "mhz": 122.7
+        }
+      ]
+    },
+    {
+      "ident": "S40",
+      "faaId": "S40",
+      "name": "PROSSER",
+      "city": "PROSSER",
+      "lat": 46.21336111,
+      "lon": -119.79555555,
+      "elevationFt": 705.5,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "08-26",
+          "headingTrue": 90,
+          "lengthFt": 3452,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 46.21337192,
+          "lon": -119.79556198
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.8
+        },
+        {
+          "use": "UNICOM",
+          "mhz": 122.8
+        }
+      ]
+    },
+    {
+      "ident": "S43",
+      "faaId": "S43",
+      "name": "HARVEY FLD",
+      "city": "SNOHOMISH",
+      "lat": 47.90486802,
+      "lon": -122.10274361,
+      "elevationFt": 22.8,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "15L-33R",
+          "headingTrue": 165,
+          "lengthFt": 2672,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 47.90479222,
+          "lon": -122.10225519
+        },
+        {
+          "designation": "15R-33L",
+          "headingTrue": 165,
+          "lengthFt": 2430,
+          "surface": "TURF",
+          "lit": false,
+          "lat": 47.90495139,
+          "lon": -122.10328047
+        },
+        {
+          "designation": "H1",
+          "headingTrue": 0,
+          "lengthFt": 15,
+          "surface": "CONC",
+          "lit": false,
+          "lat": 47.90605277,
+          "lon": -122.10051666
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "APCH/P DEP/P",
+          "mhz": 128.5
+        },
+        {
+          "use": "APCH/P DEP/P",
+          "mhz": 306.9
+        },
+        {
+          "use": "CTAF",
+          "mhz": 123
+        },
+        {
+          "use": "UNICOM",
+          "mhz": 123
+        }
+      ]
+    },
+    {
+      "ident": "S45",
+      "faaId": "S45",
+      "name": "SILETZ BAY STATE",
+      "city": "GLENEDEN BEACH",
+      "lat": 44.87677777,
+      "lon": -124.02855555,
+      "elevationFt": 69.2,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "17-35",
+          "headingTrue": 191,
+          "lengthFt": 3297,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 44.87678754,
+          "lon": -124.02855688
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.7
+        },
+        {
+          "use": "UNICOM",
+          "mhz": 122.7
+        }
+      ]
+    },
+    {
+      "ident": "S50",
+      "faaId": "S50",
+      "name": "AUBURN MUNI",
+      "city": "AUBURN",
+      "lat": 47.327625,
+      "lon": -122.226655,
+      "elevationFt": 63,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "17-35",
+          "headingTrue": 180,
+          "lengthFt": 3842,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 47.32762486,
+          "lon": -122.22665508
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "APCH/P DEP/P",
+          "mhz": 123.85
+        },
+        {
+          "use": "CD/P",
+          "mhz": 123.85
+        },
+        {
+          "use": "CTAF",
+          "mhz": 122.975
+        },
+        {
+          "use": "UNICOM",
+          "mhz": 122.975
+        }
+      ]
+    },
+    {
+      "ident": "S52",
+      "faaId": "S52",
+      "name": "METHOW VALLEY STATE",
+      "city": "WINTHROP",
+      "lat": 48.42494833,
+      "lon": -120.14588555,
+      "elevationFt": 1706,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "13-31",
+          "headingTrue": 147,
+          "lengthFt": 5049,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 48.42494819,
+          "lon": -120.14588546
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.8
+        },
+        {
+          "use": "UNICOM",
+          "mhz": 122.8
+        }
+      ]
+    },
+    {
+      "ident": "S70",
+      "faaId": "S70",
+      "name": "OTHELLO MUNI",
+      "city": "OTHELLO",
+      "lat": 46.7942175,
+      "lon": -119.08010888,
+      "elevationFt": 1148.6,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "07-25",
+          "headingTrue": 91,
+          "lengthFt": 4000,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 46.79421749,
+          "lon": -119.08010885
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.9
+        }
+      ]
+    },
+    {
+      "ident": "S72",
+      "faaId": "S72",
+      "name": "JACK A BUELL",
+      "city": "ST MARIES",
+      "lat": 47.32581111,
+      "lon": -116.57667777,
+      "elevationFt": 2131.3,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "10-28",
+          "headingTrue": 115,
+          "lengthFt": 3354,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 47.32581127,
+          "lon": -116.57667755
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.8
+        },
+        {
+          "use": "UNICOM",
+          "mhz": 122.8
+        }
+      ]
+    },
+    {
+      "ident": "S77",
+      "faaId": "S77",
+      "name": "MAGEE",
+      "city": "COEUR D'ALENE",
+      "lat": 47.84155833,
+      "lon": -116.25199444,
+      "elevationFt": 3002,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "01-19",
+          "headingTrue": 29,
+          "lengthFt": 2200,
+          "surface": "TURF",
+          "lit": false,
+          "lat": 47.84155833,
+          "lon": -116.25199444
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.9
+        }
+      ]
+    },
+    {
+      "ident": "S83",
+      "faaId": "S83",
+      "name": "SHOSHONE COUNTY",
+      "city": "KELLOGG",
+      "lat": 47.54726111,
+      "lon": -116.18906388,
+      "elevationFt": 2227,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "07-25",
+          "headingTrue": 89,
+          "lengthFt": 5316,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 47.54726161,
+          "lon": -116.18906392
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.8
+        },
+        {
+          "use": "UNICOM",
+          "mhz": 122.8
+        }
+      ]
+    },
+    {
+      "ident": "S88",
+      "faaId": "S88",
+      "name": "SKYKOMISH STATE",
+      "city": "SKYKOMISH",
+      "lat": 47.71093555,
+      "lon": -121.33905638,
+      "elevationFt": 1002,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "06-24",
+          "headingTrue": 80,
+          "lengthFt": 2050,
+          "surface": "TURF",
+          "lit": false,
+          "lat": 47.71093555,
+          "lon": -121.33905638
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.9
+        }
+      ]
+    },
+    {
+      "ident": "S89",
+      "faaId": "S89",
+      "name": "CRAIGMONT MUNI",
+      "city": "CRAIGMONT",
+      "lat": 46.24772222,
+      "lon": -116.47936111,
+      "elevationFt": 3805,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "07-25",
+          "headingTrue": 87,
+          "lengthFt": 2800,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 46.24771401,
+          "lon": -116.47937085
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.9
+        }
+      ]
+    },
+    {
+      "ident": "S93",
+      "faaId": "S93",
+      "name": "CLE ELUM MUNI",
+      "city": "CLE ELUM",
+      "lat": 47.19424275,
+      "lon": -120.88403538,
+      "elevationFt": 1944.7,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "07-25",
+          "headingTrue": 88,
+          "lengthFt": 2379,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 47.19424283,
+          "lon": -120.8840354
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.9
+        }
+      ]
+    },
+    {
+      "ident": "S94",
+      "faaId": "S94",
+      "name": "PORT OF WHITMAN BUSINESS AIR CENTER",
+      "city": "COLFAX",
+      "lat": 46.85870722,
+      "lon": -117.41408111,
+      "elevationFt": 2181,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "08-26",
+          "headingTrue": 91,
+          "lengthFt": 3209,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 46.85870725,
+          "lon": -117.41408111
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.8
+        },
+        {
+          "use": "UNICOM",
+          "mhz": 122.8
+        }
+      ]
+    },
+    {
+      "ident": "S95",
+      "faaId": "S95",
+      "name": "MARTIN FLD",
+      "city": "COLLEGE PLACE",
+      "lat": 46.04693916,
+      "lon": -118.41717777,
+      "elevationFt": 750,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "05-23",
+          "headingTrue": 65,
+          "lengthFt": 3819,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 46.04693923,
+          "lon": -118.41717763
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.8
+        },
+        {
+          "use": "UNICOM",
+          "mhz": 122.8
+        }
+      ]
+    },
+    {
+      "ident": "S97",
+      "faaId": "S97",
+      "name": "ANDERSON FLD",
+      "city": "BREWSTER",
+      "lat": 48.10472861,
+      "lon": -119.71991555,
+      "elevationFt": 919.5,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "07-25",
+          "headingTrue": 87,
+          "lengthFt": 4000,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 48.10472866,
+          "lon": -119.71991563
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.8
+        },
+        {
+          "use": "UNICOM",
+          "mhz": 122.8
+        }
+      ]
+    },
+    {
+      "ident": "W01",
+      "faaId": "W01",
+      "name": "TONASKET MUNI",
+      "city": "TONASKET",
+      "lat": 48.72486833,
+      "lon": -119.46563472,
+      "elevationFt": 1311,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "15-33",
+          "headingTrue": 162,
+          "lengthFt": 3053,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 48.72486835,
+          "lon": -119.46563484
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.9
+        }
+      ]
+    },
+    {
+      "ident": "W04",
+      "faaId": "W04",
+      "name": "OCEAN SHORES MUNI",
+      "city": "OCEAN SHORES",
+      "lat": 46.99921997,
+      "lon": -124.1423825,
+      "elevationFt": 15,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "15-33",
+          "headingTrue": 170,
+          "lengthFt": 3100,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 46.99921997,
+          "lon": -124.14238241
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.9
+        }
+      ]
+    },
+    {
+      "ident": "W09",
+      "faaId": "W09",
+      "name": "LOWER MONUMENTAL STATE",
+      "city": "KAHLOTUS",
+      "lat": 46.54972222,
+      "lon": -118.53669583,
+      "elevationFt": 813,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "01-19",
+          "headingTrue": 29,
+          "lengthFt": 3300,
+          "surface": "GRAVEL",
+          "lit": false,
+          "lat": 46.54972226,
+          "lon": -118.53669606
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.9
+        }
+      ]
+    },
+    {
+      "ident": "W10",
+      "faaId": "W10",
+      "name": "WHIDBEY AIR PARK",
+      "city": "LANGLEY",
+      "lat": 48.01751225,
+      "lon": -122.4377275,
+      "elevationFt": 271,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "16-34",
+          "headingTrue": 174,
+          "lengthFt": 2470,
+          "surface": "ASPH",
+          "lit": false,
+          "lat": 48.0176225,
+          "lon": -122.4377276
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.9
+        }
+      ]
+    },
+    {
+      "ident": "W12",
+      "faaId": "W12",
+      "name": "LOST RIVER",
+      "city": "MAZAMA",
+      "lat": 48.64958416,
+      "lon": -120.50204444,
+      "elevationFt": 2415,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "11-29",
+          "headingTrue": 131,
+          "lengthFt": 3150,
+          "surface": "TURF-GRVL",
+          "lit": false,
+          "lat": 48.64958416,
+          "lon": -120.50204444
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.9
+        }
+      ]
+    },
+    {
+      "ident": "W16",
+      "faaId": "W16",
+      "name": "FIRST AIR FLD",
+      "city": "MONROE",
+      "lat": 47.87136361,
+      "lon": -121.99524388,
+      "elevationFt": 50,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "07-25",
+          "headingTrue": 92,
+          "lengthFt": 2087,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 47.87136355,
+          "lon": -121.99524387
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.9
+        }
+      ]
+    },
+    {
+      "ident": "W20",
+      "faaId": "W20",
+      "name": "MOSES LAKE MUNI",
+      "city": "MOSES LAKE",
+      "lat": 47.14200416,
+      "lon": -119.23788194,
+      "elevationFt": 1203,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "16-34",
+          "headingTrue": 180,
+          "lengthFt": 2513,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 47.14200416,
+          "lon": -119.2378818
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 123
+        },
+        {
+          "use": "UNICOM",
+          "mhz": 123
+        }
+      ]
+    },
+    {
+      "ident": "W27",
+      "faaId": "W27",
+      "name": "WOODLAND STATE",
+      "city": "WOODLAND",
+      "lat": 45.8991825,
+      "lon": -122.73751041,
+      "elevationFt": 29,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "14-32",
+          "headingTrue": 156,
+          "lengthFt": 2245,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 45.89918251,
+          "lon": -122.73751032
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.9
+        }
+      ]
+    },
+    {
+      "ident": "W28",
+      "faaId": "W28",
+      "name": "SEQUIM VALLEY",
+      "city": "SEQUIM",
+      "lat": 48.09792222,
+      "lon": -123.18792083,
+      "elevationFt": 151,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "09-27",
+          "headingTrue": 107,
+          "lengthFt": 3508,
+          "surface": "ASPH",
+          "lit": true,
+          "lat": 48.09792242,
+          "lon": -123.18792064
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.7
+        },
+        {
+          "use": "UNICOM",
+          "mhz": 122.7
+        }
+      ]
+    },
+    {
+      "ident": "W52",
+      "faaId": "W52",
+      "name": "GOHEEN",
+      "city": "BATTLE GROUND",
+      "lat": 45.82679638,
+      "lon": -122.57685611,
+      "elevationFt": 292,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "07-25",
+          "headingTrue": 90,
+          "lengthFt": 1500,
+          "surface": "TURF",
+          "lit": false,
+          "lat": 45.82679638,
+          "lon": -122.57685611
+        },
+        {
+          "designation": "15-33",
+          "headingTrue": 165,
+          "lengthFt": 2565,
+          "surface": "TURF",
+          "lit": true,
+          "lat": 45.82749875,
+          "lon": -122.57737394
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.9
+        }
+      ]
+    },
+    {
+      "ident": "W56",
+      "faaId": "W56",
+      "name": "FLY FOR FUN",
+      "city": "VANCOUVER",
+      "lat": 45.68728,
+      "lon": -122.52185305,
+      "elevationFt": 297,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "07-25",
+          "headingTrue": 90,
+          "lengthFt": 2434,
+          "surface": "TURF",
+          "lit": false,
+          "lat": 45.68727996,
+          "lon": -122.52185292
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.9
+        }
+      ]
+    },
+    {
+      "ident": "W58",
+      "faaId": "W58",
+      "name": "CEDARS NORTH",
+      "city": "BATTLE GROUND",
+      "lat": 45.76455555,
+      "lon": -122.51508333,
+      "elevationFt": 275,
+      "towered": false,
+      "heliport": false,
+      "runways": [
+        {
+          "designation": "08-26",
+          "headingTrue": 99,
+          "lengthFt": 1960,
+          "surface": "TURF",
+          "lit": false,
+          "lat": 45.76455555,
+          "lon": -122.51508333
+        }
+      ],
+      "frequencies": [
+        {
+          "use": "CTAF",
+          "mhz": 122.9
         }
       ]
     }

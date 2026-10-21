@@ -5,7 +5,8 @@ import {fileURLToPath} from 'node:url';
 /**
  * Extracts the part of the FAA's NASR 28-day subscription (CSV) that the example screens need, for the regions in
  * regions.json, into a neutral JSON file. Usage: node generator/navdata/extract-nasr.mjs <unzipped CSV folder>
- * The format is described in README.md.
+ * The format is described in README.md. An airport's `ident` is its ICAO identifier where APT_BASE.csv has one and its
+ * FAA identifier otherwise; `faaId` is always the FAA one.
  */
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -16,7 +17,7 @@ const EARTH_RADIUS_NM = 3440.065;
 /** The columns the script reads from each file. The structure files of the download describe them. */
 const REQUIRED_COLUMNS = {
 	'APT_BASE.csv': ['EFF_DATE', 'SITE_TYPE_CODE', 'ARPT_ID', 'CITY', 'ARPT_NAME', 'FACILITY_USE_CODE', 'LAT_DECIMAL',
-		'LONG_DECIMAL', 'ELEV', 'MAG_VARN', 'MAG_HEMIS', 'TWR_TYPE_CODE'],
+		'LONG_DECIMAL', 'ELEV', 'MAG_VARN', 'MAG_HEMIS', 'TWR_TYPE_CODE', 'ICAO_ID'],
 	'APT_RWY.csv': ['ARPT_ID', 'RWY_ID', 'RWY_LEN', 'SURFACE_TYPE_CODE', 'RWY_LGT_CODE'],
 	'APT_RWY_END.csv': ['ARPT_ID', 'RWY_ID', 'RWY_END_ID', 'TRUE_ALIGNMENT', 'LAT_DECIMAL', 'LONG_DECIMAL'],
 	'FRQ.csv': ['SERVICED_FACILITY', 'SERVICED_SITE_TYPE', 'FREQ', 'FREQ_USE'],
@@ -342,7 +343,9 @@ export function extract(folder, regions, stats = {}) {
 			.slice().sort((x, y) => compare(x.use, y.use) || x.mhz - y.mhz);
 
 		airports.push({
-			ident: a.ARPT_ID,
+			// the identifier the simulator shows: the ICAO one where the airport has one, else the FAA one
+			ident: a.ICAO_ID !== '' ? a.ICAO_ID : a.ARPT_ID,
+			faaId: a.ARPT_ID,
 			name: a.ARPT_NAME,
 			city: a.CITY,
 			lat,
@@ -355,7 +358,7 @@ export function extract(folder, regions, stats = {}) {
 			frequencies,
 		});
 	}
-	airports.sort((x, y) => compare(x.ident, y.ident));
+	airports.sort((x, y) => compare(x.ident, y.ident) || compare(x.faaId, y.faaId));
 
 	// Navaids
 	const vors = [];

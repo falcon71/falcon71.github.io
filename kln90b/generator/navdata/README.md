@@ -37,8 +37,11 @@ ident (runways by designation, frequencies by use and then MHz).
 
 - `cycle`, `source`: the effective date `YYYY-MM-DD` and a description of the data.
 - `regions`: the regions the extract was made for.
-- `airports`: `ident` (the FAA identifier, so `SEA`, not `KSEA`), `name`, `city`, `lat`, `lon`, `elevationFt`,
-  `towered`, `heliport`, `runways`, `frequencies`.
+- `airports`: `ident`, `faaId`, `name`, `city`, `lat`, `lon`, `elevationFt`, `towered`, `heliport`, `runways`,
+  `frequencies`. `ident` is the identifier the simulator shows: the ICAO identifier (`ICAO_ID` of `APT_BASE.csv`) where
+  the airport has one (`KSEA`), otherwise the FAA identifier (`S77`). Canadian fields carry their ICAO identifier in the
+  FAA column already (`CYVR`). `faaId` is always the FAA identifier (`SEA`); runways and frequencies are filed under it
+  in the data, and airports are sorted by `ident`.
 - `vors`: `ident`, `name`, `type` (`VOR`, `VOR/DME` or `VORTAC`), `lat`, `lon`, `mhz`, `declinationEast` and `region`.
 - `ndbs`: `ident`, `name`, `lat`, `lon`, `khz`, `region`.
 - `fixes`: `ident`, `lat`, `lon`, `region`.
