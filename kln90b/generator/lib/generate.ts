@@ -10,7 +10,7 @@ import {explanationMismatch, fieldIdsOf} from '../../src/lib/explanations.ts';
 import {vendorCommit} from '../vendorCheck.mjs';
 import {captureScreen, type CapturedScreen} from './capture.ts';
 import {locateFields, locateMapFields, type FieldDef, type MapSide} from './fields.ts';
-import {checkCoverage, type MapElement} from './mapElements.ts';
+import {checkCoverage, recordMapElements, type MapElement} from './mapElements.ts';
 import {mapToSvg} from './mapSvg.ts';
 import {facilitiesOf, loadExtract, pointNamesOf} from './navdata.ts';
 import {decimalYear, declination, screenModel, SCREEN_DEGREE} from './wmm.ts';
@@ -80,8 +80,16 @@ async function generate(dir: string, id: string, d: ScreenDescription): Promise<
 		magvar: (lat, lon) => declination(screenModel(), lat, lon, year, 0, SCREEN_DEGREE),
 	});
 	await settle(unit);
-	await d.steps?.(unit);
-	const capture = await captureScreen(pointNamesOf(loadExtract()));
+	// From the steps on, so that the first frame of a map that draws only when its page opens (APT 3) is recorded; the
+	// last frame each map finished before the capture's last read counts
+	const recorder = recordMapElements(pointNamesOf(loadExtract()));
+	let capture: CapturedScreen;
+	try {
+		await d.steps?.(unit);
+		capture = await captureScreen(recorder);
+	} finally {
+		recorder.stop();
+	}
 	if (capture.layout === 'full' && d.show !== 'both') {
 		throw new Error(`a full page needs show both, not ${d.show}`);
 	}

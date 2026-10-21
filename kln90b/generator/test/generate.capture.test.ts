@@ -4,7 +4,7 @@ import path from 'node:path';
 import {afterEach, describe, expect, it} from 'vitest';
 import {generateScreen, type ScreenDescription} from '../lib/generate.ts';
 import {adjustCourseIndicator} from '../api.ts';
-import {facility} from '../lib/navdata.ts';
+import {facility, place} from '../lib/navdata.ts';
 import {savedFlightplan} from '../../../vendor/kln90b/test/harness/storage';
 import {parseScreenFile} from '../../src/lib/screenFile.ts';
 
@@ -151,6 +151,26 @@ describe('generateScreen', () => {
 	it('requires an explanation of a map field', async () => {
 		const dir = copyFixture('');
 		await expect(generateScreen(dir, nav5())).rejects.toThrow(/^screen nav-1-smoke: .*no explanation: aircraft/);
+	});
+
+	it('records a map that draws only once, when its page opens (APT 3)', async () => {
+		const dir = copyFixture('<Field id="runways" title="Runways">x</Field>');
+		await generateScreen(dir, nav1({
+			title: 'APT 3 page', show: 'right', boot: {position: place('KSEA')},
+			steps: async u => {
+				await u.panel.selectPage('R', 'APT 1');
+				await u.panel.cursor('R');
+				await u.panel.enterIdent('R', 'KSEA');
+				await u.panel.cursor('R');
+				await u.panel.selectPage('R', 'APT 3');
+			},
+			fields: [{id: 'runways', find: {map: 'R', draw: /^(plain|label) /, many: true}}],
+		}));
+		expect(parseScreenFile(fs.readFileSync(path.join(dir, 'screen.txt'), 'utf8')).mapFields).toEqual(new Map([['runways', 'R']]));
+		const draws = Array.from(fs.readFileSync(path.join(dir, 'map-R.svg'), 'utf8').matchAll(/data-draw="([^"]*)"/g), m => m[1]);
+		// KSEA's three parallel runways: one line each, and the designator at each end
+		expect(draws.filter(d => d.startsWith('plain '))).toHaveLength(3);
+		expect(draws.filter(d => d.startsWith('label ')).map(d => d.split(' ')[1]).sort()).toEqual(['16C', '16L', '16R', '34C', '34L', '34R']);
 	});
 
 	it('writes no map for a half the manual does not show', async () => {

@@ -9,22 +9,29 @@ import {captureScreen} from '../lib/capture.ts';
 import {blocksOf, checkCoverage, FrameElements, recordMapElements, type MapElement} from '../lib/mapElements.ts';
 import {facilitiesOf, loadExtract, place, pointNamesOf} from '../lib/navdata.ts';
 
-/** NAV 5 20 NM south of KSEA with a Direct To KSEA, as screens/nav-5-ksea shows it. */
-async function nav5DirectTo() {
+/**
+ * The capture of NAV 5 20 NM south of KSEA with a Direct To KSEA, as screens/nav-5-ksea shows it, recorded from the
+ * steps on as generateScreen records it.
+ */
+async function nav5DirectTo(names = pointNamesOf(loadExtract())) {
 	const unit = await bootUnit({position: pointFrom(place('KSEA'), 180, 20), defaultNavdata: false, facilities: facilitiesOf(loadExtract())});
 	await settle(unit);
-	await unit.panel.directTo('KSEA');
-	await adjustCourseIndicator(unit);
-	await unit.panel.selectPage('L', 'NAV 5');
-	return unit;
+	const recorder = recordMapElements(names);
+	try {
+		await unit.panel.directTo('KSEA');
+		await adjustCourseIndicator(unit);
+		await unit.panel.selectPage('L', 'NAV 5');
+		return await captureScreen(recorder);
+	} finally {
+		recorder.stop();
+	}
 }
 
 const key = ([x, y]: [number, number]) => `${x},${y}`;
 
 describe('the map elements of NAV 5', () => {
 	it('are the drawing calls of the last frame, named after the places of the extract', async () => {
-		await nav5DirectTo();
-		const {elements} = await captureScreen(pointNamesOf(loadExtract()));
+		const {elements} = await nav5DirectTo();
 		const draws = elements.L!.map(e => e.draw);
 		expect(draws).toContain('icon % KSEA');
 		expect(draws.filter(d => /^icon \$ -?\d+\.\d{4},-?\d+\.\d{4}$/.test(d))).toHaveLength(1);
@@ -34,8 +41,7 @@ describe('the map elements of NAV 5', () => {
 	});
 
 	it('own every lit pixel of the map once, and nothing else', async () => {
-		await nav5DirectTo();
-		const {canvases, elements} = await captureScreen(pointNamesOf(loadExtract()));
+		const {canvases, elements} = await nav5DirectTo();
 		const all = elements.L!.flatMap(e => e.pixels.map(key));
 		expect(new Set(all).size).toBe(all.length);
 		const blocks = downsampled(canvasToAscii(canvases.L!));
@@ -49,8 +55,7 @@ describe('the map elements of NAV 5', () => {
 	});
 
 	it('writes a point that is no place of the names as lat,lon', async () => {
-		await nav5DirectTo();
-		const {elements} = await captureScreen();
+		const {elements} = await nav5DirectTo([]);
 		expect(elements.L!.map(e => e.draw)).toContain(`icon % ${place('KSEA').lat.toFixed(4)},${place('KSEA').lon.toFixed(4)}`);
 	});
 });

@@ -62,9 +62,10 @@ description needs from the harness. See `screens/apt-1-ksea/`, `screens/nav-5-ks
 
 ### Map fields
 
-Every element the unit draws on a map (NAV 5, APT 3) is a field too. While the screen is captured, the generator records
-each drawing call of the map (an icon, a label, a flight plan line or arrow, a plain line, an arc) and the map pixels it
-lit; the last frame drawn before the capture's last tick counts. Each element is described in one line: the kind and its
+Every element the unit draws on a map (NAV 5, APT 3) is a field too. From the steps of a screen to its capture, the
+generator records each drawing call of the map (an icon, a label, a flight plan line or arrow, a plain line, an arc) and
+the map pixels it lit; the last frame the map finished before the capture's last read counts. NAV 5 redraws on every
+display tick, APT 3 only when its page opens. Each element is described in one line: the kind and its
 arguments, with each point named after the place of the extract it equals (an airport ident first, then a VOR, an NDB,
 a fix) and written as `lat,lon` otherwise, for example `icon % KSEA`, `arrow 47.1172,-122.3118 KSEA` and
 `icon $ 47.1172,-122.3118`. A description that repeats on a map gets ` #2`, ` #3`.
