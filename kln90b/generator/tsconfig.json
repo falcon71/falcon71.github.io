@@ -2,6 +2,8 @@
   "compilerOptions": {
     "strict": true,
     "target": "es2017",
+    "lib": ["es2022", "dom"],
+    "allowJs": true,
     "module": "esnext",
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
