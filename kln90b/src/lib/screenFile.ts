@@ -73,6 +73,7 @@ function checkCapture(c: ScreenCapture): void {
 		parts.forEach(part => checkPart(id, part));
 	}
 	for (const side of c.maps) if (!SIDES.includes(side)) throw new Error(`map "${side}" is not L or R`);
+	if (new Set(c.maps).size !== c.maps.length) throw new Error(`map ${c.maps.join(', ')} lists a side twice`);
 }
 
 export function serializeScreenFile(c: ScreenCapture): string {

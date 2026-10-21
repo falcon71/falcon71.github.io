@@ -146,5 +146,8 @@ describe('screen file', () => {
 		const d = capture();
 		d.title = 'two\nlines';
 		expect(() => serializeScreenFile(d)).toThrow('title');
+		const e = capture();
+		e.maps = ['L', 'L'];
+		expect(() => serializeScreenFile(e)).toThrow('map L');
 	});
 });
