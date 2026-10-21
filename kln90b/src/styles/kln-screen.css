@@ -72,6 +72,12 @@
 	position: absolute;
 	margin: 0;
 	white-space: pre;
+	/* The text layers cover the map beneath them; only their fields take the pointer, so the map fields stay reachable */
+	pointer-events: none;
+}
+
+.kln-stage .kln-field {
+	pointer-events: auto;
 }
 
 .kln-stage .kln-half-left,
@@ -160,6 +166,33 @@
 .kln-field.kln-inv[aria-describedby] {
 	background: var(--kln-phosphor);
 	outline-offset: calc(var(--u) * 1.2);
+}
+
+/*
+ * A field drawn on a map is an SVG group with a transparent rect of its box as the hit area. It is lit like a text
+ * field: the tinted box with the phosphor outline (an SVG group takes no CSS outline, so the rect is drawn with a stroke).
+ */
+.kln-map .kln-field {
+	outline: none;
+}
+
+.kln-map .kln-field > rect:first-child {
+	stroke: transparent;
+	stroke-width: 0.8;
+}
+
+.kln-map .kln-field:hover,
+.kln-map .kln-field:focus-visible,
+.kln-map .kln-field[aria-describedby] {
+	background: none;
+	outline: none;
+}
+
+.kln-map .kln-field:hover > rect:first-child,
+.kln-map .kln-field:focus-visible > rect:first-child,
+.kln-map .kln-field[aria-describedby] > rect:first-child {
+	fill: rgba(0, 209, 9, 0.28);
+	stroke: var(--kln-phosphor);
 }
 
 .kln-figure figcaption {

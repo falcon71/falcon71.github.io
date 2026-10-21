@@ -23,7 +23,7 @@ function capture(over: Partial<ScreenCapture> = {}, rows: Record<number, string>
 	const mask: CellAttr[][] = Array.from({length: ROWS}, () => Array.from({length: COLUMNS}, () => '.' as CellAttr));
 	return {
 		kln90b: '0'.repeat(40), title: 'Test page', show: 'both', layout: 'split', status: true,
-		text, mask, fields: new Map<string, FieldPart[]>(), maps: [], ...over,
+		text, mask, fields: new Map<string, FieldPart[]>(), mapFields: new Map(), maps: [], ...over,
 	};
 }
 
@@ -145,5 +145,51 @@ describe('screenHtml', () => {
 
 	it('draws no map without one', () => {
 		expect(screenHtml(blocksFromCapture(capture(), new Set()), new Set())).not.toContain('kln-map');
+	});
+});
+
+describe('map fields', () => {
+	const SVG = [
+		'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 99 78" fill="currentColor">',
+		'<g data-field="leg" data-draw="arrow 47.1,-122.3 KSEA" data-box="47 23 7 12">',
+		'<path d="M50 23h1v1h-1z"/>',
+		'</g>',
+		'<g data-field="aircraft" data-draw="icon $ 47.1,-122.3" data-box="47 36 5 6">',
+		'<path d="M49 36h1v1h-1z"/>',
+		'</g>',
+		'</svg>',
+	].join('\n') + '\n';
+	const html = (documented: string[]) => {
+		const c = capture({show: 'left', maps: ['L'], mapFields: new Map([['leg', 'L'], ['aircraft', 'L']])}, {5: 'NAV 5'});
+		return screenHtml(blocksFromCapture(c, new Set(documented)), new Set(documented), {L: SVG});
+	};
+	/** The `<g>` of a field, from its tag to its end */
+	const groupOf = (out: string, field: string) => out.match(new RegExp(`<g [^>]*data-field="${field}"[^>]*>.*?</g>`, 's'))![0];
+
+	it('makes a documented map element a field with a hit area of its box', () => {
+		expect(groupOf(html(['leg']), 'leg')).toBe(
+			'<g class="kln-field" tabindex="0" role="img" data-field="leg" data-draw="arrow 47.1,-122.3 KSEA" data-box="47 23 7 12">' +
+			'<rect x="47" y="23" width="7" height="12" fill="transparent"/>\n<path d="M50 23h1v1h-1z"/>\n</g>');
+	});
+
+	it('leaves an element without explanation as it was drawn', () => {
+		expect(groupOf(html(['leg']), 'aircraft')).toBe(
+			'<g data-field="aircraft" data-draw="icon $ 47.1,-122.3" data-box="47 36 5 6">\n<path d="M49 36h1v1h-1z"/>\n</g>');
+	});
+
+	it('leaves every element plain when none is documented', () => {
+		expect(html([])).not.toMatch(/kln-field|tabindex|<rect/);
+	});
+
+	it('does not hide a map with fields from assistive technology, and still hides one without', () => {
+		expect(html(['leg'])).toContain('<div class="kln-map kln-map-left" role="group" aria-label="Map">');
+		expect(html(['leg'])).not.toContain('aria-hidden');
+		expect(html([])).toContain('<div class="kln-map kln-map-left" aria-hidden="true">');
+	});
+
+	it('draws the text layers after the map', () => {
+		const out = html(['leg']);
+		expect(out.indexOf('kln-map-left')).toBeLessThan(out.indexOf('kln-half-left'));
+		expect(out.lastIndexOf('</svg>')).toBeLessThan(out.indexOf('kln-half-left'));
 	});
 });

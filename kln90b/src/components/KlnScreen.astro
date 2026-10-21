@@ -65,7 +65,7 @@ if (screen !== undefined) {
 		throw new Error(`screen ${screen}: screens/${screen}/fields.mdx is missing; it needs a <Field> for each field, then run npm run screens -- ${screen}`);
 	}
 	checkExplanations(screen, capture, entry.body ?? '');
-	documented = new Set(capture.fields.keys());
+	documented = new Set([...capture.fields.keys(), ...capture.mapFields.keys()]);
 	blocks = blocksFromCapture(capture, documented);
 	title = givenTitle ?? capture.title;
 	Explanations = (await render(entry)).Content;
@@ -131,14 +131,20 @@ const stageHtml = screenHtml(blocks, documented, maps);
 <script>
 	import { attachPopover, showPopover } from '../scripts/popover';
 
-	function content(figure: HTMLElement, field: HTMLElement): Node[] {
+	// A text field is a span, a field drawn on a map is an SVG group
+	type FieldElement = HTMLElement | SVGElement;
+
+	// What the help window shows as the field's screen text: for an element drawn on a map there is none
+	const MAP_CHIP = 'MAP';
+
+	function content(figure: HTMLElement, field: FieldElement): Node[] {
 		const doc = figure.querySelector<HTMLElement>(`.kln-field-doc[data-field="${field.dataset.field}"]`)!;
 		const head = document.createElement('div');
 		head.className = 'kln-popover-head';
 		const chip = document.createElement('span');
 		chip.className = 'kln-chip';
 		chip.setAttribute('aria-hidden', 'true');
-		chip.textContent = field.textContent!.trim();
+		chip.textContent = field instanceof SVGElement ? MAP_CHIP : field.textContent!.trim();
 		const title = document.createElement('strong');
 		title.textContent = doc.dataset.title ?? '';
 		head.append(chip, title);
@@ -151,7 +157,11 @@ const stageHtml = screenHtml(blocks, documented, maps);
 	const options = { wide: true, prefer: 'below' as const };
 
 	for (const figure of document.querySelectorAll<HTMLElement>('.kln-figure')) {
-		for (const field of figure.querySelectorAll<HTMLElement>('.kln-field')) {
+		for (const field of figure.querySelectorAll<FieldElement>('.kln-field')) {
+			// An element drawn on a map has no text, so a screen reader announces the explanation's title
+			if (field instanceof SVGElement) {
+				field.setAttribute('aria-label', figure.querySelector<HTMLElement>(`.kln-field-doc[data-field="${field.dataset.field}"]`)!.dataset.title ?? '');
+			}
 			attachPopover(field, () => content(figure, field), options, () => {
 				history.replaceState(null, '', `#${figure.id}--${field.dataset.field}`);
 			});
@@ -162,7 +172,7 @@ const stageHtml = screenHtml(blocks, documented, maps);
 	function openFromHash() {
 		const match = /^#(screen-.+)--([a-z0-9-]+)$/.exec(location.hash);
 		const figure = match && document.getElementById(match[1]);
-		const field = figure?.querySelector<HTMLElement>(`.kln-field[data-field="${match![2]}"]`);
+		const field = figure?.querySelector<FieldElement>(`.kln-field[data-field="${match![2]}"]`);
 		if (!figure || !field) return;
 		figure.scrollIntoView({ block: 'center' });
 		showPopover(field, content(figure, field), { ...options, pin: true });

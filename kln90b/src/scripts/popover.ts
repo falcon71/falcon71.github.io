@@ -6,7 +6,7 @@
  */
 
 let popover: HTMLDivElement | null = null;
-let anchor: HTMLElement | null = null;
+let anchor: Element | null = null;
 let pinned = false;
 
 function element(): HTMLDivElement {
@@ -37,7 +37,7 @@ export interface PopoverOptions {
 	prefer?: 'above' | 'below';
 }
 
-export function showPopover(target: HTMLElement, content: Node[], options: PopoverOptions = {}) {
+export function showPopover(target: Element, content: Node[], options: PopoverOptions = {}) {
 	const p = element();
 	anchor?.removeAttribute('aria-describedby');
 	anchor = target;
@@ -63,7 +63,7 @@ export function showPopover(target: HTMLElement, content: Node[], options: Popov
 }
 
 /** Hides the window. With a target, only if the window belongs to that element and is not pinned. */
-export function hidePopover(target?: HTMLElement) {
+export function hidePopover(target?: Element) {
 	if (target && (target !== anchor || pinned)) return;
 	anchor?.removeAttribute('aria-describedby');
 	anchor = null;
@@ -71,7 +71,7 @@ export function hidePopover(target?: HTMLElement) {
 	if (popover) popover.hidden = true;
 }
 
-export function isPinnedTo(target: HTMLElement): boolean {
+export function isPinnedTo(target: Element): boolean {
 	return pinned && anchor === target;
 }
 
@@ -80,7 +80,7 @@ export function isPinnedTo(target: HTMLElement): boolean {
  * Returns nothing; onPin runs when the reader pins the window (e.g. to put a link in the address bar).
  */
 export function attachPopover(
-	target: HTMLElement,
+	target: Element,
 	content: () => Node[],
 	options: Omit<PopoverOptions, 'pin'> = {},
 	onPin?: () => void,

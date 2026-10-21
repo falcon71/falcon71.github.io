@@ -175,14 +175,37 @@ export type Maps = Partial<Record<'L' | 'R', string>>;
 
 const MAP_CLASS = {L: 'kln-map kln-map-left', R: 'kln-map kln-map-right'} as const;
 
+// The group of a map element as the generator writes it (its data-draw is escaped, so it holds no ">")
+const MAP_ELEMENT = /<g data-field="([^"]*)"([^>]*) data-box="(\d+) (\d+) (\d+) (\d+)">/g;
+
 /**
- * The inside of the stage of a screen. A field that is not `documented` is drawn as plain text. A map comes first, so
- * that the text of its half is drawn over it.
+ * The SVG of a map with each element of a `documented` field made a field like the text fields: focusable, with a
+ * transparent hit area of its box as the first child, so that pointing anywhere in the box hits it.
+ */
+function mapFieldsHtml(svg: string, documented: Set<string>): {html: string; hasFields: boolean} {
+	let hasFields = false;
+	const html = svg.replace(MAP_ELEMENT, (group, field: string, rest: string, x: string, y: string, w: string, h: string) => {
+		if (!documented.has(field)) return group;
+		hasFields = true;
+		return `<g class="kln-field" tabindex="0" role="img" data-field="${field}"${rest} data-box="${x} ${y} ${w} ${h}">` +
+			`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="transparent"/>`;
+	});
+	return {html, hasFields};
+}
+
+/**
+ * The inside of the stage of a screen. A field that is not `documented` is drawn as plain text, and so is an element of
+ * a map. A map comes first, so that the text of its half is drawn over it. A map with fields is a labeled group, since
+ * its fields must stay reachable; one without is hidden from assistive technology.
  */
 export function screenHtml(b: ScreenBlocks, documented: Set<string>, maps: Maps = {}): string {
 	const mapHtml = (['L', 'R'] as const)
 		.filter(side => maps[side] !== undefined)
-		.map(side => `<div class="${MAP_CLASS[side]}" aria-hidden="true">${maps[side]}</div>`)
+		.map(side => {
+			const {html, hasFields} = mapFieldsHtml(maps[side]!, documented);
+			const access = hasFields ? 'role="group" aria-label="Map"' : 'aria-hidden="true"';
+			return `<div class="${MAP_CLASS[side]}" ${access}>${html}</div>`;
+		})
 		.join('');
 	return mapHtml + b.blocks
 		.map(block => `<div class="${block.cls}">${block.rows.map(row =>
