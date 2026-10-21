@@ -20,13 +20,13 @@ export interface ScreenDescription {
 	show: Show;
 	boot?: Omit<BootOptions, 'facilities' | 'defaultNavdata' | 'magvar' | 'airspaces'>;
 	/**
-	 * Leaves the messages pending, so that the status line flashes msg. Without it the screen reads the message of the
-	 * start-up right after the boot, as a pilot does, before it goes to its page, and generating fails when the steps
-	 * leave a message pending (a step that raises one, such as a moved aircraft on a flight plan, reads it with
-	 * `u.panel.readMessages()`). Only a screen that shows the MSG annunciator needs this.
+	 * Lets the status line flash msg on this screen, which is otherwise an error: a message is pending then, and a pilot
+	 * would have read it. Answer it in the steps instead: `adjustCourseIndicator(u)` for ADJ NAV IND CRS, `u.panel.readMessages()`
+	 * for any other. Only a screen that shows the MSG annunciator or the MSG page needs this, and it stages a real
+	 * message for it (a flight plan that is active, or a last position that differs from the boot position).
 	 */
 	keepMessages?: boolean;
-	/** Brings the unit to the page, from the settled state (and, unless keepMessages, with the messages read) */
+	/** Brings the unit to the page, from the settled state */
 	steps?: (unit: HeadlessUnit) => Promise<void>;
 	fields: FieldDef[];
 }
@@ -55,12 +55,15 @@ async function generate(dir: string, id: string, d: ScreenDescription): Promise<
 	if (!ID.test(id)) throw new Error(`the folder name must match ${ID}`);
 	// Only the places of the FAA extract exist, and the variation is the model's at the date the unit starts
 	const year = decimalYear(d.boot?.start ?? DEFAULT_START);
+	// The unit remembers its last position and warns when the first fix is more than 2 NM from it (Gps.ts). A pilot who
+	// last flew from here never sees that, so the unit starts where it was left unless the screen says otherwise.
+	const position = d.boot?.position;
+	const lastPosition = position === undefined ? {} : {lastLatitude: position.lat, lastLongitude: position.lon};
 	const unit = await bootUnit({
-		...d.boot, defaultNavdata: false, facilities: facilitiesOf(loadExtract()),
+		...d.boot, storage: {...lastPosition, ...d.boot?.storage}, defaultNavdata: false, facilities: facilitiesOf(loadExtract()),
 		magvar: (lat, lon) => declination(screenModel(), lat, lon, year, 0, SCREEN_DEGREE),
 	});
 	await settle(unit);
-	if (!d.keepMessages) await unit.panel.readMessages();
 	await d.steps?.(unit);
 	const capture = await captureScreen();
 	if (capture.layout === 'full' && d.show !== 'both') {
@@ -68,8 +71,9 @@ async function generate(dir: string, id: string, d: ScreenDescription): Promise<
 	}
 	const text = capture.cells.map(row => row.map(c => c.ch).join(''));
 	if (!d.keepMessages && capture.status && text[STATUS_ROW].includes(MSG_ANNUNCIATOR)) {
-		throw new Error('a message is pending (the status line flashes msg): read it with `await u.panel.readMessages()` in the '
-			+ 'steps, after whatever raised it, or set keepMessages for a screen that shows it');
+		throw new Error('a message is pending (the status line flashes msg): answer it in the steps, after whatever raised it, '
+			+ 'with `adjustCourseIndicator(u)` for ADJ NAV IND CRS or `await u.panel.readMessages()` for any other, '
+			+ 'or set keepMessages for a screen that shows msg');
 	}
 	const mask = capture.cells.map(row => row.map(c => c.attr as CellAttr));
 	const fields = locateFields(text, capture.layout, d.show, d.fields, capture.status);

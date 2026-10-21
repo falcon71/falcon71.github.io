@@ -55,12 +55,14 @@ description needs from the harness. See `screens/apt-1-ksea/`, `screens/nav-5-ks
 
 ### Messages
 
-The unit boots with a message pending (POSITION DIFFERS FROM LAST POSITION BY >2NM, because the stored last position
-is not the position of the boot), and the status line flashes `msg`. A pilot reads it right after power-on, so every screen reads the messages
-before its steps run. A step that raises another message (a Direct To or an active flight plan raises ADJ NAV IND CRS)
-answers it in the step: `adjustCourseIndicator(u)` turns the course of the external indicator the way a pilot does,
-`u.panel.readMessages()` reads any other. Generation fails when the captured screen still flashes `msg`, naming both.
-A screen that is meant to show `msg` or the MSG page sets `keepMessages: true`, which skips the first read and the check.
+The unit warns with POSITION DIFFERS FROM LAST POSITION BY >2NM when its first fix is more than 2 NM from the last
+position it saved (the user settings `lastLatitude` and `lastLongitude`, which default to 0). A pilot who last flew from
+where the unit starts never sees it, so `generateScreen` seeds both settings from `boot.position` (a `storage` of the
+screen's own wins). A step that raises a message (a Direct To or an active flight plan raises ADJ NAV IND CRS) answers it
+in the step: `adjustCourseIndicator(u)` turns the course of the external indicator the way a pilot does,
+`u.panel.readMessages()` reads any other. Generation fails when the captured screen still flashes `msg`, and the error
+names both. A screen that is meant to show `msg` sets `keepMessages: true`, which only turns that check off; it stages a
+real pending message, such as an active flight plan that was not answered with `adjustCourseIndicator`.
 
 ## Moving the pin
 

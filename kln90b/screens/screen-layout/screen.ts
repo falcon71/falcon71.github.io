@@ -7,7 +7,8 @@ defineScreen(import.meta.url, {
 	title: 'Screen layout: left page, right page and status line',
 	show: 'both',
 	boot: BOOT,
-	// The status line flashes msg here, because the field of the message is part of the figure
+	// The status line flashes msg here, because the field of the message is part of the figure: the active leg raises
+	// ADJ NAV IND CRS, which the pilot has not answered yet (fly, not flyAndAdjust)
 	keepMessages: true,
 	steps: async u => {
 		await fly(u);

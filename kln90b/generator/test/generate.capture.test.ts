@@ -50,7 +50,7 @@ describe('generateScreen', () => {
 		expect(file.maps).toEqual([]);
 	});
 
-	it('reads the pending start-up message, so that the status line does not flash msg', async () => {
+	it('starts the unit at its last position, so that no start-up message is pending', async () => {
 		const dir = copyFixture();
 		await generateScreen(dir, nav1());
 		const file = parseScreenFile(fs.readFileSync(path.join(dir, 'screen.txt'), 'utf8'));
@@ -58,9 +58,11 @@ describe('generateScreen', () => {
 		expect(file.text[6].slice(0, 5)).toBe('NAV 1');
 	});
 
-	it('keeps the message pending with keepMessages, for a screen that shows it', async () => {
+	it('keeps the last position a screen stores itself, which stages the message of a moved unit', async () => {
 		const dir = copyFixture();
-		await generateScreen(dir, nav1({keepMessages: true}));
+		await generateScreen(dir, nav1({
+			boot: {position: {lat: 47.45, lon: -122.31}, storage: {lastLatitude: 0, lastLongitude: 0}}, keepMessages: true,
+		}));
 		const file = parseScreenFile(fs.readFileSync(path.join(dir, 'screen.txt'), 'utf8'));
 		expect(file.text[6]).toContain('msg');
 		expect(file.mask[6].slice(14, 17).join('')).toBe('FFF');

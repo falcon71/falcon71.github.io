@@ -50,7 +50,9 @@ The folder `kln90b/screens/<id>/` holds the description (`screen.ts`), the expla
 generated or when the explanations and the fields of the screen differ. `title="..."` replaces the title of the generated
 file. A page name in an explanation becomes a link like anywhere else.
 
-The description is explained in `kln90b/generator/README.md` ("Describing a screen"). Screens that share a state import it
+The description is explained in `kln90b/generator/README.md` ("Describing a screen"). A screen must not flash `msg` on its
+status line unless it sets `keepMessages: true`; the generator starts the unit at its last position, and a step that
+raises a message answers it ("Messages" there). Screens that share a state import it
 from `kln90b/screens/shared/`, a folder without a `screen.ts`, which the generator skips.
 
 ### Hand-built screens
