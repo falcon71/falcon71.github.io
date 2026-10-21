@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "target": "es2017",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "jsx": "react",
+    "jsxFactory": "FSComponent.buildComponent",
+    "jsxFragmentFactory": "FSComponent.Fragment",
+    "types": [],
+    "typeRoots": ["../../vendor/kln90b/node_modules/@types"],
+    "paths": {"*": ["../../vendor/kln90b/node_modules/*"]}
+  },
+  "include": ["**/*.ts", "**/*.mts", "../screens/**/*.ts"]
+}

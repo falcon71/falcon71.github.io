@@ -1,0 +1,3 @@
+[submodule "vendor/kln90b"]
+	path = vendor/kln90b
+	url = https://github.com/falcon71/kln90b.git
