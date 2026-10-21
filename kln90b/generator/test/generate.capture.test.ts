@@ -105,10 +105,17 @@ describe('generateScreen', () => {
 		expect(fs.existsSync(path.join(dir, 'fields.mdx'))).toBe(true);
 	});
 
+	// NAV 5 without a flight plan or Direct To draws only the aircraft
+	const AIRCRAFT_MDX = '<Field id="aircraft" title="Aircraft">x</Field>';
+	const nav5 = (overrides: Partial<ScreenDescription> = {}) => nav1({
+		title: 'NAV 5 page', steps: u => u.panel.selectPage('L', 'NAV 5'),
+		fields: [{id: 'aircraft', find: {map: 'L', draw: /^icon \$ /}}], ...overrides,
+	});
+
 	it('writes the map of a map page and lists its side, and deletes the other stale map', async () => {
-		const dir = copyFixture('');
+		const dir = copyFixture(AIRCRAFT_MDX);
 		fs.writeFileSync(path.join(dir, 'map-R.svg'), '<svg/>');
-		await generateScreen(dir, nav1({title: 'NAV 5 page', steps: u => u.panel.selectPage('L', 'NAV 5'), fields: []}));
+		await generateScreen(dir, nav5());
 		const file = parseScreenFile(fs.readFileSync(path.join(dir, 'screen.txt'), 'utf8'));
 		expect(file.maps).toEqual(['L']);
 		const svg = fs.readFileSync(path.join(dir, 'map-L.svg'), 'utf8');
@@ -117,6 +124,33 @@ describe('generateScreen', () => {
 		const runs = Array.from(svg.matchAll(/M(\d+) (\d+)h/g), m => [Number(m[1]), Number(m[2])]);
 		expect(runs.some(([x, y]) => Math.abs(x - 49) <= 4 && Math.abs(y - 39) <= 4)).toBe(true);
 		expect(fs.existsSync(path.join(dir, 'map-R.svg'))).toBe(false);
+	});
+
+	it('writes the map fields and one group per element with its field', async () => {
+		const dir = copyFixture(AIRCRAFT_MDX);
+		await generateScreen(dir, nav5());
+		const text = fs.readFileSync(path.join(dir, 'screen.txt'), 'utf8');
+		expect(parseScreenFile(text).mapFields).toEqual(new Map([['aircraft', 'L']]));
+		expect(text).toContain('\nmapfield aircraft L\nmap L\n');
+		const svg = fs.readFileSync(path.join(dir, 'map-L.svg'), 'utf8');
+		const groups = Array.from(svg.matchAll(/<g data-field="([^"]*)" data-draw="([^"]*)" data-box="(\d+) (\d+) (\d+) (\d+)">/g));
+		expect(groups.map(g => g[1])).toEqual(['aircraft']);
+		expect(groups[0][2]).toMatch(/^icon \$ 47\.4500,-122\.3100$/);
+		const [x, y, w, h] = groups[0].slice(3).map(Number);
+		expect(Math.abs(x + w / 2 - 49.5) <= 1 && Math.abs(y + h / 2 - 39.5) <= 1).toBe(true);
+	});
+
+	it('fails on a map element that belongs to no field, naming the screen and the element', async () => {
+		const dir = copyFixture('');
+		await expect(generateScreen(dir, nav5({fields: []})))
+			.rejects.toThrow(/^screen nav-1-smoke: the element "icon \$ 47\.4500,-122\.3100" of map L belongs to no field$/);
+		expect(fs.existsSync(path.join(dir, 'screen.txt'))).toBe(false);
+		expect(fs.existsSync(path.join(dir, 'map-L.svg'))).toBe(false);
+	});
+
+	it('requires an explanation of a map field', async () => {
+		const dir = copyFixture('');
+		await expect(generateScreen(dir, nav5())).rejects.toThrow(/^screen nav-1-smoke: .*no explanation: aircraft/);
 	});
 
 	it('writes no map for a half the manual does not show', async () => {

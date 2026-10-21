@@ -20,6 +20,10 @@ mask
 |.......................|
 |.......................|
 |.......................|
-field bottom 5 0 11
+field orientation 5 0 2
+field range 5 9 11
 field page 6 0 5
+mapfield leg L
+mapfield active-waypoint L
+mapfield aircraft L
 map L

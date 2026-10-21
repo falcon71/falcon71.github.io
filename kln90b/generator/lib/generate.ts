@@ -9,9 +9,10 @@ import {serializeScreenFile, type CellAttr, type Show} from '../../src/lib/scree
 import {explanationMismatch, fieldIdsOf} from '../../src/lib/explanations.ts';
 import {vendorCommit} from '../vendorCheck.mjs';
 import {captureScreen, type CapturedScreen} from './capture.ts';
-import {locateFields, type FieldDef} from './fields.ts';
-import {blocksToSvg} from './mapSvg.ts';
-import {facilitiesOf, loadExtract} from './navdata.ts';
+import {locateFields, locateMapFields, type FieldDef, type MapSide} from './fields.ts';
+import {checkCoverage, type MapElement} from './mapElements.ts';
+import {mapToSvg} from './mapSvg.ts';
+import {facilitiesOf, loadExtract, pointNamesOf} from './navdata.ts';
 import {decimalYear, declination, screenModel, SCREEN_DEGREE} from './wmm.ts';
 
 export interface ScreenDescription {
@@ -36,16 +37,31 @@ const MSG_ANNUNCIATOR = 'msg';
 const ID = /^[a-z0-9-]+$/;
 const MAP_FILE = /^map-.*\.svg$/;
 
+interface ShownMap {
+	width: number;
+	height: number;
+	elements: MapElement[];
+}
+
 /**
- * The SVG of the map of each side that the manual shows and that has a canvas, even a dark one, so that the files of a
- * screen do not come and go with what the map happens to draw.
+ * The map of each side that the manual shows and that has a canvas, even a dark one, so that the files of a screen do
+ * not come and go with what the map happens to draw.
+ * @throws Error `map <side>: ...` when the recorded elements do not account for the pixels of the map
  */
-function mapsOf(canvases: CapturedScreen['canvases'], show: Show): Map<'L' | 'R', string> {
-	const maps = new Map<'L' | 'R', string>();
+function mapsOf(capture: CapturedScreen, show: Show): Map<MapSide, ShownMap> {
+	const maps = new Map<MapSide, ShownMap>();
 	for (const side of ['L', 'R'] as const) {
-		const canvas = canvases[side];
+		const canvas = capture.canvases[side];
 		if (canvas !== undefined && (show === 'both' || show === (side === 'L' ? 'left' : 'right'))) {
-			maps.set(side, blocksToSvg(downsampled(canvasToAscii(canvas))));
+			const blocks = downsampled(canvasToAscii(canvas));
+			const rows = blocks.replace(/\n$/, '').split('\n');
+			const elements = capture.elements[side] ?? [];
+			try {
+				checkCoverage(blocks, elements);
+			} catch (e) {
+				throw new Error(`map ${side}: ${(e as Error).message}`);
+			}
+			maps.set(side, {width: rows[0].length, height: rows.length, elements});
 		}
 	}
 	return maps;
@@ -65,7 +81,7 @@ async function generate(dir: string, id: string, d: ScreenDescription): Promise<
 	});
 	await settle(unit);
 	await d.steps?.(unit);
-	const capture = await captureScreen();
+	const capture = await captureScreen(pointNamesOf(loadExtract()));
 	if (capture.layout === 'full' && d.show !== 'both') {
 		throw new Error(`a full page needs show both, not ${d.show}`);
 	}
@@ -77,7 +93,13 @@ async function generate(dir: string, id: string, d: ScreenDescription): Promise<
 	}
 	const mask = capture.cells.map(row => row.map(c => c.attr as CellAttr));
 	const fields = locateFields(text, capture.layout, d.show, d.fields, capture.status);
-	const maps = mapsOf(capture.canvases, d.show);
+	const maps = mapsOf(capture, d.show);
+	const mapFields = locateMapFields(d.fields, d.show, Object.fromEntries(Array.from(maps, ([side, map]) => [side, map.elements])));
+	const svgs = new Map<MapSide, string>();
+	for (const [side, {width, height, elements}] of maps) {
+		const owners = mapFields.owners[side]!;
+		svgs.set(side, mapToSvg(width, height, elements.map((e, i) => ({field: owners[i], draw: e.draw, pixels: e.pixels}))));
+	}
 
 	const mdxFile = path.join(dir, 'fields.mdx');
 	const ids = d.fields.map(f => f.id);
@@ -87,10 +109,10 @@ async function generate(dir: string, id: string, d: ScreenDescription): Promise<
 
 	const file = serializeScreenFile({
 		kln90b: vendorCommit(), title: d.title, show: d.show, layout: capture.layout, status: capture.status,
-		text, mask, fields, maps: Array.from(maps.keys()),
+		text, mask, fields, mapFields: mapFields.sides, maps: Array.from(maps.keys()),
 	});
 	fs.writeFileSync(path.join(dir, 'screen.txt'), file);
-	for (const [side, svg] of maps) fs.writeFileSync(path.join(dir, `map-${side}.svg`), svg);
+	for (const [side, svg] of svgs) fs.writeFileSync(path.join(dir, `map-${side}.svg`), svg);
 	// A map file of an earlier run that this run did not write is stale
 	for (const name of fs.readdirSync(dir)) {
 		if (MAP_FILE.test(name) && !maps.has(name.slice('map-'.length, -'.svg'.length) as 'L' | 'R')) fs.rmSync(path.join(dir, name));
@@ -101,7 +123,8 @@ async function generate(dir: string, id: string, d: ScreenDescription): Promise<
  * Boots the unit, brings it to the page, captures one blink cycle and writes `screen.txt` into `dir`. The id of the
  * screen is the name of the folder.
  * @throws Error `screen <id>: ...` for anything that stops the screen from being generated; `screen.txt` is written only
- * after every check has passed. The maps of NAV 5 and APT 3 are written next to it as `map-L.svg` and `map-R.svg`.
+ * after every check has passed, among them that every element drawn on a map the screen shows belongs to one map field.
+ * The maps of NAV 5 and APT 3 are written next to it as `map-L.svg` and `map-R.svg`.
  */
 export async function generateScreen(dir: string, d: ScreenDescription): Promise<void> {
 	const id = path.basename(dir);

@@ -36,6 +36,8 @@ working directory, because the harness resolves `resources/` from `process.cwd()
 - `lib/paths.ts`: `VENDOR`, `SITE` and `SCREENS`.
 - `lib/navdata.ts`: loads the newest extract of `navdata/` and turns it into the facilities a screen boots with (`place()`
   gives the position of an ident for a screen's `boot.position`). `lib/wmm.ts` is the magnetic model.
+- `lib/mapElements.ts`: records what the maps draw while a screen is captured, one element per drawing call;
+  `lib/mapSvg.ts` writes a map as SVG, one group per element.
 - `harness-lgpl/`: the copied builders of the harness with the changes made to them, under the LGPL (see its README).
 - `tsconfig.json`: type check with `node ../vendor/kln90b/node_modules/typescript/bin/tsc -p generator --noEmit`.
 - `test/`: tests of the generator; `*.capture.test.ts` boots the unit and needs happy-dom.
@@ -57,6 +59,26 @@ description needs from the harness. See `screens/apt-1-ksea/`, `screens/nav-5-ks
   more than once, so a layout change in kln90b cannot silently leave the tooltip over the wrong cells. Use a place
   (`{area: 'L', row: 1}`) only for contents that are free: an airport name, the CDI bar, a field that covers a whole
   half.
+
+### Map fields
+
+Every element the unit draws on a map (NAV 5, APT 3) is a field too. While the screen is captured, the generator records
+each drawing call of the map (an icon, a label, a flight plan line or arrow, a plain line, an arc) and the map pixels it
+lit; the last frame drawn before the capture's last tick counts. Each element is described in one line: the kind and its
+arguments, with each point named after the place of the extract it equals (an airport ident first, then a VOR, an NDB,
+a fix) and written as `lat,lon` otherwise, for example `icon % KSEA`, `arrow 47.1172,-122.3118 KSEA` and
+`icon $ 47.1172,-122.3118`. A description that repeats on a map gets ` #2`, ` #3`.
+
+- A map field names the map side and a regex over the descriptions:
+  `{id: 'aircraft', find: {map: 'L', draw: /^icon \$ /}}`. It must match exactly one element; `many: true` lets it
+  claim several (all legs of a flight plan, say). A field's locators are all text locators or all map locators of one
+  side, and the side must be one the screen shows.
+- Every element of a map the screen shows must belong to exactly one field. Generation fails on an element no field
+  claims and names it (`the element "icon % KSEA" of map L belongs to no field`), so the error of a new screen lists
+  the descriptions to write the fields from. An element two fields claim fails naming both.
+- The descriptions are also in the map's SVG: `map-<side>.svg` has a
+  `<g data-field="..." data-draw="..." data-box="x y w h">` per element, in drawing order.
+- The map fields need explanations in `fields.mdx` like the text fields.
 
 ### Defaults of a screen
 

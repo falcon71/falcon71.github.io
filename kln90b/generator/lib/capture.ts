@@ -1,6 +1,7 @@
 import type {Cell} from '../../../vendor/kln90b/test/harness/render/screen';
 import {Screen} from '../../../vendor/kln90b/test/harness/render/screen';
 import {blinkCycle} from '../../../vendor/kln90b/test/harness/render/blink';
+import type {MapElement, NamedPoint} from './mapElements.ts';
 
 export interface CapturedScreen {
 	layout: 'split' | 'full';
@@ -9,6 +10,8 @@ export interface CapturedScreen {
 	cells: Cell[][];
 	/** The map canvases of the visible half pages, as they are at the last tick of the cycle */
 	canvases: {L?: HTMLCanvasElement; R?: HTMLCanvasElement};
+	/** The elements of the last frame each canvas drew during the cycle, in drawing order */
+	elements: {L?: MapElement[]; R?: MapElement[]};
 }
 
 type Attr = Cell['attr'];
@@ -51,7 +54,7 @@ function visible(container: Element, selector: string): Element | null {
 	return el !== null && el.closest('.d-none') === null ? el : null;
 }
 
-type Inspection = Omit<CapturedScreen, 'cells'>;
+type Inspection = Omit<CapturedScreen, 'cells' | 'elements'>;
 
 /**
  * Checks that the layout and the status line were the same on every tick of the cycle; reads of two different pages
@@ -92,17 +95,33 @@ function readGrid(): Cell[][] {
 
 /**
  * Reads the screen of the booted unit over one blink cycle (four display ticks) and merges the reads, so that a flashing
- * cell is marked whatever the phase was at the start.
+ * cell is marked whatever the phase was at the start. The drawing calls of the maps are recorded during the cycle only,
+ * which is enough because the maps redraw on every display tick.
+ * @param names the places the points of the map elements are named after (see recordMapElements)
  * @throws Error on Super NAV 5, which is a map and not a text grid, and on a cell that cannot be merged (see mergeCycle)
  */
-export async function captureScreen(): Promise<CapturedScreen> {
+export async function captureScreen(names: NamedPoint[] = []): Promise<CapturedScreen> {
 	const container = document.getElementById('pageContainer');
 	if (container === null) throw new Error('no #pageContainer; has the unit booted?');
 	const states: Inspection[] = [];
-	const reads = await blinkCycle(() => {
-		states.push(inspect(container));
-		return readGrid();
-	});
+	// Imported here, because mapElements.ts needs the MSFS SDK and mergeCycle and checkStable are tested without it
+	const {recordMapElements} = await import('./mapElements.ts');
+	const recorder = recordMapElements(names);
+	let reads: Cell[][][];
+	try {
+		reads = await blinkCycle(() => {
+			states.push(inspect(container));
+			return readGrid();
+		});
+	} finally {
+		recorder.stop();
+	}
 	checkStable(states);
-	return {...states[states.length - 1], cells: mergeCycle(reads)};
+	const last = states[states.length - 1];
+	const elements: CapturedScreen['elements'] = {};
+	for (const side of ['L', 'R'] as const) {
+		const canvas = last.canvases[side];
+		if (canvas !== undefined) elements[side] = recorder.elementsOf(canvas);
+	}
+	return {...last, elements, cells: mergeCycle(reads)};
 }

@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {AirportClass, FacilityFrequencyType, RunwaySurfaceType, VorType, type Facility} from '@microsoft/msfs-sdk';
 import {airport, intersection, ndb, vor, type FrequencyOptions, type RunwayOptions} from '../harness-lgpl/builders.ts';
+import type {NamedPoint} from './mapElements.ts';
 import {SITE} from './paths.ts';
 
 const NAVDATA = path.join(SITE, 'generator', 'navdata');
@@ -130,4 +131,12 @@ export function facilityIn(x: NavdataExtract, ident: string): Facility {
 	if (found.length === 0) throw new Error(`no airport, VOR, NDB or fix ${ident} in the navdata extract ${x.cycle}`);
 	if (found.length > 1) throw new Error(`${ident} is ambiguous in the navdata extract ${x.cycle}: ${found.length} facilities have it`);
 	return found[0];
+}
+
+/**
+ * The places of the extract by the ident the unit shows, for naming the points the maps draw: the airports first,
+ * then the VORs, NDBs and fixes, so that a point that is both an airport and a VOR is named after the airport.
+ */
+export function pointNamesOf(x: NavdataExtract): NamedPoint[] {
+	return [...x.airports, ...x.vors, ...x.ndbs, ...x.fixes].map(p => ({name: p.ident, lat: p.lat, lon: p.lon}));
 }

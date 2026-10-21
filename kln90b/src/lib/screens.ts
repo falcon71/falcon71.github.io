@@ -32,12 +32,12 @@ export function loadCapture(id: string): {capture: ScreenCapture; maps: Partial<
 }
 
 /**
- * Checks that the explanations of a screen (the text of its fields.mdx) and its fields agree, with the same rule the
- * generator applies.
+ * Checks that the explanations of a screen (the text of its fields.mdx) and its text and map fields agree, with the
+ * same rule the generator applies.
  * @throws Error naming the screen, the difference and the command that regenerates the screen
  */
 export function checkExplanations(id: string, capture: ScreenCapture, mdx: string): void {
-	const mismatch = explanationMismatch(Array.from(capture.fields.keys()), fieldIdsOf(mdx));
+	const mismatch = explanationMismatch([...capture.fields.keys(), ...capture.mapFields.keys()], fieldIdsOf(mdx));
 	if (mismatch !== null) {
 		throw new Error(`screen ${id}: ${mismatch}; fix screens/${id}/fields.mdx or screen.ts, then run npm run screens -- ${id}`);
 	}

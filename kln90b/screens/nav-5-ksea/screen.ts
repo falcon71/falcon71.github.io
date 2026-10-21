@@ -12,8 +12,13 @@ defineScreen(import.meta.url, {
 		await u.panel.selectPage('L', 'NAV 5');
 	},
 	fields: [
-		// The north arrow and the range of the map
-		{id: 'bottom', find: {re: /N\^ +\d+/, area: 'L'}},
+		// The orientation of the map (north up) and its range in NM
+		{id: 'orientation', find: {re: /N\^/, area: 'L', row: 5}},
+		{id: 'range', find: {re: /\d+$/, area: 'L', row: 5}},
 		{id: 'page', find: {re: /NAV 5/, area: 'S'}},
+		// What the map draws: the Direct To from where it was made, the active waypoint and the aircraft
+		{id: 'leg', find: {map: 'L', draw: /^arrow \S+ KSEA$/}},
+		{id: 'active-waypoint', find: {map: 'L', draw: /^icon % KSEA$/}},
+		{id: 'aircraft', find: {map: 'L', draw: /^icon \$ /}},
 	],
 });

@@ -20,6 +20,7 @@ export interface ScreenCapture {
 	text: string[];            // 7 rows of 23 characters
 	mask: CellAttr[][];        // 7 rows of 23
 	fields: Map<string, FieldPart[]>;   // in order of the description
+	mapFields: Map<string, 'L' | 'R'>;  // field id to the map side it is drawn on, in order of the description
 	maps: ('L' | 'R')[];       // sides with a map-<side>.svg
 }
 
@@ -74,6 +75,19 @@ function checkCapture(c: ScreenCapture): void {
 	}
 	for (const side of c.maps) if (!SIDES.includes(side)) throw new Error(`map "${side}" is not L or R`);
 	if (new Set(c.maps).size !== c.maps.length) throw new Error(`map ${c.maps.join(', ')} lists a side twice`);
+	for (const [id, side] of c.mapFields) {
+		if (!/^\S+$/.test(id)) throw new Error(`map field id "${id}" must be one word without blanks`);
+		const problem = mapFieldProblem(id, side, c.fields, c.maps);
+		if (problem !== null) throw new Error(problem);
+	}
+}
+
+/** What is wrong with a map field, given all text fields and maps of the capture, or null. */
+function mapFieldProblem(id: string, side: string, fields: Map<string, FieldPart[]>, maps: string[]): string | null {
+	if (!SIDES.includes(side)) return `map field ${id} names the side "${side}", which is not L or R`;
+	if (fields.has(id)) return `map field ${id} is also a text field`;
+	if (!maps.includes(side)) return `map field ${id} is drawn on map ${side}, which has no "map ${side}" line`;
+	return null;
 }
 
 export function serializeScreenFile(c: ScreenCapture): string {
@@ -93,6 +107,7 @@ export function serializeScreenFile(c: ScreenCapture): string {
 	for (const [id, parts] of c.fields) {
 		for (const part of parts) lines.push(`field ${id} ${part.row} ${part.from} ${part.to}`);
 	}
+	for (const [id, side] of c.mapFields) lines.push(`mapfield ${id} ${side}`);
 	for (const side of c.maps) lines.push(`map ${side}`);
 	return lines.join('\n') + '\n';
 }
@@ -106,7 +121,17 @@ class Reader {
 
 	/** Throws about the line read last (numbered from 1). */
 	fail(message: string): never {
-		throw new Error(`screen file line ${this.next}: ${message}`);
+		this.failAt(this.next, message);
+	}
+
+	/** Throws about a line read earlier (numbered from 1). */
+	failAt(line: number, message: string): never {
+		throw new Error(`screen file line ${line}: ${message}`);
+	}
+
+	/** The number of the line read last (from 1). */
+	get line(): number {
+		return this.next;
 	}
 
 	/** The next line that is neither blank nor a comment, or null at the end. Only used outside the blocks. */
@@ -180,6 +205,8 @@ export function parseScreenFile(text: string): ScreenCapture {
 	}));
 
 	const fields = new Map<string, FieldPart[]>();
+	const mapFields = new Map<string, 'L' | 'R'>();
+	const mapFieldLines = new Map<string, number>();
 	const maps: ('L' | 'R')[] = [];
 	for (let line = r.nextItem(); line !== null; line = r.nextItem()) {
 		const words = line.trim().split(/\s+/);
@@ -196,6 +223,12 @@ export function parseScreenFile(text: string): ScreenCapture {
 			}
 			const parts = fields.get(id);
 			if (parts) parts.push(part); else fields.set(id, [part]);
+		} else if (words[0] === 'mapfield') {
+			const [, id, side] = words;
+			if (words.length !== 3 || !SIDES.includes(side)) r.fail(`expected "mapfield <id> L" or "mapfield <id> R" but found "${line}"`);
+			if (mapFields.has(id)) r.fail(`map field ${id} appears twice`);
+			mapFields.set(id, side as 'L' | 'R');
+			mapFieldLines.set(id, r.line);
 		} else if (words[0] === 'map') {
 			const side = words[1];
 			if (words.length !== 2 || !SIDES.includes(side)) r.fail(`expected "map L" or "map R" but found "${line}"`);
@@ -206,5 +239,11 @@ export function parseScreenFile(text: string): ScreenCapture {
 		}
 	}
 
-	return {kln90b, title, show, layout, status, text: rows.map(cells => cells.join('')), mask, fields, maps};
+	// The text fields and maps a map field is checked against may come after it
+	for (const [id, side] of mapFields) {
+		const problem = mapFieldProblem(id, side, fields, maps);
+		if (problem !== null) r.failAt(mapFieldLines.get(id)!, problem);
+	}
+
+	return {kln90b, title, show, layout, status, text: rows.map(cells => cells.join('')), mask, fields, mapFields, maps};
 }

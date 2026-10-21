@@ -2,12 +2,13 @@ import {describe, expect, it} from 'vitest';
 import type {CellAttr, ScreenCapture} from './screenFile.ts';
 import {checkExplanations, loadCapture} from './screens.ts';
 
-function capture(fieldIds: string[]): ScreenCapture {
+function capture(fieldIds: string[], mapFieldIds: string[] = []): ScreenCapture {
 	return {
 		kln90b: '0'.repeat(40), title: 'APT 1 page', show: 'right', layout: 'split', status: true,
 		text: Array.from({length: 7}, () => ' '.repeat(23)),
 		mask: Array.from({length: 7}, () => Array.from({length: 23}, () => '.' as CellAttr)),
-		fields: new Map(fieldIds.map(id => [id, [{row: 0, from: 12, to: 16}]])), maps: [],
+		fields: new Map(fieldIds.map(id => [id, [{row: 0, from: 12, to: 16}]])),
+		mapFields: new Map(mapFieldIds.map(id => [id, 'R'])), maps: mapFieldIds.length > 0 ? ['R'] : [],
 	};
 }
 
@@ -35,6 +36,13 @@ describe('checkExplanations', () => {
 		const mdx = '<Field id="ident" title="Identifier">x</Field>';
 		expect(() => checkExplanations('apt-1-ksea', capture(['ident', 'name']), mdx))
 			.toThrow(/apt-1-ksea.*no explanation: name/);
+	});
+
+	it('counts the map fields as fields', () => {
+		const mdx = '<Field id="ident" title="Identifier">x</Field><Field id="runway" title="Runway">x</Field>';
+		expect(checkExplanations('apt-1-ksea', capture(['ident'], ['runway']), mdx)).toBeUndefined();
+		expect(() => checkExplanations('apt-1-ksea', capture(['ident'], ['runway']), '<Field id="ident" title="I">x</Field>'))
+			.toThrow(/no explanation: runway/);
 	});
 
 	it('names the explanation that has no field, and the command to run', () => {

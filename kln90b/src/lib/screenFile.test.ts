@@ -29,6 +29,7 @@ function capture(): ScreenCapture {
 			['ident', [{row: 0, from: 15, to: 19}]],
 			['name', [{row: 1, from: 12, to: 23}, {row: 2, from: 12, to: 20}]],
 		]),
+		mapFields: new Map([['aircraft', 'L'], ['leg', 'L']]),
 		maps: ['L'],
 	};
 }
@@ -53,7 +54,9 @@ describe('screen file', () => {
 			`kln90b ${COMMIT}`, 'title APT 1 page', 'show right', 'layout split', 'status yes', 'text',
 			'|APT 1       KSEA       |',
 		]);
-		expect(lines.slice(-5)).toEqual(['field ident 0 15 19', 'field name 1 12 23', 'field name 2 12 20', 'map L', '']);
+		expect(lines.slice(-7)).toEqual([
+			'field ident 0 15 19', 'field name 1 12 23', 'field name 2 12 20', 'mapfield aircraft L', 'mapfield leg L', 'map L', '',
+		]);
 	});
 
 	it('groups the parts of a field and keeps the order of the fields', () => {
@@ -74,6 +77,16 @@ describe('screen file', () => {
 		c.show = 'both';
 		c.maps = ['L', 'R'];
 		c.fields = new Map();
+		c.mapFields = new Map([['runway', 'R'], ['aircraft', 'L']]);
+		const parsed = parseScreenFile(serializeScreenFile(c));
+		expect(parsed).toEqual(c);
+		expect([...parsed.mapFields.keys()]).toEqual(['runway', 'aircraft']);
+	});
+
+	it('round-trips a capture without map fields', () => {
+		const c = capture();
+		c.mapFields = new Map();
+		expect(serializeScreenFile(c)).not.toContain('mapfield');
 		expect(parseScreenFile(serializeScreenFile(c))).toEqual(c);
 	});
 
@@ -139,6 +152,17 @@ describe('screen file', () => {
 		expect(() => parseScreenFile(text.replace('map L', 'map X'))).toThrow('map X');
 	});
 
+	it('rejects a map field without its map, one that is also a text field, a repeated one and a malformed one', () => {
+		const text = serializeScreenFile(capture());
+		expect(() => parseScreenFile(text.replace('mapfield leg L', 'mapfield leg R'))).toThrow(/line 27: .*leg.*map R/);
+		expect(() => parseScreenFile(text.replace('mapfield leg L', 'mapfield name L'))).toThrow(/line 27: .*name.*text field/);
+		expect(() => parseScreenFile(text.replace('mapfield leg L', 'mapfield aircraft L'))).toThrow(/line 27: .*aircraft.*twice/);
+		expect(() => parseScreenFile(text.replace('mapfield leg L', 'mapfield aircraft R\nmap R'))).toThrow(/aircraft.*twice/);
+		for (const bad of ['mapfield leg', 'mapfield leg X', 'mapfield leg L R']) {
+			expect(() => parseScreenFile(text.replace('mapfield leg L', bad)), bad).toThrow(/line 27: .*mapfield/);
+		}
+	});
+
 	it('refuses to write a capture that would not parse', () => {
 		const c = capture();
 		c.text[2] = 'short';
@@ -149,5 +173,14 @@ describe('screen file', () => {
 		const e = capture();
 		e.maps = ['L', 'L'];
 		expect(() => serializeScreenFile(e)).toThrow('map L');
+		const f = capture();
+		f.mapFields.set('runway', 'R');
+		expect(() => serializeScreenFile(f)).toThrow(/runway.*map R/);
+		const g = capture();
+		g.mapFields.set('name', 'L');
+		expect(() => serializeScreenFile(g)).toThrow(/name.*text field/);
+		const h = capture();
+		h.mapFields.set('two words', 'L');
+		expect(() => serializeScreenFile(h)).toThrow(/two words/);
 	});
 });

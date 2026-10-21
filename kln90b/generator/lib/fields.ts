@@ -3,20 +3,37 @@ import type {FieldPart, Show} from '../../src/lib/screenFile.ts';
 /** Left half, right half, status line, full page. */
 export type Area = 'L' | 'R' | 'S' | 'F';
 
+/** The map of the left or the right half page. */
+export type MapSide = 'L' | 'R';
+
 /**
  * Where a field is on the screen:
  * - a regex, searched in every visible area;
  * - a regex with an area, and optionally one row of it (`row` needs an `area`);
  * - a place: one row of an area, trimmed to its non-blank cells or cut at `from`/`to`.
+ * - a map locator: the elements of the map of one half whose description (`icon % KSEA`, see mapElements.ts) `draw`
+ *   matches; exactly one element, or with `many` at least one.
  * Rows count from 0 within the area (0-5 for L and R, 0-5 or 0-6 for F, only 0 for S). Columns count from 0 within
  * the area (0-10 for L and R, 0-22 for S and F, `to` exclusive).
  */
 export type Locator =
 	| RegExp
 	| {re: RegExp; area?: Area; row?: number}
-	| {area: Area; row?: number; from?: number; to?: number};
+	| {area: Area; row?: number; from?: number; to?: number}
+	| MapLocator;
 
-/** An array of locators gives a field of several parts. */
+export interface MapLocator {
+	map: MapSide;
+	draw: RegExp;
+	many?: boolean;
+}
+
+type TextLocator = Exclude<Locator, MapLocator>;
+
+/**
+ * An array of locators gives a field of several parts. The locators of a field are all text locators or all map
+ * locators of one side.
+ */
 export interface FieldDef {
 	id: string;
 	find: Locator | Locator[];
@@ -140,10 +157,48 @@ function locatePlace(areaName: Area, row: number | undefined, from: number | und
 	return [{row: reg.firstRow + index, from: reg.offset + start, to: reg.offset + end}];
 }
 
-function locate(loc: Locator, ctx: Layout): FieldPart[] {
+function locate(loc: TextLocator, ctx: Layout): FieldPart[] {
 	if (loc instanceof RegExp) return locateRegex(loc, undefined, undefined, ctx);
 	if ('re' in loc) return locateRegex(loc.re, loc.area, loc.row, ctx);
 	return locatePlace(loc.area, loc.row, loc.from, loc.to, ctx);
+}
+
+function isMapLocator(loc: Locator): loc is MapLocator {
+	return !(loc instanceof RegExp) && 'map' in loc;
+}
+
+type Field = {id: string} & ({map: false; finds: TextLocator[]} | {map: true; finds: MapLocator[]});
+
+/**
+ * The field definitions of a screen description, with their locators as a list and whether each is a map field.
+ * @throws Error `field <id>: ...` for a bad id, an id defined twice, an empty list and a mix of text and map locators
+ */
+function fieldsOf(defs: FieldDef[]): Field[] {
+	const ids = new Set<string>();
+	return defs.map(({id, find}) => {
+		try {
+			if (!ID.test(id)) throw new Error(`the id must match ${ID}`);
+			if (ids.has(id)) throw new Error('is defined twice');
+			ids.add(id);
+			const finds = Array.isArray(find) ? find : [find];
+			if (finds.length === 0) throw new Error('has no locator');
+			const maps = finds.filter(isMapLocator);
+			if (maps.length === finds.length) return {id, map: true, finds: maps};
+			if (maps.length > 0) throw new Error('mixes text and map locators');
+			return {id, map: false, finds: finds as TextLocator[]};
+		} catch (e) {
+			throw new Error(`field ${id}: ${(e as Error).message}`);
+		}
+	});
+}
+
+/** Runs `f`, with an error that names the field. */
+function inField<T>(id: string, f: () => T): T {
+	try {
+		return f();
+	} catch (e) {
+		throw new Error(`field ${id}: ${(e as Error).message}`);
+	}
 }
 
 function overlap(a: FieldPart, b: FieldPart): boolean {
@@ -163,14 +218,14 @@ function checkCropped(parts: FieldPart[], ctx: Layout): void {
 }
 
 /**
- * Turns the field definitions of a screen description into cell ranges.
+ * Turns the text fields of a screen description into cell ranges. The map fields are left to locateMapFields.
  *
  * @param text the 7 rows of 23 characters as captured: on a split layout column 11 of rows 0-5 is the middle line
  * and row 6 the status line
  * @param status false only for a full page without status line, which then has the page rows 0-6
  * @return the parts of each field in the order of the definitions, as absolute screen rows and columns
  * @throws Error `field <id>: ...` for a field that matches nothing or more than once, lies in a hidden area, outside
- * the page name of a cropped status line, or overlaps another field
+ * the page name of a cropped status line, or overlaps another field, and for a bad definition of any field
  */
 export function locateFields(text: string[], layout: 'split' | 'full', show: Show, defs: FieldDef[],
 							 status = true): Map<string, FieldPart[]> {
@@ -181,13 +236,10 @@ export function locateFields(text: string[], layout: 'split' | 'full', show: Sho
 	const ctx: Layout = {text, layout, show, status};
 	const fields = new Map<string, FieldPart[]>();
 	const owners: {id: string; part: FieldPart}[] = [];
-	for (const def of defs) {
-		const id = def.id;
-		try {
-			if (!ID.test(id)) throw new Error(`the id must match ${ID}`);
-			if (fields.has(id)) throw new Error('is defined twice');
-			const finds = Array.isArray(def.find) ? def.find : [def.find];
-			if (finds.length === 0) throw new Error('has no locator');
+	for (const field of fieldsOf(defs)) {
+		if (field.map) continue;
+		const {id, finds} = field;
+		inField(id, () => {
 			const parts: FieldPart[] = [];
 			for (const loc of finds) parts.push(...locate(loc, ctx));
 			checkCropped(parts, ctx);
@@ -198,9 +250,69 @@ export function locateFields(text: string[], layout: 'split' | 'full', show: Sho
 			});
 			fields.set(id, parts);
 			owners.push(...parts.map(part => ({id, part})));
-		} catch (e) {
-			throw new Error(`field ${id}: ${(e as Error).message}`);
-		}
+		});
 	}
 	return fields;
+}
+
+/** The map fields of a screen: the side of each field, and the field of each element of each map, by element index. */
+export interface MapFields {
+	sides: Map<string, MapSide>;
+	owners: Partial<Record<MapSide, string[]>>;
+}
+
+const SHOWN: {[show in Show]: MapSide[]} = {left: ['L'], right: ['R'], both: ['L', 'R']};
+
+/**
+ * Gives the elements of the maps to the map fields of a screen description. Every element of a map the screen shows
+ * must belong to exactly one field.
+ * @param elements the elements of each map the unit shows, in drawing order, by their descriptions
+ * @return the map fields in the order of the definitions, and the field of each element of each map the screen shows
+ * @throws Error `field <id>: ...` for a map locator that matches no element, more than one without `many`, or names a
+ * side the screen does not show or that has no map, for an element claimed twice, and for a bad definition of any
+ * field; `the element "<description>" of map <side> belongs to no field` for an element no field claims (all of them
+ * when there are several)
+ */
+export function locateMapFields(defs: FieldDef[], show: Show, elements: Partial<Record<MapSide, {draw: string}[]>>): MapFields {
+	const sides = new Map<string, MapSide>();
+	const owners: Partial<Record<MapSide, string[]>> = {};
+	for (const side of SHOWN[show]) {
+		const list = elements[side];
+		if (list !== undefined) owners[side] = list.map(() => '');
+	}
+	for (const field of fieldsOf(defs)) {
+		if (!field.map) continue;
+		const {id, finds} = field;
+		inField(id, () => {
+			const side = finds[0].map;
+			if (finds.some(loc => loc.map !== side)) throw new Error('its map locators name both sides');
+			if (!SHOWN[show].includes(side)) throw new Error(`map ${side} is not shown`);
+			const list = elements[side];
+			const owner = owners[side];
+			if (list === undefined || owner === undefined) throw new Error(`there is no map ${side}`);
+			for (const loc of finds) {
+				// Without the global and sticky flags, so that the caller's lastIndex is neither read nor changed
+				const re = new RegExp(loc.draw.source, loc.draw.flags.replace(/[gy]/g, ''));
+				const found = list.map((_, i) => i).filter(i => re.test(list[i].draw));
+				if (found.length === 0) throw new Error(`${loc.draw} matches no element of map ${side}`);
+				if (found.length > 1 && !loc.many) {
+					const names = found.map(i => `"${list[i].draw}"`).join(', ');
+					throw new Error(`${loc.draw} matches ${found.length} elements of map ${side}: ${names}`);
+				}
+				for (const i of found) {
+					const what = `the element "${list[i].draw}" of map ${side}`;
+					if (owner[i] === id) throw new Error(`${what} is claimed twice by the field`);
+					if (owner[i] !== '') throw new Error(`${what} belongs to the fields ${owner[i]} and ${id}`);
+					owner[i] = id;
+				}
+			}
+			sides.set(id, side);
+		});
+	}
+	for (const side of SHOWN[show]) {
+		const free = (owners[side] ?? []).flatMap((owner, i) => owner === '' ? [`"${elements[side]![i].draw}"`] : []);
+		if (free.length === 1) throw new Error(`the element ${free[0]} of map ${side} belongs to no field`);
+		if (free.length > 1) throw new Error(`the elements ${free.join(', ')} of map ${side} belong to no field`);
+	}
+	return {sides, owners};
 }

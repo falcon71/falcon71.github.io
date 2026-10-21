@@ -1,5 +1,5 @@
 import {describe, expect, it} from 'vitest';
-import {locateFields, type FieldDef} from '../lib/fields.ts';
+import {locateFields, locateMapFields, type FieldDef} from '../lib/fields.ts';
 
 /** Pads every row to the 23 columns of the screen. */
 function screen(...rows: string[]): string[] {
@@ -262,5 +262,106 @@ describe('locateFields', () => {
 			expect(() => full([{id: 'st', find: {area: 'S'}}], false)).toThrow('field st:');
 			expect(() => full([{id: 'st', find: {re: /STATUS/, area: 'S'}}], false)).toThrow('field st:');
 		});
+	});
+});
+
+// The descriptions of the elements of two maps, in drawing order
+const LEFT = ['arrow 47.1000,-122.3000 KSEA', 'icon % KSEA', 'icon 1 KPDX', 'icon 2 KSEA', 'icon $ 47.1000,-122.3000'];
+const RIGHT = ['plain KSEA KSEA', 'label 16L KSEA', 'label 34R KSEA', 'label 16C KSEA'];
+const MAPS = {L: LEFT.map(draw => ({draw})), R: RIGHT.map(draw => ({draw}))};
+
+describe('locateMapFields', () => {
+	const ALL_RIGHT: FieldDef = {id: 'runways', find: {map: 'R', draw: /^(plain|label) /, many: true}};
+	const LEFT_FIELDS: FieldDef[] = [
+		{id: 'leg', find: {map: 'L', draw: /^arrow /}},
+		{id: 'active', find: {map: 'L', draw: /^icon % /}},
+		{id: 'numbers', find: {map: 'L', draw: /^icon \d /, many: true}},
+		{id: 'aircraft', find: {map: 'L', draw: /^icon \$ /}},
+	];
+
+	it('gives every field its side and every element its field', () => {
+		const found = locateMapFields([...LEFT_FIELDS, ALL_RIGHT], 'both', MAPS);
+		expect([...found.sides]).toEqual([['leg', 'L'], ['active', 'L'], ['numbers', 'L'], ['aircraft', 'L'], ['runways', 'R']]);
+		expect(found.owners.L).toEqual(['leg', 'active', 'numbers', 'numbers', 'aircraft']);
+		expect(found.owners.R).toEqual(['runways', 'runways', 'runways', 'runways']);
+	});
+
+	it('joins the elements of several locators of one side', () => {
+		const found = locateMapFields([...LEFT_FIELDS, {id: 'runway', find: [{map: 'R', draw: /^plain/}, {map: 'R', draw: /^label/, many: true}]}],
+			'both', MAPS);
+		expect(found.owners.R).toEqual(['runway', 'runway', 'runway', 'runway']);
+	});
+
+	it('requires exactly one element without many', () => {
+		expect(() => locateMapFields([{id: 'n', find: {map: 'L', draw: /^icon \d /}}], 'left', MAPS))
+			.toThrow('field n: /^icon \\d / matches 2 elements of map L: "icon 1 KPDX", "icon 2 KSEA"');
+		expect(() => locateMapFields([{id: 'n', find: {map: 'L', draw: /^nothing/}}], 'left', MAPS))
+			.toThrow('field n: /^nothing/ matches no element of map L');
+		expect(() => locateMapFields([{id: 'n', find: {map: 'L', draw: /^nothing/, many: true}}], 'left', MAPS))
+			.toThrow('field n: /^nothing/ matches no element of map L');
+	});
+
+	it('ignores the flags and lastIndex of a global regex', () => {
+		const re = /^icon % /g;
+		re.lastIndex = 3;
+		const defs = LEFT_FIELDS.map(f => f.id === 'active' ? {id: 'active', find: {map: 'L' as const, draw: re}} : f);
+		expect(locateMapFields(defs, 'left', MAPS).owners.L![1]).toBe('active');
+		expect(re.lastIndex).toBe(3);
+	});
+
+	it('rejects a map side the screen does not show or that has no map', () => {
+		expect(() => locateMapFields([ALL_RIGHT], 'left', MAPS)).toThrow('field runways: map R is not shown');
+		expect(() => locateMapFields([...LEFT_FIELDS, ALL_RIGHT], 'both', {L: MAPS.L})).toThrow('field runways: there is no map R');
+	});
+
+	it('rejects a field with locators of both sides, and one mixing text and map locators', () => {
+		expect(() => locateMapFields([{id: 'x', find: [{map: 'L', draw: /^arrow/}, {map: 'R', draw: /^plain/}]}], 'both', MAPS))
+			.toThrow('field x: its map locators name both sides');
+		expect(() => locateMapFields([{id: 'x', find: [{map: 'L', draw: /^arrow/}, /DIS/]}], 'both', MAPS))
+			.toThrow('field x: mixes text and map locators');
+		expect(() => locate([{id: 'x', find: [/DIS/, {map: 'L', draw: /^arrow/}]}])).toThrow('field x: mixes text and map locators');
+	});
+
+	it('fails on an element that belongs to no field, naming it', () => {
+		const defs = LEFT_FIELDS.filter(f => f.id !== 'active');
+		expect(() => locateMapFields(defs, 'left', MAPS)).toThrow('the element "icon % KSEA" of map L belongs to no field');
+		expect(() => locateMapFields(defs.slice(1), 'left', MAPS))
+			.toThrow('the elements "arrow 47.1000,-122.3000 KSEA", "icon % KSEA" of map L belong to no field');
+	});
+
+	it('checks only the maps the screen shows', () => {
+		expect(locateMapFields(LEFT_FIELDS, 'left', MAPS).owners).toEqual({L: ['leg', 'active', 'numbers', 'numbers', 'aircraft']});
+		expect(() => locateMapFields(LEFT_FIELDS, 'both', MAPS))
+			.toThrow('the elements "plain KSEA KSEA", "label 16L KSEA", "label 34R KSEA", "label 16C KSEA" of map R belong to no field');
+	});
+
+	it('fails on an element that two fields claim, naming both', () => {
+		const defs = [...LEFT_FIELDS, {id: 'icons', find: {map: 'L' as const, draw: /^icon /, many: true}}];
+		expect(() => locateMapFields(defs, 'left', MAPS))
+			.toThrow('field icons: the element "icon % KSEA" of map L belongs to the fields active and icons');
+		const later: FieldDef[] = [...LEFT_FIELDS.slice(1), {id: 'leg', find: [{map: 'L', draw: /^arrow/}, {map: 'L', draw: /^icon % /}]}];
+		expect(() => locateMapFields(later, 'left', MAPS)).toThrow('field leg: the element "icon % KSEA" of map L belongs to the fields active and leg');
+		const itself: FieldDef[] = [...LEFT_FIELDS.slice(1), {id: 'leg', find: [{map: 'L', draw: /^arrow/}, {map: 'L', draw: /KSEA$/, many: true}]}];
+		expect(() => locateMapFields(itself, 'left', MAPS))
+			.toThrow('field leg: the element "arrow 47.1000,-122.3000 KSEA" of map L is claimed twice by the field');
+	});
+
+	it('rejects duplicate ids, across text and map fields', () => {
+		expect(() => locateMapFields([...LEFT_FIELDS, {id: 'leg', find: {map: 'L', draw: /^icon %/}}], 'left', MAPS))
+			.toThrow('field leg: is defined twice');
+		expect(() => locate([{id: 'leg', find: /DIS/}, {id: 'leg', find: {map: 'L', draw: /^arrow/}}]))
+			.toThrow('field leg: is defined twice');
+		expect(() => locateMapFields([{id: 'leg', find: /DIS/}, ...LEFT_FIELDS], 'left', MAPS))
+			.toThrow('field leg: is defined twice');
+	});
+
+	it('leaves the map fields to locateMapFields and the text fields to locateFields', () => {
+		expect([...locate([{id: 'dis', find: /DIS/}, ...LEFT_FIELDS]).keys()]).toEqual(['dis']);
+		expect([...locateMapFields([{id: 'dis', find: /DIS/}, ...LEFT_FIELDS], 'left', MAPS).sides.keys()])
+			.toEqual(['leg', 'active', 'numbers', 'aircraft']);
+	});
+
+	it('accepts a screen without maps and without map fields', () => {
+		expect(locateMapFields([{id: 'dis', find: /DIS/}], 'both', {})).toEqual({sides: new Map(), owners: {}});
 	});
 });
