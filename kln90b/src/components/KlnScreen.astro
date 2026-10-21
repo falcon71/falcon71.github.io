@@ -136,20 +136,21 @@ const stageHtml = screenHtml(blocks, documented, maps, mapCheck);
 	// A text field is a span, a field drawn on a map is an SVG group
 	type FieldElement = HTMLElement | SVGElement;
 
-	// What the help window shows as the field's screen text: for an element drawn on a map there is none
-	const MAP_CHIP = 'MAP';
-
 	function content(figure: HTMLElement, field: FieldElement): Node[] {
 		const doc = figure.querySelector<HTMLElement>(`.kln-field-doc[data-field="${field.dataset.field}"]`)!;
 		const head = document.createElement('div');
 		head.className = 'kln-popover-head';
-		const chip = document.createElement('span');
-		chip.className = 'kln-chip';
-		chip.setAttribute('aria-hidden', 'true');
-		chip.textContent = field instanceof SVGElement ? MAP_CHIP : field.textContent!.trim();
+		// The chip repeats the field's screen text; an element drawn on a map has none, so it gets no chip
+		if (!(field instanceof SVGElement)) {
+			const chip = document.createElement('span');
+			chip.className = 'kln-chip';
+			chip.setAttribute('aria-hidden', 'true');
+			chip.textContent = field.textContent!.trim();
+			head.append(chip);
+		}
 		const title = document.createElement('strong');
 		title.textContent = doc.dataset.title ?? '';
-		head.append(chip, title);
+		head.append(title);
 		const body = document.createElement('div');
 		body.className = 'kln-popover-body';
 		body.innerHTML = doc.querySelector('dd')!.innerHTML;
