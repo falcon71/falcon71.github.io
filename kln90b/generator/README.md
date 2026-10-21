@@ -30,7 +30,7 @@ working directory, because the harness resolves `resources/` from `process.cwd()
 
 ## Layout
 
-- `vitest.config.mts`: the three projects, the `.scss` stub, and `resolveFromVendor`, which makes bare imports from files
+- `vitest.config.mts`: the projects it declares, the `.scss` stub, and `resolveFromVendor`, which makes bare imports from files
   of this repository resolve inside the submodule so that there is one copy of Vitest and the SDK.
 - `vendorCheck.mjs`: the submodule checks, and `vendorCommit()` for the commit recorded in a generated screen.
 - `lib/paths.ts`: `VENDOR`, `SITE` and `SCREENS`.
@@ -52,6 +52,24 @@ description needs from the harness. See `screens/apt-1-ksea/`, `screens/nav-5-ks
 - `steps`: the front panel of the harness (`u.panel.selectPage`, `cursor`, `enterIdent`, `directTo`, ...), `moveAircraft`
   to give the GPS a track and ground speed, `settle` and `wait` for simulated time. Screens are staged, not flown.
 - Steps that several screens share live in `screens/shared/`.
+- `fields`: say where each field is with the cells' content, not with their place. A field with a label or fixed text
+  gets a regex scoped to its area (`{re: /GS +\S+/, area: 'L'}`); the generator fails when the regex matches nothing or
+  more than once, so a layout change in kln90b cannot silently leave the tooltip over the wrong cells. Use a place
+  (`{area: 'L', row: 1}`) only for contents that are free: an airport name, the CDI bar, a field that covers a whole
+  half.
+
+### Defaults of a screen
+
+A screen gets these without saying anything; it changes the ones that `boot` offers:
+
+- The start date and time are `DEFAULT_START` of the harness (`vendor/kln90b/test/harness/sim/clock.ts`); `boot.start`
+  sets another one.
+- The database cycle the unit shows is `DEFAULT_NAVDATA_RANGE` in the same file. A screen cannot change it, and a
+  `boot.start` outside that cycle makes the unit boot with an expired database.
+- The seed of `Math.random` is 1; `boot.seed` sets another one.
+- The last position the unit saved is the boot position (see Messages below); a `storage` of the screen's own wins.
+- The magnetic variation is NOAA's WMMHR2025 evaluated to degree 12 at the start date, at every position. A screen
+  cannot change the model, only the start date.
 
 ### Messages
 

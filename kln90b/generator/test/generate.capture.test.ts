@@ -69,7 +69,7 @@ describe('generateScreen', () => {
 	});
 
 	it('rejects a screen whose steps leave a message pending, unless keepMessages', async () => {
-		// Activating the flight plan raises a message of its own, after the one of the start-up was read
+		// Activating the flight plan raises a message of its own; the unit started at its last position and raised none
 		const plan = {boot: {position: {lat: 45.8, lon: -122.6}, storage: savedFlightplan(0, [facility('KPDX'), facility('KSEA')])}};
 		const dir = copyFixture();
 		await expect(generateScreen(dir, nav1(plan))).rejects.toThrow(/^screen nav-1-smoke: .*message.*pending.*readMessages.*keepMessages/);

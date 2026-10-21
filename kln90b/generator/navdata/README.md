@@ -24,8 +24,8 @@ within `radiusNm` of any region's center, measured along the great circle on a s
 
 ## Input
 
-Six files of the download: `APT_BASE.csv`, `APT_RWY.csv`, `APT_RWY_END.csv`, `FRQ.csv`, `NAV_BASE.csv` and
-`FIX_BASE.csv`. The script finds the columns by name in the header, and stops with the file and every missing column if
+The files of the download that the script reads (it names them when one is missing): `APT_BASE.csv`, `APT_RWY.csv`,
+`APT_RWY_END.csv`, `FRQ.csv`, `NAV_BASE.csv` and `FIX_BASE.csv`. The script finds the columns by name in the header, and stops with the file and every missing column if
 the FAA renames one. The column names and codes are described by the `*_CSV_DATA_STRUCTURE.csv` and
 `* DATA LAYOUT.pdf` files of the same download. The effective date comes from `EFF_DATE`; the three files that carry
 it must agree.

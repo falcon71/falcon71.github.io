@@ -12,7 +12,8 @@ defineScreen(import.meta.url, {
 		await u.panel.selectPage('L', 'NAV 5');
 	},
 	fields: [
-		{id: 'bottom', find: {area: 'L', row: 5}},
+		// The north arrow and the range of the map
+		{id: 'bottom', find: {re: /N\^ +\d+/, area: 'L'}},
 		{id: 'page', find: {re: /NAV 5/, area: 'S'}},
 	],
 });

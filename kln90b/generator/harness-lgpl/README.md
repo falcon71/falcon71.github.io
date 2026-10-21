@@ -7,8 +7,8 @@ simulated unit finds in its navdata. The code is licensed under the LGPL-3.0, so
 
 ## What was changed
 
-Only these additions; nothing of the original was removed or changed in behavior, and without the new options every
-builder returns what it returned before.
+Modified 2026-10-21. Only these additions; nothing of the original was removed or changed in behavior, and without the
+new options every builder returns what it returned before.
 
 - A header comment naming the source file and the commit, and `FacilityFrequency` in the SDK import.
 - `RunwayOptions` gained:

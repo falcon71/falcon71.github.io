@@ -8,7 +8,7 @@ defineScreen(import.meta.url, {
 		await u.panel.selectPage('L', 'SET 10');
 	},
 	fields: [
-		{id: 'gps', find: {area: 'L', row: 0}},
+		{id: 'gps', find: {re: /GPS: +\S+/, area: 'L'}},
 		{id: 'page', find: {re: /SET10/, area: 'S'}},
 	],
 });

@@ -37,6 +37,15 @@ describe('facilitiesOf', () => {
 		expect(r.lighting).toBe(RunwayLightingType.FullTime);
 	});
 
+	it('turns the letter C of a runway pair into the center designator on both ends', () => {
+		const [r] = airportOf(extract({airports: [apt({
+			runways: [{designation: '16C-34C', headingTrue: 163, lengthFt: 8000, surface: 'ASPH', lit: false, lat: 47.51, lon: -122.31}],
+		})]})).runways;
+		expect(r.designation).toBe('16-34');
+		expect(r.designatorCharPrimary).toBe(RunwayDesignator.RUNWAY_DESIGNATOR_CENTER);
+		expect(r.designatorCharSecondary).toBe(RunwayDesignator.RUNWAY_DESIGNATOR_CENTER);
+	});
+
 	it('keeps a helipad designation and a runway without letters', () => {
 		const a = airportOf(extract({airports: [apt({
 			runways: [

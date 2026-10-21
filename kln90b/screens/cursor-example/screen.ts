@@ -1,4 +1,5 @@
 import {defineScreen, place} from '../../generator/api.ts';
+import {positionRows} from '../shared/positions.ts';
 
 defineScreen(import.meta.url, {
 	title: 'Cursor on the right page',
@@ -11,11 +12,12 @@ defineScreen(import.meta.url, {
 	},
 	fields: [
 		// The cursor stands on the last character of the ident
-		{id: 'ident', find: {area: 'R', row: 0, from: 1, to: 4}},
-		{id: 'char', find: {area: 'R', row: 0, from: 4, to: 5}},
+		{id: 'ident', find: {re: /KSE/, area: 'R', row: 0}},
+		{id: 'char', find: {re: /(?<=KSE)A/, area: 'R', row: 0}},
+		// The name of the airport takes two rows and is free
 		{id: 'name', find: [{area: 'R', row: 1}, {area: 'R', row: 2}]},
 		// Latitude and longitude
-		{id: 'pos', find: [{area: 'R', row: 4}, {area: 'R', row: 5}]},
+		{id: 'pos', find: positionRows('R')},
 		{id: 'crsr', find: {re: /CRSR/, area: 'S'}},
 	],
 });

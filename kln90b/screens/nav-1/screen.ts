@@ -10,14 +10,16 @@ defineScreen(import.meta.url, {
 		await u.panel.selectPage('L', 'NAV 1');
 	},
 	fields: [
+		// The idents are free contents, so they stay places; the arrow between them is fixed
 		{id: 'from', find: {area: 'L', row: 0, from: 0, to: 5}},
-		{id: 'arrow', find: {area: 'L', row: 0, from: 5, to: 6}},
+		{id: 'arrow', find: {re: /\u203A/, area: 'L', row: 0}},
 		{id: 'to', find: {area: 'L', row: 0, from: 6, to: 11}},
+		// The course deviation bar is free
 		{id: 'cdi', find: {area: 'L', row: 1}},
-		{id: 'dis', find: {area: 'L', row: 2}},
-		{id: 'gs', find: {area: 'L', row: 3}},
-		{id: 'ete', find: {area: 'L', row: 4}},
-		{id: 'brg', find: {area: 'L', row: 5}},
+		{id: 'dis', find: {re: /DIS +\S+/, area: 'L'}},
+		{id: 'gs', find: {re: /GS +\S+/, area: 'L'}},
+		{id: 'ete', find: {re: /ETE +\S+/, area: 'L'}},
+		{id: 'brg', find: {re: /BRG +\S+/, area: 'L'}},
 		{id: 'page', find: {re: /NAV 1/, area: 'S'}},
 	],
 });

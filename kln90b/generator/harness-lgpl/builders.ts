@@ -1,6 +1,6 @@
 // Copied from test/harness/navdata/builders.ts of https://github.com/falcon71/kln90b at commit
-// 3d371f34a68144c80f8e7035490d8f0391b0eb45 (LGPL-3.0, see LICENSE.LGPL-3.0.txt next to this file). The changes are listed
-// in README.md; everything else is as in the original.
+// 3d371f34a68144c80f8e7035490d8f0391b0eb45 (LGPL-3.0, see LICENSE.LGPL-3.0.txt next to this file), modified 2026-10-21.
+// The changes are listed in README.md; everything else is as in the original.
 import {
     AirportClass, AirportFacility, AirportFacilityDataFlags, AirportPrivateType, AirportRunway, FacilityFrequency,
     FacilityFrequencyType,

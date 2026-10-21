@@ -1,4 +1,5 @@
 import {defineScreen, place} from '../../generator/api.ts';
+import {positionRows} from '../shared/positions.ts';
 
 defineScreen(import.meta.url, {
 	title: 'APT 1 page',
@@ -13,10 +14,10 @@ defineScreen(import.meta.url, {
 	},
 	fields: [
 		{id: 'ident', find: {re: /KSEA/, area: 'R', row: 0}},
-		// The name of the airport takes two rows
+		// The name of the airport takes two rows and is free
 		{id: 'name', find: [{area: 'R', row: 1}, {area: 'R', row: 2}]},
 		// Latitude and longitude
-		{id: 'pos', find: [{area: 'R', row: 4}, {area: 'R', row: 5}]},
+		{id: 'pos', find: positionRows('R')},
 		{id: 'page', find: {re: /APT 1/, area: 'S'}},
 	],
 });

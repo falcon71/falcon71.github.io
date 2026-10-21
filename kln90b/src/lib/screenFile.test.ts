@@ -134,7 +134,7 @@ describe('screen file', () => {
 
 	it('rejects an unknown line and a repeated map side', () => {
 		const text = serializeScreenFile(capture());
-		expect(() => parseScreenFile(text.replace('map L', 'colour red'))).toThrow('colour red');
+		expect(() => parseScreenFile(text.replace('map L', 'color red'))).toThrow('color red');
 		expect(() => parseScreenFile(text.replace('map L', 'map L\nmap L'))).toThrow('map');
 		expect(() => parseScreenFile(text.replace('map L', 'map X'))).toThrow('map X');
 	});

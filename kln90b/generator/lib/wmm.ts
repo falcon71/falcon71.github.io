@@ -8,7 +8,10 @@ import {SITE} from './paths.ts';
  * secular variation, and the field rotated back to geodetic.
  */
 
-/** Degree and order the screens use. The high-resolution terms add nothing visible at the precision of the unit. */
+/**
+ * Degree and order the screens use. The higher degrees add local crustal detail that the simulator's magnetic variation
+ * does not have, which would move bearings away from what the pilot sees in the sim.
+ */
 export const SCREEN_DEGREE = 12;
 
 /** The coefficients are stored at index `n * (n + 1) / 2 + m`. */
@@ -178,7 +181,9 @@ export function declination(m: WmmModel, latDeg: number, lonDeg: number, year: n
 	let z = 0;
 	let radial = EARTH_RADIUS / r;
 	for (let n = 1; n <= degree; n++) {
-		radial *= EARTH_RADIUS / r; // (a / r)^(n + 2)
+		// (a / r)^(n + 1). The report's (a / r)^(n + 2) differs by the constant factor a / r for every degree, which
+		// cancels in the declination, because only the direction of the field is used.
+		radial *= EARTH_RADIUS / r;
 		let sumX = 0;
 		let sumY = 0;
 		let sumZ = 0;
