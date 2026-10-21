@@ -1,2 +1,4 @@
 kln90b/screens/** text eol=lf
 kln90b/generator/wmm/** text eol=lf
+kln90b/generator/navdata/*.json text eol=lf
+kln90b/generator/test/fixtures/nasr/** text eol=lf
