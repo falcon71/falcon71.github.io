@@ -54,8 +54,13 @@ const sides = [
 	.kln-knobdemo .kln-screen {
 		aspect-ratio: 215 / 22;
 	}
+	/* The status line alone, centered in its strip of the screen */
 	.kln-knobdemo .kln-status {
-		top: calc(var(--u) * 3);
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		white-space: pre;
 	}
 	.kln-knob-grid {
 		display: grid;
