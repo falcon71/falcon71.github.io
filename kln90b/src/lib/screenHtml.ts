@@ -1,0 +1,179 @@
+// The HTML of an example screen: the rows of segments, from the hand markup of KlnScreen or from a generated capture.
+import type {ScreenCapture} from './screenFile.ts';
+
+export interface Segment {
+	text: string;
+	field?: string;
+	inverse: boolean;
+	flash: boolean;
+}
+
+export interface ScreenBlocks {
+	/** A half screen: only that side is shown, with the middle line */
+	crop?: 'left' | 'right';
+	blocks: {cls: string; rows: Segment[][]}[];
+}
+
+const COLUMNS = 23;
+const HALF = 11;
+const RIGHT_OFFSET = 12;       // column 11 is the middle line
+const STATUS_ROW = 6;
+const CROPPED_STATUS = 5;      // the page name of the shown side: columns 0-4 on the left, 18-22 on the right
+
+const MARKUP = /\{([a-z0-9-]*)([!~]*):([^}]*)\}/g;
+
+function parseLine(line: string): Segment[] {
+	const segments: Segment[] = [];
+	let last = 0;
+	for (const m of line.matchAll(MARKUP)) {
+		if (m.index! > last) segments.push({text: line.slice(last, m.index), inverse: false, flash: false});
+		segments.push({text: m[3], field: m[1] || undefined, inverse: m[2].includes('!'), flash: m[2].includes('~')});
+		last = m.index! + m[0].length;
+	}
+	if (last < line.length) segments.push({text: line.slice(last), inverse: false, flash: false});
+	return segments;
+}
+
+function visibleLength(line: string): number {
+	return line.replace(MARKUP, '$3').length;
+}
+
+function parseBlock(block: string | undefined, width: number, rows: number, name: string, id: string): Segment[][] {
+	if (block === undefined) return [];
+	const lines = block.replace(/^\r?\n/, '').replace(/\r?\n\s*$/, '').split(/\r?\n/);
+	if (lines.length > rows) throw new Error(`KlnScreen ${id}: ${name} has ${lines.length} rows, at most ${rows} fit`);
+	return lines.map((line, i) => {
+		const len = visibleLength(line);
+		if (len > width) throw new Error(`KlnScreen ${id}: ${name} row ${i + 1} is ${len} characters, at most ${width} fit`);
+		const segments = parseLine(line);
+		if (len < width) segments.push({text: ' '.repeat(width - len), inverse: false, flash: false});
+		return segments;
+	});
+}
+
+/**
+ * The blocks of the hand markup of `<KlnScreen>`: `{id:text}` fields, `!` inverse, `~` flashing. With only `left` or
+ * only `right` the screen is cut in half and `status` is just the page name of that side.
+ * @throws Error `KlnScreen <id>: ...` for a row that does not fit
+ */
+export function blocksFromMarkup(p: {left?: string; right?: string; full?: string; status?: string}, id: string): ScreenBlocks {
+	const {left, right, full, status} = p;
+	const crop = full === undefined && (left === undefined) !== (right === undefined) ? (left !== undefined ? 'left' : 'right') : undefined;
+
+	// On a half screen the status line shows only that side's page name, in its place on the full line
+	let statusLine = status;
+	if (crop && status !== undefined) {
+		const len = visibleLength(status);
+		if (len > 5) throw new Error(`KlnScreen ${id}: on a half screen the status line is the page name, at most 5 characters`);
+		statusLine = crop === 'left' ? status : ' '.repeat(23 - len) + status;
+	}
+
+	const leftRows = parseBlock(left, 11, 6, 'left', id);
+	const rightRows = parseBlock(right, 11, 6, 'right', id);
+	const fullRows = parseBlock(full, 23, status === undefined ? 7 : 6, 'full', id);
+	const statusRows = parseBlock(statusLine, 23, 1, 'status', id);
+
+	const blocks = full !== undefined ? [{rows: fullRows, cls: 'kln-full'}] : [
+		{rows: leftRows, cls: 'kln-half kln-half-left'},
+		// Always drawn on a split screen: its left border is the middle line
+		{rows: rightRows, cls: 'kln-half kln-half-right'},
+	];
+	blocks.push({rows: statusRows, cls: 'kln-status'});
+	return {crop, blocks: blocks.filter(b => b.rows.length > 0 || b.cls.includes('kln-half'))};
+}
+
+interface Cell {
+	ch: string;
+	field?: string;
+	inverse: boolean;
+	flash: boolean;
+}
+
+/** Consecutive cells with the same field, inverse and flash flags form one segment. */
+function segmentsOf(cells: Cell[]): Segment[] {
+	const segments: Segment[] = [];
+	for (const cell of cells) {
+		const last = segments[segments.length - 1];
+		if (last && last.field === cell.field && last.inverse === cell.inverse && last.flash === cell.flash) {
+			last.text += cell.ch;
+		} else {
+			segments.push({text: cell.ch, field: cell.field, inverse: cell.inverse, flash: cell.flash});
+		}
+	}
+	return segments;
+}
+
+const blank = (): Cell => ({ch: ' ', inverse: false, flash: false});
+
+/**
+ * The blocks of a generated screen. A field that is not `documented` is drawn as plain text.
+ */
+export function blocksFromCapture(c: ScreenCapture, documented: Set<string>): ScreenBlocks {
+	const fieldAt = new Map<string, string>();
+	for (const [id, parts] of c.fields) {
+		if (!documented.has(id)) continue;
+		for (const part of parts) for (let col = part.from; col < part.to; col++) fieldAt.set(`${part.row}:${col}`, id);
+	}
+	const rows = c.text.map(text => Array.from(text));
+	const cell = (row: number, col: number): Cell => {
+		const attr = c.mask[row][col];
+		return {
+			ch: rows[row][col], field: fieldAt.get(`${row}:${col}`),
+			inverse: attr === 'I' || attr === 'F', flash: attr === 'B' || attr === 'F',
+		};
+	};
+	const rowOf = (row: number, from: number, to: number): Segment[] => {
+		const cells: Cell[] = [];
+		for (let col = from; col < to; col++) cells.push(cell(row, col));
+		return segmentsOf(cells);
+	};
+	const rowsOf = (first: number, last: number, from: number, to: number): Segment[][] => {
+		const out: Segment[][] = [];
+		for (let row = first; row <= last; row++) out.push(rowOf(row, from, to));
+		return out;
+	};
+
+	const crop = c.show === 'both' ? undefined : c.show;
+	const statusRow = (): Segment[] => {
+		const cells: Cell[] = [];
+		for (let col = 0; col < COLUMNS; col++) {
+			const shown = crop === undefined || (crop === 'left' ? col < CROPPED_STATUS : col >= COLUMNS - CROPPED_STATUS);
+			cells.push(shown ? cell(STATUS_ROW, col) : blank());
+		}
+		return segmentsOf(cells);
+	};
+	const status = {cls: 'kln-status', rows: c.status ? [statusRow()] : []};
+
+	if (c.layout === 'full') {
+		const last = c.status ? STATUS_ROW - 1 : STATUS_ROW;
+		return {crop, blocks: [{cls: 'kln-full', rows: rowsOf(0, last, 0, COLUMNS)}, status].filter(b => b.rows.length > 0)};
+	}
+	// A hidden half stays as an empty block: its left border is the middle line
+	return {
+		crop,
+		blocks: [
+			{cls: 'kln-half kln-half-left', rows: crop === 'right' ? [] : rowsOf(0, STATUS_ROW - 1, 0, HALF)},
+			{cls: 'kln-half kln-half-right', rows: crop === 'left' ? [] : rowsOf(0, STATUS_ROW - 1, RIGHT_OFFSET, COLUMNS)},
+			status,
+		].filter(b => b.rows.length > 0 || b.cls.includes('kln-half')),
+	};
+}
+
+const escapeHtml = (t: string) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+// Built as a string: whitespace is significant on the screen, so no template formatting may leak into it.
+function segmentHtml(s: Segment, documented: Set<string>): string {
+	const text = escapeHtml(s.text);
+	const isField = s.field !== undefined && documented.has(s.field);
+	const cls = [s.inverse && 'kln-inv', s.flash && 'kln-flash', isField && 'kln-field'].filter(Boolean).join(' ');
+	if (isField) return `<span class="${cls}" tabindex="0" data-field="${s.field}">${text}</span>`;
+	return cls ? `<span class="${cls}">${text}</span>` : text;
+}
+
+/** The inside of the stage of a screen. A field that is not `documented` is drawn as plain text. */
+export function screenHtml(b: ScreenBlocks, documented: Set<string>): string {
+	return b.blocks
+		.map(block => `<div class="${block.cls}">${block.rows.map(row =>
+			`<span class="kln-row">${row.map(s => segmentHtml(s, documented)).join('')}</span>`).join('')}</div>`)
+		.join('');
+}

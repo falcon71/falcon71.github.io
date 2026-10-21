@@ -2,7 +2,13 @@
 /**
  * An example screen of the unit, drawn in the KLN font.
  *
- * Screen text is written as it appears on the unit. Markup inside a line:
+ * A generated screen is shown by its id, with its explanations from screens/<id>/fields.mdx:
+ *   <KlnScreen screen="apt-1-ksea" />
+ * It does not repeat any text or field. `title` replaces the title of the generated file. The explanation file writes
+ * <Field> and <Term> without imports.
+ *
+ * Hand-built screens (for the few that are no state of the unit) write the screen text as it appears on the unit, with
+ * markup inside a line:
  *   {dis:DIS  45.2nm}  a field with the id "dis", label and value together; pointing at it shows <Field id="dis">
  *   {to!:KSEA}         the field shown inverse (cursor on it)
  *   {to~:KSEA}         the field flashing on the unit (shown with a dashed box here, never animated)
@@ -13,124 +19,79 @@
  * With only `left` or only `right`, the screen is cut in half and shows that side with the middle line. The status
  * line then holds just the name of that side's page, e.g. status="NAV 1" (markup allowed, at most 5 characters).
  */
+import { getEntry, render } from 'astro:content';
 import '../styles/kln-screen.css';
 import '../styles/popover.css';
+import Field from './Field.astro';
+import Term from './Term.astro';
+import { blocksFromCapture, blocksFromMarkup, screenHtml, type ScreenBlocks } from '../lib/screenHtml';
+import { checkExplanations, loadCapture } from '../lib/screens';
 
 interface Props {
-	/** Id of the screen, e.g. "nav-1". The figure is #screen-nav-1, a field explanation links as #screen-nav-1--dis */
-	id: string;
-	/** Caption shown under the screen, e.g. "NAV 1 page" */
-	title: string;
+	/** Id of a generated screen, e.g. "nav-1": the folder in screens/. The figure is #screen-nav-1 */
+	screen?: string;
+	/** Id of a hand-built screen, e.g. "nav-1". The figure is #screen-nav-1, a field explanation links as #screen-nav-1--dis */
+	id?: string;
+	/** Caption shown under the screen, e.g. "NAV 1 page". Required for a hand-built screen */
+	title?: string;
 	left?: string;
 	right?: string;
 	full?: string;
 	status?: string;
 }
 
-const { id, title, left, right, full, status } = Astro.props;
+const { screen, id, title: givenTitle, left, right, full, status } = Astro.props;
+
+let name: string;
+let title: string;
+let blocks: ScreenBlocks;
+let documented: Set<string>;
+// Generated screen: the explanations as a component. Hand-built: the rendered <Field> children.
+let Explanations: Awaited<ReturnType<typeof render>>['Content'] | undefined;
+let docsHtml = '';
+
+if (screen !== undefined) {
+	if ([id, left, right, full, status].some((v) => v !== undefined)) {
+		throw new Error(`KlnScreen screen="${screen}": a generated screen takes no id, left, right, full or status`);
+	}
+	name = screen;
+	const { capture } = loadCapture(screen);
+	const entry = await getEntry('screenFields', screen);
+	if (!entry) {
+		throw new Error(`screen ${screen}: screens/${screen}/fields.mdx is missing; it needs a <Field> for each field, then run npm run screens -- ${screen}`);
+	}
+	checkExplanations(screen, capture, entry.body ?? '');
+	documented = new Set(capture.fields.keys());
+	blocks = blocksFromCapture(capture, documented);
+	title = givenTitle ?? capture.title;
+	Explanations = (await render(entry)).Content;
+} else {
+	if (id === undefined || givenTitle === undefined) throw new Error('KlnScreen needs a screen, or an id and a title');
+	name = id;
+	title = givenTitle;
+	blocks = blocksFromMarkup({ left, right, full, status }, id);
+	// The explanations come from the <Field> children. A field on the screen without one stays plain text.
+	docsHtml = Astro.slots.has('default') ? await Astro.slots.render('default') : '';
+	documented = new Set([...docsHtml.matchAll(/data-field="([^"]+)"/g)].map((m) => m[1]));
+	for (const s of blocks.blocks.flatMap((b) => b.rows.flat())) {
+		if (s.field && !documented.has(s.field)) {
+			console.warn(`KlnScreen ${id}: field "${s.field}" has no <Field> explanation`);
+		}
+	}
+}
+
 // Prefixed, because headings get plain anchors ("NAV 1" becomes #nav-1)
-const figureId = `screen-${id}`;
-
-interface Segment {
-	text: string;
-	field?: string;
-	inverse: boolean;
-	flash: boolean;
-}
-
-const MARKUP = /\{([a-z0-9-]*)([!~]*):([^}]*)\}/g;
-
-function parseLine(line: string): Segment[] {
-	const segments: Segment[] = [];
-	let last = 0;
-	for (const m of line.matchAll(MARKUP)) {
-		if (m.index! > last) segments.push({ text: line.slice(last, m.index), inverse: false, flash: false });
-		segments.push({ text: m[3], field: m[1] || undefined, inverse: m[2].includes('!'), flash: m[2].includes('~') });
-		last = m.index! + m[0].length;
-	}
-	if (last < line.length) segments.push({ text: line.slice(last), inverse: false, flash: false });
-	return segments;
-}
-
-function visibleLength(line: string): number {
-	return line.replace(MARKUP, '$3').length;
-}
-
-function parseBlock(block: string | undefined, width: number, rows: number, name: string): Segment[][] {
-	if (block === undefined) return [];
-	const lines = block.replace(/^\r?\n/, '').replace(/\r?\n\s*$/, '').split(/\r?\n/);
-	if (lines.length > rows) throw new Error(`KlnScreen ${id}: ${name} has ${lines.length} rows, at most ${rows} fit`);
-	return lines.map((line, i) => {
-		const len = visibleLength(line);
-		if (len > width) throw new Error(`KlnScreen ${id}: ${name} row ${i + 1} is ${len} characters, at most ${width} fit`);
-		const segments = parseLine(line);
-		if (len < width) segments.push({ text: ' '.repeat(width - len), inverse: false, flash: false });
-		return segments;
-	});
-}
-
-const crop = full === undefined && (left === undefined) !== (right === undefined) ? (left !== undefined ? 'left' : 'right') : undefined;
-
-// On a half screen the status line shows only that side's page name, in its place on the full line
-let statusLine = status;
-if (crop && status !== undefined) {
-	const len = visibleLength(status);
-	if (len > 5) throw new Error(`KlnScreen ${id}: on a half screen the status line is the page name, at most 5 characters`);
-	statusLine = crop === 'left' ? status : ' '.repeat(23 - len) + status;
-}
-
-const leftRows = parseBlock(left, 11, 6, 'left');
-const rightRows = parseBlock(right, 11, 6, 'right');
-const fullRows = parseBlock(full, 23, status === undefined ? 7 : 6, 'full');
-const statusRows = parseBlock(statusLine, 23, 1, 'status');
-const allSegments = [...leftRows, ...rightRows, ...fullRows, ...statusRows].flat();
-
-// The explanations come from the <Field> children. A field on the screen without one stays plain text.
-const docsHtml = Astro.slots.has('default') ? await Astro.slots.render('default') : '';
-const documented = new Set([...docsHtml.matchAll(/data-field="([^"]+)"/g)].map((m) => m[1]));
-for (const s of allSegments) {
-	if (s.field && !documented.has(s.field)) {
-		console.warn(`KlnScreen ${id}: field "${s.field}" has no <Field> explanation`);
-	}
-}
-const hasFlash = allSegments.some((s) => s.flash);
+const figureId = `screen-${name}`;
+const crop = blocks.crop;
+const hasFlash = blocks.blocks.some((b) => b.rows.some((row) => row.some((s) => s.flash)));
 const hasFields = documented.size > 0;
-
-function classes(s: Segment): string {
-	return [s.inverse && 'kln-inv', s.flash && 'kln-flash', s.field && documented.has(s.field) && 'kln-field']
-		.filter(Boolean)
-		.join(' ');
-}
-
-const escapeHtml = (t: string) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-
-// Built as a string: whitespace is significant on the screen, so no template formatting may leak into it.
-function segmentHtml(s: Segment): string {
-	const text = escapeHtml(s.text);
-	const cls = classes(s);
-	if (s.field && documented.has(s.field)) {
-		return `<span class="${cls}" tabindex="0" data-field="${s.field}">${text}</span>`;
-	}
-	return cls ? `<span class="${cls}">${text}</span>` : text;
-}
-
-const blocks = full !== undefined ? [{ rows: fullRows, cls: 'kln-full' }] : [
-	{ rows: leftRows, cls: 'kln-half kln-half-left' },
-	// Always drawn on a split screen: its left border is the middle line
-	{ rows: rightRows, cls: 'kln-half kln-half-right' },
-];
-blocks.push({ rows: statusRows, cls: 'kln-status' });
-
-const screenHtml = blocks
-	.filter((b) => b.rows.length > 0 || b.cls.includes('kln-half'))
-	.map((b) => `<div class="${b.cls}">${b.rows.map((row) => `<span class="kln-row">${row.map(segmentHtml).join('')}</span>`).join('')}</div>`)
-	.join('');
+const stageHtml = screenHtml(blocks, documented);
 ---
 
 <figure class="kln-figure" id={figureId} data-crop={crop}>
 	<div class="kln-bezel">
 		<div class="kln-screen" role="group" aria-label={`${title}, example screen`} data-crop={crop}>
-			<div class="kln-stage" set:html={screenHtml} />
+			<div class="kln-stage" set:html={stageHtml} />
 		</div>
 	</div>
 	<figcaption>
@@ -149,7 +110,15 @@ const screenHtml = blocks
 		hasFields && (
 			<details class="kln-field-list">
 				<summary>All fields on this screen</summary>
-				<dl set:html={docsHtml} />
+				{
+					Explanations ? (
+						<dl>
+							<Explanations components={{ Field, Term }} />
+						</dl>
+					) : (
+						<dl set:html={docsHtml} />
+					)
+				}
 			</details>
 		)
 	}
