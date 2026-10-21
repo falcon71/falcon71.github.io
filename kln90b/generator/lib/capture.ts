@@ -13,13 +13,14 @@ export interface CapturedScreen {
 
 type Attr = Cell['attr'];
 
-/** The attribute a cell shows over one blink cycle, from the set of attributes it had on the four reads. */
-function merged(seen: Set<Attr>, where: string): Attr {
+/**
+ * The attribute a cell shows over one blink cycle, from the set of attributes it had on the reads: flashing text with
+ * inverse is a flashing inverse cell, as the Blink control makes it (an inverse span that gets `blink` on the blink
+ * tick, so it reads I, I, I, B).
+ */
+function merged(seen: Set<Attr>): Attr {
 	const has = (a: Attr) => seen.has(a);
-	if (has('B') && (has('I') || has('F'))) {
-		throw new Error(`the cell at ${where} is flashing text (B) and inverse (${has('I') ? 'I' : 'F'}) in one cycle, ` +
-			`which the screen file cannot say`);
-	}
+	if (has('B') && (has('I') || has('F'))) return 'F';
 	if (has('B')) return 'B';
 	if (has('F') || (has('I') && has('.'))) return 'F';
 	return has('I') ? 'I' : '.';
@@ -27,9 +28,10 @@ function merged(seen: Set<Attr>, where: string): Attr {
 
 /**
  * Merges the reads of one blink cycle into one grid. The characters are those of the last read (a clock may tick during
- * the cycle). A cell that is not the same on every read flashes: the set of attributes it showed says how.
+ * the cycle). A cell that is not the same on every read flashes: the set of attributes it showed says how (B alone is
+ * flashing text, B with I or F and I with normal text are a flashing inverse cell, F).
  * @param reads the grids of the four ticks of `blinkCycle`, indexed `[tick][row][column]`
- * @throws Error naming the cell when flashing text (B) shares a cell with inverse (I or F), or when the reads differ in size
+ * @throws Error when the reads differ in size
  */
 export function mergeCycle(reads: Cell[][][]): Cell[][] {
 	if (reads.length === 0) throw new Error('mergeCycle needs at least one read');
@@ -40,7 +42,7 @@ export function mergeCycle(reads: Cell[][][]): Cell[][] {
 	}
 	return last.map((row, r) => row.map((cell, c) => ({
 		ch: cell.ch,
-		attr: merged(new Set(reads.map(read => read[r][c].attr)), `row ${r} column ${c}`),
+		attr: merged(new Set(reads.map(read => read[r][c].attr))),
 	})));
 }
 
@@ -49,8 +51,23 @@ function visible(container: Element, selector: string): Element | null {
 	return el !== null && el.closest('.d-none') === null ? el : null;
 }
 
+type Inspection = Omit<CapturedScreen, 'cells'>;
+
+/**
+ * Checks that the layout and the status line were the same on every tick of the cycle; reads of two different pages
+ * would otherwise merge into a screen that never existed.
+ * @throws Error `the screen changed during the blink cycle: layout split → full`
+ */
+export function checkStable(inspections: Pick<Inspection, 'layout' | 'status'>[]): void {
+	const first = inspections[0];
+	for (const key of ['layout', 'status'] as const) {
+		const other = inspections.find(i => i[key] !== first[key]);
+		if (other) throw new Error(`the screen changed during the blink cycle: ${key} ${first[key]} → ${other[key]}`);
+	}
+}
+
 /** What the unit shows now: the layout, whether there is a status line and the map canvases of the half pages. */
-function inspect(container: Element): Omit<CapturedScreen, 'cells'> {
+function inspect(container: Element): Inspection {
 	const left = visible(container, '.left-page');
 	const right = visible(container, '.right-page');
 	const full = visible(container, '.full-page');
@@ -81,10 +98,11 @@ function readGrid(): Cell[][] {
 export async function captureScreen(): Promise<CapturedScreen> {
 	const container = document.getElementById('pageContainer');
 	if (container === null) throw new Error('no #pageContainer; has the unit booted?');
-	let state: Omit<CapturedScreen, 'cells'> | undefined;
+	const states: Inspection[] = [];
 	const reads = await blinkCycle(() => {
-		state = inspect(container);
+		states.push(inspect(container));
 		return readGrid();
 	});
-	return {...state!, cells: mergeCycle(reads)};
+	checkStable(states);
+	return {...states[states.length - 1], cells: mergeCycle(reads)};
 }

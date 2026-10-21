@@ -1,5 +1,5 @@
 import {describe, expect, it} from 'vitest';
-import {mergeCycle} from '../lib/capture.ts';
+import {checkStable, mergeCycle} from '../lib/capture.ts';
 import type {Cell} from '../../../vendor/kln90b/test/harness/render/screen';
 
 type Attr = Cell['attr'];
@@ -42,16 +42,37 @@ describe('mergeCycle', () => {
 		expect(merged.map(r => r.map(c => c.attr))).toEqual([['.'], ['B', 'I']]);
 	});
 
-	it('throws on B with I and names the cell', () => {
-		const grid = (a: Attr): Cell[][] => [[{ch: 'A', attr: '.'}], [{ch: 'B', attr: '.'}, {ch: 'C', attr: '.'}, {ch: 'D', attr: '.'}, {ch: 'E', attr: a}]];
-		expect(() => mergeCycle([grid('B'), grid('I'), grid('B'), grid('I')])).toThrow('row 1 column 3');
+	it('marks inverse text that blinks away as flashing inverse', () => {
+		// The Blink control: an inverse span that gets the blink class on the blink tick
+		const merged = mergeCycle([read('A', 'I'), read('A', 'I'), read('A', 'I'), read('A', 'B')]);
+		expect(merged).toEqual([[{ch: 'A', attr: 'F'}]]);
 	});
 
-	it('throws on B with F', () => {
-		expect(() => mergeCycle([read('K', 'B'), read('K', 'F'), read('K', 'B'), read('K', 'F')])).toThrow('row 0 column 0');
+	it('marks a cell that reads F and B as flashing inverse', () => {
+		const merged = mergeCycle([read('K', 'F'), read('K', 'B'), read('K', 'F'), read('K', 'B')]);
+		expect(merged).toEqual([[{ch: 'K', attr: 'F'}]]);
 	});
 
 	it('throws when the reads differ in size', () => {
 		expect(() => mergeCycle([read('AB', '..'), read('A', '.')])).toThrow(/size/);
+	});
+});
+
+describe('checkStable', () => {
+	it('accepts four equal inspections', () => {
+		const tick = {layout: 'split' as const, status: true};
+		expect(checkStable([tick, tick, tick, tick])).toBeUndefined();
+	});
+
+	it('throws when the layout changes during the cycle', () => {
+		const split = {layout: 'split' as const, status: true};
+		const full = {layout: 'full' as const, status: true};
+		expect(() => checkStable([split, split, full, full])).toThrow('the screen changed during the blink cycle: layout split → full');
+	});
+
+	it('throws when the status line appears during the cycle', () => {
+		const without = {layout: 'full' as const, status: false};
+		const withStatus = {layout: 'full' as const, status: true};
+		expect(() => checkStable([without, without, without, withStatus])).toThrow('status false → true');
 	});
 });
