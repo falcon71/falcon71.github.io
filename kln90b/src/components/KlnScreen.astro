@@ -25,8 +25,8 @@ import '../styles/kln-screen.css';
 import '../styles/popover.css';
 import Field from './Field.astro';
 import Term from './Term.astro';
-import { blocksFromCapture, blocksFromMarkup, screenHtml, type Maps, type ScreenBlocks } from '../lib/screenHtml';
-import { checkExplanations, loadCapture } from '../lib/screens';
+import { blocksFromCapture, blocksFromMarkup, screenHtml, type MapCheck, type Maps, type ScreenBlocks } from '../lib/screenHtml';
+import { checkExplanations, documentedFields, loadCapture } from '../lib/screens';
 
 interface Props {
 	/** Id of a generated screen, e.g. "nav-1": the folder in screens/. The figure is #screen-nav-1 */
@@ -51,6 +51,7 @@ let documented: Set<string>;
 let Explanations: Awaited<ReturnType<typeof render>>['Content'] | undefined;
 let docsHtml = '';
 let maps: Maps = {};
+let mapCheck: MapCheck | undefined;
 
 if (screen !== undefined) {
 	if ([id, left, right, full, status].some((v) => v !== undefined)) {
@@ -65,7 +66,8 @@ if (screen !== undefined) {
 		throw new Error(`screen ${screen}: screens/${screen}/fields.mdx is missing; it needs a <Field> for each field, then run npm run screens -- ${screen}`);
 	}
 	checkExplanations(screen, capture, entry.body ?? '');
-	documented = new Set([...capture.fields.keys(), ...capture.mapFields.keys()]);
+	documented = documentedFields(capture, entry.body ?? '');
+	mapCheck = { screen, mapFields: capture.mapFields };
 	blocks = blocksFromCapture(capture, documented);
 	title = givenTitle ?? capture.title;
 	Explanations = (await render(entry)).Content;
@@ -89,7 +91,7 @@ const figureId = `screen-${name}`;
 const crop = blocks.crop;
 const hasFlash = blocks.blocks.some((b) => b.rows.some((row) => row.some((s) => s.flash)));
 const hasFields = documented.size > 0;
-const stageHtml = screenHtml(blocks, documented, maps);
+const stageHtml = screenHtml(blocks, documented, maps, mapCheck);
 ---
 
 <figure class="kln-figure" id={figureId} data-crop={crop}>

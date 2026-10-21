@@ -1,6 +1,8 @@
 import {describe, expect, it} from 'vitest';
 import type {CellAttr, FieldPart, ScreenCapture} from './screenFile.ts';
+import {mapToSvg} from '../../generator/lib/mapSvg.ts';
 import {blocksFromCapture, blocksFromMarkup, screenHtml} from './screenHtml.ts';
+import {loadCapture} from './screens.ts';
 
 // The NAV 1 markup of pages/nav.mdx, and the stage HTML that KlnScreen.astro built from it before the code moved here
 const NAV_1_LEFT = `
@@ -185,6 +187,59 @@ describe('map fields', () => {
 		expect(html(['leg'])).toContain('<div class="kln-map kln-map-left" role="group" aria-label="Map">');
 		expect(html(['leg'])).not.toContain('aria-hidden');
 		expect(html([])).toContain('<div class="kln-map kln-map-left" aria-hidden="true">');
+	});
+
+	describe('against the generator', () => {
+		const withMap = (svg: string, documented: string[], mapFields: [string, 'L' | 'R'][], check = true) => {
+			const c = capture({show: 'left', maps: ['L'], mapFields: new Map(mapFields)}, {5: 'NAV 5'});
+			return screenHtml(blocksFromCapture(c, new Set(documented)), new Set(documented), {L: svg},
+				check ? {screen: 'test-screen', mapFields: c.mapFields} : undefined);
+		};
+
+		it('makes the elements of the SVG the generator writes fields', () => {
+			const svg = mapToSvg(99, 78, [
+				{field: 'leg', draw: 'arrow 47.1,-122.3 "KSEA"', pixels: [[50, 23], [50, 24], [48, 25]]},
+				{field: 'aircraft', draw: 'icon $ 47.1,-122.3', pixels: [[49, 36], [47, 39]]},
+			]);
+			const out = withMap(svg, ['leg', 'aircraft'], [['leg', 'L'], ['aircraft', 'L']]);
+			expect(out).toContain('data-field="leg" data-draw="arrow 47.1,-122.3 &quot;KSEA&quot;" data-box="48 23 3 3"><rect x="48" y="23" width="3" height="3"');
+			expect(out).toContain('data-field="aircraft" data-draw="icon $ 47.1,-122.3" data-box="47 36 3 4"><rect x="47" y="36" width="3" height="4"');
+		});
+
+		it('makes the elements of the committed map of NAV 5 fields', () => {
+			const {capture: nav5, maps} = loadCapture('nav-5-ksea');
+			const documented = new Set(nav5.mapFields.keys());
+			const out = screenHtml(blocksFromCapture(nav5, documented), documented, maps, {screen: 'nav-5-ksea', mapFields: nav5.mapFields});
+			for (const id of nav5.mapFields.keys()) expect(out).toMatch(new RegExp(`<g class="kln-field" tabindex="0" role="img" data-field="${id}"`));
+		});
+
+		it('names the screen and the element when a group is not in the form the generator writes', () => {
+			const svg = '<svg><g data-box="1 2 3 4" data-field="leg"><path d="M1 2h1v1h-1z"/></g></svg>';
+			expect(() => withMap(svg, ['leg'], [['leg', 'L']]))
+				.toThrow("screen test-screen: map L has an element the site cannot read, the generator's format changed: <g data-box=\"1 2 3 4\" data-field=\"leg\">");
+		});
+
+		it('rejects an unreadable group of a field that is not documented as well', () => {
+			expect(() => withMap('<svg><g data-field="leg" data-box="1.5 2 3 4"></g></svg>', [], [['leg', 'L']])).toThrow(/cannot read/);
+		});
+
+		it('names the screen and the field when a documented map field has no element in its map', () => {
+			const svg = mapToSvg(99, 78, [{field: 'leg', draw: 'arrow', pixels: [[50, 23]]}]);
+			expect(() => withMap(svg, ['leg', 'aircraft'], [['leg', 'L'], ['aircraft', 'L']]))
+				.toThrow('screen test-screen: map L has no element of the map field aircraft');
+		});
+
+		it('does not ask for the element of an undocumented map field or of the other map', () => {
+			const svg = mapToSvg(99, 78, [{field: 'leg', draw: 'arrow', pixels: [[50, 23]]}]);
+			expect(() => withMap(svg, ['leg'], [['leg', 'L'], ['aircraft', 'L']])).not.toThrow();
+			expect(() => withMap(svg, ['leg', 'runway'], [['leg', 'L'], ['runway', 'R']])).not.toThrow();
+		});
+
+		it('checks nothing about the fields without a check, but still reads every group', () => {
+			const svg = mapToSvg(99, 78, [{field: 'leg', draw: 'arrow', pixels: [[50, 23]]}]);
+			expect(() => withMap(svg, ['leg', 'aircraft'], [['leg', 'L'], ['aircraft', 'L']], false)).not.toThrow();
+			expect(() => withMap('<svg><g data-field="x"></g></svg>', [], [], false)).toThrow(/^map L has an element/);
+		});
 	});
 
 	it('draws the text layers after the map', () => {

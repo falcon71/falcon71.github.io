@@ -176,20 +176,40 @@ export type Maps = Partial<Record<'L' | 'R', string>>;
 const MAP_CLASS = {L: 'kln-map kln-map-left', R: 'kln-map kln-map-right'} as const;
 
 // The group of a map element as the generator writes it (its data-draw is escaped, so it holds no ">")
-const MAP_ELEMENT = /<g data-field="([^"]*)"([^>]*) data-box="(\d+) (\d+) (\d+) (\d+)">/g;
+const MAP_ELEMENT = /<g data-field="([^"]*)"([^>]*) data-box="(\d+) (\d+) (\d+) (\d+)">/;
+const MAP_GROUP_TAG = /<g\b[^>]*>/g;
+
+/** What the map fields of a screen must match: the screen's name for the messages and the map fields of its capture. */
+export interface MapCheck {
+	screen: string;
+	mapFields: ReadonlyMap<string, 'L' | 'R'>;
+}
 
 /**
  * The SVG of a map with each element of a `documented` field made a field like the text fields: focusable, with a
  * transparent hit area of its box as the first child, so that pointing anywhere in the box hits it.
+ * @throws Error when a group of the SVG is not in the form the generator writes, or, with `check`, when a documented map
+ * field of this side has no group. Either would silently leave elements unexplained.
  */
-function mapFieldsHtml(svg: string, documented: Set<string>): {html: string; hasFields: boolean} {
+function mapFieldsHtml(svg: string, side: 'L' | 'R', documented: Set<string>, check?: MapCheck): {html: string; hasFields: boolean} {
+	const where = `${check ? `screen ${check.screen}: ` : ''}map ${side}`;
+	const seen = new Set<string>();
 	let hasFields = false;
-	const html = svg.replace(MAP_ELEMENT, (group, field: string, rest: string, x: string, y: string, w: string, h: string) => {
+	const html = svg.replace(MAP_GROUP_TAG, tag => {
+		const m = MAP_ELEMENT.exec(tag);
+		if (m === null || m[0] !== tag) throw new Error(`${where} has an element the site cannot read, the generator's format changed: ${tag}`);
+		const [group, field, rest, x, y, w, h] = m;
+		seen.add(field);
 		if (!documented.has(field)) return group;
 		hasFields = true;
 		return `<g class="kln-field" tabindex="0" role="img" data-field="${field}"${rest} data-box="${x} ${y} ${w} ${h}">` +
 			`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="transparent"/>`;
 	});
+	for (const [field, fieldSide] of check?.mapFields ?? []) {
+		if (fieldSide === side && documented.has(field) && !seen.has(field)) {
+			throw new Error(`${where} has no element of the map field ${field}`);
+		}
+	}
 	return {html, hasFields};
 }
 
@@ -197,12 +217,14 @@ function mapFieldsHtml(svg: string, documented: Set<string>): {html: string; has
  * The inside of the stage of a screen. A field that is not `documented` is drawn as plain text, and so is an element of
  * a map. A map comes first, so that the text of its half is drawn over it. A map with fields is a labeled group, since
  * its fields must stay reachable; one without is hidden from assistive technology.
+ * @param check the screen's name and map fields; with it, a documented map field without an element in its map is an error
+ * @throws Error see mapFieldsHtml
  */
-export function screenHtml(b: ScreenBlocks, documented: Set<string>, maps: Maps = {}): string {
+export function screenHtml(b: ScreenBlocks, documented: Set<string>, maps: Maps = {}, check?: MapCheck): string {
 	const mapHtml = (['L', 'R'] as const)
 		.filter(side => maps[side] !== undefined)
 		.map(side => {
-			const {html, hasFields} = mapFieldsHtml(maps[side]!, documented);
+			const {html, hasFields} = mapFieldsHtml(maps[side]!, side, documented, check);
 			const access = hasFields ? 'role="group" aria-label="Map"' : 'aria-hidden="true"';
 			return `<div class="${MAP_CLASS[side]}" ${access}>${html}</div>`;
 		})

@@ -1,6 +1,6 @@
 import {describe, expect, it} from 'vitest';
 import type {CellAttr, ScreenCapture} from './screenFile.ts';
-import {checkExplanations, loadCapture} from './screens.ts';
+import {checkExplanations, documentedFields, loadCapture} from './screens.ts';
 
 function capture(fieldIds: string[], mapFieldIds: string[] = []): ScreenCapture {
 	return {
@@ -49,5 +49,21 @@ describe('checkExplanations', () => {
 		const mdx = '<Field id="ident" title="Identifier">x</Field><Field id="extra" title="E">x</Field>';
 		expect(() => checkExplanations('apt-1-ksea', capture(['ident']), mdx))
 			.toThrow(/apt-1-ksea.*no field: extra.*npm run screens -- apt-1-ksea/);
+	});
+});
+
+describe('documentedFields', () => {
+	const mdx = '<Field id="ident" title="Identifier">x</Field><Field id="runway" title="Runway">x</Field>';
+
+	it('holds the text fields and the map fields that have an explanation', () => {
+		expect([...documentedFields(capture(['ident'], ['runway']), mdx)].sort()).toEqual(['ident', 'runway']);
+	});
+
+	it('leaves out a map field without an explanation, and a text field without one', () => {
+		expect([...documentedFields(capture(['ident', 'name'], ['runway', 'taxiway']), mdx)].sort()).toEqual(['ident', 'runway']);
+	});
+
+	it('leaves out an explanation that has no field', () => {
+		expect([...documentedFields(capture(['ident']), mdx)]).toEqual(['ident']);
 	});
 });

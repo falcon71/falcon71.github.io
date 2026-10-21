@@ -42,3 +42,9 @@ export function checkExplanations(id: string, capture: ScreenCapture, mdx: strin
 		throw new Error(`screen ${id}: ${mismatch}; fix screens/${id}/fields.mdx or screen.ts, then run npm run screens -- ${id}`);
 	}
 }
+
+/** The text and map fields of a screen that have an explanation in its fields.mdx: the fields the site makes interactive. */
+export function documentedFields(capture: ScreenCapture, mdx: string): Set<string> {
+	const explained = new Set(fieldIdsOf(mdx));
+	return new Set([...capture.fields.keys(), ...capture.mapFields.keys()].filter(id => explained.has(id)));
+}
