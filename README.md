@@ -14,6 +14,8 @@ https://falcon71.github.io/kln90b/.
 | `kln90b/src/data/glossary.ts`  | Every explained term; tooltips and the glossary page read it       |
 | `.github/workflows/pages.yml`  | Builds the manual and deploys the site                             |
 
+How the manual is written, and who may read which sources, is in the [style guide](docs/style-guide.md).
+
 ## Working on the manual locally
 
 Needs Node.js 22 or newer.
