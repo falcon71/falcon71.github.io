@@ -3,6 +3,7 @@ import {vi} from 'vitest';
 
 export {defineScreen, type ScreenDescription} from './lib/generate.ts';
 export type {FieldDef, Locator} from './lib/fields.ts';
+export {place} from './lib/navdata.ts';
 export {moveAircraft, settle, NEAREST_SEARCH_WAIT_MS} from '../../vendor/kln90b/test/harness/boot';
 export {pointFrom} from '../../vendor/kln90b/test/harness/flight/geo';
 export {savedFlightplan} from '../../vendor/kln90b/test/harness/storage';

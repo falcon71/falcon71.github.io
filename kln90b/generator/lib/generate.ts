@@ -3,11 +3,14 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {it} from 'vitest';
 import {bootUnit, settle, type BootOptions, type HeadlessUnit} from '../../../vendor/kln90b/test/harness/boot';
+import {DEFAULT_START} from '../../../vendor/kln90b/test/harness/sim/clock';
 import {serializeScreenFile, type CellAttr, type Show} from '../../src/lib/screenFile.ts';
 import {explanationMismatch, fieldIdsOf} from '../../src/lib/explanations.ts';
 import {vendorCommit} from '../vendorCheck.mjs';
 import {captureScreen} from './capture.ts';
 import {locateFields, type FieldDef} from './fields.ts';
+import {facilitiesOf, loadExtract} from './navdata.ts';
+import {decimalYear, declination, screenModel, SCREEN_DEGREE} from './wmm.ts';
 
 export interface ScreenDescription {
 	title: string;
@@ -24,8 +27,12 @@ const MAP_FILE = /^map-.*\.svg$/;
 
 async function generate(dir: string, id: string, d: ScreenDescription): Promise<void> {
 	if (!ID.test(id)) throw new Error(`the folder name must match ${ID}`);
-	// Until the FAA navdata and the magnetic model are wired in: the default navdata and no magnetic variation
-	const unit = await bootUnit({...d.boot, defaultNavdata: true, magvar: 0});
+	// Only the places of the FAA extract exist, and the variation is the model's at the date the unit starts
+	const year = decimalYear(d.boot?.start ?? DEFAULT_START);
+	const unit = await bootUnit({
+		...d.boot, defaultNavdata: false, facilities: facilitiesOf(loadExtract()),
+		magvar: (lat, lon) => declination(screenModel(), lat, lon, year, 0, SCREEN_DEGREE),
+	});
 	await settle(unit);
 	await d.steps?.(unit);
 	const capture = await captureScreen();

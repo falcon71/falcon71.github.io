@@ -34,6 +34,9 @@ working directory, because the harness resolves `resources/` from `process.cwd()
   of this repository resolve inside the submodule so that there is one copy of Vitest and the SDK.
 - `vendorCheck.mjs`: the submodule checks, and `vendorCommit()` for the commit recorded in a generated screen.
 - `lib/paths.ts`: `VENDOR`, `SITE` and `SCREENS`.
+- `lib/navdata.ts`: loads the newest extract of `navdata/` and turns it into the facilities a screen boots with (`place()`
+  gives the position of an ident for a screen's `boot.position`). `lib/wmm.ts` is the magnetic model.
+- `harness-lgpl/`: the copied builders of the harness with the changes made to them, under the LGPL (see its README).
 - `tsconfig.json`: type check with `node ../vendor/kln90b/node_modules/typescript/bin/tsc -p generator --noEmit`.
 - `test/`: tests of the generator; `*.capture.test.ts` boots the unit and needs happy-dom.
 
@@ -42,4 +45,5 @@ working directory, because the harness resolves `resources/` from `process.cwd()
 1. Check out the new commit inside `vendor/kln90b` (it must exist on GitHub).
 2. Commit the changed pointer in this repository.
 3. Run `npm ci --prefix vendor/kln90b`.
+   Copy `harness-lgpl/builders.ts` again from the new commit if it changed, as `harness-lgpl/README.md` says.
 4. Regenerate all screens and review the diff: it shows which screens and which field explanations need a look.
