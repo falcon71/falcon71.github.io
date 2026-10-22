@@ -1,7 +1,7 @@
 # Copied harness code (LGPL-3.0)
 
 `builders.ts` is a copy of `test/harness/navdata/builders.ts` of https://github.com/falcon71/kln90b at commit
-`3d371f34a68144c80f8e7035490d8f0391b0eb45`, the commit `vendor/kln90b` is pinned to. It builds the facilities the
+`d9370b0143af6463cadf0b52076e1e76f7310fbe`, the commit `vendor/kln90b` is pinned to. It builds the facilities the
 simulated unit finds in its navdata. The code is licensed under the LGPL-3.0, so it stays here with the license texts
 (`LICENSE.LGPL-3.0.txt` and the GPL-3.0 it refers to), and the rest of this repository does not take on that license.
 
@@ -24,7 +24,7 @@ and without the new options every builder returns what it returned before.
 - `intersection` and `ndb` gained the option `airport` (modified 2026-10-22): the airport a terminal waypoint or terminal
   NDB belongs to, which becomes the airport of its ICAO. Without it the ICAO has no airport, as before.
 
-Compare with `git -C vendor/kln90b show 3d371f34a68144c80f8e7035490d8f0391b0eb45:test/harness/navdata/builders.ts` to see
+Compare with `git -C vendor/kln90b show d9370b0143af6463cadf0b52076e1e76f7310fbe:test/harness/navdata/builders.ts` to see
 the difference. `.gitattributes` keeps this folder on LF line endings, as the original has them.
 
 ## Moving the pin
