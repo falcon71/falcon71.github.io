@@ -284,7 +284,7 @@ before you reuse one):
 
 > To fly direct to an airport:
 >
-> 1. Press <kbd>D→</kbd>. The Direct To page appears on the left side with the cursor on the waypoint identifier.
+> 1. Press `<DirectToKey />`. The Direct To page appears on the left side with the cursor on the waypoint identifier.
 > 2. Enter the identifier with the left knobs: the inner knob selects a character, the outer knob moves to the next
 >    one.
 > 3. Press <kbd>ENT</kbd>. The unit shows the waypoint page of the identifier you entered. Check that it is the right
@@ -309,8 +309,10 @@ before you reuse one):
 ### Controls
 
 - **Keys** are written with `<kbd>` and their label: <kbd>CRSR</kbd>, <kbd>ENT</kbd>, <kbd>CLR</kbd>, <kbd>MSG</kbd>,
-  <kbd>ALT</kbd>, <kbd>D→</kbd> (the Direct To key). A key that exists on both sides gets its side: "the left
-  <kbd>CRSR</kbd>". In prose, "press" a key.
+  <kbd>ALT</kbd>. A key that exists on both sides gets its side: "the left <kbd>CRSR</kbd>". In prose, "press" a key.
+- **The Direct To key** is the one exception: write `<DirectToKey />`, which shows D→ with the arrow centered on the
+  D. The fonts of the site have no arrow of their own, so `<kbd>D→</kbd>` shows it too low. A page that names the key
+  is therefore `.mdx`.
 - **Knobs** are the left outer knob, the left inner knob, the right outer knob and the right inner knob. You "turn" a
   knob, "one step" or "clockwise" and "counterclockwise", and you "pull" or "push" the right inner knob.
 - The Controls and display page names every control of the front panel, including the power and brightness controls.
@@ -711,7 +713,7 @@ Before a writer hands in a page:
 - [ ] Every fact checked in the code or on the generated screen; no fact from memory or from another unit.
 - [ ] Exact numbers instead of vague words; every exception after its rule.
 - [ ] Procedures: numbered, one action per step, sides named, way back given, stable end state.
-- [ ] Keys in `<kbd>`, screen text in code formatting, page names plain and with a space before the number.
+- [ ] Keys in `<kbd>`, the Direct To key as `<DirectToKey />`, screen text in code formatting, page names plain and with a space before the number.
 - [ ] `<Term>` at the first use of each glossary term; new terms and words reported to the coordinator.
 - [ ] Screens shown by id, generated, every field explained, explanations free of context.
 - [ ] Installation-dependent and simulator-only features in their boxes; no configuration keys.
