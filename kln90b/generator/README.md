@@ -87,6 +87,11 @@ the kind and its arguments, with each point named after the place of the extract
 then a VOR, an NDB, a fix) and written as `lat,lon` otherwise, for example `icon % KSEA`, `arrow 47.1172,-122.3118 KSEA` and
 `icon $ 47.1172,-122.3118`. A description that repeats on a map gets ` #2`, ` #3`.
 
+The unit draws its maps on a canvas four times the size of the map and shows the canvas itself. A map pixel is a block
+of 4 x 4 canvas pixels, lit when at least half of them are (`lib/mapBlocks.ts`): the lines and icons fill whole blocks,
+but the map font draws each label one canvas row below its block, and lighting a block for any pixel would draw every
+stroke of a letter two map pixels thick where the pilot sees one.
+
 - A map field names the map side, `L` or `R` for the map of a half page and `F` for the full-page map of Super NAV 5,
   and a regex over the descriptions: `{id: 'aircraft', find: {map: 'L', draw: /^icon \$ /}}`. It must match exactly
   one element; `many: true` lets it claim several (all legs of a flight plan, say). A field's locators are all text

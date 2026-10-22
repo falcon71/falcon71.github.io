@@ -4,7 +4,8 @@ import {fileURLToPath} from 'node:url';
 import {it} from 'vitest';
 import {bootUnit, settle, type BootOptions, type HeadlessUnit} from '../../../vendor/kln90b/test/harness/boot';
 import {DEFAULT_START} from '../../../vendor/kln90b/test/harness/sim/clock';
-import {canvasToAscii, downsampled} from '../../../vendor/kln90b/test/harness/render/canvas';
+import {canvasToAscii} from '../../../vendor/kln90b/test/harness/render/canvas';
+import {mapBlocks} from './mapBlocks.ts';
 import {serializeScreenFile, type CellAttr, type Show} from '../../src/lib/screenFile.ts';
 import {explanationMismatch, fieldIdsOf} from '../../src/lib/explanations.ts';
 import {captureScreen, type CapturedScreen} from './capture.ts';
@@ -57,7 +58,7 @@ function mapsOf(capture: CapturedScreen, show: Show): Map<MapSide, ShownMap> {
 		const canvas = capture.canvases[side];
 		// The full-page map of Super NAV 5 is always shown, since that screen needs show both
 		if (canvas !== undefined && (side === 'F' || show === 'both' || show === (side === 'L' ? 'left' : 'right'))) {
-			const blocks = downsampled(canvasToAscii(canvas));
+			const blocks = mapBlocks(canvasToAscii(canvas));
 			const rows = blocks.replace(/\n$/, '').split('\n');
 			const elements = capture.elements[side] ?? [];
 			try {

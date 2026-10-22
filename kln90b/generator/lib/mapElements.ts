@@ -3,7 +3,8 @@
 // every element can be a field of its screen.
 import {CanvasDrawContext, CoordinateCanvasDrawContext} from '../../../vendor/kln90b/kln90b/controls/Canvas';
 import {ZOOM_FACTOR} from '../../../vendor/kln90b/kln90b/data/Constants';
-import {canvasToAscii, downsampled} from '../../../vendor/kln90b/test/harness/render/canvas';
+import {canvasToAscii} from '../../../vendor/kln90b/test/harness/render/canvas';
+import {mapBlocks} from './mapBlocks.ts';
 
 /** One drawing call of a map: its description (`icon % KSEA`) and the map pixels it lit, as [x, y] in row order. */
 export interface MapElement {
@@ -39,7 +40,7 @@ export class FrameElements {
 	}
 
 	/**
-	 * @param before the map before the element, as rows of `#` and `.` (the output of `downsampled(canvasToAscii(...))`)
+	 * @param before the map before the element, as rows of `#` and `.` (the output of `mapBlocks(canvasToAscii(...))`)
 	 * @param after the map after it
 	 */
 	add(draw: string, before: string, after: string): void {
@@ -80,7 +81,7 @@ export class FrameElements {
 	}
 }
 
-/** The map pixels the elements lit, as rows of `#` and `.` like `downsampled`. */
+/** The map pixels the elements lit, as rows of `#` and `.` like `mapBlocks`. */
 export function blocksOf(width: number, height: number, elements: MapElement[]): string {
 	const rows = Array.from({length: height}, () => Array<string>(width).fill('.'));
 	for (const e of elements) for (const [x, y] of e.pixels) rows[y][x] = '#';
@@ -90,7 +91,7 @@ export function blocksOf(width: number, height: number, elements: MapElement[]):
 /**
  * Checks that the elements account for exactly the pixels of the map: a map that was drawn outside the recorded
  * calls, or cleared after its last frame, would otherwise get explanations for what it does not show.
- * @param blocks the map as `downsampled(canvasToAscii(canvas))` gives it
+ * @param blocks the map as `mapBlocks(canvasToAscii(canvas))` gives it
  * @throws Error naming the first pixel that differs
  */
 export function checkCoverage(blocks: string, elements: MapElement[]): void {
@@ -138,7 +139,7 @@ function targetOf(context: object): {ctx: CanvasRenderingContext2D; width: numbe
 
 function readBlocks(ctx: CanvasRenderingContext2D, width: number, height: number): string {
 	const canvas = {width: width * ZOOM_FACTOR, height: height * ZOOM_FACTOR, getContext: () => ctx};
-	return downsampled(canvasToAscii(canvas as unknown as HTMLCanvasElement));
+	return mapBlocks(canvasToAscii(canvas as unknown as HTMLCanvasElement));
 }
 
 export interface MapRecorder {

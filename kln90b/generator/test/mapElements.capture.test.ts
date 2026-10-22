@@ -1,7 +1,8 @@
 import {describe, expect, it} from 'vitest';
 import {GeoPoint, MapProjection, UnitType} from '@microsoft/msfs-sdk';
 import {bootUnit, settle} from '../../../vendor/kln90b/test/harness/boot';
-import {canvasToAscii, downsampled} from '../../../vendor/kln90b/test/harness/render/canvas';
+import {canvasToAscii} from '../../../vendor/kln90b/test/harness/render/canvas';
+import {mapBlocks} from '../lib/mapBlocks.ts';
 import {pointFrom} from '../../../vendor/kln90b/test/harness/flight/geo';
 import {CanvasDrawContext, CoordinateCanvasDrawContext} from '../../../vendor/kln90b/kln90b/controls/Canvas';
 import {adjustCourseIndicator} from '../api.ts';
@@ -44,7 +45,7 @@ describe('the map elements of NAV 5', () => {
 		const {canvases, elements} = await nav5DirectTo();
 		const all = elements.L!.flatMap(e => e.pixels.map(key));
 		expect(new Set(all).size).toBe(all.length);
-		const blocks = downsampled(canvasToAscii(canvases.L!));
+		const blocks = mapBlocks(canvasToAscii(canvases.L!));
 		const lit = blocks.split('\n').flatMap((row, y) => Array.from(row).flatMap((c, x) => c === '#' ? [key([x, y])] : []));
 		expect(lit.length).toBeGreaterThan(0);
 		expect([...all].sort()).toEqual([...lit].sort());
@@ -71,6 +72,24 @@ function halfPage() {
 	ctx.textBaseline = 'top';
 	return {canvas, ctx, pixel: new CanvasDrawContext(ctx, 99, 78)};
 }
+
+describe('the map pixels of a label', () => {
+	it('draw every stroke of the map font one map pixel thick, as the unit shows it', () => {
+		// As in the maintainer's screenshot of Super NAV 5 in the simulator, 2026-10-22: the top of the D is one pixel
+		const {canvas, pixel} = halfPage();
+		pixel.drawIcon(50, 40, 'CADED');
+		pixel.fill();
+		expect(mapBlocks(canvasToAscii(canvas)).split('\n').slice(37, 44).map(row => row.slice(35, 64))).toEqual([
+			'.###...###..###...#####.###..',
+			'#...#.#...#.#..#..#.....#..#.',
+			'#.....#...#.#...#.#.....#...#',
+			'#.....#####.#...#.####..#...#',
+			'#.....#...#.#...#.#.....#...#',
+			'#...#.#...#.#..#..#.....#..#.',
+			'.###..#...#.###...#####.###..',
+		]);
+	});
+});
 
 describe('recordMapElements', () => {
 	it('records the outermost call only and keeps the frame that fill ended', () => {
@@ -124,7 +143,7 @@ describe('recordMapElements', () => {
 		pixel.drawIcon(50, 40, '$');
 		pixel.fill();
 		expect(recorder.elementsOf(canvas).map(e => e.draw)).toEqual(['plain at 10,10 20,10']);
-		expect(downsampled(canvasToAscii(canvas)).split('\n')[10].slice(10, 20)).toBe('#'.repeat(10));
+		expect(mapBlocks(canvasToAscii(canvas)).split('\n')[10].slice(10, 20)).toBe('#'.repeat(10));
 		expect(CanvasDrawContext.prototype.drawLine.name).toBe('drawLine');
 	});
 
