@@ -23,7 +23,7 @@ export const tut2Boot: NonNullable<ScreenDescription['boot']> = {
 	panelXml: panelXml(APR_ARM_SWITCH),
 };
 
-// The text of a list entry on APT 7 is its number and its name; the cursor covers the whole entry
+// The text of a list entry on APT 7 and APT 8 is its number and its name; the cursor covers the whole entry
 const YKM7 = '3 YKM7';
 const RW27 = '3 RW27';
 const CHINS5 = '1 CHINS5';
