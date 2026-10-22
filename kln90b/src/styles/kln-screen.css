@@ -7,6 +7,9 @@
  *
  * The whole screen is always laid out on .kln-stage; a half screen is a 112 px wide window onto it that includes the
  * middle line (x = 107.5).
+ *
+ * Super NAV 5 is a left column of six characters and a map over the rest of the screen, as the simulator's
+ * .super-nav5-left-controls, .super-nav5-mgs-range and .canvas-fullpage place them.
  */
 
 @font-face {
@@ -68,7 +71,9 @@
 
 .kln-stage .kln-half,
 .kln-stage .kln-full,
-.kln-stage .kln-status {
+.kln-stage .kln-status,
+.kln-stage .kln-snav5-left,
+.kln-stage .kln-snav5-overlay {
 	position: absolute;
 	margin: 0;
 	white-space: pre;
@@ -102,6 +107,22 @@
 	border-top: var(--u) solid var(--kln-phosphor);
 }
 
+/* Super NAV 5: the left column, 6 characters and 5 px wide; its right border is the line along the map */
+.kln-stage .kln-snav5-left {
+	top: calc(var(--u) * 3);
+	left: calc(var(--u) * 4);
+	box-sizing: border-box;
+	width: calc(var(--u) * 59);
+	height: calc(var(--u) * 91);
+	border-right: var(--u) solid var(--kln-phosphor);
+}
+
+/* The message indicator and the range, rows 5 and 6 over the map, 6 px right of column 6 */
+.kln-stage .kln-snav5-overlay {
+	top: calc(var(--u) * 68);
+	left: calc(var(--u) * 64);
+}
+
 /* The map of NAV 5 or APT 3 (an inline SVG in the phosphor color) fills the text area of its half, under the text */
 .kln-stage .kln-map {
 	position: absolute;
@@ -117,6 +138,13 @@
 /* The text area of the right half: its left edge 107.5, the middle line 1 and the padding 4.5 */
 .kln-stage .kln-map-right {
 	left: calc(var(--u) * 113);
+}
+
+/* The map of Super NAV 5, right of the left column: 6 characters and 5 px, 17 characters less 5 px, all 7 rows */
+.kln-stage .kln-map-full {
+	left: calc(var(--u) * 63);
+	width: calc(var(--u) * 148);
+	height: calc(var(--u) * 91);
 }
 
 .kln-map svg {

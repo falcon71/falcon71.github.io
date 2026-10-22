@@ -16,6 +16,9 @@ const NAV_1_LEFT = `
 const NAV_1_IDS = ['from', 'arrow', 'to', 'cdi', 'dis', 'gs', 'ete', 'brg', 'page'];
 const NAV_1_HTML = '<div class="kln-half kln-half-left"><span class="kln-row"><span class="kln-field" tabindex="0" data-field="from">KPDX </span><span class="kln-field" tabindex="0" data-field="arrow">›</span><span class="kln-field" tabindex="0" data-field="to">KSEA </span></span><span class="kln-row"><span class="kln-field" tabindex="0" data-field="cdi">ηηηΚΑθηηηηη</span></span><span class="kln-row"><span class="kln-field" tabindex="0" data-field="dis">DIS  45.2nm</span></span><span class="kln-row"><span class="kln-field" tabindex="0" data-field="gs">GS    123kt</span></span><span class="kln-row"><span class="kln-field" tabindex="0" data-field="ete">ETE   0:21</span> </span><span class="kln-row"><span class="kln-field" tabindex="0" data-field="brg">BRG    012°</span></span></div><div class="kln-half kln-half-right"></div><div class="kln-status"><span class="kln-row"><span class="kln-field" tabindex="0" data-field="page">NAV 1</span>                  </span></div>';
 
+// The stage HTML of the split screen of the test "a split screen", as the code gave it before Super NAV 5
+const SPLIT_HTML = '<div class="kln-map kln-map-left" role="group" aria-label="Map"><svg viewBox="0 0 99 78"><g class="kln-field" tabindex="0" role="img" data-field="leg" data-draw="icon $" data-box="1 2 3 4"><rect x="1" y="2" width="3" height="4" fill="transparent"/><path d="M1 2h1v1h-1z"/></g></svg></div><div class="kln-map kln-map-right" aria-hidden="true"><svg viewBox="0 0 99 78"><g data-field="runway" data-draw="icon $" data-box="1 2 3 4"><path d="M1 2h1v1h-1z"/></g></svg></div><div class="kln-half kln-half-left"><span class="kln-row"><span class="kln-inv kln-flash">A</span>          </span><span class="kln-row">           </span><span class="kln-row"><span class="kln-field" tabindex="0" data-field="dis">DIS  45.2nm</span></span><span class="kln-row">           </span><span class="kln-row">           </span><span class="kln-row">           </span></div><div class="kln-half kln-half-right"><span class="kln-row"><span class="kln-field" tabindex="0" data-field="ident">KSEA</span>       </span><span class="kln-row">           </span><span class="kln-row">           </span><span class="kln-row">           </span><span class="kln-row">           </span><span class="kln-row">           </span></div><div class="kln-status"><span class="kln-row"><span class="kln-field" tabindex="0" data-field="page">NAV 5</span>      GPS    APT 3</span></div>';
+
 const ROWS = 7;
 const COLUMNS = 23;
 
@@ -246,5 +249,93 @@ describe('map fields', () => {
 		const out = html(['leg']);
 		expect(out.indexOf('kln-map-left')).toBeLessThan(out.indexOf('kln-half-left'));
 		expect(out.lastIndexOf('</svg>')).toBeLessThan(out.indexOf('kln-half-left'));
+	});
+});
+
+describe('a split screen', () => {
+	it('gives the HTML it gave before Super NAV 5', () => {
+		const svg = (field: string) => `<svg viewBox="0 0 99 78"><g data-field="${field}" data-draw="icon $" data-box="1 2 3 4"><path d="M1 2h1v1h-1z"/></g></svg>`;
+		const c = capture({
+			fields: new Map([['dis', [{row: 2, from: 0, to: 11}]], ['ident', [{row: 0, from: 12, to: 16}]], ['page', [{row: 6, from: 0, to: 5}]]]),
+			mapFields: new Map([['leg', 'L'], ['runway', 'R']]), maps: ['L', 'R'],
+		}, {0: 'A          |KSEA', 2: 'DIS  45.2nm', 6: 'NAV 5      GPS    APT 3'});
+		c.mask[0][0] = 'F';
+		const documented = new Set(['dis', 'ident', 'page', 'leg']);
+		const out = screenHtml(blocksFromCapture(c, documented), documented, {L: svg('leg'), R: svg('runway')}, {screen: 's', mapFields: c.mapFields});
+		expect(out).toBe(SPLIT_HTML);
+	});
+});
+
+describe('Super NAV 5', () => {
+	// The left column in columns 0-5, the blank message indicator in row 5 and the range in row 6 from column 6
+	const TEXT = {
+		0: '20.0 È', 1: 'KSEA', 2: 'Ê-Ë', 3: ' 120 É', 4: 'Ð0:10', 5: 'Ó345°', 6: 'Ö345° 40',
+	};
+	const FIELDS = new Map([['ident', [{row: 1, from: 0, to: 4}]], ['field-3', [{row: 6, from: 0, to: 5}]], ['range', [{row: 6, from: 6, to: 8}]]]);
+	const SVG = '<svg viewBox="0 0 148 91"><g data-field="map" data-draw="icon $" data-box="70 40 5 6"><path d="M70 40h1v1h-1z"/></g></svg>';
+	const superNav5 = (over: Partial<ScreenCapture> = {}, rows: Record<number, string> = TEXT) =>
+		capture({layout: 'super-nav-5', status: false, fields: FIELDS, mapFields: new Map([['map', 'F']]), maps: ['F'], ...over}, rows);
+	const html = (documented: string[], c = superNav5()) =>
+		screenHtml(blocksFromCapture(c, new Set(documented)), new Set(documented), {F: SVG}, {screen: 's', mapFields: c.mapFields});
+	const text = (rows: {text: string}[][]) => rows.map(row => row.map(s => s.text).join(''));
+
+	it('draws the left column and, over the map, the message indicator and the range, without status line', () => {
+		const {crop, blocks} = blocksFromCapture(superNav5(), new Set());
+		expect(crop).toBeUndefined();
+		expect(blocks.map(b => b.cls)).toEqual(['kln-snav5-left', 'kln-snav5-overlay']);
+		expect(text(blocks[0].rows)).toEqual(['20.0 È', 'KSEA  ', 'Ê-Ë   ', ' 120 É', 'Ð0:10 ', 'Ó345°', 'Ö345° '].map(r => r.padEnd(6)));
+		expect(text(blocks[1].rows)).toEqual([' '.repeat(17), '40' + ' '.repeat(15)]);
+	});
+
+	it('puts the field of the range in the overlay and the fields of the left column in the column', () => {
+		const out = html(['ident', 'field-3', 'range']);
+		const left = out.match(/<div class="kln-snav5-left">.*?<\/div>/)![0];
+		const overlay = out.match(/<div class="kln-snav5-overlay">.*?<\/div>/)![0];
+		expect(left).toContain('<span class="kln-field" tabindex="0" data-field="ident">KSEA</span>');
+		expect(left).toContain('<span class="kln-field" tabindex="0" data-field="field-3">Ö345°</span>');
+		expect(overlay).toBe('<div class="kln-snav5-overlay"><span class="kln-row">' + ' '.repeat(17) + '</span>' +
+			'<span class="kln-row"><span class="kln-field" tabindex="0" data-field="range">40</span>' + ' '.repeat(15) + '</span></div>');
+	});
+
+	it('draws the full-page map first, so that the text is drawn over it', () => {
+		const out = html([]);
+		expect(out.startsWith('<div class="kln-map kln-map-full" aria-hidden="true"><svg viewBox="0 0 148 91">')).toBe(true);
+		expect(out.indexOf('</svg></div><div class="kln-snav5-left">')).toBeGreaterThan(0);
+		expect(out.indexOf('kln-snav5-left')).toBeLessThan(out.indexOf('kln-snav5-overlay'));
+		expect(out).not.toMatch(/kln-map-left|kln-map-right|kln-half|kln-status/);
+	});
+
+	it('makes the documented elements of the map fields, in a labeled group', () => {
+		const out = html(['map']);
+		expect(out).toContain('<div class="kln-map kln-map-full" role="group" aria-label="Map"><svg viewBox="0 0 148 91">' +
+			'<g class="kln-field" tabindex="0" role="img" data-field="map" data-draw="icon $" data-box="70 40 5 6">' +
+			'<rect x="70" y="40" width="5" height="6" fill="transparent"/><path d="M70 40h1v1h-1z"/></g></svg></div>');
+	});
+
+	it('names the full-page map when a documented map field has no element in it', () => {
+		const c = superNav5({mapFields: new Map([['map', 'F'], ['aircraft', 'F']])});
+		expect(() => html(['map', 'aircraft'], c)).toThrow('screen s: map F has no element of the map field aircraft');
+	});
+
+	it('splits a field that runs from the left column over the map into a part in each', () => {
+		const c = superNav5({fields: new Map([['bottom', [{row: 6, from: 0, to: 8}]]])});
+		const out = html(['bottom'], c);
+		expect(out).toContain('<span class="kln-row"><span class="kln-field" tabindex="0" data-field="bottom">Ö345° </span></span></div>');
+		expect(out).toContain('<span class="kln-row"><span class="kln-field" tabindex="0" data-field="bottom">40</span>' + ' '.repeat(15) + '</span></div>');
+	});
+
+	it('draws nothing of a field part over the map above the overlay, where only the map is', () => {
+		const c = superNav5({fields: new Map([['top', [{row: 0, from: 0, to: 12}]]])});
+		const out = html(['top'], c);
+		expect(out.match(/data-field="top"/g)).toHaveLength(1);
+		expect(out).toContain('<span class="kln-field" tabindex="0" data-field="top">20.0 È</span></span>');
+	});
+
+	it('rejects text over the map above the overlay, which the site would not draw', () => {
+		expect(() => blocksFromCapture(superNav5({}, {...TEXT, 2: 'Ê-Ë   X'}), new Set()))
+			.toThrow('Super NAV 5: row 2 column 6 lies over the map but holds "X" with the mask "."');
+		const c = superNav5();
+		c.mask[4][22] = 'I';
+		expect(() => blocksFromCapture(c, new Set())).toThrow('Super NAV 5: row 4 column 22 lies over the map but holds " " with the mask "I"');
 	});
 });

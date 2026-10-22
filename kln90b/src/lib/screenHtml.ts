@@ -19,6 +19,10 @@ const HALF = 11;
 const RIGHT_OFFSET = 12;       // column 11 is the middle line
 const STATUS_ROW = 6;
 const CROPPED_STATUS = 5;      // the page name of the shown side: columns 0-4 on the left, 18-22 on the right
+// Super NAV 5: the left column in columns 0-5, the message indicator and the range from column 6 in rows 5 and 6, the
+// map everywhere else
+const SNAV5_COLUMN = 6;
+const SNAV5_OVERLAY_ROW = 5;
 
 const MARKUP = /\{([a-z0-9-]*)([!~]*):([^}]*)\}/g;
 
@@ -106,7 +110,25 @@ function segmentsOf(cells: Cell[]): Segment[] {
 const blank = (): Cell => ({ch: ' ', inverse: false, flash: false});
 
 /**
- * The blocks of a generated screen. A field that is not `documented` is drawn as plain text.
+ * Checks that the cells of Super NAV 5 above the message indicator and the range, right of the left column, are blank:
+ * the map is drawn there, not text.
+ * @throws Error naming the first cell that is not a blank
+ */
+function checkMapCells(c: ScreenCapture): void {
+	for (let row = 0; row < SNAV5_OVERLAY_ROW; row++) {
+		const chars = Array.from(c.text[row]);
+		for (let col = SNAV5_COLUMN; col < COLUMNS; col++) {
+			if (chars[col] !== ' ' || c.mask[row][col] !== '.') {
+				throw new Error(`Super NAV 5: row ${row} column ${col} lies over the map but holds "${chars[col]}" with the mask "${c.mask[row][col]}"`);
+			}
+		}
+	}
+}
+
+/**
+ * The blocks of a generated screen. A field that is not `documented` is drawn as plain text. On Super NAV 5 the part of a
+ * field that lies over the map above the message indicator and the range is not drawn, as nothing but the map is there.
+ * @throws Error on Super NAV 5, when a cell there is not a blank (see checkMapCells)
  */
 export function blocksFromCapture(c: ScreenCapture, documented: Set<string>): ScreenBlocks {
 	const fieldAt = new Map<string, string>();
@@ -144,6 +166,16 @@ export function blocksFromCapture(c: ScreenCapture, documented: Set<string>): Sc
 	};
 	const status = {cls: 'kln-status', rows: c.status ? [statusRow()] : []};
 
+	if (c.layout === 'super-nav-5') {
+		checkMapCells(c);
+		return {
+			crop,
+			blocks: [
+				{cls: 'kln-snav5-left', rows: rowsOf(0, STATUS_ROW, 0, SNAV5_COLUMN)},
+				{cls: 'kln-snav5-overlay', rows: rowsOf(SNAV5_OVERLAY_ROW, STATUS_ROW, SNAV5_COLUMN, COLUMNS)},
+			],
+		};
+	}
 	if (c.layout === 'full') {
 		const last = c.status ? STATUS_ROW - 1 : STATUS_ROW;
 		return {crop, blocks: [{cls: 'kln-full', rows: rowsOf(0, last, 0, COLUMNS)}, status].filter(b => b.rows.length > 0)};
@@ -170,10 +202,11 @@ function segmentHtml(s: Segment, documented: Set<string>): string {
 	return cls ? `<span class="${cls}">${text}</span>` : text;
 }
 
-/** The maps of the half pages as inline SVG, which go under the text of their half. */
-export type Maps = Partial<Record<'L' | 'R', string>>;
+/** The maps of the half pages or of Super NAV 5 as inline SVG, which go under the text. */
+export type Maps = Partial<Record<MapSide, string>>;
 
-const MAP_CLASS = {L: 'kln-map kln-map-left', R: 'kln-map kln-map-right'} as const;
+const MAP_SIDES: MapSide[] = ['L', 'R', 'F'];
+const MAP_CLASS = {L: 'kln-map kln-map-left', R: 'kln-map kln-map-right', F: 'kln-map kln-map-full'} as const;
 
 // The group of a map element as the generator writes it (its data-draw is escaped, so it holds no ">")
 const MAP_ELEMENT = /<g data-field="([^"]*)"([^>]*) data-box="(\d+) (\d+) (\d+) (\d+)">/;
@@ -191,7 +224,7 @@ export interface MapCheck {
  * @throws Error when a group of the SVG is not in the form the generator writes, or, with `check`, when a documented map
  * field of this side has no group. Either would silently leave elements unexplained.
  */
-function mapFieldsHtml(svg: string, side: 'L' | 'R', documented: Set<string>, check?: MapCheck): {html: string; hasFields: boolean} {
+function mapFieldsHtml(svg: string, side: MapSide, documented: Set<string>, check?: MapCheck): {html: string; hasFields: boolean} {
 	const where = `${check ? `screen ${check.screen}: ` : ''}map ${side}`;
 	const seen = new Set<string>();
 	let hasFields = false;
@@ -215,13 +248,13 @@ function mapFieldsHtml(svg: string, side: 'L' | 'R', documented: Set<string>, ch
 
 /**
  * The inside of the stage of a screen. A field that is not `documented` is drawn as plain text, and so is an element of
- * a map. A map comes first, so that the text of its half is drawn over it. A map with fields is a labeled group, since
- * its fields must stay reachable; one without is hidden from assistive technology.
+ * a map. A map comes first, so that the text of its half, or of Super NAV 5, is drawn over it. A map with fields is a
+ * labeled group, since its fields must stay reachable; one without is hidden from assistive technology.
  * @param check the screen's name and map fields; with it, a documented map field without an element in its map is an error
  * @throws Error see mapFieldsHtml
  */
 export function screenHtml(b: ScreenBlocks, documented: Set<string>, maps: Maps = {}, check?: MapCheck): string {
-	const mapHtml = (['L', 'R'] as const)
+	const mapHtml = MAP_SIDES
 		.filter(side => maps[side] !== undefined)
 		.map(side => {
 			const {html, hasFields} = mapFieldsHtml(maps[side]!, side, documented, check);
