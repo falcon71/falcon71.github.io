@@ -1,8 +1,9 @@
 # Navdata of the example screens
 
-The example screens show real US places. Their data is the FAA's public NASR data, never the simulator's and never
+The example screens show real US places. Their data is the FAA's public data, never the simulator's and never
 Navigraph's. `extract-nasr.mjs` turns the NASR 28-day subscription (CSV) into one neutral JSON file for the regions in
-`regions.json`; the screens load only that file.
+`regions.json`, and `extract-cifp.mjs` takes the SIDs, STARs and approaches of that file's airports from the CIFP into a
+second one. The screens load only these files.
 
 ## Downloads
 
@@ -12,7 +13,7 @@ from those folders is committed except the generated files.
 | Download | Link | Read by |
 | --- | --- | --- |
 | NASR subscription, CSV data | https://www.faa.gov/air_traffic/flight_info/aeronav/aero_data/NASR_Subscription/ | `extract-nasr.mjs`, from the unzipped folder |
-| CIFP, the file `FAACIFP18` | https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/cifp/download/ | the procedures script, from the file |
+| CIFP, the file `FAACIFP18` | https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/cifp/download/ | `extract-cifp.mjs`, from the file |
 | Airspace Boundary | https://adds-faa.opendata.arcgis.com/datasets/faa::airspace-boundary-1/about | the airspaces script, from the GeoJSON file |
 | Class Airspace | https://adds-faa.opendata.arcgis.com/datasets/faa::class-airspace/about | the airspaces script, from the GeoJSON file |
 
@@ -98,3 +99,65 @@ frequencies selects.
 A fix has its own ICAO region. A navaid has none (`REGION_CODE` of `NAV_BASE.csv` is the FAA region), so it takes the
 ICAO region that most fixes of its ARTCC carry, from its low altitude ARTCC, otherwise the high altitude one. A navaid
 whose ARTCC has no fixes, such as a Canadian one, gets `K1`. The summary says how many records each rule covered.
+
+## The CIFP extract
+
+The CIFP (Coded Instrument Flight Procedures) is the FAA's procedure data in ARINC 424, one fixed-width record of 132
+columns per line. `extract-cifp.mjs` reads the file `FAACIFP18` of the download and the newest `nasr-*.json` here.
+
+### Updating it
+
+1. Download the current CIFP (see Downloads) and unzip it into a folder outside this repository. Update the NASR
+   extract first when its cycle changed too, since the CIFP extract takes the airports and facilities from it.
+2. From `kln90b/`:
+
+   ```bash
+   node generator/navdata/extract-cifp.mjs <path to FAACIFP18>
+   ```
+
+3. The script writes `cifp-<cycle>.json` here (`cifp-2610.json` for cycle 2610) and prints a summary: the NASR extract
+   it used, the counts of airports, SIDs, STARs, approaches and waypoints, every procedure it skipped with the reason,
+   and what it left out of the procedures it kept. Commit the new file and delete the old one.
+
+### What gets in
+
+- Airports: those of the NASR extract that have SIDs (subsection `PD`), STARs (`PE`) or approaches (`PF`) in the CIFP,
+  matched by the identifier the unit shows (`KYKM`, `S50`).
+- Every procedure of those airports with every leg, whatever its path terminator. The unit filters the legs itself.
+- A procedure is skipped, and named in the summary, when one of its fixes can be found neither in the NASR extract nor
+  in the CIFP, when the navaid of one of its arcs is not a VOR, or when a record of it has a route type or a value the
+  script does not read.
+
+### Output format
+
+Courses are degrees magnetic, distances nautical miles, positions degrees. Airports, procedures, transitions and
+waypoints are sorted by name or ident; legs stay in the order the CIFP gives them.
+
+- `cycle`, `source`: the CIFP cycle (`2610`) from the header record, and a description of the data.
+- `airports`: `ident` and its `departures`, `arrivals` and `approaches`.
+- A SID or STAR: `name` (`YKM7`), `runways` (runway transitions: `runway` and `legs`), `common` (the legs of the common
+  route) and `transitions` (en route transitions: `name` and `legs`). The route type (column 20) decides the part: for
+  SIDs `1`, `4` and `T` (vector SID) are runway transitions, `2` and `5` the common route, `3`, `6` and `V` en route
+  transitions; for STARs `1` and `4` are en route transitions, `2` and `5` the common route, `3` and `6` runway
+  transitions. `runway` is the CIFP's transition name without the `RW`: `27`, `32L`, `32B` for both parallels, `ALL`.
+- An approach: `ident` (`R32LY`), `type`, `runway`, `suffix`, `transitions` (route type `A`), `final` and `missed`.
+  `type` is the route type of the final approach: `R` RNAV, `H` RNP, `I` ILS, `L` localizer, `B` localizer back course,
+  `N` NDB, `S` and `D` VOR. A circling approach spells its type differently in its ident (`VOR-A` is type `S`).
+  `runway` and `suffix` come from the ident: `R32LY` is runway `32L`, suffix `Y`; `R02-Y` runway `02`; `VOR-A` has no
+  runway and suffix `A`. The missed approach starts after the leg to the missed approach point (column 43 `M`),
+  or where there is none at the leg that column 42 marks `M`.
+- A leg: `type`, the path terminator as published (`IF`, `TF`, `CF`, `AF`, `VM`, `HM`, `RF` ...); `fix` where the record
+  names one; `navaid`, the recommended navaid, for `AF`, `CF` and `PI` legs; `courseMag`; `turn` (`L` or `R`);
+  `flyOver` where column 41 is `Y`; `role` from column 43 (`A`, `C` and `D` are `IAF`, `B` and `I` are `IF`, `F` is
+  `FAF`, `M` is `MAP`); `rhoNm`, `thetaDeg` and `arcRadiusNm` where the record has them. A leg to the airport keeps its
+  fix.
+- A fix or navaid: `ident`, `region` and `kind`, which comes from the section of its record: `airport` (`PA`), `runway`
+  (`PG`, `RW32L`), `terminal` (`PC`), `fix` (`EA`), `vor` (`D`), `ndb` (`DB`, and `PN` for a terminal NDB). A terminal
+  waypoint, a terminal NDB and a runway carry the `airport` they belong to.
+- `waypoints`: the fixes and navaids the procedures need that the NASR extract does not have, with `ident`, `region`,
+  `kind`, `airport` where it has one, `lat` and `lon` from their CIFP record. These are every terminal waypoint, since
+  NASR does not tell them from en route fixes (it files some as fixes, without their airport), and the fixes and VORs
+  outside the regions that procedures inside them reach. A fix, VOR or NDB of the NASR extract is matched by ident,
+  kind and region.
+- A localizer, TACAN or DME is no facility of either extract. As the navaid of a `CF` or `PI` leg it is left out, which
+  the unit does not miss: it reads the navaid of an `AF` leg only. The summary counts them.
