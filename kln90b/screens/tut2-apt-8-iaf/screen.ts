@@ -7,7 +7,7 @@ defineScreen(import.meta.url, {
 	boot: tut2Boot,
 	steps: cursorOnHumpp,
 	fields: [
-		{id: 'title', find: {re: /R32LY-KBFI/, area: 'R', row: 0}},
+		{id: 'title', find: {re: /R32L-KBFI/, area: 'R', row: 0}},
 		{id: 'iaf', find: {re: /IAF/, area: 'R'}},
 		// The IAFs of the approach, each with its number in the list
 		{id: 'arvad', find: {re: /1 ARVAD/, area: 'R'}},

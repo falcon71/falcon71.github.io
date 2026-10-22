@@ -29,6 +29,8 @@ const RW27 = '3 RW27';
 const CHINS5 = '1 CHINS5';
 const YKM = '3 YKM';
 const RW32L = '3 RW32L';
+// The list of approaches shows the RNAV (GPS) Y approach to 32L without its suffix
+const RNAV_32L = '1 RNAV 32L';
 const HUMPP = '2 HUMPP';
 
 /** APT 7 of KYKM on the right, with the cursor on YKM7 in its list of departures. */
@@ -81,12 +83,9 @@ export async function cursorOnChins5(u: HeadlessUnit): Promise<void> {
 	await u.panel.cursor('R');
 	await u.panel.enterIdent('R', 'KBFI');
 	await u.panel.cursor('R');
-	// Forward by way of APT 4: the shorter way back passes APT 8, whose list of KBFI the screen cannot be read on
-	// (kln90b#411, see cursorOnHumpp)
-	await u.panel.selectPage('R', 'APT 4');
+	// KBFI has departures and arrivals, so APT 7 has two pages. The knob turns back from APT 1 by way of APT 8 and comes
+	// to the last of them, the arrivals
 	await u.panel.selectPage('R', 'APT 7');
-	// KBFI has departures and arrivals, so APT 7 has two pages; the first lists the departures
-	await u.panel.inner('R', 1);
 	// The cursor comes on at the first arrival
 	await u.panel.cursor('R');
 	await u.panel.cursorTo('R', CHINS5);
@@ -125,19 +124,18 @@ export async function loadStar(u: HeadlessUnit): Promise<void> {
 	await adjustCourseIndicator(u);
 }
 
-/**
- * APT 8 of KBFI chosen and its approach with it: the IAFs of the approach, with the cursor on HUMPP.
- *
- * The list of approaches of KBFI cannot be read as a screen: the unit draws its one entry, the RNAV Y approach to 32L,
- * one cell wider than the half page (kln90b#411), and the harness rejects such a screen. So these steps do not read
- * the screen until the IAF page shows: the inner knob turns from the arrivals of APT 7 to APT 8, and ENT chooses the
- * approach the cursor comes on at, the first and only one in the list.
- */
-export async function cursorOnHumpp(u: HeadlessUnit): Promise<void> {
+/** APT 8 of KBFI on the right, with the cursor on the RNAV approach to 32L, the only approach in its list. */
+export async function cursorOnRnav32l(u: HeadlessUnit): Promise<void> {
 	await loadStar(u);
-	// Workaround for kln90b#411; once fixed, use selectPage('R', 'APT 8') and cursorTo, and add tut2-apt-8-approach
-	await u.panel.inner('R', 1);
+	await u.panel.selectPage('R', 'APT 8');
+	// The cursor comes on at the first approach
 	await u.panel.cursor('R');
+	await u.panel.cursorTo('R', RNAV_32L);
+}
+
+/** The approach chosen: its IAFs, with the cursor on HUMPP. */
+export async function cursorOnHumpp(u: HeadlessUnit): Promise<void> {
+	await cursorOnRnav32l(u);
 	await u.panel.ent();
 	// The cursor comes on at the first IAF
 	await u.panel.cursorTo('R', HUMPP);
@@ -151,14 +149,11 @@ export async function cursorOnLoadApproach(u: HeadlessUnit): Promise<void> {
 
 /**
  * Loads the approach with the IAF HUMPP into FPL 0 and reads the messages (the load raises none). The unit shows FPL 0
- * on the left then, and on the right APT 8 goes back to its list of approaches with the cursor off; that list cannot be
- * read (see cursorOnHumpp), so the inner knob turns back to the arrivals of APT 7 first.
+ * on the left then, and on the right APT 8 goes back to its list of approaches with the cursor off.
  */
 export async function loadApproach(u: HeadlessUnit): Promise<void> {
 	await cursorOnLoadApproach(u);
 	await u.panel.ent();
 	await wait(1000);
-	// Workaround for kln90b#411: the list of approaches cannot be read
-	await u.panel.inner('R', -1);
 	await adjustCourseIndicator(u);
 }

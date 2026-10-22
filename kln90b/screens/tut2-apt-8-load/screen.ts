@@ -7,7 +7,7 @@ defineScreen(import.meta.url, {
 	boot: tut2Boot,
 	steps: cursorOnLoadApproach,
 	fields: [
-		{id: 'title', find: {re: /R32LY-KBFI/, area: 'R', row: 0}},
+		{id: 'title', find: {re: /R32L-KBFI/, area: 'R', row: 0}},
 		// The waypoints of the approach, each with its number in the list and the mark of its kind of fix; the list
 		// shows its last waypoint always
 		{id: 'humpp', find: {re: /1 HUMPPà/, area: 'R'}},
