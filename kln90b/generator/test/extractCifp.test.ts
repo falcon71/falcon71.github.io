@@ -72,16 +72,26 @@ describe('parseRecord', () => {
 		});
 		expect(parseRecord(line('SUSAD        LMT '))).toEqual({
 			type: 'point', section: 'D ', ident: 'LMT', region: 'K1', lat: 42.15314167, lon: -121.72752778,
+			name: 'KLAMATH FALLS', vorType: 'VORTAC', mhz: 115.9, declinationEast: 17,
 		});
 	});
 
 	it('reads the position of an NDB and of a terminal NDB', () => {
 		expect(parseRecord(line('SUSADB       PND '))).toEqual({
-			type: 'point', section: 'DB', ident: 'PND', region: 'K1', lat: 45.63026944, lon: -123.04581111,
+			type: 'point', section: 'DB', ident: 'PND', region: 'K1', lat: 45.63026944, lon: -123.04581111, name: 'BANKS', khz: 356,
 		});
 		expect(parseRecord(line('SUSAPNKAWOK1 AW '))).toEqual({
 			type: 'point', section: 'PN', airport: 'KAWO', ident: 'AW', region: 'K1', lat: 48.07611944, lon: -122.15391111,
+			name: 'WATON', khz: 382,
 		});
+	});
+
+	it('reads the type of a VOR from its class and a declination west as negative', () => {
+		const lmt = line('SUSAD        LMT ');
+		const changed = (type: string, decl: string) => parseRecord(lmt.slice(0, 28) + type + lmt.slice(29, 74) + decl + lmt.slice(79));
+		expect(changed('D', 'W0040')).toMatchObject({vorType: 'VOR/DME', declinationEast: -4});
+		expect(changed(' ', 'E0000')).toMatchObject({vorType: 'VOR', declinationEast: 0});
+		expect(changed('X', 'T0000')).toMatchObject({vorType: null, declinationEast: null});
 	});
 
 	it('reads the cycle from the header', () => {
@@ -209,8 +219,8 @@ describe('extractCifp', () => {
 		withoutNdbs.ndbs = [];
 		const x = extractCifp(CIFP, withoutNdbs);
 		expect(x.waypoints.filter((w: any) => w.kind === 'ndb')).toEqual([
-			{ident: 'AW', region: 'K1', kind: 'ndb', airport: 'KAWO', lat: 48.07611944, lon: -122.15391111},
-			{ident: 'PND', region: 'K1', kind: 'ndb', lat: 45.63026944, lon: -123.04581111},
+			{ident: 'AW', region: 'K1', kind: 'ndb', airport: 'KAWO', lat: 48.07611944, lon: -122.15391111, name: 'WATON', khz: 382},
+			{ident: 'PND', region: 'K1', kind: 'ndb', lat: 45.63026944, lon: -123.04581111, name: 'BANKS', khz: 356},
 		]);
 		expect(x.airports.find((a: any) => a.ident === 'KAWO')!.approaches.map((a: any) => a.ident)).toEqual(['N34']);
 	});
@@ -269,7 +279,10 @@ describe('extractCifp', () => {
 
 	it('takes a fix that NASR lacks from the CIFP, a terminal waypoint and a VOR outside the region alike', () => {
 		expect(waypoint('ATULY')).toEqual({ident: 'ATULY', region: 'K1', kind: 'terminal', airport: 'KBFI', lat: 47.27227778, lon: -122.24447222});
-		expect(waypoint('LMT')).toEqual({ident: 'LMT', region: 'K1', kind: 'vor', lat: 42.15314167, lon: -121.72752778});
+		expect(waypoint('LMT')).toEqual({
+			ident: 'LMT', region: 'K1', kind: 'vor', lat: 42.15314167, lon: -121.72752778, name: 'KLAMATH FALLS', type: 'VORTAC',
+			mhz: 115.9, declinationEast: 17,
+		});
 		expect(waypoint('OED')).toMatchObject({kind: 'vor'});
 		// what NASR has stays out: DUANE, a terminal waypoint of KBFI that NASR files as a fix, keeps its kind and airport
 		expect(waypoint('DUANE')).toBeUndefined();
@@ -301,6 +314,14 @@ describe('extractCifp', () => {
 		expect(skipStats.skipped).toEqual({'fix LMT (K1, VOR) is neither in the NASR extract nor in the CIFP': ['KHIO STAR OCITY3']});
 		expect(withoutLmt.waypoints.map((w: any) => w.ident).includes('OED')).toBe(false);
 		expect(stats.skipped).toEqual({});
+	});
+
+	it('skips a procedure that needs a VOR from the CIFP whose frequency it cannot read', () => {
+		const skipStats: any = {};
+		const lmt = line('SUSAD        LMT ');
+		const x = extractCifp(CIFP.replace(lmt, lmt.slice(0, 22) + '115.9' + lmt.slice(27)), nasr(), skipStats);
+		expect(x.airports.find((a: any) => a.ident === 'KHIO')!.arrivals).toEqual([]);
+		expect(skipStats.skipped).toEqual({'fix LMT (K1, VOR) with a type, frequency or declination the extract cannot read': ['KHIO STAR OCITY3']});
 	});
 
 	it('counts what it extracted', () => {

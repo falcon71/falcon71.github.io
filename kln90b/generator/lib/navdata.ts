@@ -98,6 +98,19 @@ function surfaceOf(code: string): RunwaySurfaceType {
 
 const VOR_TYPES: Record<string, VorType> = {'VOR': VorType.VOR, 'VOR/DME': VorType.VORDME, 'VORTAC': VorType.VORTAC};
 
+/** A VOR of the NASR extract, or one the CIFP extract adds with the same values */
+function vorOf(v: NavdataExtract['vors'][number]): Facility {
+	// The sim stores the variation west positive; the extract has it east positive (KLNMagvar.ts in the instrument)
+	return vor(v.ident, v.lat, v.lon, {
+		name: v.name, frequencyMHz: v.mhz, magneticVariation: -v.declinationEast, region: v.region, type: VOR_TYPES[v.type],
+	});
+}
+
+/** An NDB of the NASR extract, or one the CIFP extract adds with the same values and, if it is terminal, its airport */
+function ndbOf(n: NavdataExtract['ndbs'][number] & { airport?: string }): Facility {
+	return ndb(n.ident, n.lat, n.lon, {name: n.name, frequencyKHz: n.khz, region: n.region, airport: n.airport});
+}
+
 /**
  * The facilities of the extract, as the harness's navdata takes them. With the procedures of the CIFP extract, the
  * airports carry their SIDs, STARs and approaches as the simulator delivers them, and the facilities include what the
@@ -116,13 +129,8 @@ export function facilitiesOf(x: NavdataExtract, p?: CifpExtract): Facility[] {
 			airportClass: a.heliport ? AirportClass.HeliportOnly : undefined, frequencies: frequenciesOf(a.frequencies),
 		}));
 	}
-	for (const v of x.vors) {
-		// The sim stores the variation west positive; the extract has it east positive (KLNMagvar.ts in the instrument)
-		out.push(vor(v.ident, v.lat, v.lon, {
-			name: v.name, frequencyMHz: v.mhz, magneticVariation: -v.declinationEast, region: v.region, type: VOR_TYPES[v.type],
-		}));
-	}
-	for (const n of x.ndbs) out.push(ndb(n.ident, n.lat, n.lon, {name: n.name, frequencyKHz: n.khz, region: n.region}));
+	for (const v of x.vors) out.push(vorOf(v));
+	for (const n of x.ndbs) out.push(ndbOf(n));
 	for (const f of x.fixes) out.push(intersection(f.ident, f.lat, f.lon, {region: f.region}));
 	return p === undefined ? out : withCifpProcedures(out, x, p);
 }
@@ -164,14 +172,44 @@ function runwayEndsOf(a: NavdataExtract['airports'][number]): string[] {
  * The runways a runway transition of the CIFP is for. A transition for both parallels (`32B`) becomes one per runway end
  * of that number, as the maintainer saw the simulator deliver CHINS5 at KBFI; one for every runway (`ALL`) becomes one
  * per runway end of the airport, by the same logic.
+ * @throws Error when the airport has no runway end the transition is for
  */
-function runwaysOf(runway: string, ends: string[]): string[] {
-	if (runway === 'ALL') return ends;
+function runwaysOf(runway: string, ends: string[], apt: string): string[] {
 	const both = BOTH_PARALLELS.exec(runway);
-	return both === null ? [runway] : ends.filter(e => e.startsWith(both[1]));
+	const runways = runway === 'ALL' ? ends : both === null ? ends.filter(e => e === runway) : ends.filter(e => e.startsWith(both[1]));
+	if (runways.length === 0) throw new Error(`${apt} has no runway for the runway transition ${runway}`);
+	return runways;
 }
 
 const key = (...parts: string[]) => parts.join(' ');
+
+/**
+ * The facility of a waypoint of the CIFP extract; a VOR or NDB with the values its CIFP record gives, as the NASR ones.
+ * @throws Error for a VOR or NDB without them, or a kind no facility has
+ */
+function facilityOf(w: CifpExtract['waypoints'][number], apt: string): Facility {
+	const {ident, region, lat, lon, name} = w;
+	switch (w.kind) {
+		case 'terminal':
+			return intersection(ident, lat, lon, {region, airport: w.airport});
+		case 'fix':
+			return intersection(ident, lat, lon, {region});
+		case 'vor': {
+			const {type, mhz, declinationEast} = w;
+			if (name === undefined || type === undefined || mhz === undefined || declinationEast === undefined) {
+				throw new Error(`${apt}: the VOR ${ident} ${region} of the CIFP extract has no name, type, frequency or declination`);
+			}
+			return vorOf({ident, region, lat, lon, name, type, mhz, declinationEast});
+		}
+		case 'ndb': {
+			const {khz} = w;
+			if (name === undefined || khz === undefined) throw new Error(`${apt}: the NDB ${ident} ${region} of the CIFP extract has no name or frequency`);
+			return ndbOf({ident, region, lat, lon, name, khz, airport: w.airport});
+		}
+		default:
+			throw new Error(`${apt}: no facility of the kind ${w.kind} (${ident})`);
+	}
+}
 
 /** Turns the procedures of the CIFP extract into the SDK's, and makes the facilities their fixes need */
 class ProcedureBuilder {
@@ -201,7 +239,7 @@ class ProcedureBuilder {
 	private procedure(build: typeof sid, p: Proc, apt: string, ends: string[]): Procedure {
 		return build(p.name, {
 			// Fresh legs for each runway: a leg is never shared between transitions
-			runways: p.runways.flatMap(r => runwaysOf(r.runway, ends).map(runway => ({runway, legs: this.legs(r.legs, apt)}))),
+			runways: p.runways.flatMap(r => runwaysOf(r.runway, ends, apt).map(runway => ({runway, legs: this.legs(r.legs, apt)}))),
 			common: this.legs(p.common, apt),
 			transitions: p.transitions.map(t => ({name: t.name, legs: this.legs(t.legs, apt)})),
 		});
@@ -239,7 +277,8 @@ class ProcedureBuilder {
 		return FlightPlan.createLeg({
 			type,
 			fixIcaoStruct: l.fix === undefined ? undefined : this.icaoOf(l.fix, apt),
-			originIcaoStruct: l.navaid === undefined ? undefined : this.icaoOf(l.navaid, apt),
+			// The unit loads the navaid of an arc only (SidStar), so the recommended navaid of a CF or PI leg is no facility
+			originIcaoStruct: l.navaid === undefined ? undefined : this.icaoOf(l.navaid, apt, l.type === 'AF'),
 			course: l.courseMag, theta: l.thetaDeg,
 			rho: l.rhoNm === undefined ? undefined : UnitType.NMILE.convertTo(l.rhoNm, UnitType.METER),
 			turnDirection: l.turn === undefined ? undefined : TURNS[l.turn], flyOver: l.flyOver,
@@ -251,14 +290,15 @@ class ProcedureBuilder {
 	 * The ICAO of the facility a fix reference names. A fix, terminal waypoint, VOR or NDB is the NASR facility of its
 	 * ident and region where there is one, whatever airport the reference names; only one that NASR lacks is made from
 	 * the waypoints of the CIFP extract, a terminal one with its airport.
+	 * @param make whether a facility that NASR lacks is added to the navdata; without, only its ICAO is returned
 	 * @throws Error when neither has it
 	 */
-	private icaoOf(ref: FixRef, apt: string): IcaoValue {
+	private icaoOf(ref: FixRef, apt: string, make = true): IcaoValue {
 		// A leg to the airport itself: the simulator delivers it without a fix, and the unit drops it
 		if (ref.kind === 'airport') return ICAO.emptyValue();
 		if (ref.kind === 'runway') {
 			const owner = this.airports.get(ref.airport ?? apt);
-			if (owner === undefined) throw new Error(`${apt}: no airport ${ref.airport} for the runway ${ref.ident}`);
+			if (owner === undefined) throw new Error(`${apt}: the airport ${ref.airport ?? apt} of the runway ${ref.ident} is not in the NASR extract`);
 			return this.once(runwayFix(owner, ref.ident.replace(/^RW/, '')));
 		}
 		const type = ICAO_TYPES[ref.kind];
@@ -269,18 +309,8 @@ class ProcedureBuilder {
 		if (w === undefined) {
 			throw new Error(`${apt}: the ${ref.kind} ${ref.ident} ${ref.region}${ref.airport ? ` of ${ref.airport}` : ''} is in neither extract`);
 		}
-		switch (w.kind) {
-			case 'terminal':
-				return this.once(intersection(w.ident, w.lat, w.lon, {region: w.region, airport: w.airport}));
-			case 'fix':
-				return this.once(intersection(w.ident, w.lat, w.lon, {region: w.region}));
-			case 'vor':
-				return this.once(vor(w.ident, w.lat, w.lon, {region: w.region}));
-			case 'ndb':
-				return this.once(ndb(w.ident, w.lat, w.lon, {region: w.region, airport: w.airport}));
-			default:
-				throw new Error(`${apt}: no facility of the kind ${w.kind} (${w.ident})`);
-		}
+		const made = facilityOf(w, apt);
+		return make ? this.once(made) : made.icaoStruct;
 	}
 
 	/** The facility made once for all procedures that use it */

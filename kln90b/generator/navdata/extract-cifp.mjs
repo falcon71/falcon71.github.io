@@ -59,6 +59,33 @@ function fixed(text, decimals) {
 	return /^\d+$/.test(text) ? Number(text) / 10 ** decimals : NaN;
 }
 
+/** "E0170" or "W0040": a station declination in tenths of a degree, east positive; null for anything else. */
+function declination(text) {
+	const m = /^([EW])(\d{4})$/.exec(text);
+	if (m === null) return null;
+	const value = Number(m[2]) / 10;
+	return m[1] === 'W' && value !== 0 ? -value : value;
+}
+
+/** The VOR types of the NASR extract by the second letter of the navaid class (column 29): DME, TACAN or none. */
+const VOR_TYPES = {'D': 'VOR/DME', 'T': 'VORTAC', ' ': 'VOR'};
+
+/**
+ * What a VOR (section D) or NDB (DB, PN) record says of its station besides the position: the name in columns 94-123,
+ * the frequency in 23-27 (a VOR's in hundredths of a MHz, an NDB's in tenths of a kHz), and for a VOR the type from the
+ * navaid class in 28-32 and the station declination in 75-79. A value the extract cannot read is NaN or null, which
+ * makes the extract skip a procedure that needs the station from the CIFP.
+ */
+function navaidValues(section, line) {
+	const name = line.slice(93, 123).trim();
+	if (section === 'D ') {
+		return {name, vorType: VOR_TYPES[line[28]] ?? null, mhz: fixed(line.slice(22, 27), 2) ?? NaN,
+			declinationEast: declination(line.slice(74, 79))};
+	}
+	if (section === 'DB' || section === 'PN') return {name, khz: fixed(line.slice(22, 27), 1) ?? NaN};
+	return {};
+}
+
 /**
  * @typedef {{ident: string, region: string, section: string}} RecordFix
  * @typedef {object} LegRecord
@@ -86,6 +113,11 @@ function fixed(text, decimals) {
  * @property {number} lat
  * @property {number} lon
  * @property {true} [withoutVor] a TACAN or DME of section D, at the position of its DME
+ * @property {string} [name] a VOR's or NDB's
+ * @property {string | null} [vorType] a VOR's: 'VOR', 'VOR/DME' or 'VORTAC'
+ * @property {number} [mhz] a VOR's frequency
+ * @property {number | null} [declinationEast] a VOR's station declination, degrees east
+ * @property {number} [khz] an NDB's frequency
  * @typedef {object} RnavRecord the levels of service an approach continuation record of application W authorizes
  * @property {'rnav'} type
  * @property {string} airport
@@ -157,7 +189,7 @@ export function parseRecord(line) {
 	if (line[21] !== '0' && line[21] !== '1') return null;
 	const lat = coordinate(line.slice(32, 41));
 	const lon = coordinate(line.slice(41, 51));
-	if (lat !== null && lon !== null) return {type: 'point', ...point, region: line.slice(19, 21), lat, lon};
+	if (lat !== null && lon !== null) return {type: 'point', ...point, region: line.slice(19, 21), lat, lon, ...navaidValues(section, line)};
 	// A TACAN or DME without VOR has its position in the DME columns 56-74 only
 	const dmeLat = coordinate(line.slice(55, 64));
 	const dmeLon = coordinate(line.slice(64, 74));
@@ -191,7 +223,18 @@ export function parseRecord(line) {
  * @property {CifpLeg[]} final
  * @property {CifpLeg[]} missed
  * @typedef {{ident: string, departures: Proc[], arrivals: Proc[], approaches: Approach[]}} CifpAirport
- * @typedef {{ident: string, region: string, kind: string, airport?: string, lat: number, lon: number}} Waypoint
+ * @typedef {object} Waypoint
+ * @property {string} ident
+ * @property {string} region
+ * @property {string} kind
+ * @property {string} [airport]
+ * @property {number} lat
+ * @property {number} lon
+ * @property {string} [name] a VOR's or NDB's
+ * @property {string} [type] a VOR's: 'VOR', 'VOR/DME' or 'VORTAC'
+ * @property {number} [mhz] a VOR's frequency
+ * @property {number} [declinationEast] a VOR's station declination, degrees east
+ * @property {number} [khz] an NDB's frequency
  * @typedef {{cycle: string, source: string, airports: CifpAirport[], waypoints: Waypoint[]}} CifpExtract
  * @typedef {object} CifpStats
  * @property {{airports: number, departures: number, arrivals: number, approaches: number, waypoints: number}} counts
@@ -283,7 +326,19 @@ export function extractCifp(cifpText, nasr, stats = {}) {
 		const point = points.get(pointKey(fix.section, fix.ident, fix.region, ofAirport));
 		if (point === undefined) return {reason: `fix ${name} is neither in the NASR extract nor in the CIFP`};
 		if (point.withoutVor) return {reason: `fix ${name} is a TACAN or DME without VOR`};
-		return {ref, waypoint: {...ref, lat: point.lat, lon: point.lon}};
+		/** @type {Waypoint} */
+		const waypoint = {...ref, lat: point.lat, lon: point.lon};
+		// A VOR or NDB gets what the NASR extract has of one, in the same units
+		if (kind === 'vor') {
+			if (point.vorType === null || Number.isNaN(point.mhz) || point.declinationEast === null) {
+				return {reason: `fix ${name} with a type, frequency or declination the extract cannot read`};
+			}
+			Object.assign(waypoint, {name: point.name, type: point.vorType, mhz: point.mhz, declinationEast: point.declinationEast});
+		} else if (kind === 'ndb') {
+			if (Number.isNaN(point.khz)) return {reason: `fix ${name} with a frequency the extract cannot read`};
+			Object.assign(waypoint, {name: point.name, khz: point.khz});
+		}
+		return {ref, waypoint};
 	};
 
 	/** @type {Map<string, Waypoint>} */

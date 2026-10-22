@@ -1,7 +1,7 @@
 import {describe, expect, it} from 'vitest';
 import {
 	AirportFacility, BitFlags, FixTypeFlags, ICAO, LegTurnDirection, LegType, RnavTypeFlags, RunwayUtils, UnitType,
-	type Facility,
+	VorType, type Facility, type VorFacility,
 } from '@microsoft/msfs-sdk';
 import {bootUnit, settle} from '../../../vendor/kln90b/test/harness/boot';
 import {MemoryFacilityClient} from '../../../vendor/kln90b/test/harness/navdata/MemoryFacilityClient';
@@ -74,6 +74,14 @@ describe('the procedures of the CIFP extract', () => {
 		expect(vorA.rnavTypeFlags).toBe(RnavTypeFlags.None);
 	});
 
+	it('gives a VOR/DME approach and a localizer back course approach their types', () => {
+		const kykm = apt('KYKM').approaches;
+		const d27 = kykm.filter(a => a.approachType === ApproachType.APPROACH_TYPE_VORDME);
+		expect(d27.map(a => [a.runway, a.approachSuffix])).toEqual([['27', '']]);
+		const lbcB = kykm.filter(a => a.approachType === ApproachType.APPROACH_TYPE_LOCALIZER_BACK_COURSE);
+		expect(lbcB.map(a => [a.runway, a.approachSuffix])).toEqual([['', 'B']]);
+	});
+
 	it('gives a terminal waypoint that NASR lacks the ICAO of its airport', () => {
 		// MACHU is a terminal waypoint of KPDX in region K2, in the waypoints of the CIFP extract
 		const machu = facilities().filter(f => f.icaoStruct.ident === 'MACHU');
@@ -117,6 +125,31 @@ describe('the procedures of the CIFP extract', () => {
 		expect(hold.turnDirection).toBe(LegTurnDirection.Right);
 	});
 
+	it('makes a VOR outside the regions that a procedure flies to once, with the values of its CIFP record', () => {
+		// LKV, Lakeview, lies outside the regions; OCITY3 at KHIO starts there
+		const lkv = facilities().filter(f => f.icaoStruct.ident === 'LKV') as VorFacility[];
+		expect(lkv).toHaveLength(1);
+		expect(lkv[0].icaoStruct.type).toBe('V');
+		expect(lkv[0].icaoStruct.region).toBe('K1');
+		expect(lkv[0].icaoStruct.airport).toBe('');
+		expect([lkv[0].lat, lkv[0].lon]).toEqual([42.49284444, -120.50710556]);
+		expect(lkv[0].name).toBe('LAKEVIEW');
+		expect(lkv[0].freqMHz).toBe(112);
+		expect(lkv[0].type).toBe(VorType.VORTAC);
+		// The sim stores the variation west positive; the CIFP publishes 19 degrees east
+		expect(lkv[0].magneticVariation).toBe(-19);
+	});
+
+	it('makes no facility of a navaid that only a CF or PI leg names, and keeps it on the leg', () => {
+		// The ILS and the localizer 16 of KBLI fly a CF leg to TECUV off YVR of region CY, which NASR files as K1
+		const yvr = facilities().filter(f => f.icaoStruct.ident === 'YVR');
+		expect(yvr.map(f => f.icaoStruct.region)).toEqual(['K1']);
+		const offYvr = apt('KBLI').approaches.flatMap(a => [...a.transitions.flatMap(t => t.legs), ...a.finalLegs, ...a.missedLegs])
+			.filter(l => l.originIcaoStruct.ident === 'YVR');
+		expect(offYvr.map(l => [l.type, l.fixIcaoStruct.ident, l.originIcaoStruct.type, l.originIcaoStruct.region]))
+			.toEqual([[LegType.CF, 'TECUV', 'V', 'CY'], [LegType.CF, 'TECUV', 'V', 'CY']]);
+	});
+
 	it('has every fix and arc navaid of every procedure in the facilities', () => {
 		expect(new MemoryFacilityClient(facilities()).missingProcedureFixes()).toEqual([]);
 	});
@@ -151,6 +184,14 @@ describe('the transcoding', () => {
 			{ident: 'N16L', type: 'N', runway: '16L', suffix: '', rnav: [], transitions: [], final, missed: []},
 		]}));
 		expect(a.approaches.map(x => x.approachType)).toEqual([ApproachType.APPROACH_TYPE_NDB]);
+	});
+
+	it('refuses a runway transition for a runway the airport lacks, naming both', () => {
+		const departure = (runway: string) => () => airportOf(cifp({departures: [{name: 'ONE1', runways: [{runway, legs: [leg]}], common: [], transitions: []}]}));
+		expect(departure('18')).toThrow(/KAAA.* 18$/);
+		expect(departure('18B')).toThrow(/KAAA.* 18B$/);
+		expect(departure('16B')().departures[0].runwayTransitions.map(runwayName)).toEqual(['16L', '16R']);
+		expect(departure('25')().departures[0].runwayTransitions.map(runwayName)).toEqual(['25']);
 	});
 
 	it('refuses a fix it cannot resolve, naming it', () => {

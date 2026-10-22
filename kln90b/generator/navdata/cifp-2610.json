@@ -70457,7 +70457,11 @@
       "region": "K1",
       "kind": "vor",
       "lat": 43.59312222,
-      "lon": -118.95505
+      "lon": -118.95505,
+      "name": "WILDHORSE",
+      "type": "VOR/DME",
+      "mhz": 114.55,
+      "declinationEast": 18
     },
     {
       "ident": "JUDAH",
@@ -70486,14 +70490,22 @@
       "region": "K1",
       "kind": "vor",
       "lat": 42.49284444,
-      "lon": -120.50710556
+      "lon": -120.50710556,
+      "name": "LAKEVIEW",
+      "type": "VORTAC",
+      "mhz": 112,
+      "declinationEast": 19
     },
     {
       "ident": "LMT",
       "region": "K1",
       "kind": "vor",
       "lat": 42.15314167,
-      "lon": -121.72752778
+      "lon": -121.72752778,
+      "name": "KLAMATH FALLS",
+      "type": "VORTAC",
+      "mhz": 115.9,
+      "declinationEast": 17
     },
     {
       "ident": "MACHU",
@@ -70508,14 +70520,22 @@
       "region": "K1",
       "kind": "vor",
       "lat": 47.45690278,
-      "lon": -115.64604444
+      "lon": -115.64604444,
+      "name": "MULLAN PASS",
+      "type": "VOR/DME",
+      "mhz": 117.8,
+      "declinationEast": 15
     },
     {
       "ident": "OED",
       "region": "K1",
       "kind": "vor",
       "lat": 42.479575,
-      "lon": -122.91293333
+      "lon": -122.91293333,
+      "name": "ROGUE VALLEY",
+      "type": "VORTAC",
+      "mhz": 113.6,
+      "declinationEast": 19
     },
     {
       "ident": "OFINO",
@@ -70574,7 +70594,11 @@
       "region": "CY",
       "kind": "vor",
       "lat": 49.07731944,
-      "lon": -123.14907222
+      "lon": -123.14907222,
+      "name": "VANCOUVER",
+      "type": "VOR/DME",
+      "mhz": 115.9,
+      "declinationEast": 17
     }
   ]
 }

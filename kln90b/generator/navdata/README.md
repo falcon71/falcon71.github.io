@@ -167,6 +167,11 @@ waypoints are sorted by name or ident; legs stay in the order the CIFP gives the
 - `waypoints`: the fixes and navaids the procedures need that the NASR extract does not have, with `ident`, `region`,
   `kind`, `airport` where it has one, `lat` and `lon` from their CIFP record. For a terminal waypoint or terminal NDB
   that is the record filed under the procedure's airport. These are the terminal waypoints NASR lacks and the fixes and
-  VORs outside the regions that procedures inside them reach.
+  VORs outside the regions that procedures inside them reach. A VOR also has what the NASR extract has of one, in the
+  same units: `name` (columns 94-123), `type` (`VOR`, `VOR/DME` or `VORTAC`, from the second letter of the navaid class
+  in column 29), `mhz` (columns 23-27, hundredths) and `declinationEast` (the station declination in columns 75-79,
+  east positive). An NDB has `name` and `khz` (columns 23-27, tenths). A VOR or NDB with a value the script cannot read
+  skips its procedure. A navaid that is only the recommended navaid of a `CF` or `PI` leg is listed too (`YVR` of region
+  `CY`, which NASR files as `K1`); `navdata.ts` makes no facility of it, since the unit never loads that navaid.
 - A localizer, TACAN or DME is no facility of either extract. As the navaid of a `CF` or `PI` leg it is left out, which
   the unit does not miss: it reads the navaid of an `AF` leg only. The summary counts them.
