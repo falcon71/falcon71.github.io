@@ -12,7 +12,7 @@ import {captureScreen, type CapturedScreen} from './capture.ts';
 import {locateFields, locateMapFields, type FieldDef, type MapSide} from './fields.ts';
 import {checkCoverage, recordMapElements, type MapElement} from './mapElements.ts';
 import {mapToSvg} from './mapSvg.ts';
-import {facilitiesOf, loadExtract, pointNamesOf} from './navdata.ts';
+import {facilitiesOf, loadExtract, loadProcedures, pointNamesOf} from './navdata.ts';
 import {decimalYear, declination, screenModel, SCREEN_DEGREE} from './wmm.ts';
 
 export interface ScreenDescription {
@@ -76,7 +76,7 @@ async function generate(dir: string, id: string, d: ScreenDescription): Promise<
 	const position = d.boot?.position;
 	const lastPosition = position === undefined ? {} : {lastLatitude: position.lat, lastLongitude: position.lon};
 	const unit = await bootUnit({
-		...d.boot, storage: {...lastPosition, ...d.boot?.storage}, defaultNavdata: false, facilities: facilitiesOf(loadExtract()),
+		...d.boot, storage: {...lastPosition, ...d.boot?.storage}, defaultNavdata: false, facilities: facilitiesOf(loadExtract(), loadProcedures()),
 		magvar: (lat, lon) => declination(screenModel(), lat, lon, year, 0, SCREEN_DEGREE),
 	});
 	await settle(unit);

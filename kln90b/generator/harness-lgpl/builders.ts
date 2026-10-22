@@ -1,5 +1,5 @@
 // Copied from test/harness/navdata/builders.ts of https://github.com/falcon71/kln90b at commit
-// 3d371f34a68144c80f8e7035490d8f0391b0eb45 (LGPL-3.0, see LICENSE.LGPL-3.0.txt next to this file), modified 2026-10-21.
+// 3d371f34a68144c80f8e7035490d8f0391b0eb45 (LGPL-3.0, see LICENSE.LGPL-3.0.txt next to this file), modified 2026-10-21 and 2026-10-22.
 // The changes are listed in README.md; everything else is as in the original.
 import {
     AirportClass, AirportFacility, AirportFacilityDataFlags, AirportPrivateType, AirportRunway, FacilityFrequency,
@@ -166,9 +166,10 @@ export function vor(ident: string, lat: number, lon: number, opts: VorOptions = 
     } as unknown as VorFacility;
 }
 
-export function ndb(ident: string, lat: number, lon: number, opts: { frequencyKHz?: number; region?: string; name?: string } = {}): NdbFacility {
+/** `airport`: the airport a terminal NDB belongs to, part of its ICAO. Default none */
+export function ndb(ident: string, lat: number, lon: number, opts: { frequencyKHz?: number; region?: string; name?: string; airport?: string } = {}): NdbFacility {
     const region = opts.region ?? DEFAULT_REGION;
-    const icaoStruct = ICAO.value('N', region, '', ident);
+    const icaoStruct = ICAO.value('N', region, opts.airport ?? '', ident);
     // noinspection JSDeprecatedSymbols
     return {
         icao: ICAO.valueToStringV1(icaoStruct), icaoStruct, name: opts.name ?? ident, lat, lon, region, city: '',
@@ -176,9 +177,10 @@ export function ndb(ident: string, lat: number, lon: number, opts: { frequencyKH
     } as unknown as NdbFacility;
 }
 
-export function intersection(ident: string, lat: number, lon: number, opts: { region?: string } = {}): IntersectionFacility {
+/** `airport`: the airport a terminal waypoint belongs to, part of its ICAO. Default none */
+export function intersection(ident: string, lat: number, lon: number, opts: { region?: string; airport?: string } = {}): IntersectionFacility {
     const region = opts.region ?? DEFAULT_REGION;
-    const icaoStruct = ICAO.value('W', region, '', ident);
+    const icaoStruct = ICAO.value('W', region, opts.airport ?? '', ident);
     // noinspection JSDeprecatedSymbols
     return {
         icao: ICAO.valueToStringV1(icaoStruct), icaoStruct, name: '', lat, lon, region, city: '', routes: [],

@@ -1,12 +1,21 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import {AirportClass, FacilityFrequencyType, RunwaySurfaceType, VorType, type Facility} from '@microsoft/msfs-sdk';
+import {
+	AirportClass, FacilityFrequencyType, FixTypeFlags, FlightPlan, ICAO, LegTurnDirection, LegType, RnavTypeFlags,
+	RunwaySurfaceType, UnitType, VorType, type AirportFacility, type ApproachProcedure, type Facility, type FlightPlanLeg,
+	type IcaoValue, type Procedure,
+} from '@microsoft/msfs-sdk';
+import {approach, runwayFix, sid, star, withProcedures} from '../../../vendor/kln90b/test/harness/navdata/procedures';
 import {airport, intersection, ndb, vor, type FrequencyOptions, type RunwayOptions} from '../harness-lgpl/builders.ts';
+import type {Approach, CifpExtract, CifpLeg, FixRef, Proc} from '../navdata/extract-cifp.mjs';
 import type {NamedPoint} from './mapElements.ts';
 import {SITE} from './paths.ts';
 
+export type {CifpExtract};
+
 const NAVDATA = path.join(SITE, 'generator', 'navdata');
 const EXTRACT_FILE = /^nasr-\d{4}-\d{2}-\d{2}\.json$/;
+const CIFP_FILE = /^cifp-\d{4}\.json$/;
 
 /** The extract `generator/navdata/extract-nasr.mjs` writes; the format is described in `navdata/README.md`. */
 export interface NavdataExtract {
@@ -33,6 +42,18 @@ export function loadExtract(): NavdataExtract {
 		extractCache = JSON.parse(fs.readFileSync(path.join(NAVDATA, newest), 'utf8')) as NavdataExtract;
 	}
 	return extractCache;
+}
+
+let proceduresCache: CifpExtract | undefined;
+
+/** The newest `generator/navdata/cifp-*.json`, the procedures of the extract's airports, read once. */
+export function loadProcedures(): CifpExtract {
+	if (proceduresCache === undefined) {
+		const newest = fs.readdirSync(NAVDATA).filter(f => CIFP_FILE.test(f)).sort().pop();
+		if (newest === undefined) throw new Error(`no cifp-*.json in ${NAVDATA}; run generator/navdata/extract-cifp.mjs`);
+		proceduresCache = JSON.parse(fs.readFileSync(path.join(NAVDATA, newest), 'utf8')) as CifpExtract;
+	}
+	return proceduresCache;
 }
 
 // The use text of a NASR frequency starts with the kind of service (`LCL/P`, `APCH/P DEP/P`, `D-ATIS`). Everything else
@@ -77,8 +98,13 @@ function surfaceOf(code: string): RunwaySurfaceType {
 
 const VOR_TYPES: Record<string, VorType> = {'VOR': VorType.VOR, 'VOR/DME': VorType.VORDME, 'VORTAC': VorType.VORTAC};
 
-/** The facilities of the extract, as the harness's navdata takes them. */
-export function facilitiesOf(x: NavdataExtract): Facility[] {
+/**
+ * The facilities of the extract, as the harness's navdata takes them. With the procedures of the CIFP extract, the
+ * airports carry their SIDs, STARs and approaches as the simulator delivers them, and the facilities include what the
+ * procedures fly to that the NASR extract lacks: terminal waypoints, the fixes and VORs outside the regions, and the
+ * runway fixes.
+ */
+export function facilitiesOf(x: NavdataExtract, p?: CifpExtract): Facility[] {
 	const out: Facility[] = [];
 	for (const a of x.airports) {
 		const runways: RunwayOptions[] = a.runways.map(r => ({
@@ -98,7 +124,185 @@ export function facilitiesOf(x: NavdataExtract): Facility[] {
 	}
 	for (const n of x.ndbs) out.push(ndb(n.ident, n.lat, n.lon, {name: n.name, frequencyKHz: n.khz, region: n.region}));
 	for (const f of x.fixes) out.push(intersection(f.ident, f.lat, f.lon, {region: f.region}));
-	return out;
+	return p === undefined ? out : withCifpProcedures(out, x, p);
+}
+
+/**
+ * The approach types of the CIFP (the route type of the final approach) as the SDK names them, or undefined for a type
+ * that is left out. A function, because `ApproachType` is a global of the sim that the harness sets up.
+ */
+function approachTypeOf(type: string): ApproachType | undefined {
+	const types: Record<string, ApproachType> = {
+		P: ApproachType.APPROACH_TYPE_GPS, R: ApproachType.APPROACH_TYPE_RNAV, H: ApproachType.APPROACH_TYPE_RNAV,
+		I: ApproachType.APPROACH_TYPE_ILS, L: ApproachType.APPROACH_TYPE_LOCALIZER,
+		B: ApproachType.APPROACH_TYPE_LOCALIZER_BACK_COURSE, D: ApproachType.APPROACH_TYPE_VORDME,
+		V: ApproachType.APPROACH_TYPE_VOR, S: ApproachType.APPROACH_TYPE_VOR, N: ApproachType.APPROACH_TYPE_NDB,
+		Q: ApproachType.APPROACH_TYPE_NDBDME, X: ApproachType.APPROACH_TYPE_LDA, U: ApproachType.APPROACH_TYPE_SDF,
+	};
+	return types[type];
+}
+
+const RNAV_LEVELS: Record<string, RnavTypeFlags> = {
+	'LNAV': RnavTypeFlags.LNAV, 'LNAV/VNAV': RnavTypeFlags.LNAVVNAV, 'LP': RnavTypeFlags.LP, 'LPV': RnavTypeFlags.LPV,
+};
+const ROLES: Record<string, FixTypeFlags> = {IAF: FixTypeFlags.IAF, IF: FixTypeFlags.IF, FAF: FixTypeFlags.FAF, MAP: FixTypeFlags.MAP};
+const TURNS: Record<string, LegTurnDirection> = {L: LegTurnDirection.Left, R: LegTurnDirection.Right};
+/** The facility type of the ICAO by the kind of a fix reference; NASR files terminal waypoints as fixes */
+const ICAO_TYPES: Record<string, string> = {fix: 'W', terminal: 'W', vor: 'V', ndb: 'N'};
+const RUNWAY_PAIR = /^(\d\d)([LRCW]?)-(\d\d)([LRCW]?)$/;
+const BOTH_PARALLELS = /^(\d\d)B$/;
+
+/** The runway ends of an airport of the extract in the order of its runways: `14L-32R` has 14L and 32R */
+function runwayEndsOf(a: NavdataExtract['airports'][number]): string[] {
+	return a.runways.flatMap(r => {
+		const pair = RUNWAY_PAIR.exec(r.designation);
+		return pair === null ? [] : [pair[1] + pair[2], pair[3] + pair[4]];
+	});
+}
+
+/**
+ * The runways a runway transition of the CIFP is for. A transition for both parallels (`32B`) becomes one per runway end
+ * of that number, as the maintainer saw the simulator deliver CHINS5 at KBFI; one for every runway (`ALL`) becomes one
+ * per runway end of the airport, by the same logic.
+ */
+function runwaysOf(runway: string, ends: string[]): string[] {
+	if (runway === 'ALL') return ends;
+	const both = BOTH_PARALLELS.exec(runway);
+	return both === null ? [runway] : ends.filter(e => e.startsWith(both[1]));
+}
+
+const key = (...parts: string[]) => parts.join(' ');
+
+/** Turns the procedures of the CIFP extract into the SDK's, and makes the facilities their fixes need */
+class ProcedureBuilder {
+	private readonly nasr = new Map<string, Facility>();
+	private readonly airports = new Map<string, AirportFacility>();
+	private readonly waypoints = new Map<string, CifpExtract['waypoints'][number]>();
+	/** The facilities made for the procedures, by ICAO */
+	public readonly made = new Map<string, Facility>();
+
+	public constructor(facilities: Facility[], waypoints: CifpExtract['waypoints']) {
+		for (const f of facilities) {
+			if (f.icaoStruct.type === 'A') this.airports.set(f.icaoStruct.ident, f as AirportFacility);
+			else this.nasr.set(key(f.icaoStruct.type, f.icaoStruct.region, f.icaoStruct.ident), f);
+		}
+		for (const w of waypoints) this.waypoints.set(key(w.kind, w.region, w.airport ?? '', w.ident), w);
+	}
+
+	public airport(apt: AirportFacility, procedures: CifpExtract['airports'][number], ends: string[]): AirportFacility {
+		const ident = apt.icaoStruct.ident;
+		return withProcedures(apt, {
+			departures: procedures.departures.map(p => this.procedure(sid, p, ident, ends)),
+			arrivals: procedures.arrivals.map(p => this.procedure(star, p, ident, ends)),
+			approaches: procedures.approaches.flatMap(a => this.approach(a, ident) ?? []),
+		});
+	}
+
+	private procedure(build: typeof sid, p: Proc, apt: string, ends: string[]): Procedure {
+		return build(p.name, {
+			// Fresh legs for each runway: a leg is never shared between transitions
+			runways: p.runways.flatMap(r => runwaysOf(r.runway, ends).map(runway => ({runway, legs: this.legs(r.legs, apt)}))),
+			common: this.legs(p.common, apt),
+			transitions: p.transitions.map(t => ({name: t.name, legs: this.legs(t.legs, apt)})),
+		});
+	}
+
+	private approach(a: Approach, apt: string): ApproachProcedure | null {
+		const type = approachTypeOf(a.type);
+		if (type === undefined) return null;
+		const levels = a.rnav.reduce((flags, level) => {
+			if (RNAV_LEVELS[level] === undefined) throw new Error(`${apt} ${a.ident}: no RNAV level ${level}`);
+			return flags | RNAV_LEVELS[level];
+		}, RnavTypeFlags.None);
+		return approach({
+			name: a.ident, type, runway: a.runway, suffix: a.suffix,
+			// An RNAV approach without published levels (a circling one) is flown to LNAV
+			rnav: a.type === 'R' && levels === RnavTypeFlags.None ? RnavTypeFlags.LNAV : levels,
+			rnpAr: a.type === 'H',
+			transitions: a.transitions.map(t => ({name: t.name, legs: this.legs(t.legs, apt)})),
+			final: this.legs(a.final, apt), missed: this.legs(a.missed, apt),
+		});
+	}
+
+	private legs(legs: CifpLeg[], apt: string): FlightPlanLeg[] {
+		return legs.map(l => this.leg(l, apt));
+	}
+
+	/**
+	 * A leg as the simulator delivers it. Courses and radials stay magnetic, as published. `rho` is the distance from the
+	 * navaid in meters: the radius of an arc, the distance of a procedure turn's or a course's fix. The radius of an RF
+	 * leg is left out with its center, since the unit refuses every procedure with an RF leg.
+	 */
+	private leg(l: CifpLeg, apt: string): FlightPlanLeg {
+		const type = LegType[l.type as keyof typeof LegType];
+		if (type === undefined) throw new Error(`${apt}: no SDK leg type for the path terminator ${l.type}`);
+		return FlightPlan.createLeg({
+			type,
+			fixIcaoStruct: l.fix === undefined ? undefined : this.icaoOf(l.fix, apt),
+			originIcaoStruct: l.navaid === undefined ? undefined : this.icaoOf(l.navaid, apt),
+			course: l.courseMag, theta: l.thetaDeg,
+			rho: l.rhoNm === undefined ? undefined : UnitType.NMILE.convertTo(l.rhoNm, UnitType.METER),
+			turnDirection: l.turn === undefined ? undefined : TURNS[l.turn], flyOver: l.flyOver,
+			fixTypeFlags: l.role === undefined ? undefined : ROLES[l.role],
+		});
+	}
+
+	/**
+	 * The ICAO of the facility a fix reference names. A fix, terminal waypoint, VOR or NDB is the NASR facility of its
+	 * ident and region where there is one, whatever airport the reference names; only one that NASR lacks is made from
+	 * the waypoints of the CIFP extract, a terminal one with its airport.
+	 * @throws Error when neither has it
+	 */
+	private icaoOf(ref: FixRef, apt: string): IcaoValue {
+		// A leg to the airport itself: the simulator delivers it without a fix, and the unit drops it
+		if (ref.kind === 'airport') return ICAO.emptyValue();
+		if (ref.kind === 'runway') {
+			const owner = this.airports.get(ref.airport ?? apt);
+			if (owner === undefined) throw new Error(`${apt}: no airport ${ref.airport} for the runway ${ref.ident}`);
+			return this.once(runwayFix(owner, ref.ident.replace(/^RW/, '')));
+		}
+		const type = ICAO_TYPES[ref.kind];
+		if (type === undefined) throw new Error(`${apt}: no fix kind ${ref.kind} (${ref.ident})`);
+		const known = this.nasr.get(key(type, ref.region, ref.ident));
+		if (known !== undefined) return known.icaoStruct;
+		const w = this.waypoints.get(key(ref.kind, ref.region, ref.airport ?? '', ref.ident));
+		if (w === undefined) {
+			throw new Error(`${apt}: the ${ref.kind} ${ref.ident} ${ref.region}${ref.airport ? ` of ${ref.airport}` : ''} is in neither extract`);
+		}
+		switch (w.kind) {
+			case 'terminal':
+				return this.once(intersection(w.ident, w.lat, w.lon, {region: w.region, airport: w.airport}));
+			case 'fix':
+				return this.once(intersection(w.ident, w.lat, w.lon, {region: w.region}));
+			case 'vor':
+				return this.once(vor(w.ident, w.lat, w.lon, {region: w.region}));
+			case 'ndb':
+				return this.once(ndb(w.ident, w.lat, w.lon, {region: w.region, airport: w.airport}));
+			default:
+				throw new Error(`${apt}: no facility of the kind ${w.kind} (${w.ident})`);
+		}
+	}
+
+	/** The facility made once for all procedures that use it */
+	private once(f: Facility): IcaoValue {
+		const uid = ICAO.getUid(f.icaoStruct);
+		if (!this.made.has(uid)) this.made.set(uid, f);
+		return this.made.get(uid)!.icaoStruct;
+	}
+}
+
+function withCifpProcedures(facilities: Facility[], x: NavdataExtract, p: CifpExtract): Facility[] {
+	const builder = new ProcedureBuilder(facilities, p.waypoints);
+	const nasrAirports = new Map(x.airports.map(a => [a.ident, a]));
+	const procedures = new Map(p.airports.map(a => [a.ident, a]));
+	for (const ident of procedures.keys()) {
+		if (!nasrAirports.has(ident)) throw new Error(`the CIFP extract ${p.cycle} has procedures of ${ident}, which the NASR extract ${x.cycle} lacks`);
+	}
+	const out = facilities.map(f => {
+		const own = f.icaoStruct.type === 'A' ? procedures.get(f.icaoStruct.ident) : undefined;
+		return own === undefined ? f : builder.airport(f as AirportFacility, own, runwayEndsOf(nasrAirports.get(own.ident)!));
+	});
+	return [...out, ...builder.made.values()];
 }
 
 /**
