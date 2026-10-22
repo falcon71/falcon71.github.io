@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "kln90b-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "kln90b", "run", "dev", "--", "--port", "4400"],
+      "port": 4400
+    }
+  ]
+}
