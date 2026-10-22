@@ -30,6 +30,8 @@ const YKM7 = '3 YKM7';
 const RW27 = '3 RW27';
 const CHINS5 = '1 CHINS5';
 const YKM = '3 YKM';
+// kln90b#409: the unit splits the runway entry RW32B of the CHINS5 arrival into RW32L and RW32R; when the fix lands the
+// entry is RW32B and this constant (and the runway fields of the screen tut2-apt-7-star-runway) change with it
 const RW32L = '3 RW32L';
 // The list of approaches shows the RNAV (GPS) Y approach to 32L without its suffix
 const RNAV_32L = '1 RNAV 32L';
