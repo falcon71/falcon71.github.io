@@ -205,6 +205,34 @@ describe('extract', () => {
 		]);
 	});
 
+	it('keeps the low VHF RCAG frequencies of every ARTCC with a site in a region, in file order', () => {
+		const x = extract(FIXTURE, [SEATTLE]);
+		expect(x.centers).toEqual([{artcc: 'ZSE', frequencies: [124.85, 126.1, 127.05]}]);
+	});
+
+	it('names every ARTCC with a site in any of the regions, sorted by ARTCC', () => {
+		const abajo = {name: 'abajo', lat: 37.95, lon: -107.91, radiusNm: 10};
+		const x = extract(FIXTURE, [SEATTLE, abajo]);
+		expect(x.centers).toEqual([
+			{artcc: 'ZDV', frequencies: [125.35]},
+			{artcc: 'ZSE', frequencies: [124.85, 126.1, 127.05]},
+		]);
+		expect(extract(FIXTURE, [abajo]).centers).toEqual([{artcc: 'ZDV', frequencies: [125.35]}]);
+	});
+
+	it('takes only the RCAG rows, not the other facilities that carry an ARTCC or FSS identifier', () => {
+		const dir = copyFixture();
+		// the RCO rows of the real file carry the identifier of their flight service station
+		edit(dir, 'FRQ.csv', text => text
+			+ '"2026/10/01","BDG","RCO","ZSE","BDG","RCO",47.5,-122.3,"122.55","LOW","BDG RCO"\n'
+			+ '"2026/10/01","BDG","RCO","ZXX","BDG","RCO",47.5,-122.3,"122.55","LOW","BDG RCO"\n');
+		expect(extract(dir, [SEATTLE]).centers).toEqual([{artcc: 'ZSE', frequencies: [124.85, 126.1, 127.05]}]);
+	});
+
+	it('has no Center where no RCAG lies within a region', () => {
+		expect(extract(FIXTURE, [MIAMI]).centers).toEqual([]);
+	});
+
 	it('counts what it derived and what it could not use', () => {
 		expect(stats).toMatchObject({
 			counts: {airports: 3, vors: 4, ndbs: 2, fixes: 4},

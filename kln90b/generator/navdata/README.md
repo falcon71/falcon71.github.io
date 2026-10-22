@@ -4,20 +4,32 @@ The example screens show real US places. Their data is the FAA's public NASR dat
 Navigraph's. `extract-nasr.mjs` turns the NASR 28-day subscription (CSV) into one neutral JSON file for the regions in
 `regions.json`; the screens load only that file.
 
+## Downloads
+
+The FAA publishes everything the generator reads. Download each file into a folder outside this repository; nothing
+from those folders is committed except the generated files.
+
+| Download | Link | Read by |
+| --- | --- | --- |
+| NASR subscription, CSV data | https://www.faa.gov/air_traffic/flight_info/aeronav/aero_data/NASR_Subscription/ | `extract-nasr.mjs`, from the unzipped folder |
+| CIFP, the file `FAACIFP18` | https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/cifp/download/ | the procedures script, from the file |
+| Airspace Boundary | https://adds-faa.opendata.arcgis.com/datasets/faa::airspace-boundary-1/about | the airspaces script, from the GeoJSON file |
+| Class Airspace | https://adds-faa.opendata.arcgis.com/datasets/faa::class-airspace/about | the airspaces script, from the GeoJSON file |
+
 ## Updating the extract
 
-1. Download the current CSV data from the FAA's NASR Subscription page and unzip it into a folder outside this
-   repository. Nothing from that folder is committed except the generated file.
+1. Download the current CSV data from the FAA's NASR Subscription page (see Downloads) and unzip it into a folder outside
+   this repository. Nothing from that folder is committed except the generated file.
 2. From `kln90b/`:
 
    ```bash
    node generator/navdata/extract-nasr.mjs <unzipped CSV folder>
    ```
 
-3. The script writes `nasr-<effective date>.json` here and prints a summary: the counts per type, how many regions it
-   derived from the fixes of an ARTCC, how many it had to set to `K1`, and every record or value it skipped or
-   defaulted, with the reason. Commit the new file and delete the old one; the records are sorted and indented so that
-   the diff shows what changed.
+3. The script writes `nasr-<effective date>.json` here and prints a summary: the counts per type (the Centers too),
+   how many regions it derived from the fixes of an ARTCC, how many it had to set to `K1`, and every record or value it
+   skipped or defaulted, with the reason. Commit the new file and delete the old one; the records are sorted and
+   indented so that the diff shows what changed.
 
 Add a region to `regions.json` (`name`, `lat`, `lon`, `radiusNm`) to extract more. A record is included when it lies
 within `radiusNm` of any region's center, measured along the great circle on a sphere of radius 3440.065 NM.
@@ -45,6 +57,7 @@ ident (runways by designation, frequencies by use and then MHz).
 - `vors`: `ident`, `name`, `type` (`VOR`, `VOR/DME` or `VORTAC`), `lat`, `lon`, `mhz`, `declinationEast` and `region`.
 - `ndbs`: `ident`, `name`, `lat`, `lon`, `khz`, `region`.
 - `fixes`: `ident`, `lat`, `lon`, `region`.
+- `centers`: `artcc` (`ZSE`) and `frequencies`, in MHz. Sorted by `artcc`.
 
 ### What gets in
 
@@ -55,6 +68,11 @@ ident (runways by designation, frequencies by use and then MHz).
 - Navaids: operational status only (`OPERATIONAL IFR`, `OPERATIONAL VFR ONLY`, `OPERATIONAL RESTRICTED`). VOR, VOR/DME
   and VORTAC are VORs; NDB and NDB/DME are NDBs. DME, TACAN, VOT, markers and marine beacons are left out.
 - Fixes: all of them, whatever their use code.
+- Centers: an ARTCC qualifies when a row of `FRQ.csv` for one of its remote sites (`FACILITY_TYPE` `RCAG`) lies within a
+  region. The row's position is the one the file gives for that row, which for most rows is the airport the site
+  serves. The `frequencies` are then all the RCAG rows of that ARTCC (`ARTCC_OR_FSS_ID`) with `SECTORIZATION` `LOW` or
+  `LOW/HIGH`, from 118.000 to 136.975 MHz, without 121.5, in file order and each once, wherever the site lies: a
+  Center's frequencies are those of the whole ARTCC, not of the region.
 
 ### Runways
 

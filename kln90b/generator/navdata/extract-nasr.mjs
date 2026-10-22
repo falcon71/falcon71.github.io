@@ -20,12 +20,17 @@ const REQUIRED_COLUMNS = {
 		'LONG_DECIMAL', 'ELEV', 'MAG_VARN', 'MAG_HEMIS', 'TWR_TYPE_CODE', 'ICAO_ID'],
 	'APT_RWY.csv': ['ARPT_ID', 'RWY_ID', 'RWY_LEN', 'SURFACE_TYPE_CODE', 'RWY_LGT_CODE'],
 	'APT_RWY_END.csv': ['ARPT_ID', 'RWY_ID', 'RWY_END_ID', 'TRUE_ALIGNMENT', 'LAT_DECIMAL', 'LONG_DECIMAL'],
-	'FRQ.csv': ['SERVICED_FACILITY', 'SERVICED_SITE_TYPE', 'FREQ', 'FREQ_USE'],
+	'FRQ.csv': ['FACILITY_TYPE', 'ARTCC_OR_FSS_ID', 'SERVICED_FACILITY', 'SERVICED_SITE_TYPE', 'LAT_DECIMAL', 'LONG_DECIMAL',
+		'FREQ', 'SECTORIZATION', 'FREQ_USE'],
 	'NAV_BASE.csv': ['EFF_DATE', 'NAV_ID', 'NAV_TYPE', 'NAV_STATUS', 'NAME', 'HIGH_ALT_ARTCC_ID', 'LOW_ALT_ARTCC_ID',
 		'LAT_DECIMAL', 'LONG_DECIMAL', 'MAG_VARN', 'MAG_VARN_HEMIS', 'FREQ'],
 	'FIX_BASE.csv': ['EFF_DATE', 'FIX_ID', 'ICAO_REGION_CODE', 'LAT_DECIMAL', 'LONG_DECIMAL', 'ARTCC_ID_HIGH',
 		'ARTCC_ID_LOW'],
 };
+
+/** The communication band in MHz, and the emergency frequency that every Center lists and no screen shows. */
+const COMM_BAND_MHZ = {min: 118, max: 136.975};
+const GUARD_MHZ = 121.5;
 
 /** NAV_TYPE values the data layout lists. Anything else is counted as unknown and skipped. */
 const KNOWN_NAV_TYPES = new Set(['CONSOLAN', 'DME', 'FAN MARKER', 'MARINE NDB', 'MARINE NDB/DME', 'NDB', 'NDB/DME',
@@ -169,7 +174,7 @@ function effectiveDate(file, rows) {
 /**
  * @typedef {{name: string, lat: number, lon: number, radiusNm: number}} Region
  * @typedef {object} ExtractStats
- * @property {{airports: number, vors: number, ndbs: number, fixes: number}} counts
+ * @property {{airports: number, vors: number, ndbs: number, fixes: number, centers: number}} counts
  * @property {number} regionsFromArtcc records whose region came from the fixes of their ARTCC
  * @property {number} regionsDefaulted records without a region whose ARTCC has no fixes, set to K1
  * @property {Record<string, number>} skipped records and values the script could not use, by reason
@@ -418,7 +423,29 @@ export function extract(folder, regions, stats = {}) {
 	}
 	fixes.sort(byIdent);
 
-	stats.counts = {airports: airports.length, vors: vors.length, ndbs: ndbs.length, fixes: fixes.length};
+	// Centers: an ARTCC with a remote site (RCAG) within a region. The row's position is the one of the facility the
+	// site serves, or of the site itself where it serves no airport. The frequencies are all the low altitude VHF
+	// communication frequencies of its RCAGs, wherever they are, in file order.
+	/** @type {Map<string, number[]>} */
+	const frequenciesOfArtcc = new Map();
+	const centerArtccs = new Set();
+	for (const f of frq) {
+		if (f.FACILITY_TYPE !== 'RCAG' || f.ARTCC_OR_FSS_ID === '') continue;
+		const lat = num(f.LAT_DECIMAL);
+		const lon = num(f.LONG_DECIMAL);
+		if (lat !== null && lon !== null && inside(lat, lon)) centerArtccs.add(f.ARTCC_OR_FSS_ID);
+		const mhz = num(f.FREQ);
+		if (mhz === null || (f.SECTORIZATION !== 'LOW' && f.SECTORIZATION !== 'LOW/HIGH')) continue;
+		if (mhz < COMM_BAND_MHZ.min || mhz > COMM_BAND_MHZ.max || mhz === GUARD_MHZ) continue;
+		const list = frequenciesOfArtcc.get(f.ARTCC_OR_FSS_ID) ?? [];
+		if (!list.includes(mhz)) list.push(mhz);
+		frequenciesOfArtcc.set(f.ARTCC_OR_FSS_ID, list);
+	}
+	const centers = [...centerArtccs].sort(compare)
+		.map(artcc => ({artcc, frequencies: frequenciesOfArtcc.get(artcc) ?? []}));
+
+	stats.counts = {airports: airports.length, vors: vors.length, ndbs: ndbs.length, fixes: fixes.length,
+		centers: centers.length};
 	return {
 		cycle,
 		source: `FAA NASR 28-day subscription (CSV), effective ${cycle}`,
@@ -427,6 +454,7 @@ export function extract(folder, regions, stats = {}) {
 		vors,
 		ndbs,
 		fixes,
+		centers,
 	};
 }
 
@@ -439,6 +467,7 @@ function summary(extractedFile, result, stats) {
 		`VORs ${stats.counts.vors}`,
 		`NDBs ${stats.counts.ndbs}`,
 		`Fixes ${stats.counts.fixes}`,
+		`Centers ${stats.counts.centers}`,
 		`Regions derived from the fixes of the ARTCC: ${stats.regionsFromArtcc}`,
 		`Regions set to ${FALLBACK_REGION} because the ARTCC has no fixes: ${stats.regionsDefaulted}`,
 	];

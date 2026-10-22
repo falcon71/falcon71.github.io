@@ -18,7 +18,7 @@ function apt(over: Partial<Airport> = {}): Airport {
 }
 
 function extract(over: Partial<NavdataExtract> = {}): NavdataExtract {
-	return {cycle: '2026-10-01', airports: [apt()], vors: [], ndbs: [], fixes: [], ...over};
+	return {cycle: '2026-10-01', airports: [apt()], vors: [], ndbs: [], fixes: [], centers: [], ...over};
 }
 
 function airportOf(x: NavdataExtract): AirportFacility {

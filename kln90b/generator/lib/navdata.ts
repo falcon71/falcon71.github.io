@@ -20,6 +20,7 @@ export interface NavdataExtract {
 	vors: { ident: string; name: string; type: string; lat: number; lon: number; mhz: number; declinationEast: number; region: string }[];
 	ndbs: { ident: string; name: string; lat: number; lon: number; khz: number; region: string }[];
 	fixes: { ident: string; lat: number; lon: number; region: string }[];
+	centers: { artcc: string; frequencies: number[] }[];
 }
 
 let extractCache: NavdataExtract | undefined;
