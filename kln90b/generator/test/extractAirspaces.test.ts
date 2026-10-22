@@ -3,7 +3,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {afterEach, describe, expect, it} from 'vitest';
 import {SITE} from '../lib/paths.ts';
-import {extractAirspaces, serialize} from '../navdata/extract-airspaces.mjs';
+import {extractAirspaces, serialize, summary} from '../navdata/extract-airspaces.mjs';
 
 const FIXTURES = path.join(SITE, 'generator', 'test', 'fixtures', 'airspaces');
 const CLASS_FILE = path.join(FIXTURES, 'Class_Airspace.geojson');
@@ -84,11 +84,53 @@ describe('extractAirspaces', () => {
 		expect(parts[0]).toMatchObject({lowerFt: 0, lowerRef: 'SFC', upperFt: 10000, upperRef: 'MSL'});
 	});
 
-	it('counts what it kept per kind and what it skipped', async () => {
+	it('counts what it kept per kind', async () => {
 		const stats: any = {};
 		await run(stats);
 		expect(stats.counts).toEqual({B: 5, C: 1, center: 1});
-		expect(stats.skipped).toEqual({});
+	});
+
+	it('skips a feature with a limit it does not read, and counts it with the reason', async () => {
+		const stats: any = {};
+		const result = await run(stats);
+		// the lower limit of one shelf is in meters, the upper limit code of another is unknown
+		expect(stats.skipped).toMatchObject({
+			'class B airspace with a lower limit the script does not read (LOWER_VAL 0, LOWER_UOM M, LOWER_CODE SFC)': 1,
+			'class B airspace with an upper limit the script does not read (UPPER_VAL 10000, UPPER_UOM FT, UPPER_CODE XXX)': 1,
+		});
+		expect(result.airspaces.filter(a => a.sector === 'BADLOWER' || a.sector === 'BADUPPER')).toEqual([]);
+	});
+
+	it('skips a feature that has no polygon, and a ring that has no area, and counts them', async () => {
+		const stats: any = {};
+		const result = await run(stats);
+		// no geometry at all, a line string, and a ring of two vertices
+		expect(stats.skipped).toMatchObject({
+			'class B airspace with a geometry that is not a polygon or a multipolygon': 2,
+			'class B airspace with a ring of fewer than three vertices': 1,
+		});
+		expect(Object.keys(stats.skipped)).toHaveLength(4);
+		expect(result.airspaces.filter(a => ['NOGEOMETRY', 'LINE', 'THINRING'].includes(a.sector ?? ''))).toEqual([]);
+	});
+
+	it('counts a feature that is no polygon wherever it is, and does not count one that lies outside every region', async () => {
+		const stats: any = {};
+		const nowhere = {name: 'nowhere', lat: 0, lon: 0, radiusNm: 10};
+		await extractAirspaces(CLASS_FILE, BOUNDARY_FILE, [nowhere], DATE, stats);
+		// the features without a polygon cannot say where they lie; the ones with unreadable limits lie in Seattle
+		expect(stats.skipped).toEqual({
+			'class B airspace with a geometry that is not a polygon or a multipolygon': 2,
+			'class B airspace with a ring of fewer than three vertices': 1,
+		});
+	});
+
+	it('stops with the file named when a file has no feature line', async () => {
+		const dir = mkdtempSync(path.join(os.tmpdir(), 'airspaces-fixture-'));
+		temps.push(dir);
+		const empty = path.join(dir, 'Reformatted.geojson');
+		writeFileSync(empty, '{ "type": "FeatureCollection",\n"features": [\n{ "type": "Feature", "properties": {} }\n]\n}\n');
+		await expect(extractAirspaces(empty, BOUNDARY_FILE, [SEATTLE], DATE)).rejects.toThrow(/Reformatted\.geojson: no feature lines/);
+		await expect(extractAirspaces(CLASS_FILE, empty, [SEATTLE], DATE)).rejects.toThrow(/Reformatted\.geojson: no feature lines/);
 	});
 
 	it('leaves out what lies outside every region', async () => {
@@ -115,6 +157,30 @@ describe('extractAirspaces', () => {
 		const converted = await extractAirspaces(crlf(CLASS_FILE), crlf(BOUNDARY_FILE), [SEATTLE], DATE);
 		expect(readFileSync(path.join(dir, 'Class_Airspace.geojson'), 'utf8')).toContain('\r\n');
 		expect(serialize(converted)).toBe(serialize(await run()));
+	});
+});
+
+describe('summary', () => {
+	it('prints the counts and every skip with its reason, sorted by reason', async () => {
+		const stats: any = {};
+		const result = await run(stats);
+		expect(summary('out.json', result, stats)).toBe([
+			'Wrote out.json',
+			'Date 2026-10-22',
+			'Class B airspaces 5',
+			'Class C airspaces 1',
+			'Centers 1',
+			'Skipped:',
+			'  2 class B airspace with a geometry that is not a polygon or a multipolygon',
+			'  1 class B airspace with a lower limit the script does not read (LOWER_VAL 0, LOWER_UOM M, LOWER_CODE SFC)',
+			'  1 class B airspace with a ring of fewer than three vertices',
+			'  1 class B airspace with an upper limit the script does not read (UPPER_VAL 10000, UPPER_UOM FT, UPPER_CODE XXX)',
+		].join('\n'));
+	});
+
+	it('says that nothing was skipped', () => {
+		const stats = {counts: {B: 0, C: 0, center: 0}, skipped: {}};
+		expect(summary('out.json', {date: DATE, source: '', airspaces: []}, stats)).toMatch(/\nNothing skipped$/);
 	});
 });
 

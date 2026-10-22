@@ -55,29 +55,35 @@ const compare = (a, b) => a < b ? -1 : a > b ? 1 : 0;
 
 /**
  * The features of a GeoJSON file that has one feature per line, as parsed objects. Every other line (the collection's
- * header and its closing brackets) is ignored, and so is the comma that ends a feature line.
+ * header and its closing brackets) is ignored, and so is the comma that ends a feature line. A file without a single
+ * feature is an error: the FAA has most likely changed the layout.
  * @param {string} file
  * @returns {AsyncGenerator<any>}
  */
 async function* features(file) {
 	const lines = readline.createInterface({input: fs.createReadStream(file), crlfDelay: Infinity});
+	let found = 0;
 	for await (const line of lines) {
 		if (!line.startsWith('{"type":"Feature"')) continue;
+		found++;
 		yield JSON.parse(line.trimEnd().replace(/,$/, ''));
 	}
+	if (found === 0) throw new Error(`${file}: no feature lines found (the script reads one {"type":"Feature" per line)`);
 }
 
 /**
  * The outer rings of a feature's geometry, one per polygon of a multipolygon. A ring is [lat, lon] pairs without the
- * closing vertex (GeoJSON repeats the first one) and without altitude. Other geometries have none.
- * @returns {[number, number][][]}
+ * closing vertex (GeoJSON repeats the first one) and without altitude. Null for a geometry that is not a polygon or a
+ * multipolygon, or has no coordinates.
+ * @returns {[number, number][][] | null}
  */
 function outerRings(geometry) {
-	if (geometry === null || geometry === undefined) return [];
+	if (geometry === null || geometry === undefined || !Array.isArray(geometry.coordinates)) return null;
 	const polygons = geometry.type === 'Polygon' ? [geometry.coordinates]
-		: geometry.type === 'MultiPolygon' ? geometry.coordinates : [];
+		: geometry.type === 'MultiPolygon' ? geometry.coordinates : null;
+	if (polygons === null) return null;
 	return polygons.map(polygon => {
-		const ring = polygon[0].map(([lon, lat]) => [round5(lat), round5(lon)]);
+		const ring = (polygon[0] ?? []).map(([lon, lat]) => [round5(lat), round5(lon)]);
 		const first = ring[0];
 		const last = ring[ring.length - 1];
 		if (ring.length > 1 && first[0] === last[0] && first[1] === last[1]) ring.pop();
@@ -116,7 +122,7 @@ function limit(properties, side) {
 	const code = properties[`${prefix}_CODE`];
 	if (value === NO_VALUE) return side === 'lower' ? {ft: 0, ref: 'SFC'} : {ft: null, ref: null};
 	if (typeof value !== 'number' || !Number.isFinite(value)) return null;
-	if (code === 'SFC' && side === 'lower') return {ft: 0, ref: 'SFC'};
+	if (code === 'SFC' && side === 'lower' && value === 0 && unit === 'FT') return {ft: 0, ref: 'SFC'};
 	if (unit === 'FL' && code === 'STD') return {ft: value * 100, ref: 'MSL'};
 	if (unit === 'FT' && (code === 'MSL' || code === 'AGL')) return {ft: value, ref: code};
 	return null;
@@ -125,7 +131,7 @@ function limit(properties, side) {
 /** The text for the summary when a limit is not readable. */
 const unreadable = (properties, side) => {
 	const prefix = side.toUpperCase();
-	return `with a ${side} limit the script does not read (${prefix}_VAL ${properties[`${prefix}_VAL`]}, ` +
+	return `with ${side === 'upper' ? 'an' : 'a'} ${side} limit the script does not read (${prefix}_VAL ${properties[`${prefix}_VAL`]}, ` +
 		`${prefix}_UOM ${properties[`${prefix}_UOM`]}, ${prefix}_CODE ${properties[`${prefix}_CODE`]})`;
 };
 
@@ -150,7 +156,14 @@ export async function extractAirspaces(classFile, boundaryFile, regions, date, s
 	/** The airspaces of one feature, when it is one we keep and lies in a region. */
 	function take(feature, kind, label) {
 		const properties = feature.properties;
-		const rings = outerRings(feature.geometry).filter(ring => ring.length >= 3 && inRegions(ring, regions));
+		const all = outerRings(feature.geometry);
+		if (all === null) {
+			skip(`${label} with a geometry that is not a polygon or a multipolygon`);
+			return;
+		}
+		// a ring without an area has no place to be in a region, so it is counted wherever it lies
+		for (const ring of all) if (ring.length < 3) skip(`${label} with a ring of fewer than three vertices`);
+		const rings = all.filter(ring => ring.length >= 3 && inRegions(ring, regions));
 		if (rings.length === 0) return;
 		const lower = limit(properties, 'lower');
 		const upper = limit(properties, 'upper');
@@ -188,7 +201,7 @@ export async function extractAirspaces(classFile, boundaryFile, regions, date, s
 }
 
 /** The text the CLI prints. */
-function summary(extractedFile, result, stats) {
+export function summary(extractedFile, result, stats) {
 	const lines = [
 		`Wrote ${extractedFile}`,
 		`Date ${result.date}`,

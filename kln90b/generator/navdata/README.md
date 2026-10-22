@@ -193,7 +193,8 @@ never loads one whole.
    ```
 
 3. The script writes `airspaces-<date>.json` here and prints a summary: the counts per kind, and every airspace it
-   skipped with the reason. Commit the new file and delete the old one.
+   skipped with the reason. Commit the new file and delete the old one. A file in which the script finds no feature line
+   at all stops it, naming the file: the FAA has changed the layout.
 
 ### What gets in
 
@@ -220,7 +221,8 @@ All positions are degrees, all heights feet. Airspaces are sorted by kind (B, C,
   `STD` in the data) becomes hundreds of feet above mean sea level. The FAA's -9998, no value, is the surface for a lower
   limit and, for an upper limit, `upperFt` and `upperRef` `null`: the Center boundaries have both limits as -9998, so
   a Center runs from the surface up without an upper limit. A feature with any other code or unit is skipped and
-  named in the summary.
+  named in the summary, and so is a feature whose geometry is not a polygon or a multipolygon, and a ring of fewer than
+  three vertices (a ring is counted wherever it lies, since it has no position to test).
 - `polygon`: the outer ring as `[lat, lon]` pairs, rounded to five decimals and not closed (the data repeats the first
   vertex at the end, the extract does not). The holes of a polygon are dropped, and each polygon of a multipolygon is
   an airspace of its own, with the same name, sector and limits.
