@@ -417,6 +417,10 @@ The explanations of a screen's fields live in its `fields.mdx` and appear wherev
 - **Length:** one to four sentences for most fields; a complex field (the CDI, a selectable list) may take a few short
   paragraphs.
 - **Every field gets an explanation,** the status line fields included. A field is a label and its value together.
+- **A field covers everything the cursor marks.** Where the cursor (inverse or flashing inverse) marks an entry, the
+  field spans every cell of the cursor, the entry's number and padding included, so that pointing anywhere at what the
+  cursor marks opens the explanation. The generator widens a field to its cursor and fails when one cursor would mark
+  two fields.
 - Field explanations are indexed by the search and can be linked one by one (`#screen-nav-1--dis`), so the FAQ and
   answers on Discord can point to a single field.
 

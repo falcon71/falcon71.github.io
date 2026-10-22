@@ -1,5 +1,6 @@
 import {describe, expect, it} from 'vitest';
-import {locateFields, locateMapFields, type FieldDef} from '../lib/fields.ts';
+import {extendToCursor, locateFields, locateMapFields, type FieldDef} from '../lib/fields.ts';
+import type {CellAttr} from '../../src/lib/screenFile.ts';
 
 /** Pads every row to the 23 columns of the screen. */
 function screen(...rows: string[]): string[] {
@@ -393,5 +394,60 @@ describe('locateMapFields', () => {
 
 	it('accepts a screen without maps and without map fields', () => {
 		expect(locateMapFields([{id: 'dis', find: /DIS/}], 'both', {})).toEqual({sides: new Map(), owners: {}});
+	});
+});
+
+describe('extendToCursor', () => {
+	/** A mask of 7 rows of 23 normal cells with the given runs: [row, from, to, attr]. */
+	function mask(...runs: [number, number, number, CellAttr][]): CellAttr[][] {
+		const m: CellAttr[][] = Array.from({length: 7}, () => Array<CellAttr>(23).fill('.'));
+		for (const [row, from, to, attr] of runs) for (let c = from; c < to; c++) m[row][c] = attr;
+		return m;
+	}
+
+	const fields = (...entries: [string, number, number, number][]) =>
+		new Map(entries.map(([id, row, from, to]) => [id, [{row, from, to}]]));
+
+	it('widens a field to the whole cursor that marks it', () => {
+		const f = fields(['ykm7', 2, 13, 19]);
+		extendToCursor(f, mask([2, 12, 22, 'F']), 'split', 'right');
+		expect(f.get('ykm7')).toEqual([{row: 2, from: 12, to: 22}]);
+	});
+
+	it('widens to an inverse cursor too, and leaves a field without cursor alone', () => {
+		const f = fields(['wpt', 0, 0, 3], ['dis', 2, 0, 4]);
+		extendToCursor(f, mask([0, 0, 6, 'I']), 'split', 'both');
+		expect(f.get('wpt')).toEqual([{row: 0, from: 0, to: 6}]);
+		expect(f.get('dis')).toEqual([{row: 2, from: 0, to: 4}]);
+	});
+
+	it('does not widen across the middle line of a split screen', () => {
+		const f = fields(['left', 1, 8, 11]);
+		extendToCursor(f, mask([1, 8, 16, 'I']), 'split', 'both');
+		expect(f.get('left')).toEqual([{row: 1, from: 8, to: 11}]);
+	});
+
+	it('does not count flashing text without inverse as a cursor', () => {
+		const f = fields(['ent', 6, 14, 15]);
+		extendToCursor(f, mask([6, 14, 17, 'B']), 'split', 'both');
+		expect(f.get('ent')).toEqual([{row: 6, from: 14, to: 15}]);
+	});
+
+	it('merges the parts of one field that lie in the same cursor', () => {
+		const f = new Map([['two', [{row: 3, from: 0, to: 2}, {row: 3, from: 4, to: 6}, {row: 4, from: 0, to: 1}]]]);
+		extendToCursor(f, mask([3, 0, 8, 'F']), 'split', 'left');
+		expect(f.get('two')).toEqual([{row: 3, from: 0, to: 8}, {row: 4, from: 0, to: 1}]);
+	});
+
+	it('refuses a cursor that marks two fields', () => {
+		const f = fields(['a', 2, 12, 14], ['b', 2, 16, 18]);
+		expect(() => extendToCursor(f, mask([2, 12, 20, 'F']), 'split', 'right'))
+			.toThrow('the cursor in row 2, columns 12 to 20, marks the fields a and b');
+	});
+
+	it('refuses to widen a field beyond the page name of a cropped status line', () => {
+		const f = fields(['crsr', 6, 18, 22]);
+		expect(() => extendToCursor(f, mask([6, 16, 22, 'I']), 'split', 'right'))
+			.toThrow(/field crsr: the status line of a screen that shows only the right half/);
 	});
 });

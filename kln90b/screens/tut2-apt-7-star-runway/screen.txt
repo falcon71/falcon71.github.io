@@ -23,6 +23,6 @@ field title 0 12 20
 field runway 1 12 18
 field rw14l 2 13 20
 field rw14r 3 13 20
-field rw32l 4 13 20
+field rw32l 4 12 20
 field rw32r 5 13 20
 field crsr 6 18 22

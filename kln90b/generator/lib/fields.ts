@@ -1,4 +1,4 @@
-import type {FieldPart, Layout as ScreenLayout, MapSide, Show} from '../../src/lib/screenFile.ts';
+import type {CellAttr, FieldPart, Layout as ScreenLayout, MapSide, Show} from '../../src/lib/screenFile.ts';
 
 /** Left half, right half, status line, full page (Super NAV 5 too). */
 export type Area = 'L' | 'R' | 'S' | 'F';
@@ -254,6 +254,49 @@ export function locateFields(text: string[], layout: ScreenLayout, show: Show, d
 		});
 	}
 	return fields;
+}
+
+const CURSOR: ReadonlySet<CellAttr> = new Set<CellAttr>(['I', 'F']);
+
+/**
+ * Widens the text fields to the cursor that marks them: a run of inverse or flashing inverse cells in one row belongs
+ * as a whole to the field it touches, so that pointing anywhere at what the cursor marks opens that field. On a split
+ * screen a run ends at the middle line. Changes `fields` in place.
+ * @param mask the attributes of the 7 rows of 23 cells
+ * @throws Error when one cursor marks two fields, or `field <id>: ...` when the widened field leaves the page name of
+ * a cropped status line
+ */
+export function extendToCursor(fields: Map<string, FieldPart[]>, mask: CellAttr[][], layout: ScreenLayout, show: Show): void {
+	const ctx: Layout = {text: [], layout, show, status: true};
+	for (let row = 0; row < ROWS; row++) {
+		const split = layout === 'split' && row < STATUS_ROW;
+		let col = 0;
+		while (col < COLUMNS) {
+			if (!CURSOR.has(mask[row][col])) {
+				col++;
+				continue;
+			}
+			const from = col;
+			while (col < COLUMNS && CURSOR.has(mask[row][col]) && !(split && col === HALF)) col++;
+			const run: FieldPart = {row, from, to: col};
+			const marked = [...fields].filter(([, parts]) => parts.some(part => overlap(part, run)));
+			if (marked.length > 1) {
+				throw new Error(`the cursor in row ${row}, columns ${from} to ${col}, marks the fields `
+					+ marked.map(([id]) => id).join(' and '));
+			}
+			if (marked.length === 1) {
+				const [id, parts] = marked[0];
+				const inRun = parts.filter(part => overlap(part, run));
+				const widened = {
+					row, from: Math.min(from, ...inRun.map(p => p.from)), to: Math.max(col, ...inRun.map(p => p.to)),
+				};
+				inField(id, () => checkCropped([widened], ctx));
+				const at = parts.indexOf(inRun[0]);
+				fields.set(id, parts.flatMap((part, i) => i === at ? [widened] : inRun.includes(part) ? [] : [part]));
+			}
+			if (split && col === HALF) col++;
+		}
+	}
 }
 
 /** The map fields of a screen: the side of each field, and the field of each element of each map, by element index. */

@@ -23,5 +23,5 @@ field title 0 12 20
 field transition 1 12 22
 field pdt 2 13 18
 field suned 3 13 20
-field ykm 4 13 18
+field ykm 4 12 20
 field crsr 6 18 22

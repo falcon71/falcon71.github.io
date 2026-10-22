@@ -21,7 +21,7 @@ mask
 |..............BBB.IIII.|
 field ident 0 13 17
 field title 1 12 23
-field chins5 2 13 21
+field chins5 2 12 22
 field olm2 3 13 19
 field skyko1 4 13 21
 field crsr 6 18 22

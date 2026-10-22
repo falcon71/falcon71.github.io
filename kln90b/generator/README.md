@@ -64,6 +64,9 @@ description needs from the harness. See `screens/apt-1-ksea/`, `screens/nav-5-ks
   more than once, so a layout change in kln90b cannot silently leave the tooltip over the wrong cells. Use a place
   (`{area: 'L', row: 1}`) only for contents that are free: an airport name, the CDI bar, a field that covers a whole
   half.
+- A field that the cursor marks is widened to the whole cursor, the run of inverse or flashing inverse cells in its row
+  (up to the middle line on a split screen), so the regex only has to find the entry (`/3 YKM7/`). Generation fails
+  when one cursor touches two fields.
 
 ### Super NAV 5
 

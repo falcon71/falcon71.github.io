@@ -23,5 +23,5 @@ field title 0 12 20
 field runway 1 12 18
 field rw09 2 13 19
 field rw22 3 13 19
-field rw27 4 13 19
+field rw27 4 12 20
 field crsr 6 18 22

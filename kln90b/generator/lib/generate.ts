@@ -8,7 +8,7 @@ import {canvasToAscii, downsampled} from '../../../vendor/kln90b/test/harness/re
 import {serializeScreenFile, type CellAttr, type Show} from '../../src/lib/screenFile.ts';
 import {explanationMismatch, fieldIdsOf} from '../../src/lib/explanations.ts';
 import {captureScreen, type CapturedScreen} from './capture.ts';
-import {locateFields, locateMapFields, type FieldDef, type MapSide} from './fields.ts';
+import {extendToCursor, locateFields, locateMapFields, type FieldDef, type MapSide} from './fields.ts';
 import {checkCoverage, recordMapElements, type MapElement} from './mapElements.ts';
 import {mapToSvg} from './mapSvg.ts';
 import {airspacesOf, facilitiesOf, loadAirspaces, loadExtract, loadProcedures, pointNamesOf} from './navdata.ts';
@@ -118,6 +118,8 @@ async function generate(dir: string, id: string, d: ScreenDescription): Promise<
 	}
 	const mask = capture.cells.map(row => row.map(c => c.attr as CellAttr));
 	const fields = locateFields(text, capture.layout, d.show, d.fields, capture.status);
+	// What the cursor marks opens the field it marks, wherever the pilot points at it
+	extendToCursor(fields, mask, capture.layout, d.show);
 	const maps = mapsOf(capture, d.show);
 	const mapFields = locateMapFields(d.fields, d.show, Object.fromEntries(Array.from(maps, ([side, map]) => [side, map.elements])),
 		capture.layout);

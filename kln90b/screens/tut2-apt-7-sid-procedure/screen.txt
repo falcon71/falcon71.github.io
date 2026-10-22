@@ -23,5 +23,5 @@ field ident 0 13 17
 field title 1 12 22
 field gromo4 2 13 21
 field wenas7 3 13 21
-field ykm7 4 13 19
+field ykm7 4 12 22
 field crsr 6 18 22
