@@ -183,19 +183,27 @@ export function facilitiesOf(x: NavdataExtract, p?: CifpExtract): Facility[] {
 	return p === undefined ? out : withCifpProcedures(out, x, p);
 }
 
-/**
- * The approach types of the CIFP (the route type of the final approach) as the SDK names them, or undefined for a type
- * that is left out. A function, because `ApproachType` is a global of the sim that the harness sets up.
- */
-function approachTypeOf(type: string): ApproachType | undefined {
-	const types: Record<string, ApproachType> = {
+/** The SDK names of the approach types of the CIFP (the route type of the final approach) that the SDK has a type for */
+function approachTypes(): Record<string, ApproachType> {
+	return {
 		P: ApproachType.APPROACH_TYPE_GPS, R: ApproachType.APPROACH_TYPE_RNAV, H: ApproachType.APPROACH_TYPE_RNAV,
 		I: ApproachType.APPROACH_TYPE_ILS, L: ApproachType.APPROACH_TYPE_LOCALIZER,
 		B: ApproachType.APPROACH_TYPE_LOCALIZER_BACK_COURSE, D: ApproachType.APPROACH_TYPE_VORDME,
 		V: ApproachType.APPROACH_TYPE_VOR, S: ApproachType.APPROACH_TYPE_VOR, N: ApproachType.APPROACH_TYPE_NDB,
 		Q: ApproachType.APPROACH_TYPE_NDBDME, X: ApproachType.APPROACH_TYPE_LDA, U: ApproachType.APPROACH_TYPE_SDF,
 	};
-	return types[type];
+}
+
+/**
+ * The approach type of the CIFP as the SDK names it. Every approach the SDK has a type for goes to the unit, which
+ * filters the procedures it cannot fly itself. A function, because `ApproachType` is a global of the sim that the
+ * harness sets up.
+ * @throws Error naming airport, approach and type when the SDK has no type for it (GLS, TACAN, IGS, FMS, MLS ...)
+ */
+function approachTypeOf(type: string, apt: string, ident: string): ApproachType {
+	const found = approachTypes()[type];
+	if (found === undefined) throw new Error(`${apt} ${ident}: no SDK approach type for the route type ${type}`);
+	return found;
 }
 
 const RNAV_LEVELS: Record<string, RnavTypeFlags> = {
@@ -286,7 +294,7 @@ class ProcedureBuilder {
 		return withProcedures(apt, {
 			departures: procedures.departures.map(p => this.procedure(sid, p, ident, ends)),
 			arrivals: procedures.arrivals.map(p => this.procedure(star, p, ident, ends)),
-			approaches: procedures.approaches.flatMap(a => this.approach(a, ident) ?? []),
+			approaches: procedures.approaches.map(a => this.approach(a, ident)),
 		});
 	}
 
@@ -299,9 +307,8 @@ class ProcedureBuilder {
 		});
 	}
 
-	private approach(a: Approach, apt: string): ApproachProcedure | null {
-		const type = approachTypeOf(a.type);
-		if (type === undefined) return null;
+	private approach(a: Approach, apt: string): ApproachProcedure {
+		const type = approachTypeOf(a.type, apt, a.ident);
 		const levels = a.rnav.reduce((flags, level) => {
 			if (RNAV_LEVELS[level] === undefined) throw new Error(`${apt} ${a.ident}: no RNAV level ${level}`);
 			return flags | RNAV_LEVELS[level];

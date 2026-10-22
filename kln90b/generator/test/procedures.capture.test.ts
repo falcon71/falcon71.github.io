@@ -178,13 +178,13 @@ describe('the transcoding', () => {
 		expect(a.departures[0].runwayTransitions.map(runwayName)).toEqual(['07', '16L', '16R', '25', '34L', '34R']);
 	});
 
-	it('leaves out an approach type the unit does not know', () => {
+	it('hands every approach type the SDK has to the unit, and refuses one it lacks naming airport, approach and type', () => {
 		const final = [{...leg, type: 'IF'}];
-		const a = airportOf(cifp({approaches: [
-			{ident: 'J16L', type: 'J', runway: '16L', suffix: '', rnav: [], transitions: [], final, missed: []},
-			{ident: 'N16L', type: 'N', runway: '16L', suffix: '', rnav: [], transitions: [], final, missed: []},
-		]}));
-		expect(a.approaches.map(x => x.approachType)).toEqual([ApproachType.APPROACH_TYPE_NDB]);
+		const approachOf = (type: string) => ({ident: `${type}16L`, type, runway: '16L', suffix: '', rnav: [], transitions: [], final, missed: []});
+		const types = {X: ApproachType.APPROACH_TYPE_LDA, U: ApproachType.APPROACH_TYPE_SDF, Q: ApproachType.APPROACH_TYPE_NDBDME, N: ApproachType.APPROACH_TYPE_NDB};
+		const a = airportOf(cifp({approaches: Object.keys(types).map(approachOf)}));
+		expect(a.approaches.map(x => x.approachType)).toEqual(Object.values(types));
+		expect(() => airportOf(cifp({approaches: [approachOf('N'), approachOf('J')]}))).toThrow('KAAA J16L: no SDK approach type for the route type J');
 	});
 
 	it('refuses a runway transition for a runway the airport lacks, naming both', () => {
