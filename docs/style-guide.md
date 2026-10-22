@@ -398,6 +398,9 @@ general; the screen shows one concrete case.
   own id. Ids are lowercase with hyphens: the page, then what distinguishes it (`apt-1-ksea`, `vor-user-waypoint`,
   `fpl-0-approach`). Tutorial screens start with `tut1-` or `tut2-`.
 - **Real places.** Screens show real, well-known US places from the FAA data (section 18). Never invent identifiers.
+- **No message prompt** unless the message is what the text explains. A screen shows no flashing `msg` and no pending
+  message; a step that raises one answers it before the screen is captured. For the same reason the screens run with the
+  airspace alert off, unless a screen is about the airspace alert and turns it on.
 - **Show half a screen** when only one side matters. The generator keeps the line between the halves.
 - **Flashing.** The site draws flashing text as a static dashed box and explains it under the screen. Say in the text
   what flashes and when.
