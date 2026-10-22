@@ -194,6 +194,24 @@ describe('the transcoding', () => {
 		expect(departure('25')().departures[0].runwayTransitions.map(runwayName)).toEqual(['25']);
 	});
 
+	it('makes a VOR of the CIFP extract that an arc turns around, and none that only a CF leg names', () => {
+		const vorOut = (ident: string) => ({
+			ident, region: 'K1', kind: 'vor', lat: 46, lon: -121, name: `${ident} VOR`, type: 'VORTAC', mhz: 113.6, declinationEast: 19,
+		});
+		const navaid = (ident: string) => ({ident, region: 'K1', kind: 'vor'});
+		const facs = facilitiesOf(nasr, {...cifp({approaches: [{
+			ident: 'R16L', type: 'R', runway: '16L', suffix: '', rnav: [], transitions: [], missed: [],
+			final: [
+				{...leg, type: 'IF'},
+				{...leg, type: 'AF', navaid: navaid('ARC'), courseMag: 10, thetaDeg: 40, rhoNm: 12, turn: 'R'},
+				{...leg, type: 'CF', navaid: navaid('CRS'), courseMag: 160},
+			],
+		}]}), waypoints: [vorOut('ARC'), vorOut('CRS')]});
+		expect(facs.filter(f => f.icaoStruct.type === 'V').map(f => [f.icaoStruct.ident, (f as VorFacility).freqMHz])).toEqual([['ARC', 113.6]]);
+		const final = (facs.find(f => f.icaoStruct.type === 'A') as AirportFacility).approaches[0].finalLegs;
+		expect(final.map(l => l.originIcaoStruct.ident)).toEqual(['', 'ARC', 'CRS']);
+	});
+
 	it('refuses a fix it cannot resolve, naming it', () => {
 		expect(() => airportOf(cifp({arrivals: [{name: 'TWO2', runways: [], common: [{type: 'TF', fix: {ident: 'BRAVO', region: 'K1', kind: 'fix'}}], transitions: []}]})))
 			.toThrow(/BRAVO/);
