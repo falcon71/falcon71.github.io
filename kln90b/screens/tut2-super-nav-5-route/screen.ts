@@ -32,7 +32,7 @@ defineScreen(import.meta.url, {
 		const track = courseDeg(place('CHINS'), place(ACTIVE));
 		await moveAircraft(u, pointFrom(place('CHINS'), track, 20), {groundspeedKt: GROUNDSPEED_KT, trackTrue: track});
 		await wait(2000);
-		// Each new leg raises ADJ NAV IND CRS
+		// The unit asks for the course of the leg to RADDY with ADJ NAV IND CRS
 		await adjustCourseIndicator(u);
 		await showSuperNav5(u);
 		// The left cursor comes on at the range of the map, and the inner knob turns it from 40 to 60 NM, which holds
