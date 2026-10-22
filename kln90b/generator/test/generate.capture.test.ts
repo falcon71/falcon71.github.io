@@ -46,7 +46,6 @@ describe('generateScreen', () => {
 		expect(file.text[6].slice(0, 5)).toBe('NAV 1');
 		expect(file.fields.get('page')).toEqual([{row: 6, from: 0, to: 5}]);
 		expect(file.fields.get('dis')).toHaveLength(1);
-		expect(file.kln90b).toMatch(/^[0-9a-f]{40}$/);
 		expect(file.maps).toEqual([]);
 	});
 

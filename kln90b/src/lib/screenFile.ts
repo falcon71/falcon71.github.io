@@ -16,7 +16,6 @@ export interface FieldPart {
 }
 
 export interface ScreenCapture {
-	kln90b: string;            // 40-char commit
 	title: string;
 	show: Show;
 	layout: Layout;
@@ -35,7 +34,6 @@ const ATTRS = '.IBF';
 const SHOWS: Show[] = ['left', 'right', 'both'];
 const LAYOUTS: Layout[] = ['split', 'full', 'super-nav-5'];
 const SIDES: MapSide[] = ['L', 'R', 'F'];
-const COMMIT = /^[0-9a-f]{40}$/;
 
 /** The characters of a row. The font maps its glyphs onto Greek and Cyrillic code points, so these are plain strings. */
 function chars(row: string): string[] {
@@ -56,7 +54,6 @@ function checkPart(id: string, part: FieldPart): void {
 }
 
 function checkCapture(c: ScreenCapture): void {
-	if (!COMMIT.test(c.kln90b)) throw new Error(`kln90b "${c.kln90b}" is not a 40-character commit`);
 	if (c.title.trim() === '' || /[\r\n]/.test(c.title)) throw new Error('title must be one non-empty line');
 	if (!SHOWS.includes(c.show)) throw new Error(`show "${c.show}" is not left, right or both`);
 	if (!LAYOUTS.includes(c.layout)) throw new Error(`layout "${c.layout}" is not split, full or super-nav-5`);
@@ -121,7 +118,6 @@ export function serializeScreenFile(c: ScreenCapture): string {
 	checkCapture(c);
 	const lines = [
 		HEADER,
-		`kln90b ${c.kln90b}`,
 		`title ${c.title}`,
 		`show ${c.show}`,
 		`layout ${c.layout}`,
@@ -171,6 +167,11 @@ class Reader {
 		}
 	}
 
+	/** The next line that is neither blank nor a comment, without reading it, or null at the end. */
+	peekItem(): string | null {
+		return this.lines.slice(this.next).find(line => line.trim() !== '' && !line.startsWith('#')) ?? null;
+	}
+
 	/** The next line, whatever it is, or null at the end. */
 	nextRaw(): string | null {
 		if (this.next >= this.lines.length) return null;
@@ -218,8 +219,11 @@ function oneOf<T extends string>(r: Reader, key: string, allowed: readonly T[]):
 export function parseScreenFile(text: string): ScreenCapture {
 	const r = new Reader(text.split(/\r?\n/));
 
-	const kln90b = r.value('kln90b');
-	if (!COMMIT.test(kln90b)) r.fail(`kln90b must be a 40-character commit but is "${kln90b}"`);
+	// Older generators wrote the kln90b commit into every screen; it is in screens/kln90b-commit.txt now
+	if (r.peekItem()?.startsWith('kln90b ')) {
+		r.nextItem();
+		r.fail('the file has a "kln90b <commit>" line, which an older generator wrote; run `npm run screens` to regenerate it');
+	}
 	const title = r.value('title');
 	const show = oneOf(r, 'show', SHOWS);
 	const layout = oneOf(r, 'layout', LAYOUTS);
@@ -279,5 +283,5 @@ export function parseScreenFile(text: string): ScreenCapture {
 		if (problem !== null) r.failAt(mapFieldLines.get(id)!, problem);
 	}
 
-	return {kln90b, title, show, layout, status, text: rows.map(cells => cells.join('')), mask, fields, mapFields, maps};
+	return {title, show, layout, status, text: rows.map(cells => cells.join('')), mask, fields, mapFields, maps};
 }

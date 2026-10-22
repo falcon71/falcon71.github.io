@@ -27,7 +27,7 @@ function capture(over: Partial<ScreenCapture> = {}, rows: Record<number, string>
 	const text = Array.from({length: ROWS}, (_, row) => (rows[row] ?? '').padEnd(COLUMNS));
 	const mask: CellAttr[][] = Array.from({length: ROWS}, () => Array.from({length: COLUMNS}, () => '.' as CellAttr));
 	return {
-		kln90b: '0'.repeat(40), title: 'Test page', show: 'both', layout: 'split', status: true,
+		title: 'Test page', show: 'both', layout: 'split', status: true,
 		text, mask, fields: new Map<string, FieldPart[]>(), mapFields: new Map(), maps: [], ...over,
 	};
 }

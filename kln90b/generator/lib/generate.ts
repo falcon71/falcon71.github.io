@@ -7,7 +7,6 @@ import {DEFAULT_START} from '../../../vendor/kln90b/test/harness/sim/clock';
 import {canvasToAscii, downsampled} from '../../../vendor/kln90b/test/harness/render/canvas';
 import {serializeScreenFile, type CellAttr, type Show} from '../../src/lib/screenFile.ts';
 import {explanationMismatch, fieldIdsOf} from '../../src/lib/explanations.ts';
-import {vendorCommit} from '../vendorCheck.mjs';
 import {captureScreen, type CapturedScreen} from './capture.ts';
 import {locateFields, locateMapFields, type FieldDef, type MapSide} from './fields.ts';
 import {checkCoverage, recordMapElements, type MapElement} from './mapElements.ts';
@@ -135,7 +134,7 @@ async function generate(dir: string, id: string, d: ScreenDescription): Promise<
 	if (mismatch !== null) throw new Error(mismatch);
 
 	const file = serializeScreenFile({
-		kln90b: vendorCommit(), title: d.title, show: d.show, layout: capture.layout, status: capture.status,
+		title: d.title, show: d.show, layout: capture.layout, status: capture.status,
 		text, mask, fields, mapFields: mapFields.sides, maps: Array.from(maps.keys()),
 	});
 	fs.writeFileSync(path.join(dir, 'screen.txt'), file);

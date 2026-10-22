@@ -4,7 +4,7 @@ import {checkExplanations, documentedFields, loadCapture} from './screens.ts';
 
 function capture(fieldIds: string[], mapFieldIds: string[] = []): ScreenCapture {
 	return {
-		kln90b: '0'.repeat(40), title: 'APT 1 page', show: 'right', layout: 'split', status: true,
+		title: 'APT 1 page', show: 'right', layout: 'split', status: true,
 		text: Array.from({length: 7}, () => ' '.repeat(23)),
 		mask: Array.from({length: 7}, () => Array.from({length: 23}, () => '.' as CellAttr)),
 		fields: new Map(fieldIds.map(id => [id, [{row: 0, from: 12, to: 16}]])),
