@@ -12,8 +12,8 @@ defineScreen(import.meta.url, {
 		// The runways of the arrival, each with its number in the list
 		{id: 'rw14l', find: {re: /1 RW14L/, area: 'R'}},
 		{id: 'rw14r', find: {re: /2 RW14R/, area: 'R'}},
-		{id: 'rw32r', find: {re: /3 RW32R/, area: 'R'}},
-		{id: 'rw32l', find: {re: /4 RW32L/, area: 'R'}},
+		{id: 'rw32l', find: {re: /3 RW32L/, area: 'R'}},
+		{id: 'rw32r', find: {re: /4 RW32R/, area: 'R'}},
 		{id: 'crsr', find: {re: /CRSR/, area: 'S'}},
 	],
 });

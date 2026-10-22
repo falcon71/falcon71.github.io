@@ -9,21 +9,21 @@ text
 |ÂYKM7-SID  |RUNWAY     |
 |À 2.YKM    | 1 RW14L   |
 |  3.TITON  | 2 RW14R   |
-|  4:TITON  | 3 RW32R   |
-|  7:KBFI   | 4 RW32L   |
+|  4:TITON  | 3 RW32L   |
+|  7:KBFI   | 4 RW32R   |
 |FPL 0|enr-leg ent|CRSR |
 mask
 |.......................|
 |.......................|
 |.......................|
 |.......................|
-|.......................|
 |............FFFFFFFF...|
+|.......................|
 |..............BBB.IIII.|
 field title 0 12 20
 field runway 1 12 18
 field rw14l 2 13 20
 field rw14r 3 13 20
-field rw32r 4 13 20
-field rw32l 5 13 20
+field rw32l 4 13 20
+field rw32r 5 13 20
 field crsr 6 18 22

@@ -216,17 +216,23 @@ function runwayEndsOf(a: NavdataExtract['airports'][number]): string[] {
 	});
 }
 
+/** The order of the designators of one runway number: none, then left, center, right (and water last) */
+const DESIGNATOR_ORDER = ['', 'L', 'C', 'R', 'W'];
+const byDesignation = (a: string, b: string) =>
+	Number(a.slice(0, 2)) - Number(b.slice(0, 2)) || DESIGNATOR_ORDER.indexOf(a.slice(2)) - DESIGNATOR_ORDER.indexOf(b.slice(2));
+
 /**
  * The runways a runway transition of the CIFP is for. A transition for both parallels (`32B`) becomes one per runway end
  * of that number, as the maintainer saw the simulator deliver CHINS5 at KBFI; one for every runway (`ALL`) becomes one
- * per runway end of the airport, by the same logic.
+ * per runway end of the airport, by the same logic. The simulator delivers the split transitions in the order of their
+ * designations (14L, 14R, 32L, 32R), not in the order of the airport's runways.
  * @throws Error when the airport has no runway end the transition is for
  */
 function runwaysOf(runway: string, ends: string[], apt: string): string[] {
 	const both = BOTH_PARALLELS.exec(runway);
 	const runways = runway === 'ALL' ? ends : both === null ? ends.filter(e => e === runway) : ends.filter(e => e.startsWith(both[1]));
 	if (runways.length === 0) throw new Error(`${apt} has no runway for the runway transition ${runway}`);
-	return runways;
+	return [...runways].sort(byDesignation);
 }
 
 const key = (...parts: string[]) => parts.join(' ');

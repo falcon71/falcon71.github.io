@@ -16,9 +16,10 @@ const apt = (ident: string) => facilities().find(f => f.icaoStruct.type === 'A' 
 const runwayName = (r: { runwayNumber: number; runwayDesignation: number }) => RunwayUtils.getRunwayNameString(r.runwayNumber, r.runwayDesignation);
 
 describe('the procedures of the CIFP extract', () => {
-	it('splits a runway transition for both parallels into one per runway, as the simulator does', () => {
+	it('splits a runway transition for both parallels into one per runway, in the order of their designations, as the simulator does', () => {
 		const chins = apt('KBFI').arrivals.find(p => p.name === 'CHINS5')!;
-		expect(chins.runwayTransitions.map(runwayName).sort()).toEqual(['14L', '14R', '32L', '32R']);
+		// The runways of KBFI are 14L-32R and 14R-32L, so the order of the runways would put 32R before 32L
+		expect(chins.runwayTransitions.map(runwayName)).toEqual(['14L', '14R', '32L', '32R']);
 		// Each runway gets legs of its own
 		const [a, b] = chins.runwayTransitions.filter(r => r.runwayNumber === 14);
 		expect(a.legs.map(l => l.fixIcaoStruct.ident)).toEqual(b.legs.map(l => l.fixIcaoStruct.ident));
@@ -172,9 +173,9 @@ describe('the transcoding', () => {
 	});
 	const airportOf = (p: CifpExtract) => facilitiesOf(nasr, p).find(f => f.icaoStruct.type === 'A') as AirportFacility;
 
-	it('splits a transition for all runways into one per runway end', () => {
+	it('splits a transition for all runways into one per runway end, in the order of their designations', () => {
 		const a = airportOf(cifp({departures: [{name: 'ONE1', runways: [{runway: 'ALL', legs: [leg]}], common: [], transitions: []}]}));
-		expect(a.departures[0].runwayTransitions.map(runwayName)).toEqual(['16L', '34R', '16R', '34L', '07', '25']);
+		expect(a.departures[0].runwayTransitions.map(runwayName)).toEqual(['07', '16L', '16R', '25', '34L', '34R']);
 	});
 
 	it('leaves out an approach type the unit does not know', () => {
@@ -191,6 +192,8 @@ describe('the transcoding', () => {
 		expect(departure('18')).toThrow(/KAAA.* 18$/);
 		expect(departure('18B')).toThrow(/KAAA.* 18B$/);
 		expect(departure('16B')().departures[0].runwayTransitions.map(runwayName)).toEqual(['16L', '16R']);
+		// The runways are 16L-34R and 16R-34L, so 34L comes before 34R only by its designation
+		expect(departure('34B')().departures[0].runwayTransitions.map(runwayName)).toEqual(['34L', '34R']);
 		expect(departure('25')().departures[0].runwayTransitions.map(runwayName)).toEqual(['25']);
 	});
 

@@ -28,8 +28,7 @@ const YKM7 = '3 YKM7';
 const RW27 = '3 RW27';
 const CHINS5 = '1 CHINS5';
 const YKM = '3 YKM';
-// The unit lists RW32L after RW32R
-const RW32L = '4 RW32L';
+const RW32L = '3 RW32L';
 const HUMPP = '2 HUMPP';
 
 /** APT 7 of KYKM on the right, with the cursor on YKM7 in its list of departures. */
@@ -82,8 +81,8 @@ export async function cursorOnChins5(u: HeadlessUnit): Promise<void> {
 	await u.panel.cursor('R');
 	await u.panel.enterIdent('R', 'KBFI');
 	await u.panel.cursor('R');
-	// Forward by way of APT 4: the shorter way back passes APT 8, whose list of KBFI the screen cannot be read on (see
-	// cursorOnHumpp)
+	// Forward by way of APT 4: the shorter way back passes APT 8, whose list of KBFI the screen cannot be read on
+	// (kln90b#411, see cursorOnHumpp)
 	await u.panel.selectPage('R', 'APT 4');
 	await u.panel.selectPage('R', 'APT 7');
 	// KBFI has departures and arrivals, so APT 7 has two pages; the first lists the departures
@@ -130,12 +129,13 @@ export async function loadStar(u: HeadlessUnit): Promise<void> {
  * APT 8 of KBFI chosen and its approach with it: the IAFs of the approach, with the cursor on HUMPP.
  *
  * The list of approaches of KBFI cannot be read as a screen: the unit draws its one entry, the RNAV Y approach to 32L,
- * one cell wider than the half page (a kln90b bug), and the harness rejects such a screen. So these steps do not read
+ * one cell wider than the half page (kln90b#411), and the harness rejects such a screen. So these steps do not read
  * the screen until the IAF page shows: the inner knob turns from the arrivals of APT 7 to APT 8, and ENT chooses the
  * approach the cursor comes on at, the first and only one in the list.
  */
 export async function cursorOnHumpp(u: HeadlessUnit): Promise<void> {
 	await loadStar(u);
+	// Workaround for kln90b#411; once fixed, use selectPage('R', 'APT 8') and cursorTo, and add tut2-apt-8-approach
 	await u.panel.inner('R', 1);
 	await u.panel.cursor('R');
 	await u.panel.ent();
@@ -158,6 +158,7 @@ export async function loadApproach(u: HeadlessUnit): Promise<void> {
 	await cursorOnLoadApproach(u);
 	await u.panel.ent();
 	await wait(1000);
+	// Workaround for kln90b#411: the list of approaches cannot be read
 	await u.panel.inner('R', -1);
 	await adjustCourseIndicator(u);
 }
