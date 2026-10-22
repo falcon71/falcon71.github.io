@@ -3,7 +3,8 @@
 The example screens show real US places. Their data is the FAA's public data, never the simulator's and never
 Navigraph's. `extract-nasr.mjs` turns the NASR 28-day subscription (CSV) into one neutral JSON file for the regions in
 `regions.json`, and `extract-cifp.mjs` takes the SIDs, STARs and approaches of that file's airports from the CIFP into a
-second one. The screens load only these files.
+second one, and `extract-airspaces.mjs` the class B and C airspace and the Center boundaries of the regions from the
+FAA's ADDS GeoJSON files into a third. The screens load only these files.
 
 ## Downloads
 
@@ -14,8 +15,8 @@ from those folders is committed except the generated files.
 | --- | --- | --- |
 | NASR subscription, CSV data | https://www.faa.gov/air_traffic/flight_info/aeronav/aero_data/NASR_Subscription/ | `extract-nasr.mjs`, from the unzipped folder |
 | CIFP, the file `FAACIFP18` | https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/cifp/download/ | `extract-cifp.mjs`, from the file |
-| Airspace Boundary | https://adds-faa.opendata.arcgis.com/datasets/faa::airspace-boundary-1/about | the airspaces script, from the GeoJSON file |
-| Class Airspace | https://adds-faa.opendata.arcgis.com/datasets/faa::class-airspace/about | the airspaces script, from the GeoJSON file |
+| Airspace Boundary | https://adds-faa.opendata.arcgis.com/datasets/faa::airspace-boundary-1/about | `extract-airspaces.mjs`, from the GeoJSON file |
+| Class Airspace | https://adds-faa.opendata.arcgis.com/datasets/faa::class-airspace/about | `extract-airspaces.mjs`, from the GeoJSON file |
 
 ## Updating the extract
 
@@ -175,3 +176,51 @@ waypoints are sorted by name or ident; legs stay in the order the CIFP gives the
   `CY`, which NASR files as `K1`); `navdata.ts` makes no facility of it, since the unit never loads that navaid.
 - A localizer, TACAN or DME is no facility of either extract. As the navaid of a `CF` or `PI` leg it is left out, which
   the unit does not miss: it reads the navaid of an `AF` leg only. The summary counts them.
+
+## The airspace extract
+
+`extract-airspaces.mjs` reads the two GeoJSON files of the ADDS open data, Class Airspace and Airspace Boundary. Each
+feature is one line of the file, and the class file is hundreds of megabytes: the script reads both line by line and
+never loads one whole.
+
+### Updating it
+
+1. Download both files as GeoJSON (see Downloads) into a folder outside this repository.
+2. From `kln90b/`, with the download date:
+
+   ```bash
+   node generator/navdata/extract-airspaces.mjs <Class_Airspace.geojson> <Airspace_Boundary.geojson> <YYYY-MM-DD>
+   ```
+
+3. The script writes `airspaces-<date>.json` here and prints a summary: the counts per kind, and every airspace it
+   skipped with the reason. Commit the new file and delete the old one.
+
+### What gets in
+
+- Class B and class C airspace: the features of the class file whose `LOCAL_TYPE` is `CLASS_B` or `CLASS_C`. The
+  `CLASS` property is not used: the foreign control areas of the file carry it too, with limits the format cannot
+  express. Mode C veils, class D and E and every other type are left out.
+- Centers: the features of the boundary file whose `LOCAL_TYPE` is `ARTCC_L`, the low altitude boundary. The high
+  altitude boundary (`ARTCC_H`) is left out.
+- A feature is in a region when a vertex of its outer ring lies within `radiusNm` of the region's center, measured as
+  for the NASR extract, or when the region's center lies inside the ring. A Center that borders the region therefore
+  comes with it: it is the whole boundary, not the part inside the region.
+- A class B airspace is published in shelves (`SECTOR` `AREA A`, `AREA B` ...), each with its own limits, and a class C
+  in rings; every one is an airspace of its own.
+
+### Output format
+
+All positions are degrees, all heights feet. Airspaces are sorted by kind (B, C, center), name, sector and lower limit.
+
+- `date`, `source`: the download date `YYYY-MM-DD` and a description of the data.
+- `airspaces`: `name`, `kind` (`B`, `C` or `center`), `ident` (`SEA` for the airport of a class B or C, `ZSE` for a
+  Center) where the data has one, `sector` of a class B shelf where it has one, `lowerFt` and `lowerRef`, `upperFt`
+  and `upperRef`, and `polygon`.
+- The limits: `lowerRef` is `SFC` (`lowerFt` 0), `MSL` or `AGL`, `upperRef` `MSL` or `AGL`. A flight level (`FL` and
+  `STD` in the data) becomes hundreds of feet above mean sea level. The FAA's -9998, no value, is the surface for a lower
+  limit and, for an upper limit, `upperFt` and `upperRef` `null`: the Center boundaries have both limits as -9998, so
+  a Center runs from the surface up without an upper limit. A feature with any other code or unit is skipped and
+  named in the summary.
+- `polygon`: the outer ring as `[lat, lon]` pairs, rounded to five decimals and not closed (the data repeats the first
+  vertex at the end, the extract does not). The holes of a polygon are dropped, and each polygon of a multipolygon is
+  an airspace of its own, with the same name, sector and limits.
