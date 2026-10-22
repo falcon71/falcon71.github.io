@@ -109,18 +109,28 @@ function segmentsOf(cells: Cell[]): Segment[] {
 
 const blank = (): Cell => ({ch: ' ', inverse: false, flash: false});
 
+/** Whether a cell of Super NAV 5 is drawn as text: in the left column, or in the rows of the msg indicator and range. */
+const snav5Drawn = (row: number, col: number) => col < SNAV5_COLUMN || row >= SNAV5_OVERLAY_ROW;
+
 /**
- * Checks that the cells of Super NAV 5 above the message indicator and the range, right of the left column, are blank:
- * the map is drawn there, not text.
- * @throws Error naming the first cell that is not a blank
+ * Checks that the cells of Super NAV 5 above the message indicator and the range, right of the left column, are blank,
+ * and that every documented field has a cell elsewhere: the map is drawn there, not text, so a field there alone would
+ * have no element to point at or link to.
+ * @param where the start of the messages
+ * @throws Error naming the first cell that is not a blank, or a documented field drawn nowhere
  */
-function checkMapCells(c: ScreenCapture): void {
+function checkMapCells(c: ScreenCapture, documented: Set<string>, where: string): void {
 	for (let row = 0; row < SNAV5_OVERLAY_ROW; row++) {
 		const chars = Array.from(c.text[row]);
 		for (let col = SNAV5_COLUMN; col < COLUMNS; col++) {
 			if (chars[col] !== ' ' || c.mask[row][col] !== '.') {
-				throw new Error(`Super NAV 5: row ${row} column ${col} lies over the map but holds "${chars[col]}" with the mask "${c.mask[row][col]}"`);
+				throw new Error(`${where}row ${row} column ${col} lies over the map but holds "${chars[col]}" with the mask "${c.mask[row][col]}"`);
 			}
+		}
+	}
+	for (const [id, parts] of c.fields) {
+		if (documented.has(id) && !parts.some(p => snav5Drawn(p.row, p.from))) {
+			throw new Error(`${where}the field ${id} lies only over the map above the message indicator and the range, so the site draws it nowhere`);
 		}
 	}
 }
@@ -128,9 +138,11 @@ function checkMapCells(c: ScreenCapture): void {
 /**
  * The blocks of a generated screen. A field that is not `documented` is drawn as plain text. On Super NAV 5 the part of a
  * field that lies over the map above the message indicator and the range is not drawn, as nothing but the map is there.
- * @throws Error on Super NAV 5, when a cell there is not a blank (see checkMapCells)
+ * @param screen the screen's name for the messages
+ * @throws Error on Super NAV 5, when a cell over the map is not a blank or a documented field lies only there (see
+ * checkMapCells)
  */
-export function blocksFromCapture(c: ScreenCapture, documented: Set<string>): ScreenBlocks {
+export function blocksFromCapture(c: ScreenCapture, documented: Set<string>, screen?: string): ScreenBlocks {
 	const fieldAt = new Map<string, string>();
 	for (const [id, parts] of c.fields) {
 		if (!documented.has(id)) continue;
@@ -167,7 +179,7 @@ export function blocksFromCapture(c: ScreenCapture, documented: Set<string>): Sc
 	const status = {cls: 'kln-status', rows: c.status ? [statusRow()] : []};
 
 	if (c.layout === 'super-nav-5') {
-		checkMapCells(c);
+		checkMapCells(c, documented, `${screen ? `screen ${screen}: ` : ''}Super NAV 5: `);
 		return {
 			crop,
 			blocks: [

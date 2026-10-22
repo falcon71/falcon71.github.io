@@ -78,6 +78,7 @@
 	margin: 0;
 	white-space: pre;
 	/* The text layers cover the map beneath them; only their fields take the pointer, so the map fields stay reachable */
+	/* Where a text field overlaps the box of a map element, the text field takes the pointer there */
 	pointer-events: none;
 }
 

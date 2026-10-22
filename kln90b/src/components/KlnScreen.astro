@@ -68,7 +68,7 @@ if (screen !== undefined) {
 	checkExplanations(screen, capture, entry.body ?? '');
 	documented = documentedFields(capture, entry.body ?? '');
 	mapCheck = { screen, mapFields: capture.mapFields };
-	blocks = blocksFromCapture(capture, documented);
+	blocks = blocksFromCapture(capture, documented, screen);
 	title = givenTitle ?? capture.title;
 	Explanations = (await render(entry)).Content;
 } else {

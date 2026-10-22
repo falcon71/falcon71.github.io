@@ -331,6 +331,18 @@ describe('Super NAV 5', () => {
 		expect(out).toContain('<span class="kln-field" tabindex="0" data-field="top">20.0 È</span></span>');
 	});
 
+	it('rejects a documented field that lies only over the map above the overlay, which the site would draw nowhere', () => {
+		const c = superNav5({fields: new Map([['hidden', [{row: 1, from: 6, to: 10}, {row: 4, from: 20, to: 23}]]])});
+		expect(() => blocksFromCapture(c, new Set(['hidden']), 'nav-s'))
+			.toThrow('screen nav-s: Super NAV 5: the field hidden lies only over the map above the message indicator and the range, so the site draws it nowhere');
+		expect(() => blocksFromCapture(c, new Set())).not.toThrow();
+	});
+
+	it('names the screen when it rejects text over the map', () => {
+		expect(() => blocksFromCapture(superNav5({}, {...TEXT, 0: '20.0 È   Y'}), new Set(), 'nav-s'))
+			.toThrow('screen nav-s: Super NAV 5: row 0 column 9 lies over the map but holds "Y" with the mask "."');
+	});
+
 	it('rejects text over the map above the overlay, which the site would not draw', () => {
 		expect(() => blocksFromCapture(superNav5({}, {...TEXT, 2: 'Ê-Ë   X'}), new Set()))
 			.toThrow('Super NAV 5: row 2 column 6 lies over the map but holds "X" with the mask "."');
