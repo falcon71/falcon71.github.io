@@ -172,7 +172,7 @@ const DUPLICATES = [
 ];
 
 /** FPL 0 once the duplicates are deleted. */
-const CLEANED_UP = [
+export const CLEANED_UP = [
 	'KYKM', 'YKM', 'TITON', 'CADED', 'CHINS', 'RADDY', 'HUMPP', 'COVOG', 'AUBRN', 'DUANE', 'RW32L', 'FEVAS', 'GRRAM',
 	'LOFAL', 'KBFI',
 ];
