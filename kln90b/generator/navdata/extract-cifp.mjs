@@ -86,13 +86,21 @@ function fixed(text, decimals) {
  * @property {number} lat
  * @property {number} lon
  * @property {true} [withoutVor] a TACAN or DME of section D, at the position of its DME
+ * @typedef {object} RnavRecord the levels of service an approach continuation record of application W authorizes
+ * @property {'rnav'} type
+ * @property {string} airport
+ * @property {string} procedure
+ * @property {string} routeType
+ * @property {string} transition
+ * @property {string[]} levels as published: 'LPV' or 'LP', 'LNAV/VNAV', 'LNAV'
  * @typedef {{type: 'header', cycle: string}} HeaderRecord
- * @typedef {LegRecord | PointRecord | HeaderRecord} CifpRecord
+ * @typedef {LegRecord | RnavRecord | PointRecord | HeaderRecord} CifpRecord
  */
 
 /**
- * Reads one record of the CIFP. Columns are 1-based in the comments and ARINC 424, 0-based in the code. Returns null for
- * continuation records and for every record the extract does not use.
+ * Reads one record of the CIFP. Columns are 1-based in the comments and ARINC 424, 0-based in the code. A continuation
+ * record never becomes a leg: an approach's continuation of application W gives its RNAV levels, every other one null,
+ * as does every record the extract does not use.
  * @param {string} line
  * @returns {CifpRecord | null}
  */
@@ -103,7 +111,15 @@ export function parseRecord(line) {
 
 	// Airport procedures: section P, subsection D, E or F in column 13, continuation number in column 39
 	if (section === 'P ' && 'DEF'.includes(line[12])) {
-		if (line[38] !== '0' && line[38] !== '1') return null;
+		if (line[38] !== '0' && line[38] !== '1') {
+			if (line[12] !== 'F' || line[39] !== 'W') return null;
+			// Three fields of eleven columns from column 41 (LPV or LP, LNAV/VNAV, LNAV), each A (authorized) or N (not)
+			// and the level. An RNP AR approach publishes its RNP values in other columns and leaves these blank.
+			const levels = [line.slice(40, 51), line.slice(51, 62), line.slice(62, 73)]
+				.filter(field => field[0] === 'A').map(field => field.slice(1).trim());
+			return {type: 'rnav', airport: line.slice(6, 10).trim(), procedure: line.slice(13, 19).trim(), routeType: line[19],
+				transition: line.slice(20, 25).trim(), levels};
+		}
 		/** @type {LegRecord} */
 		const record = {
 			type: 'leg',
@@ -170,6 +186,7 @@ export function parseRecord(line) {
  * @property {string} type
  * @property {string} runway
  * @property {string} suffix
+ * @property {string[]} rnav the RNAV levels the approach is authorized for, as published ('LPV', 'LNAV/VNAV', 'LNAV')
  * @property {Transition[]} transitions
  * @property {CifpLeg[]} final
  * @property {CifpLeg[]} missed
@@ -202,6 +219,9 @@ export function extractCifp(cifpText, nasr, stats = {}) {
 	// airport -> procedure -> part (route type and transition) -> legs, each in file order
 	/** @type {Map<string, Map<string, Map<string, LegRecord[]>>>} */
 	const procedures = new Map();
+	// airport and approach -> the RNAV levels of the first W continuation of its final approach
+	/** @type {Map<string, string[]>} */
+	const rnavLevels = new Map();
 
 	for (const line of cifpText.split(/\r?\n/)) {
 		const record = parseRecord(line);
@@ -211,6 +231,9 @@ export function extractCifp(cifpText, nasr, stats = {}) {
 		} else if (record.type === 'point') {
 			const key = pointKey(record.section, record.ident, record.region, record.airport);
 			if (!points.has(key)) points.set(key, record);
+		} else if (record.type === 'rnav') {
+			const key = `${record.airport}|${record.procedure}`;
+			if (record.routeType !== 'A' && !rnavLevels.has(key)) rnavLevels.set(key, record.levels);
 		} else if (airportIdents.has(record.airport)) {
 			const ofAirport = procedures.get(record.airport) ?? new Map();
 			procedures.set(record.airport, ofAirport);
@@ -253,8 +276,10 @@ export function extractCifp(cifpText, nasr, stats = {}) {
 		/** @type {FixRef} */
 		const ref = {ident: fix.ident, region: fix.region, kind};
 		if (ofAirport !== undefined) ref.airport = ofAirport;
-		// NASR has no terminal waypoints: it files some of them as fixes, without their airport
-		if (kind !== 'terminal' && nasrKeys.has(`${kind}|${fix.ident}|${fix.region}`)) return {ref};
+		// NASR files terminal waypoints as fixes, without their airport: the reference keeps it, the lookup does not
+		const nasrKind = kind === 'terminal' ? 'fix' : kind;
+		if (nasrKeys.has(`${nasrKind}|${fix.ident}|${fix.region}`)) return {ref};
+		// The CIFP files terminal waypoints and NDBs under their airport
 		const point = points.get(pointKey(fix.section, fix.ident, fix.region, ofAirport));
 		if (point === undefined) return {reason: `fix ${name} is neither in the NASR extract nor in the CIFP`};
 		if (point.withoutVor) return {reason: `fix ${name} is a TACAN or DME without VOR`};
@@ -302,7 +327,8 @@ export function extractCifp(cifpText, nasr, stats = {}) {
 				leg[key] = r[key];
 			}
 			if (r.turn === 'L' || r.turn === 'R') leg.turn = r.turn;
-			if (r.description[1] === 'Y') leg.flyOver = true;
+			// column 41: Y fly-over, B fly-over at the end of a route part
+			if (r.description[1] === 'Y' || r.description[1] === 'B') leg.flyOver = true;
 			const role = ROLES[r.description[3]];
 			if (role !== undefined) leg.role = role;
 			legs.push(leg);
@@ -370,6 +396,7 @@ export function extractCifp(cifpText, nasr, stats = {}) {
 				type: [...finalTypes][0],
 				runway: m === null ? '' : m[1],
 				suffix: m === null ? ident.replace(/^.*-/, '') : m[2],
+				rnav: rnavLevels.get(`${airport}|${ident}`) ?? [],
 				transitions,
 				final: built.legs.slice(0, missedFrom),
 				missed: built.legs.slice(missedFrom),

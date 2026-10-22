@@ -140,24 +140,33 @@ waypoints are sorted by name or ident; legs stay in the order the CIFP gives the
   SIDs `1`, `4` and `T` (vector SID) are runway transitions, `2` and `5` the common route, `3`, `6` and `V` en route
   transitions; for STARs `1` and `4` are en route transitions, `2` and `5` the common route, `3` and `6` runway
   transitions. `runway` is the CIFP's transition name without the `RW`: `27`, `32L`, `32B` for both parallels, `ALL`.
-- An approach: `ident` (`R32LY`), `type`, `runway`, `suffix`, `transitions` (route type `A`), `final` and `missed`.
+- An approach: `ident` (`R32LY`), `type`, `runway`, `suffix`, `rnav`, `transitions` (route type `A`), `final` and
+  `missed`.
   `type` is the route type of the final approach: `R` RNAV, `H` RNP, `I` ILS, `L` localizer, `B` localizer back course,
   `N` NDB, `S` and `D` VOR. A circling approach spells its type differently in its ident (`VOR-A` is type `S`).
   `runway` and `suffix` come from the ident: `R32LY` is runway `32L`, suffix `Y`; `R02-Y` runway `02`; `VOR-A` has no
   runway and suffix `A`. The missed approach starts after the leg to the missed approach point (column 43 `M`),
   or where there is none at the leg that column 42 marks `M`.
+  `rnav` lists the levels the approach is authorized for, as published: `LPV` (or `LP`), `LNAV/VNAV` and `LNAV`, each
+  where its field is marked `A`. They come from the continuation record of application `W` (column 40) of the final
+  approach, three fields of eleven columns from column 41 (R32LY: `['LPV', 'LNAV/VNAV', 'LNAV']`, R14RY: `['LPV',
+  'LNAV/VNAV']`). An approach without that record, and an RNP AR approach, whose record has its RNP values elsewhere,
+  has an empty list. No continuation record becomes a leg.
 - A leg: `type`, the path terminator as published (`IF`, `TF`, `CF`, `AF`, `VM`, `HM`, `RF` ...); `fix` where the record
   names one; `navaid`, the recommended navaid, for `AF`, `CF` and `PI` legs; `courseMag`; `turn` (`L` or `R`);
-  `flyOver` where column 41 is `Y`; `role` from column 43 (`A`, `C` and `D` are `IAF`, `B` and `I` are `IF`, `F` is
+  `flyOver` where column 41 is `Y`, or `B`, which marks a fly-over fix that ends its route part; `role` from column 43 (`A`, `C` and `D` are `IAF`, `B` and `I` are `IF`, `F` is
   `FAF`, `M` is `MAP`); `rhoNm`, `thetaDeg` and `arcRadiusNm` where the record has them. A leg to the airport keeps its
   fix.
 - A fix or navaid: `ident`, `region` and `kind`, which comes from the section of its record: `airport` (`PA`), `runway`
   (`PG`, `RW32L`), `terminal` (`PC`), `fix` (`EA`), `vor` (`D`), `ndb` (`DB`, and `PN` for a terminal NDB). A terminal
   waypoint, a terminal NDB and a runway carry the `airport` they belong to.
+- A fix is looked up in the NASR extract by ident and region among the facilities of its kind: `fixes` for `fix` and
+  for `terminal` (NASR files terminal waypoints as fixes, without their airport), `vors` for `vor`, `ndbs` for `ndb`.
+  The `airport` of a terminal waypoint or terminal NDB is no part of that lookup, so a reference that carries it can
+  resolve to a NASR fix or NDB. Where NASR has the facility, the leg has the reference only.
 - `waypoints`: the fixes and navaids the procedures need that the NASR extract does not have, with `ident`, `region`,
-  `kind`, `airport` where it has one, `lat` and `lon` from their CIFP record. These are every terminal waypoint, since
-  NASR does not tell them from en route fixes (it files some as fixes, without their airport), and the fixes and VORs
-  outside the regions that procedures inside them reach. A fix, VOR or NDB of the NASR extract is matched by ident,
-  kind and region.
+  `kind`, `airport` where it has one, `lat` and `lon` from their CIFP record. For a terminal waypoint or terminal NDB
+  that is the record filed under the procedure's airport. These are the terminal waypoints NASR lacks and the fixes and
+  VORs outside the regions that procedures inside them reach.
 - A localizer, TACAN or DME is no facility of either extract. As the navaid of a `CF` or `PI` leg it is left out, which
   the unit does not miss: it reads the navaid of an `AF` leg only. The summary counts them.

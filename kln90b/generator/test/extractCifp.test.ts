@@ -18,17 +18,18 @@ const point = (ident: string) => ({ident, lat: 0, lon: 0, region: 'K1'});
 
 /**
  * A NASR extract with what the fixture's procedures use inside the region: not LMT and OED, which lie outside it, and
- * no terminal waypoints, except DUANE, which NASR files as a fix.
+ * of the terminal waypoints only DUANE, which NASR files as a fix.
  */
 function nasr(): NavdataExtract {
 	return {
 		cycle: '2026-10-01',
-		airports: [airport('KBFI', ['14L-32R', '14R-32L']), airport('KHIO', ['02-20', '13L-31R', '13R-31L']),
-			airport('KYKM', ['04-22', '09-27'])],
-		vors: ['PDT', 'YKM'].map(ident => ({...point(ident), name: ident, type: 'VORTAC', mhz: 116, declinationEast: 0})),
-		ndbs: [],
-		fixes: ['ARVAD', 'AUBRN', 'BRUKK', 'CHINS', 'CIDOG', 'DUANE', 'HUMPP', 'LOFAL', 'MARRK', 'MOXEE', 'OCITY', 'PORTL',
-			'RADDY', 'SELAH', 'SUNED', 'TAGOR', 'TITON', 'VAMPS', 'VANTZ', 'WIKIK', 'WOODI'].map(point),
+		airports: [airport('KAWO', ['11-29', '16-34']), airport('KBFI', ['14L-32R', '14R-32L']),
+			airport('KHIO', ['02-20', '13L-31R', '13R-31L']), airport('KYKM', ['04-22', '09-27'])],
+		vors: ['BTG', 'PAE', 'PDT', 'UBG', 'YKM'].map(ident => ({...point(ident), name: ident, type: 'VORTAC', mhz: 116, declinationEast: 0})),
+		ndbs: ['AW', 'PND'].map(ident => ({...point(ident), name: ident, khz: 356})),
+		fixes: ['ARVAD', 'AUBRN', 'BRUKK', 'CHINS', 'CIDOG', 'CIDUG', 'DEDBE', 'DIGGN', 'DUANE', 'FAVDU', 'HUMPP', 'LOFAL',
+			'MARRK', 'MOXEE', 'OCITY', 'PORTL', 'RADDY', 'SELAH', 'SUNED', 'TAGOR', 'TITON', 'USDAW', 'VAMPS', 'VANTZ', 'WIKIK',
+			'WOODI'].map(point),
 		centers: [],
 	};
 }
@@ -37,10 +38,20 @@ const fix = (ident: string) => ({ident, region: 'K1', kind: 'fix'});
 const vor = (ident: string) => ({ident, region: 'K1', kind: 'vor'});
 
 describe('parseRecord', () => {
-	it('returns null for a continuation record', () => {
+	it('reads the RNAV levels of an approach continuation record, and no leg from it', () => {
 		const continuation = line('SUSAP KBFIK1FR32LY R      020DUANEK1PC2');
-		expect(continuation[38]).toBe('2');
-		expect(parseRecord(continuation)).toBeNull();
+		expect(continuation.slice(38, 40)).toBe('2W');
+		expect(parseRecord(continuation)).toEqual({
+			type: 'rnav', airport: 'KBFI', procedure: 'R32LY', routeType: 'R', transition: '',
+			levels: ['LPV', 'LNAV/VNAV', 'LNAV'],
+		});
+		// the RNP AR continuation of H32LZ publishes no levels in these columns
+		expect(parseRecord(line('SUSAP KBFIK1FH32LZ H      020DUANEK1PC2'))).toMatchObject({type: 'rnav', levels: []});
+	});
+
+	it('returns null for a continuation record of another application', () => {
+		const continuation = line('SUSAP KBFIK1FR32LY R      020DUANEK1PC2');
+		expect(parseRecord(continuation.slice(0, 39) + 'L' + continuation.slice(40))).toBeNull();
 	});
 
 	it('reads a procedure leg', () => {
@@ -64,6 +75,15 @@ describe('parseRecord', () => {
 		});
 	});
 
+	it('reads the position of an NDB and of a terminal NDB', () => {
+		expect(parseRecord(line('SUSADB       PND '))).toEqual({
+			type: 'point', section: 'DB', ident: 'PND', region: 'K1', lat: 45.63026944, lon: -123.04581111,
+		});
+		expect(parseRecord(line('SUSAPNKAWOK1 AW '))).toEqual({
+			type: 'point', section: 'PN', airport: 'KAWO', ident: 'AW', region: 'K1', lat: 48.07611944, lon: -122.15391111,
+		});
+	});
+
 	it('reads the cycle from the header', () => {
 		expect(parseRecord(line('HDR01'))).toEqual({type: 'header', cycle: '2610'});
 	});
@@ -81,10 +101,10 @@ describe('extractCifp', () => {
 	});
 
 	it('takes the airports of the NASR extract that have procedures in the CIFP', () => {
-		expect(result.airports.map((a: any) => a.ident)).toEqual(['KBFI', 'KHIO', 'KYKM']);
+		expect(result.airports.map((a: any) => a.ident)).toEqual(['KAWO', 'KBFI', 'KHIO', 'KYKM']);
 		const withoutHillsboro = nasr();
 		withoutHillsboro.airports = withoutHillsboro.airports.filter(a => a.ident !== 'KHIO');
-		expect(extractCifp(CIFP, withoutHillsboro).airports.map((a: any) => a.ident)).toEqual(['KBFI', 'KYKM']);
+		expect(extractCifp(CIFP, withoutHillsboro).airports.map((a: any) => a.ident)).toEqual(['KAWO', 'KBFI', 'KYKM']);
 	});
 
 	it('reads YKM7 at KYKM: runway transitions and the common route, no en route transitions', () => {
@@ -126,7 +146,7 @@ describe('extractCifp', () => {
 
 	it('reads the RNAV (GPS) Y 32L: transitions with their IAF, the final approach to the MAP and the missed approach', () => {
 		const r32ly = airportOf('KBFI').approaches.find((a: any) => a.ident === 'R32LY')!;
-		expect(r32ly).toMatchObject({type: 'R', runway: '32L', suffix: 'Y'});
+		expect(r32ly).toMatchObject({type: 'R', runway: '32L', suffix: 'Y', rnav: ['LPV', 'LNAV/VNAV', 'LNAV']});
 		expect(r32ly.transitions.map((t: any) => t.name)).toEqual(['ARVAD', 'HUMPP', 'WOODI']);
 		expect(r32ly.transitions.find((t: any) => t.name === 'HUMPP')!.legs).toEqual([
 			{type: 'IF', fix: fix('HUMPP'), role: 'IAF'},
@@ -149,8 +169,50 @@ describe('extractCifp', () => {
 
 	it('reads the RNAV (RNP) Z 32L as type H', () => {
 		const h32lz = airportOf('KBFI').approaches.find((a: any) => a.ident === 'H32LZ')!;
-		expect(h32lz).toMatchObject({type: 'H', runway: '32L', suffix: 'Z'});
-		expect(airportOf('KBFI').approaches.map((a: any) => a.ident)).toEqual(['H32LZ', 'R32LY']);
+		expect(h32lz).toMatchObject({type: 'H', runway: '32L', suffix: 'Z', rnav: []});
+		expect(airportOf('KBFI').approaches.map((a: any) => a.ident)).toEqual(['H32LZ', 'R14RY', 'R32LY']);
+	});
+
+	it('lists the RNAV levels as published: the RNAV (GPS) Y 14R has no LNAV, an ILS none at all', () => {
+		expect(airportOf('KBFI').approaches.find((a: any) => a.ident === 'R14RY')!.rnav).toEqual(['LPV', 'LNAV/VNAV']);
+		expect(airportOf('KYKM').approaches.find((a: any) => a.ident === 'I27')!.rnav).toEqual([]);
+	});
+
+	it('reads the last leg of a route part, column 41 B, as fly-over', () => {
+		const ocity3 = airportOf('KHIO').arrivals.find((a: any) => a.name === 'OCITY3')!;
+		const lmt = ocity3.transitions.find((t: any) => t.name === 'LMT')!.legs;
+		expect(line('SUSAP KHIOK1EOCITY31LMT   050')[40]).toBe('B');
+		expect(lmt[lmt.length - 1]).toEqual({type: 'TF', fix: fix('OCITY'), flyOver: true});
+		expect(lmt[lmt.length - 2]).toEqual({type: 'TF', fix: fix('VANTZ')});
+	});
+
+	it('reads NDBs and terminal NDBs, which NASR has, as ndb; a terminal NDB keeps its airport', () => {
+		const aw = {ident: 'AW', region: 'K1', kind: 'ndb', airport: 'KAWO'};
+		const n34 = airportOf('KAWO').approaches.find((a: any) => a.ident === 'N34')!;
+		expect(n34.transitions.find((t: any) => t.name === 'AW')!.legs).toEqual([
+			{type: 'IF', fix: aw},
+			{type: 'PI', fix: aw, navaid: aw, courseMag: 207.1, turn: 'L', rhoNm: 0, thetaDeg: 0, role: 'IAF'},
+		]);
+		const pnd = {ident: 'PND', region: 'K1', kind: 'ndb'};
+		const ndbB = airportOf('KHIO').approaches.find((a: any) => a.ident === 'NDB-B')!;
+		expect(ndbB).toMatchObject({type: 'N', runway: '', suffix: 'B'});
+		expect(ndbB.transitions.find((t: any) => t.name === 'BTG')!.legs.slice(1, 3)).toEqual([
+			{type: 'TF', fix: pnd},
+			{type: 'PI', fix: pnd, navaid: pnd, courseMag: 261.8, turn: 'R', rhoNm: 0, thetaDeg: 0, role: 'IAF'},
+		]);
+		expect(waypoint('AW')).toBeUndefined();
+		expect(waypoint('PND')).toBeUndefined();
+	});
+
+	it('takes an NDB and a terminal NDB that NASR lacks from their CIFP records', () => {
+		const withoutNdbs = nasr();
+		withoutNdbs.ndbs = [];
+		const x = extractCifp(CIFP, withoutNdbs);
+		expect(x.waypoints.filter((w: any) => w.kind === 'ndb')).toEqual([
+			{ident: 'AW', region: 'K1', kind: 'ndb', airport: 'KAWO', lat: 48.07611944, lon: -122.15391111},
+			{ident: 'PND', region: 'K1', kind: 'ndb', lat: 45.63026944, lon: -123.04581111},
+		]);
+		expect(x.airports.find((a: any) => a.ident === 'KAWO')!.approaches.map((a: any) => a.ident)).toEqual(['N34']);
 	});
 
 	it('reads a circling approach: the route type of its final approach, no runway, the suffix of its ident', () => {
@@ -205,18 +267,21 @@ describe('extractCifp', () => {
 		expect(skipStats.skipped).toEqual({'navaid TCM (K1, VOR) is a TACAN or DME without VOR': ['KYKM approach I27']});
 	});
 
-	it('takes a fix that NASR lacks from the CIFP, the terminal waypoints and a VOR outside the region alike', () => {
-		// NASR files DUANE as a fix, but the procedure names the terminal waypoint of KBFI
-		expect(waypoint('DUANE')).toEqual({ident: 'DUANE', region: 'K1', kind: 'terminal', airport: 'KBFI', lat: 47.442875, lon: -122.22891944});
+	it('takes a fix that NASR lacks from the CIFP, a terminal waypoint and a VOR outside the region alike', () => {
+		expect(waypoint('ATULY')).toEqual({ident: 'ATULY', region: 'K1', kind: 'terminal', airport: 'KBFI', lat: 47.27227778, lon: -122.24447222});
 		expect(waypoint('LMT')).toEqual({ident: 'LMT', region: 'K1', kind: 'vor', lat: 42.15314167, lon: -121.72752778});
 		expect(waypoint('OED')).toMatchObject({kind: 'vor'});
-		// what NASR has stays out
+		// what NASR has stays out: DUANE, a terminal waypoint of KBFI that NASR files as a fix, keeps its kind and airport
+		expect(waypoint('DUANE')).toBeUndefined();
+		const r32ly = airportOf('KBFI').approaches.find((a: any) => a.ident === 'R32LY')!;
+		expect(r32ly.final[1].fix).toEqual({ident: 'DUANE', region: 'K1', kind: 'terminal', airport: 'KBFI'});
 		expect(waypoint('TITON')).toBeUndefined();
 		expect(waypoint('YKM')).toBeUndefined();
 		const lmt = airportOf('KHIO').arrivals.find((a: any) => a.name === 'OCITY3')!.transitions.find((t: any) => t.name === 'LMT')!;
 		expect(lmt.legs[0]).toEqual({type: 'IF', fix: vor('LMT')});
-		expect(result.waypoints.map((w: any) => w.ident)).toEqual(
-			['ATULY', 'COVOG', 'DUANE', 'EMAME', 'FEVAS', 'FITIM', 'GRRAM', 'JAMDA', 'LMT', 'OED', 'OPISE', 'XOWLO', 'ZIGED', 'ZITLU']);
+		expect(result.waypoints.map((w: any) => w.ident)).toEqual(['ATULY', 'BIGIO', 'CFVNT', 'COLMT', 'COVOG', 'EMAME', 'FEVAS',
+			'FITIM', 'GRRAM', 'HAGEV', 'JACAL', 'JAMDA', 'LACKR', 'LEMNN', 'LMT', 'OCEZE', 'OED', 'OPISE', 'SAVOY', 'SEYOY', 'XOWLO',
+			'ZIGED', 'ZITLU']);
 	});
 
 	it('matches a VOR of the NASR extract by ident and region', () => {
@@ -239,7 +304,7 @@ describe('extractCifp', () => {
 	});
 
 	it('counts what it extracted', () => {
-		expect(stats.counts).toEqual({airports: 3, departures: 2, arrivals: 2, approaches: 4, waypoints: 14});
+		expect(stats.counts).toEqual({airports: 4, departures: 2, arrivals: 2, approaches: 7, waypoints: 23});
 	});
 
 	it('writes the same text for the same data, two-space indented', () => {

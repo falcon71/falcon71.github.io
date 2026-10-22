@@ -2,11 +2,31 @@ HDR01FAACIFP18      001P013203969192610  09-SEP-202612:03:55  U.S.A. DOT FAA    
 SUSAD        LMT   K1011590VTHW N42091131W121433910    N42091131W121433910E0170040902     NARKLAMATH FALLS                 255162004
 SUSAD        OED   K1011360VTHW N42284647W122544656    N42284647W122544656E0190020832     NARROGUE VALLEY                  256741605
 SUSAD        TCM   K1010960 TTW                    TCM N47085161W122283014E0150002830     NARMCCHORD                       258972102
+SUSADB       PND   K1003560H MW N45374897W123024492                       E0160           NARBANKS                         271052013
+SUSAP KAWOK1CSAVOY K10    C     N47583192W122090717                       E0150     NAR           SAVOY                    286562605
+SUSAP KAWOK1FN34   AAW    010AW   K1PN0N       IF                                 - 06000     18000                 0  S   286732211
+SUSAP KAWOK1FN34   AAW    020AW   K1PN0NE AL   PI AW  K1      0000000020710100PN  + 02000                           0  S   286742211
+SUSAP KAWOK1FN34   APAE   010PAE  K1D 0V  A    IF                                             18000                 0  S   286752211
+SUSAP KAWOK1FN34   APAE   020SAVOYK1PC0EE B    TF                                 + 02000                           0  S   286762211
+SUSAP KAWOK1FN34   N      010SAVOYK1PC0E  I    IF AW  K1                      PN  + 02000     18000                 0  S   286772211
+SUSAP KAWOK1FN34   N      020AW   K1PN0N  F    CF AW  K1              34210060PN  + 01700                 AW    K1PN0  S   286782211
+SUSAP KAWOK1FN34   N      030RW34 K1PG0GY M    CF AW  K1              34210047PN    00174             -305          0  S   286792211
+SUSAP KAWOK1FN34   N      040         0  M     CA                     3421        + 01000                           0  S   286802211
+SUSAP KAWOK1FN34   N      050AW   K1PN0NY  L   DF                                 + 02000                           0  S   286812211
+SUSAP KAWOK1FN34   N      060AW   K1PN0NE  L   HM                     3421T010    + 02000                           0  S   286822211
 SUSAP KBFIK1CATULY K10    W     N47162020W122144010                       E0148     NAR           ATULY                    323392605
+SUSAP KBFIK1CBIGIO K10    W     N47374568W122352174                       E0150     NAR           BIGIO                    323402605
+SUSAP KBFIK1CCOLMT K10    W     N47363542W122221219                       E0149     NAR           COLMT                    323422605
 SUSAP KBFIK1CCOVOG K10    W     N47181722W122011160                       E0148     NAR           COVOG                    323432605
 SUSAP KBFIK1CDUANE K10    C     N47263435W122134411                       E0149     NAR           DUANE                    323442605
 SUSAP KBFIK1CFEVAS K10    W     N47344761W122204079                       E0149     NAR           FEVAS                    323452605
 SUSAP KBFIK1CGRRAM K10    W     N47411196W122315780                       E0150     NAR           GRRAM                    323472605
+SUSAP KBFIK1CHAGEV K10    W     N47405792W122330419                       E0150     NAR           HAGEV                    323482605
+SUSAP KBFIK1CJACAL K10    W     N47475888W122250926                       E0150     NAR           JACAL                    323502605
+SUSAP KBFIK1CLACKR K10    C     N47222649W122101567                       E0148     NAR           LACKR                    323522605
+SUSAP KBFIK1CLEMNN K10    W     N47402580W122275162                       E0150     NAR           LEMNN                    323532605
+SUSAP KBFIK1COCEZE K10    C     N47273306W122143338                       E0149     NAR           OCEZE                    323552605
+SUSAP KBFIK1CSEYOY K10    W     N47141996W122203608                       E0148     NAR           SEYOY                    323562605
 SUSAP KBFIK1CZIGED K10    R     N47194126W122074956                       E0148     NAR           ZIGED                    323592605
 SUSAP KBFIK1DKENT1 TRW14L 010         0        VI                     1370                    18000       SEA   K1D        323652512
 SUSAP KBFIK1DKENT1 TRW14L 020ZIGEDK1PC0EE      CF TCM K1      0373017813520130D     02000                                  323662512
@@ -51,6 +71,29 @@ SUSAP KBFIK1FH32LZ H      050FEVASK1PC0E    010DF                               
 SUSAP KBFIK1FH32LZ H      060GRRAMK1PC0E    010TF                                                                   A FS   324562308
 SUSAP KBFIK1FH32LZ H      070LOFALK1EA0EY   010TF                                 + 03000                           A FS   324572308
 SUSAP KBFIK1FH32LZ H      080LOFALK1EA0EE  R   HM                     31380040    + 03000                           A FS   324582308
+SUSAP KBFIK1FR14RY AARVAD 010ARVADK1EA0E  A    IF                                             18000                 A JS   324962308
+SUSAP KBFIK1FR14RY AARVAD 020FAVDUK1EA0E       TF                                 + 08000                           A JS   324972308
+SUSAP KBFIK1FR14RY AARVAD 030BIGIOK1PC0E       TF                                 + 04000                           A JS   324982502
+SUSAP KBFIK1FR14RY AARVAD 040HAGEVK1PC0E       TF                                 + 03000          200              A-JS   324992502
+SUSAP KBFIK1FR14RY AARVAD 050LEMNNK1PC0EE B    TF                                 + 02200                           A JS   325002502
+SUSAP KBFIK1FR14RY ADIGGN 010DIGGNK1EA0E  A    IF                                             18000                 A JS   325012308
+SUSAP KBFIK1FR14RY ADIGGN 020LOFALK1EA0E       TF                                 + 05400                           A JS   325022502
+SUSAP KBFIK1FR14RY ADIGGN 030LEMNNK1PC0EE B    TF                                 + 02200                           A JS   325032502
+SUSAP KBFIK1FR14RY AWOODI 010WOODIK1EA0E  A    IF                                             18000                 A JS   325042308
+SUSAP KBFIK1FR14RY AWOODI 020DEDBEK1EA0E       TF                                 + 07000                           A JS   325052502
+SUSAP KBFIK1FR14RY AWOODI 030USDAWK1EA0E       TF                                 + 05000                           A JS   325062502
+SUSAP KBFIK1FR14RY AWOODI 040JACALK1PC0E       TF                                 + 04000                           A JS   325072502
+SUSAP KBFIK1FR14RY AWOODI 050LEMNNK1PC0EE B    TF                                 + 02200                           A JS   325082502
+SUSAP KBFIK1FR14RY R      010LEMNNK1PC0E  I    IF                                 + 02200     18000                 A JS   325092308
+SUSAP KBFIK1FR14RY R      020COLMTK1PC1E  F    TF                                 + 01600                 RW14R K1PGA JS   325102502
+SUSAP KBFIK1FR14RY R      020COLMTK1PC2WALPV       ALNAV/VNAV                                                         JS   325112502
+SUSAP KBFIK1FR14RY R      030RW14RK1PG0GY M    TF                                   00073             -300          A JS   325122502
+SUSAP KBFIK1FR14RY R      040         0  M     CA                     1352        + 00301                           A JS   325132308
+SUSAP KBFIK1FR14RY R      050OCEZEK1PC0E       DF                                   01500                           A JS   325142502
+SUSAP KBFIK1FR14RY R      060LACKRK1PC0E       TF                                                                   A JS   325152502
+SUSAP KBFIK1FR14RY R      070SEYOYK1PC0E       TF                                                                   A JS   325162502
+SUSAP KBFIK1FR14RY R      080CIDUGK1EA0EY      TF                                 + 05000                           A JS   325172502
+SUSAP KBFIK1FR14RY R      090CIDUGK1EA0EE  R   HM                     17160050    + 05000                           A JS   325182308
 SUSAP KBFIK1FR32LY AARVAD 010ARVADK1EA0E  A    IF                                             18000                 A JS   325192308
 SUSAP KBFIK1FR32LY AARVAD 020ATULYK1PC0E       TF                                 + 06000                           A JS   325202502
 SUSAP KBFIK1FR32LY AARVAD 030AUBRNK1EA0EE B    TF                                 + 03600                           A JS   325212502
@@ -70,6 +113,7 @@ SUSAP KBFIK1FR32LY R      050FEVASK1PC0E       DF                               
 SUSAP KBFIK1FR32LY R      060GRRAMK1PC0E       TF                                                                   A JS   325352502
 SUSAP KBFIK1FR32LY R      070LOFALK1EA0EY      TF                                 + 03000                           A JS   325362502
 SUSAP KBFIK1FR32LY R      080LOFALK1EA0EE  R   HM                     31380040    + 03000                           A JS   325372308
+SUSAP KHIOK1CCFVNT K10    W     N45325944W122573262                       E0146     NAR           CFVNT(CNF)               113122605
 SUSAP KHIOK1EOCITY31LMT   010LMT  K1D 0V       IF                                             18000                        114132002
 SUSAP KHIOK1EOCITY31LMT   020MOXEEK1EA0E       TF                                                                          114142002
 SUSAP KHIOK1EOCITY31LMT   030PORTLK1EA0E       TF                                                                          114152002
@@ -97,6 +141,19 @@ SUSAP KHIOK1EOCITY33RW20  010OCITYK1EA0E       IF                               
 SUSAP KHIOK1EOCITY33RW20  020KHIO K1PA0AE      VM                     1000                                                 114372002
 SUSAP KHIOK1EOCITY33RW31B 010OCITYK1EA0E       IF                                             18000                        114382002
 SUSAP KHIOK1EOCITY33RW31B 020KHIO K1PA0AE      VM                     1000                                                 114392002
+SUSAP KHIOK1FNDB-B ABTG   010BTG  K1D 0V       IF                                             18000                 0  C   114712004
+SUSAP KHIOK1FNDB-B ABTG   020PND  K1DB0N       TF                                 B 0600004000                      0  C   114722204
+SUSAP KHIOK1FNDB-B ABTG   030PND  K1DB0N  AR   PI PND K1      0000000026180100DB  + 03600                           0  C   114732204
+SUSAP KHIOK1FNDB-B ABTG   040PND  K1DB0NE      CF PND K1              12680060DB  + 03200                           0  C   114742204
+SUSAP KHIOK1FNDB-B AUBG   010UBG  K1D 0V       IF                                             18000                 0  C   114752004
+SUSAP KHIOK1FNDB-B AUBG   020PND  K1DB0N       TF                                 B 0600004000                      0  C   114762204
+SUSAP KHIOK1FNDB-B AUBG   030PND  K1DB0N  AR   PI PND K1      0000000026180100DB  + 03600                           0  C   114772204
+SUSAP KHIOK1FNDB-B AUBG   040PND  K1DB0NE      CF PND K1              12680060DB  + 03200                           0  C   114782204
+SUSAP KHIOK1FNDB-B N      020PND  K1DB0N  F    IF PND K1                      DB  + 03200     18000       PND   K1DB0  C   114792013
+SUSAP KHIOK1FNDB-B N      030CFVNTK1PC0EY M    CF PND K1              12680061DB    00208              000          0  C   114802204
+SUSAP KHIOK1FNDB-B N      040         0  M     CA                     1268        + 01000                           0  C   114812004
+SUSAP KHIOK1FNDB-B N      050UBG  K1D 0VY  R   DF                                 + 03000                           0  C   114822004
+SUSAP KHIOK1FNDB-B N      060UBG  K1D 0VE  R   HM                     0030T010    + 03000                           0  C   114832004
 SUSAP KYKMK1CEMAME K10    R     N46323136W120212556                       E0143     NAR           EMAME                    450562605
 SUSAP KYKMK1CFITIM K10    R     N46324983W120075679                       E0143     NAR           FITIM                    450592605
 SUSAP KYKMK1CJAMDA K10    R     N46341914W120315103                       E0143     NAR           JAMDA                    450672605
@@ -143,3 +200,4 @@ SUSAP KYKMK1FVOR-A S      030JAMDAK1PC0EY M    CF YKM K1      2507003625070036D 
 SUSAP KYKMK1FVOR-A S      040JAMDAK1PC0E M     FA YKM K1      250700362507    D   + 02600                           0 DC   453552204
 SUSAP KYKMK1FVOR-A S      050YKM  K1D 0VY  R   CFYYKM K1      0000000009700037D   + 04600                           0 DC   453562204
 SUSAP KYKMK1FVOR-A S      060YKM  K1D 0VE  L   HM                     2880T010    + 04600                           0 DC   453572204
+SUSAPNKAWOK1 AW    K1003820HO W N48043403W122091408                       E0170           NARWATON                         582651709
