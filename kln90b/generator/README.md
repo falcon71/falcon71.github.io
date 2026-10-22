@@ -20,9 +20,12 @@ of that is a dependency of `kln90b/package.json`, and the site builds without th
 
 Run them from `kln90b/`:
 
-- `npm run screens` generates the screens (Vitest project `screens`). Extra arguments are Vitest filters, for example
-  `npm run screens -- screens/nav-1`.
-- `npm run screens:test` runs the generator's own tests (projects `unit` and `capture`).
+- `npm run screens` generates all screens (Vitest project `screens`) and, when that succeeds, records the submodule's
+  commit in `screens/kln90b-commit.txt`. Extra arguments are Vitest filters, for example `npm run screens -- screens/nav-1`;
+  such a run refuses to start while `screens/kln90b-commit.txt` is missing or names another commit than the submodule's,
+  because the screens it does not generate would stay at the old one. Run `npm run screens` without filters then.
+- `npm run screens:test` runs the generator's own tests (projects `unit` and `capture`). Neither the manifest nor its check
+  concerns them.
 
 `generator/run.mjs` first checks that the submodule is checked out, has its dependencies, sits at the pinned commit and
 has no local changes. It then starts the submodule's Vitest with `generator/vitest.config.mts`, with the submodule as
@@ -32,7 +35,9 @@ working directory, because the harness resolves `resources/` from `process.cwd()
 
 - `vitest.config.mts`: the projects it declares, the `.scss` stub, and `resolveFromVendor`, which makes bare imports from files
   of this repository resolve inside the submodule so that there is one copy of Vitest and the SDK.
-- `vendorCheck.mjs`: the submodule checks, and `vendorCommit()` for the commit recorded in a generated screen.
+- `vendorCheck.mjs`: the submodule checks, and `vendorCommit()` for the commit the submodule is at.
+- `screensManifest.mjs`: the format of `screens/kln90b-commit.txt`, and what a run of the `screens` project does about it
+  (`planScreensRun`).
 - `lib/paths.ts`: `VENDOR`, `SITE` and `SCREENS`.
 - `lib/navdata.ts`: loads the newest extract of `navdata/` and turns it into the facilities a screen boots with (`place()`
   gives the position of an ident for a screen's `boot.position`). `lib/wmm.ts` is the magnetic model.
@@ -124,4 +129,6 @@ that was not answered with `adjustCourseIndicator`.
 2. Commit the changed pointer in this repository.
 3. Run `npm ci --prefix vendor/kln90b`.
    Copy `harness-lgpl/builders.ts` again from the new commit if it changed, as `harness-lgpl/README.md` says.
-4. Regenerate all screens and review the diff: it shows which screens and which field explanations need a look.
+4. Run `npm run screens` without filters, which also writes the new commit to `screens/kln90b-commit.txt`, and review the
+   diff: a screen file changes only when the screen itself changed, so it shows which screens and which field
+   explanations need a look.

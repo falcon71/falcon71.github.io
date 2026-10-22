@@ -48,8 +48,10 @@ A screen of the unit is generated from the simulated unit (see `kln90b/generator
 
 The folder `kln90b/screens/<id>/` holds the description (`screen.ts`), the explanations of the fields (`fields.mdx`, with
 `<Field id title>` and `<Term>` written without imports) and the generated `screen.txt`. `npm run screens -- <id>` in
-`kln90b/` writes it. The build fails, naming the screen and the command to run, when a page names a screen that was never
-generated or when the explanations and the fields of the screen differ. `title="..."` replaces the title of the generated
+`kln90b/` writes it, and `npm run screens` without a filter also records the kln90b commit of all screens in
+`kln90b/screens/kln90b-commit.txt`; a run with a filter refuses while that file is missing or names another commit. The
+build fails, naming the screen and the command to run, when a page names a screen that was never generated or when the
+explanations and the fields of the screen differ. `title="..."` replaces the title of the generated
 file. A page name in an explanation becomes a link like anywhere else.
 
 The description is explained in `kln90b/generator/README.md` ("Describing a screen"). A screen must not flash `msg` on its

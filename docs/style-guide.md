@@ -647,9 +647,11 @@ These are built. They are listed here so that they stay true; changes to them go
 - The generator and the description of every screen (how the unit is set up, which keys reach the screen, where its
   fields are) live in this repository. The generator boots the unit headless the way the kln90b tests do; helpers that
   need changes are copied here and adapted, under their license.
-- Generated screens are committed and record the kln90b commit they came from. Regenerating all screens after the pin
-  moves, or after a fix to the generator, shows every changed screen as a git change, which tells the writers what to
-  look at.
+- Generated screens are committed. The kln90b commit they all came from is recorded once, in
+  `kln90b/screens/kln90b-commit.txt`, which `npm run screens` writes after a run of all screens; a screen file changes
+  in git only when the screen itself changed. Regenerating all screens after the pin moves, or after a fix to the
+  generator, shows every changed screen as a git change, which tells the writers what to look at. A run with filters
+  refuses to start while the file names another commit than the pin.
 - The site build reads only the committed screens; it needs neither the submodule nor its dependencies.
 - A screen is defined in one place and shown on any page by its id. A field is found by a regular expression over the
   text, or by its place when its contents do not matter. Generation fails when a field is found nowhere or more than
@@ -679,8 +681,9 @@ session in this repository and asks for an update to that release. The session:
    controls, messages, settings, navigation behavior, H events for External hardware). Commit messages that say
    `fixes #NN` name the kln90b issue; read it.
 3. Searches the manual for `kln90b#NN` of every fixed issue, rewrites those paragraphs and removes the comment.
-4. Regenerates all screens and goes through the diff of `kln90b/screens/`: every changed screen needs a look at its
-   field explanations and at the text around it on every page that shows it.
+4. Regenerates all screens with `npm run screens` (no filters, so that `kln90b/screens/kln90b-commit.txt` is updated) and
+   goes through the diff of `kln90b/screens/`: every changed screen needs a look at its field explanations and at the
+   text around it on every page that shows it.
 5. Updates the pages for every other user-visible change: new or removed pages and fields, changed behavior, new
    messages, changed installation options (in pilot terms).
 6. Updates the version in the footer if the major version changed.
