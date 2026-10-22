@@ -18,6 +18,8 @@ defineScreen(import.meta.url, {
 		{id: 'name', find: [{area: 'R', row: 1}, {area: 'R', row: 2}]},
 		// Latitude and longitude
 		{id: 'pos', find: positionRows('R')},
+		// The class of the airspace the airport lies in
+		{id: 'class', find: {re: /CL B/, area: 'R'}},
 		{id: 'page', find: {re: /APT 1/, area: 'S'}},
 	],
 });

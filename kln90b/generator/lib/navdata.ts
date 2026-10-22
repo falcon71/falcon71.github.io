@@ -1,21 +1,25 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {
-	AirportClass, FacilityFrequencyType, FixTypeFlags, FlightPlan, ICAO, LegTurnDirection, LegType, RnavTypeFlags,
-	RunwaySurfaceType, UnitType, VorType, type AirportFacility, type ApproachProcedure, type Facility, type FlightPlanLeg,
+	AirportClass, BoundaryAltitudeType, BoundaryType, FacilityFrequencyType, FixTypeFlags, FlightPlan, ICAO, LegTurnDirection, LegType, RnavTypeFlags,
+	RunwaySurfaceType, UnitType, VorType, type AirportFacility, type ApproachProcedure, type BoundaryFacility, type Facility,
+	type FlightPlanLeg,
 	type IcaoValue, type Procedure,
 } from '@microsoft/msfs-sdk';
+import {airspace} from '../../../vendor/kln90b/test/harness/navdata/airspaces';
 import {approach, runwayFix, sid, star, withProcedures} from '../../../vendor/kln90b/test/harness/navdata/procedures';
 import {airport, intersection, ndb, vor, type FrequencyOptions, type RunwayOptions} from '../harness-lgpl/builders.ts';
+import type {Airspace, AirspaceExtract} from '../navdata/extract-airspaces.mjs';
 import type {Approach, CifpExtract, CifpLeg, FixRef, Proc} from '../navdata/extract-cifp.mjs';
 import type {NamedPoint} from './mapElements.ts';
 import {SITE} from './paths.ts';
 
-export type {CifpExtract};
+export type {AirspaceExtract, CifpExtract};
 
 const NAVDATA = path.join(SITE, 'generator', 'navdata');
 const EXTRACT_FILE = /^nasr-\d{4}-\d{2}-\d{2}\.json$/;
 const CIFP_FILE = /^cifp-\d{4}\.json$/;
+const AIRSPACE_FILE = /^airspaces-\d{4}-\d{2}-\d{2}\.json$/;
 
 /** The extract `generator/navdata/extract-nasr.mjs` writes; the format is described in `navdata/README.md`. */
 export interface NavdataExtract {
@@ -54,6 +58,50 @@ export function loadProcedures(): CifpExtract {
 		proceduresCache = JSON.parse(fs.readFileSync(path.join(NAVDATA, newest), 'utf8')) as CifpExtract;
 	}
 	return proceduresCache;
+}
+
+let airspacesCache: AirspaceExtract | undefined;
+
+/** The newest `generator/navdata/airspaces-*.json`, the class B and C airspace and the Centers of the extract's regions, read once. */
+export function loadAirspaces(): AirspaceExtract {
+	if (airspacesCache === undefined) {
+		const newest = fs.readdirSync(NAVDATA).filter(f => AIRSPACE_FILE.test(f)).sort().pop();
+		if (newest === undefined) throw new Error(`no airspaces-*.json in ${NAVDATA}; run generator/navdata/extract-airspaces.mjs`);
+		airspacesCache = JSON.parse(fs.readFileSync(path.join(NAVDATA, newest), 'utf8')) as AirspaceExtract;
+	}
+	return airspacesCache;
+}
+
+const BOUNDARY_TYPES = {B: BoundaryType.ClassB, C: BoundaryType.ClassC, center: BoundaryType.Center} as const;
+
+/** The reference of a limit in the extract: the surface counts as above ground level, and no upper limit is unlimited. */
+function limitType(ref: string | null): BoundaryAltitudeType {
+	switch (ref) {
+		case 'SFC': case 'AGL': return BoundaryAltitudeType.AGL;
+		case 'MSL': return BoundaryAltitudeType.MSL;
+		case null: return BoundaryAltitudeType.Unlimited;
+		default: throw new Error(`unknown altitude reference ${ref}`);
+	}
+}
+
+/** One airspace of the extract; a Center speaks on the first frequency the NASR extract lists for its ARTCC. */
+function boundaryOf(a: Airspace, x: NavdataExtract): BoundaryFacility {
+	const type = BOUNDARY_TYPES[a.kind];
+	let frequencyMHz: number | undefined;
+	if (a.kind === 'center') {
+		frequencyMHz = x.centers.find(c => c.artcc === a.ident)?.frequencies[0];
+		if (frequencyMHz === undefined) throw new Error(`the Center ${a.name} (${a.ident}) has no frequency in the NASR extract`);
+	}
+	return airspace(a.name, type, a.polygon, {
+		// With no upper limit, the height is not read
+		minFt: a.lowerFt, maxFt: a.upperFt ?? 0, minType: limitType(a.lowerRef), maxType: limitType(a.upperRef),
+		frequencyMHz, frequencyName: a.name,
+	});
+}
+
+/** The airspaces of the extract as the harness's boundary search takes them. */
+export function airspacesOf(a: AirspaceExtract, x: NavdataExtract): BoundaryFacility[] {
+	return a.airspaces.map(b => boundaryOf(b, x));
 }
 
 // The use text of a NASR frequency starts with the kind of service (`LCL/P`, `APCH/P DEP/P`, `D-ATIS`). Everything else

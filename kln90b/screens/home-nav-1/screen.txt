@@ -8,7 +8,7 @@ text
 |KPDX ›KSEA |›KSEA      |
 |ηηηηηΟηηηηη|SEATTLE-TAC|
 |DIS  45.0nm|OMA INTL   |
-|GS    123kt|           |
+|GS    123kt|CL B       |
 |ETE     :22|N 47°26.99'|
 |BRG    351°|W122°18.71'|
 |NAV 1|enr-leg    |APT 1|

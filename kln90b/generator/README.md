@@ -91,6 +91,9 @@ A screen gets these without saying anything; it changes the ones that `boot` off
   `boot.start` outside that cycle makes the unit boot with an expired database.
 - The seed of `Math.random` is 1; `boot.seed` sets another one.
 - The last position the unit saved is the boot position (see Messages below); a `storage` of the screen's own wins.
+- The unit knows the class B and C airspace and the Centers of the airspace extract (`navdata/README.md`), and its
+  airspace alert is off, so that no airspace message covers a screen. `boot.storage` sets `airspaceAlertEnabled: true`
+  for a screen that shows the alert; a screen cannot pass `boot.airspaces`.
 - The magnetic variation is NOAA's WMMHR2025 evaluated to degree 12 at the start date, at every position. A screen
   cannot change the model, only the start date.
 

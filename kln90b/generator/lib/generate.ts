@@ -12,7 +12,7 @@ import {captureScreen, type CapturedScreen} from './capture.ts';
 import {locateFields, locateMapFields, type FieldDef, type MapSide} from './fields.ts';
 import {checkCoverage, recordMapElements, type MapElement} from './mapElements.ts';
 import {mapToSvg} from './mapSvg.ts';
-import {facilitiesOf, loadExtract, loadProcedures, pointNamesOf} from './navdata.ts';
+import {airspacesOf, facilitiesOf, loadAirspaces, loadExtract, loadProcedures, pointNamesOf} from './navdata.ts';
 import {decimalYear, declination, screenModel, SCREEN_DEGREE} from './wmm.ts';
 
 export interface ScreenDescription {
@@ -67,16 +67,25 @@ function mapsOf(capture: CapturedScreen, show: Show): Map<MapSide, ShownMap> {
 	return maps;
 }
 
+/**
+ * The user settings a screen starts with: the airspace alert off, and the last position at the boot position, and
+ * the screen's own `storage` wins over both. The unit warns when the first fix is more than 2 NM from the last position
+ * it saved (Gps.ts), which a pilot who last flew from here never sees. The alert is on by default and would flash
+ * its message over any screen that stands in or near an airspace.
+ */
+export function screenStorage(position?: { lat: number; lon: number }, own?: Record<string, unknown>): Record<string, unknown> {
+	const last = position === undefined ? {} : {lastLatitude: position.lat, lastLongitude: position.lon};
+	return {airspaceAlertEnabled: false, ...last, ...own};
+}
+
 async function generate(dir: string, id: string, d: ScreenDescription): Promise<void> {
 	if (!ID.test(id)) throw new Error(`the folder name must match ${ID}`);
 	// Only the places of the FAA extract exist, and the variation is the model's at the date the unit starts
 	const year = decimalYear(d.boot?.start ?? DEFAULT_START);
-	// The unit remembers its last position and warns when the first fix is more than 2 NM from it (Gps.ts). A pilot who
-	// last flew from here never sees that, so the unit starts where it was left unless the screen says otherwise.
-	const position = d.boot?.position;
-	const lastPosition = position === undefined ? {} : {lastLatitude: position.lat, lastLongitude: position.lon};
+	const extract = loadExtract();
 	const unit = await bootUnit({
-		...d.boot, storage: {...lastPosition, ...d.boot?.storage}, defaultNavdata: false, facilities: facilitiesOf(loadExtract(), loadProcedures()),
+		...d.boot, storage: screenStorage(d.boot?.position, d.boot?.storage), defaultNavdata: false,
+		facilities: facilitiesOf(extract, loadProcedures()), airspaces: airspacesOf(loadAirspaces(), extract),
 		magvar: (lat, lon) => declination(screenModel(), lat, lon, year, 0, SCREEN_DEGREE),
 	});
 	await settle(unit);

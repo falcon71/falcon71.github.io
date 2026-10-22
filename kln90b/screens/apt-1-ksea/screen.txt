@@ -8,7 +8,7 @@ text
 |PRESENT POS| KSEA      |
 |           |SEATTLE-TAC|
 |SEA  335°fr|OMA INTL   |
-|      0.9nm|           |
+|      0.9nm|CL B       |
 |N 47°26.99'|N 47°26.99'|
 |W122°18.71'|W122°18.71'|
 |NAV 2|enr-leg    |APT 1|
@@ -25,4 +25,5 @@ field name 1 12 23
 field name 2 12 20
 field pos 4 12 23
 field pos 5 12 23
+field class 3 12 16
 field page 6 18 23

@@ -8,7 +8,7 @@ text
 |PRESENT POS| KSEA      |
 |           |SEATTLE-TAC|
 |SEA  335°fr|OMA INTL   |
-|      0.9nm|           |
+|      0.9nm|CL B       |
 |N 47°26.99'|N 47°26.99'|
 |W122°18.71'|W122°18.71'|
 |NAV 2|enr-leg    |CRSR |
