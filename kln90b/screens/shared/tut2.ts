@@ -12,6 +12,8 @@ import {
 	type ScreenDescription,
 } from '../../generator/api.ts';
 import type {HeadlessUnit} from '../../../vendor/kln90b/test/harness/boot';
+import {fplIdents} from '../../../vendor/kln90b/test/harness/readers';
+import {Screen} from '../../../vendor/kln90b/test/harness/render/screen';
 
 /** The en route waypoints of the flight, in the order the pilot enters them into FPL 0. */
 export const TUT2_ENROUTE = ['KYKM', 'TITON', 'CADED', 'CHINS', 'KBFI'];
@@ -156,4 +158,63 @@ export async function loadApproach(u: HeadlessUnit): Promise<void> {
 	await u.panel.ent();
 	await wait(1000);
 	await adjustCourseIndicator(u);
+}
+
+// FPL 0 shows each waypoint with its number and a mark of its kind: a colon for an en route waypoint, a full stop for a
+// waypoint of a departure or an arrival, a blank for one of an approach
+const DUPLICATES = [
+	// The arrival's copies of the first waypoints of the approach, from the end of the arrival
+	'11.AUBRN', '10.HUMPP',
+	// The arrival's YKM, which is also the first waypoint of the departure
+	'7.YKM',
+	// The en route copies the message REDUNDANT WPTS IN FPL points at
+	'6:CHINS', '4:TITON',
+];
+
+/** FPL 0 once the duplicates are deleted. */
+const CLEANED_UP = [
+	'KYKM', 'YKM', 'TITON', 'CADED', 'CHINS', 'RADDY', 'HUMPP', 'COVOG', 'AUBRN', 'DUANE', 'RW32L', 'FEVAS', 'GRRAM',
+	'LOFAL', 'KBFI',
+];
+
+/**
+ * Turns the left outer knob until the cursor is on the entry of FPL 0 that shows `entry`, its number, mark and
+ * waypoint ('4:TITON'). The search turns clockwise and, once the cursor stops at the end of the list, counterclockwise.
+ */
+async function cursorToEntry(u: HeadlessUnit, entry: string): Promise<void> {
+	let dir: 1 | -1 = 1;
+	for (let i = 0; i < 60; i++) {
+		const field = u.panel.focused('L');
+		// The first column holds the arrow of the active leg
+		if (Screen.read().rows('L')[field.row].slice(1).trim() === entry) return;
+		const before = Screen.read().dump();
+		await u.panel.outer('L', dir);
+		if (Screen.read().dump() === before) {
+			if (dir === -1) break;
+			dir = -1;
+		}
+	}
+	throw new Error(`cursorToEntry: no entry "${entry}" in FPL 0\n${Screen.read().dump()}`);
+}
+
+/**
+ * Deletes the waypoints that the departure, the arrival and the approach repeat from FPL 0, from the end of the list,
+ * so that the numbers of the entries above stay: the left cursor on each copy, CLR, which asks DEL, and ENT. Ends with
+ * FPL 0 on the left and the left cursor off.
+ */
+export async function cleanUpDuplicates(u: HeadlessUnit): Promise<void> {
+	await loadApproach(u);
+	await u.panel.cursor('L');
+	for (const entry of DUPLICATES) {
+		await cursorToEntry(u, entry);
+		await u.panel.clr();
+		await u.panel.ent();
+	}
+	await u.panel.cursor('L');
+	await wait(1000);
+	await adjustCourseIndicator(u);
+	const idents = fplIdents(u);
+	if (idents.join(' ') !== CLEANED_UP.join(' ')) {
+		throw new Error(`cleanUpDuplicates: FPL 0 is ${idents.join(' ')}\n${Screen.read().dump()}`);
+	}
 }
