@@ -338,6 +338,14 @@ describe('Super NAV 5', () => {
 		expect(() => blocksFromCapture(c, new Set())).not.toThrow();
 	});
 
+	it('draws a documented field that lies only in the row of the message indicator, right of the left column', () => {
+		const c = superNav5({fields: new Map([['indicator', [{row: 5, from: 6, to: 9}]]])});
+		expect(() => blocksFromCapture(c, new Set(['indicator']), 'nav-s')).not.toThrow();
+		const overlay = html(['indicator'], c).match(/<div class="kln-snav5-overlay">.*?<\/div>/)![0];
+		expect(overlay).toBe('<div class="kln-snav5-overlay"><span class="kln-row"><span class="kln-field" tabindex="0" data-field="indicator">   </span>' +
+			' '.repeat(14) + '</span><span class="kln-row">' + '40' + ' '.repeat(15) + '</span></div>');
+	});
+
 	it('names the screen when it rejects text over the map', () => {
 		expect(() => blocksFromCapture(superNav5({}, {...TEXT, 0: '20.0 È   Y'}), new Set(), 'nav-s'))
 			.toThrow('screen nav-s: Super NAV 5: row 0 column 9 lies over the map but holds "Y" with the mask "."');
