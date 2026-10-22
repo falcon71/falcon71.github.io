@@ -17,7 +17,7 @@ export function wait(ms: number): Promise<void> {
 }
 
 /**
- * Does what a pilot does about the message ADJ NAV IND CRS TO nnn (3-16): reads the messages and turns the course of
+ * Does what a pilot does about the message ADJ NAV IND CRS TO nnn: reads the messages and turns the course of
  * the external indicator to nnn (the sim variable Nav OBS:1, which the unit reads when the GPS drives the indicator), so
  * that the message goes and the status line does not flash msg. Does nothing without that message.
  */

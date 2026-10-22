@@ -22,7 +22,7 @@ in `kln90b/generator/vitest.config.mts`), the MSFS SDK and the kln90b harness fr
 - Never change anything in `vendor/kln90b`. Copy a harness file into `kln90b/generator/harness-lgpl/` and record the
   change in its README if it must change.
 - Data only from the FAA files: NASR `E:\msfs\01_Oct_2026_CSV`, CIFP `E:\msfs\CIFP_261001\FAACIFP18`,
-  `E:\msfs\Class_Airspace.geojson`, `E:\msfs\Airspace_Boundary.geojson`. These paths go into no committed file.
+  `E:\msfs\Class_Airspace.geojson`, `E:\msfs\Airspace_Boundary.geojson`. These paths go into no README, script, extract or screen.
 - `Class_Airspace.geojson` is about 560 MB and has one feature per line: read it line by line, never whole.
 - Generated files (`screen.txt`, `map-*.svg`, the extract JSON) are never edited by hand.
 - New field explanations are placeholders: a sentence-case title and a lorem ipsum body, like `screens/apt-1-ksea/fields.mdx`.

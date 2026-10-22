@@ -28,7 +28,9 @@ Compare the copy with the original in the pinned submodule to see the difference
 
 ## Moving the pin
 
-When the submodule pin moves, compare the copy with `vendor/kln90b/test/harness/navdata/builders.ts` as above. If the
-original changed, copy it again and apply the changes listed above to it, then add the date to the modification dates here
-and in the header of `builders.ts`. The copy names no commit: the commit the screens were generated from is in
+When the submodule pin moves, look at what changed upstream between the old and the new pin (the old pin is the submodule
+pointer before the commit that moves it): `git -C vendor/kln90b diff <old pin> <new pin> -- test/harness/navdata/builders.ts`.
+Comparing the copy with the new upstream file would mix our changes with upstream's. If the file changed, copy the new
+original again and apply the changes listed above to it, then add the date to the modification dates here and in the
+header of `builders.ts`. The copy names no commit: the commit the screens were generated from is in
 `kln90b/screens/kln90b-commit.txt`.
