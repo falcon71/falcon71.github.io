@@ -1,18 +1,18 @@
-import type {FieldPart, Show} from '../../src/lib/screenFile.ts';
+import type {FieldPart, Layout as ScreenLayout, MapSide, Show} from '../../src/lib/screenFile.ts';
 
-/** Left half, right half, status line, full page. */
+/** Left half, right half, status line, full page (Super NAV 5 too). */
 export type Area = 'L' | 'R' | 'S' | 'F';
 
-/** The map of the left or the right half page. */
-export type MapSide = 'L' | 'R';
+/** The map of the left or the right half page, or the full-page map of Super NAV 5. */
+export type {MapSide};
 
 /**
  * Where a field is on the screen:
  * - a regex, searched in every visible area;
  * - a regex with an area, and optionally one row of it (`row` needs an `area`);
  * - a place: one row of an area, trimmed to its non-blank cells or cut at `from`/`to`.
- * - a map locator: the elements of the map of one half whose description (`icon % KSEA`, see mapElements.ts) `draw`
- *   matches; exactly one element, or with `many` at least one.
+ * - a map locator: the elements of the map of one half or of Super NAV 5 whose description (`icon % KSEA`, see
+ *   mapElements.ts) `draw` matches; exactly one element, or with `many` at least one.
  * Rows count from 0 within the area (0-5 for L and R, 0-5 or 0-6 for F, only 0 for S). Columns count from 0 within
  * the area (0-10 for L and R, 0-22 for S and F, `to` exclusive).
  */
@@ -50,7 +50,7 @@ const PAGE_NAME: {[side in 'left' | 'right']: {from: number; to: number}} = {lef
 
 interface Layout {
 	text: string[];
-	layout: 'split' | 'full';
+	layout: ScreenLayout;
 	show: Show;
 	status: boolean;
 }
@@ -69,18 +69,18 @@ function region(name: Area, ctx: Layout): Region {
 	};
 	switch (name) {
 		case 'L':
-			if (ctx.layout !== 'split') hidden('on a full layout');
+			if (ctx.layout !== 'split') hidden(`on layout ${ctx.layout}`);
 			if (ctx.show === 'right') hidden('on a screen that shows only the right half');
 			return {name, offset: 0, width: HALF, rows: STATUS_ROW, firstRow: 0};
 		case 'R':
-			if (ctx.layout !== 'split') hidden('on a full layout');
+			if (ctx.layout !== 'split') hidden(`on layout ${ctx.layout}`);
 			if (ctx.show === 'left') hidden('on a screen that shows only the left half');
 			return {name, offset: RIGHT_OFFSET, width: HALF, rows: STATUS_ROW, firstRow: 0};
 		case 'S':
 			if (!ctx.status) hidden('on a screen without status line');
 			return {name, offset: 0, width: COLUMNS, rows: 1, firstRow: STATUS_ROW};
 		case 'F':
-			if (ctx.layout !== 'full') hidden('on a split layout');
+			if (ctx.layout === 'split') hidden('on a split layout');
 			return {name, offset: 0, width: COLUMNS, rows: ctx.status ? STATUS_ROW : ROWS, firstRow: 0};
 		default:
 			throw new Error(`unknown area "${name}"`);
@@ -90,7 +90,7 @@ function region(name: Area, ctx: Layout): Region {
 /** The areas a locator without an area searches, in screen order. */
 function visibleRegions(ctx: Layout): Region[] {
 	const names: Area[] = [];
-	if (ctx.layout === 'full') names.push('F');
+	if (ctx.layout !== 'split') names.push('F');
 	else names.push(...(ctx.show === 'right' ? [] : ['L' as const]), ...(ctx.show === 'left' ? [] : ['R' as const]));
 	if (ctx.status) names.push('S');
 	return names.map(name => region(name, ctx));
@@ -221,13 +221,14 @@ function checkCropped(parts: FieldPart[], ctx: Layout): void {
  * Turns the text fields of a screen description into cell ranges. The map fields are left to locateMapFields.
  *
  * @param text the 7 rows of 23 characters as captured: on a split layout column 11 of rows 0-5 is the middle line
- * and row 6 the status line
- * @param status false only for a full page without status line, which then has the page rows 0-6
+ * and row 6 the status line; Super NAV 5 has the left column in columns 0-5 and its message indicator and range from
+ * column 6 in rows 5 and 6
+ * @param status false only for a full page without status line and for Super NAV 5, which then have the page rows 0-6
  * @return the parts of each field in the order of the definitions, as absolute screen rows and columns
  * @throws Error `field <id>: ...` for a field that matches nothing or more than once, lies in a hidden area, outside
  * the page name of a cropped status line, or overlaps another field, and for a bad definition of any field
  */
-export function locateFields(text: string[], layout: 'split' | 'full', show: Show, defs: FieldDef[],
+export function locateFields(text: string[], layout: ScreenLayout, show: Show, defs: FieldDef[],
 							 status = true): Map<string, FieldPart[]> {
 	if (text.length !== ROWS) throw new Error(`text must have ${ROWS} rows of ${COLUMNS} characters, not ${text.length} rows`);
 	text.forEach((row, i) => {
@@ -263,20 +264,28 @@ export interface MapFields {
 
 const SHOWN: {[show in Show]: MapSide[]} = {left: ['L'], right: ['R'], both: ['L', 'R']};
 
+/** The maps a screen shows: the full-page map of Super NAV 5, otherwise those of the halves it shows. */
+function shownMaps(show: Show, layout: ScreenLayout): MapSide[] {
+	return layout === 'super-nav-5' ? ['F'] : SHOWN[show];
+}
+
 /**
  * Gives the elements of the maps to the map fields of a screen description. Every element of a map the screen shows
  * must belong to exactly one field.
  * @param elements the elements of each map the unit shows, in drawing order, by their descriptions
+ * @param layout the layout of the screen; Super NAV 5 shows only its full-page map F
  * @return the map fields in the order of the definitions, and the field of each element of each map the screen shows
  * @throws Error `field <id>: ...` for a map locator that matches no element, more than one without `many`, or names a
  * side the screen does not show or that has no map, for an element claimed twice, and for a bad definition of any
  * field; `the element "<description>" of map <side> belongs to no field` for an element no field claims (all of them
  * when there are several)
  */
-export function locateMapFields(defs: FieldDef[], show: Show, elements: Partial<Record<MapSide, {draw: string}[]>>): MapFields {
+export function locateMapFields(defs: FieldDef[], show: Show, elements: Partial<Record<MapSide, {draw: string}[]>>,
+								layout: ScreenLayout = 'split'): MapFields {
+	const shown = shownMaps(show, layout);
 	const sides = new Map<string, MapSide>();
 	const owners: Partial<Record<MapSide, string[]>> = {};
-	for (const side of SHOWN[show]) {
+	for (const side of shown) {
 		const list = elements[side];
 		if (list !== undefined) owners[side] = list.map(() => '');
 	}
@@ -285,8 +294,8 @@ export function locateMapFields(defs: FieldDef[], show: Show, elements: Partial<
 		const {id, finds} = field;
 		inField(id, () => {
 			const side = finds[0].map;
-			if (finds.some(loc => loc.map !== side)) throw new Error('its map locators name both sides');
-			if (!SHOWN[show].includes(side)) throw new Error(`map ${side} is not shown`);
+			if (finds.some(loc => loc.map !== side)) throw new Error('its map locators name more than one side');
+			if (!shown.includes(side)) throw new Error(`map ${side} is not shown`);
 			const list = elements[side];
 			const owner = owners[side];
 			if (list === undefined || owner === undefined) throw new Error(`there is no map ${side}`);
@@ -309,7 +318,7 @@ export function locateMapFields(defs: FieldDef[], show: Show, elements: Partial<
 			sides.set(id, side);
 		});
 	}
-	for (const side of SHOWN[show]) {
+	for (const side of shown) {
 		const free = (owners[side] ?? []).flatMap((owner, i) => owner === '' ? [`"${elements[side]![i].draw}"`] : []);
 		if (free.length === 1) throw new Error(`the element ${free[0]} of map ${side} belongs to no field`);
 		if (free.length > 1) throw new Error(`the elements ${free.join(', ')} of map ${side} belong to no field`);

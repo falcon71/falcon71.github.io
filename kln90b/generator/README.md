@@ -60,20 +60,29 @@ description needs from the harness. See `screens/apt-1-ksea/`, `screens/nav-5-ks
   (`{area: 'L', row: 1}`) only for contents that are free: an airport name, the CDI bar, a field that covers a whole
   half.
 
+### Super NAV 5
+
+`showSuperNav5(u)` (from `generator/api.ts`) brings the unit to Super NAV 5, NAV 5 on both sides. Its screen has the
+layout `super-nav-5`, needs `show: 'both'` and has no status line. Its text is the area `F` with all seven rows: the left
+column in columns 0-5, and the message indicator (`msg` or blanks) and the range of the map in rows 5 and 6 from column
+6, over the map. The unit draws those two rows 6 unit pixels right of column 6 (`.super-nav5-mgs-range` in
+`KLN90B.scss`), and so must the site. All other cells are blank: they are the map, which is the map side `F`. Super
+NAV 5 with the right menu or the direct-to window open is not supported yet and fails.
+
 ### Map fields
 
-Every element the unit draws on a map (NAV 5, APT 3) is a field too. From the steps of a screen to its capture, the
-generator records each drawing call of the map (an icon, a label, a flight plan line or arrow, a plain line, an arc) and
-the map pixels it lit; the last frame the map finished before the capture's last read counts. NAV 5 redraws on every
-display tick, APT 3 only when its page opens. Each element is described in one line: the kind and its
-arguments, with each point named after the place of the extract it equals (an airport ident first, then a VOR, an NDB,
-a fix) and written as `lat,lon` otherwise, for example `icon % KSEA`, `arrow 47.1172,-122.3118 KSEA` and
+Every element the unit draws on a map (NAV 5, Super NAV 5, APT 3) is a field too. From the steps of a screen to its
+capture, the generator records each drawing call of the map (an icon, a label, a flight plan line or arrow, a plain
+line, an arc) and the map pixels it lit; the last frame the map finished before the capture's last read counts. NAV 5
+and Super NAV 5 redraw on every display tick, APT 3 only when its page opens. Each element is described in one line:
+the kind and its arguments, with each point named after the place of the extract it equals (an airport ident first,
+then a VOR, an NDB, a fix) and written as `lat,lon` otherwise, for example `icon % KSEA`, `arrow 47.1172,-122.3118 KSEA` and
 `icon $ 47.1172,-122.3118`. A description that repeats on a map gets ` #2`, ` #3`.
 
-- A map field names the map side and a regex over the descriptions:
-  `{id: 'aircraft', find: {map: 'L', draw: /^icon \$ /}}`. It must match exactly one element; `many: true` lets it
-  claim several (all legs of a flight plan, say). A field's locators are all text locators or all map locators of one
-  side, and the side must be one the screen shows.
+- A map field names the map side, `L` or `R` for the map of a half page and `F` for the full-page map of Super NAV 5,
+  and a regex over the descriptions: `{id: 'aircraft', find: {map: 'L', draw: /^icon \$ /}}`. It must match exactly
+  one element; `many: true` lets it claim several (all legs of a flight plan, say). A field's locators are all text
+  locators or all map locators of one side, and the side must be one the screen shows.
 - Every element of a map the screen shows must belong to exactly one field. Generation fails on an element no field
   claims and names it (`the element "icon % KSEA" of map L belongs to no field`), so the error of a new screen lists
   the descriptions to write the fields from. An element two fields claim fails naming both.
@@ -104,9 +113,10 @@ position it saved (the user settings `lastLatitude` and `lastLongitude`, which d
 where the unit starts never sees it, so `generateScreen` seeds both settings from `boot.position` (a `storage` of the
 screen's own wins). A step that raises a message (a Direct To or an active flight plan raises ADJ NAV IND CRS) answers it
 in the step: `adjustCourseIndicator(u)` turns the course of the external indicator the way a pilot does,
-`u.panel.readMessages()` reads any other. Generation fails when the captured screen still flashes `msg`, and the error
-names both. A screen that is meant to show `msg` sets `keepMessages: true`, which only turns that check off; it stages a
-real pending message, such as an active flight plan that was not answered with `adjustCourseIndicator`.
+`u.panel.readMessages()` reads any other. Generation fails when the captured screen still flashes `msg` (on Super NAV 5
+in its message indicator over the map), and the error names both. A screen that is meant to show `msg` sets
+`keepMessages: true`, which only turns that check off; it stages a real pending message, such as an active flight plan
+that was not answered with `adjustCourseIndicator`.
 
 ## Moving the pin
 

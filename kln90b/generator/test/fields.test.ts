@@ -263,6 +263,24 @@ describe('locateFields', () => {
 			expect(() => full([{id: 'st', find: {re: /STATUS/, area: 'S'}}], false)).toThrow('field st:');
 		});
 	});
+
+	describe('Super NAV 5', () => {
+		// The left column in columns 0-5, the message indicator and the range over the map from column 6, rows 5 and 6
+		const SNAV5 = screen('20.0 n', 'KSEA', 'ENR', ' 120 k', 'DTK', 'TK      msg', '345     40');
+		const snav5 = (defs: FieldDef[]) => locateFields(SNAV5, 'super-nav-5', 'both', defs, false);
+
+		it('searches all seven rows of the page', () => {
+			expect(snav5([{id: 'ident', find: /KSEA/}]).get('ident')).toEqual([{row: 1, from: 0, to: 4}]);
+			expect(snav5([{id: 'range', find: {re: /\d+(?= *$)/, area: 'F', row: 6}}]).get('range')).toEqual([{row: 6, from: 8, to: 10}]);
+			expect(snav5([{id: 'range', find: {area: 'F', row: 6, from: 6, to: 23}}]).get('range')).toEqual([{row: 6, from: 6, to: 23}]);
+		});
+
+		it('rejects the halves and the status line', () => {
+			expect(() => snav5([{id: 'l', find: {area: 'L', row: 0}}])).toThrow('field l: area L does not exist on layout super-nav-5');
+			expect(() => snav5([{id: 'r', find: {re: /KSEA/, area: 'R'}}])).toThrow('field r: area R does not exist on layout super-nav-5');
+			expect(() => snav5([{id: 's', find: {area: 'S'}}])).toThrow('field s: area S does not exist');
+		});
+	});
 });
 
 // The descriptions of the elements of two maps, in drawing order
@@ -316,7 +334,7 @@ describe('locateMapFields', () => {
 
 	it('rejects a field with locators of both sides, and one mixing text and map locators', () => {
 		expect(() => locateMapFields([{id: 'x', find: [{map: 'L', draw: /^arrow/}, {map: 'R', draw: /^plain/}]}], 'both', MAPS))
-			.toThrow('field x: its map locators name both sides');
+			.toThrow('field x: its map locators name more than one side');
 		expect(() => locateMapFields([{id: 'x', find: [{map: 'L', draw: /^arrow/}, /DIS/]}], 'both', MAPS))
 			.toThrow('field x: mixes text and map locators');
 		expect(() => locate([{id: 'x', find: [/DIS/, {map: 'L', draw: /^arrow/}]}])).toThrow('field x: mixes text and map locators');
@@ -359,6 +377,18 @@ describe('locateMapFields', () => {
 		expect([...locate([{id: 'dis', find: /DIS/}, ...LEFT_FIELDS]).keys()]).toEqual(['dis']);
 		expect([...locateMapFields([{id: 'dis', find: /DIS/}, ...LEFT_FIELDS], 'left', MAPS).sides.keys()])
 			.toEqual(['leg', 'active', 'numbers', 'aircraft']);
+	});
+
+	it('shows only the full-page map on Super NAV 5, and the half-page maps on the other layouts', () => {
+		const maps = {...MAPS, F: [{draw: 'icon $ 47.1000,-122.3000'}, {draw: 'icon % KSEA'}]};
+		const found = locateMapFields([{id: 'map', find: {map: 'F', draw: /./, many: true}}], 'both', maps, 'super-nav-5');
+		expect([...found.sides]).toEqual([['map', 'F']]);
+		expect(found.owners).toEqual({F: ['map', 'map']});
+		expect(() => locateMapFields(LEFT_FIELDS, 'both', maps, 'super-nav-5')).toThrow('field leg: map L is not shown');
+		expect(() => locateMapFields([{id: 'map', find: {map: 'F', draw: /^icon \$/}}], 'both', maps, 'super-nav-5'))
+			.toThrow('the element "icon % KSEA" of map F belongs to no field');
+		expect(() => locateMapFields([...LEFT_FIELDS, ALL_RIGHT, {id: 'map', find: {map: 'F', draw: /./, many: true}}], 'both', maps, 'split'))
+			.toThrow('field map: map F is not shown');
 	});
 
 	it('accepts a screen without maps and without map fields', () => {

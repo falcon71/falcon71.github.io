@@ -17,14 +17,15 @@ import {decimalYear, declination, screenModel, SCREEN_DEGREE} from './wmm.ts';
 
 export interface ScreenDescription {
 	title: string;
-	/** Which half of a split screen the manual shows; a full page needs 'both' */
+	/** Which half of a split screen the manual shows; a full page and Super NAV 5 need 'both' */
 	show: Show;
 	boot?: Omit<BootOptions, 'facilities' | 'defaultNavdata' | 'magvar' | 'airspaces'>;
 	/**
-	 * Lets the status line flash msg on this screen, which is otherwise an error: a message is pending then, and a pilot
-	 * would have read it. Answer it in the steps instead: `adjustCourseIndicator(u)` for ADJ NAV IND CRS, `u.panel.readMessages()`
-	 * for any other. Only a screen that shows the MSG annunciator or the MSG page needs this, and it stages a real
-	 * message for it (a flight plan that is active, or a last position that differs from the boot position).
+	 * Lets the status line (on Super NAV 5 its message indicator) flash msg on this screen, which is otherwise an error: a
+	 * message is pending then, and a pilot would have read it. Answer it in the steps instead: `adjustCourseIndicator(u)`
+	 * for ADJ NAV IND CRS, `u.panel.readMessages()` for any other. Only a screen that shows the MSG annunciator or the
+	 * MSG page needs this, and it stages a real message for it (a flight plan that is active, or a last position that
+	 * differs from the boot position).
 	 */
 	keepMessages?: boolean;
 	/** Brings the unit to the page, from the settled state */
@@ -34,6 +35,9 @@ export interface ScreenDescription {
 
 const STATUS_ROW = 6;
 const MSG_ANNUNCIATOR = 'msg';
+// Super NAV 5 has no status line; its message indicator is in row 5 from column 6, over the map
+const SUPER_NAV5_MSG = {row: 5, from: 6, to: 9};
+const MAP_SIDES: MapSide[] = ['L', 'R', 'F'];
 const ID = /^[a-z0-9-]+$/;
 const MAP_FILE = /^map-.*\.svg$/;
 
@@ -50,9 +54,10 @@ interface ShownMap {
  */
 function mapsOf(capture: CapturedScreen, show: Show): Map<MapSide, ShownMap> {
 	const maps = new Map<MapSide, ShownMap>();
-	for (const side of ['L', 'R'] as const) {
+	for (const side of MAP_SIDES) {
 		const canvas = capture.canvases[side];
-		if (canvas !== undefined && (show === 'both' || show === (side === 'L' ? 'left' : 'right'))) {
+		// The full-page map of Super NAV 5 is always shown, since that screen needs show both
+		if (canvas !== undefined && (side === 'F' || show === 'both' || show === (side === 'L' ? 'left' : 'right'))) {
 			const blocks = downsampled(canvasToAscii(canvas));
 			const rows = blocks.replace(/\n$/, '').split('\n');
 			const elements = capture.elements[side] ?? [];
@@ -99,19 +104,24 @@ async function generate(dir: string, id: string, d: ScreenDescription): Promise<
 	} finally {
 		recorder.stop();
 	}
-	if (capture.layout === 'full' && d.show !== 'both') {
-		throw new Error(`a full page needs show both, not ${d.show}`);
+	if (capture.layout !== 'split' && d.show !== 'both') {
+		throw new Error(`${capture.layout === 'full' ? 'a full page' : 'Super NAV 5'} needs show both, not ${d.show}`);
 	}
 	const text = capture.cells.map(row => row.map(c => c.ch).join(''));
-	if (!d.keepMessages && capture.status && text[STATUS_ROW].includes(MSG_ANNUNCIATOR)) {
-		throw new Error('a message is pending (the status line flashes msg): answer it in the steps, after whatever raised it, '
+	const msg = capture.layout === 'super-nav-5'
+		? text[SUPER_NAV5_MSG.row].slice(SUPER_NAV5_MSG.from, SUPER_NAV5_MSG.to) === MSG_ANNUNCIATOR
+		: capture.status && text[STATUS_ROW].includes(MSG_ANNUNCIATOR);
+	if (!d.keepMessages && msg) {
+		const where = capture.layout === 'super-nav-5' ? 'Super NAV 5' : 'the status line';
+		throw new Error(`a message is pending (${where} flashes msg): answer it in the steps, after whatever raised it, `
 			+ 'with `adjustCourseIndicator(u)` for ADJ NAV IND CRS or `await u.panel.readMessages()` for any other, '
 			+ 'or set keepMessages for a screen that shows msg');
 	}
 	const mask = capture.cells.map(row => row.map(c => c.attr as CellAttr));
 	const fields = locateFields(text, capture.layout, d.show, d.fields, capture.status);
 	const maps = mapsOf(capture, d.show);
-	const mapFields = locateMapFields(d.fields, d.show, Object.fromEntries(Array.from(maps, ([side, map]) => [side, map.elements])));
+	const mapFields = locateMapFields(d.fields, d.show, Object.fromEntries(Array.from(maps, ([side, map]) => [side, map.elements])),
+		capture.layout);
 	const svgs = new Map<MapSide, string>();
 	for (const [side, {width, height, elements}] of maps) {
 		const owners = mapFields.owners[side]!;
@@ -132,7 +142,7 @@ async function generate(dir: string, id: string, d: ScreenDescription): Promise<
 	for (const [side, svg] of svgs) fs.writeFileSync(path.join(dir, `map-${side}.svg`), svg);
 	// A map file of an earlier run that this run did not write is stale
 	for (const name of fs.readdirSync(dir)) {
-		if (MAP_FILE.test(name) && !maps.has(name.slice('map-'.length, -'.svg'.length) as 'L' | 'R')) fs.rmSync(path.join(dir, name));
+		if (MAP_FILE.test(name) && !maps.has(name.slice('map-'.length, -'.svg'.length) as MapSide)) fs.rmSync(path.join(dir, name));
 	}
 }
 
@@ -141,7 +151,8 @@ async function generate(dir: string, id: string, d: ScreenDescription): Promise<
  * screen is the name of the folder.
  * @throws Error `screen <id>: ...` for anything that stops the screen from being generated; `screen.txt` is written only
  * after every check has passed, among them that every element drawn on a map the screen shows belongs to one map field.
- * The maps of NAV 5 and APT 3 are written next to it as `map-L.svg` and `map-R.svg`.
+ * The maps of NAV 5 and APT 3 are written next to it as `map-L.svg` and `map-R.svg`, the map of Super NAV 5 as
+ * `map-F.svg`.
  */
 export async function generateScreen(dir: string, d: ScreenDescription): Promise<void> {
 	const id = path.basename(dir);

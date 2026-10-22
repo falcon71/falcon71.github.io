@@ -1,5 +1,5 @@
 // The HTML of an example screen: the rows of segments, from the hand markup of KlnScreen or from a generated capture.
-import type {ScreenCapture} from './screenFile.ts';
+import type {MapSide, ScreenCapture} from './screenFile.ts';
 
 export interface Segment {
 	text: string;
@@ -182,7 +182,7 @@ const MAP_GROUP_TAG = /<g\b[^>]*>/g;
 /** What the map fields of a screen must match: the screen's name for the messages and the map fields of its capture. */
 export interface MapCheck {
 	screen: string;
-	mapFields: ReadonlyMap<string, 'L' | 'R'>;
+	mapFields: ReadonlyMap<string, MapSide>;
 }
 
 /**

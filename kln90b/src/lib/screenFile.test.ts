@@ -83,6 +83,48 @@ describe('screen file', () => {
 		expect([...parsed.mapFields.keys()]).toEqual(['runway', 'aircraft']);
 	});
 
+	it('round-trips Super NAV 5 with its full-page map', () => {
+		const c = capture();
+		c.layout = 'super-nav-5';
+		c.status = false;
+		c.show = 'both';
+		c.maps = ['F'];
+		c.fields = new Map([['distance', [{row: 0, from: 0, to: 4}]]]);
+		c.mapFields = new Map([['aircraft', 'F']]);
+		const text = serializeScreenFile(c);
+		expect(text).toContain('\nlayout super-nav-5\n');
+		expect(text).toContain('\nmapfield aircraft F\nmap F\n');
+		expect(parseScreenFile(text)).toEqual(c);
+	});
+
+	it('keeps the full-page map to Super NAV 5 and the half-page maps to the split layout', () => {
+		const snav5 = capture();
+		snav5.layout = 'super-nav-5';
+		snav5.status = false;
+		snav5.show = 'both';
+		snav5.fields = new Map();
+		const text = serializeScreenFile({...snav5, maps: ['F'], mapFields: new Map([['aircraft', 'F']])});
+		expect(() => serializeScreenFile(snav5)).toThrow(/map L.*super-nav-5/);
+		expect(() => parseScreenFile(text.replace('map F', 'map F\nmap L'))).toThrow(/line 25: .*map L.*super-nav-5/);
+		const split = capture();
+		expect(() => serializeScreenFile({...split, maps: ['F'], mapFields: new Map()})).toThrow(/map F.*split/);
+		expect(() => parseScreenFile(serializeScreenFile(split).replace('map L', 'map L\nmap F')))
+			.toThrow(/line 29: .*map F.*split/);
+		expect(() => serializeScreenFile({...snav5, maps: [], mapFields: new Map(), show: 'left'})).toThrow(/super-nav-5.*show both/);
+		expect(() => serializeScreenFile({...snav5, maps: [], mapFields: new Map(), status: true})).toThrow(/super-nav-5.*status/);
+		expect(() => parseScreenFile(text.replace('show both', 'show left'))).toThrow(/line 5: .*super-nav-5.*show both/);
+		expect(() => parseScreenFile(text.replace('status no', 'status yes'))).toThrow(/line 6: .*super-nav-5.*status/);
+	});
+
+	it('re-serializes every committed screen file to the same text', () => {
+		const files = import.meta.glob<string>('../../screens/*/screen.txt', {query: '?raw', import: 'default', eager: true});
+		// The glob finds them: a screen with a map is among them
+		expect(Object.keys(files)).toContain('../../screens/nav-5-ksea/screen.txt');
+		for (const [name, text] of Object.entries(files)) {
+			expect(serializeScreenFile(parseScreenFile(text)), name).toBe(text);
+		}
+	});
+
 	it('round-trips a capture without map fields', () => {
 		const c = capture();
 		c.mapFields = new Map();
