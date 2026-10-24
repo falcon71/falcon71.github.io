@@ -57,12 +57,7 @@ facts or text taken from a real manual. It contains:
    pages, in parallel where the pages own different topics.
 5. **Getting started** (home page, installation, quickstart), **reference lists** (messages, status line messages, the
    glossary texts), **Help**.
-6. **Blocked until the maintainer says otherwise:** everything that needs SID, STAR and approach procedures,
-   airspaces or Super NAV 5 in the screens (another session is adding them to the generator), including Tutorial
-   flight 2. Mark them blocked in the plan and leave them. Tutorial flight 1 is not blocked: its route is in the style
-   guide (section 17), and its airports are in the navigation data extract. Both tutorials are published only after
-   the maintainer has flown them in the simulator; hand each one to the maintainer when it is reviewed.
-7. **A final pass over the whole manual:** facts said twice, contradictions, terms and word forms that drifted, missing
+6**A final pass over the whole manual:** facts said twice, contradictions, terms and word forms that drifted, missing
    links between Operation and the page reference, `<Term>` use, summaries that do not answer.
 
 Each step's pages go through review (below) before the next step relies on them.
