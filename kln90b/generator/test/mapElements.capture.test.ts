@@ -79,7 +79,7 @@ describe('the map pixels of a label', () => {
 		const {canvas, pixel} = halfPage();
 		pixel.drawIcon(50, 40, 'CADED');
 		pixel.fill();
-		expect(mapBlocks(canvasToAscii(canvas)).split('\n').slice(37, 44).map(row => row.slice(35, 64))).toEqual([
+		expect(mapBlocks(canvasToAscii(canvas)).split('\n').slice(37, 44).map(row => row.slice(36, 65))).toEqual([
 			'.###...###..###...#####.###..',
 			'#...#.#...#.#..#..#.....#..#.',
 			'#.....#...#.#...#.#.....#...#',

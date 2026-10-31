@@ -1,17 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 99 78" width="99" height="78" shape-rendering="crispEdges" fill="currentColor">
-<g data-field="leg" data-draw="arrow 47.1172,-122.3118 KSEA" data-box="47 23 7 12">
-<path d="M50 23h1v1h-1z"/>
-<path d="M49 24h3v1h-3z"/>
-<path d="M48 25h1v1h-1zM50 25h1v1h-1zM52 25h1v1h-1z"/>
-<path d="M47 26h1v1h-1zM50 26h1v1h-1zM53 26h1v1h-1z"/>
-<path d="M50 27h1v1h-1z"/>
-<path d="M50 28h1v1h-1z"/>
-<path d="M50 29h1v1h-1z"/>
-<path d="M50 30h1v1h-1z"/>
-<path d="M50 31h1v1h-1z"/>
-<path d="M50 32h1v1h-1z"/>
-<path d="M50 33h1v1h-1z"/>
-<path d="M50 34h1v1h-1z"/>
+<g data-field="leg" data-draw="arrow 47.1172,-122.3118 KSEA" data-box="46 23 7 12">
+<path d="M49 23h1v1h-1z"/>
+<path d="M48 24h3v1h-3z"/>
+<path d="M47 25h1v1h-1zM49 25h1v1h-1zM51 25h1v1h-1z"/>
+<path d="M46 26h1v1h-1zM49 26h1v1h-1zM52 26h1v1h-1z"/>
+<path d="M49 27h1v1h-1z"/>
+<path d="M49 28h1v1h-1z"/>
+<path d="M49 29h1v1h-1z"/>
+<path d="M49 30h1v1h-1z"/>
+<path d="M49 31h1v1h-1z"/>
+<path d="M49 32h1v1h-1z"/>
+<path d="M49 33h1v1h-1z"/>
+<path d="M49 34h1v1h-1z"/>
 </g>
 <g data-field="active-waypoint" data-draw="icon % KSEA" data-box="47 17 5 5">
 <path d="M47 17h1v1h-1zM49 17h1v1h-1zM51 17h1v1h-1z"/>

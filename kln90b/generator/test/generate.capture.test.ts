@@ -3,9 +3,10 @@ import os from 'node:os';
 import path from 'node:path';
 import {afterEach, describe, expect, it} from 'vitest';
 import {generateScreen, type ScreenDescription} from '../lib/generate.ts';
-import {adjustCourseIndicator} from '../api.ts';
+import {adjustCourseIndicator, wait} from '../api.ts';
 import {facility, place} from '../lib/navdata.ts';
 import {savedFlightplan} from '../../../vendor/kln90b/test/harness/storage';
+import {COURSE_MESSAGE_DELAY} from '../../../vendor/kln90b/kln90b/data/PersistentMessages';
 import {parseScreenFile} from '../../src/lib/screenFile.ts';
 
 const FIXTURE = path.join(import.meta.dirname, 'fixtures', 'nav-1-smoke');
@@ -33,6 +34,15 @@ function nav1(overrides: Partial<ScreenDescription> = {}): ScreenDescription {
 		...overrides,
 	};
 }
+
+// FPL 0 is active from power-on, and the unit asks with ADJ NAV IND CRS TO for its course once the indicator has been off
+// it for COURSE_MESSAGE_DELAY
+const PLAN = {boot: {position: {lat: 45.8, lon: -122.6}, storage: savedFlightplan(0, [facility('KPDX'), facility('KSEA')])}};
+const waitForCourseMessage = () => wait(COURSE_MESSAGE_DELAY + 1000);
+const nav1AfterCourseMessage: ScreenDescription['steps'] = async u => {
+	await waitForCourseMessage();
+	await u.panel.selectPage('L', 'NAV 1');
+};
 
 describe('generateScreen', () => {
 	it('writes the screen file of a page', async () => {
@@ -68,18 +78,17 @@ describe('generateScreen', () => {
 	});
 
 	it('rejects a screen whose steps leave a message pending, unless keepMessages', async () => {
-		// Activating the flight plan raises a message of its own; the unit started at its last position and raised none
-		const plan = {boot: {position: {lat: 45.8, lon: -122.6}, storage: savedFlightplan(0, [facility('KPDX'), facility('KSEA')])}};
+		// The active flight plan raises a message of its own; the unit started at its last position and raised none
 		const dir = copyFixture();
-		await expect(generateScreen(dir, nav1(plan))).rejects.toThrow(/^screen nav-1-smoke: .*message.*pending.*readMessages.*keepMessages/);
+		await expect(generateScreen(dir, nav1({...PLAN, steps: nav1AfterCourseMessage}))).rejects.toThrow(/^screen nav-1-smoke: .*message.*pending.*readMessages.*keepMessages/);
 		expect(fs.existsSync(path.join(dir, 'screen.txt'))).toBe(false);
 	});
 
 	it('shows no msg once adjustCourseIndicator has answered the message of the flight plan', async () => {
 		const dir = copyFixture();
-		const plan = {boot: {position: {lat: 45.8, lon: -122.6}, storage: savedFlightplan(0, [facility('KPDX'), facility('KSEA')])}};
 		await generateScreen(dir, nav1({
-			...plan, steps: async u => {
+			...PLAN, steps: async u => {
+				await waitForCourseMessage();
 				await adjustCourseIndicator(u);
 				await u.panel.selectPage('L', 'NAV 1');
 			},
@@ -91,8 +100,7 @@ describe('generateScreen', () => {
 
 	it('accepts the pending message of a flight plan with keepMessages', async () => {
 		const dir = copyFixture();
-		const plan = {boot: {position: {lat: 45.8, lon: -122.6}, storage: savedFlightplan(0, [facility('KPDX'), facility('KSEA')])}};
-		await generateScreen(dir, nav1({...plan, keepMessages: true}));
+		await generateScreen(dir, nav1({...PLAN, steps: nav1AfterCourseMessage, keepMessages: true}));
 		expect(parseScreenFile(fs.readFileSync(path.join(dir, 'screen.txt'), 'utf8')).text[6]).toContain('msg');
 	});
 

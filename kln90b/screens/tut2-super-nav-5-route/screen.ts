@@ -17,14 +17,19 @@ const ACTIVE = 'RADDY';
 const GROUNDSPEED_KT = 150;
 // The runway fix of the approach is no place of the extract, so the map describes its icon and name by its position
 const RUNWAY_FIX = 'RW32L';
+// KBFI is about 1 NM from the runway fix, a map pixel at this range. The unit draws its icon after that of the runway
+// fix, onto pixels that icon has lit already, so on the map KBFI has only its name
+const HIDDEN_ICON = 'KBFI';
 
 /**
  * The icon and the name of a waypoint of FPL 0, each of which must be drawn exactly once, so that the screen fails when
  * a waypoint falls off the map.
  */
 function drawn(ident: string): Locator[] {
+	const label: Locator = {map: 'F', draw: new RegExp(`^label ${ident} `)};
+	if (ident === HIDDEN_ICON) return [label];
 	const icon = ident === RUNWAY_FIX ? /^icon @ -?\d+\.\d+,-?\d+\.\d+$/ : new RegExp(`^icon @ ${ident}$`);
-	return [{map: 'F', draw: icon}, {map: 'F', draw: new RegExp(`^label ${ident} `)}];
+	return [{map: 'F', draw: icon}, label];
 }
 
 defineScreen(import.meta.url, {
