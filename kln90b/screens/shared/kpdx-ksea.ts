@@ -1,8 +1,10 @@
 // The state of the unit that the manual's NAV 1 screens share: flying the stored flight plan from KPDX to KSEA, 45 NM
 // short of KSEA, at 123 kt.
 import {
-	adjustCourseIndicator, courseDeg, facility, moveAircraft, place, pointFrom, savedFlightplan, type ScreenDescription,
+	adjustCourseIndicator, courseDeg, facility, moveAircraft, place, pointFrom, savedFlightplan, wait,
+	type ScreenDescription,
 } from '../../generator/api.ts';
+import {COURSE_MESSAGE_DELAY} from '../../../vendor/kln90b/kln90b/data/PersistentMessages';
 import type {HeadlessUnit} from '../../../vendor/kln90b/test/harness/boot';
 
 const KPDX = place('KPDX');
@@ -17,6 +19,9 @@ export const BOOT: NonNullable<ScreenDescription['boot']> = {
 /** Flies the leg. The message ADJ NAV IND CRS of the active leg stays pending. */
 export async function fly(u: HeadlessUnit): Promise<void> {
 	await moveAircraft(u, POSITION, {groundspeedKt: 123, trackTrue: courseDeg(POSITION, KSEA)});
+	// The leg was activated at power-on, so the unit posts the message only once the indicator has been off the course
+	// for COURSE_MESSAGE_DELAY
+	await wait(COURSE_MESSAGE_DELAY + 1000);
 }
 
 /** Flies the leg, and a pilot answers the message of the active leg on the indicator. */
