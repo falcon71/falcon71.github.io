@@ -18,7 +18,7 @@ The airport you enter, scan to or create on one APT page is the airport on all t
 
 Turn the right outer knob to the APT pages and the right inner knob to the page you want. The inner knob goes through APT 1 to APT 7 and then back to APT 1; APT 8 follows APT 7 only in an aircraft whose unit is installed for approaches. A page with more than one subpage shows a `+` in its name (`APT+3`): the inner knob steps through the subpages before it goes on to the next page, and back through them the other way. When you return to the APT pages from another group, you land on the APT page you used last.
 
-The top line is the same on every page except the APT 3 runway diagram, which has no top line. It shows the identifier of the airport and, at the right end, `nr` and a rank when you reached the airport through the <Term t="Nearest list">nearest list</Term>. A `›` in the first column marks the airport as the <Term t="Active waypoint">active waypoint</Term>; it flashes during <Term t="Waypoint alerting">waypoint alerting</Term>.
+The top line is the same on every page except the APT 3 runway diagram, which has no top line. It shows the identifier of the airport and, at the right end, <Term t="nr">`nr`</Term> and a rank when you reached the airport through the <Term t="Nearest list">nearest list</Term>. A `›` in the first column marks the airport as the <Term t="Active waypoint">active waypoint</Term>; it flashes during <Term t="Waypoint alerting">waypoint alerting</Term>.
 
 ### Choosing the airport
 
@@ -72,7 +72,7 @@ A user airport shows its identifier and position and nothing else: no name, no a
 
 <KlnScreen screen="apt-1-user-airport" />
 
-With `USER POS?`, APT 1 opens with the cursor on the empty latitude and no airport yet. The airport exists when you have entered both coordinates.
+With `USER POS?`, APT 1 opens with the cursor on the empty latitude and no airport yet. The airport exists when you have entered both coordinates. After the first <kbd>ENT</kbd>, which accepts the latitude, the status line shows `ENT LAT/LON`: a reminder to enter the longitude, not an error.
 
 <KlnScreen screen="apt-1-user-pos" />
 
@@ -84,7 +84,7 @@ APT 2 shows where the airport is, how high it lies, which time zone it is in, an
 
 <KlnScreen screen="apt-2-ksea" />
 
-Nothing on this page can be changed for an airport of the database; the cursor stops only on the identifier and on `nr`. The page of a nearest airport has the same body as the plain page. The time zone comes from the simulator: the row stays blank where it supplies none. The radar flag `(R)` at the end of the approach row shows that approach and departure control have radar, so that you can expect vectors; it appears only for airports whose data marks radar coverage.
+Nothing on this page can be changed for an airport of the database; the cursor stops only on the identifier and on `nr`. The page of a nearest airport has the same body as the plain page. The time zone comes from the simulator: the row stays blank where it supplies none. The radar flag <Term t="(R)">`(R)`</Term> at the end of the approach row shows that approach and departure control have radar, so that you can expect vectors; it appears only for airports whose data marks radar coverage.
 
 A user airport shows only its elevation, as an entry, because the city, the time zone and the approaches are unknown. The cursor stops on the identifier and then on the elevation.
 
@@ -110,7 +110,7 @@ An airport without a runway entry has no diagram, and its one page reads `RUNWAY
 
 {/* kln90b bug candidate: after an unknown identifier on an APT 3 list page, entering a valid one shows the diagram and turns the cursor off */}
 
-A user airport has one page, which holds its single runway: the length and the surface, which you enter. It appears in the nearest list only when the runway meets the minimum length of SET 3 and, where SET 3 allows hard surfaces only, has the surface `HRD`; a runway without an entered surface counts as soft.
+A user airport has one page, which holds its single runway: the length and the surface, which you enter. It appears in the nearest list only when the runway meets the minimum length of SET 3 and, where SET 3 allows hard surfaces only, has the surface <Term t="HRD">`HRD`</Term>; a runway without an entered surface counts as soft.
 
 <KlnScreen screen="apt-3-user-airport" />
 
@@ -139,7 +139,7 @@ Each line holds a four-character label and a frequency in MHz with two decimals;
 | `AFIS` | A flight service station of the airport (<Term t="AFIS" />) |
 | `AWOS` | An <Term t="AWOS" /> broadcast |
 | `ASOS` | An <Term t="ASOS" /> broadcast |
-| `PTAX` | Pre-taxi clearance |
+| <Term t="PTAX">`PTAX`</Term> | Pre-taxi clearance |
 
 A line with another type of frequency has no label. A frequency of no type is not listed.
 
@@ -155,11 +155,11 @@ An airport without a usable frequency, and every user airport, shows `COMM FREQ 
 
 ## APT 5: remarks
 
-APT 5 holds three lines of notes of your own about the airport, which APT 5 shows for that airport from then on, for example a frequency or a procedure you want to remember. The unit keeps them when it is turned off.
+APT 5 holds three lines of notes of your own about the airport, for example a frequency or a procedure you want to remember, which the page shows whenever you choose that airport. The unit keeps them when it is turned off.
 
 <KlnScreen screen="apt-5-ktiw" />
 
-The unit keeps the remarks by identifier: if you delete a user airport, its remarks stay, and a user airport that you create again with the same identifier shows them again. It keeps the remarks of up to 100 airports. A remark for the 101st raises `RMKS FULL` and is not stored; changing the remarks of an airport already in the list is always accepted. A line takes 11 characters, each a letter, a digit, a hyphen or a blank. The cursor stops on the identifier, on `nr`, and then on the three lines in turn.
+The unit keeps the remarks by identifier: if you delete a user airport, its remarks stay, and a user airport that you create again with the same identifier shows them again. It keeps the remarks of up to 100 airports. A remark for the 101st raises <Term t="RMKS">`RMKS FULL`</Term> and is not stored; changing the remarks of an airport already in the list is always accepted. A line takes 11 characters, each a letter, a digit, a hyphen or a blank. The cursor stops on the identifier, on `nr`, and then on the three lines in turn.
 
 OTH 4 (`APTS W/RMKS`) lists the airports that have remarks; you delete an airport's remarks there. An airport whose lines you have blanked out still counts as having remarks, stays on OTH 4 and counts toward the 100 until you delete it there.
 
@@ -382,7 +382,7 @@ before.
 
 **An approach starts only at an IAF.** The list after `IAF` offers the transitions of the approach, each beginning at
 an IAF or at a fix before one, and you must select one of them. No entry begins at the intermediate fix or later, so
-you cannot start the approach there. An approach with one transition skips the step and shows its waypoints at once.
+you cannot start the approach there. An approach with one transition or none skips the step and shows its waypoints at once.
 Joining an approach in flight is covered in [Non-precision approaches](/kln90b/operation/approaches/).
 
 **The transition rule applies to approaches too.** When the transition you select repeats waypoints that FPL 0

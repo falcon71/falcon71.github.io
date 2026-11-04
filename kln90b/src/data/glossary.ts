@@ -196,7 +196,7 @@ export const glossary: Record<string, GlossaryEntry> = {
 	},
 	SFT: {
 		expansion: 'Soft surface',
-		text: 'The surface a runway of a user airport has when it is not HRD.',
+		text: 'Soft surface, the choice for the runway of a user airport on APT 3 that is not HRD. On SET 3, HRD SFT lets the nearest list include airports with soft runways.',
 	},
 	TRF: {
 		expansion: 'Turf',
@@ -255,8 +255,8 @@ export const glossary: Record<string, GlossaryEntry> = {
 		text: 'A frequency label of APT 4. On the front panel, CLR is the clear key.',
 	},
 	APR: {
-		expansion: 'Approach control',
-		text: 'A frequency label of APT 4.',
+		expansion: 'Approach',
+		text: 'On APT 4, the label of the approach control frequency. On APT 2 and in FPL 0 the short form of an approach procedure, as in NO APR and CHANGE APR?.',
 	},
 	DEP: {
 		expansion: 'Departure control',
@@ -264,7 +264,7 @@ export const glossary: Record<string, GlossaryEntry> = {
 	},
 	CTR: {
 		expansion: 'Center',
-		text: 'A frequency label of APT 4: a center that provides approach and departure control for the airport.',
+		text: 'On APT 4, the label of the frequency of a center that provides approach and departure control for the airport. CTR is also the right-side page group with the nearest centers.',
 	},
 	PTAX: {
 		expansion: 'Pre-taxi clearance',

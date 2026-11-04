@@ -13,13 +13,13 @@
 </Field>
 
 <Field id="zone" title="Time zone of the airport">
-	The time zone of the airport as its offset from UTC. `Z-08` means that standard time is 8 hours behind UTC. Where the zone observes daylight time, the offset of daylight time follows in brackets: `(-07DT)`. The offset is truncated to whole hours, and zero shows as `Z+00`.
+	The time zone of the airport as its offset from UTC. <Term t="Z">`Z-08`</Term> means that standard time is 8 hours behind UTC. Where the zone observes daylight time, the offset of daylight time follows in brackets: <Term t="DT">`(-07DT)`</Term>. The offset is truncated to whole hours, and zero shows as `Z+00`.
 
 	The unit shows the daylight time offset whenever the zone observes daylight time at all, also in winter, and the offset shown for standard time is always the standard one. The row is blank until the simulator has supplied the time zone.
 </Field>
 
 <Field id="approach" title="Approaches of the airport">
-	The best kind of approach the database has for the airport: `ILS` if the airport has an ILS approach, otherwise `NP APR` if it has any other approach (GPS, RNAV, LDA, localizer, localizer back course, SDF, VOR, VOR-DME, NDB or NDB-DME), and `NO APR` if it has none. At the right end of the row `(R)` shows that approach and departure control have radar, so that you can expect vectors.
+	The best kind of approach the database has for the airport: `ILS` if the airport has an ILS approach, otherwise <Term t="NP APR">`NP APR`</Term> if it has any other approach (GPS, RNAV, LDA, localizer, localizer back course, SDF, VOR, VOR-DME, NDB or NDB-DME), and <Term t="NO APR">`NO APR`</Term> if it has none. At the right end of the row <Term t="(R)">`(R)`</Term> shows that approach and departure control have radar, so that you can expect vectors.
 </Field>
 
 <Field id="page" title="Page name">

@@ -69,6 +69,8 @@ reference has its own ids. Status per screen: planned, generated, done.
 | `apt-1-ksea-cursor` | APT 1, KSEA, cursor on the identifier | APT 1 |
 | `apt-1-nearest` | APT 1, a nearest entry (`nr n`, longest runway, bearing and distance), aircraft 10 NM from KSEA | APT 1 |
 | `apt-1-user-airport` | APT 1, a user airport created at the present position | APT 1 |
+| `apt-1-user-pos` | APT 1, entering the position of a new user airport (`USER POS?`), the latitude entered | APT group |
+| `apt-1-nearest-cursor` | APT 1, nearest entry with the cursor parked on `nr n` | APT 1 |
 | `apt-create-new-wpt` | The offer `CREATE NEW WPT AT` after an unknown identifier | APT group |
 | `apt-2-ksea` | APT 2, KSEA, with the time zone answered | APT 2 |
 | `apt-2-user-airport` | APT 2 of a user airport with the elevation entered | APT 2 |
@@ -76,6 +78,7 @@ reference has its own ids. Status per screen: planned, generated, done.
 | `apt-3-list-ksea` | APT 3 first list page of KSEA (`APT+3`) | APT 3 |
 | `apt-3-user-airport` | APT 3 of a user airport with a runway entered | APT 3 |
 | `apt-4-kykm` | APT 4 first page of KYKM (`APT+4`) | APT 4 |
+| `apt-4-no-data` | APT 4 with `COMM FREQ DATA NOT AVAILABLE` (a user airport) | APT 4 |
 | `apt-5-ktiw` | APT 5 of KTIW with a remark entered | APT 5 |
 | `apt-6-ksea` | APT 6 of KSEA | APT 6 |
 | `apt-7-sids-ksea` | APT 7 first page, SIDs of KSEA, cursor on a departure | APT 7 |
@@ -84,20 +87,25 @@ reference has its own ids. Status per screen: planned, generated, done.
 | `apt-7-transition` | the transition list of a SID | APT 7 |
 | `apt-7-load` | the waypoint list of a SID with `LOAD IN FPL` | APT 7 |
 | `apt-7-add-airport` | the question to add the airport to FPL 0 | APT 7 |
+| `apt-7-replace` | the question to replace a loaded procedure of the same kind | APT 7 |
 | `apt-7-none` | `NO SID/STAR FOR THIS AIRPORT IN DATABASE` (KTIW) | APT 7 |
 | `apt-8-approaches-ksea` | APT 8 list of approaches of KSEA | APT 8 |
 | `apt-8-iaf` | the IAF list of an approach | APT 8 |
-| `apt-8-load` | the waypoint list of an approach with `LOAD IN FPL` | APT 8 |
-| `apt-8-none` | `NO APPROACH FOR THIS AIRPORT IN DATABASE` | APT 8 |
+| `apt-8-load` | the waypoint list of an approach with `LOAD IN FPL` (IAF and MAHP marks) | APT 8 |
+| `apt-8-load-scrolled` | the end of that list (FAF and MAP marks) | APT 8 |
+| `apt-8-none` | `NO APPROACH FOR THIS AIRPORT IN DATABASE` (2S1) | APT 8 |
 
 The writers may add a screen where a variant needs one, and drop one that turns out to show nothing the text does not
-say; they report the change.
+say; they report the change. Variants without a screen, because the FAA extract cannot stage them: APT 3 `RUNWAY DATA
+NOT AVAILABLE` (every airport of the extract has a runway), `MILTRY`, `PRIVAT`, `(R)`, `LPC`/`LPT`, the state on APT 2
+(the extract carries the country only). The APT 8 questions (add, replace) have no screens of their own; the APT 7
+questions differ by one word and stand for both.
 
 ## Status
 
 | Page | Status |
 | --- | --- |
-| APT pages (page reference) | researched (fact sheets in the coordinator's scratchpad, 2026-11-04); writing |
+| APT pages (page reference) | done for the dry run (2026-11-04): two review passes, every finding that matters applied; bug candidates unfiled |
 | Every other page | not started (dry run) |
 
 ## Open questions for the maintainer
@@ -105,15 +113,32 @@ say; they report the change.
 - Plan approval was skipped for the dry run; the full run stops here.
 - Suspected bugs are not filed during the dry run. The paragraphs that describe the suspect behavior carry a
   `{/* kln90b bug candidate: … */}` comment instead of `kln90b#NN`; once the maintainer agrees, the coordinator files
-  the issues and replaces the comments. The candidates, from the researchers (to be confirmed by review):
-  1. APT 4 shows blank rows after the airport changes while a later frequency page is shown.
-  2. Airport names drop the `/` without a blank (`BOEING FLDK`).
-  3. A remark blanked out on APT 5 keeps its slot in the 100-airport limit and stays listed on OTH 4.
-  4. The airspace text on APT 1 (`CL B`) ignores the airspace floor; airports under a shelf show it too.
-  5. APT 3: typing an unknown identifier and then a valid one on a list page jumps to the diagram and drops the cursor.
-  6. APT 3 diagram throws for airports with helipad-style runway entries (KMWH, 2S1 and others) and stays blank.
-  7. A route from the EFB loads an approach into a unit not installed for approaches; `CHANGE APR?` then throws.
-  8. A STAR or an approach is inserted before the first occurrence of the airport, which is wrong when the same
-     airport is also the departure.
+  the issues and replaces the comments. After the review:
+  - Worth filing, confirmed in the code and not settled by the real manual (comments in the chapter):
+    1. APT 4 shows blank rows after the airport changes while a later frequency page is shown.
+    2. APT 3: typing an unknown identifier and then a valid one on a list page jumps to the diagram and drops the
+       cursor.
+    3. APT 3 diagram throws for airports with helipad-style runway entries and stays blank; the extract of the
+       screens turns helipads into such entries, and whether the simulator's data does is unverified.
+  - Confirmed against the real manual, but belonging to other pages (held for the Flight plans writer in the
+    coordinator's scratchpad, `handoff-flight-plans.md`):
+    4. A route from the EFB loads an approach into a unit not installed for approaches; `CHANGE APR?` then throws.
+    5. The real unit finds an airport by typing its name on APT 1 or its city on APT 2; the simulation has no such
+       search (a missing feature; the chapter leaves it out, style guide section 3).
+  - Not settled by the manual, the maintainer decides:
+    6. A STAR or an approach is inserted before the first occurrence of the airport, which puts it at the start of a
+       round trip (held in `handoff-flight-plans.md` with its paragraph).
+    7. The frequencies of the simulator's flight service stations are labeled `AFIS` on APT 4; the real unit uses
+       that label differently and has a label of its own for radio frequencies.
+  - Dropped after review (the real unit behaves the same, or the manual leans the code's way): the airspace text of
+    APT 1 ignores the airspace floor (the real unit uses the lateral outline too); a `/` in an airport name is deleted
+    without a blank; a remark blanked out on APT 5 keeps its slot until it is deleted on OTH 4.
+- Text that the review moved out of the APT chapter because other pages own it (the scan rules, creating a user
+  waypoint in full, the `USER POS?` entry, where a procedure goes in FPL 0 in detail, the make-room question, the 30 NM
+  arming) is held in the coordinator's scratchpad as `handoff-waypoints.md` and `handoff-flight-plans.md` for the
+  writers of Controls and display, Waypoints and the database, Flight plans and Non-precision approaches.
+- Style questions the dry run raised: a glossary term that stands as screen text gets its tooltip on the code
+  (`<Term t="HRD">`HRD`</Term>`); whether abbreviations every pilot knows (GRND, TWR, APR, ELV, L) need the tooltip at
+  all, or only the glossary entry; and whether a message page message of several lines is quoted on one line.
 - Whether APT 2's state abbreviation and the private/military flags can be shown at all from the FAA extract (the
   extract has no state and only public airports), which would need an extract change, not a manual change.
