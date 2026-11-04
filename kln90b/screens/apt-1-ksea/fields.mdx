@@ -5,12 +5,11 @@
 </Field>
 
 <Field id="name" title="Airport name">
-	The name of the airport in two rows of 11 characters. The unit shows only letters, digits, blanks and hyphens and drops every other character, such as `/`, without leaving a blank. A name of more than 22 characters loses the words `CITY OF`, `GREATER` and `THE` and gets short forms (`NORTH` becomes `N`, `INTERNATIONAL` becomes `INT`, `REGIONAL` becomes `REG`, `SAINT` becomes `ST`, among others); what is still longer than 22 characters is cut off. The break between the rows falls after the eleventh character, in the middle of a word if need be.
+	The name of the airport in two rows of 11 characters. The unit shows only letters, digits, blanks and hyphens and drops every other character, such as `/`, without leaving a blank. A name of more than 22 characters loses the words `CITY OF`, `GREATER` and `THE` and gets short forms (`NORTH` becomes `N`, `INTERNATIONAL` becomes `INT`, `REGIONAL` becomes `REG`, `SAINT` becomes `ST`, among others); the first word keeps its full form unless it is longer than 8 characters; what is still longer than 22 characters is cut off. The break between the rows falls after the eleventh character, in the middle of a word if need be.
 
 	A user airport has no name, and the rows stay blank.
 </Field>
 
-{/* kln90b bug candidate: a "/" in an airport name is deleted without a blank, so the words around it fuse ("BOEING FLD/KING COUNTY INTL" shows BOEING FLDK / ING COUNTY) */}
 
 <Field id="pos" title="Airport position">
 	The position of the airport: latitude above, longitude below, as `N 47°26.99'` and `W122°18.71'` (degrees, minutes and hundredths of a minute). For an airport of the database the position cannot be changed. For a user airport it can, with the cursor on.
@@ -22,7 +21,6 @@
 	The unit compares only the outline on the map and not the floor of the airspace, so an airport below a class B shelf also shows `CL B`. The row is blank for a user airport, and it can stay blank for a moment after the page appears.
 </Field>
 
-{/* kln90b bug candidate: the airspace text ignores the floor of the airspace, so airports below a class B shelf (KRNT, KTIW, KPAE, KBFI) show CL B */}
 
 <Field id="page" title="Page name">
 	The name of the page on the right side. The right inner knob, with the cursor off, turns to the other pages of the APT group. A `+` in place of the space (`APT+3`) means that the page has more than one subpage.

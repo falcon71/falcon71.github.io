@@ -8,7 +8,7 @@ defineScreen(import.meta.url, {
 		await u.panel.selectPage('R', 'APT 1');
 		await u.panel.cursor('R');
 		await u.panel.enterIdent('R', 'HOME');
-		// The cursor stays on, on the first character
+		// The cursor stays on, on the last character entered
 	},
 	fields: [
 		{id: 'ident', find: {re: /HOME/, area: 'R', row: 0}},

@@ -1,9 +1,9 @@
-<Field id="ident" title="Airport identifier">
-	The identifier of the airport, with the cursor on it. The right outer knob moves the cursor from one character to the next, and from the last character on to the next field of the page. The airport changes with every character you enter.
+<Field id="ident" title="Rest of the identifier">
+	The characters of the identifier to the right of the cursor. The right outer knob moves the cursor on to them, and from the last character to the next field of the page. They change when you change a character to the left of them, because the unit completes them with the first airport that matches.
 </Field>
 
 <Field id="char" title="Character under the cursor">
-	The character that the right inner knob changes. The change takes effect at once and needs no <kbd>ENT</kbd>. The knob steps through `0` to `9`, a blank and `A` to `Z`, and the first character never offers the blank. After each change the unit fills in the characters to the right of the cursor with the first airport that matches.
+	The character that the right inner knob changes; the cursor stands on the first character each time it is turned on. The change takes effect at once and needs no <kbd>ENT</kbd>. The knob steps through `0` to `9`, a blank and `A` to `Z`, and the first character never offers the blank. After each change the unit fills in the characters to the right of the cursor with the first airport that matches.
 </Field>
 
 <Field id="name" title="Airport name">
@@ -15,7 +15,7 @@
 </Field>
 
 <Field id="class" title="Airspace and type of the airport">
-	The airspace the airport lies in (`CL B`, `CL C`, `TMA` or `CTA`) on the left, and `MILTRY` or `PRIVAT` on the right where they apply.
+	The airspace the airport lies in (`CL B`, `CL C`, <Term t="TMA" /> or <Term t="CTA" />) on the left, and `MILTRY` or `PRIVAT` on the right where they apply.
 </Field>
 
 <Field id="crsr" title="Cursor indication">

@@ -3,7 +3,7 @@
 </Field>
 
 <Field id="rank" title="Rank in the nearest list">
-	The rank of the airport in the list of the nearest airports, from `nr 1` for the nearest to `nr 9`. The rank flashes while the cursor is elsewhere. The unit recalculates the distances every second and the list every 10 seconds, so the number changes within 10 seconds after the airport moves down the list, and it disappears when the airport has dropped out of the list.
+	The rank of the airport in the list of the nearest airports, from `nr 1` for the nearest to `nr 9`. The rank flashes while the cursor is elsewhere. The unit recalculates distances and order every second, so the number changes within a second when another airport comes nearer. Which airports belong to the list is searched anew every 10 seconds, so the number disappears within 10 seconds after the airport has dropped out of the list.
 
 	With the cursor on the rank, the page keeps showing whichever airport holds that rank, so it follows the list as the aircraft moves.
 </Field>
@@ -21,7 +21,7 @@
 </Field>
 
 <Field id="lighting" title="Lighting of the longest runway">
-	The lighting of the longest runway: `L` for full-time lighting, `LPC` for lighting that you turn on by radio, `LPT` for part-time lighting. The field is blank when the runway has no lighting or the lighting is not known.
+	The lighting of the longest runway: `L` for a runway lighted from sunset to sunrise, `LPC` for lighting that you turn on by radio, `LPT` for part-time lighting. The field is blank when the runway has no lighting or the lighting is not known.
 </Field>
 
 <Field id="bearing" title="Bearing to the airport">

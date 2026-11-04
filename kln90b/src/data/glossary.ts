@@ -39,10 +39,10 @@ export const glossary: Record<string, GlossaryEntry> = {
 		text: 'The waypoint the unit is navigating to: the end of the active leg of the flight plan, or the direct-to waypoint.',
 	},
 	'Waypoint alerting': {
-		text: 'The warning of the unit that you are about to reach the active waypoint. It flashes the arrow on the waypoint page and raises a message.',
+		text: 'The warning of the unit that you are about to reach the active waypoint. It flashes the arrow in front of the waypoint and, where the aircraft has one, the external waypoint annunciator.',
 	},
 	'User waypoint': {
-		text: 'A waypoint that you create yourself, at your present position or at coordinates you enter. The unit stores up to 250 user waypoints of all kinds together.',
+		text: 'A waypoint that you create yourself: at your present position, at coordinates you enter or, for some kinds, by radial and distance from another waypoint. The unit stores up to 250 user waypoints of all kinds together.',
 	},
 	'Nearest list': {
 		text: 'The list of the airports, VORs or NDBs closest to the aircraft, ranked by distance from nr 1 to nr 9. The unit builds it by itself; for airports it uses the criteria on SET 3.',
@@ -73,15 +73,15 @@ export const glossary: Record<string, GlossaryEntry> = {
 	},
 	AFIS: {
 		expansion: 'Aerodrome flight information service',
-		text: 'The frequency of an airport information service that is not a control tower.',
+		text: 'On APT 4, the label of the frequency of a flight service station of the airport.',
 	},
 	AWOS: {
 		expansion: 'Automated weather observing system',
-		text: 'An automated weather broadcast on its own frequency.',
+		text: 'An automated weather broadcast on its own frequency, from a small set of sensors.',
 	},
 	ASOS: {
 		expansion: 'Automated surface observing system',
-		text: 'An automated weather broadcast on its own frequency.',
+		text: 'An automated weather broadcast on its own frequency, with more sensors than an AWOS.',
 	},
 	SID: {
 		expansion: 'Standard instrument departure',
@@ -92,11 +92,11 @@ export const glossary: Record<string, GlossaryEntry> = {
 		text: 'A published arrival procedure from the en route structure to an airport. The unit lists the STARs of an airport on APT 7 and loads one into FPL 0.',
 	},
 	Transition: {
-		text: 'The part of a SID, a STAR or an approach that connects it to one particular en route fix or initial approach fix. A procedure with transitions cannot be loaded without selecting one.',
+		text: 'The part of a SID, a STAR or an approach that connects it to one particular en route fix or initial approach fix. A procedure with transitions cannot be loaded without one; when there is only one, the unit takes it.',
 	},
 	IAF: {
 		expansion: 'Initial approach fix',
-		text: 'The fix where an approach begins. On this unit an approach always starts at an IAF, which you select on APT 8.',
+		text: 'The fix where an approach begins. On this unit an approach always starts at an IAF, which you select on APT 8, or which the unit takes when there is only one.',
 	},
 	FAF: {
 		expansion: 'Final approach fix',
@@ -112,7 +112,7 @@ export const glossary: Record<string, GlossaryEntry> = {
 	},
 	IAP: {
 		expansion: 'Instrument approach procedure',
-		text: 'APT 8 shows IAP after the airport identifier to label its list of approaches.',
+		text: 'A published instrument approach. APT 8 shows IAP after the airport identifier to label its list of approaches.',
 	},
 	RNAV: {
 		expansion: 'Area navigation',
@@ -133,6 +133,146 @@ export const glossary: Record<string, GlossaryEntry> = {
 	'RNP AR': {
 		expansion: 'Required navigation performance, authorization required',
 		text: 'Procedures that need a special approval of aircraft and crew. The unit does not offer them.',
+	},
+	APPR: {
+		expansion: 'Approach',
+		text: 'The short form of approach on the unit, as in the question AND APPR TO on APT 8.',
+	},
+	RW: {
+		expansion: 'Runway',
+		text: 'The prefix of a runway in the lists and waypoint names of the unit, such as RW34L, the threshold of runway 34L.',
+	},
+	nr: {
+		expansion: 'Nearest rank',
+		text: 'The rank of a waypoint in the nearest list, from nr 1 for the nearest. It flashes while the cursor is elsewhere on the page.',
+	},
+	'CL B': {
+		expansion: 'Class B airspace',
+		text: 'APT 1 shows CL B when the airport lies inside the lateral outline of a class B airspace.',
+	},
+	'CL C': {
+		expansion: 'Class C airspace',
+		text: 'APT 1 shows CL C when the airport lies inside the lateral outline of a class C airspace.',
+	},
+	MILTRY: {
+		expansion: 'Military',
+		text: 'APT 1 shows MILTRY on the right of the airspace line for a military airport.',
+	},
+	PRIVAT: {
+		expansion: 'Private',
+		text: 'APT 1 shows PRIVAT on the right of the airspace line for a private airport.',
+	},
+	ELV: {
+		expansion: 'Elevation',
+		text: 'The elevation of the airport above sea level on APT 2, in feet.',
+	},
+	Z: {
+		expansion: 'Zulu time offset',
+		text: 'The offset of the standard time of the airport from UTC on APT 2, in whole hours.',
+	},
+	DT: {
+		expansion: 'Daylight time',
+		text: 'The offset of daylight time, shown in parentheses on APT 2 where the time zone observes it.',
+	},
+	'NP APR': {
+		expansion: 'Non-precision approach',
+		text: 'APT 2 shows NP APR when the airport has an approach but no ILS.',
+	},
+	'NO APR': {
+		expansion: 'No approach',
+		text: 'APT 2 shows NO APR when the airport has no approach in the database.',
+	},
+	'(R)': {
+		expansion: 'Radar',
+		text: 'APT 2 shows (R) when approach and departure control have radar.',
+	},
+	'RWY LEN': {
+		expansion: 'Runway length',
+		text: 'The label of the runway entry of a user airport on APT 3.',
+	},
+	HRD: {
+		expansion: 'Hard surface',
+		text: 'The runway surface code for concrete, asphalt and other hard surfaces.',
+	},
+	SFT: {
+		expansion: 'Soft surface',
+		text: 'The surface a runway of a user airport has when it is not HRD.',
+	},
+	TRF: {
+		expansion: 'Turf',
+		text: 'The runway surface code for grass and turf.',
+	},
+	SNW: {
+		expansion: 'Snow',
+		text: 'A runway surface code of APT 3.',
+	},
+	ICE: {
+		expansion: 'Ice',
+		text: 'A runway surface code of APT 3.',
+	},
+	DRT: {
+		expansion: 'Dirt',
+		text: 'A runway surface code of APT 3.',
+	},
+	GRV: {
+		expansion: 'Gravel',
+		text: 'A runway surface code of APT 3.',
+	},
+	MAT: {
+		expansion: 'Steel mats',
+		text: 'A runway surface code of APT 3.',
+	},
+	SND: {
+		expansion: 'Sand',
+		text: 'A runway surface code of APT 3.',
+	},
+	SHL: {
+		expansion: 'Shale',
+		text: 'A runway surface code of APT 3.',
+	},
+	L: {
+		expansion: 'Lighted',
+		text: 'The lighting code of a runway lighted from sunset to sunrise.',
+	},
+	LPC: {
+		expansion: 'Pilot-controlled lighting',
+		text: 'The lighting code of a runway whose lights you turn on by radio.',
+	},
+	LPT: {
+		expansion: 'Part-time lighting',
+		text: 'The lighting code of a runway whose lights are not on all night.',
+	},
+	GRND: {
+		expansion: 'Ground control',
+		text: 'A frequency label of APT 4.',
+	},
+	TWR: {
+		expansion: 'Tower',
+		text: 'A frequency label of APT 4.',
+	},
+	CLR: {
+		expansion: 'Clearance delivery',
+		text: 'A frequency label of APT 4. On the front panel, CLR is the clear key.',
+	},
+	APR: {
+		expansion: 'Approach control',
+		text: 'A frequency label of APT 4.',
+	},
+	DEP: {
+		expansion: 'Departure control',
+		text: 'A frequency label of APT 4.',
+	},
+	CTR: {
+		expansion: 'Center',
+		text: 'A frequency label of APT 4: a center that provides approach and departure control for the airport.',
+	},
+	PTAX: {
+		expansion: 'Pre-taxi clearance',
+		text: 'A frequency label of APT 4, for a frequency on which you get your clearance before taxi.',
+	},
+	RMKS: {
+		expansion: 'Remarks',
+		text: 'The remarks of an airport on APT 5, as in RMKS FULL and APTS W/RMKS.',
 	},
 };
 

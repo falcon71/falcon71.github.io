@@ -1,0 +1,15 @@
+<Field id="ident" title="Identifier of the new airport">
+	The identifier that you entered for the airport that is being created. The airport does not exist until you have entered both coordinates.
+</Field>
+
+<Field id="lat" title="Latitude of the new airport">
+	The latitude of the airport as `N`/`S`, two digits of degrees, two digits of minutes and two digits of hundredths of a minute. The first click of the right inner knob starts the entry and shows `N` (or `E` for the longitude); the right outer knob moves between the cells, and the right inner knob changes the cell. The degrees stop at 89, and the tens of minutes at 5. <kbd>ENT</kbd> accepts the latitude and moves the cursor to the longitude. The status line then shows `ENT LAT/LON` for about 5 seconds, which reminds you that the airport is created only when both coordinates are entered; it is not an error. <kbd>CLR</kbd> with an entry open cancels it.
+</Field>
+
+<Field id="lon" title="Longitude of the new airport">
+	The longitude of the airport as `E`/`W`, three digits of degrees, two digits of minutes and two digits of hundredths of a minute. It shows dashes until you enter it. A longitude beyond 180° is refused with `INVALID ENT`. <kbd>ENT</kbd> on the longitude creates the airport, shows it on APT 1 and turns the cursor off.
+</Field>
+
+<Field id="crsr" title="Cursor indication">
+	`CRSR` replaces the name of the page while the right cursor is on.
+</Field>
