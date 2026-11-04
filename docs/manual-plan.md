@@ -74,6 +74,9 @@ reference has its own ids. Status per screen: planned, generated, done.
 | `apt-1-user-pos` | APT 1, entering the position of a new user airport (`USER POS?`), the latitude entered | APT group |
 | `apt-1-nearest-cursor` | APT 1, nearest entry with the cursor parked on `nr n` | APT 1 |
 | `apt-create-new-wpt` | The offer `CREATE NEW WPT AT` after an unknown identifier | APT group |
+| `apt-act-1` | ACT 1 of the destination airport of an active flight plan (FPL 0 number and `A` on the top line) | APT group |
+| `apt-confirm` | both halves: the Direct To page with an identifier entered and APT 1 of that airport with `ent` flashing in the status line | APT group |
+| (`apt-1-nearest`, rows 1) | the shared top line with the `nr` rank, as an excerpt | APT group |
 | `apt-2-ksea` | APT 2, KSEA, with the time zone answered | APT 2 |
 | `apt-2-user-airport` | APT 2 of a user airport with the elevation entered | APT 2 |
 | `apt-3-diagram-kpdx` | APT 3 runway diagram of KPDX (map) | APT 3 |
