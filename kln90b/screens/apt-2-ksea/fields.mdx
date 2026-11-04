@@ -1,0 +1,27 @@
+<Field id="ident" title="Airport identifier">
+	The identifier of the airport. It is the same on every APT page and is changed in the same way as on APT 1.
+</Field>
+
+<Field id="city" title="City and state of the airport">
+	The city of the airport and, at the right end, the state or province as two letters, or the country as three letters (`USA`). The unit takes them from the city entry of the airport; it shows the three-letter country code where the entry names no state or province.
+
+	A short city, up to 8 characters with a two-letter state or 7 with a three-letter country, shares the first row with it. A longer city fills the first row up to 11 characters and continues on the second row, followed by the state or country at the right end. The city is cut off after 19 characters with a two-letter state and after 18 with a three-letter country.
+</Field>
+
+<Field id="elevation" title="Elevation of the airport">
+	The elevation of the airport above sea level in feet, rounded to the nearest 10 ft (`ELV   430ft`). It shows `-----` where the elevation is not known. You cannot change it for an airport of the database.
+</Field>
+
+<Field id="zone" title="Time zone of the airport">
+	The time zone of the airport as its offset from UTC. `Z-08` means that standard time is 8 hours behind UTC. Where the zone observes daylight time, the offset of daylight time follows in brackets: `(-07DT)`. The offset is truncated to whole hours, and zero shows as `Z+00`.
+
+	The unit shows the daylight time offset whenever the zone observes daylight time at all, also in winter, and the offset shown for standard time is always the standard one. The row is blank until the simulator has supplied the time zone.
+</Field>
+
+<Field id="approach" title="Approaches of the airport">
+	The best kind of approach the database has for the airport: `ILS` if the airport has an ILS approach, otherwise `NP APR` if it has any other approach (GPS, RNAV, LDA, localizer, localizer back course, SDF, VOR, VOR-DME, NDB or NDB-DME), and `NO APR` if it has none. At the right end of the row `(R)` shows that the airport has radar coverage.
+</Field>
+
+<Field id="page" title="Page name">
+	The name of the page on the right side.
+</Field>

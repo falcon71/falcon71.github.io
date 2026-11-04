@@ -1,0 +1,35 @@
+<Field id="ident" title="Airport identifier">
+	The identifier of the airport. It is the same on every APT page and is changed in the same way as on APT 1.
+</Field>
+
+<Field id="designations" title="Runway designations">
+	The designations of the two ends of a runway, each padded to three characters and separated by `/` (`16L/34R`). An end without a letter keeps a blank in its place (`03 /21 `).
+</Field>
+
+<Field id="lighting" title="Runway lighting">
+	The lighting of the runway: `L` for full-time lighting, `LPC` for lighting that you turn on by radio, `LPT` for part-time lighting. It is blank when the runway has no lighting or the lighting is not known.
+</Field>
+
+<Field id="length" title="Runway length">
+	The length of the runway in feet, as a whole number of feet, followed by `'`.
+</Field>
+
+<Field id="surface" title="Runway surface">
+	The surface of the runway as a three-letter code:
+
+	- `HRD`: concrete, asphalt, bituminous, brick, tarmac or macadam
+	- `TRF`: grass or turf
+	- `SNW`: snow
+	- `ICE`: ice
+	- `DRT`: dirt
+	- `GRV`: gravel
+	- `MAT`: steel mats
+	- `SND`: sand
+	- `SHL`: shale
+
+	Every other surface, water included, shows nothing.
+</Field>
+
+<Field id="page" title="Page name">
+	The name of the page on the right side. `APT+3` means that APT 3 has more than one subpage.
+</Field>
