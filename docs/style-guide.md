@@ -200,6 +200,15 @@ The model packs several facts into every paragraph and wastes no words. So does 
   rule it qualifies (section 11).
 - **Say each fact once,** in the place a pilot would look for it, and link to it from everywhere else. A field is
   explained in its screen's field explanation; a task in Operation; a page's overall purpose in the page reference.
+  This holds above all for the basic operation of the unit: how a page group is selected, how the cursor and the knobs
+  enter characters, how the scan works, how a waypoint identifier is entered and confirmed. A chapter that opens by
+  explaining those again is fatiguing to read, because every chapter would, and the pilot who studies the manual
+  reads them all. Such a chapter says in one sentence that the operation is the same as everywhere and links to the
+  page that explains it (section 10, "Page reference").
+- **Assume a capable reader.** Do not tell the pilot what the screen shows them plainly or what they find out the
+  moment they try: that a line has as many characters as it has, which characters a field accepts, that the cursor
+  stops on every field in turn. Say what they cannot see: the limits, what is stored and where, what happens at the
+  edges. If a sentence would make a pilot feel talked down to, cut it.
 - **Paragraphs of two to five sentences.** Sentences mostly of 10 to 25 words. Split a sentence that carries two
   conditions.
 - **Lists** for parallel items: the fields of a page, the choices of a menu, the conditions of a message. Prose for
@@ -240,6 +249,13 @@ Each page gets its section:
 4. The rules of the page as a whole: when it shows dashes, what the cursor can change on it, how it differs on the left
    and the right side, the variants of the page and what selects them (section 13 says which variants get a screen).
 5. A sentence linking to the Operation sections that use the page.
+
+A chapter explains what is specific to its page group and nothing that is the same on other pages. The waypoint
+pages (APT, VOR, NDB, INT, SUP) share the way an identifier is entered, the scan through the database, the nearest
+list, the offer to create a user waypoint, the ACT page and the waypoint confirmation; Waypoints and the database
+explains all of that once, and each waypoint chapter says in one sentence that it works as it does everywhere, links
+there, and goes on with what its kind of waypoint shows and does differently. The same applies to the cursor and data
+entry (Controls and display) and to every topic the plan assigns to another page.
 
 ### Tutorial flights
 
@@ -341,6 +357,9 @@ before you reuse one):
   unit's small letters (`nm`, `kt`, `ft`, `enr-leg`) stay small.
 - A message is quoted in full: `ADJ NAV IND CRS TO 271°`.
 - Field labels are quoted the same way, then named in words when it helps: "`ETE`, the estimated time en route".
+- **Choices in the screen's order.** When the text names several choices, menu entries, questions or fields that the
+  unit shows together, it names them in the order they appear on the screen, top to bottom, and describes the knob
+  turn that reaches them accordingly. A list in another order than the one the pilot is looking at confuses.
 
 ### Units and numbers
 
@@ -404,6 +423,11 @@ general; the screen shows one concrete case.
   message; a step that raises one answers it before the screen is captured. For the same reason the screens run with the
   airspace alert off, unless a screen is about the airspace alert and turns it on.
 - **Show half a screen** when only one side matters. The generator keeps the line between the halves.
+- **Show an excerpt** when only one line or a few lines of a page matter: the shared top line of a page group, a
+  question the unit asks, a prompt in the status line. A page shows the rows of a generated screen with `rows`
+  (README, "Writing a screen"); the fields on those rows keep their explanations. Where the text describes a line in
+  detail, the reader needs to see it, so the excerpt stands next to the description instead of leaving the line to the
+  imagination. The screen is still generated whole, so the same screen serves the page that shows it in full.
 - **Flashing.** The site draws flashing text as a static dashed box and explains it under the screen. Say in the text
   what flashes and when.
 
@@ -431,8 +455,14 @@ The explanations of a screen's fields live in its `fields.mdx` and appear wherev
 - `<Term t="XTK" />` shows the abbreviation with a dotted underline and its explanation on hover, focus or tap.
   `<Term t="XTK">cross-track error</Term>` explains other words with the same entry.
 - **Every abbreviation the unit shows** has a glossary entry, so that the Glossary page is a complete lookup list, and
-  so does every concept specific to the unit or to GPS navigation (turn anticipation, waypoint alerting, a fence in the
-  flight plan). Common pilot vocabulary that the unit does not display needs no entry.
+  so does a term of GPS navigation or of this unit that names a thing (a fence in the flight plan, a RAIM prediction).
+  Common pilot vocabulary that the unit does not display needs no entry.
+- **Operating concepts are not glossary terms.** The nearest list, the active waypoint, waypoint alerting, turn
+  anticipation, the scan, OBS mode, user waypoints and the like are ways the unit works, explained in their Operation
+  section. A tooltip cannot explain how something works, so these get no glossary entry and no `<Term>`; the text
+  writes them in plain words and links to the owning section at the first use on a page (`[nearest
+  list](/kln90b/operation/nearest/)`), and at the first use in a field explanation. The plan's topic ownership says
+  which section owns which concept.
 - **Use `<Term>` at the first use of a glossary term on a page,** and at its first use in each field explanation. Not
   on every use. The exception is the vocabulary every pilot knows (section 2), which gets no tooltip even though the
   glossary lists it: VOR, NDB, DME, ILS, IFR, VFR, ATC, UTC, CDI, HSI, NM, kt, ft. Add to this list only with the
@@ -714,8 +744,12 @@ Before a writer hands in a page:
 - [ ] Exact numbers instead of vague words; every exception after its rule.
 - [ ] Procedures: numbered, one action per step, sides named, way back given, stable end state.
 - [ ] Keys in `<kbd>`, the Direct To key as `<DirectToKey />`, screen text in code formatting, page names plain and with a space before the number.
-- [ ] `<Term>` at the first use of each glossary term; new terms and words reported to the coordinator.
-- [ ] Screens shown by id, generated, every field explained, explanations free of context.
+- [ ] `<Term>` at the first use of each glossary term; operating concepts linked to their section instead; new terms
+      and words reported to the coordinator.
+- [ ] Nothing re-explained that another page owns; the basic operation of the unit linked, not repeated.
+- [ ] Choices and fields named in the order the screen shows them.
+- [ ] Screens shown by id, generated, every field explained, explanations free of context; an excerpt where the text
+      describes a single line.
 - [ ] Installation-dependent and simulator-only features in their boxes; no configuration keys.
 - [ ] No code (outside External hardware), no manual page numbers, no invented identifiers outside drawings.
 - [ ] Bugs found are reported to the coordinator, with the paragraph that describes the current behavior; it adds

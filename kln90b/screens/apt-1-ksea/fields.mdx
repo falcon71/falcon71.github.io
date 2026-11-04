@@ -1,19 +1,27 @@
 <Field id="ident" title="Airport identifier">
-	Lorem ipsum dolor sit amet, consectetur adipiscing elit. The <Term t="GS" /> is not shown here.
+	The identifier of the airport, three or four characters. Every APT page shows the same airport, so this is also the identifier on APT 2 to APT 8. A `›` in front of it means that the airport is the [active waypoint](/kln90b/operation/navigation-modes/#the-active-waypoint).
+
+	With the right cursor on, the right inner knob changes the character under the cursor and the right outer knob moves to the next one. The unit looks up the airports at once, without <kbd>ENT</kbd>: it shows the first airport, in alphabetical order, whose identifier starts with the characters you have entered, and fills in the remaining characters (entering `KO` shows `KOKH`). If two airports have the same identifier, it shows the first and raises `DUP IDENT`. If no airport matches, the page offers to create a [user airport](/kln90b/operation/waypoints/#user-waypoints).
 </Field>
 
 <Field id="name" title="Airport name">
-	Lorem ipsum dolor sit amet, sed do eiusmod tempor. The name takes two rows.
+	The name of the airport in two rows of 11 characters. The unit shows only letters, digits, blanks and hyphens and drops every other character, such as `/`, without leaving a blank. A name of more than 22 characters loses the words `CITY OF`, `GREATER` and `THE` and gets short forms (`NORTH` becomes `N`, `INTERNATIONAL` becomes `INT`, `REGIONAL` becomes `REG`, `SAINT` becomes `ST`, among others); the first word keeps its full form unless it is longer than 8 characters; what is still longer than 22 characters is cut off. The break between the rows falls after the eleventh character, in the middle of a word if need be.
+
+	A user airport has no name, and the rows stay blank.
 </Field>
+
 
 <Field id="pos" title="Airport position">
-	Lorem ipsum dolor sit amet, quis nostrud exercitation: latitude above, longitude below.
+	The position of the airport: latitude above, longitude below, as `N 47°26.99'` and `W122°18.71'` (degrees, minutes and hundredths of a minute). For an airport of the database the position cannot be changed. For a user airport it can, with the cursor on.
 </Field>
 
-<Field id="class" title="Airspace class">
-	Lorem ipsum dolor sit amet, consectetur adipiscing elit, ut labore et dolore magna aliqua.
+<Field id="class" title="Airspace and type of the airport">
+	The row under the name. On the left it shows `CL B` or `CL C` when the airport lies inside the lateral outline of a class B or class C airspace, and `TMA` or `CTA` when it lies inside an airspace whose name contains <Term t="TMA" /> or <Term t="CTA" />. Class B takes precedence over class C, class C over `TMA`, and `TMA` over `CTA`. Airspaces of other classes show nothing. At the right end of the row the unit shows <Term t="MILTRY">`MILTRY`</Term> for a military airport and <Term t="PRIVAT">`PRIVAT`</Term> for a private one; a public airport shows nothing there.
+
+	The unit compares only the outline on the map and not the floor of the airspace, so an airport below a class B shelf also shows `CL B`. The row is blank for a user airport, and it can stay blank for a moment after the page appears.
 </Field>
+
 
 <Field id="page" title="Page name">
-	Lorem ipsum dolor sit amet, sed do eiusmod tempor. Compare NAV 1.
+	The name of the page on the right side. The right inner knob, with the cursor off, turns to the other pages of the APT group. A `+` in place of the space (`APT+3`) means that the page has more than one subpage.
 </Field>

@@ -1,0 +1,19 @@
+---
+/**
+ * The field explanations of its slot (the rendered <Field> elements of a screen's fields.mdx), only those of the fields
+ * in `shown`. KlnScreen uses it for an excerpt of some rows, whose list leaves out the fields of the other rows.
+ */
+import { onlyFieldDocs } from '../lib/screenHtml';
+
+interface Props {
+	/** The fields whose explanations stay */
+	shown: ReadonlySet<string>;
+	/** The screen's name for the messages */
+	screen: string;
+}
+
+const { shown, screen } = Astro.props;
+const html = Astro.slots.has('default') ? await Astro.slots.render('default') : '';
+---
+
+<Fragment set:html={onlyFieldDocs(html, shown, screen)} />

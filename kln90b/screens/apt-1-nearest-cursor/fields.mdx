@@ -1,0 +1,35 @@
+<Field id="ident" title="Airport identifier">
+	The identifier of the airport that holds the rank under the cursor.
+</Field>
+
+<Field id="rank" title="Rank under the cursor">
+	The rank of the airport in the list of the nearest airports, with the cursor on it. While the cursor stays here, the page shows whichever airport holds this rank, so it changes by itself when the order of the list changes as the aircraft moves. If the list becomes shorter than the rank, the page shows the last airport of the list; if the list is empty, it keeps the airport it shows. The right outer knob moves the cursor away from the rank, and then the page keeps the airport it shows.
+</Field>
+
+<Field id="name" title="Airport name">
+	The name of the airport, in two rows of 11 characters.
+</Field>
+
+<Field id="length" title="Length of the longest runway">
+	The length of the longest runway of the airport in feet.
+</Field>
+
+<Field id="surface" title="Surface of the longest runway">
+	The surface of the longest runway as a three-letter code, as on APT 3.
+</Field>
+
+<Field id="lighting" title="Lighting of the longest runway">
+	The lighting of the longest runway (`L`, <Term t="LPC">`LPC`</Term> or <Term t="LPT">`LPT`</Term>), blank when there is none or it is not known.
+</Field>
+
+<Field id="bearing" title="Bearing to the airport">
+	The magnetic bearing from the aircraft to the airport.
+</Field>
+
+<Field id="distance" title="Distance to the airport">
+	The distance from the aircraft to the airport in NM.
+</Field>
+
+<Field id="crsr" title="Cursor indication">
+	`CRSR` replaces the name of the page while the right cursor is on.
+</Field>

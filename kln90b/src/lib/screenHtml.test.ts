@@ -1,7 +1,7 @@
 import {describe, expect, it} from 'vitest';
 import type {CellAttr, FieldPart, ScreenCapture} from './screenFile.ts';
 import {mapToSvg} from '../../generator/lib/mapSvg.ts';
-import {blocksFromCapture, blocksFromMarkup, screenHtml} from './screenHtml.ts';
+import {blocksFromCapture, blocksFromMarkup, excerptWindow, fieldsOnRows, onlyFieldDocs, parseRows, screenHtml} from './screenHtml.ts';
 import {loadCapture} from './screens.ts';
 
 // The NAV 1 markup of pages/nav.mdx, and the stage HTML that KlnScreen.astro built from it before the code moved here
@@ -357,5 +357,198 @@ describe('Super NAV 5', () => {
 		const c = superNav5();
 		c.mask[4][22] = 'I';
 		expect(() => blocksFromCapture(c, new Set())).toThrow('Super NAV 5: row 4 column 22 lies over the map but holds " " with the mask "I"');
+	});
+});
+
+describe('an excerpt of some rows', () => {
+	const text = (row: {text: string}[]) => row.map(s => s.text).join('');
+
+	describe('parseRows', () => {
+		it('reads one row and a range, numbered from 1, as rows from 0', () => {
+			expect(parseRows('1', capture(), 'apt-1')).toEqual({first: 0, last: 0});
+			expect(parseRows('2-4', capture(), 'apt-1')).toEqual({first: 1, last: 3});
+			expect(parseRows('3-3', capture(), 'apt-1')).toEqual({first: 2, last: 2});
+		});
+
+		it('takes 7 for the status line of a split screen', () => {
+			expect(parseRows('7', capture(), 'apt-7')).toEqual({first: 6, last: 6});
+			expect(parseRows('6-7', capture(), 'apt-7')).toEqual({first: 5, last: 6});
+		});
+
+		it('takes the seventh row of a full page, with or without a status line', () => {
+			expect(parseRows('1-7', capture({layout: 'full'}), 'set-1')).toEqual({first: 0, last: 6});
+			expect(parseRows('7', capture({layout: 'full', status: false}), 'welcome')).toEqual({first: 6, last: 6});
+		});
+
+		it('names the screen and the value of anything that is not a row or a range', () => {
+			for (const value of ['', '0', '01', '1-', '-2', '1,2', '1 - 2', ' 1', 'a', '1-2-3', '1.5', 'status']) {
+				expect(() => parseRows(value, capture(), 'apt-1'), value)
+					.toThrow(`KlnScreen screen="apt-1" rows="${value}": rows takes one row, e.g. "1", or consecutive rows`);
+			}
+		});
+
+		it('rejects a range from the lower row to the upper', () => {
+			expect(() => parseRows('3-2', capture(), 'apt-1'))
+				.toThrow('KlnScreen screen="apt-1" rows="3-2": a range runs from the upper row to the lower');
+		});
+
+		it('rejects a row below the screen', () => {
+			expect(() => parseRows('8', capture(), 'apt-1'))
+				.toThrow('KlnScreen screen="apt-1" rows="8": the screen has the rows 1 to 7, 7 is the status line');
+			expect(() => parseRows('6-8', capture({layout: 'full'}), 'set-1'))
+				.toThrow('KlnScreen screen="set-1" rows="6-8": the screen has the rows 1 to 7');
+			expect(() => parseRows('7', capture({status: false}), 'odd'))
+				.toThrow('KlnScreen screen="odd" rows="7": the screen has the rows 1 to 6');
+		});
+
+		it('rejects a screen with a map, a map field or Super NAV 5', () => {
+			const message = 'KlnScreen screen="nav-5" rows="1": a screen with a map is always shown whole, without rows';
+			expect(() => parseRows('1', capture({maps: ['L']}), 'nav-5')).toThrow(message);
+			expect(() => parseRows('1', capture({mapFields: new Map([['leg', 'R']])}), 'nav-5')).toThrow(message);
+			expect(() => parseRows('1', capture({layout: 'super-nav-5', status: false}), 'nav-5')).toThrow(message);
+		});
+	});
+
+	describe('fieldsOnRows', () => {
+		const c = capture({
+			fields: new Map([
+				['ident', [{row: 0, from: 13, to: 17}]],
+				['rank', [{row: 0, from: 19, to: 23}]],
+				['name', [{row: 1, from: 12, to: 23}]],
+				['both', [{row: 2, from: 0, to: 3}, {row: 3, from: 0, to: 3}]],
+				['page', [{row: 6, from: 18, to: 23}]],
+			]),
+		});
+		const all = new Set(['ident', 'rank', 'name', 'both', 'page']);
+
+		it('keeps the documented fields with a part on the rows', () => {
+			expect(fieldsOnRows(c, all, {first: 0, last: 0})).toEqual(new Set(['ident', 'rank']));
+			expect(fieldsOnRows(c, all, {first: 0, last: 1})).toEqual(new Set(['ident', 'rank', 'name']));
+		});
+
+		it('keeps a field with a part on the rows and another outside them', () => {
+			expect(fieldsOnRows(c, all, {first: 3, last: 3})).toEqual(new Set(['both']));
+		});
+
+		it('keeps the field of the status line for row 7 alone', () => {
+			expect(fieldsOnRows(c, all, {first: 6, last: 6})).toEqual(new Set(['page']));
+		});
+
+		it('leaves out a field on the rows without explanation', () => {
+			expect(fieldsOnRows(c, new Set(['rank']), {first: 0, last: 1})).toEqual(new Set(['rank']));
+		});
+	});
+
+	describe('blocksFromCapture', () => {
+		const c = capture({
+			show: 'right',
+			fields: new Map([['ident', [{row: 0, from: 12, to: 16}]], ['name', [{row: 1, from: 12, to: 23}]], ['page', [{row: 6, from: 18, to: 23}]]]),
+		}, {0: 'PRESENT POS|KRNT  nr 2', 1: '           |RENTON MUNI', 6: 'NAV 2|enr-leg    |APT 1'});
+		c.mask[0][18] = 'B';
+		c.mask[1][12] = 'B';
+		const documented = new Set(['ident', 'name', 'page']);
+
+		it('draws the rows and blanks the others, keeping the crop and the size of the blocks', () => {
+			const {crop, blocks} = blocksFromCapture(c, documented, 'apt-1', {first: 0, last: 0});
+			expect(crop).toBe('right');
+			expect(blocks.map(b => [b.cls, b.rows.length])).toEqual([['kln-half kln-half-left', 0], ['kln-half kln-half-right', 6], ['kln-status', 1]]);
+			const right = blocks[1].rows;
+			expect(right[0]).toEqual([
+				{text: 'KRNT', field: 'ident', inverse: false, flash: false},
+				{text: '  ', field: undefined, inverse: false, flash: false},
+				{text: 'n', field: undefined, inverse: false, flash: true},
+				{text: 'r 2 ', field: undefined, inverse: false, flash: false},
+			]);
+			// The name, flashing in its first cell, is on a hidden row: blank, without field or flash
+			expect(right[1]).toEqual([{text: ' '.repeat(11), field: undefined, inverse: false, flash: false}]);
+			expect(blocks[2].rows[0]).toEqual([{text: ' '.repeat(23), field: undefined, inverse: false, flash: false}]);
+		});
+
+		it('draws the status line alone as row 7', () => {
+			const {blocks} = blocksFromCapture(c, documented, 'apt-1', {first: 6, last: 6});
+			expect(blocks[1].rows.every(row => text(row) === ' '.repeat(11))).toBe(true);
+			expect(blocks[2].rows[0]).toEqual([
+				{text: ' '.repeat(18), field: undefined, inverse: false, flash: false},
+				{text: 'APT 1', field: 'page', inverse: false, flash: false},
+			]);
+		});
+
+		it('carries the window of the rows, and none for the whole screen', () => {
+			expect(blocksFromCapture(c, documented, 'apt-1', {first: 0, last: 1}).window).toEqual({top: 0, height: 32});
+			expect(blocksFromCapture(c, documented, 'apt-1').window).toBeUndefined();
+		});
+
+		it('blanks the hidden rows of a full page', () => {
+			const full = capture({layout: 'full', status: false}, {0: 'WELCOME', 6: 'LAST ROW'});
+			const [block] = blocksFromCapture(full, new Set(), 'welcome', {first: 6, last: 6}).blocks;
+			expect(block.rows.map(text)).toEqual([...Array(6).fill(' '.repeat(23)), 'LAST ROW'.padEnd(23)]);
+		});
+	});
+
+	describe('excerptWindow', () => {
+		// The rows of the page are 13 px from y = 3; the line above the status line is at y = 81, the screen 100 px high
+		it('keeps 3 px above and below rows of the page', () => {
+			expect(excerptWindow(capture(), {first: 0, last: 0})).toEqual({top: 0, height: 19});
+			expect(excerptWindow(capture(), {first: 2, last: 3})).toEqual({top: 26, height: 32});
+		});
+
+		it('stops at the line above the status line under the bottom row of the page', () => {
+			expect(excerptWindow(capture(), {first: 5, last: 5})).toEqual({top: 65, height: 16});
+			expect(excerptWindow(capture({layout: 'full'}), {first: 4, last: 5})).toEqual({top: 52, height: 29});
+		});
+
+		it('shows the status line alone without the line above it, down to the bottom of the screen', () => {
+			expect(excerptWindow(capture(), {first: 6, last: 6})).toEqual({top: 82, height: 18});
+		});
+
+		it('shows the line above the status line between a row of the page and the status line', () => {
+			expect(excerptWindow(capture(), {first: 5, last: 6})).toEqual({top: 65, height: 35});
+			expect(excerptWindow(capture(), {first: 0, last: 6})).toEqual({top: 0, height: 100});
+		});
+
+		it('takes the seventh row of a page without status line as a row of the page', () => {
+			expect(excerptWindow(capture({layout: 'full', status: false}), {first: 6, last: 6})).toEqual({top: 78, height: 19});
+		});
+	});
+
+	describe('onlyFieldDocs', () => {
+		const doc = (id: string, body: string) =>
+			`<div class="kln-field-doc" data-field="${id}" data-title="T ${id}"><dt>T ${id}</dt><dd>${body}</dd></div>`;
+		const ident = doc('ident', '<p>The <abbr class="kln-term">ident</abbr>.</p>');
+		const rank = doc('rank', '<div><p>nested</p></div>');
+		const name = doc('name', 'x');
+		const html = `\n${ident}\n${rank}\n${name}\n`;
+
+		it('keeps the explanations of the shown fields with everything inside them', () => {
+			expect(onlyFieldDocs(html, new Set(['rank']), 'apt-1')).toBe(`\n${rank}\n`);
+			expect(onlyFieldDocs(html, new Set(['ident', 'name']), 'apt-1')).toBe(`\n${ident}\n${name}\n`);
+		});
+
+		it('keeps everything when all are shown, and only the text before the first when none is', () => {
+			expect(onlyFieldDocs(html, new Set(['ident', 'rank', 'name']), 'apt-1')).toBe(html);
+			expect(onlyFieldDocs(html, new Set(), 'apt-1')).toBe('\n');
+		});
+
+		it('reads an explanation with the attributes the dev server adds', () => {
+			const dev = '<div class="kln-field-doc" data-field="rank" data-title="Rank" data-astro-source-file="Field.astro"><dt>Rank</dt></div>';
+			expect(onlyFieldDocs(ident + dev, new Set(['rank']), 'apt-1')).toBe(dev);
+		});
+
+		it('names the screen and the field when a shown field has no explanation in the HTML', () => {
+			expect(() => onlyFieldDocs(html, new Set(['rank', 'surface']), 'apt-1'))
+				.toThrow('screen apt-1: the rendered explanations have none of the field surface');
+		});
+	});
+
+	it('draws only the fields on the rows as fields, against the committed screen apt-1-nearest', () => {
+		const {capture: nearest} = loadCapture('apt-1-nearest');
+		const documented = new Set(nearest.fields.keys());
+		const rows = parseRows('1', nearest, 'apt-1-nearest');
+		const shown = fieldsOnRows(nearest, documented, rows);
+		expect(shown).toEqual(new Set(['ident', 'rank']));
+		const html = screenHtml(blocksFromCapture(nearest, shown, 'apt-1-nearest', rows), shown);
+		expect([...html.matchAll(/data-field="([^"]+)"/g)].map(m => m[1])).toEqual(['ident', 'rank']);
+		expect(html).toContain('KRNT');
+		expect(html).not.toContain('RENTON');
 	});
 });

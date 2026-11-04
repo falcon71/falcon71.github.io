@@ -1,0 +1,17 @@
+<Field id="ident" title="Airport identifier">
+	The identifier of the airport. The remarks belong to this identifier, so they show whenever the airport is shown, also for a user airport.
+</Field>
+
+<Field id="title" title="Remarks heading">
+	`REMARKS:` heads the three lines in which you can write a note about the airport.
+</Field>
+
+<Field id="remark" title="Remark line">
+	One of the three remark lines of the airport, 11 characters each. A character is a letter, a digit, a hyphen or a blank. You write the lines yourself, and the unit keeps them when it is off.
+
+	With the cursor on a line, the first click of the right inner knob starts the entry, and the status line shows `ent`. The line shows `A` in its first cell and `_` in the others, also when it already holds text, which the entry replaces. The right outer knob moves between the 11 cells, and the right inner knob changes the cell. <kbd>ENT</kbd> stores the line, turns cells you did not touch into blanks and moves the cursor to the next line; on the last line the cursor stays. <kbd>CLR</kbd> with an entry open cancels it and keeps the old text.
+</Field>
+
+<Field id="page" title="Page name">
+	The name of the page on the right side.
+</Field>

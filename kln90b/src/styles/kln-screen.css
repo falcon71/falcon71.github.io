@@ -6,7 +6,8 @@
  * so the screen scales from a phone to a desktop without images.
  *
  * The whole screen is always laid out on .kln-stage; a half screen is a 112 px wide window onto it that includes the
- * middle line (x = 107.5).
+ * middle line (x = 107.5). An excerpt of some rows is a window of --h px from y = --top, which KlnScreen sets on the
+ * .kln-screen element.
  *
  * Super NAV 5 is a left column of six characters and a map over the rest of the screen, as the simulator's
  * .super-nav5-left-controls, .super-nav5-mgs-range and .canvas-fullpage place them.
@@ -40,9 +41,11 @@
 .kln-screen {
 	--w: 215;
 	--offset: 0;
+	--h: 100;
+	--top: 0;
 	--u: calc(100cqi / var(--w));
 	position: relative;
-	aspect-ratio: var(--w) / 100;
+	aspect-ratio: var(--w) / var(--h);
 	background: #000;
 	color: var(--kln-phosphor);
 	font-family: 'KLN90B', monospace;
@@ -63,10 +66,10 @@
 
 .kln-stage {
 	position: absolute;
-	top: 0;
+	top: calc(var(--u) * var(--top) * -1);
 	left: calc(var(--u) * var(--offset) * -1);
 	width: calc(var(--u) * 215);
-	height: 100%;
+	height: calc(var(--u) * 100);
 }
 
 .kln-stage .kln-half,

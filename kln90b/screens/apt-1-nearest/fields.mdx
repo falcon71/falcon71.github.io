@@ -1,0 +1,37 @@
+<Field id="ident" title="Airport identifier">
+	The identifier of the airport. It shows an airport of the [nearest list](/kln90b/operation/nearest/) here.
+</Field>
+
+<Field id="rank" title="Rank in the nearest list">
+	The rank of the airport in the list of the nearest airports, from <Term t="nr">`nr 1`</Term> for the nearest to `nr 9`. The rank flashes while the cursor is elsewhere. The unit recalculates distances and order every second, so the number changes within a second when another airport comes nearer. Which airports belong to the list is searched anew every 10 seconds, so the number disappears within 10 seconds after the airport has dropped out of the list.
+
+	With the cursor on the rank, the page keeps showing whichever airport holds that rank, so it follows the list as the aircraft moves.
+</Field>
+
+<Field id="name" title="Airport name">
+	The name of the airport, in two rows of 11 characters.
+</Field>
+
+<Field id="length" title="Length of the longest runway">
+	The length of the longest runway in feet, as a whole number of feet, followed by `'`. An airport appears in the list only if it has a runway that meets the minimum length and the surface that SET 3 sets.
+</Field>
+
+<Field id="surface" title="Surface of the longest runway">
+	The surface of the longest runway as a three-letter code. The codes are the ones that APT 3 uses: <Term t="HRD">`HRD`</Term> for a hard surface, <Term t="TRF">`TRF`</Term> for turf, and so on.
+</Field>
+
+<Field id="lighting" title="Lighting of the longest runway">
+	The lighting of the longest runway: `L` for a runway lighted from sunset to sunrise, <Term t="LPC">`LPC`</Term> for lighting that you turn on by radio, <Term t="LPT">`LPT`</Term> for part-time lighting. The field is blank when the runway has no lighting or the lighting is not known.
+</Field>
+
+<Field id="bearing" title="Bearing to the airport">
+	The magnetic bearing from the aircraft to the airport, in three digits and followed by `to` (`002°to`). It shows `---°to` while the aircraft is exactly over the airport.
+</Field>
+
+<Field id="distance" title="Distance to the airport">
+	The distance from the aircraft to the airport in NM, with one decimal place and a leading zero below 10 NM (`03.3nm`).
+</Field>
+
+<Field id="page" title="Page name">
+	The name of the page on the right side.
+</Field>

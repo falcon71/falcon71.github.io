@@ -1,36 +1,419 @@
 ---
 title: APT pages
-description: APT 1 to APT 8, airport information, departures, arrivals and approaches.
+description: What the APT pages show about an airport (name, position, runways, frequencies, remarks, departures, arrivals and approaches) and how you choose the airport.
 sidebar:
   order: 6
 ---
 
 import KlnScreen from '../../../components/KlnScreen.astro';
 import Callout from '../../../components/Callout.astro';
+import Term from '../../../components/Term.astro';
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-aliqua.
+The APT pages of the KLN 90B show everything the database holds about one airport, one kind of information per page. APT 1 to APT 6 give the airport's data, APT 7 its departures and arrivals, and APT 8 its approaches. All of them show the same airport, which you choose on any of them.
 
-## APT 1
+## The APT pages: one airport on every page
+
+The airport you enter, scan to or create on one APT page is the airport on all the others, and the unit remembers it when you turn it off. One exception is the airport of the last active waypoint: if that was an airport, the unit comes on with it, shown on APT 4. Another is an airport that you only confirm or that is the active waypoint: the ACT page and a waypoint confirmation show their own airport and leave the shared one alone.
+
+The right inner knob goes through APT 1 to APT 7 and then back to APT 1; APT 8 follows APT 7 only in an aircraft whose unit is installed for approaches. A page with more than one subpage shows a `+` in its name (`APT+3`): the inner knob steps through the subpages before it goes on to the next page, and back through them the other way.
+
+The top line is the same on every page except the APT 3 runway diagram, which has no top line. It shows the identifier of the airport and, at the right end, <Term t="nr">`nr`</Term> and a rank when you reached the airport through the [nearest list](/kln90b/operation/nearest/). An airport of the list keeps its `nr` on all APT pages. A `›` in the first column marks the airport as the [active waypoint](/kln90b/operation/navigation-modes/#the-active-waypoint); it flashes during [waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting).
+
+<KlnScreen screen="apt-1-nearest" rows="1" />
+
+How you enter an identifier, scan through the database and create a user waypoint is the same on every waypoint page; see [Waypoints and the database](/kln90b/operation/waypoints/).
+
+### User airports
+
+When the identifier you enter matches no airport, every APT page offers to create a [user airport](/kln90b/operation/waypoints/#user-waypoints) with it, at a position you enter (`USER POS?`) or at the present position (`PRES POS?`). Whichever page made the offer, the new airport appears on APT 1. A user airport has a position, an elevation and one runway, which you enter on APT 1 to APT 3; it has no name, no city and no frequencies.
+
+<KlnScreen screen="apt-create-new-wpt" />
+
+### The ACT page and the waypoint confirmation of an airport
+
+When the active waypoint is an airport, the ACT page shows its APT pages, named ACT 1 and so on, and the identifier cannot be changed there. The top line adds the number of the airport in FPL 0, the same number FPL 0 shows (blank for a direct-to waypoint that is not in FPL 0), and an `A` for airport at the right end. The scan steps through the waypoints of FPL 0 instead of through the database.
+
+<KlnScreen screen="apt-act-1" />
+
+When you enter an airport identifier on another page, such as the Direct To page, the unit shows APT 1 of that airport on the right side for you to confirm, with `ent` flashing in the status line:
+
+<KlnScreen screen="apt-confirm" />
+
+[Waypoints and the database](/kln90b/operation/waypoints/) explains the ACT page and the waypoint confirmation for every kind of waypoint.
+
+## APT 1: name, position and airspace
+
+APT 1 shows the name of the airport, its position and the airspace it lies in. It is the page where you check that you have the right airport, and where a new user airport ends up.
 
 <KlnScreen screen="apt-1-ksea" />
 
-## APT 2 to APT 6
+With the cursor on, you can change the identifier; on a nearest airport the cursor can also rest on the rank (see below). The name, the airspace row and the position of an airport of the database cannot be changed.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-aliqua.
+<KlnScreen screen="apt-1-ksea-cursor" />
+
+### A nearest airport
+
+The page changes when you reach the airport through the nearest list, with <kbd>MSG</kbd> and <kbd>ENT</kbd> or by scanning back past the first airport. An airport that you enter by its identifier shows the plain page, even when it is the nearest. The rank `nr 2` appears at the right of the top line, and the three rows below the name give the longest runway (length and surface), its lighting, and the bearing and distance from the aircraft. The unit recalculates bearing, distance and the order of the list every second, and searches anew which airports belong to the list every 10 seconds.
+
+<KlnScreen screen="apt-1-nearest" />
+
+The page keeps the airport it shows. As the aircraft moves, the rank counts up within a second when another airport comes nearer, and it disappears within 10 seconds after the airport has dropped out of the list; the page then shows the position and the airspace again. With the cursor on the rank, the page does the opposite: it keeps the rank and shows whichever airport holds it.
+
+<KlnScreen screen="apt-1-nearest-cursor" />
+
+Entering another identifier turns the page back into the plain airport page.
+
+### A user airport
+
+A user airport shows only its identifier and its position. You can change the position with the cursor; the new value is stored when you press <kbd>ENT</kbd>.
+
+<KlnScreen screen="apt-1-user-airport" />
+
+With `USER POS?`, APT 1 opens with the cursor on the empty latitude and no airport yet. The airport exists when you have entered both coordinates. After the first <kbd>ENT</kbd>, which accepts the latitude, the status line shows `ENT LAT/LON`: a reminder to enter the longitude, not an error.
+
+<KlnScreen screen="apt-1-user-pos" />
+
+[Waypoints and the database](/kln90b/operation/waypoints/) and [Nearest](/kln90b/operation/nearest/) describe the tasks that use APT 1.
+
+## APT 2: city, elevation, time zone and approaches
+
+APT 2 shows where the airport is, how high it lies, which time zone it is in, and the best kind of approach it has. Use it to find out the local time difference and whether you can expect an instrument approach.
+
+<KlnScreen screen="apt-2-ksea" />
+
+Nothing on this page can be changed for an airport of the database. The time zone comes from the simulator: the row stays blank where it supplies none. The radar flag <Term t="(R)">`(R)`</Term> at the end of the approach row shows that approach and departure control have radar, so that you can expect vectors; it appears only for airports whose data marks radar coverage.
+
+A user airport shows only its elevation, as an entry, because the city, the time zone and the approaches are unknown.
+
+<KlnScreen screen="apt-2-user-airport" />
+
+[Waypoints and the database](/kln90b/operation/waypoints/) describes the tasks that use APT 2.
+
+## APT 3: runways
+
+APT 3 shows the runways of the airport, first as a diagram and then as a list of lengths, surfaces and lighting. Use the diagram to see how the runways lie to each other and the list for their data.
+
+<KlnScreen screen="apt-3-diagram-kpdx" />
+
+The diagram is the first subpage of an airport that has runways, and the status line therefore reads `APT+3`. It shows no identifier and no top line, so the page has no field: the right <kbd>CRSR</kbd> key does nothing, and you cannot change the identifier there. Scanning works. At an airport whose runway data lists a helipad, the diagram can stay blank, while the list pages work.
+
+{/* kln90b bug candidate (unverified in the simulator): the APT 3 diagram throws an error and stays blank for airports whose runway data has helipad entries such as H1 (KMWH); the entries may come from the FAA extract of the screens only */}
+
+The runway list follows: the unit lists at most the five longest runways, longest first, two runways per page.
+
+<KlnScreen screen="apt-3-list-ksea" />
+
+An airport without a runway entry has no diagram, and its one page reads `RUNWAY DATA NOT AVAILABLE`. If you enter an identifier that no airport has while a list page is shown, and then correct it to an airport that has a diagram, the unit shows that diagram and turns the cursor off, so that the next click of the right inner knob selects another page instead of changing a character.
+
+{/* kln90b bug candidate: after an unknown identifier on an APT 3 list page, entering a valid one shows the diagram and turns the cursor off */}
+
+A user airport has one page, which holds its single runway: the length and the surface, which you enter. It appears in the nearest list only when the runway meets the minimum length of SET 3 and, where SET 3 allows hard surfaces only, has the surface <Term t="HRD">`HRD`</Term>; a runway without an entered surface counts as soft.
+
+<KlnScreen screen="apt-3-user-airport" />
+
+[Waypoints and the database](/kln90b/operation/waypoints/) and [Nearest](/kln90b/operation/nearest/) describe the tasks that use APT 3.
+
+## APT 4: communication frequencies
+
+APT 4 lists the communication frequencies of the airport. The unit only shows them; you tune the radio yourself.
+
+<KlnScreen screen="apt-4-kykm" />
+
+Each line holds a four-character label and a frequency in MHz with two decimals; the unit rounds the half up (128.075 shows as `128.08`). A frequency up to and including 30 MHz is a high frequency and shows in kHz without a decimal point. The page lists the frequencies in the order of the database, without sorting or merging them, so a frequency that the database lists twice shows twice. These are the labels:
+
+| Label | Frequency of |
+| --- | --- |
+| `ATIS` | The <Term t="ATIS" /> broadcast |
+| `MCOM` | The <Term t="MCOM" /> frequency |
+| `UNIC` | The <Term t="UNIC" /> frequency |
+| `CTAF` | The <Term t="CTAF" /> |
+| `GRND` | Ground control |
+| `TWR` | Tower |
+| `CLR` | Clearance delivery, also remote clearance delivery |
+| `APR` | Approach control |
+| `DEP` | Departure control |
+| `CTR` | A center, where it provides approach and departure control |
+| `AFIS` | A flight service station of the airport (<Term t="AFIS" />) |
+| `AWOS` | An <Term t="AWOS" /> broadcast |
+| `ASOS` | An <Term t="ASOS" /> broadcast |
+| <Term t="PTAX">`PTAX`</Term> | Pre-taxi clearance |
+
+A line with another type of frequency has no label. A frequency of no type is not listed.
+
+The page shows five frequencies. An airport with more than five has more pages, and the status line reads `APT+4`; the inner knob steps through them. If you change the airport while a later page is shown and the new airport has fewer pages, the page shows the new identifier with blank lines until you turn the right inner knob one click counterclockwise.
+
+{/* kln90b bug candidate: APT 4 shows blank rows when the airport changes while a later frequency page is shown and the new airport has fewer pages */}
+
+An airport without a usable frequency, and every user airport, shows `COMM FREQ DATA NOT AVAILABLE`.
+
+<KlnScreen screen="apt-4-no-data" />
+
+[Waypoints and the database](/kln90b/operation/waypoints/) describes the tasks that use APT 4.
+
+## APT 5: remarks
+
+APT 5 holds three lines of notes of your own about the airport, for example a frequency or a procedure you want to remember, which the page shows whenever you choose that airport. The unit keeps them when it is turned off.
+
+<KlnScreen screen="apt-5-ktiw" />
+
+The unit keeps the remarks by identifier: if you delete a user airport, its remarks stay, and a user airport that you create again with the same identifier shows them again. It keeps the remarks of up to 100 airports. A remark for the 101st raises <Term t="RMKS">`RMKS FULL`</Term> and is not stored; changing the remarks of an airport already in the list is always accepted.
+
+OTH 4 (`APTS W/RMKS`) lists the airports that have remarks; you delete an airport's remarks there. An airport whose lines you have blanked out still counts as having remarks, stays on OTH 4 and counts toward the 100 until you delete it there.
+
+[Waypoints and the database](/kln90b/operation/waypoints/) describes the tasks that use APT 5.
+
+## APT 6: services
+
+APT 6 is meant for the fuel, the oxygen, the customs and the fee information of the airport. The simulator holds none of it, so the page shows the same texts for every airport, user airports included, and the line for customs stays blank.
+
+<KlnScreen screen="apt-6-ksea" />
 
 ## APT 7: departures and arrivals
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-aliqua.
+APT 7 lists the departures (<Term t="SID" />s) and arrivals (<Term t="STAR" />s) of the airport on the APT pages and
+loads the one you select into FPL 0. You use it on the ground to load the departure, and en route to load the arrival
+before the descent. APT 7 is part of every installation of the unit; only APT 8 depends on how the unit is installed.
+
+An airport with departures and arrivals has two APT 7 pages, and the status line shows `APT+7`: the first page lists
+the SIDs, the second the STARs. Turning the right inner knob clockwise from APT 6 brings you to the SIDs first;
+turning it counterclockwise from APT 8, or from APT 1 in a unit without APT 8, brings you to the STARs first. An
+airport with only one kind of procedure has one APT 7 page with that list.
+
+<KlnScreen screen="apt-7-stars-ksea" />
+
+Press the right <kbd>CRSR</kbd> to turn the cursor on. It comes on at the first entry, or at the top entry shown when
+you had scrolled the list before. The bottom row of the list always shows the last entry, and the rows above it scroll as you turn the right outer knob. The cursor flashes on an entry that <kbd>ENT</kbd> selects, and on
+`LOAD IN FPL` and `APPROVE?` later on. With an expired database, each press of the right <kbd>CRSR</kbd> that turns the
+cursor on shows `OUTDATED DB` on the status line; you can still select and load procedures.
+
+<KlnScreen screen="apt-7-sids-ksea" />
+
+An airport for which the database has no procedure the unit can fly shows this text instead of the lists:
+
+<KlnScreen screen="apt-7-none" />
+
+On ACT 7, when the active waypoint is an airport, the same lists of that airport appear, and you select and load a
+procedure the same way. The airport identifier cannot be changed there.
+
+### Selecting a departure or an arrival
+
+You select a departure in the order you fly it: the SID, then the runway you take off from, then the
+<Term t="Transition">transition</Term> to the en route fix. An arrival goes the other way: the STAR, then the
+transition from the en route fix, then the runway you land on. The unit asks for a runway or a transition only when
+there is a choice to make.
+
+To load a departure or an arrival into FPL 0, the airport must be on the APT pages (see
+[Waypoints and the database](/kln90b/operation/waypoints/)). Then:
+
+1. Turn the right outer knob to the APT pages and the right inner knob to the SIDs or the STARs of APT 7. From APT 1,
+   the STARs are two steps counterclockwise in a unit with APT 8, one step in a unit without it.
+2. Press the right <kbd>CRSR</kbd> and turn the right outer knob until the cursor is on the procedure.
+3. Press <kbd>ENT</kbd>. The unit shows the first list it needs, `RUNWAY` or `TRANSITION`, with the cursor on its
+   first entry, or, when there is nothing to choose, the waypoints of the procedure (step 5).
+
+   <KlnScreen screen="apt-7-runway" />
+
+4. Turn the right outer knob to the runway or the transition and press <kbd>ENT</kbd>. If a second list follows,
+   select its entry the same way.
+
+   <KlnScreen screen="apt-7-transition" />
+
+5. Check the waypoints of the procedure as they go into FPL 0, which the unit now shows with the cursor on
+   `LOAD IN FPL`, and press <kbd>ENT</kbd>.
+
+   <KlnScreen screen="apt-7-load" />
+
+6. If the unit asks a question (below), press <kbd>ENT</kbd> to approve it. The unit loads the procedure and shows
+   FPL 0 on the left side, so that you can check where it went. APT 7 shows its list again with the cursor off.
+
+If you selected the wrong entry, press <kbd>CLR</kbd>: each press goes back one step, skips the steps the unit skipped
+on the way forward, and puts the cursor on the entry you selected there before. At the list of procedures,
+<kbd>CLR</kbd> no longer changes APT 7. While you select, the right cursor stays on by itself. If you turn it off and
+turn the right inner knob to another page, the selection is dropped, and APT 7 shows its list when you come back.
+
+**A transition must be selected whenever the procedure has one.** When a procedure has two or more transitions, the
+list has no entry for the procedure without a transition, so you cannot load only the part that all transitions
+share. A procedure with one transition gets it without a question. If the transition you need repeats waypoints that
+FPL 0 already has, select it anyway and delete the waypoints that are now in FPL 0 twice by hand. When an en route
+waypoint of FPL 0 is also a waypoint of the procedure, the unit reminds you with the message
+`REDUNDANT WPTS IN FPL EDIT ENROUTE WPTS AS NECESSARY`. A waypoint that the procedure shares with another procedure
+in FPL 0, such as an arrival and an approach that both contain a fix, raises no message, so look for such copies in
+FPL 0 yourself.
+
+The unit skips a step when it has nothing to ask:
+
+- **The transition step** is skipped when the procedure has one transition, which the unit takes, or none.
+- **The runway step** is skipped when every runway of the procedure leads to the same waypoints, because then the
+  runway changes nothing in FPL 0. It is also skipped when the procedure has no part of its own for each runway.
+  KYKM's YKM7 departure has neither a runway nor a transition to choose, so <kbd>ENT</kbd> on it shows its waypoints at
+  once.
+
+Each entry of the runway list is <Term t="RW" /> and the runway. Parallel runways that lead to the same waypoints share
+one entry with `B` for the parallels, such as `RW10B`, and selecting it loads the first of them. Runways of different
+numbers always have their own entries.
+
+### Questions before the load
+
+When you press <kbd>ENT</kbd> on `LOAD IN FPL`, the unit loads at once if FPL 0 already contains the airport and holds
+no procedure of the same kind. If the airport is not in FPL 0, also when FPL 0 is empty, it asks whether to add the
+airport with the procedure:
+
+<KlnScreen screen="apt-7-add-airport" />
+
+If FPL 0 already holds a procedure of the same kind, a departure when you load a departure or an arrival when you load
+an arrival, the unit asks whether to replace it, also when it is the same procedure. This is then the only question:
+if the airport is missing, the unit adds it without asking. A procedure of the other kind does not count: loading an
+arrival while FPL 0 holds a departure asks nothing about the departure.
+
+<KlnScreen screen="apt-7-replace" />
+
+Press <kbd>ENT</kbd> to approve the question, or <kbd>CLR</kbd> to go back to the waypoints with FPL 0 unchanged.
+
+### Where the procedure goes in FPL 0
+
+The unit inserts a departure right after its airport in FPL 0 and an arrival right in front of its airport, before an
+approach that is already in front of the airport. An airport the unit adds goes to the start of FPL 0 for a departure
+and to the end for an arrival. How a loaded procedure appears in FPL 0, how you change or delete it, and what the unit
+does when FPL 0 has no room are explained in [Flight plans](/kln90b/operation/flight-plans/).
+
+### What the unit keeps of a procedure
+
+The unit flies procedures as a series of waypoints, so it keeps what ends at a waypoint and leaves out the rest:
+
+- **Procedures it cannot fly are not listed:** a SID or STAR with an <Term t="RF leg" /> (a fixed-radius turn), one
+  that needs <Term t="RNP AR" />, and one in which no leg ends at a waypoint. Before the flight, check that the
+  departure, arrival and approach you plan to fly are in the lists; if one is missing, enter its waypoints in FPL 0 by
+  hand.
+- **Legs that end at no waypoint** are dropped: headings, climbs on a course to an altitude, vectors. From runway 34C,
+  KSEA's BANGR9 starts at `NESOE`; you fly the climb from the runway by heading.
+- **Holding patterns and procedure turns** are dropped; their waypoint stays. When that waypoint is the active waypoint
+  and you are within 4 NM of it in leg mode, the unit raises the message `IF REQUIRED SELECT OBS`, so that you fly the
+  hold or the turn in OBS mode.
+- **Altitude and speed restrictions** are not loaded; read them from the chart.
+- **DME arcs** stay. The unit replaces the waypoint before the arc with an arc entry that it computes when you select
+  the procedure: the point of the arc nearest the aircraft, or the published start of the arc when the aircraft is not
+  abeam the arc. The entry is named `D`, the radial from the VOR in three digits and a letter for the distance, A for
+  1 NM to Z for 26 NM: `D338M` lies on the 338° radial at 13 NM. Beyond 26 NM the name is the first two letters of the
+  VOR and the radial. An entry computed on the ground or far from the arc therefore lies where the aircraft was then;
+  you can move it to your present track later from FPL 0, as
+  [Non-precision approaches](/kln90b/operation/approaches/) explains.
+
+Flying a departure or an arrival, and editing it in FPL 0, is covered in
+[Departures and arrivals](/kln90b/operation/departures-arrivals/).
 
 ## APT 8: approaches
 
 <Callout kind="availability">
-	Lorem ipsum: APT 8 exists only if the unit is installed in your aircraft for approaches. Without it, the APT
-	group ends at APT 7.
+APT 8 is available only if the unit is installed for non-precision approaches. Not every aircraft has such an
+installation. Without it, the APT pages end at APT 7, and the unit has no ACT 8 page either.
 </Callout>
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-aliqua.
+APT 8 lists the non-precision approaches of the airport on the APT pages and loads the one you select, with its missed
+approach, into FPL 0. You use it en route before the descent, usually after loading the arrival on APT 7.
+
+<KlnScreen screen="apt-8-approaches-ksea" />
+
+The bottom row of the list always shows the last approach. Press the right <kbd>CRSR</kbd> to turn the
+cursor on: it comes on at the first approach, or at the top approach shown on a scrolled list. As on APT 7, an expired
+database shows `OUTDATED DB` on the status line each time you turn the cursor on.
+
+Each approach has a short name of eight characters in the list and a header that heads its waypoints on APT 8 and in
+FPL 0:
+
+| Approach | In the list | Header |
+| --- | --- | --- |
+| <Term t="RNAV" /> (GPS) to runway 34L | `RNAV 34L` | `R34L-KSEA` |
+| GPS to a runway | `GPS` and the runway | `G`, the runway and the airport |
+| VOR to runway 21 | `VOR  21` | `V21-KGEG` |
+| VOR/DME to runway 27 | `VORD 27` | `D27-KYKM` |
+| NDB or NDB/DME to runway 32R | `NDB  32R` | `N32R-KMWH` |
+| VOR-A or VOR/DME-A (no runway) | `VOR-A` | `VOR-A-KYKM` |
+| NDB-B (no runway) | `NDB-B` | `NDB-B-KHIO` |
+
+An RNAV approach without a runway shows `RNV` and its letter, such as `RNVA`. The letter of an approach to a runway is
+never shown, so RNAV (GPS) Y RWY 19 and RNAV (GPS) Z RWY 19 at KRLD both read `RNAV 19` and `R19-KRLD`. Tell them
+apart by their IAFs and waypoints before you load one.
+
+The unit offers RNAV (GPS) approaches that have <Term t="LNAV" /> minima, and GPS, VOR, VOR/DME, NDB and NDB/DME
+approaches. It leaves out ILS, localizer, LDA and SDF approaches, RNAV approaches that have only LPV or LNAV/VNAV
+minima, approaches that need RNP AR, and approaches with an RF leg anywhere, the missed approach included. Of KSEA's
+approaches, the list shows the six RNAV approaches. An airport without an approach the unit can fly shows this:
+
+<KlnScreen screen="apt-8-none" />
+
+On ACT 8, when the active waypoint is an airport, the same list of that airport appears, without the label
+<Term t="IAP" />, and you select and load an approach the same way.
+
+### Selecting an approach
+
+You select an approach, then its <Term t="IAF" />, then you load it.
+
+To load an approach into FPL 0, the airport must be on the APT pages (see
+[Waypoints and the database](/kln90b/operation/waypoints/)). Then:
+
+1. Turn the right outer knob to the APT pages and the right inner knob to APT 8, one step counterclockwise from APT 1.
+2. Press the right <kbd>CRSR</kbd> and turn the right outer knob until the cursor is on the approach.
+3. Press <kbd>ENT</kbd>. The unit shows the list after `IAF` with the cursor on the first entry, or, when the approach
+   has one transition or none, its waypoints (step 5).
+
+   <KlnScreen screen="apt-8-iaf" />
+
+4. Turn the right outer knob to the IAF and press <kbd>ENT</kbd>.
+5. Check the waypoints of the approach, which the unit now shows from that IAF to the end of the missed approach with
+   the cursor on `LOAD IN FPL`: turn the right outer knob counterclockwise to scroll the list, and clockwise back down
+   to `LOAD IN FPL`. The list stays scrolled.
+
+   <KlnScreen screen="apt-8-load" />
+
+   <KlnScreen screen="apt-8-load-scrolled" />
+
+6. Press <kbd>ENT</kbd>.
+7. If the unit asks a question (below), press <kbd>ENT</kbd> to approve it. The unit loads the approach and shows
+   FPL 0 on the left side. APT 8 shows its list again with the cursor off.
+
+<kbd>CLR</kbd> goes back one step at a time, as on APT 7, and puts the cursor on the IAF or the approach you selected
+before.
+
+**An approach starts only at an IAF.** The list after `IAF` offers the transitions of the approach, each beginning at
+an IAF or at a fix before one, and you must select one of them. No entry begins at the intermediate fix or later, so
+you cannot start the approach there. An approach with one transition or none skips the step and shows its waypoints at once.
+Joining an approach in flight is covered in [Non-precision approaches](/kln90b/operation/approaches/).
+
+**The transition rule applies to approaches too.** When the transition you select repeats waypoints that FPL 0
+already has, for example the end of the arrival, delete the copies by hand. The waypoints of an approach cannot be
+deleted, so delete the copies in the arrival or among the en route waypoints, and look for copies in the arrival
+yourself: only en route waypoints raise `REDUNDANT WPTS IN FPL EDIT ENROUTE WPTS AS NECESSARY`.
+[Flight plans](/kln90b/operation/flight-plans/) explains deleting waypoints from FPL 0.
+
+An entry is named after the first waypoint of its transition. That is usually the IAF itself; where the transition
+begins earlier, the IAF mark appears on a later waypoint of the list. At KSEA, RNAV 16C offers `PAE`, and its waypoint
+list starts with `PAE` and marks `ERYKA` as the IAF. On a long list after `IAF`, `IAF` stays on the top row and the bottom row always shows the last entry.
+
+The waypoint list marks the fixes that have a role in the approach with a dash and a small letter after the
+identifier: `-i` for the IAF, `-f` for the <Term t="FAF" />, `-m` for the <Term t="MAP" /> and `-h` for the
+<Term t="MAHP" />, the waypoint where the missed approach ends in a holding pattern. A fix that is both IAF and FAF
+appears twice, once with each mark. What the unit leaves out of an approach (legs without a waypoint, holding patterns
+and procedure turns, altitude restrictions) and how it treats DME arcs is the same as on APT 7 (see
+[What the unit keeps of a procedure](/kln90b/pages/apt/#what-the-unit-keeps-of-a-procedure)).
+
+### Questions before the load and where the approach goes
+
+The questions are those of APT 7. If the airport is not in FPL 0, the unit asks whether to add it, with
+`AND APPR TO` (<Term t="APPR" /> for approach). If FPL 0 already holds an approach, any approach, the unit asks
+whether to replace it, with `APPROACH` above `APPROVE?`; FPL 0 holds one approach at a time.
+
+The unit inserts the approach right in front of its airport in FPL 0, after an arrival that is already there. An
+airport the unit adds goes to the end of FPL 0.
+
+With the approach in FPL 0, the unit arms it by itself as you near the airport. Arming and flying the approach are
+covered in [Non-precision approaches](/kln90b/operation/approaches/), and the approach in FPL 0 in
+[Flight plans](/kln90b/operation/flight-plans/).
+
+## Where the APT pages are used
+
+- [Waypoints and the database](/kln90b/operation/waypoints/): choosing and creating airports.
+- [Nearest](/kln90b/operation/nearest/): the list of the nearest airports and the shortcut to it.
+- [Direct-to](/kln90b/operation/direct-to/): flying direct to an airport.
+- [Flight plans](/kln90b/operation/flight-plans/): adding an airport to a flight plan.
+- [Departures and arrivals](/kln90b/operation/departures-arrivals/): loading a SID or a STAR with APT 7.
+- [Non-precision approaches](/kln90b/operation/approaches/): loading and flying an approach with APT 8.
