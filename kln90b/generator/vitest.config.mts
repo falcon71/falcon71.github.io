@@ -40,6 +40,9 @@ const config: ViteUserConfig = {
 	test: {
 		// The instrument logs a lot. Set KLN_TEST_LOG=1 to see console.log/info output; stderr is always shown.
 		onConsoleLog: (_log, type) => process.env.KLN_TEST_LOG === '1' || type === 'stderr' ? undefined : false,
+		// Vitest's module cache on disk keeps the result of import.meta.glob from an earlier run, so a test that reads
+		// the screens would not see a screen generated since. The tests are small; transforming them again is cheap.
+		experimental: {fsModuleCache: false},
 		projects: [
 			{
 				extends: true,

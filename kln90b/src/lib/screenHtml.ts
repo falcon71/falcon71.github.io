@@ -11,6 +11,8 @@ export interface Segment {
 export interface ScreenBlocks {
 	/** A half screen: only that side is shown, with the middle line */
 	crop?: 'left' | 'right';
+	/** An excerpt of some rows: the window onto the stage, in screen pixels from the top of the screen */
+	window?: ExcerptWindow;
 	blocks: {cls: string; rows: Segment[][]}[];
 }
 
@@ -136,13 +138,15 @@ function checkMapCells(c: ScreenCapture, documented: Set<string>, where: string)
 }
 
 /**
- * The blocks of a generated screen. A field that is not `documented` is drawn as plain text. On Super NAV 5 the part of a
- * field that lies over the map above the message indicator and the range is not drawn, as nothing but the map is there.
+ * The blocks of a generated screen. A field that is not `documented` is drawn as plain text. With `shownRows`, the screen
+ * is an excerpt: the other rows are drawn blank, so that they hold no field, and the blocks carry the window that shows the
+ * rows (see excerptWindow). On Super NAV 5 the part of a field that lies over the map above the message indicator and
+ * the range is not drawn, as nothing but the map is there.
  * @param screen the screen's name for the messages
  * @throws Error on Super NAV 5, when a cell over the map is not a blank or a documented field lies only there (see
  * checkMapCells)
  */
-export function blocksFromCapture(c: ScreenCapture, documented: Set<string>, screen?: string): ScreenBlocks {
+export function blocksFromCapture(c: ScreenCapture, documented: Set<string>, screen?: string, shownRows?: RowRange): ScreenBlocks {
 	const fieldAt = new Map<string, string>();
 	for (const [id, parts] of c.fields) {
 		if (!documented.has(id)) continue;
@@ -150,6 +154,7 @@ export function blocksFromCapture(c: ScreenCapture, documented: Set<string>, scr
 	}
 	const rows = c.text.map(text => Array.from(text));
 	const cell = (row: number, col: number): Cell => {
+		if (shownRows && (row < shownRows.first || row > shownRows.last)) return blank();
 		const attr = c.mask[row][col];
 		return {
 			ch: rows[row][col], field: fieldAt.get(`${row}:${col}`),
@@ -168,6 +173,7 @@ export function blocksFromCapture(c: ScreenCapture, documented: Set<string>, scr
 	};
 
 	const crop = c.show === 'both' ? undefined : c.show;
+	const excerpt = shownRows && excerptWindow(c, shownRows);
 	const statusRow = (): Segment[] => {
 		const cells: Cell[] = [];
 		for (let col = 0; col < COLUMNS; col++) {
@@ -190,17 +196,110 @@ export function blocksFromCapture(c: ScreenCapture, documented: Set<string>, scr
 	}
 	if (c.layout === 'full') {
 		const last = c.status ? STATUS_ROW - 1 : STATUS_ROW;
-		return {crop, blocks: [{cls: 'kln-full', rows: rowsOf(0, last, 0, COLUMNS)}, status].filter(b => b.rows.length > 0)};
+		return {crop, window: excerpt, blocks: [{cls: 'kln-full', rows: rowsOf(0, last, 0, COLUMNS)}, status].filter(b => b.rows.length > 0)};
 	}
 	// A hidden half stays as an empty block: its left border is the middle line
 	return {
 		crop,
+		window: excerpt,
 		blocks: [
 			{cls: 'kln-half kln-half-left', rows: crop === 'right' ? [] : rowsOf(0, STATUS_ROW - 1, 0, HALF)},
 			{cls: 'kln-half kln-half-right', rows: crop === 'left' ? [] : rowsOf(0, STATUS_ROW - 1, RIGHT_OFFSET, COLUMNS)},
 			status,
 		].filter(b => b.rows.length > 0 || b.cls.includes('kln-half')),
 	};
+}
+
+/** Rows of a capture, 0 to 6 from the top, both inclusive. Row 6 is the status line where the screen has one. */
+export interface RowRange {
+	first: number;
+	last: number;
+}
+
+/** The part of the 100 screen pixels high stage that an excerpt shows, in screen pixels. */
+export interface ExcerptWindow {
+	top: number;
+	height: number;
+}
+
+// The geometry of kln-screen.css: rows of 13 px from y = 3, the status line's border at y = 81, its text from y = 83
+const ROW_HEIGHT = 13;
+const TEXT_TOP = 3;
+const STATUS_BORDER = 81;
+const SCREEN_HEIGHT = 100;
+
+/**
+ * The rows that `<KlnScreen rows>` names: one row "3" or consecutive rows "1-2", numbered from 1 at the top line of the
+ * page; on a split screen 7 is the status line, on a full page 1 to 7 are its seven rows.
+ * @param screen the screen's name for the messages
+ * @throws Error `KlnScreen screen="<screen>" rows="<value>": ...` for any other value, a row the screen does not have, or
+ * a screen with a map
+ */
+export function parseRows(value: string, c: ScreenCapture, screen: string): RowRange {
+	const fail = (message: string): never => {
+		throw new Error(`KlnScreen screen="${screen}" rows="${value}": ${message}`);
+	};
+	if (c.layout === 'super-nav-5' || c.maps.length > 0 || c.mapFields.size > 0) {
+		fail('a screen with a map is always shown whole, without rows');
+	}
+	const m = /^([1-9]\d*)(?:-([1-9]\d*))?$/.exec(value);
+	if (m === null) fail('rows takes one row, e.g. "1", or consecutive rows from the upper to the lower, e.g. "1-2"');
+	const first = Number(m![1]);
+	const last = m![2] === undefined ? first : Number(m![2]);
+	if (last < first) fail('a range runs from the upper row to the lower, e.g. "1-2"');
+	const count = c.layout === 'split' && !c.status ? STATUS_ROW : STATUS_ROW + 1;
+	const what = count === STATUS_ROW + 1 && c.layout === 'split' ? ', 7 is the status line' : '';
+	if (last > count) fail(`the screen has the rows 1 to ${count}${what}`);
+	return {first: first - 1, last: last - 1};
+}
+
+/**
+ * The window onto the stage that shows the rows of an excerpt with the margins of the whole screen: 3 px above a row
+ * of the page and 3 px below it, but never the line above the status line under the page rows. The status line alone
+ * starts below that line.
+ */
+export function excerptWindow(c: ScreenCapture, rows: RowRange): ExcerptWindow {
+	const isStatus = (row: number) => c.status && row === STATUS_ROW;
+	const top = isStatus(rows.first) ? STATUS_BORDER + 1 : ROW_HEIGHT * rows.first;
+	let bottom = isStatus(rows.last) ? SCREEN_HEIGHT : TEXT_TOP + ROW_HEIGHT * (rows.last + 1) + TEXT_TOP;
+	if (c.status && rows.last < STATUS_ROW) bottom = Math.min(bottom, STATUS_BORDER);
+	return {top, height: bottom - top};
+}
+
+/** The `documented` text fields of a capture that have a part on the rows. */
+export function fieldsOnRows(c: ScreenCapture, documented: ReadonlySet<string>, rows: RowRange): Set<string> {
+	return new Set([...c.fields]
+		.filter(([id, parts]) => documented.has(id) && parts.some(p => p.row >= rows.first && p.row <= rows.last))
+		.map(([id]) => id));
+}
+
+// The start tag of a field explanation as Field.astro writes it
+const FIELD_DOC = /<div\b[^>]*\bclass="kln-field-doc"[^>]*>/g;
+const DATA_FIELD = /\sdata-field="([^"]*)"/;
+
+/**
+ * The rendered field explanations (the HTML of the <Field> elements of a fields.mdx, one after the other) with only
+ * those of the `shown` fields.
+ * @param screen the screen's name for the messages
+ * @throws Error when a shown field has no explanation in the HTML: the markup of Field.astro changed
+ */
+export function onlyFieldDocs(html: string, shown: ReadonlySet<string>, screen: string): string {
+	const starts = [...html.matchAll(FIELD_DOC)];
+	let out = html.slice(0, starts[0]?.index ?? html.length);
+	const found = new Set<string>();
+	starts.forEach((m, i) => {
+		const id = DATA_FIELD.exec(m[0])?.[1];
+		const end = starts[i + 1]?.index ?? html.length;
+		if (id !== undefined && shown.has(id)) {
+			found.add(id);
+			out += html.slice(m.index, end);
+		}
+	});
+	const missing = [...shown].filter(id => !found.has(id));
+	if (missing.length > 0) {
+		throw new Error(`screen ${screen}: the rendered explanations have none of the field ${missing.join(', ')}; the markup of Field.astro changed`);
+	}
+	return out;
 }
 
 const escapeHtml = (t: string) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');

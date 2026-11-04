@@ -35,18 +35,6 @@ export const glossary: Record<string, GlossaryEntry> = {
 	'Turn anticipation': {
 		text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, duis aute irure dolor in reprehenderit.',
 	},
-	'Active waypoint': {
-		text: 'The waypoint the unit is navigating to: the end of the active leg of the flight plan, or the direct-to waypoint.',
-	},
-	'Waypoint alerting': {
-		text: 'The warning of the unit that you are about to reach the active waypoint. It flashes the arrow in front of the waypoint and, where the aircraft has one, the external waypoint annunciator.',
-	},
-	'User waypoint': {
-		text: 'A waypoint that you create yourself: at your present position, at coordinates you enter or, for some kinds, by radial and distance from another waypoint. The unit stores up to 250 user waypoints of all kinds together.',
-	},
-	'Nearest list': {
-		text: 'The list of the airports, VORs or NDBs closest to the aircraft, ranked by distance from nr 1 to nr 9. The unit builds it by itself; for airports it uses the criteria on SET 3.',
-	},
 	TMA: {
 		expansion: 'Terminal control area',
 		text: 'A controlled airspace around a busy airport. APT 1 shows TMA when the airport lies inside one.',

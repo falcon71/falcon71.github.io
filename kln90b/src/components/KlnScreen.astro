@@ -7,6 +7,12 @@
  * It does not repeat any text or field. `title` replaces the title of the generated file. The explanation file writes
  * <Field> and <Term> without imports.
  *
+ * `rows` shows only some consecutive rows of a generated screen, numbered from 1 at the top line of the page, 7 the
+ * status line (on a full page, 1 to 7 are its seven rows):
+ *   <KlnScreen screen="apt-1-nearest" rows="1" />      <KlnScreen screen="apt-1-nearest" rows="1-2" />
+ * Only the fields on those rows are explained and listed. The figure is #screen-apt-1-nearest--rows-1-2, so that it
+ * does not collide with the whole screen on the same page. A screen with a map is always shown whole.
+ *
  * Hand-built screens are the exception, for an illustration that is no state of the unit (a status line alone, say). They
  * write the screen text as it appears on the unit, with markup inside a line, and their explanations as <Field> children
  * (imported by the page):
@@ -24,8 +30,19 @@ import { getEntry, render } from 'astro:content';
 import '../styles/kln-screen.css';
 import '../styles/popover.css';
 import Field from './Field.astro';
+import FieldDocs from './FieldDocs.astro';
 import Term from './Term.astro';
-import { blocksFromCapture, blocksFromMarkup, screenHtml, type MapCheck, type Maps, type ScreenBlocks } from '../lib/screenHtml';
+import {
+	blocksFromCapture,
+	blocksFromMarkup,
+	fieldsOnRows,
+	parseRows,
+	screenHtml,
+	type MapCheck,
+	type Maps,
+	type RowRange,
+	type ScreenBlocks,
+} from '../lib/screenHtml';
 import { checkExplanations, documentedFields, loadCapture } from '../lib/screens';
 
 interface Props {
@@ -39,9 +56,11 @@ interface Props {
 	right?: string;
 	full?: string;
 	status?: string;
+	/** Of a generated screen, the rows to show: "1", or consecutive rows "1-2". 7 is the status line */
+	rows?: string;
 }
 
-const { screen, id, title: givenTitle, left, right, full, status } = Astro.props;
+const { screen, id, title: givenTitle, left, right, full, status, rows } = Astro.props;
 
 let name: string;
 let title: string;
@@ -52,6 +71,8 @@ let Explanations: Awaited<ReturnType<typeof render>>['Content'] | undefined;
 let docsHtml = '';
 let maps: Maps = {};
 let mapCheck: MapCheck | undefined;
+// An excerpt: the rows shown and the fields on them, which are the only ones listed
+let excerpt: { rows: RowRange; value: string } | undefined;
 
 if (screen !== undefined) {
 	if ([id, left, right, full, status].some((v) => v !== undefined)) {
@@ -68,11 +89,16 @@ if (screen !== undefined) {
 	checkExplanations(screen, capture, entry.body ?? '');
 	documented = documentedFields(capture, entry.body ?? '');
 	mapCheck = { screen, mapFields: capture.mapFields };
-	blocks = blocksFromCapture(capture, documented, screen);
+	if (rows !== undefined) {
+		excerpt = { rows: parseRows(rows, capture, screen), value: rows };
+		documented = fieldsOnRows(capture, documented, excerpt.rows);
+	}
+	blocks = blocksFromCapture(capture, documented, screen, excerpt?.rows);
 	title = givenTitle ?? capture.title;
 	Explanations = (await render(entry)).Content;
 } else {
 	if (id === undefined || givenTitle === undefined) throw new Error('KlnScreen needs a screen, or an id and a title');
+	if (rows !== undefined) throw new Error(`KlnScreen id="${id}": rows="${rows}" is only for a generated screen`);
 	name = id;
 	title = givenTitle;
 	blocks = blocksFromMarkup({ left, right, full, status }, id);
@@ -87,16 +113,18 @@ if (screen !== undefined) {
 }
 
 // Prefixed, because headings get plain anchors ("NAV 1" becomes #nav-1)
-const figureId = `screen-${name}`;
+const figureId = excerpt ? `screen-${name}--rows-${excerpt.value}` : `screen-${name}`;
 const crop = blocks.crop;
+// The window of an excerpt in screen pixels (kln-screen.css)
+const windowStyle = blocks.window && `--top: ${blocks.window.top}; --h: ${blocks.window.height}`;
 const hasFlash = blocks.blocks.some((b) => b.rows.some((row) => row.some((s) => s.flash)));
 const hasFields = documented.size > 0;
 const stageHtml = screenHtml(blocks, documented, maps, mapCheck);
 ---
 
-<figure class="kln-figure" id={figureId} data-crop={crop}>
+<figure class="kln-figure" id={figureId} data-crop={crop} data-rows={excerpt?.value}>
 	<div class="kln-bezel">
-		<div class="kln-screen" role="group" aria-label={`${title}, example screen`} data-crop={crop}>
+		<div class="kln-screen" role="group" aria-label={`${title}, example screen`} data-crop={crop} style={windowStyle}>
 			<div class="kln-stage" set:html={stageHtml} />
 		</div>
 	</div>
@@ -119,7 +147,13 @@ const stageHtml = screenHtml(blocks, documented, maps, mapCheck);
 				{
 					Explanations ? (
 						<dl>
-							<Explanations components={{ Field, Term }} />
+							{excerpt ? (
+								<FieldDocs shown={documented} screen={name}>
+									<Explanations components={{ Field, Term }} />
+								</FieldDocs>
+							) : (
+								<Explanations components={{ Field, Term }} />
+							)}
 						</dl>
 					) : (
 						<dl set:html={docsHtml} />

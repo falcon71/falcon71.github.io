@@ -8,7 +8,6 @@ sidebar:
 import KlnScreen from '../../../components/KlnScreen.astro';
 import Callout from '../../../components/Callout.astro';
 import Term from '../../../components/Term.astro';
-import DirectToKey from '../../../components/DirectToKey.astro';
 
 The APT pages of the KLN 90B show everything the database holds about one airport, one kind of information per page. APT 1 to APT 6 give the airport's data, APT 7 its departures and arrivals, and APT 8 its approaches. All of them show the same airport, which you choose on any of them.
 
@@ -16,33 +15,31 @@ The APT pages of the KLN 90B show everything the database holds about one airpor
 
 The airport you enter, scan to or create on one APT page is the airport on all the others, and the unit remembers it when you turn it off. One exception is the airport of the last active waypoint: if that was an airport, the unit comes on with it, shown on APT 4. Another is an airport that you only confirm or that is the active waypoint: the ACT page and a waypoint confirmation show their own airport and leave the shared one alone.
 
-Turn the right outer knob to the APT pages and the right inner knob to the page you want. The inner knob goes through APT 1 to APT 7 and then back to APT 1; APT 8 follows APT 7 only in an aircraft whose unit is installed for approaches. A page with more than one subpage shows a `+` in its name (`APT+3`): the inner knob steps through the subpages before it goes on to the next page, and back through them the other way. When you return to the APT pages from another group, you land on the APT page you used last.
+The right inner knob goes through APT 1 to APT 7 and then back to APT 1; APT 8 follows APT 7 only in an aircraft whose unit is installed for approaches. A page with more than one subpage shows a `+` in its name (`APT+3`): the inner knob steps through the subpages before it goes on to the next page, and back through them the other way.
 
-The top line is the same on every page except the APT 3 runway diagram, which has no top line. It shows the identifier of the airport and, at the right end, <Term t="nr">`nr`</Term> and a rank when you reached the airport through the <Term t="Nearest list">nearest list</Term>. A `›` in the first column marks the airport as the <Term t="Active waypoint">active waypoint</Term>; it flashes during <Term t="Waypoint alerting">waypoint alerting</Term>.
+The top line is the same on every page except the APT 3 runway diagram, which has no top line. It shows the identifier of the airport and, at the right end, <Term t="nr">`nr`</Term> and a rank when you reached the airport through the [nearest list](/kln90b/operation/nearest/). An airport of the list keeps its `nr` on all APT pages. A `›` in the first column marks the airport as the [active waypoint](/kln90b/operation/navigation-modes/#the-active-waypoint); it flashes during [waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting).
 
-### Choosing the airport
+<KlnScreen screen="apt-1-nearest" rows="1" />
 
-To enter an identifier, press the right <kbd>CRSR</kbd> and turn the right knobs: the inner knob changes the character under the cursor, and the outer knob moves to the next one. You do not press <kbd>ENT</kbd>. After every character the unit shows the first airport, in alphabetical order, whose identifier begins with the characters you have entered, and fills in the remaining characters. Press the right <kbd>CRSR</kbd> again to turn the cursor off. [Controls and display](/kln90b/unit/controls-and-display/#entering-data-with-the-cursor) explains the cursor and the entry of characters.
+How you enter an identifier, scan through the database and create a user waypoint is the same on every waypoint page; see [Waypoints and the database](/kln90b/operation/waypoints/).
 
-To page through the airports instead, pull out the right inner knob and turn it; [Controls and display](/kln90b/unit/controls-and-display/) describes the scan. Your user airports are in the scan, ordered with the others by identifier. Turning back past the first airport leads into the nearest list at its last entry, and turning clockwise past the last nearest airport leads to the first airport of the database; within the nearest list each click steps one rank.
+### User airports
 
-Another way in is the nearest list itself: press <kbd>MSG</kbd> and then <kbd>ENT</kbd>, and APT 1 shows the nearest airport as `nr 1`. An airport of the list keeps its `nr` on all APT pages. [Nearest](/kln90b/operation/nearest/) explains how the list is built and how to reach it.
-
-### An identifier that no airport has
-
-When the identifier matches no airport, every APT page offers to create one.
+When the identifier you enter matches no airport, every APT page offers to create a [user airport](/kln90b/operation/waypoints/#user-waypoints) with it, at a position you enter (`USER POS?`) or at the present position (`PRES POS?`). Whichever page made the offer, the new airport appears on APT 1. A user airport has a position, an elevation and one runway, which you enter on APT 1 to APT 3; it has no name, no city and no frequencies.
 
 <KlnScreen screen="apt-create-new-wpt" />
 
-Turn the right outer knob to `PRES POS?` or `USER POS?` and press <kbd>ENT</kbd>: the first creates the airport at the position of the aircraft, the second opens APT 1 for a position you enter. Either way the new <Term t="User waypoint">user airport</Term> appears on APT 1, whichever page made the offer. A user airport has no name, no city and no frequencies, and one runway of unknown length. [Waypoints and the database](/kln90b/operation/waypoints/) covers creating user waypoints, their limit and deleting them.
+### The ACT page and the waypoint confirmation of an airport
 
-### The ACT page and the waypoint confirmation
+When the active waypoint is an airport, the ACT page shows its APT pages, named ACT 1 and so on, and the identifier cannot be changed there. The top line adds the number of the airport in FPL 0, the same number FPL 0 shows (blank for a direct-to waypoint that is not in FPL 0), and an `A` for airport at the right end. The scan steps through the waypoints of FPL 0 instead of through the database.
 
-The ACT page of an active airport shows these pages for that airport, named ACT 1 and so on. Its top line adds the number of the airport in FPL 0, the same number FPL 0 shows (blank for a direct-to waypoint that is not in FPL 0), and an `A` for airport at the right end, and the identifier cannot be changed there. The scan steps through the legs of the active flight plan instead of through the database.
+<KlnScreen screen="apt-act-1" />
 
-When you enter an airport identifier anywhere else (on the Direct To page, in a flight plan, on REF), the right half shows its APT 1 page with `ent` in the status line, and you can step through the other pages of that airport with the right inner knob before you approve it with <kbd>ENT</kbd>. The cursor and the scan are off on these pages. [Waypoints and the database](/kln90b/operation/waypoints/) describes both cases.
+When you enter an airport identifier on another page, such as the Direct To page, the unit shows APT 1 of that airport on the right side for you to confirm, with `ent` flashing in the status line:
 
-Nothing on the left half changes when you choose an airport. The other way round, pressing <DirectToKey /> with an APT page on the right makes the Direct To page propose the airport that the APT page shows.
+<KlnScreen screen="apt-confirm" />
+
+[Waypoints and the database](/kln90b/operation/waypoints/) explains the ACT page and the waypoint confirmation for every kind of waypoint.
 
 ## APT 1: name, position and airspace
 
@@ -50,13 +47,13 @@ APT 1 shows the name of the airport, its position and the airspace it lies in. I
 
 <KlnScreen screen="apt-1-ksea" />
 
-The cursor stops on the four characters of the identifier, on the rank `nr` while the page shows one, and on the position of a user airport. The right outer knob moves it from field to field and stops at the first and the last field. It does not wrap around, and each time you turn the cursor on, it starts on the first character. You cannot change the name, the airspace row or the position of an airport of the database.
+With the cursor on, you can change the identifier; on a nearest airport the cursor can also rest on the rank (see below). The name, the airspace row and the position of an airport of the database cannot be changed.
 
 <KlnScreen screen="apt-1-ksea-cursor" />
 
 ### A nearest airport
 
-The page changes when you reach the airport through the nearest list, with <kbd>MSG</kbd> and <kbd>ENT</kbd> or by scanning back past the first airport. An airport that you enter by its identifier shows the plain page, even when it is the nearest. The rank `nr 2` appears at the right of the top line, and the three rows below the name give the longest runway (length and surface), its lighting, and the bearing and distance from the aircraft. The unit recalculates bearing, distance and the order of the list every second, and searches anew which airports belong to the list every 10 seconds. `nr` flashes while the cursor is elsewhere.
+The page changes when you reach the airport through the nearest list, with <kbd>MSG</kbd> and <kbd>ENT</kbd> or by scanning back past the first airport. An airport that you enter by its identifier shows the plain page, even when it is the nearest. The rank `nr 2` appears at the right of the top line, and the three rows below the name give the longest runway (length and surface), its lighting, and the bearing and distance from the aircraft. The unit recalculates bearing, distance and the order of the list every second, and searches anew which airports belong to the list every 10 seconds.
 
 <KlnScreen screen="apt-1-nearest" />
 
@@ -68,7 +65,7 @@ Entering another identifier turns the page back into the plain airport page.
 
 ### A user airport
 
-A user airport shows its identifier and position and nothing else: no name, no airspace row and no type. With the cursor on, the cursor stops on latitude and longitude after the identifier, and a new value changes the stored position when you press <kbd>ENT</kbd>.
+A user airport shows only its identifier and its position. You can change the position with the cursor; the new value is stored when you press <kbd>ENT</kbd>.
 
 <KlnScreen screen="apt-1-user-airport" />
 
@@ -84,9 +81,9 @@ APT 2 shows where the airport is, how high it lies, which time zone it is in, an
 
 <KlnScreen screen="apt-2-ksea" />
 
-Nothing on this page can be changed for an airport of the database; the cursor stops only on the identifier and on `nr`. The page of a nearest airport has the same body as the plain page. The time zone comes from the simulator: the row stays blank where it supplies none. The radar flag <Term t="(R)">`(R)`</Term> at the end of the approach row shows that approach and departure control have radar, so that you can expect vectors; it appears only for airports whose data marks radar coverage.
+Nothing on this page can be changed for an airport of the database. The time zone comes from the simulator: the row stays blank where it supplies none. The radar flag <Term t="(R)">`(R)`</Term> at the end of the approach row shows that approach and departure control have radar, so that you can expect vectors; it appears only for airports whose data marks radar coverage.
 
-A user airport shows only its elevation, as an entry, because the city, the time zone and the approaches are unknown. The cursor stops on the identifier and then on the elevation.
+A user airport shows only its elevation, as an entry, because the city, the time zone and the approaches are unknown.
 
 <KlnScreen screen="apt-2-user-airport" />
 
@@ -98,11 +95,11 @@ APT 3 shows the runways of the airport, first as a diagram and then as a list of
 
 <KlnScreen screen="apt-3-diagram-kpdx" />
 
-The diagram is the first subpage of an airport that has runways, and the status line therefore reads `APT+3`. It shows no identifier and no top line, so the page has no field: the right <kbd>CRSR</kbd> key does nothing, and you cannot change the identifier there. Scanning works, and so does the inner knob. At an airport whose runway data lists a helipad, the diagram can stay blank, while the list pages work.
+The diagram is the first subpage of an airport that has runways, and the status line therefore reads `APT+3`. It shows no identifier and no top line, so the page has no field: the right <kbd>CRSR</kbd> key does nothing, and you cannot change the identifier there. Scanning works. At an airport whose runway data lists a helipad, the diagram can stay blank, while the list pages work.
 
 {/* kln90b bug candidate (unverified in the simulator): the APT 3 diagram throws an error and stays blank for airports whose runway data has helipad entries such as H1 (KMWH); the entries may come from the FAA extract of the screens only */}
 
-The runway list follows: the unit lists at most the five longest runways, longest first, two runways per page. On a list page the cursor stops on the identifier and on `nr`.
+The runway list follows: the unit lists at most the five longest runways, longest first, two runways per page.
 
 <KlnScreen screen="apt-3-list-ksea" />
 
@@ -143,7 +140,7 @@ Each line holds a four-character label and a frequency in MHz with two decimals;
 
 A line with another type of frequency has no label. A frequency of no type is not listed.
 
-The page shows five frequencies. An airport with more than five has more pages, and the status line reads `APT+4`; the inner knob steps through them, and the last page shows the rest with blank lines. The cursor stops on the identifier and on `nr`, because nothing on the page can be selected. If you change the airport while a later page is shown and the new airport has fewer pages, the page shows the new identifier with blank lines until you turn the right inner knob one click counterclockwise.
+The page shows five frequencies. An airport with more than five has more pages, and the status line reads `APT+4`; the inner knob steps through them. If you change the airport while a later page is shown and the new airport has fewer pages, the page shows the new identifier with blank lines until you turn the right inner knob one click counterclockwise.
 
 {/* kln90b bug candidate: APT 4 shows blank rows when the airport changes while a later frequency page is shown and the new airport has fewer pages */}
 
@@ -159,7 +156,7 @@ APT 5 holds three lines of notes of your own about the airport, for example a fr
 
 <KlnScreen screen="apt-5-ktiw" />
 
-The unit keeps the remarks by identifier: if you delete a user airport, its remarks stay, and a user airport that you create again with the same identifier shows them again. It keeps the remarks of up to 100 airports. A remark for the 101st raises <Term t="RMKS">`RMKS FULL`</Term> and is not stored; changing the remarks of an airport already in the list is always accepted. A line takes 11 characters, each a letter, a digit, a hyphen or a blank. The cursor stops on the identifier, on `nr`, and then on the three lines in turn.
+The unit keeps the remarks by identifier: if you delete a user airport, its remarks stay, and a user airport that you create again with the same identifier shows them again. It keeps the remarks of up to 100 airports. A remark for the 101st raises <Term t="RMKS">`RMKS FULL`</Term> and is not stored; changing the remarks of an airport already in the list is always accepted.
 
 OTH 4 (`APTS W/RMKS`) lists the airports that have remarks; you delete an airport's remarks there. An airport whose lines you have blanked out still counts as having remarks, stays on OTH 4 and counts toward the 100 until you delete it there.
 
@@ -170,8 +167,6 @@ OTH 4 (`APTS W/RMKS`) lists the airports that have remarks; you delete an airpor
 APT 6 is meant for the fuel, the oxygen, the customs and the fee information of the airport. The simulator holds none of it, so the page shows the same texts for every airport, user airports included, and the line for customs stays blank.
 
 <KlnScreen screen="apt-6-ksea" />
-
-The page has no field of its own: the cursor stops on the identifier and on `nr`, and there are no variants.
 
 ## APT 7: departures and arrivals
 
@@ -187,8 +182,7 @@ airport with only one kind of procedure has one APT 7 page with that list.
 <KlnScreen screen="apt-7-stars-ksea" />
 
 Press the right <kbd>CRSR</kbd> to turn the cursor on. It comes on at the first entry, or at the top entry shown when
-you had scrolled the list before. A list has four rows: the bottom row always shows the last entry, and the rows above
-it scroll as you turn the right outer knob. The cursor flashes on an entry that <kbd>ENT</kbd> selects, and on
+you had scrolled the list before. The bottom row of the list always shows the last entry, and the rows above it scroll as you turn the right outer knob. The cursor flashes on an entry that <kbd>ENT</kbd> selects, and on
 `LOAD IN FPL` and `APPROVE?` later on. With an expired database, each press of the right <kbd>CRSR</kbd> that turns the
 cursor on shows `OUTDATED DB` on the status line; you can still select and load procedures.
 
@@ -209,7 +203,7 @@ transition from the en route fix, then the runway you land on. The unit asks for
 there is a choice to make.
 
 To load a departure or an arrival into FPL 0, the airport must be on the APT pages (see
-[Choosing the airport](/kln90b/pages/apt/#choosing-the-airport)). Then:
+[Waypoints and the database](/kln90b/operation/waypoints/)). Then:
 
 1. Turn the right outer knob to the APT pages and the right inner knob to the SIDs or the STARs of APT 7. From APT 1,
    the STARs are two steps counterclockwise in a unit with APT 8, one step in a unit without it.
@@ -319,7 +313,7 @@ approach, into FPL 0. You use it en route before the descent, usually after load
 
 <KlnScreen screen="apt-8-approaches-ksea" />
 
-The list has five rows, and the bottom row always shows the last approach. Press the right <kbd>CRSR</kbd> to turn the
+The bottom row of the list always shows the last approach. Press the right <kbd>CRSR</kbd> to turn the
 cursor on: it comes on at the first approach, or at the top approach shown on a scrolled list. As on APT 7, an expired
 database shows `OUTDATED DB` on the status line each time you turn the cursor on.
 
@@ -355,7 +349,7 @@ On ACT 8, when the active waypoint is an airport, the same list of that airport 
 You select an approach, then its <Term t="IAF" />, then you load it.
 
 To load an approach into FPL 0, the airport must be on the APT pages (see
-[Choosing the airport](/kln90b/pages/apt/#choosing-the-airport)). Then:
+[Waypoints and the database](/kln90b/operation/waypoints/)). Then:
 
 1. Turn the right outer knob to the APT pages and the right inner knob to APT 8, one step counterclockwise from APT 1.
 2. Press the right <kbd>CRSR</kbd> and turn the right outer knob until the cursor is on the approach.
@@ -393,8 +387,7 @@ yourself: only en route waypoints raise `REDUNDANT WPTS IN FPL EDIT ENROUTE WPTS
 
 An entry is named after the first waypoint of its transition. That is usually the IAF itself; where the transition
 begins earlier, the IAF mark appears on a later waypoint of the list. At KSEA, RNAV 16C offers `PAE`, and its waypoint
-list starts with `PAE` and marks `ERYKA` as the IAF. The list after `IAF` has five rows; on a longer list, `IAF` stays
-on the top row and the bottom row always shows the last entry.
+list starts with `PAE` and marks `ERYKA` as the IAF. On a long list after `IAF`, `IAF` stays on the top row and the bottom row always shows the last entry.
 
 The waypoint list marks the fixes that have a role in the approach with a dash and a small letter after the
 identifier: `-i` for the IAF, `-f` for the <Term t="FAF" />, `-m` for the <Term t="MAP" /> and `-h` for the

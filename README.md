@@ -54,6 +54,12 @@ build fails, naming the screen and the command to run, when a page names a scree
 explanations and the fields of the screen differ. `title="..."` replaces the title of the generated
 file. A page name in an explanation becomes a link like anywhere else.
 
+`rows="1"` or `rows="1-2"` shows only those consecutive rows of a generated screen, for text about a single line: rows 1 to
+6 are the page, 7 is the status line (on a full page, 1 to 7 are its seven rows). The excerpt keeps the side, the bezel
+and the dashed boxes, and only the fields on its rows are explained and listed; its figure is `#screen-<id>--rows-1-2`
+and a field `#screen-<id>--rows-1-2--<field>`, so the same screen can also be shown whole on the page. Any other value,
+a row the screen does not have, `rows` on a hand-built screen and `rows` on a screen with a map fail the build.
+
 The description is explained in `kln90b/generator/README.md` ("Describing a screen"). A screen must not flash `msg` on its
 status line unless it sets `keepMessages: true`; the generator starts the unit at its last position, and a step that
 raises a message answers it ("Messages" there). Screens that share a state import it

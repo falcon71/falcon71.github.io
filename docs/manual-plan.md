@@ -49,9 +49,11 @@ touches are listed.
 | Topic | Owner | Links only |
 | --- | --- | --- |
 | The cursor, entering characters with the knobs, the scan (right inner knob pulled out) | Controls and display | APT chapter (one sentence each, link) |
-| Waypoint pages in general: the five kinds, how an identifier is entered, the ACT page and the waypoint confirmation | Waypoints and the database (Operation) | APT chapter says what is special to airports and links |
-| Creating a user waypoint (`CREATE NEW WPT AT`, user or present position, the 250 limit, `USR DB FULL`) | Waypoints and the database | APT chapter shows the offer once, names the user-airport fields on APT 1 to APT 3, links |
-| The nearest lists: criteria (SET 3), radius, count, how they are reached, the MSG + ENT shortcut | Nearest (Operation) | APT chapter explains the nearest *variant of the pages* (header `nr n`, the fields that change on APT 1, the cursor parked on `nr n`) and links for the rest |
+| Waypoint pages in general: the five kinds, how an identifier is entered, the ACT page and the waypoint confirmation | Waypoints and the database (Operation) | APT chapter says what is special to airports and links (one sentence for the general operation; maintainer's feedback of 2026-11-04, style guide section 10) |
+| Creating a user waypoint (`CREATE NEW WPT AT`, user or present position, the 250 limit, `USR DB FULL`); user waypoints as a concept, linked as `/kln90b/operation/waypoints/#user-waypoints` | Waypoints and the database | APT chapter shows the offer once, names the user-airport fields on APT 1 to APT 3, links |
+| The nearest lists: criteria (SET 3), radius, count, how they are reached, the MSG + ENT shortcut; the nearest list as a concept, linked as `/kln90b/operation/nearest/` | Nearest (Operation) | APT chapter explains the nearest *variant of the pages* (header `nr n`, the fields that change on APT 1, the cursor parked on `nr n`) and links for the rest |
+| The active waypoint and the active leg, linked as `/kln90b/operation/navigation-modes/#the-active-waypoint` | Navigation modes (Operation) | every page that names the active waypoint links at its first use (no glossary entry, style guide section 14) |
+| Waypoint alerting, linked as `/kln90b/operation/sequencing/#waypoint-alerting`; turn anticipation | Sequencing and turn anticipation (Operation) | every page that names them links at its first use (no glossary entry) |
 | What a loaded procedure does in FPL 0: where it is inserted, headers and markers, `CHANGE`/`DELETE` on a header, editing procedure waypoints, the make-room question, the 30/45 limits | Flight plans (Operation), with Departures and arrivals and Non-precision approaches | APT 7 and APT 8 say in one sentence where the procedure goes and link |
 | Approach arming and activation, `PRESS ALT TO SET BARO`, the CDI scale | Non-precision approaches | APT 8 links |
 | Remarks: deleting on OTH 4 | OTH chapter | APT 5 links |
@@ -105,12 +107,20 @@ questions differ by one word and stand for both.
 
 | Page | Status |
 | --- | --- |
-| APT pages (page reference) | done for the dry run (2026-11-04): two review passes, every finding that matters applied; bug candidates unfiled |
+| APT pages (page reference) | done for the dry run (2026-11-04): two review passes, every finding that matters applied; the maintainer's feedback of the same day applied (group section cut to what is specific to airports, concepts linked instead of tooltipped, choices in screen order, excerpts of screens for the ACT page and the confirmation, APT 5 trimmed); bug candidates unfiled. The maintainer keeps the branch as the example for the full run. |
 | Every other page | not started (dry run) |
 
 ## Open questions for the maintainer
 
 - Plan approval was skipped for the dry run; the full run stops here.
+- The maintainer's feedback on the dry run (2026-11-04) is written into the style guide as rules: the basic
+  operation is said once and linked (sections 8 and 10), a capable reader is assumed (section 8), choices are named
+  in the screen's order (section 12), an excerpt of a screen where the text describes a single line (section 13),
+  operating concepts link to their section instead of a tooltip (section 14), and the checklist (section 21). The
+  anchors the links use (`#the-active-waypoint`, `#waypoint-alerting`, `#user-waypoints`) are planned; the writers
+  of those pages must create them, and the final pass checks every planned anchor.
+- The glossary still holds the placeholder entry `Turn anticipation` from before the dry run, used by the lorem text
+  of Navigation modes; under section 14 it goes when that placeholder is replaced.
 - Suspected bugs are not filed during the dry run. The paragraphs that describe the suspect behavior carry a
   `{/* kln90b bug candidate: … */}` comment instead of `kln90b#NN`; once the maintainer agrees, the coordinator files
   the issues and replaces the comments. After the review:
