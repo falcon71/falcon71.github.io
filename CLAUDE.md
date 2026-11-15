@@ -9,8 +9,10 @@ specification of the manual and its style guide in one.
 
 ## Roles
 
-The maintainer starts the coordinator session; the coordinator starts researchers, writers and reviewers as
-subagents and names each one's role in its prompt (style guide, section 4). The prompt for the coordinator is
+The manual is written in work packages, one coordinator session per package. The maintainer starts each coordinator
+session; the coordinator starts researchers, writers and reviewers as subagents and names each one's role in its
+prompt (style guide, section 4). The plan in `docs/manual-plan.md` and `docs/plan/` carries the state from one session
+to the next. The prompt for the coordinator is
 [docs/coordinator-prompt.md](docs/coordinator-prompt.md). If no role was given and the task touches the manual's text,
 ask.
 

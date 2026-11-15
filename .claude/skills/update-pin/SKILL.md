@@ -91,8 +91,8 @@ writers may not.
   hardware), `kln90b/data/navdata` and `kln90b/services` (procedures, EFB).
 - The major version for the footer (`kln90b/src/components/Footer.astro`).
 
-Record in the coordinator's plan file, `docs/manual-plan.md`, only what it holds anyway: the screens added or
-removed and the status of each page to rewrite. The list of what changed stays in your scratchpad, because writers read
+Record in the coordinator's plan (`docs/manual-plan.md` and the package files in `docs/plan/`) only what it holds
+anyway: the status of each page to rewrite, and in the package's file the screens added or removed. The list of what changed stays in your scratchpad, because writers read
 the plan. Then start one writer per affected page group and a
 reviewer for each draft, with the prompts of `docs/coordinator-prompt.md` ("Starting agents"; `model` always set,
 never a fork). Tell a writer **where** to look (the page, the screen ids, the files and functions that changed, the

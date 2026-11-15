@@ -71,8 +71,9 @@ GitHub wiki of the kln90b project.
 The real manuals of the KLN 90B are copyrighted. This manual must not contain any of their text, tables, figures or
 structure. The roles below make sure that no manual text can reach the site.
 
-The maintainer starts one coordinator session in `E:\msfs\falcon71.github.io`. The coordinator starts every other
-agent (researchers, writers, reviewers) as a subagent and names its role and its rules in the agent's prompt, because a
+The manual is written in work packages. For each package the maintainer starts a coordinator session in
+`E:\msfs\falcon71.github.io` (`docs/coordinator-prompt.md`); the plan carries the state from one session to the next.
+The coordinator starts every other agent (researchers, writers, reviewers) as a subagent and names its role and its rules in the agent's prompt, because a
 subagent knows only what that prompt and this repository tell it. A session started in this repository does not inherit
 the kln90b project's Claude memory.
 
@@ -104,7 +105,8 @@ The coordinator plans the work, hands sections to writers, sends their drafts to
 - **What it tells a writer** is the outline, the topics the writer's pages own, where in the code to look, and
   reviewer findings in the reviewer's own words. It never passes on a fact about the unit that it learned from a
   manual; a writer finds every fact in the code.
-- It keeps the plan of the whole manual: which page owns which topic, so that each fact is said once (section 8).
+- It keeps the plan of the whole manual (`docs/manual-plan.md` and the package files in `docs/plan/`): which page
+  owns which topic, so that each fact is said once (section 8), and what the next session must know.
 - It alone edits the shared files (the glossary, the word list in section 12, the sidebar). Writers report new entries
   to it, so that parallel writers never overwrite each other.
 - It files the bugs that writers and reviewers report (section 5), so that parallel agents do not file duplicates.
