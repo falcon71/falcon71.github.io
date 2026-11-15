@@ -5,7 +5,7 @@ layout split
 status yes
 text
 |GPS:   FAST| 0         |
-|           |           |
+|FAILURES?  |           |
 |           |CREATE NEW |
 |           |WPT AT:    |
 |           |USER POS?  |
