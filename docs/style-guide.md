@@ -666,6 +666,9 @@ These are built. They are listed here so that they stay true; changes to them go
   text.
 - The site loads nothing from third parties: fonts are self-hosted, no analytics, no embedded widgets.
 - A print stylesheet is welcome where it is cheap.
+- **The home page** is titled "KLN 90B for Microsoft Flight Simulator" and opens with a drawing of the whole unit
+  that shows a generated screen without its fields (`kln90b/src/components/Hero.astro`). The manual begins under it
+  with its own heading, a short description of the unit and the table of contents.
 - **The home page has a download button for each simulator**, Microsoft Flight Simulator 2024 (version 2.x) and 2020
   (version 1.x), linking the zip of the newest full release straight from GitHub; pre-releases never get a button. The
   build reads the releases from the GitHub API (`kln90b/src/lib/releases.ts`), so the buttons follow the newest release

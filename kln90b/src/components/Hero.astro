@@ -1,0 +1,113 @@
+---
+/**
+ * The hero of the home page, in place of Starlight's: the page title over a large drawing of the unit, across the
+ * whole width of the content area, fading into the page at the bottom. Only the home page has a hero.
+ */
+import KlnUnit from './KlnUnit.astro';
+
+// Starlight's id of the page title, which its skip link and "Overview" entry point to (not exported by Starlight)
+const PAGE_TITLE_ID = '_top';
+
+const { data } = Astro.locals.starlightRoute.entry;
+const title = data.hero?.title ?? data.title;
+---
+
+<section class="kln-hero">
+	<div class="kln-hero-copy">
+		<h1 id={PAGE_TITLE_ID} data-page-title set:html={title} />
+	</div>
+	<div class="kln-hero-art">
+		<KlnUnit screen="home-nav-1" label="The KLN 90B, showing the NAV 1 page on the left and the APT 1 page on the right" />
+	</div>
+</section>
+
+<style is:global>
+	/* The hero spans the whole content area; main is the container it measures (100cqi) */
+	main:has(.kln-hero) {
+		container-type: inline-size;
+	}
+</style>
+
+<style>
+	.kln-hero {
+		/* The width of the drawing of the unit, and its height (912 x 290) */
+		--kln-unit-w: min(64rem, max(36rem, 92cqi));
+		--kln-unit-h: calc(var(--kln-unit-w) * 290 / 912);
+		position: relative;
+		/* Out of the centered content column to the edges of the content area, and up to the header */
+		width: 100cqi;
+		margin-inline: calc(50% - 50cqi);
+		margin-top: -1.5rem;
+		padding-top: clamp(1.5rem, 5cqi, 3.5rem);
+		overflow: hidden;
+		isolation: isolate;
+		/* An instrument panel at night, the same in both color schemes */
+		background:
+			radial-gradient(ellipse 60% 70% at 50% 75%, rgba(76, 175, 110, 0.16), transparent 70%),
+			linear-gradient(180deg, #0f1214 0%, #1a1e22 55%, #23282d 100%);
+	}
+
+	/* The fade into the page background at the bottom */
+	.kln-hero::after {
+		content: '';
+		position: absolute;
+		inset: auto 0 0 0;
+		/* From the keys under the screen down */
+		height: calc(var(--kln-unit-h) * 0.3);
+		background: linear-gradient(to bottom, transparent, var(--sl-color-bg));
+		pointer-events: none;
+		z-index: 2;
+	}
+
+	.kln-hero-copy {
+		position: relative;
+		z-index: 3;
+		max-width: var(--sl-content-width);
+		margin-inline: auto;
+		padding-inline: var(--sl-content-pad-x);
+	}
+
+	.kln-hero-copy h1 {
+		display: inline-block;
+		margin: 0;
+		padding: 0.6em 0.9em;
+		background: rgba(18, 22, 25, 0.72);
+		border-left: 3px solid #4caf6e;
+		border-radius: 0.375rem;
+		backdrop-filter: blur(4px);
+		font-family: var(--kln-font-heading);
+		font-weight: 600;
+		font-size: clamp(1.75rem, 1rem + 3.2cqi, 3rem);
+		line-height: 1.1;
+		color: #f3f5f7;
+		text-wrap: balance;
+	}
+
+	/* The bottom edge of the unit is cut off and the keys fade into the page */
+	.kln-hero-art {
+		position: relative;
+		z-index: 1;
+		display: flex;
+		justify-content: center;
+		margin-top: clamp(1rem, 2.5cqi, 2rem);
+		height: calc(var(--kln-unit-h) * 0.97);
+		pointer-events: none;
+		user-select: none;
+	}
+
+	.kln-hero-art > :global(.kln-unit) {
+		flex: none;
+		width: var(--kln-unit-w);
+		height: fit-content;
+	}
+
+	@media print {
+		.kln-hero {
+			background: none;
+		}
+		.kln-hero-art,
+		.kln-hero::after {
+			display: none;
+		}
+	}
+</style>

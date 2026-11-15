@@ -1,0 +1,195 @@
+---
+/**
+ * A drawing of the whole KLN 90B, front panel and screen, for the hero of the home page. Not interactive: the screen
+ * is a generated screen without its fields, and the drawing is one image to screen readers.
+ *
+ *   <KlnUnit screen="home-nav-1" label="The KLN 90B showing NAV 1 and APT 1" />
+ *
+ * The panel is drawn in a 912 x 290 box. The screen window is at 246, 30 and 422 x 196, the ratio of the screen
+ * (215 x 100), so the generated screen fills it exactly.
+ */
+import '../styles/kln-screen.css';
+import { blocksFromCapture, screenHtml } from '../lib/screenHtml';
+import { loadCapture } from '../lib/screens';
+
+interface Props {
+	screen: string;
+	label: string;
+}
+
+const { screen, label } = Astro.props;
+const { capture, maps } = loadCapture(screen);
+const none = new Set<string>();
+const stageHtml = screenHtml(blocksFromCapture(capture, none, screen), none, maps);
+
+const keys = [
+	{ x: 259, text: 'MSG' },
+	{ x: 357, text: 'ALT' },
+	{ x: 456, text: '' },
+	{ x: 555, text: 'CLR' },
+	{ x: 654, text: 'ENT' },
+];
+const leftLabels = ['NAV', 'FPL', 'MODE', 'TRIP'];
+const leftLabels2 = ['CALC', 'STAT', 'SETUP', 'OTHER'];
+const rightLabels = ['NAV', 'D/T', 'ACTV', 'REF', 'CTR'];
+const rightLabels2 = ['APT', 'VOR', 'NDB', 'INT', 'SUPL'];
+---
+
+<div class="kln-unit" role="img" aria-label={label} data-pagefind-ignore>
+	<svg viewBox="0 0 912 290" aria-hidden="true" class="kln-unit-panel">
+		<defs>
+			<linearGradient id="kln-unit-face" x1="0" y1="0" x2="0" y2="1">
+				<stop offset="0" stop-color="#3a3d41" />
+				<stop offset="1" stop-color="#26282b" />
+			</linearGradient>
+			<linearGradient id="kln-unit-recess" x1="0" y1="0" x2="0" y2="1">
+				<stop offset="0" stop-color="#1a1c1e" />
+				<stop offset="1" stop-color="#25272a" />
+			</linearGradient>
+			<linearGradient id="kln-unit-key" x1="0" y1="0" x2="0" y2="1">
+				<stop offset="0" stop-color="#f1f1f1" />
+				<stop offset="1" stop-color="#bdbdbd" />
+			</linearGradient>
+			<radialGradient id="kln-unit-knob" cx="0.4" cy="0.35" r="0.75">
+				<stop offset="0" stop-color="#3b3d40" />
+				<stop offset="0.7" stop-color="#101112" />
+				<stop offset="1" stop-color="#050505" />
+			</radialGradient>
+		</defs>
+
+		<!-- Faceplate and its three fields -->
+		<rect x="1" y="1" width="910" height="288" rx="7" fill="url(#kln-unit-face)" stroke="#55595e" stroke-width="2" />
+		<rect x="10" y="10" width="208" height="270" rx="6" fill="url(#kln-unit-recess)" />
+		<rect x="694" y="10" width="208" height="270" rx="6" fill="url(#kln-unit-recess)" />
+		<rect x="228" y="12" width="458" height="226" rx="9" fill="#0d0e0f" stroke="#4a4e53" stroke-width="2" />
+		<rect x="244" y="28" width="426" height="200" rx="3" fill="#000" />
+
+		<g class="kln-unit-labels">
+			<!-- Left side -->
+			<text x="28" y="50" class="kln-unit-model">KLN 90B</text>
+			<g transform="translate(113 128)">
+				<rect x="-36" y="-22" width="72" height="44" rx="5" fill="#0b0c0d" />
+				<rect x="-30" y="-16" width="60" height="32" rx="4" fill="url(#kln-unit-key)" />
+				<text y="7" class="kln-unit-key">CRSR</text>
+			</g>
+			{leftLabels.map((t, i) => <text x="42" y={196 + i * 20} class="kln-unit-mid">{t}</text>)}
+			{leftLabels2.map((t, i) => <text x="190" y={196 + i * 20} class="kln-unit-mid">{t}</text>)}
+
+			<!-- Right side -->
+			<text x="864" y="40" class="kln-unit-mid kln-unit-big">GPS</text>
+			<text x="864" y="58" class="kln-unit-mid kln-unit-small">PUSH</text>
+			<text x="864" y="74" class="kln-unit-mid kln-unit-small">ON</text>
+			<circle cx="740" cy="44" r="10" fill="#050505" stroke="#5a5e63" stroke-width="2" />
+			<path d="M760 92V68M755 74l5-6 5 6" fill="none" stroke="#e8e8e8" stroke-width="2" />
+			<text x="776" y="98" class="kln-unit-small">BRT</text>
+			<g transform="translate(801 128)">
+				<rect x="-36" y="-22" width="72" height="44" rx="5" fill="#0b0c0d" />
+				<rect x="-30" y="-16" width="60" height="32" rx="4" fill="url(#kln-unit-key)" />
+				<text y="7" class="kln-unit-key">CRSR</text>
+			</g>
+			{rightLabels.map((t, i) => <text x="724" y={190 + i * 20} class="kln-unit-mid">{t}</text>)}
+			{rightLabels2.map((t, i) => <text x="880" y={190 + i * 20} class="kln-unit-mid">{t}</text>)}
+		</g>
+
+		<!-- Knobs: a large outer knob with a smaller inner knob on each side -->
+		{
+			[116, 803].map((cx, side) => (
+				<g transform={`translate(${cx} 226)`}>
+					<circle r="50" fill="#0b0c0d" />
+					<circle r="45" fill="url(#kln-unit-knob)" stroke="#2c2e31" stroke-width="5" stroke-dasharray="2 3" />
+					<circle r="26" fill="url(#kln-unit-knob)" stroke="#45484c" stroke-width="1.5" />
+					{side === 0 && (
+						<g class="kln-unit-scan">
+							<text y="-3">PULL</text>
+							<text y="8">SCAN</text>
+						</g>
+					)}
+				</g>
+			))
+		}
+
+		<!-- The keys under the screen; the middle one is Direct To -->
+		{
+			keys.map(({ x, text }) => (
+				<g transform={`translate(${x} 262)`}>
+					<rect x="-31" y="-19" width="62" height="38" rx="5" fill="#0b0c0d" />
+					<rect x="-26" y="-14" width="52" height="28" rx="4" fill="url(#kln-unit-key)" />
+					{text ? (
+						<text y="7" class="kln-unit-key">{text}</text>
+					) : (
+						<g fill="none" stroke="#151515" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+							<path d="M-12 -7h6a7 7 0 0 1 0 14h-6z" />
+							<path d="M-16 0h30M8 -5l6 5-6 5" />
+						</g>
+					)}
+				</g>
+			))
+		}
+	</svg>
+	<div class="kln-unit-window">
+		<div class="kln-screen">
+			<div class="kln-stage" set:html={stageHtml} />
+		</div>
+	</div>
+</div>
+
+<style>
+	.kln-unit {
+		position: relative;
+		aspect-ratio: 912 / 290;
+		filter: drop-shadow(0 1.5rem 2.5rem rgba(0, 0, 0, 0.55));
+	}
+
+	.kln-unit-panel {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	.kln-unit-labels text,
+	.kln-unit-scan text {
+		font-family: var(--kln-font-heading);
+		font-weight: 600;
+		fill: #ececec;
+		font-size: 17px;
+		letter-spacing: 0.02em;
+	}
+
+	.kln-unit-mid {
+		text-anchor: middle;
+	}
+
+	.kln-unit-model {
+		font-size: 15px;
+	}
+
+	.kln-unit-small {
+		font-size: 12px;
+	}
+
+	.kln-unit-big {
+		font-size: 19px;
+	}
+
+	.kln-unit .kln-unit-key {
+		text-anchor: middle;
+		fill: #151515;
+		font-size: 19px;
+	}
+
+	.kln-unit-scan text {
+		text-anchor: middle;
+		font-size: 10px;
+		fill: #cfcfcf;
+	}
+
+	/* The screen window, in percent of the 912 x 290 panel */
+	.kln-unit-window {
+		position: absolute;
+		left: calc(246 / 912 * 100%);
+		top: calc(30 / 290 * 100%);
+		width: calc(422 / 912 * 100%);
+		container-type: inline-size;
+	}
+</style>
