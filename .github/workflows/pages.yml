@@ -28,6 +28,9 @@ jobs:
           cache-dependency-path: kln90b/package-lock.json
       - name: Build the manual
         working-directory: kln90b
+        env:
+          # The home page reads the current kln90b releases from the GitHub API; the token raises the rate limit
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
           npm ci
           npm run build

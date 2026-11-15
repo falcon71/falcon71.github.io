@@ -35,7 +35,11 @@ npm run preview    # the built site at http://localhost:4321/kln90b/
 
 ## Publishing
 
-Pushing to `main` runs the workflow, which builds the manual and deploys it. In the repository settings, Pages →
+Pushing to `main` runs the workflow, which builds the manual and deploys it. The download buttons of the home page
+link the newest full release of each major version, which the build reads from the GitHub API
+(`kln90b/src/lib/releases.ts`). After a kln90b release, rebuild the site so that the buttons follow: the push that
+moves the pin does it, or run the workflow by hand. On CI a failed lookup fails the build; a local build without
+network links the buttons to the releases page instead. In the repository settings, Pages →
 Build and deployment → Source must be set to "GitHub Actions" once.
 
 ## Writing a screen
