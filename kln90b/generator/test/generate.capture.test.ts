@@ -3,7 +3,7 @@ import os from 'node:os';
 import path from 'node:path';
 import {afterEach, describe, expect, it} from 'vitest';
 import {generateScreen, type ScreenDescription} from '../lib/generate.ts';
-import {adjustCourseIndicator, wait} from '../api.ts';
+import {adjustCourseIndicator, moveAircraft, wait} from '../api.ts';
 import {facility, place} from '../lib/navdata.ts';
 import {savedFlightplan} from '../../../vendor/kln90b/test/harness/storage';
 import {COURSE_MESSAGE_DELAY} from '../../../vendor/kln90b/kln90b/data/PersistentMessages';
@@ -67,10 +67,22 @@ describe('generateScreen', () => {
 		expect(file.text[6].slice(0, 5)).toBe('NAV 1');
 	});
 
-	it('keeps the last position a screen stores itself, which stages the message of a moved unit', async () => {
+	it('stages the position message of a unit that is switched on away from where it was switched off', async () => {
+		// The unit compares only its first fix after a power-on with the position it saved at the power-off (#454). The
+		// boot of a screen is a running unit whose fix was already its first, so the steps power it off and on again.
+		// FAST acquisition starts from the true position, so the screen asks for the slow one
 		const dir = copyFixture();
 		await generateScreen(dir, nav1({
-			boot: {position: {lat: 47.45, lon: -122.31}, storage: {lastLatitude: 0, lastLongitude: 0}}, keepMessages: true,
+			boot: {position: {lat: 47.45, lon: -122.31}, storage: {fastGpsAcquisition: false}},
+			keepMessages: true, steps: async u => {
+				await u.panel.powerOff();
+				await moveAircraft(u, {lat: 47.95, lon: -122.31}, {groundspeedKt: 0});
+				await u.panel.powerOn();
+				await wait(19_000);
+				await u.panel.approveSelfTest();
+				await wait(150_000);
+				await u.panel.selectPage('L', 'NAV 1');
+			},
 		}));
 		const file = parseScreenFile(fs.readFileSync(path.join(dir, 'screen.txt'), 'utf8'));
 		expect(file.text[6]).toContain('msg');

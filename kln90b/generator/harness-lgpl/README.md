@@ -6,7 +6,7 @@ facilities the simulated unit finds in its navdata. The code is licensed under t
 
 ## What was changed
 
-Modified 2026-10-21 and 2026-10-22. Only these additions; nothing of the original was removed or changed in behavior,
+Modified 2026-10-21, 2026-10-22 and 2026-11-15. Only these additions; nothing of the original was removed or changed in behavior,
 and without the new options every builder returns what it returned before.
 
 - A header comment naming the source file and the modification dates, and `FacilityFrequency` in the SDK import.
@@ -20,8 +20,9 @@ and without the new options every builder returns what it returned before.
   `AirportFacility.frequencies`, with `freqBCD16` computed from the frequency. Choosing which NASR frequencies become
   one of these, and their type, is the job of `lib/navdata.ts`, not of the copy.
 - The helpers `PAIR`, `designator`, `bcd16` and `frequency`, and the exported `FrequencyOptions`.
-- `intersection` and `ndb` gained the option `airport` (modified 2026-10-22): the airport a terminal waypoint or terminal
-  NDB belongs to, which becomes the airport of its ICAO. Without it the ICAO has no airport, as before.
+- `ndb` gained the option `airport` (modified 2026-10-22): the airport a terminal NDB belongs to, which becomes the
+  airport of its ICAO. Without it the ICAO has no airport, as before. (`intersection` got the same option upstream and
+  has it unchanged since 2026-11-15.)
 
 Compare the copy with the original in the pinned submodule to see the difference:
 `diff vendor/kln90b/test/harness/navdata/builders.ts kln90b/generator/harness-lgpl/builders.ts`. `.gitattributes` keeps this folder on LF line endings, as the original has them.
