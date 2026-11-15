@@ -50,6 +50,11 @@ const rightLabels2 = ['APT', 'VOR', 'NDB', 'INT', 'SUPL'];
 				<stop offset="0" stop-color="#f1f1f1" />
 				<stop offset="1" stop-color="#bdbdbd" />
 			</linearGradient>
+			<linearGradient id="kln-unit-flange" x1="0.2" y1="0" x2="0.8" y2="1">
+				<stop offset="0" stop-color="#ece7dc" />
+				<stop offset="0.55" stop-color="#b9b4aa" />
+				<stop offset="1" stop-color="#6f6b65" />
+			</linearGradient>
 			<radialGradient id="kln-unit-knob" cx="0.4" cy="0.35" r="0.75">
 				<stop offset="0" stop-color="#3b3d40" />
 				<stop offset="0.7" stop-color="#101112" />
@@ -66,7 +71,7 @@ const rightLabels2 = ['APT', 'VOR', 'NDB', 'INT', 'SUPL'];
 
 		<g class="kln-unit-labels">
 			<!-- Left side -->
-			<text x="28" y="50" class="kln-unit-model">KLN 90B</text>
+			<text x="28" y="50" class="kln-unit-model">KLN 90B TSO</text>
 			<g transform="translate(113 128)">
 				<rect x="-36" y="-22" width="72" height="44" rx="5" fill="#0b0c0d" />
 				<rect x="-30" y="-16" width="60" height="32" rx="4" fill="url(#kln-unit-key)" />
@@ -76,12 +81,23 @@ const rightLabels2 = ['APT', 'VOR', 'NDB', 'INT', 'SUPL'];
 			{leftLabels2.map((t, i) => <text x="190" y={196 + i * 20} class="kln-unit-mid">{t}</text>)}
 
 			<!-- Right side -->
-			<text x="864" y="40" class="kln-unit-mid kln-unit-big">GPS</text>
-			<text x="864" y="58" class="kln-unit-mid kln-unit-small">PUSH</text>
-			<text x="864" y="74" class="kln-unit-mid kln-unit-small">ON</text>
-			<circle cx="740" cy="44" r="10" fill="#050505" stroke="#5a5e63" stroke-width="2" />
-			<path d="M760 92V68M755 74l5-6 5 6" fill="none" stroke="#e8e8e8" stroke-width="2" />
-			<text x="776" y="98" class="kln-unit-small">BRT</text>
+			<text x="862" y="42" class="kln-unit-mid kln-unit-big">GPS</text>
+			<text x="862" y="61" class="kln-unit-mid kln-unit-small">PUSH</text>
+			<text x="862" y="75" class="kln-unit-mid kln-unit-small">ON</text>
+			<!-- The jack, and the brightness knob with its curved arrow, BRT in the gap of the arrow -->
+			<circle cx="726" cy="40" r="9" fill="#050505" stroke="#5a5e63" stroke-width="2" />
+			<g fill="none" stroke="#e8e8e8" stroke-width="2" stroke-linecap="round">
+				<path d="M771.6 80.2A32 32 0 0 1 765.5 74.6" />
+				<path d="M758.1 51.2A32 32 0 0 1 762.9 37" />
+			</g>
+			<path d="M765.5 32.8L766.3 39.1L759.5 34.9Z" fill="#e8e8e8" stroke="#e8e8e8" stroke-width="1.5" stroke-linejoin="round" />
+			<text x="759" y="67.5" class="kln-unit-mid kln-unit-small">BRT</text>
+			<g transform="translate(790 54)">
+				<circle r="19" fill="#050505" />
+				<circle r="16.5" fill="url(#kln-unit-knob)" stroke="#34373b" stroke-width="3.5" stroke-dasharray="1.4 1.8" />
+				<circle r="11" fill="url(#kln-unit-knob)" />
+				<path d="M0 -10V-3" stroke="#cfcfcf" stroke-width="1.6" stroke-linecap="round" />
+			</g>
 			<g transform="translate(801 128)">
 				<rect x="-36" y="-22" width="72" height="44" rx="5" fill="#0b0c0d" />
 				<rect x="-30" y="-16" width="60" height="32" rx="4" fill="url(#kln-unit-key)" />
@@ -91,17 +107,20 @@ const rightLabels2 = ['APT', 'VOR', 'NDB', 'INT', 'SUPL'];
 			{rightLabels2.map((t, i) => <text x="880" y={190 + i * 20} class="kln-unit-mid">{t}</text>)}
 		</g>
 
-		<!-- Knobs: a large outer knob with a smaller inner knob on each side -->
+		<!-- Knobs: on each side a large outer knob on a light flange, and a smaller inner knob; the right one pulls for scan -->
 		{
-			[116, 803].map((cx, side) => (
+			[118, 803].map((cx, side) => (
 				<g transform={`translate(${cx} 226)`}>
-					<circle r="50" fill="#0b0c0d" />
-					<circle r="45" fill="url(#kln-unit-knob)" stroke="#2c2e31" stroke-width="5" stroke-dasharray="2 3" />
-					<circle r="26" fill="url(#kln-unit-knob)" stroke="#45484c" stroke-width="1.5" />
-					{side === 0 && (
-						<g class="kln-unit-scan">
-							<text y="-3">PULL</text>
-							<text y="8">SCAN</text>
+					<circle r="53" fill="url(#kln-unit-flange)" />
+					<circle r="45" fill="#070708" />
+					<circle r="43" fill="url(#kln-unit-knob)" stroke="#2e3034" stroke-width="5" stroke-dasharray="1.8 2.2" />
+					<circle r="29" fill="#050505" />
+					<circle r="27" fill="url(#kln-unit-knob)" stroke="#33363a" stroke-width="4" stroke-dasharray="1.5 1.9" />
+					<circle r="21" fill="url(#kln-unit-knob)" stroke="#45484c" stroke-width="1" />
+					{side === 1 && (
+						<g class="kln-unit-scan" transform="rotate(58)">
+							<text y="-2">PULL</text>
+							<text y="9">SCAN</text>
 						</g>
 					)}
 				</g>
@@ -135,6 +154,8 @@ const rightLabels2 = ['APT', 'VOR', 'NDB', 'INT', 'SUPL'];
 
 <style>
 	.kln-unit {
+		/* kln-screen.css sets the phosphor color on .kln-figure, which the drawing is not */
+		--kln-phosphor: #00d109;
 		position: relative;
 		aspect-ratio: 912 / 290;
 		filter: drop-shadow(0 1.5rem 2.5rem rgba(0, 0, 0, 0.55));
@@ -160,25 +181,27 @@ const rightLabels2 = ['APT', 'VOR', 'NDB', 'INT', 'SUPL'];
 		text-anchor: middle;
 	}
 
-	.kln-unit-model {
+	/* Sizes other than the labels' 17px; as specific as .kln-unit-labels text, and after it */
+	.kln-unit-labels .kln-unit-model {
 		font-size: 15px;
 	}
 
-	.kln-unit-small {
+	.kln-unit-labels .kln-unit-small {
 		font-size: 12px;
 	}
 
-	.kln-unit-big {
-		font-size: 19px;
+	.kln-unit-labels .kln-unit-big {
+		font-size: 26px;
 	}
 
+	.kln-unit-labels .kln-unit-key,
 	.kln-unit .kln-unit-key {
 		text-anchor: middle;
 		fill: #151515;
 		font-size: 19px;
 	}
 
-	.kln-unit-scan text {
+	.kln-unit .kln-unit-scan text {
 		text-anchor: middle;
 		font-size: 10px;
 		fill: #cfcfcf;

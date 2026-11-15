@@ -62,7 +62,8 @@ const title = data.hero?.title ?? data.title;
 	.kln-hero-copy {
 		position: relative;
 		z-index: 3;
-		max-width: var(--sl-content-width);
+		/* As wide as the drawing, so that the title fits on one line where there is room */
+		max-width: min(var(--kln-unit-w), 100%);
 		margin-inline: auto;
 		padding-inline: var(--sl-content-pad-x);
 	}
