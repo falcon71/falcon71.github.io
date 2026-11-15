@@ -2,8 +2,14 @@
 
 The coordinator's working structure of the KLN 90B manual (`docs/coordinator-prompt.md`, "The plan file"). It holds
 no fact and no text from a real manual. **Dry run of 2026-11-04:** only the APT chapter of the page reference is
-planned and written, so that the maintainer can judge prose, length, detail and screens before the full run. The full
-run replaces this file with the plan of the whole manual; the APT part below is meant to carry over.
+planned and written, so that the maintainer can judge prose, length, detail and screens before the full run. The
+planning session (`docs/coordinator-prompt.md`) replaces this file with the index of the whole manual and the package
+files in `docs/plan/`; the APT part below is meant to carry over.
+
+**The scratchpad files this plan names (`handoff-waypoints.md`, `handoff-flight-plans.md`) no longer exist;** the
+scratchpad of the dry run's session is gone. The text the review moved out of the APT chapter is still in the history
+of `kln90b/src/content/docs/pages/apt.mdx` (the draft `f1465fc` and the two review commits after it). The planning
+session writes notes for the owning packages from there, or leaves it to their researchers.
 
 ## Outline
 
