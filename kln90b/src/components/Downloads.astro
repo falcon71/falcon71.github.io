@@ -1,0 +1,169 @@
+---
+/**
+ * The download buttons of the home page: the current full release for each simulator, looked up when the site is
+ * built (src/lib/releases.ts). Without the lookup (a local build offline) both buttons go to the releases page.
+ */
+import {currentReleases, RELEASES_PAGE, type Release} from '../lib/releases';
+
+const releases = await currentReleases();
+
+interface Card {
+	simulator: string;
+	major: string;
+	release: Release | undefined;
+	primary: boolean;
+}
+
+const cards: Card[] = [
+	{simulator: 'Microsoft Flight Simulator 2024', major: '2', release: releases?.msfs2024, primary: true},
+	{simulator: 'Microsoft Flight Simulator 2020', major: '1', release: releases?.msfs2020, primary: false},
+];
+
+const date = (iso: string) =>
+	new Date(iso).toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC'});
+const megabytes = (bytes: number) => `${(bytes / 1_000_000).toFixed(1)} MB`;
+---
+
+<section class="kln-downloads not-content" aria-labelledby="kln-downloads-title">
+	<h2 id="kln-downloads-title">Download</h2>
+	<div class="kln-download-cards">
+		{
+			cards.map(card => (
+				<div class={`kln-download-card${card.primary ? ' kln-download-card--primary' : ''}`}>
+					<p class="kln-download-sim">{card.simulator}</p>
+					{card.release ? (
+						<>
+							<a class="kln-download-button" href={card.release.downloadUrl} download>
+								<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+									<path d="M12 3v12m0 0-5-5m5 5 5-5M4 20h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+								</svg>
+								<span>Download version {card.release.version}</span>
+							</a>
+							<p class="kln-download-meta">
+								{card.release.fileName}, {megabytes(card.release.size)}
+								<br />
+								Released {date(card.release.published)} ·{' '}
+								<a href={card.release.notesUrl}>Release notes</a>
+							</p>
+						</>
+					) : (
+						<>
+							<a class="kln-download-button" href={RELEASES_PAGE}>
+								<span>Version {card.major}.x on GitHub</span>
+							</a>
+							<p class="kln-download-meta">
+								Take the newest release that is not marked as a pre-release, and download the zip file
+								named falcon71-kln90b.
+							</p>
+						</>
+					)}
+				</div>
+			))
+		}
+	</div>
+	<p class="kln-download-next">
+		Then <a href="/kln90b/getting-started/installation/">install the package</a> in the Community folder and continue
+		with the <a href="/kln90b/getting-started/quickstart/">quickstart</a>. This manual describes version 2.x.
+	</p>
+</section>
+
+<style>
+	.kln-downloads {
+		margin-block: 2rem 2.5rem;
+	}
+
+	.kln-downloads h2 {
+		font-family: var(--kln-font-heading);
+		font-weight: 600;
+		font-size: var(--sl-text-h3);
+		color: var(--sl-color-white);
+		margin-bottom: 1rem;
+	}
+
+	.kln-download-cards {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+		gap: 1rem;
+	}
+
+	.kln-download-card {
+		display: flex;
+		flex-direction: column;
+		gap: 0.85rem;
+		padding: 1.25rem;
+		border: 1px solid var(--sl-color-gray-5);
+		border-radius: 0.5rem;
+		background: var(--kln-figure-bg);
+	}
+
+	.kln-download-card--primary {
+		border-color: var(--sl-color-accent);
+	}
+
+	.kln-download-sim {
+		margin: 0;
+		font-family: var(--kln-font-heading);
+		font-weight: 600;
+		font-size: var(--sl-text-xl);
+		line-height: 1.2;
+		color: var(--sl-color-white);
+	}
+
+	.kln-download-button {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.6rem;
+		min-height: 3.25rem;
+		padding: 0.75rem 1.25rem;
+		border: 2px solid var(--sl-color-accent);
+		border-radius: 999rem;
+		font-size: var(--sl-text-lg);
+		font-weight: 600;
+		text-align: center;
+		text-decoration: none;
+		color: var(--sl-color-accent-high);
+	}
+
+	.kln-download-card--primary .kln-download-button {
+		background: var(--sl-color-accent);
+		color: var(--sl-color-black);
+	}
+
+	.kln-download-button:hover {
+		background: var(--sl-color-accent-low);
+		color: var(--sl-color-white);
+	}
+
+	.kln-download-card--primary .kln-download-button:hover {
+		background: var(--sl-color-accent-high);
+		border-color: var(--sl-color-accent-high);
+		color: var(--sl-color-black);
+	}
+
+	.kln-download-button:focus-visible {
+		outline: 2px solid var(--sl-color-white);
+		outline-offset: 2px;
+	}
+
+	.kln-download-meta {
+		margin: 0;
+		font-size: var(--sl-text-sm);
+		color: var(--sl-color-gray-3);
+		overflow-wrap: anywhere;
+	}
+
+	.kln-download-meta a {
+		color: var(--sl-color-text-accent);
+	}
+
+	.kln-download-next {
+		margin-top: 1rem;
+		max-width: 70ch;
+		color: var(--sl-color-gray-2);
+	}
+
+	.kln-download-next a {
+		color: var(--sl-color-text-accent);
+	}
+</style>
