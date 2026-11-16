@@ -1,0 +1,19 @@
+<Field id="state" title="GPS state">
+	`STATE` and `ACQ`, acquisition: the unit has no position and is acquiring satellites. When it searches blind, the state reads `INIT`, initialization. [The GPS states](/kln90b/operation/gps-receiver/#the-gps-states) lists every state.
+</Field>
+
+<Field id="sv" title="Satellite number">
+	The number of a satellite that the unit expects to find, under the heading `SV`. During the acquisition after power-on, the unit lists the satellites that it predicts at least 5° above the horizon, from the position and the time it remembers. A `*` in front of the number means that the position does not use the satellite yet; the `*` goes when the satellite comes in.
+</Field>
+
+<Field id="snr" title="Signal-to-noise ratio">
+	`00` while the position does not use the satellite. When the receiver takes the satellite into the position, its signal strength shows here.
+</Field>
+
+<Field id="ele" title="Predicted elevation of the satellite">
+	The elevation that the unit predicts for the satellite, in whole degrees. While the unit has no position, the value does not change: it is a prediction and not a measurement.
+</Field>
+
+<Field id="page" title="Page identification">
+	The page identification on the left side. The `+` shows that the list has a second page.
+</Field>

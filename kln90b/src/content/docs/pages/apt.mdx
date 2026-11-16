@@ -2,7 +2,7 @@
 title: APT pages
 description: What the APT pages show about an airport (name, position, runways, frequencies, remarks, SIDs, STARs and approaches) and how you choose the airport.
 sidebar:
-  order: 6
+  order: 14
 ---
 
 import KlnScreen from '../../../components/KlnScreen.astro';
@@ -97,7 +97,7 @@ APT 3 shows the runways of the airport, first as a diagram and then as a list of
 
 The diagram is the first APT 3 page of an airport that has runways, and the status line therefore reads `APT+3`. It shows no identifier and no top line, so the page has no field: the right <kbd>CRSR</kbd> does nothing, and you cannot change the identifier there. Scanning works. At an airport whose runway data lists a helipad, the diagram can stay blank, while the list pages work.
 
-{/* kln90b bug candidate (unverified in the simulator): the APT 3 diagram throws an error and stays blank for airports whose runway data has helipad entries such as H1 (KMWH); the entries may come from the FAA extract of the screens only */}
+{/* kln90b#476: describes the current behavior (whether the simulator's own data has such runway entries is unverified); the fix makes the unit draw the diagram without them */}
 
 The runway list follows: the unit lists at most the five longest runways, longest first, two runways per page.
 
@@ -105,7 +105,7 @@ The runway list follows: the unit lists at most the five longest runways, longes
 
 An airport without a runway entry has no diagram, and its one page reads `RUNWAY DATA NOT AVAILABLE`. If you enter an identifier that no airport has while a list page is shown, and then correct it to an airport that has a diagram, the unit shows that diagram and turns the cursor off, so that the next click of the right inner knob selects another page instead of changing a character.
 
-{/* kln90b bug candidate: after an unknown identifier on an APT 3 list page, entering a valid one shows the diagram and turns the cursor off */}
+{/* kln90b#475: describes the current behavior; the fix makes the unit stay on the list page with the cursor on */}
 
 A user-defined airport has one page, which holds its single runway: the length and the surface, which you enter. It appears in the nearest list only when the runway meets the minimum length of SET 3 and, where SET 3 allows hard surfaces only, has the surface <Term t="HRD">`HRD`</Term>; a runway without an entered surface counts as soft.
 
@@ -142,7 +142,7 @@ A frequency of another type is listed without a frequency type. A frequency of n
 
 The page shows five frequencies. An airport with more than five has more pages, and the status line reads `APT+4`; the inner knob steps through them. If you change the airport while a later page is shown and the new airport has fewer pages, the page shows the new identifier with blank lines until you turn the right inner knob one click counterclockwise.
 
-{/* kln90b bug candidate: APT 4 shows blank rows when the airport changes while a later frequency page is shown and the new airport has fewer pages */}
+{/* kln90b#474: describes the current behavior; the fix makes the unit show the first frequency page of the new airport */}
 
 An airport without a usable frequency, and every user-defined airport, shows `COMM FREQ DATA NOT AVAILABLE`.
 

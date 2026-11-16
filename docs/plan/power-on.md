@@ -41,6 +41,25 @@ Links instead of explanations: the receiver states and acquisition (GPS receptio
 
 ## Notes from other packages
 
+### From the package sta (2026-11-16)
+
+Pointers from the code (`Gps.ts`, `GpsSearch.ts`, `pages/WelcomePage.tsx`); check each before it is written:
+
+- Correcting the position, the date or the time while the receiver has no position restarts the search, and the
+  position follows within about 150 seconds. While the unit has a position, the correction changes nothing for the
+  receiver.
+- The unit's clock follows the simulator's time while the unit is off.
+- With the acquisition set to `REAL`, loading the aircraft at another airport than the one it was last turned off
+  at posts `POSITION DIFFERS FROM` `LAST POSITION BY >2NM` at the first position.
+- **Take-home mode** stays with this package: a pilot meets it only as the warning page before the self test, in
+  aircraft whose installation enables it (Availability box). In the pinned code a take-home unit turned on cold and
+  dark never gets a position, and one started with the engine running loses it for good after a power cycle
+  (`Gps.ts:562-574, 746, 948-955`). kln90b#455 (closed) is about this; check whether the pin contains its fix
+  before the page describes the behavior, and add the `kln90b#455` comment if it does not. The maintainer wants
+  no new issue for it (2026-11-16).
+- GPS reception and RAIM owns acquisition (`#acquiring-satellites`, `#the-gps-states`,
+  `#real-and-fast-acquisition`); this page says what the pilot does while waiting and links.
+
 From the package getting-started (facts from the code and the staged unit, to be checked again):
 
 - The display warms up for up to about 6 seconds after a long time off, less after a short one

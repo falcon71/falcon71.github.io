@@ -23,7 +23,7 @@ Candidates for the FAQ and Known limitations, collected by earlier packages; eve
   copy offer the unit there (wiki, "Bundling the KLN with your aircraft").
 - From the package getting-started: keyboard mode has two H events for hardware
   (`KLN90B_LeftKeyboard_Toggle`, `KLN90B_RightKeyboard_Toggle`; kln90b README) for External hardware.
-- From the package apt: the simulation has no search of an airport by name or city (Known limitations).
+- From the package apt: the simulation has no search of an airport by name or city (Known limitations); the enhancement is kln90b#482, which the entry can link.
 - From the planning survey, as candidates to verify: the screen stays dark after power-on (FAQ, linked to the
   Quickstart's box); slow acquisition and the setting on SET 10 (FAQ, linked to GPS reception and RAIM); the unit
   does not sequence (FAQ, linked to Sequencing); OTH 1 lists no flight service stations; course reversals and holds

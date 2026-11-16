@@ -1,0 +1,36 @@
+---
+/**
+ * Synthetic drawing, flattened to two dimensions: each line is the set of positions that fit one measurement. Left,
+ * just as many measurements as the position needs: a wrong one (green) moves the crossing, and every line still fits
+ * the new point. Right, one measurement more: the wrong one misses the crossing of the others and leaves a triangle,
+ * the misfit that RAIM tests. The faint lines show where the wrong measurement should have been; the ring is the true
+ * position, the dot the computed one.
+ */
+import GpsFigure from './GpsFigure.astro';
+
+interface Props {
+	caption: string;
+}
+const { caption } = Astro.props;
+---
+
+<GpsFigure caption={caption} viewBox="0 0 560 304" id="gps-raim">
+	<!-- left: just enough -->
+	<line x1="59.3" y1="45.7" x2="200.7" y2="214.3" class="grid" />
+	<line x1="30.3" y1="176.5" x2="229.7" y2="83.5" class="line" />
+	<line x1="37.8" y1="63.7" x2="179.3" y2="232.3" class="accent" />
+	<circle cx="130" cy="130" r="8" class="ring" />
+	<circle cx="103.7" cy="142.3" r="7" class="dot-plain" />
+	<text x="130" y="272" text-anchor="middle" class="t">just enough</text>
+	<text x="130" y="296" text-anchor="middle" class="t small">error unseen</text>
+	<!-- right: one more -->
+	<line x1="428.7" y1="229.6" x2="411.3" y2="30.4" class="grid" />
+	<polygon points="420,130 447,117.4 451.4,167.4" class="area" />
+	<line x1="320.3" y1="176.5" x2="519.7" y2="83.5" class="line" />
+	<line x1="349.3" y1="45.7" x2="490.7" y2="214.3" class="line" />
+	<line x1="456.6" y1="227.2" x2="439.2" y2="27.9" class="accent" />
+	<circle cx="420" cy="130" r="8" class="ring" />
+	<circle cx="439.5" cy="138.3" r="7" class="dot-plain" />
+	<text x="420" y="272" text-anchor="middle" class="t">one more</text>
+	<text x="420" y="296" text-anchor="middle" class="t small t-accent">error found</text>
+</GpsFigure>

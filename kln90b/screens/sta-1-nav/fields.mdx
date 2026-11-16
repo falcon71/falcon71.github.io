@@ -1,0 +1,32 @@
+<Field id="state" title="GPS state">
+	`STATE` and the GPS state, five characters long:
+
+	- `ACQ`, acquisition: the unit has no position and is acquiring the satellites it expects to find.
+	- `INIT`, initialization: the unit has no position and searches for satellites without knowing where they are, or collects the almanac data.
+	- `TRAN`, transition: the receiver has a position that the unit has not accepted yet. It lasts about a second.
+	- `NAV`, navigation: the unit has a position from the satellites alone.
+	- `NAV A`, navigation with altitude aiding: the unit has a position and uses the altitude input as one more measurement.
+	- `NAV D`, navigation with data collection: the unit navigates while the receiver collects the ephemeris data of a satellite it has just found.
+	- `DEGRD`, navigation with position degradation: the unit has a position, but the geometry of the satellites is too poor for <Term t="RAIM" /> in the present phase of flight.
+	- `FAILR`, receiver failure: the receiver has failed.
+
+	`FAILR` takes precedence over all other states, `DEGRD` over `NAV D`, and `NAV D` over `NAV A`: `NAV A` does not show while either of the others does, although the altitude input is still in use. [The GPS states](/kln90b/operation/gps-receiver/#the-gps-states) explains how one state follows another.
+</Field>
+
+<Field id="sv" title="Satellite number">
+	The number of the satellite as two digits, under the heading `SV`. The list is sorted by number and holds up to eight satellites, four on each page; a row without a satellite is blank.
+
+	A `*` in front of the number means that the position does not use the satellite; a blank means that it does. The satellite health follows the number: a blank for a healthy satellite, and a `-` for a satellite that the receiver searched for several minutes without finding it, which you see while the unit searches blind (`INIT`).
+</Field>
+
+<Field id="snr" title="Signal-to-noise ratio">
+	The signal strength of a satellite that the position uses, as two digits under the heading `SNR`. Satellites in use usually read between the mid-30s and 50, those low on the horizon lower than those overhead. The unit drops a satellite from the position when its reading falls below 30 and takes it back at 35 or more. A satellite that the position does not use reads `00`.
+</Field>
+
+<Field id="ele" title="Elevation of the satellite">
+	The height of the satellite above the horizon, in whole degrees under the heading `ELE`, for example `22°`. The unit shows dashes (`--`) for a satellite below the horizon and, while it has no position, for a satellite whose ephemeris data it does not have yet.
+</Field>
+
+<Field id="page" title="Page identification">
+	The page identification on the left side. A `+` in place of the space (`STA+1`) means that STA 1 has a second page, which the left inner knob selects while the cursor is off.
+</Field>

@@ -1,0 +1,43 @@
+---
+/**
+ * Synthetic drawing: the answer of the simulation's position filter (one axis, one update per second, the aircraft at a
+ * steady speed) to a step of 20 m in the measured position, as when a satellite joins or leaves. The two curves are the
+ * filter's own equations with the measurement weights of the two skies of GpsSkyGeometry for a step to the east (good:
+ * 8 satellites spread, east variance 0.53 × (5 m)²; poor: 6 bunched to the east, east variance 64.3 × (5 m)²). Good: 93%
+ * after 10 s, 95% after 12 s. Poor: 23% after 10 s, 39% after 20 s, 52% after 30 s, 77% after 60 s.
+ */
+import GpsFigure from './GpsFigure.astro';
+
+interface Props {
+	caption: string;
+}
+const { caption } = Astro.props;
+
+const good = '70,230 108,230 108,192 114,162 120.1,138.4 126.1,119.7 132.1,105 138.2,93.4 144.2,84.2 150.2,77 156.3,71.3 162.3,66.8 168.3,63.3 180.4,58.3 192.5,55.1 204.5,53.2 216.6,52 228.7,51.2 258.8,50.4 289,50.1 319.2,50 349.3,50 379.5,50 409.7,50 439.8,50 470,50';
+const poor = '70,230 108,230 108,225.8 114,221.6 120.1,217.6 126.1,213.7 132.1,209.8 138.2,206.1 144.2,202.4 150.2,198.8 156.3,195.3 162.3,191.9 168.3,188.6 180.4,182.1 192.5,176 204.5,170.1 216.6,164.5 228.7,159.2 258.8,147 289,136.1 319.2,126.4 349.3,117.9 379.5,110.2 409.7,103.5 439.8,97.5 470,92.2';
+const xTicks: [string, number][] = [['0', 108], ['20', 228.7], ['40', 349.3], ['60 s', 470]];
+const yTicks: [string, number][] = [['0', 230], ['10', 140], ['20 m', 50]];
+---
+
+<GpsFigure caption={caption} viewBox="0 0 570 290" id="gps-filter">
+	{xTicks.map(([label, x]) => (
+		<g>
+			<line x1={x} y1="230" x2={x} y2="236" class="ax" />
+			<text x={x} y="256" text-anchor="middle" class="t small">{label}</text>
+		</g>
+	))}
+	{yTicks.map(([label, y]) => (
+		<g>
+			<line x1="64" y1={y} x2="70" y2={y} class="ax" />
+			<text x="58" y={y + 6} text-anchor="end" class="t small">{label}</text>
+		</g>
+	))}
+	<polyline points="70,30 70,230 470,230" class="ax" />
+	<polyline points="70,230 108,230 108,50 470,50" class="dash" />
+	<polyline points={poor} class="muted" />
+	<polyline points={good} class="accent" />
+	<text x="118" y="40" class="t">measured</text>
+	<text x="480" y="56" class="t t-accent">good sky</text>
+	<text x="480" y="98" class="t">poor sky</text>
+	<text x="470" y="284" text-anchor="end" class="t small">time after the step</text>
+</GpsFigure>

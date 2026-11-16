@@ -36,7 +36,7 @@ See the index: what a loaded procedure does in FPL 0, and (with Non-precision ap
 - From the package apt: the text about where a procedure goes in FPL 0 and about the make-room question that the
   review cut from the APT chapter is in the git history (`docs/plan/apt.md`, "Text the review moved out of the
   chapter").
-- From the package apt, bug candidate 6: a STAR or an approach is inserted before the first occurrence of the
+- From the package apt, filed as kln90b#480 (the maintainer decides): a STAR or an approach is inserted before the first occurrence of the
   airport, which puts it at the start of a round trip. Not settled by the real manual; the maintainer decides
   whether it is filed. The page describes the current behavior.
 - The maintainer's findings on the route of Tutorial flight 2 (style guide, section 17) show the rules at work.
