@@ -189,7 +189,10 @@ after the other.
 
 Every page gets a reviewer that did not write it. The reviewer checks the facts against the code (staging screens
 where that settles a question) and against the real manuals, the text against the style guide and the example page,
-and the screens and field explanations. It also checks the page against topic ownership: a fact that another page
+and the screens and field explanations. It checks every name of a thing of the unit (controls, pages, parts of the
+screen, prompts, modes, functions) against the official terms of the real manuals and reports each one that differs,
+as the term alone (style guide, section 12, "Official terms"); you add the official term to the word list, so that
+later writers use it. It also checks the page against topic ownership: a fact that another page
 owns is a finding, and so is a term or a name that differs from the section the page links to. It reports each
 finding as "place: the draft says A; it should say B, because …" in its own words.
 

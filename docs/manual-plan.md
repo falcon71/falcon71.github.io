@@ -132,8 +132,9 @@ questions differ by one word and stand for both.
 
 ## Open questions for the maintainer
 
-- From the package "getting started": the name of the power control ("the brightness knob" in the Quickstart, "power
-  button" on the wiki), to be fixed with Controls and display.
+- From the package "getting started": five official terms that contradict the word list or the APT chapter
+  (`docs/plan/getting-started.md`, "Open"). For the final pass: the APT chapter was reviewed before the rule on
+  official terms (style guide, section 12) existed and needs the reviewer's term check.
 - The first approved Installation and Quickstart pages become the examples of their kinds, if the maintainer
   approves them as such.
 

@@ -309,7 +309,7 @@ export const glossary: Record<string, GlossaryEntry> = {
 		text: 'The course that the unit reads from the OBS setting of the course indicator in the aircraft, in degrees magnetic.',
 	},
 	OUT: {
-		expansion: 'Output',
+		expansion: 'OBS output',
 		text: 'On the Self Test page, the desired track that the unit sends out; it shows a fixed test value.',
 	},
 	RMI: {
@@ -325,8 +325,8 @@ export const glossary: Record<string, GlossaryEntry> = {
 		text: 'The indicated altitude from the altitude input of the aircraft, rounded to 100 ft.',
 	},
 	BARO: {
-		expansion: 'Barometric pressure setting',
-		text: 'The pressure setting of the unit, in inches of mercury, which it uses for altitude.',
+		expansion: 'Altimeter baro setting',
+		text: 'The baro setting of the altimeter, in inches of mercury, which the unit uses for altitude.',
 	},
 };
 

@@ -3,14 +3,16 @@
  * The recurring boxes of the manual. Each kind has one fixed title, so the reader learns to recognize them.
  *   availability   the feature exists only in some installations
  *   sim-only       exists only in the simulation, not in the real unit
+ *   info           something that regularly catches pilots off guard
  */
 interface Props {
-	kind: 'availability' | 'sim-only';
+	kind: 'availability' | 'sim-only' | 'info';
 }
 
 const titles = {
 	availability: 'Availability',
 	'sim-only': 'Simulator only',
+	info: 'Good to know',
 };
 
 const { kind } = Astro.props;
@@ -33,6 +35,9 @@ const { kind } = Astro.props;
 	}
 	.kln-callout-sim-only {
 		--kln-callout-color: #5f86a8;
+	}
+	.kln-callout-info {
+		--kln-callout-color: #c9a227;
 	}
 	.kln-callout-title {
 		margin: 0;

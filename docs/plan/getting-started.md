@@ -28,9 +28,9 @@ As written:
 As written:
 
 1. Summary: two pages side by side, pages chosen with the knobs, the cursor, ENT.
-2. `#turning-the-unit-on`: the warm-up of the screen first, then the brightness knob, the procedure from the Turn-On
+2. `#turning-the-unit-on`: the power/brightness knob, the warm-up of the screen in a Good to know box, the procedure from the Turn-On
    page to the normal pages with the screen `self-test`, link to Power-on and initialization.
-3. `#the-two-halves-of-the-screen`: the halves, which controls serve which, the status line; screen
+3. `#the-two-sides-of-the-screen`: the two sides, which controls serve which, the status line; screen
    `nav-1-apt-1-ksea`.
 4. `#selecting-a-page`: groups and pages, outer and inner knob, subpages (`+`), the knob demo.
 5. `#changing-a-field-with-the-knobs`: the CRSR keys, fields that the inner knob changes at once; screen
@@ -76,8 +76,11 @@ SET chapter, Direct-to) reuse these screens or replace them; one screen, one id.
 
 ## Open
 
-- **The name of the power control.** The Quickstart calls it "the brightness knob" (pushed in to turn the unit on);
-  the wiki says "power button". Controls and display fixes the names of all controls; the Quickstart follows it.
+- **Official terms the maintainer must decide** (reviewer's term check, 2026-11-16; each contradicts the word list
+  or the approved APT chapter, so the pages keep the present term until then): the official "button" for what the
+  manual calls a key (CRSR, ENT, MSG); "page type" for a page group; "groundspeed" for ground speed; "Enroute-Leg
+  mode" as the name of `enr-leg`; "NAV ready" for the state in which the unit has found its position. Also whether
+  the field `cdi` of NAV 1 is titled "D-bar" as on the Self Test page.
 - **The knob demo** steps through optional pages (marked dashed) and shows no subpages; the Quickstart says so. SET 0
   was added after SET 10 in `pageTree.ts` in this package.
 
@@ -131,9 +134,7 @@ hardware (kln90b README); the External hardware page can carry them.
 field (with an explicit opt-out for free text) would catch this in future screens. `home-nav-1` has the same gap, but
 it is shown without fields.
 
-**Controls and display, from the Quickstart's writer**: the Quickstart names the power control "the brightness knob"
-(the class comment `BRT/PUSH ON` in `PowerSupply.ts`, the `BRT` label of the drawing in `KlnUnit.astro`); Controls and
-display fixes the names of all controls and must use this one or change the Quickstart with it. Text cut from the
+**Controls and display, from the Quickstart's writer**: text cut from the
 Quickstart because Controls and display owns it: some aircraft need a right click on the knob to turn the unit on, and
 a pilot who uses the right mouse button to pan the camera holds the left mouse button before the right click (wiki).
 On the identifier of a waypoint page, the first step of the inner knob goes from the existing character on through
@@ -141,7 +142,7 @@ the character set (from `0` to `1`), not to `A`.
 
 **Power-on, from the maintainer (2026-11-16)**: the beeps on approval of the self test need an audio output of the
 aircraft, which none of the aircraft that carry the unit has so far; the Quickstart leaves the beep out and Power-on
-says it with that condition. A turned-down brightness knob also keeps the screen dark.
+says it with that condition. A turned-down power/brightness knob also keeps the screen dark.
 
 **Power-on, from the Quickstart's writer**: after the database page the unit shows NAV 2 on the left and the SUP page
 on the right when no waypoint was last active, or the page of the last active waypoint (APT 4 for an airport)

@@ -121,6 +121,8 @@ against this guide.
 - A reviewer may read the real manuals. It never quotes them and never shows a page or a figure of one.
 - A finding states the error in the reviewer's own words: "Direct-to, step 3: the draft says A; the unit does B." It
   names no manual page. It reaches the writer only through the coordinator.
+- A reviewer checks that the draft uses the official terms (section 12, "Official terms") and reports each term that
+  differs, as the term alone.
 - Where the manual and the code disagree, the finding is a kln90b bug (section 5), not a change to the draft.
 
 ### Where the manuals are
@@ -219,10 +221,10 @@ The model packs several facts into every paragraph and wastes no words. So does 
 - **Nothing about how the simulation is built,** not even in pilot words: that the unit only receives the commands
   of its controls, which part of the aircraft decides what a click does, how the aircraft switches the unit in. Say
   what the pilot does and sees (section 2).
-- **A gotcha gets its own sentence, up front.** Where the unit regularly catches pilots off guard (the screen stays
-  dark for a few seconds after power-on while it warms up), the fact stands in a sentence of its own at the start of
-  the section, or in a note, never in a subordinate clause. A pilot who searches for the cause of exactly that must
-  not be able to overlook it.
+- **A gotcha must not be overlooked.** Where the unit regularly catches pilots off guard (the screen stays dark for a
+  few seconds after power-on while it warms up), the fact never stands in a subordinate clause. It gets the Good to
+  know box (section 11) at the place where the pilot meets it, and the text around it keeps its natural order: a
+  gotcha moved to the front of a section makes the section read out of order.
 - **Paragraphs of two to five sentences.** Sentences mostly of 10 to 25 words. Split a sentence that carries two
   conditions.
 - **Lists** for parallel items: the fields of a page, the choices of a menu, the conditions of a message. Prose for
@@ -331,10 +333,29 @@ before you reuse one):
   every aircraft has one." It never names a configuration key. Put it at the start of the section about the feature.
 - **The Simulator only box** (`<Callout kind="sim-only">`) marks a feature that the real unit does not have. Put it at
   the start of the section about the feature.
+- **The Good to know box** (`<Callout kind="info">`) holds a fact that regularly catches pilots off guard and that a
+  pilot may open the page to find: the screen stays dark for a few seconds after power-on while the unit warms up. Put
+  it where the pilot meets the surprise, so that the text around it stays in its natural order. Two or three
+  sentences. It is rare: a page has at most one, and most pages have none; an ordinary exception stays a sentence or a
+  note.
 - There are no other boxes. If a new kind is needed, ask the coordinator; it is added to `Callout` with one fixed title,
   so that pilots learn to recognize it.
 
 ## 12. Words and notation
+
+### Official terms
+
+The manual names the things of the unit as the real unit's documentation names them: the controls, the pages, the
+parts of the screen, the prompts, the modes and the functions. Terms are not copyrighted, and a pilot who meets two
+names for one thing takes them for two things.
+
+- A writer cannot know the official term, because a writer never reads the real manuals (section 4). The writer uses
+  the terms of the word list below and of the pages already written, and otherwise the name the unit's screen or the
+  code suggests.
+- **The reviewer checks every term against the real manuals** and reports each difference as a finding: the draft's
+  term and the official term, nothing else. A term is a name of a few words; no sentence around it comes along.
+- The coordinator adds the official term to the word list below, so that every later writer uses it without a
+  reviewer having to find it again.
 
 ### Controls
 
@@ -345,6 +366,8 @@ before you reuse one):
   is therefore `.mdx`.
 - **Knobs** are the left outer knob, the left inner knob, the right outer knob and the right inner knob. You "turn" a
   knob, "one step" or "clockwise" and "counterclockwise", and you "pull" or "push" the right inner knob.
+- **The power/brightness knob** turns the unit on and off (pushed in for on) and sets the brightness of the screen
+  (turned).
 - The Controls and display page names every control of the front panel, including the power and brightness controls.
   Every other page uses exactly those names.
 - **Mouse and keyboard.** Most aircraft follow the simulator's own control schemes, which need no description, and
@@ -408,6 +431,7 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | cursor; turn the cursor on, turn the cursor off | activate the cursor |
 | identifier; ident only in screen text | ID |
 | hot-swapping (noun), hot-swap (verb): an aircraft that offers the unit as one of several GPS units | take turns, switch in |
+| the power/brightness knob | the brightness knob, the power button, the power knob |
 | Microsoft Flight Simulator 2024, then "the simulator" | MSFS, FS2024 (except on Installation) |
 
 ### Spelling and style
@@ -551,7 +575,7 @@ knobs, the cursor, and data entry, each in a few sentences, each linking to the 
 
 - It contains the interactive knob demo, which walks the real page tree.
 - **Turning the unit on.** It says prominently that the screen stays dark for a few seconds while the unit warms up
-  (section 8, gotchas): pilots open this page to find out why their unit does not turn on. It shows the Self Test
+  in a Good to know box (sections 8 and 11): pilots open this page to find out why their unit does not turn on. It shows the Self Test
   page, which a pilot at that point has never seen; the other power-on pages need no screen here. It does not mention
   the beep on approval, which needs an audio output that the aircraft so far lack; that belongs to Power-on and
   initialization.
@@ -783,6 +807,7 @@ Before a writer hands in a page:
 - [ ] Exact numbers instead of vague words; every exception after its rule.
 - [ ] Procedures: numbered, one action per step, sides named, way back given, stable end state.
 - [ ] Keys in `<kbd>`, the Direct To key as `<DirectToKey />`, screen text in code formatting, page names plain and with a space before the number.
+- [ ] The terms of the word list used; no second name for a thing that a page already written names.
 - [ ] `<Term>` at the first use of each glossary term; operating concepts linked to their section instead; new terms
       and words reported to the coordinator.
 - [ ] Nothing re-explained that another page owns; the basic operation of the unit linked, not repeated.
@@ -795,5 +820,5 @@ Before a writer hands in a page:
       the `kln90b#NN` comment once the issue is filed.
 - [ ] `npm run build` in `kln90b/` passes without new `[page links]` warnings.
 
-A reviewer checks the same list, then the facts against the code and the real manuals, and reports each finding in
-their own words, with the place in the draft, what it says and what is right.
+A reviewer checks the same list, then the facts against the code and the real manuals and every term against the
+official terms of the real manuals (section 12), and reports each finding in their own words, with the place in the draft, what it says and what is right.

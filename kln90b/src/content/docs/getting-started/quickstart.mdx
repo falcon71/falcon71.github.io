@@ -4,6 +4,7 @@ description: The least you need to operate the KLN 90B, from turning it on to se
 ---
 
 import KnobDemo from '../../../components/KnobDemo.astro';
+import Callout from '../../../components/Callout.astro';
 import KlnScreen from '../../../components/KlnScreen.astro';
 import DirectToKey from '../../../components/DirectToKey.astro';
 import Term from '../../../components/Term.astro';
@@ -12,9 +13,13 @@ The KLN 90B shows two pages side by side. You choose a page with the knobs, not 
 
 ## Turning the unit on
 
-The screen stays dark for up to 6 seconds after you turn the unit on while it warms up, and then brightens over about 4 seconds. A unit that was off for less than 10 minutes is dark for a shorter time. The screen also stays dim while the brightness knob is turned down. Do not push the knob again, which turns the unit off.
+You turn the KLN 90B on by pushing in the power/brightness knob, at the upper right of the unit. The avionics of the aircraft must have power, with the avionics bus on and no circuit breaker pulled. Some aircraft need a right click on the knob, see [the controls in the simulator](#the-controls-in-the-simulator).
 
-You turn the KLN 90B on by pushing in the brightness knob, at the upper right of the unit. The avionics of the aircraft must have power, with the avionics bus on and no circuit breaker pulled. Some aircraft need a right click on the knob, see [the controls in the simulator](#the-controls-in-the-simulator). The Turn-On page is what the screen shows as it brightens; the unit runs its self test while that page is shown, and the Self Test page follows about 17 seconds after power-on.
+<Callout kind="info">
+The screen stays dark for up to 6 seconds after you turn the unit on while it warms up, and then brightens over about 4 seconds. A unit that was off for less than 10 minutes is dark for a shorter time. Do not push the knob again, which turns the unit off.
+</Callout>
+
+The Turn-On page is what the screen shows as it brightens; the unit runs its self test while that page is shown, and the Self Test page follows about 17 seconds after power-on. The screen also stays dim while you keep the knob turned down.
 
 To get from the Turn-On page to the normal pages:
 
@@ -22,15 +27,15 @@ To get from the Turn-On page to the normal pages:
 
 <KlnScreen screen="self-test" />
 
-2. Press <kbd>ENT</kbd> until the cursor is on `APPROVE?`. The cursor starts on the barometer setting and moves one field on with each press. Once it is on `APPROVE?`, <Term t="ent">`ent`</Term> flashes in the status line.
-3. Press <kbd>ENT</kbd>. The unit shows the database page, with the cursor on `ACKNOWLEDGE?`.
+2. Press <kbd>ENT</kbd> until the cursor is on `APPROVE?`. The cursor starts on the baro setting and moves one field on with each press. Once it is on `APPROVE?`, <Term t="ent">`ent`</Term> flashes in the status line.
+3. Press <kbd>ENT</kbd>. The unit shows the Database page, with the cursor on `ACKNOWLEDGE?`.
 4. Press <kbd>ENT</kbd>. The unit shows its normal pages.
 
-Depending on the installation, another page can appear before the Self Test page or before the database page. Until the unit has found its position, the navigation pages show dashes instead of values. [Power-on and initialization](/kln90b/unit/power-on/) explains the self test, the database page and the search for the position, including those pages and what to do when the search takes too long.
+Depending on the installation, another page can appear before the Self Test page or before the Database page. Until the unit has found its position, the navigation pages show dashes instead of values. [Power-on and initialization](/kln90b/unit/power-on/) explains the self test, the Database page and the search for the position, including those pages and what to do when the search takes too long.
 
-## The two halves of the screen
+## The two sides of the screen
 
-The screen is a left page and a right page with the status line under them, and each half has six lines. The left knobs and the left <kbd>CRSR</kbd> key operate the left page, the right knobs and the right <kbd>CRSR</kbd> key the right page. A few pages, such as the MSG page, use both halves.
+The screen is a left page and a right page with the status line under them, and each side has six lines. The left knobs and the left <kbd>CRSR</kbd> key operate the left page, the right knobs and the right <kbd>CRSR</kbd> key the right page. A few pages, such as the MSG page, use both sides.
 
 <KlnScreen screen="nav-1-apt-1-ksea" />
 
@@ -82,7 +87,7 @@ To fly direct to Boeing Field:
 
 ## The controls in the simulator
 
-In some aircraft the brightness knob needs a right click to turn the unit on. If you use the right mouse button to pan the camera, hold the left mouse button before you right click. [Using the controls in the simulator](/kln90b/unit/controls-and-display/#using-the-controls-in-the-simulator) says more.
+In some aircraft the power/brightness knob needs a right click to turn the unit on. If you use the right mouse button to pan the camera, hold the left mouse button before you right click. [Using the controls in the simulator](/kln90b/unit/controls-and-display/#using-the-controls-in-the-simulator) says more.
 
 Keyboard mode lets you use the keys of your PC instead of the knobs. With the cursor on, left click on <Term t="CRSR">`CRSR`</Term> in the status line, and <Term t="KYBD">`KYBD`</Term> flashes in its place. While it flashes, the simulator ignores all other input, joysticks included. [Keyboard mode](/kln90b/unit/keyboard-mode/) explains how to leave it and which keys it uses.
 
