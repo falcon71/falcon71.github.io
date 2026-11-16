@@ -1,6 +1,7 @@
 # Package: failures (the FLR chapter; Simulated failures)
 
-Written on 2026-11-16, the second package of the full run, at the maintainer's request: the FLR pages are new and
+Written on 2026-11-16 and approved by the maintainer the same day. The second package of the full run, at the
+maintainer's request: the FLR pages are new and
 pilots need guidance for them. Everything in this package is Simulator only (style guide, sections 3 and 11). The
 pages this package links to for the basics (Controls and display, Power-on, the message lists, the SET chapter) are
 not written yet; it links to them by the planned anchors and page links of the index.

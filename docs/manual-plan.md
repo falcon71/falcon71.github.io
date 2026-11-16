@@ -31,12 +31,12 @@ as `/kln90b/<slug>/`) and its package. Pages that do not exist yet are linked by
 | | Non-precision approaches | `operation/approaches` | approaches |
 | | VNAV | `operation/vnav` | vnav-alerts |
 | | GPS reception and RAIM (new) | `operation/gps-receiver` | sta (done) |
-| | Inside the GPS simulation (new, optional reading) | `operation/gps-simulation` | sta (done); the failures part: failures (in review) |
+| | Inside the GPS simulation (new, optional reading) | `operation/gps-simulation` | sta (done); the failures part: failures (done) |
 | | Messages | `operation/messages` | messages |
 | | Airspace and altitude alerting | `operation/alerts` | vnav-alerts |
 | | Trip planning and calculators | `operation/trip-planning` | trip-planning |
 | | Fuel and air data | `operation/fuel-air-data` | fuel-air-data |
-| | Simulated failures (new) | `operation/failures` | failures (in review) |
+| | Simulated failures (new) | `operation/failures` | failures (done) |
 | Page reference, left | TRI | `pages/tri` | trip-planning |
 | | MOD | `pages/mod` | navigation |
 | | FPL | `pages/fpl` | flight-plans |
@@ -44,7 +44,7 @@ as `/kln90b/<slug>/`) and its package. Pages that do not exist yet are linked by
 | | CAL | `pages/cal` | trip-planning |
 | | STA | `pages/sta` | sta (done) |
 | | SET (with SET 0 and SET 10) | `pages/set` | set |
-| | FLR (new; opened from SET 10) | `pages/flr` | failures (in review) |
+| | FLR (new; opened from SET 10) | `pages/flr` | failures (done) |
 | | OTH | `pages/oth` | fuel-air-data |
 | Page reference, right | CTR | `pages/ctr` | flight-plan-pages |
 | | REF | `pages/ref` | flight-plan-pages |
@@ -165,7 +165,7 @@ anchors and page links above. After them the order follows "owners before the pa
 | – | getting-started | Installation, Quickstart | done (2026-11-16) |
 | – | apt | APT chapter | done (dry run 2026-11-04, corrected 2026-11-16) |
 | 1 | sta | STA chapter; GPS reception and RAIM; Inside the GPS simulation | done (2026-11-16) |
-| 2 | failures | FLR chapter; Simulated failures; the failures part of Inside the GPS simulation | in review (2026-11-16) |
+| 2 | failures | FLR chapter; Simulated failures; the failures part of Inside the GPS simulation | done (2026-11-16) |
 | 3 | controls | Controls and display; Keyboard mode | not started |
 | 4 | power-on | Power-on and initialization | not started |
 | 5 | waypoints | Waypoints and the database | not started |
