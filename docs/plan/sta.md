@@ -1,6 +1,6 @@
 # Package: sta (the STA chapter; GPS reception and RAIM; Inside the GPS simulation)
 
-Written on 2026-11-16, the first package of the full run, at the maintainer's request. In review with the
+Written on 2026-11-16, the first package of the full run, at the maintainer's request. Approved by the
 maintainer. The pages this package links to for the basics (Controls and display, Power-on, Waypoints and the
 database, the message lists, Non-precision approaches, Simulated failures) are not written yet; it links to them by
 the planned anchors and page links of the index.

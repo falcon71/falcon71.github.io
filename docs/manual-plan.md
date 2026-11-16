@@ -30,8 +30,8 @@ as `/kln90b/<slug>/`) and its package. Pages that do not exist yet are linked by
 | | SID and STAR procedures | `operation/departures-arrivals` | sid-star |
 | | Non-precision approaches | `operation/approaches` | approaches |
 | | VNAV | `operation/vnav` | vnav-alerts |
-| | GPS reception and RAIM (new) | `operation/gps-receiver` | sta (in review) |
-| | Inside the GPS simulation (new, optional reading) | `operation/gps-simulation` | sta (in review); the failures part: failures |
+| | GPS reception and RAIM (new) | `operation/gps-receiver` | sta (done) |
+| | Inside the GPS simulation (new, optional reading) | `operation/gps-simulation` | sta (done); the failures part: failures |
 | | Messages | `operation/messages` | messages |
 | | Airspace and altitude alerting | `operation/alerts` | vnav-alerts |
 | | Trip planning and calculators | `operation/trip-planning` | trip-planning |
@@ -42,7 +42,7 @@ as `/kln90b/<slug>/`) and its package. Pages that do not exist yet are linked by
 | | FPL | `pages/fpl` | flight-plans |
 | | NAV (both sides, with Super NAV 1 and Super NAV 5) | `pages/nav` | nav-pages |
 | | CAL | `pages/cal` | trip-planning |
-| | STA | `pages/sta` | sta (in review) |
+| | STA | `pages/sta` | sta (done) |
 | | SET (with SET 0 and SET 10) | `pages/set` | set |
 | | FLR (new; opened from SET 10) | `pages/flr` | failures |
 | | OTH | `pages/oth` | fuel-air-data |
@@ -164,7 +164,7 @@ anchors and page links above. After them the order follows "owners before the pa
 | --- | --- | --- | --- |
 | – | getting-started | Installation, Quickstart | done (2026-11-16) |
 | – | apt | APT chapter | done (dry run 2026-11-04, corrected 2026-11-16) |
-| 1 | sta | STA chapter; GPS reception and RAIM; Inside the GPS simulation | in review (2026-11-16) |
+| 1 | sta | STA chapter; GPS reception and RAIM; Inside the GPS simulation | done (2026-11-16) |
 | 2 | failures | FLR chapter; Simulated failures; the failures part of Inside the GPS simulation | not started |
 | 3 | controls | Controls and display; Keyboard mode | not started |
 | 4 | power-on | Power-on and initialization | not started |
