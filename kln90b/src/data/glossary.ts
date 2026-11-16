@@ -21,7 +21,7 @@ export const glossary: Record<string, GlossaryEntry> = {
 		text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam.',
 	},
 	GS: {
-		expansion: 'Ground speed',
+		expansion: 'Groundspeed',
 		text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
 	},
 	ETE: {
@@ -240,7 +240,7 @@ export const glossary: Record<string, GlossaryEntry> = {
 	},
 	CLR: {
 		expansion: 'Clearance delivery',
-		text: 'A frequency label of APT 4. On the front panel, CLR is the clear key.',
+		text: 'A frequency label of APT 4. On the front panel, CLR is the clear button.',
 	},
 	APR: {
 		expansion: 'Approach',
@@ -252,7 +252,7 @@ export const glossary: Record<string, GlossaryEntry> = {
 	},
 	CTR: {
 		expansion: 'Center',
-		text: 'On APT 4, the label of the frequency of a center that provides approach and departure control for the airport. CTR is also the right-side page group with the nearest centers.',
+		text: 'On APT 4, the label of the frequency of a center that provides approach and departure control for the airport. CTR is also the right-side page type with the nearest centers.',
 	},
 	PTAX: {
 		expansion: 'Pre-taxi clearance',
@@ -263,21 +263,21 @@ export const glossary: Record<string, GlossaryEntry> = {
 		text: 'The remarks of an airport on APT 5, as in RMKS FULL and APTS W/RMKS.',
 	},
 	msg: {
-		text: 'The message prompt. It shows in the status line when the unit holds a message and flashes while you have not read all of them. You read the messages with the MSG key.',
+		text: 'The message prompt. It shows in the status line when the unit holds a message and flashes while you have not read all of them. You read the messages with the MSG button.',
 	},
 	ent: {
 		text: 'The enter prompt. It flashes in the status line when ENT accepts what you have entered or selected.',
 	},
 	CRSR: {
 		expansion: 'Cursor',
-		text: 'Replaces the page name in the status line while the cursor is on for that side. Pressing the CRSR key of that side turns the cursor off again.',
+		text: 'Replaces the page name in the status line while the cursor is on for that side. Pressing the CRSR button of that side turns the cursor off again.',
 	},
 	KYBD: {
 		expansion: 'Keyboard',
 		text: 'Flashes in the status line in place of CRSR while keyboard mode is on for that side.',
 	},
 	'enr-leg': {
-		expansion: 'En route, leg mode',
+		expansion: 'Enroute-Leg mode',
 		text: 'The navigation mode in which you fly along a leg from one waypoint to the next while en route.',
 	},
 	DIS: {

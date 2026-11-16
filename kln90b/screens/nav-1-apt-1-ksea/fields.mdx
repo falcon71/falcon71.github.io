@@ -7,23 +7,23 @@
 </Field>
 
 <Field id="to" title="Active waypoint">
-	The waypoint you are flying to, in five characters. The page measures distance, ground speed, time and bearing to it. It is blank when there is no active waypoint.
+	The waypoint you are flying to, in five characters. The page measures distance, groundspeed, time and bearing to it. It is blank when there is no active waypoint.
 </Field>
 
-<Field id="cdi" title="Course deviation indicator">
-	A scale of dots with a marker that shows how far you are from the desired course; the center of the scale is on course. The ends of the scale are full deflection of 5 NM, 1 NM or 0.3 NM. You can select the scale on MOD 1 and MOD 2, and the unit changes it for approaches. The center shows whether you fly to or from the active waypoint. An inverse `F L A G` replaces the middle of the scale when the unit has no valid navigation.
+<Field id="cdi" title="D-bar">
+	The D-bar is a scale of dots with a marker that shows how far you are from the desired course; the center of the scale is on course. The ends of the scale are full deflection of 5 NM, 1 NM or 0.3 NM. You can select the scale on MOD 1 and MOD 2, and the unit changes it for approaches. The center shows whether you fly to or from the active waypoint. An inverse `F L A G` replaces the middle of the scale when the unit has no valid navigation.
 </Field>
 
 <Field id="dis" title="Distance to the active waypoint">
 	<Term t="DIS">`DIS`</Term> is the distance to the active waypoint, in NM. It shows one decimal below 100 NM and whole numbers from 100 NM on, and dashes when the unit has no distance.
 </Field>
 
-<Field id="gs" title="Ground speed">
-	Your ground speed in kt, from the GPS. It shows dashes while the unit has no valid position.
+<Field id="gs" title="Groundspeed">
+	Your groundspeed in kt, from the GPS. It shows dashes until the unit is NAV ready.
 </Field>
 
 <Field id="ete" title="Estimated time en route">
-	The time to the active waypoint at your present ground speed, as hours and minutes. Below one hour the hours stay blank (`:22` is 22 minutes). It shows `--:--` when the unit cannot calculate it.
+	The time to the active waypoint at your present groundspeed, as hours and minutes. Below one hour the hours stay blank (`:22` is 22 minutes). It shows `--:--` when the unit cannot calculate it.
 </Field>
 
 <Field id="brg" title="Bearing to the active waypoint">
@@ -51,7 +51,7 @@
 </Field>
 
 <Field id="mode" title="Navigation mode">
-	The navigation mode. <Term t="enr-leg">`enr-leg`</Term> is en route navigation along a leg, from one waypoint to the next. In [OBS mode](/kln90b/operation/navigation-modes/) the field shows <Term t="enr:">`enr:`</Term> and the course you selected, and for approaches <Term t="arm-leg">`arm-leg`</Term>, <Term t="arm:">`arm:`</Term> or <Term t="apr-leg">`apr-leg`</Term>. For about 5 seconds, a short message of the unit, such as `NO SUCH WPT`, replaces this field and the next one.
+	The navigation mode. <Term t="enr-leg">`enr-leg`</Term> is Enroute-Leg mode: en route navigation along a leg, from one waypoint to the next. In [OBS mode](/kln90b/operation/navigation-modes/) the field shows <Term t="enr:">`enr:`</Term> and the course you selected, and for approaches <Term t="arm-leg">`arm-leg`</Term>, <Term t="arm:">`arm:`</Term> or <Term t="apr-leg">`apr-leg`</Term>. For about 5 seconds, a short message of the unit, such as `NO SUCH WPT`, replaces this field and the next one.
 </Field>
 
 <Field id="prompt" title="Message and enter prompt">

@@ -205,7 +205,7 @@ The model packs several facts into every paragraph and wastes no words. So does 
   rule it qualifies (section 11).
 - **Say each fact once,** in the place a pilot would look for it, and link to it from everywhere else. A field is
   explained in its screen's field explanation; a task in Operation; a page's overall purpose in the page reference.
-  This holds above all for the basic operation of the unit: how a page group is selected, how the cursor and the knobs
+  This holds above all for the basic operation of the unit: how a page type is selected, how the cursor and the knobs
   enter characters, how the scan works, how a waypoint identifier is entered and confirmed. A chapter that opens by
   explaining those again is fatiguing to read, because every chapter would, and the pilot who studies the manual
   reads them all. Such a chapter says in one sentence that the operation is the same as everywhere and links to the
@@ -256,7 +256,7 @@ it uses; the names link to the page reference by themselves.
 
 ### Page reference
 
-It answers "what is this page and what is this field". One chapter per page group, in page tree order (section 17).
+It answers "what is this page and what is this field". One chapter per page type, in page tree order (section 17).
 Each page gets its section:
 
 1. A heading with the page name (section 9).
@@ -266,7 +266,7 @@ Each page gets its section:
    and the right side, the variants of the page and what selects them (section 13 says which variants get a screen).
 5. A sentence linking to the Operation sections that use the page.
 
-A chapter explains what is specific to its page group and nothing that is the same on other pages. The waypoint
+A chapter explains what is specific to its page type and nothing that is the same on other pages. The waypoint
 pages (APT, VOR, NDB, INT, SUP) share the way an identifier is entered, the scan through the database, the nearest
 list, the offer to create a user waypoint, the ACT page and the waypoint confirmation; Waypoints and the database
 explains all of that once, and each waypoint chapter says in one sentence that it works as it does everywhere, links
@@ -359,10 +359,12 @@ names for one thing takes them for two things.
 
 ### Controls
 
-- **Keys** are written with `<kbd>` and their label: <kbd>CRSR</kbd>, <kbd>ENT</kbd>, <kbd>CLR</kbd>, <kbd>MSG</kbd>,
-  <kbd>ALT</kbd>. A key that exists on both sides gets its side: "the left <kbd>CRSR</kbd>". In prose, "press" a key.
-- **The Direct To key** is the one exception: write `<DirectToKey />`, which shows D→ with the arrow centered on the
-  D. The fonts of the site have no arrow of their own, so `<kbd>D→</kbd>` shows it too low. A page that names the key
+- **Buttons** are written with `<kbd>` and their label: <kbd>CRSR</kbd>, <kbd>ENT</kbd>, <kbd>CLR</kbd>,
+  <kbd>MSG</kbd>, <kbd>ALT</kbd>. A button that exists on both sides gets its side: "the left <kbd>CRSR</kbd>". In
+  prose, "press" a button. The unit has buttons, not keys; "key" is only for the keys of the PC keyboard (Keyboard
+  mode).
+- **The Direct To button** is the one exception: write `<DirectToKey />`, which shows D→ with the arrow centered on the
+  D. The fonts of the site have no arrow of their own, so `<kbd>D→</kbd>` shows it too low. A page that names the button
   is therefore `.mdx`.
 - **Knobs** are the left outer knob, the left inner knob, the right outer knob and the right inner knob. You "turn" a
   knob, "one step" or "clockwise" and "counterclockwise", and you "pull" or "push" the right inner knob.
@@ -380,7 +382,7 @@ names for one thing takes them for two things.
 - **A page name is written as the unit's page tree names it** (`kln90b/src/data/pageTree.ts`), with a space before
   the number: NAV 1, SET 10, FPL 0, D/T 2, APT 8, Super NAV 5. The status line writes some of them without the space
   (SET10, FPL10); in prose, use the space.
-- **A page without a number** is written with "page": the VOR page, the REF page. A group is "the APT pages".
+- **A page without a number** is written with "page": the VOR page, the REF page. The pages of one kind are a page type, written "the APT pages".
 - **The full-screen pages** are Super NAV 1, Super NAV 5, the MSG page and SET 0.
 - **Do not link page names by hand.** The site links them when it builds (README, "Page links"). Write the name plainly
   in the text, outside code formatting.
@@ -421,7 +423,12 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | flight plan; the active flight plan (FPL 0) | flightplan |
 | waypoint; active waypoint; user waypoint | |
 | en route | enroute, en-route (except the unit's `enr-leg`) |
-| ground speed | groundspeed |
+| groundspeed | ground speed |
+| button (the buttons of the unit) | key |
+| page type (the APT pages are a page type) | page group, group |
+| Enroute-Leg mode (the unit shows `enr-leg`) | en route leg mode |
+| NAV ready (the unit is NAV ready once it has a position good enough to navigate) | has found its position |
+| D-bar (the course deviation bar of NAV 1 and the Self Test page) | CDI bar, deviation bar |
 | leg mode, OBS mode | LEG mode |
 | turn anticipation, waypoint alerting, waypoint sequencing | |
 | self test (noun), self-test (adjective) | selftest |
@@ -463,7 +470,7 @@ general; the screen shows one concrete case.
   message; a step that raises one answers it before the screen is captured. For the same reason the screens run with the
   airspace alert off, unless a screen is about the airspace alert and turns it on.
 - **Show half a screen** when only one side matters. The generator keeps the line between the halves.
-- **Show an excerpt** when only one line or a few lines of a page matter: the shared top line of a page group, a
+- **Show an excerpt** when only one line or a few lines of a page matter: the shared top line of a page type, a
   question the unit asks, a prompt in the status line. A page shows the rows of a generated screen with `rows`
   (README, "Writing a screen"); the fields on those rows keep their explanations. Where the text describes a line in
   detail, the reader needs to see it, so the excerpt stands next to the description instead of leaving the line to the
@@ -546,12 +553,12 @@ The sidebar has these chapters and pages. Operation explains tasks ("how do I…
 | Getting started | Table of contents (home page) · Installation · Quickstart · Tutorial flight 1 · Tutorial flight 2 |
 | The unit | Controls and display (knobs, buttons, the two halves, status line, cursor and data entry, scan, page tree) · Keyboard mode · Power-on and initialization |
 | Operation | Waypoints and the database · Nearest · Direct-to · Flight plans · Navigation modes (leg and OBS) · Sequencing and turn anticipation · Departures and arrivals · Non-precision approaches · VNAV · Messages · Airspace and altitude alerting · Trip planning and calculators · Fuel and air data |
-| Page reference | One chapter per page group in page tree order. Left: TRI, MOD, FPL, NAV, CAL, STA, SET, OTH. Right: CTR, REF, ACT, D/T, NAV, APT, VOR, NDB, INT, SUP. Each page with its screen. |
+| Page reference | One chapter per page type in page tree order. Left: TRI, MOD, FPL, NAV, CAL, STA, SET, OTH. Right: CTR, REF, ACT, D/T, NAV, APT, VOR, NDB, INT, SUP. Each page with its screen. |
 | Reference lists | Message page messages · Status line messages · Glossary |
 | Help | External hardware · FAQ and troubleshooting · Known limitations · Contact |
 
 The NAV pages exist on both sides. The page reference has one NAV chapter that covers both sides, in its place among
-the left groups (after FPL); the right groups skip it. The page links depend on this: a group has exactly one chapter.
+the left page types (after FPL); the right ones skip it. The page links depend on this: a page type has exactly one chapter.
 
 ### Installation
 
@@ -594,7 +601,7 @@ Its own page, based on the wiki page "Keyboard Mode" and the code, marked Simula
 ### Power-on and initialization
 
 The self test, the database confirmation, position and time initialization and GPS acquisition, with the time each
-takes and what the pilot does when the unit cannot find its position.
+takes and what the pilot does when the unit does not become NAV ready.
 
 ### SET 10
 
@@ -806,7 +813,7 @@ Before a writer hands in a page:
 - [ ] Every fact checked in the code or on the generated screen; no fact from memory or from another unit.
 - [ ] Exact numbers instead of vague words; every exception after its rule.
 - [ ] Procedures: numbered, one action per step, sides named, way back given, stable end state.
-- [ ] Keys in `<kbd>`, the Direct To key as `<DirectToKey />`, screen text in code formatting, page names plain and with a space before the number.
+- [ ] Buttons in `<kbd>`, the Direct To button as `<DirectToKey />`, screen text in code formatting, page names plain and with a space before the number.
 - [ ] The terms of the word list used; no second name for a thing that a page already written names.
 - [ ] `<Term>` at the first use of each glossary term; operating concepts linked to their section instead; new terms
       and words reported to the coordinator.

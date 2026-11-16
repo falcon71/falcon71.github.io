@@ -31,11 +31,11 @@ To get from the Turn-On page to the normal pages:
 3. Press <kbd>ENT</kbd>. The unit shows the Database page, with the cursor on `ACKNOWLEDGE?`.
 4. Press <kbd>ENT</kbd>. The unit shows its normal pages.
 
-Depending on the installation, another page can appear before the Self Test page or before the Database page. Until the unit has found its position, the navigation pages show dashes instead of values. [Power-on and initialization](/kln90b/unit/power-on/) explains the self test, the Database page and the search for the position, including those pages and what to do when the search takes too long.
+Depending on the installation, another page can appear before the Self Test page or before the Database page. Until the unit is NAV ready (it has a position good enough to navigate), the navigation pages show dashes instead of values. [Power-on and initialization](/kln90b/unit/power-on/) explains the self test, the Database page and the search for the position and the NAV ready state, including those pages and what to do when the search takes too long.
 
 ## The two sides of the screen
 
-The screen is a left page and a right page with the status line under them, and each side has six lines. The left knobs and the left <kbd>CRSR</kbd> key operate the left page, the right knobs and the right <kbd>CRSR</kbd> key the right page. A few pages, such as the MSG page, use both sides.
+The screen is a left page and a right page with the status line under them, and each side has six lines. The left knobs and the left <kbd>CRSR</kbd> button operate the left page, the right knobs and the right <kbd>CRSR</kbd> button the right page. A few pages, such as the MSG page, use both sides.
 
 <KlnScreen screen="nav-1-apt-1-ksea" />
 
@@ -43,7 +43,7 @@ The status line holds the names of both pages with the navigation mode between t
 
 ## Selecting a page
 
-The pages of each side are grouped, and each group has its own pages: NAV 1 to NAV 5 are the NAV group. With the cursor off, the outer knob of a side selects the group and the inner knob the page within the group. Clockwise goes to the next group or page, counterclockwise to the previous one, and after the last the unit wraps around to the first. A group comes back with the page you last used in it. A page that has subpages shows a `+` in its name (`APT+3`), and the inner knob steps through the subpages before it goes on to the next page.
+The pages of each side come in page types, and each page type has its own pages: NAV 1 to NAV 5 are the NAV pages, a page type. With the cursor off, the outer knob of a side selects the page type and the inner knob the page within the page type. Clockwise goes to the next page type or page, counterclockwise to the previous one, and after the last the unit wraps around to the first. A page type comes back with the page you last used in it. A page that has subpages shows a `+` in its name (`APT+3`), and the inner knob steps through the subpages before it goes on to the next page.
 
 Try it: turn the knobs below and watch the page names in the status line. The demo shows page names only, not subpages, and the unit skips the dashed pages where the installation has none.
 
@@ -53,7 +53,7 @@ Try it: turn the knobs below and watch the page names in the status line. The de
 
 ## Changing a field with the knobs
 
-Press the left <kbd>CRSR</kbd> for the left page or the right <kbd>CRSR</kbd> for the right page, and the cursor appears in inverse video on a field of that page. Press the same key again to turn it off. With the cursor on, the knobs of that side no longer select pages: the inner knob changes the field, and the outer knob moves the cursor to the next or previous field.
+Press the left <kbd>CRSR</kbd> button for the left page or the right <kbd>CRSR</kbd> button for the right page, and the cursor appears in inverse video on a field of that page. Press the same button again to turn it off. With the cursor on, the knobs of that side no longer select pages: the inner knob changes the field, and the outer knob moves the cursor to the next or previous field.
 
 On many fields the inner knob steps through a list of values, and each step takes effect at once. You need no <kbd>ENT</kbd>, and <kbd>CLR</kbd> has nothing to take back. On SET 3, one step of the left inner knob has changed the minimum runway length:
 
@@ -62,12 +62,12 @@ On many fields the inner knob steps through a list of values, and each step take
 The identifier on the waypoint pages (APT, VOR, NDB, INT and SUP) works this way too: the page shows the waypoint as soon as you change a character, and the unit fills in the characters to the right of the cursor with the first waypoint that matches. To show Seattle-Tacoma on the APT pages:
 
 1. Turn the right outer knob to the APT pages and the right inner knob to APT 1.
-2. Press the right <kbd>CRSR</kbd>. The cursor stands on the first character of the identifier.
+2. Press the right <kbd>CRSR</kbd> button. The cursor stands on the first character of the identifier.
 3. Turn the right inner knob until the first character is K.
 4. Turn the right outer knob one step clockwise. The cursor moves to the next character.
 5. Turn the right inner knob to S. If you pass a character, turn the inner knob back.
 6. Repeat steps 4 and 5 until the page shows KSEA. Because the unit fills in the rest at each character, the page can show KSEA before the last one, and then nothing remains to turn. That saves a lot of knob turning.
-7. Press the right <kbd>CRSR</kbd> to turn the cursor off.
+7. Press the right <kbd>CRSR</kbd> button to turn the cursor off.
 
 ## Entering a value with ENT
 

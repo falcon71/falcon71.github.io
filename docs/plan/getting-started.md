@@ -32,7 +32,7 @@ As written:
    page to the normal pages with the screen `self-test`, link to Power-on and initialization.
 3. `#the-two-sides-of-the-screen`: the two sides, which controls serve which, the status line; screen
    `nav-1-apt-1-ksea`.
-4. `#selecting-a-page`: groups and pages, outer and inner knob, subpages (`+`), the knob demo.
+4. `#selecting-a-page`: page types and pages, outer and inner knob, subpages (`+`), the knob demo.
 5. `#changing-a-field-with-the-knobs`: the CRSR keys, fields that the inner knob changes at once; screen
    `set-3-cursor`; the identifier of a waypoint page as such a field, with the worked example (KSEA on the APT pages).
 6. `#entering-a-value-with-ent`: entries that flash and take effect only with ENT, what ENT and CLR do, the
@@ -76,13 +76,15 @@ SET chapter, Direct-to) reuse these screens or replace them; one screen, one id.
 
 ## Open
 
-- **Official terms the maintainer must decide** (reviewer's term check, 2026-11-16; each contradicts the word list
-  or the approved APT chapter, so the pages keep the present term until then): the official "button" for what the
-  manual calls a key (CRSR, ENT, MSG); "page type" for a page group; "groundspeed" for ground speed; "Enroute-Leg
-  mode" as the name of `enr-leg`; "NAV ready" for the state in which the unit has found its position. Also whether
-  the field `cdi` of NAV 1 is titled "D-bar" as on the Self Test page.
+- **The names of the other modes.** The glossary entries `enr:`, `arm-leg`, `arm:` and `apr-leg` were written before
+  the rule on official terms; only `enr-leg` (Enroute-Leg mode) was checked. The reviewer of Navigation modes checks
+  the names of all modes and the coordinator corrects the glossary.
 - **The knob demo** steps through optional pages (marked dashed) and shows no subpages; the Quickstart says so. SET 0
   was added after SET 10 in `pageTree.ts` in this package.
+
+The maintainer decided on 2026-11-16 that the manual uses all official terms, also where they replaced a form of
+the word list: button (not key), page type (not page group), groundspeed, Enroute-Leg mode, NAV ready, D-bar. They
+are in the word list (style guide, section 12).
 
 Settled by the maintainer's review (2026-11-16) and written into the style guide (sections 8, 12 and 17): no common
 mouse pattern is described; an update keeps all user data; the page does not say where the Community folder is; the

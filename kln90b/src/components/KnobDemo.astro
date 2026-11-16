@@ -34,12 +34,12 @@ const sides = [
 						<button type="button" data-knob="inner" data-dir="-1" aria-label={`${side.label}: inner knob counterclockwise`}>⟲</button>
 						<button type="button" data-knob="inner" data-dir="1" aria-label={`${side.label}: inner knob clockwise`}>⟳</button>
 					</div>
-					<ol class="kln-groups" aria-label="Page groups">
+					<ol class="kln-groups" aria-label="Page types">
 						{side.tree.map((g, i) => (
 							<li data-group={i}>{g.name}</li>
 						))}
 					</ol>
-					<ol class="kln-pages" aria-label="Pages in this group" aria-live="polite" />
+					<ol class="kln-pages" aria-label="Pages of this type" aria-live="polite" />
 				</section>
 			))
 		}

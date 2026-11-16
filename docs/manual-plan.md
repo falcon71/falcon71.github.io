@@ -132,9 +132,10 @@ questions differ by one word and stand for both.
 
 ## Open questions for the maintainer
 
-- From the package "getting started": five official terms that contradict the word list or the APT chapter
-  (`docs/plan/getting-started.md`, "Open"). For the final pass: the APT chapter was reviewed before the rule on
-  official terms (style guide, section 12) existed and needs the reviewer's term check.
+- For the final pass, from the package "getting started": the APT chapter and the placeholders were written before
+  the rule on official terms (style guide, section 12). The APT chapter needs the reviewer's term check and the terms
+  the maintainer decided on 2026-11-16 (button, page type, groundspeed, NAV ready, D-bar); the package that next
+  touches the chapter may do it earlier.
 - The first approved Installation and Quickstart pages become the examples of their kinds, if the maintainer
   approves them as such.
 
