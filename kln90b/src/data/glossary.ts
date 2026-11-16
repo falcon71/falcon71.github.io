@@ -304,6 +304,30 @@ export const glossary: Record<string, GlossaryEntry> = {
 		expansion: 'Approach active, leg mode',
 		text: 'The navigation mode in which the approach is active and the unit navigates along its legs.',
 	},
+	'OBS IN': {
+		expansion: 'OBS input',
+		text: 'The course that the unit reads from the OBS setting of the course indicator in the aircraft, in degrees magnetic.',
+	},
+	OUT: {
+		expansion: 'Output',
+		text: 'On the Self Test page, the desired track that the unit sends out; it shows a fixed test value.',
+	},
+	RMI: {
+		expansion: 'Radio magnetic indicator',
+		text: 'An instrument that shows bearings; the unit sends it the bearing to the active waypoint.',
+	},
+	ANNUN: {
+		expansion: 'Annunciators',
+		text: 'The lamps of the aircraft that the unit lights to show its state, such as msg and the approach and waypoint lamps.',
+	},
+	ALT: {
+		expansion: 'Altitude',
+		text: 'The indicated altitude from the altitude input of the aircraft, rounded to 100 ft.',
+	},
+	BARO: {
+		expansion: 'Barometric pressure setting',
+		text: 'The pressure setting of the unit, in inches of mercury, which it uses for altitude.',
+	},
 };
 
 /** The anchor of a term on the glossary page */

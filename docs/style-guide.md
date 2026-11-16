@@ -212,6 +212,17 @@ The model packs several facts into every paragraph and wastes no words. So does 
   moment they try: that a line has as many characters as it has, which characters a field accepts, that the cursor
   stops on every field in turn. Say what they cannot see: the limits, what is stored and where, what happens at the
   edges. If a sentence would make a pilot feel talked down to, cut it.
+- **Say what is, not what is not.** Do not state what the manual leaves out, what the site does not offer or what the
+  unit does not do, unless a pilot would otherwise expect it and act on it. "This manual does not say how version 1.x
+  differs" sounds as if something were withheld; "the download buttons never offer a pre-release" answers a question
+  nobody asked. Cut such sentences.
+- **Nothing about how the simulation is built,** not even in pilot words: that the unit only receives the commands
+  of its controls, which part of the aircraft decides what a click does, how the aircraft switches the unit in. Say
+  what the pilot does and sees (section 2).
+- **A gotcha gets its own sentence, up front.** Where the unit regularly catches pilots off guard (the screen stays
+  dark for a few seconds after power-on while it warms up), the fact stands in a sentence of its own at the start of
+  the section, or in a note, never in a subordinate clause. A pilot who searches for the cause of exactly that must
+  not be able to overlook it.
 - **Paragraphs of two to five sentences.** Sentences mostly of 10 to 25 words. Split a sentence that carries two
   conditions.
 - **Lists** for parallel items: the fields of a page, the choices of a menu, the conditions of a message. Prose for
@@ -336,9 +347,10 @@ before you reuse one):
   knob, "one step" or "clockwise" and "counterclockwise", and you "pull" or "push" the right inner knob.
 - The Controls and display page names every control of the front panel, including the power and brightness controls.
   Every other page uses exactly those names.
-- **Mouse and keyboard.** How a knob or key reacts to the mouse depends on the aircraft (click zones, the mouse wheel, a
-  right click for power). Write "turn" and "press", as on the real panel; only Controls and display, the Quickstart and
-  Keyboard mode talk about the mouse.
+- **Mouse and keyboard.** Most aircraft follow the simulator's own control schemes, which need no description, and
+  pilots on Xbox use a controller. Write "turn" and "press", as on the real panel, and never describe a control scheme.
+  Only Controls and display, the Quickstart and Keyboard mode talk about the mouse, and they name just the special
+  cases that catch pilots (below, "Quickstart").
 
 ### Pages of the unit
 
@@ -395,6 +407,7 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | the message page; the MSG page | |
 | cursor; turn the cursor on, turn the cursor off | activate the cursor |
 | identifier; ident only in screen text | ID |
+| hot-swapping (noun), hot-swap (verb): an aircraft that offers the unit as one of several GPS units | take turns, switch in |
 | Microsoft Flight Simulator 2024, then "the simulator" | MSFS, FS2024 (except on Installation) |
 
 ### Spelling and style
@@ -522,9 +535,13 @@ the left groups (after FPL); the right groups skip it. The page links depend on 
   another version, the Releases page of the kln90b GitHub repository and the zip attached to a release. Some pilots
   download the source code by mistake; say which file to take.
 - Version 1.x is for Microsoft Flight Simulator 2020, version 2.x for Microsoft Flight Simulator 2024.
-- Where the package goes in the Community folder, and the folder structure it must have there.
+- Where the package goes in the Community folder, and the folder structure it must have there. The zip contains the
+  folder `falcon71-kln90b` itself. Do not say where the Community folder is; pilots know.
+- Updating: delete the old folder and install the new one. Flight plans, user waypoints and settings are kept
+  (confirmed by the maintainer, 2026-11-16).
 - Installing the package puts the unit into no aircraft by itself. The pilot needs an aircraft that carries the unit
-  (link the wiki page "Aircraft using the KLN 90B") or one into which the unit can be hot-swapped.
+  (link the wiki page "Aircraft using the KLN 90B"). Some aircraft offer it by hot-swapping; of that the page says
+  only that the KLN 90B may have to be selected in the configuration of the aircraft before it appears.
 
 ### Quickstart
 
@@ -533,7 +550,18 @@ daunting. The Quickstart gets a pilot going with as little reading as possible: 
 knobs, the cursor, and data entry, each in a few sentences, each linking to the full treatment.
 
 - It contains the interactive knob demo, which walks the real page tree.
-- It says that the mouse controls differ between aircraft, describes the common pattern and points to Keyboard mode.
+- **Turning the unit on.** It says prominently that the screen stays dark for a few seconds while the unit warms up
+  (section 8, gotchas): pilots open this page to find out why their unit does not turn on. It shows the Self Test
+  page, which a pilot at that point has never seen; the other power-on pages need no screen here. It does not mention
+  the beep on approval, which needs an audio output that the aircraft so far lack; that belongs to Power-on and
+  initialization.
+- **Two ways of entering data, each in its own section:** fields that the knobs change directly, and entries that
+  flash and take effect only with <kbd>ENT</kbd>. The code calls the second kind editors; that is no term of the unit
+  and stays out of the manual.
+- **The controls in the simulator** is short. It describes no control scheme and nothing about how the aircraft and
+  the unit work together. It names the two special cases (in some aircraft the power knob needs a right click; in
+  some control schemes a click needs a second mouse button held) and describes keyboard mode in a few sentences with
+  the link.
 
 ### Keyboard mode
 

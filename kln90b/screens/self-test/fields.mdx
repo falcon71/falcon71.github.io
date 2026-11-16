@@ -1,0 +1,67 @@
+<Field id="dis" title="Test distance">
+	A fixed test value, 34.5 NM, in place of the distance to the active waypoint. While the Self Test page is shown, the left page carries test values in all its fields except `OBS IN`, and the unit sends them to the instruments of the aircraft that it drives.
+</Field>
+
+<Field id="cdi" title="Test deflection of the course deviation bar">
+	A fixed test deflection of the course deviation bar. It shows that the bar and the instruments that the unit drives respond.
+</Field>
+
+<Field id="obs" title="Course selected on the course indicator">
+	<Term t="OBS IN">`OBS IN`</Term> is the course that the unit reads from the OBS setting of the course indicator in the aircraft, in degrees magnetic.
+</Field>
+
+<Field id="out" title="Test course output">
+	<Term t="OUT">`OUT`</Term> is a fixed test value, 315°, for the desired track that the unit sends out.
+</Field>
+
+<Field id="rmi" title="Test bearing output">
+	A fixed test value, 130°, for the bearing to the active waypoint that the unit sends to the <Term t="RMI" /> of the aircraft.
+</Field>
+
+<Field id="annun" title="Annunciator test">
+	<Term t="ANNUN">`ANNUN`</Term> `ON` means that the unit lights the annunciator lamps that the aircraft has, so that you can check them. A flashing `TEST FAIL` replaces it when the self test has failed.
+</Field>
+
+<Field id="title" title="Page title">
+	The title of the right page.
+</Field>
+
+<Field id="date" title="Date">
+	The date of the unit: day, month and two-digit year, in the time zone shown on the line below. You change it with the cursor and accept it with <kbd>ENT</kbd>. Entering the date speeds up the unit's search for satellites.
+</Field>
+
+<Field id="time" title="Time">
+	The time of the unit in hours and minutes, in the time zone beside it. You change it with the cursor and accept it with <kbd>ENT</kbd>; the seconds then start at 00. Entering the time speeds up the unit's search for satellites.
+</Field>
+
+<Field id="seconds" title="Seconds">
+	The seconds of the time. They count on by themselves and cannot be changed on their own.
+</Field>
+
+<Field id="zone" title="Time zone">
+	The code of the time zone in which the unit shows the date and the time (`UTC` for universal time). With the cursor on it, the right inner knob steps through the time zones.
+</Field>
+
+<Field id="alt" title="Indicated altitude">
+	<Term t="ALT">`ALT`</Term> is the altitude that the aircraft's altitude input gives, rounded to 100 ft. It shows dashes while the unit receives no altitude.
+</Field>
+
+<Field id="baro" title="Barometric pressure setting">
+	<Term t="BARO">`BARO`</Term> is the barometric pressure setting of the unit in inches of mercury, which the unit uses for altitude. You change it digit by digit with the cursor. It cannot be changed where the aircraft transmits the setting to the unit.
+</Field>
+
+<Field id="approve" title="Approval of the self test">
+	Pressing <kbd>ENT</kbd> with the cursor on `APPROVE?` approves the self test and ends it. The unit then shows the next power-on page.
+</Field>
+
+<Field id="mode" title="Navigation mode">
+	The navigation mode. <Term t="enr-leg">`enr-leg`</Term> is en route navigation along a leg.
+</Field>
+
+<Field id="prompt" title="Message and enter prompt">
+	The three cells after the navigation mode. <Term t="msg">`msg`</Term> in inverse video means that the unit holds a message, and a flashing <Term t="ent">`ent`</Term> means that <kbd>ENT</kbd> accepts what the cursor is on. They are blank when neither applies.
+</Field>
+
+<Field id="crsr" title="Cursor indication">
+	<Term t="CRSR">`CRSR`</Term> shows that the right cursor is on. This page shows no page names. Pressing the right <kbd>CRSR</kbd> key turns the cursor off.
+</Field>

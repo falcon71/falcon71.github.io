@@ -19,8 +19,8 @@ As written:
 3. `#downloading`: the download buttons of the home page; other versions on the Releases page; the name of the file
    to take; the Source code archives are the wrong ones; pre-releases.
 4. `#installing-in-the-community-folder`: the folder structure, the install procedure, updating, removing.
-5. `#an-aircraft-that-carries-the-unit`: the package alone puts the unit into no aircraft; the wiki list; aircraft
-   that switch between the unit and another GPS; aircraft that bring their own copy of the unit.
+5. `#an-aircraft-that-carries-the-unit`: the package alone puts the unit into no aircraft; the wiki list;
+   hot-swapping in one sentence; aircraft that bring their own copy of the unit.
 6. `#next-steps`: Quickstart, Tutorial flight 1.
 
 ### Quickstart (`getting-started/quickstart.mdx`)
@@ -28,16 +28,18 @@ As written:
 As written:
 
 1. Summary: two pages side by side, pages chosen with the knobs, the cursor, ENT.
-2. `#turning-the-unit-on`: the brightness knob, the procedure from the Turn-On page to the normal pages, link to
-   Power-on and initialization.
+2. `#turning-the-unit-on`: the warm-up of the screen first, then the brightness knob, the procedure from the Turn-On
+   page to the normal pages with the screen `self-test`, link to Power-on and initialization.
 3. `#the-two-halves-of-the-screen`: the halves, which controls serve which, the status line; screen
    `nav-1-apt-1-ksea`.
 4. `#selecting-a-page`: groups and pages, outer and inner knob, subpages (`+`), the knob demo.
-5. `#the-cursor-and-entering-data`: the CRSR keys, the knobs with the cursor on, ENT and CLR; screen
-   `apt-1-ksea-cursor`; the worked example (KSEA on the APT pages); the Direct To page as the case that needs ENT.
-6. `#the-controls-in-the-simulator`: the mouse depends on the aircraft (no common pattern described, see "Open"
-   below); Keyboard mode in three sentences.
-7. `#where-to-go-next`: Tutorial flight 1, Controls and display.
+5. `#changing-a-field-with-the-knobs`: the CRSR keys, fields that the inner knob changes at once; screen
+   `set-3-cursor`; the identifier of a waypoint page as such a field, with the worked example (KSEA on the APT pages).
+6. `#entering-a-value-with-ent`: entries that flash and take effect only with ENT, what ENT and CLR do, the
+   worked example (direct to KBFI); screen `direct-to-ident-entry`.
+7. `#the-controls-in-the-simulator`: the two special cases of the mouse (right click for power; a second mouse
+   button held), keyboard mode in three sentences.
+8. `#where-to-go-next`: Tutorial flight 1, Controls and display.
 
 Each section is a few sentences and links to the full treatment.
 
@@ -66,21 +68,22 @@ The Quickstart links to these; the writer of the owning page must create them:
 
 ## Screens
 
-The package generated one screen, `nav-1-apt-1-ksea` (NAV 1 and APT 1 of KSEA with the status line, every field
-explained), and shows the existing `apt-1-ksea-cursor`. Nothing could not be staged.
+The package generated `nav-1-apt-1-ksea` (NAV 1 and APT 1 of KSEA with the status line), `self-test` (the Self Test
+page as the pilot first sees it, cursor on the barometer setting), `set-3-cursor` (SET 3 with the cursor on the
+minimum runway length) and `direct-to-ident-entry` (the Direct To page with KBFI entered, waiting for ENT), each with
+every field explained, and shows the existing `apt-1-ksea-cursor`. The packages that own those pages (Power-on, the
+SET chapter, Direct-to) reuse these screens or replace them; one screen, one id. Nothing could not be staged.
 
 ## Open
 
-- **The mouse pattern.** The style guide (section 17) asks the Quickstart to describe the common pattern of the mouse
-  controls. Neither the code nor the wiki has a source for one: the unit receives only the events of its controls, and
-  each aircraft's model decides which click sends which. The page says that the controls differ and gives the
-  right click for power as the example. The maintainer supplies the pattern, or the requirement is dropped.
-- **What an update keeps.** Installation says to delete the folder and install the new version. Whether flight
-  plans, user waypoints and settings survive that is not stated; the maintainer confirms it, then one sentence is
-  added.
-- **Where the Community folder is.** No source says, so the page does not either.
+- **The name of the power control.** The Quickstart calls it "the brightness knob" (pushed in to turn the unit on);
+  the wiki says "power button". Controls and display fixes the names of all controls; the Quickstart follows it.
 - **The knob demo** steps through optional pages (marked dashed) and shows no subpages; the Quickstart says so. SET 0
   was added after SET 10 in `pageTree.ts` in this package.
+
+Settled by the maintainer's review (2026-11-16) and written into the style guide (sections 8, 12 and 17): no common
+mouse pattern is described; an update keeps all user data; the page does not say where the Community folder is; the
+zip contains the folder itself.
 
 ## Notes for packages that are not planned yet
 
@@ -135,6 +138,10 @@ Quickstart because Controls and display owns it: some aircraft need a right clic
 a pilot who uses the right mouse button to pan the camera holds the left mouse button before the right click (wiki).
 On the identifier of a waypoint page, the first step of the inner knob goes from the existing character on through
 the character set (from `0` to `1`), not to `A`.
+
+**Power-on, from the maintainer (2026-11-16)**: the beeps on approval of the self test need an audio output of the
+aircraft, which none of the aircraft that carry the unit has so far; the Quickstart leaves the beep out and Power-on
+says it with that condition. A turned-down brightness knob also keeps the screen dark.
 
 **Power-on, from the Quickstart's writer**: after the database page the unit shows NAV 2 on the left and the SUP page
 on the right when no waypoint was last active, or the page of the last active waypoint (APT 4 for an airport)
