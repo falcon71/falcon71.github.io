@@ -31,12 +31,12 @@ as `/kln90b/<slug>/`) and its package. Pages that do not exist yet are linked by
 | | Non-precision approaches | `operation/approaches` | approaches |
 | | VNAV | `operation/vnav` | vnav-alerts |
 | | GPS reception and RAIM (new) | `operation/gps-receiver` | sta (done) |
-| | Inside the GPS simulation (new, optional reading) | `operation/gps-simulation` | sta (done); the failures part: failures |
+| | Inside the GPS simulation (new, optional reading) | `operation/gps-simulation` | sta (done); the failures part: failures (in review) |
 | | Messages | `operation/messages` | messages |
 | | Airspace and altitude alerting | `operation/alerts` | vnav-alerts |
 | | Trip planning and calculators | `operation/trip-planning` | trip-planning |
 | | Fuel and air data | `operation/fuel-air-data` | fuel-air-data |
-| | Simulated failures (new) | `operation/failures` | failures |
+| | Simulated failures (new) | `operation/failures` | failures (in review) |
 | Page reference, left | TRI | `pages/tri` | trip-planning |
 | | MOD | `pages/mod` | navigation |
 | | FPL | `pages/fpl` | flight-plans |
@@ -44,7 +44,7 @@ as `/kln90b/<slug>/`) and its package. Pages that do not exist yet are linked by
 | | CAL | `pages/cal` | trip-planning |
 | | STA | `pages/sta` | sta (done) |
 | | SET (with SET 0 and SET 10) | `pages/set` | set |
-| | FLR (new; opened from SET 10) | `pages/flr` | failures |
+| | FLR (new; opened from SET 10) | `pages/flr` | failures (in review) |
 | | OTH | `pages/oth` | fuel-air-data |
 | Page reference, right | CTR | `pages/ctr` | flight-plan-pages |
 | | REF | `pages/ref` | flight-plan-pages |
@@ -108,9 +108,9 @@ that writes the owner records the anchors in this table, and the final pass shar
 | Features that depend on the installation, each in its Availability box | the page that owns the feature | no list of installation options anywhere (style guide, section 3) |
 | The GPS states, the satellites, acquisition and what slows it, NAV ready as a state, the altitude input, the position error, RAIM (what it is, when it is needed, its messages), RAIM prediction as a task, real and fast acquisition | GPS reception and RAIM: `#acquiring-satellites`, `#the-gps-states`, `#real-and-fast-acquisition`, `#the-altitude-input`, `#the-estimated-position-error`, `#raim`, `#predicting-raim`, `#messages-of-the-receiver` | STA chapter: the pages and fields; Power-on: what the pilot does while waiting, and the link; Non-precision approaches: what RAIM decides in an approach; SET chapter (SET 10): the setting and the link |
 | How STA 5 behaves: the default destination and ETA, the time of the calculation, the forgotten entries | STA chapter, `STA 5: RAIM prediction` | GPS reception and RAIM: the procedures and the link |
-| The model of the receiver in the simulation: the satellites and their signals, the errors of the position, the filter, the kinds of search, the RAIM mathematics | Inside the GPS simulation (optional reading) | GPS reception and RAIM: one link; every other page: nothing (style guide, section 8). The failures part is written by the package failures |
-| The failures: what can fail, what each failure does, when the unit notices, random failures, the battery and the loss of user data, service | Simulated failures | FLR chapter: the pages and fields; a page whose values a failure blanks says nothing about failures; the message lists give the text, the meaning and the link |
-| Opening the FLR pages from SET 10 and leaving them | FLR chapter, the type's opening section | SET chapter (SET 10): one sentence and the link |
+| The model of the receiver in the simulation: the satellites and their signals, the errors of the position, the filter, the kinds of search, the RAIM mathematics | Inside the GPS simulation (optional reading) | GPS reception and RAIM: one link; every other page: nothing (style guide, section 8). How the failures of the reception act on the model: `#the-simulated-failures-in-the-model`; Simulated failures links there once |
+| The failures: what can fail, what each failure does, telling the failures of the reception apart on the unit, when the unit notices, random failures, the battery and the loss of user data (with the wrong date afterwards), service | Simulated failures: `#random-failures`, `#failing-a-part-and-repairing-it`, `#service`, `#when-the-unit-notices-a-failure`, `#what-can-fail` (with `#the-receiver-and-the-antenna`, `#interference-and-a-faulty-satellite`, `#the-inputs-from-the-aircraft`, `#the-outputs-to-the-aircraft`, `#the-annunciators`, `#the-memory-of-the-unit`), `#the-battery` | FLR chapter: the pages and fields; a page whose values a failure blanks says nothing about failures; the message lists give the text, the meaning and the link |
+| Opening the FLR pages from SET 10 and leaving them | FLR chapter, `#the-flr-pages-failing-and-repairing-parts-of-the-unit` | SET chapter (SET 10): one sentence and the link |
 | Waypoint pages in general: the waypoint types, entering an identifier, the scan through the database, duplicate identifiers, the waypoint page shown for approval, the ACT pages as a concept | Waypoints and the database | waypoint chapters (APT, VOR, NDB, INT, SUP, ACT): one sentence, the link, then what is specific |
 | User waypoints: creating (`CREATE NEW WPT AT`, `USER POS?`, present position), the limit, `USR DB FULL`, editing, deleting, temporary waypoints | Waypoints and the database, `#user-waypoints` (planned) | waypoint chapters: the fields of a user waypoint of their type; OTH chapter: OTH 3 as a page |
 | The database: cycle, expiry, the messages about it | Waypoints and the database | Power-on: the database page; SET chapter: SET 0 |
@@ -165,7 +165,7 @@ anchors and page links above. After them the order follows "owners before the pa
 | – | getting-started | Installation, Quickstart | done (2026-11-16) |
 | – | apt | APT chapter | done (dry run 2026-11-04, corrected 2026-11-16) |
 | 1 | sta | STA chapter; GPS reception and RAIM; Inside the GPS simulation | done (2026-11-16) |
-| 2 | failures | FLR chapter; Simulated failures; the failures part of Inside the GPS simulation | not started |
+| 2 | failures | FLR chapter; Simulated failures; the failures part of Inside the GPS simulation | in review (2026-11-16) |
 | 3 | controls | Controls and display; Keyboard mode | not started |
 | 4 | power-on | Power-on and initialization | not started |
 | 5 | waypoints | Waypoints and the database | not started |
@@ -223,7 +223,7 @@ Not manual text; for the maintainer or a session that works on the site.
 - **The order of the page reference in the sidebar** is each chapter's `sidebar.order`, in page tree order: TRI 1,
   MOD 2, FPL 3, NAV 4, CAL 5, STA 6, SET 7, FLR 8, OTH 9, CTR 10, REF 11, ACT 12, D/T 13, APT 14, VOR 15, NDB 16,
   INT 17, SUP 18. The Operation pages take their number from the order of the style guide's chapter list (section
-  17); GPS reception and RAIM has 10 and Inside the GPS simulation 11, so the pages after them count on from 12.
+  17); GPS reception and RAIM has 10, Inside the GPS simulation 11 and Simulated failures 16, so Messages to Fuel and air data take 12 to 15.
 - The source tree of kln90b holds the software revision as a template that only its build fills in, and the
   generator fails on it. `kln90b/screens/sta-3/screen.ts` works around this with a mock that reads the version
   from kln90b's `package.json`. A substitution in the generator for every screen would be the cleaner place.
@@ -235,5 +235,5 @@ Not manual text; for the maintainer or a session that works on the site.
   for free text, would catch this.
 - The fallback text of the home page's download buttons (`Downloads.astro`) names the zip `falcon71-kln90b`; the
   file is named `falcon71-kln90b-` and the version, ending in `.zip` (`releases.ts`). A wording mismatch only.
-- The FLR pages are not in `kln90b/src/data/pageTree.ts`, so the page links do not know them. The package failures
-  settles how FLR 1 to FLR 3 become page names that link (`docs/plan/failures.md`).
+- The FLR pages are in `kln90b/src/data/pageTree.ts` as `offKnobTree`: the page links read it, the knob demo does
+  not, so FLR is no stop of the outer knob there (`docs/plan/failures.md`).

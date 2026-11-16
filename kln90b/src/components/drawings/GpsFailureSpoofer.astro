@@ -1,0 +1,56 @@
+---
+/**
+ * Synthetic drawing: the signal strengths as an aircraft at 35,000 ft above the ground closes on a spoofer of the
+ * weakest strength the simulation draws (one that would capture the receiver 300 NM away in line of sight: 83.0 dB over
+ * the receiver's noise at 1 NM), plotted from 270 NM to 235 NM. The spoofer sends eight fake satellites; their total
+ * level F over the noise falls with 20 × log10 of the distance, by 2 dB per NM beyond the radio horizon of a 100 ft mast
+ * and the aircraft, 1.23 × (√100 + √35000) = 242.4 NM, and with the antenna's gain toward the spoofer (−12 dB at the
+ * antenna's plane, 0.5 dB less per degree below it). A fake satellite's SNR is 10 × log10(F / 8) + 60 −
+ * 10 × log10(1 + 7 × F / 8): it reaches 35 at 261.0 NM and saturates at 60 − 10 × log10(7) = 51.5, as the fake signals
+ * jam each other. The real satellites, 50 dB-Hz overhead and 37 at 5°, lose the noise rise 10 × log10(1 + F): the one at
+ * 5° falls below 30 at 250.2 NM, the one overhead at 243.3 NM. Inside the horizon the rise is about 22 dB.
+ */
+import GpsFigure from './GpsFigure.astro';
+
+interface Props {
+	caption: string;
+}
+const { caption } = Astro.props;
+
+const fake = '70,190.2 96.3,173.2 122.6,156.2 148.9,139.3 175.1,122.4 188.3,114 201.4,105.8 214.6,97.6 227.7,89.7 240.9,82.1 254,74.9 267.1,68.3 280.3,62.5 293.4,57.6 306.6,53.7 319.7,50.8 332.9,48.6 346,47.2 359.1,46.2 372.3,45.6 385.4,45.1 398.6,44.9 411.7,44.7 424.9,44.6 432.7,44.6 451.1,44.6 477.4,44.6 503.7,44.6 530,44.6';
+const top = '70,50.9 96.3,50.9 122.6,51 148.9,51 175.1,51.2 188.3,51.4 201.4,51.6 214.6,52 227.7,52.7 240.9,53.7 254,55.2 267.1,57.3 280.3,60.2 293.4,64.1 306.6,69 319.7,74.9 332.9,81.5 346,88.7 359.1,96.3 372.3,104.2 385.4,112.4 398.6,120.7 411.7,129 424.9,137.5 432.7,142.4 451.1,142.6 477.4,142.9 503.7,143.3 530,143.6';
+const low = '70,105.3 96.3,105.3 122.6,105.3 148.9,105.4 175.1,105.6 188.3,105.7 201.4,106 214.6,106.4 227.7,107.1 240.9,108 254,109.5 267.1,111.6 280.3,114.6 293.4,118.5 306.6,123.4 319.7,129.2 332.9,135.8 346,143 359.1,150.7 372.3,158.6 385.4,166.8 398.6,175 411.7,183.4 424.9,191.8 432.7,196.8 451.1,197 477.4,197.3 503.7,197.6 530,197.9';
+const yTicks: [string, number][] = [['0', 260], ['10', 218.2], ['20', 176.4], ['30', 134.5], ['40', 92.7], ['50', 50.9]];
+const xTicks: [string, number][] = [['270', 70], ['260', 201.4], ['250', 332.9], ['240', 464.3]];
+---
+
+<GpsFigure caption={caption} viewBox="0 0 560 312" id="gps-spoofer">
+	{yTicks.map(([label, y]) => (
+		<g>
+			<line x1="64" y1={y} x2="70" y2={y} class="ax" />
+			<text x="58" y={y + 6} text-anchor="end" class="t small">{label}</text>
+		</g>
+	))}
+	{xTicks.map(([label, x]) => (
+		<g>
+			<line x1={x} y1="260" x2={x} y2="266" class="ax" />
+			<text x={x} y="286" text-anchor="middle" class="t small">{label}</text>
+		</g>
+	))}
+	<line x1="432.6" y1="30" x2="432.6" y2="260" class="grid" />
+	<text x="426" y="250" text-anchor="end" class="t small">radio horizon</text>
+	<line x1="70" y1="113.6" x2="530" y2="113.6" class="dash" />
+	<line x1="70" y1="134.5" x2="530" y2="134.5" class="dash" />
+	<polyline points="70,30 70,260 530,260" class="ax" />
+	<polyline points={low} class="muted" />
+	<polyline points={top} class="line" />
+	<polyline points={fake} class="accent" />
+	<circle cx="188.9" cy="113.6" r="6" class="dot-plain" />
+	<circle cx="330.4" cy="134.5" r="6" class="dot-plain" />
+	<circle cx="420.3" cy="134.5" r="6" class="dot-plain" />
+	<text x="78" y="42" class="t small ko">real, overhead</text>
+	<text x="78" y="97" class="t small ko">real, 5°</text>
+	<text x="526" y="36" text-anchor="end" class="t t-accent ko">fake</text>
+	<text x="80" y="20" class="t small">SNR</text>
+	<text x="530" y="310" text-anchor="end" class="t small">distance to the spoofer</text>
+</GpsFigure>

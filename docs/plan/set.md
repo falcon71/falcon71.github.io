@@ -42,6 +42,15 @@ Only the pages and their fields.
   altitude alerting; SET 0 has no loader behind it in the simulation, and the chapter says what the pilot sees and
   no more (style guide, section 3).
 
+### From the package failures (2026-11-16)
+
+- SET 10 opens the FLR pages. The FLR chapter owns the way in and out (`/kln90b/pages/flr/`, its opening section)
+  and has the screen `set-10-failures` (SET 10 with the cursor on `FAILURES?`), which the SET chapter may show.
+  The SET chapter says one sentence and links. The existing screen `set-10` still has placeholder field
+  explanations.
+- After a loss of the unit's memory SET 2 takes a date only until the unit has a position (Simulated failures,
+  `#the-battery`).
+
 ## Changes to earlier pages
 
 The pages that named a SET page before this chapter existed link to it by the page links; the seam check verifies

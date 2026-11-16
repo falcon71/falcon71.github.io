@@ -1,0 +1,132 @@
+---
+title: FLR pages
+description: What the three FLR pages do (random failures, the internal battery and service on FLR 1, the active failures and their repair on FLR 2, the failures you can fail on FLR 3), how you open them from SET 10 and how you leave them.
+sidebar:
+  order: 8
+---
+
+import KlnScreen from '../../../components/KlnScreen.astro';
+import Callout from '../../../components/Callout.astro';
+import DirectToKey from '../../../components/DirectToKey.astro';
+
+The FLR pages let you make the KLN 90B fail and repair it again. FLR 1 sets whether failures come at random and has the internal battery and the service, FLR 2 lists the active failures and repairs them, and FLR 3 lists the inactive failures and fails them. You open them from SET 10.
+
+<Callout kind="sim-only">
+	The real KLN 90B has no FLR pages. They exist so that you can practice with a unit that fails, in the situations a real one might meet.
+</Callout>
+
+## The FLR pages: failing and repairing parts of the unit
+
+The FLR pages are not a stop of the left outer knob. They open from SET 10, replace the left page, and leave the right side as it is: whatever page the right side shows stays and keeps working. [Simulated failures](/kln90b/operation/failures/) says what can fail and what each failure does; the pages only fail and repair them.
+
+<KlnScreen screen="set-10-failures" />
+
+To open the FLR pages:
+
+1. Select SET 10 on the left side ([Controls and display](/kln90b/unit/controls-and-display/#selecting-a-page) explains how you select pages).
+2. Press the left <kbd>CRSR</kbd>. The cursor marks the `GPS:` field.
+3. Turn the left outer knob one step clockwise. The cursor marks `FAILURES?`.
+4. Press <kbd>ENT</kbd>. FLR 1 appears with the cursor off.
+
+Every entry on the FLR pages works as everywhere in the unit: [the cursor and data entry](/kln90b/unit/controls-and-display/#entering-data-with-the-cursor) explains the cursor, the knobs, <kbd>ENT</kbd> and <kbd>CLR</kbd>. What follows is what is specific to these pages.
+
+### Turning from one FLR page to the next
+
+With the cursor off, the left inner knob turns from FLR 1 to FLR 2 to FLR 3 and on to FLR 1 again, and the other way round with the opposite turn. The left outer knob does not change the FLR page. A turn to another FLR page withdraws a question that is open and shows a list from its top again.
+
+With the cursor on, the inner knob does not turn the pages. On FLR 2 and FLR 3 it does nothing, and on FLR 1 it changes the hours when the cursor is on them. Press the left <kbd>CRSR</kbd> first.
+
+### Leaving the FLR pages
+
+With the cursor off, one step of the left outer knob in either direction closes the FLR pages, and the same step moves on from SET 10 as any outer knob step from there does: clockwise to the OTH pages, counterclockwise to the STA pages ([Controls and display](/kln90b/unit/controls-and-display/#selecting-a-page) says which page of the type you reach). You do not come back to SET 10. With the cursor on, the outer knob moves the cursor, so press the left <kbd>CRSR</kbd> first.
+
+<DirectToKey /> and <kbd>ALT</kbd> open their pages over the FLR pages. When they close, the same FLR page is back as you left it, with the cursor, the scroll position and an open question unchanged. After you confirm a direct-to, the FLR page comes back with its cursor off. A step of the left outer knob on the Direct To page with its cursor off closes the Direct To page and the FLR pages together and moves on from SET 10.
+
+Closing the pages changes nothing: [Simulated failures](/kln90b/operation/failures/) says what the setting and the failures keep.
+
+## FLR 1: random failures, internal battery and service
+
+FLR 1 has the setting for random failures, the charge of the internal battery and the button that services the unit. You open it first, and you return to it to turn random failures on or off or to repair everything at once.
+
+<KlnScreen screen="flr-1" />
+
+The left <kbd>CRSR</kbd> marks the hours of `MTBF:`; `SERVICE?` is the other field.
+
+<KlnScreen screen="flr-1-set" />
+
+### Entering the hours of the random failures
+
+The hours are the mean time between failures; [Random failures](/kln90b/operation/failures/#random-failures) says which failures can come at random and which never do.
+
+With the cursor on the hours, the first turn of the left inner knob in either direction opens the entry and shows `0__H`. You then enter three digits, hundreds first: the left inner knob changes the marked digit, and the left outer knob moves to the next digit and stops at the ends. A digit that you leave empty counts as 0, and `000` sets `OFF`. With the digits `015`, you enter 15 hours.
+
+<KlnScreen screen="flr-1-mtbf-entry" />
+
+<kbd>ENT</kbd> stores the hours and moves the cursor to `SERVICE?`. The value acts from then on. <kbd>CLR</kbd> during the entry leaves it and restores the old value. With the hours closed and above 0, <kbd>CLR</kbd> sets `OFF` at once, without a question. In keyboard mode you enter the digits on the keyboard ([Keyboard mode](/kln90b/unit/keyboard-mode/)).
+
+### The battery
+
+`BATTERY` shows what the battery holds, not whether it works: a failed battery does not change the number. [The battery](/kln90b/operation/failures/#the-battery) explains how the charge falls, what a low charge warns of and what an empty battery costs you.
+
+### Servicing the unit
+
+Pressing <kbd>ENT</kbd> on `SERVICE?` does not service the unit yet. The button reads `CONFIRM?` and the cursor stays on it. <kbd>CLR</kbd> withdraws the question.
+
+<KlnScreen screen="flr-1-confirm" />
+
+<kbd>ENT</kbd> on `CONFIRM?` services the unit; [Service](/kln90b/operation/failures/#service) lists everything it does and what it leaves alone. The button reads `SERVICE?` again and the cursor goes off, so that the status line shows `FLR 1` again. For 5 seconds `SERVICED` stands in the middle of the status line.
+
+<KlnScreen screen="flr-1-serviced" rows="7" />
+
+{/* kln90b#483: describes the current behavior; the fix withdraws the question when the cursor leaves the button or goes off */}
+The question does not go away when the cursor leaves the button. If you turn the cursor off or move it away after the first <kbd>ENT</kbd>, `CONFIRM?` stays on the button, and when you come back to it, one <kbd>ENT</kbd> services the unit. A `CONFIRM?` that the cursor is not on does not flash. The question goes only when you press <kbd>CLR</kbd> on the button, turn to another FLR page or close the FLR pages.
+
+## FLR 2: the active failures
+
+FLR 2 lists every active failure, one per row, by its name, and repairs a failure that you choose. You open it to see what has failed, for example after a random failure, and to repair one failure without servicing the whole unit.
+
+<KlnScreen screen="flr-2" />
+
+The list is sorted by the characters of the names, so digits come before letters, and it is not grouped. Five rows are visible; with more failures the list scrolls when the cursor moves past the first or the last row. The page shows no scroll marker. A failure of equipment that the aircraft no longer has is listed too, and you can repair it.
+
+With no active failure, the page shows only its heading, and the left <kbd>CRSR</kbd> does nothing, because there is no entry to mark.
+
+<KlnScreen screen="flr-2-empty" />
+
+### Repairing a failure
+
+With the cursor on, <kbd>CLR</kbd> on a marked entry replaces the name with the flashing question `REPAIR` and a question mark. The cursor starts on the top entry shown.
+
+<KlnScreen screen="flr-2-repair" />
+
+<kbd>ENT</kbd> on the question repairs the failure, and the entry leaves the list. <kbd>CLR</kbd> withdraws the question, and so does turning the cursor off or moving it to another entry. <kbd>ENT</kbd> alone does not repair a failure: only <kbd>CLR</kbd> asks the question.
+
+After a repair the entry that followed the repaired one moves under the cursor. When you repaired the last entry, the cursor moves to the new last one, and when the repair empties the list, the cursor goes off. A repair here repairs only that failure: it neither gives the battery a charge nor sets the clock, which only service does.
+
+Any change of the list from elsewhere, a failure that arrives at random for example, rebuilds it and withdraws an open question. With the cursor off the list shows its top again; with the cursor on it scrolls to keep the marked entry in view. If the question vanishes while you wait, the list has changed under it.
+
+## FLR 3: the inactive failures
+
+FLR 3 lists the inactive failures and fails the one you choose. You use it to fail a part on purpose, which works whether random failures are on or off.
+
+<Callout kind="availability">
+	FLR 3 lists only failures of equipment that the aircraft has, so the list differs from one aircraft to the next. The inputs, the outputs and the remote annunciators that a unit drives depend on how it is installed in the aircraft; [What can fail](/kln90b/operation/failures/#what-can-fail) says which failure needs which equipment.
+</Callout>
+
+<KlnScreen screen="flr-3" />
+
+The list is sorted and scrolls like that of FLR 2. When every failure that the aircraft offers is active, FLR 3 shows only its heading, and the left <kbd>CRSR</kbd> does nothing. That happens only when you fail every entry yourself, because `JAMMING`, `SPOOFING` and `SATELLITE` never come at random.
+
+### Failing a part
+
+With the cursor on, <kbd>ENT</kbd> on a marked entry replaces the name with the flashing question `FAIL` and a question mark. On FLR 3 <kbd>ENT</kbd> asks, where on FLR 2 <kbd>CLR</kbd> does.
+
+<KlnScreen screen="flr-3-fail" />
+
+<kbd>ENT</kbd> on the question fails the part, and the entry moves to FLR 2. <kbd>CLR</kbd> withdraws the question, and so does turning the cursor off or moving it to another entry. A change of the list from elsewhere withdraws it too. When the failure that came stood at or above the cursor, the cursor then marks the entry that moved up into its row.
+
+Most failures act at once; a few act only at the next power-on. [Failing a part and repairing it](/kln90b/operation/failures/#failing-a-part-and-repairing-it) describes the task, and [What can fail](/kln90b/operation/failures/#what-can-fail) what each failure does.
+
+## Where the FLR pages are used
+
+[Simulated failures](/kln90b/operation/failures/) has the tasks that use these pages: [random failures](/kln90b/operation/failures/#random-failures), [failing a part and repairing it](/kln90b/operation/failures/#failing-a-part-and-repairing-it), [service](/kln90b/operation/failures/#service) and [the battery](/kln90b/operation/failures/#the-battery). [When the unit notices a failure](/kln90b/operation/failures/#when-the-unit-notices-a-failure) says how a part that you fail shows itself in the unit. SET 10 is described in the SET chapter.

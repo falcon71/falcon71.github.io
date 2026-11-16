@@ -47,6 +47,26 @@ page `External-Annunciators.md` as background.
 - Earlier packages quote message texts where they are raised and link to these lists by page; the seam check
   sharpens those links to the entries.
 
+### From the package failures (2026-11-16)
+
+- **The failure messages for the list.** Simulated failures quotes each where its failure raises it, with the line
+  breaks of the MSG page; the list gives the text, a short meaning and the link to the entry under
+  `/kln90b/operation/failures/#what-can-fail` (the anchors of its groups are in `docs/plan/failures.md`). Take the
+  texts from the code (`failures/FailureCatalog.ts`, `data/PersistentMessages.ts`), not from this note:
+  `ARINC 429 AIR DATA FAIL`, `ARINC 429 OUTPUT FAIL`, for each of ACTV, ARM, MSG and WPT an `… ANNUNCIATOR FAIL`
+  and a `CHECK … ANNUNCIATOR`, `BATTERY LOW: SERVICE` (three lines), `EEPROM FAILURE: IC1045` (two lines),
+  `NAV SUPER FLAG FAILURE`, `NO RCVR DATA`, `NO RS-232 DATA`, `RCVR HARDWARE ERROR:` (two lines, with a code),
+  `RS-232 DATA ERROR`, `RS-232 OUTPUT ERROR`, `USER DATA LOST`. `ALTITUDE FAIL` links to GPS reception and RAIM
+  and to the inputs on Simulated failures.
+- **Failure messages are persistent** and come back unread at every power-on, while an ordinary message that was
+  read stays read over a power cycle (`data/MessageHandler.ts`, `VolatileMemory.ts`). Messages owns the general
+  rule; Simulated failures says only the failures' part.
+- **Status line messages in general** (found in the review of the FLR chapter, which shows `SERVICED`): a status
+  line message takes the whole middle segment of the status line, inverse, for about 5 seconds
+  (`controls/StatusLine.tsx`). While it is shown it is also an entry on the MSG page, and that entry never counts
+  as read, so it does not stop a flashing `msg` (`data/MessageHandler.ts`). The FLR chapter says only that
+  `SERVICED` shows for 5 seconds; the owner says the rest once.
+
 ## Changes to earlier pages
 
 To be listed by the session: links from earlier pages to single entries.

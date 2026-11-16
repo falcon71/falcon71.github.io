@@ -1,0 +1,51 @@
+---
+/**
+ * Synthetic drawing: the horizontal position error a faulty satellite causes, over the time since the failure, in the two
+ * skies of GpsSkyGeometry without the altitude input. The faulty satellite is the highest of each sky: 72° in the spread
+ * sky (eight satellites), 60° at 120° in the bunched one (six). Its range error ramps evenly from 0 to a size drawn
+ * between 500 and 3,000 m over a time drawn between 120 and 300 s and then holds; drawn here for 2,000 m over 200 s. The
+ * position moves by the satellite's coefficients in the solution times the range error: 0.115 m per meter in the spread
+ * sky (230 m at the end), 1.094 in the bunched sky (2,188 m). The residual test detects a range error b of row i once
+ * b > 5 m × √(T / (1 − h_ii)), T the chi-square value exceeded with the probability 1/15000 (24.39 for four spare
+ * measurements, 19.23 for two), h_ii the satellite's own share of its row (0.624 and 0.539): at 40.3 m in the spread sky
+ * and at 32.3 m in the bunched sky. The unit computes once a second, so with the drawn ramp of 10 m per second the test
+ * crosses its bound at the fifth update in the spread sky (50 m of range error, 5.8 m of position error) and at the
+ * fourth in the bunched sky (40 m, 43.8 m).
+ */
+import GpsFigure from './GpsFigure.astro';
+
+interface Props {
+	caption: string;
+}
+const { caption } = Astro.props;
+
+const xTicks: [string, number][] = [['0', 70], ['100', 203.3], ['200', 336.7], ['300 s', 470]];
+const yTicks: [string, number][] = [['0', 230], ['1,000', 150], ['2,000', 70]];
+---
+
+<GpsFigure caption={caption} viewBox="0 0 570 290" id="gps-ramp">
+	{xTicks.map(([label, x]) => (
+		<g>
+			<line x1={x} y1="230" x2={x} y2="236" class="ax" />
+			<text x={x} y="256" text-anchor="middle" class="t small">{label}</text>
+		</g>
+	))}
+	{yTicks.map(([label, y]) => (
+		<g>
+			<line x1="64" y1={y} x2="70" y2={y} class="ax" />
+			<text x="58" y={y + 6} text-anchor="end" class="t small">{label}</text>
+		</g>
+	))}
+	<line x1="336.7" y1="30" x2="336.7" y2="230" class="grid" />
+	<text x="342" y="130" class="t small">ramp complete</text>
+	<polyline points="70,30 70,230 470,230" class="ax" />
+	<polyline points="70,230 336.7,211.6 470,211.6" class="muted" />
+	<polyline points="70,230 336.7,55 470,55" class="accent" />
+	<line x1="76" y1="226" x2="112" y2="100" class="ax" />
+	<circle cx="75" cy="228" r="6" class="dot-plain" />
+	<text x="104" y="92" class="t ko">RAIM POSITION ERROR</text>
+	<text x="470" y="44" text-anchor="end" class="t t-accent">bunched sky</text>
+	<text x="470" y="200" text-anchor="end" class="t">spread sky</text>
+	<text x="80" y="20" class="t small">position error, m</text>
+	<text x="470" y="284" text-anchor="end" class="t small">time since the failure</text>
+</GpsFigure>

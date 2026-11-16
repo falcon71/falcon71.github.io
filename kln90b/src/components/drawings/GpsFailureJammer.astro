@@ -1,0 +1,57 @@
+---
+/**
+ * Synthetic drawing: the signal strength of three satellites as an aircraft at 3,000 ft above the ground closes on a
+ * jammer of the weakest strength the simulation draws (one that would take the weakest satellite 100 NM away at
+ * 35,000 ft in line of sight: 60.0 dB over the receiver's noise at 1 NM). The satellites stand at 5°, 30° and overhead,
+ * with 37, 46 and 50 dB-Hz before the jammer (the antenna curve, without the generation's offset, the fade and the
+ * jitter); each loses the noise rise 10 × log10(1 + J), J the jammer's level over the noise. The level falls with
+ * 20 × log10 of the distance, by 2 dB per NM beyond the radio horizon of a 100 ft mast and the aircraft,
+ * 1.23 × (√100 + √3000) = 79.7 NM, and with the antenna's gain toward the jammer: −12 dB at the antenna's plane and
+ * 0.5 dB less per degree below it. The rise is 9.9 dB at the horizon, 13.8 dB at 50 NM and 21.3 dB at 20 NM. A tracked
+ * satellite is lost below 30: the 5° satellite at 81.3 NM, the 30° satellite at 38.1 NM, the satellite overhead at 23.4 NM.
+ * Plotted from 100 NM to 2 NM.
+ */
+import GpsFigure from './GpsFigure.astro';
+
+interface Props {
+	caption: string;
+}
+const { caption } = Astro.props;
+
+const top = '70,50.9 93,51 116,52 125.2,53.6 134.4,57.3 139,60.3 143.6,64.4 148.2,69.5 152.8,75.7 157.4,82.6 159.7,86.3 162,90.1 163.4,92.5 171.2,93.4 185,94.7 208,97 231,99.5 254,102.3 277,105.2 300,108.5 323,112.1 346,116.2 369,120.8 392,126.1 415,132.3 438,139.8 451.8,145.2 461,149.3 474.8,156.5 484,162.2 493.2,168.8 502.4,176.9 507,181.6 511.6,186.9 516.2,192.5 520.8,197.5';
+const mid = '70,67.6 93,67.7 116,68.7 125.2,70.3 134.4,74 139,77 143.6,81.1 148.2,86.3 152.8,92.4 157.4,99.3 159.7,103 162,106.9 163.4,109.2 171.2,110.2 185,111.5 208,113.8 231,116.3 254,119 277,122 300,125.2 323,128.8 346,132.9 369,137.5 392,142.8 415,149 438,156.5 451.8,161.9 461,166 474.8,173.2 484,178.9 493.2,185.6 502.4,193.7 507,198.4 511.6,203.6 516.2,209.3 520.8,214.3';
+const low = '70,105.3 93,105.4 116,106.3 125.2,108 134.4,111.6 139,114.7 143.6,118.8 148.2,123.9 152.8,130 157.4,137 159.7,140.7 162,144.5 163.4,146.9 171.2,147.8 185,149.1 208,151.4 231,153.9 254,156.6 277,159.6 300,162.9 323,166.5 346,170.5 369,175.1 392,180.4 415,186.6 438,194.2 451.8,199.6 461,203.7 474.8,210.8 484,216.5 493.2,223.2 502.4,231.3 507,236 511.6,241.2 516.2,246.9 520.8,251.9';
+const yTicks: [string, number][] = [['0', 260], ['10', 218.2], ['20', 176.4], ['30', 134.5], ['40', 92.7], ['50', 50.9]];
+const xTicks: [string, number][] = [['100', 70], ['80', 162], ['60', 254], ['40', 346], ['20', 438], ['0 NM', 530]];
+---
+
+<GpsFigure caption={caption} viewBox="0 0 560 312" id="gps-jammer">
+	{yTicks.map(([label, y]) => (
+		<g>
+			<line x1="64" y1={y} x2="70" y2={y} class="ax" />
+			<text x="58" y={y + 6} text-anchor="end" class="t small">{label}</text>
+		</g>
+	))}
+	{xTicks.map(([label, x]) => (
+		<g>
+			<line x1={x} y1="260" x2={x} y2="266" class="ax" />
+			<text x={x} y="286" text-anchor="middle" class="t small">{label}</text>
+		</g>
+	))}
+	<line x1="163.5" y1="30" x2="163.5" y2="260" class="grid" />
+	<text x="170" y="250" class="t small">radio horizon</text>
+	<line x1="70" y1="134.5" x2="530" y2="134.5" class="dash" />
+	<polyline points="70,30 70,260 530,260" class="ax" />
+	<polyline points={low} class="muted" />
+	<polyline points={mid} class="muted" />
+	<polyline points={top} class="accent" />
+	<circle cx="155.9" cy="134.5" r="6" class="dot-plain" />
+	<circle cx="354.6" cy="134.5" r="6" class="dot-plain" />
+	<circle cx="422.4" cy="134.5" r="6" class="dot-plain" />
+	<text x="78" y="42" class="t t-accent ko">overhead</text>
+	<text x="78" y="88" class="t small ko">30°</text>
+	<text x="78" y="126" class="t small ko">5°</text>
+	<text x="78" y="172" class="t small">lost below 30</text>
+	<text x="80" y="20" class="t small">SNR</text>
+	<text x="530" y="310" text-anchor="end" class="t small">distance to the jammer</text>
+</GpsFigure>

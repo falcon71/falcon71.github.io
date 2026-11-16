@@ -60,8 +60,8 @@ GitHub wiki of the kln90b project.
   (OTH 1 shows no flight service stations, because the simulator has none).
 - **Nothing that matters only in real aviation.** Database subscriptions, certification paperwork, the flight manual
   supplement, antenna installation and the like are left out.
-- **Features that depend on the installation** (an approach-certified unit for APT 8, a fuel computer for OTH 5 to OTH
-  8, an air data computer for OTH 9 and OTH 10, VFR-only units, altitude alerting) are described the way a pilot meets
+- **Features that depend on the installation** (an approach-certified unit for APT 8, a fuel management system for OTH 5 to OTH
+  8, an air data system for OTH 9 and OTH 10, VFR-only units, altitude alerting) are described the way a pilot meets
   them: the feature depends on how the unit is installed in the aircraft. Never name the panel.xml key or any other
   configuration that controls it. Use the Availability box (section 11).
 - **Features that exist only in the simulation** (the SET 10 page, the FLR pages and the failures they set, keyboard
@@ -471,6 +471,12 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | the GPS APR button | |
 | total operational time (STA 4) | total operating time |
 | software revision status (STA 3) | software version |
+| remote annunciators (the annunciators outside the unit that it drives) | annunciator lamps, external annunciators |
+| internal battery (at its first mention; "the battery" after that) | memory battery, backup battery |
+| fuel management system | fuel computer |
+| air data system | air data computer |
+| a failure is active or inactive, as FLR 2 and FLR 3 head their lists; fail a part, repair a part | a failure is on or off; set a failure |
+| the fail question, the repair question (FLR 3, FLR 2) | |
 
 ### Spelling and style
 

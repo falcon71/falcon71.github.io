@@ -88,6 +88,26 @@ From the planning survey: after more than a few minutes off the unit also drops 
 direct-to and an entered magnetic variation (`data/VolatileMemory.ts`, `reset` and `RESET_TIME`); the owners of
 those items (index) say their own item and link here.
 
+### From the package failures (2026-11-16)
+
+Pointers for this package's research (check each in the code):
+
+- **The Self Test page after a failure.** A failure that the self test finds makes the page show `TEST FAIL`;
+  Simulated failures, `#when-the-unit-notices-a-failure`, owns which failures those are and shows the screen
+  `failure-self-test-fail`. Power-on says what the pilot sees and does on the page, and links.
+- **After a loss of the unit's memory** (a power-on while the internal battery has failed; Simulated failures,
+  `#the-battery`, owns the cause and what is lost): the Self Test page shows a date in 1988, the message
+  `USER DATA LOST` is on the MSG page, and the first position sets the date about 39 years too early, where it
+  stays over power-offs. The right date and time must be entered before the first position, on the Self Test page
+  or on SET 2; once the unit has a position, SET 2 no longer takes a date. Simulated failures gives the procedure;
+  Power-on says it where it describes the entry of the date, and links.
+- **Failure messages come back unread at every power-on**, although a message that was read normally stays read
+  over a power cycle (`data/MessageHandler.ts`). Simulated failures says it for the failures; the general rule
+  belongs to Messages.
+- `FAST` acquisition does not help at a power-on after the memory was lost, nor with the failures `RCVR MEMORY`
+  and `RCVR INIT` active.
+- Terms settled in this package (style guide, word list): internal battery, remote annunciators.
+
 ## Changes to earlier pages
 
 The seam check compares the Quickstart's "Turning the unit on" with this page (terms, the screen `self-test`). The

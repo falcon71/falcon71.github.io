@@ -14,7 +14,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import GithubSlugger, { slug } from 'github-slugger';
-import { leftTree, rightTree } from '../data/pageTree';
+import { leftTree, offKnobTree, rightTree } from '../data/pageTree';
 
 interface Options {
 	/** The site's base path, e.g. "/kln90b" */
@@ -34,7 +34,7 @@ const DOCS_DIR = fileURLToPath(new URL('../content/docs/', import.meta.url));
 // "SET10" and "SET 10" are the same page; the status line writes the former, the manual the latter
 const normalize = (name: string) => name.replace(/^(\S+?)\s*(\d+)$/, '$1 $2').trim();
 
-const groups = [...leftTree, ...rightTree];
+const groups = [...leftTree, ...rightTree, ...offKnobTree];
 const pageGroup = new Map<string, string>();
 for (const g of groups) for (const p of g.pages) pageGroup.set(normalize(p), g.name);
 
