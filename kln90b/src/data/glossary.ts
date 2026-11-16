@@ -262,6 +262,48 @@ export const glossary: Record<string, GlossaryEntry> = {
 		expansion: 'Remarks',
 		text: 'The remarks of an airport on APT 5, as in RMKS FULL and APTS W/RMKS.',
 	},
+	msg: {
+		text: 'The message prompt. It shows in the status line when the unit holds a message and flashes while you have not read all of them. You read the messages with the MSG key.',
+	},
+	ent: {
+		text: 'The enter prompt. It flashes in the status line when ENT accepts what you have entered or selected.',
+	},
+	CRSR: {
+		expansion: 'Cursor',
+		text: 'Replaces the page name in the status line while the cursor is on for that side. Pressing the CRSR key of that side turns the cursor off again.',
+	},
+	KYBD: {
+		expansion: 'Keyboard',
+		text: 'Flashes in the status line in place of CRSR while keyboard mode is on for that side.',
+	},
+	'enr-leg': {
+		expansion: 'En route, leg mode',
+		text: 'The navigation mode in which you fly along a leg from one waypoint to the next while en route.',
+	},
+	DIS: {
+		expansion: 'Distance',
+		text: 'The distance to the active waypoint, in NM.',
+	},
+	BRG: {
+		expansion: 'Bearing',
+		text: 'The magnetic bearing from your position to the active waypoint.',
+	},
+	'enr:': {
+		expansion: 'En route, OBS mode',
+		text: 'The navigation mode in which you fly the course you selected with the OBS, followed by that course in degrees.',
+	},
+	'arm-leg': {
+		expansion: 'Approach armed, leg mode',
+		text: 'The navigation mode in which the unit has armed an approach and still navigates along legs.',
+	},
+	'arm:': {
+		expansion: 'Approach armed, OBS mode',
+		text: 'The navigation mode in which the unit has armed an approach while you fly an OBS course, shown with that course in degrees.',
+	},
+	'apr-leg': {
+		expansion: 'Approach active, leg mode',
+		text: 'The navigation mode in which the approach is active and the unit navigates along its legs.',
+	},
 };
 
 /** The anchor of a term on the glossary page */

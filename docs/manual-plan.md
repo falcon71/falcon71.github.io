@@ -11,6 +11,13 @@ scratchpad of the dry run's session is gone. The text the review moved out of th
 of `kln90b/src/content/docs/pages/apt.mdx` (the draft `f1465fc` and the two review commits after it). The planning
 session writes notes for the owning packages from there, or leaves it to their researchers.
 
+**Package "getting started" (2026-11-16):** at the maintainer's request, Installation and the Quickstart were written
+ahead of the planning session, because pilots need them first. Their plan is `docs/plan/getting-started.md`, the first
+package file. It also holds notes for packages that are not planned yet (Power-on, Controls and display, Keyboard
+mode, FAQ); the planning session moves them into those packages' files. The Quickstart links to anchors of Controls
+and display that are planned (listed there); the writer of Controls and display must create them, and when that page
+is written the Quickstart is checked against it (terms, the names of the controls) in the seam check.
+
 ## Outline
 
 Chapter order and page list: style guide, section 17. Page slugs used in links (planned; pages that do not exist yet
@@ -18,6 +25,7 @@ are linked by these paths already, so that the links work once they are written)
 
 | Chapter | Slug |
 | --- | --- |
+| Getting started | `getting-started/installation`, `getting-started/quickstart`, `getting-started/tutorial-1`, `getting-started/tutorial-2` |
 | The unit | `unit/controls-and-display`, `unit/keyboard-mode`, `unit/power-on` |
 | Operation | `operation/waypoints`, `operation/nearest`, `operation/direct-to`, `operation/flight-plans`, `operation/navigation-modes`, `operation/sequencing`, `operation/departures-arrivals`, `operation/approaches`, `operation/vnav`, `operation/messages`, `operation/alerts`, `operation/trip-planning`, `operation/fuel-air-data` |
 | Page reference | `pages/tri`, `pages/mod`, `pages/fpl`, `pages/nav`, `pages/cal`, `pages/sta`, `pages/set`, `pages/oth`, `pages/ctr`, `pages/ref`, `pages/act`, `pages/dt`, `pages/apt`, `pages/vor`, `pages/ndb`, `pages/int`, `pages/sup` |
@@ -55,6 +63,8 @@ touches are listed.
 | Topic | Owner | Links only |
 | --- | --- | --- |
 | The cursor, entering characters with the knobs, the scan (right inner knob pulled out) | Controls and display | APT chapter (one sentence each, link) |
+| The screen halves and the status line, page selection, the cursor and data entry, the mouse controls: planned anchors `#the-screen`, `#selecting-a-page`, `#entering-data-with-the-cursor`, `#using-the-controls-in-the-simulator` | Controls and display | the Quickstart gives each in a few sentences and links |
+| Download, versions, the Community folder, the aircraft that carries the unit | Installation | the home page has the download buttons; other pages link |
 | Waypoint pages in general: the five kinds, how an identifier is entered, the ACT page and the waypoint confirmation | Waypoints and the database (Operation) | APT chapter says what is special to airports and links (one sentence for the general operation; maintainer's feedback of 2026-11-04, style guide section 10) |
 | Creating a user waypoint (`CREATE NEW WPT AT`, user or present position, the 250 limit, `USR DB FULL`); user waypoints as a concept, linked as `/kln90b/operation/waypoints/#user-waypoints` | Waypoints and the database | APT chapter shows the offer once, names the user-airport fields on APT 1 to APT 3, links |
 | The nearest lists: criteria (SET 3), radius, count, how they are reached, the MSG + ENT shortcut; the nearest list as a concept, linked as `/kln90b/operation/nearest/` | Nearest (Operation) | APT chapter explains the nearest *variant of the pages* (header `nr n`, the fields that change on APT 1, the cursor parked on `nr n`) and links for the rest |
@@ -117,9 +127,16 @@ questions differ by one word and stand for both.
 | Page | Status |
 | --- | --- |
 | APT pages (page reference) | done for the dry run (2026-11-04): two review passes, every finding that matters applied; the maintainer's feedback of the same day applied (group section cut to what is specific to airports, concepts linked instead of tooltipped, choices in screen order, excerpts of screens for the ACT page and the confirmation, APT 5 trimmed); bug candidates unfiled. The maintainer keeps the branch as the example for the full run. |
+| Installation, Quickstart (package "getting started") | in review with the maintainer (2026-11-16): one full review and a second round for the fixes; open points in `docs/plan/getting-started.md`, "Open" |
 | Every other page | not started (dry run) |
 
 ## Open questions for the maintainer
+
+- From the package "getting started" (details in `docs/plan/getting-started.md`, "Open"): the common pattern of the
+  mouse controls that the style guide asks the Quickstart to describe has no source in the code or the wiki; whether
+  flight plans, user waypoints and settings survive an update of the package; where the Community folder is.
+- The first approved Installation and Quickstart pages become the examples of their kinds, if the maintainer
+  approves them as such.
 
 - Plan approval was skipped for the dry run; the full run stops here.
 - The maintainer's feedback on the dry run (2026-11-04) is written into the style guide as rules: the basic
