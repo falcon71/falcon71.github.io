@@ -29,7 +29,12 @@ them against the pages written since and plans the rest.
 
 ## Notes from other packages
 
-None.
+### From the package failures (2026-11-16)
+
+- The route exchange with the EFB stops while the output that carries the navigation data has failed (Simulated
+  failures, `/kln90b/operation/failures/#the-outputs-to-the-aircraft`). Where the tutorial has the pilot load
+  FPL 0 into the EFB, one sentence says that a simulated failure of that output makes the step fail silently,
+  with the link.
 
 ## Changes to earlier pages
 

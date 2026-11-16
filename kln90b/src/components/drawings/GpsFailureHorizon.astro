@@ -1,0 +1,52 @@
+---
+/**
+ * Synthetic drawing: how the curvature of the earth shields a ground transmitter, side view, heights exaggerated about
+ * 24 times against the distances. The transmitter's antenna is on a mast 100 ft above the ground. Radio waves bend a
+ * little toward the ground, which the simulation takes into account the usual way, with an earth of 4/3 its radius
+ * (4,587 NM): the ground falls below the transmitter's level by d² / (2 × 4,587 NM), 6,624 ft at 100 NM. The line of
+ * sight from the mast grazes the earth at 1.23 × √100 = 12.3 NM and reaches 3,000 ft above the ground at the radio
+ * horizon, 1.23 × (√100 + √3000) = 79.7 NM. At 100 NM it passes 5,094 ft above the ground: an aircraft there at
+ * 3,000 ft is in the shadow (beyond its horizon the signal loses 2 dB per NM, 40 dB at 100 NM), one at 10,000 ft
+ * (horizon 135.3 NM) is in sight. Scale: x = 60 + 4.27 px per NM, y = 90 − 0.0167 px per ft, 0 ft at the transmitter's
+ * foot.
+ */
+import GpsFigure from './GpsFigure.astro';
+
+interface Props {
+	caption: string;
+}
+const { caption } = Astro.props;
+
+const ground = '60,90 81.3,90.3 102.7,91.1 124,92.5 145.4,94.4 166.8,96.9 188.1,100 209.4,103.6 230.8,107.7 252.1,112.4 273.5,117.7 294.8,123.5 316.2,129.8 337.5,136.7 358.9,144.2 380.2,152.2 401.6,160.8 422.9,169.9 444.3,179.6 465.6,189.8 487,200.6 508.3,212 529.7,223.8';
+const path3000 = '60,39.9 81.3,40.2 102.7,41 124,42.4 145.4,44.3 166.8,46.8 188.1,49.9 209.4,53.5 230.8,57.6 252.1,62.3 273.5,67.6 294.8,73.4 316.2,79.7 337.5,86.6 358.9,94.1 380.2,102.1 401.6,110.7 422.9,119.8 444.3,129.5 465.6,139.7 487,150.5 508.3,161.9 529.7,173.7';
+// The shadow: between the line of sight beyond its grazing point and the ground
+const shadow = `112.5,91.7 529.7,118.3 529.7,223.8 508.3,212 487,200.6 465.6,189.8 444.3,179.6 422.9,169.9 401.6,160.8 380.2,152.2 358.9,144.2 337.5,136.7 316.2,129.8 294.8,123.5 273.5,117.7 252.1,112.4 230.8,107.7 209.4,103.6 188.1,100 166.8,96.9 145.4,94.4 124,92.5`;
+const xTicks: [string, number][] = [['0', 60], ['20', 145.4], ['40', 230.8], ['60', 316.2], ['80', 401.6], ['100 NM', 487]];
+---
+
+<GpsFigure caption={caption} viewBox="0 0 560 300" id="gps-horizon">
+	<polygon points={shadow} class="area" />
+	<polyline points={ground} class="line" />
+	<polyline points={path3000} class="dash" />
+	<line x1="60" y1="88.3" x2="529.7" y2="118.3" class="accent" />
+	<line x1="60" y1="90" x2="60" y2="88.3" class="ax" />
+	<circle cx="60" cy="88.3" r="4" class="dot-plain" />
+	<line x1="400.3" y1="20" x2="400.3" y2="240" class="grid" />
+	<circle cx="400.3" cy="110.2" r="6" class="dot-plain" />
+	<circle cx="487" cy="150.5" r="7" class="ring" />
+	<circle cx="487" cy="33.6" r="7" class="dot" />
+	<text x="72" y="74" class="t small">mast, 100 ft</text>
+	<text x="66" y="28" class="t small ko">3,000 ft above the ground</text>
+	<text x="394" y="238" text-anchor="end" class="t small">radio horizon, 79.7 NM</text>
+	<text x="478" y="28" text-anchor="end" class="t t-accent ko">10,000 ft: in sight</text>
+	<text x="478" y="146" text-anchor="end" class="t ko">3,000 ft: shadow</text>
+	<text x="250" y="90" class="t small t-accent ko">line of sight</text>
+	{xTicks.map(([label, x]) => (
+		<g>
+			<line x1={x} y1="250" x2={x} y2="256" class="ax" />
+			<text x={x} y="276" text-anchor="middle" class="t small">{label}</text>
+		</g>
+	))}
+	<line x1="60" y1="250" x2="530" y2="250" class="ax" />
+	<text x="530" y="298" text-anchor="end" class="t small">distance from the transmitter</text>
+</GpsFigure>

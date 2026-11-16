@@ -38,3 +38,9 @@ export const rightTree: PageGroup[] = [
 	{ name: 'INT', pages: ['INT  '] },
 	{ name: 'SUP', pages: ['SUP  '] },
 ];
+
+/**
+ * Page types that no knob reaches: the FLR pages open from SET 10. The page links know them, the knob demo
+ * does not.
+ */
+export const offKnobTree: PageGroup[] = [{ name: 'FLR', pages: numbered('FLR', 1, 3) }];

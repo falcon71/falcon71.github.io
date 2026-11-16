@@ -1,0 +1,269 @@
+---
+title: Simulated failures
+description: What can fail in the simulated KLN 90B and its installation, what each failure does and which message it raises, how random failures work, how to fail and repair a part on purpose, and how the internal battery can lose your data.
+sidebar:
+  order: 16
+---
+
+import KlnScreen from '../../../components/KlnScreen.astro';
+import Callout from '../../../components/Callout.astro';
+import Term from '../../../components/Term.astro';
+
+<Callout kind="sim-only">
+The failures and the FLR pages that set them exist only in the simulation. A real KLN 90B fails by itself; nobody can order it to.
+</Callout>
+
+The simulation can let parts of the KLN 90B and of its installation fail: the GPS receiver and its antenna, the inputs and outputs that connect the unit to the aircraft, the remote annunciators, the unit's memory and its internal battery. A part fails at random if you turn random failures on, or when you fail it on FLR 3. The failure stays active, also over power-off and into your next flight in the same aircraft, until you repair it on FLR 2 or have the unit serviced on FLR 1.
+
+## Random failures
+
+With random failures on, parts fail by themselves now and then, on average once in the number of hours you set. The setting is `MTBF:` on FLR 1, the mean time between failures, in whole hours from 1 to 999; `OFF`, the default, means that nothing fails at random. The setting is kept with the aircraft.
+
+Only the time the unit is on counts, in simulator time: at a higher simulation rate failures come correspondingly sooner, and a pause or a jump of the simulator's clock counts nothing. The gaps between failures vary widely around the mean, so a failure can come minutes after you turned random failures on, or not for many times the hours you set.
+
+Each failure picks one part at random, with equal chance, from the inactive failures of the parts the aircraft has. Three failures never come at random: `JAMMING`, `SPOOFING` and `SATELLITE`. You start them yourself, to practice. `BATTERY` comes at random only once the battery is empty (see [The battery](#the-battery)).
+
+Nothing tells you that a failure came at random. You find out as from any failure: from what it does, from the message the unit raises when it notices it (see [What can fail](#what-can-fail)), or from FLR 2, which lists it as active at once.
+
+To turn random failures on:
+
+1. Open FLR 1 from SET 10 ([the FLR pages](/kln90b/pages/flr/) explain the way in).
+2. Press the left <kbd>CRSR</kbd>. The cursor is on the hours of `MTBF:`.
+3. Enter the hours with the left inner knob, which changes a digit, and the left outer knob, which moves to the next one. Before you press <kbd>ENT</kbd>, <kbd>CLR</kbd> takes the entry back.
+4. Press <kbd>ENT</kbd>. The field shows the hours with an `H`, and the cursor moves on to `SERVICE?`.
+5. Press the left <kbd>CRSR</kbd> to turn the cursor off.
+
+To turn random failures off, put the cursor on the hours of `MTBF:` and press <kbd>CLR</kbd>: the field shows `OFF` at once. Turning them off repairs nothing; active failures stay active until you repair them.
+
+## Failing a part and repairing it
+
+FLR 3 lists the inactive failures, those you can start now, and FLR 2 the active ones. Failing a part on purpose lets you practice what to do when it fails in flight; it works whether random failures are on or off.
+
+To fail a part:
+
+1. Open FLR 1 from SET 10 and turn the left inner knob to FLR 3.
+2. Press the left <kbd>CRSR</kbd>. The cursor is on the top entry shown.
+3. Turn the left outer knob to the part you want to fail.
+4. Press <kbd>ENT</kbd>. `FAIL      ?` flashes in place of the entry. If you chose the wrong part, press <kbd>CLR</kbd>.
+5. Press <kbd>ENT</kbd>. The part fails at once, and the failure moves to FLR 2.
+6. Press the left <kbd>CRSR</kbd> to turn the cursor off.
+
+To repair a part:
+
+1. Open FLR 1 from SET 10 and turn the left inner knob to FLR 2.
+2. Press the left <kbd>CRSR</kbd>. The cursor is on the top entry shown.
+3. Turn the left outer knob to the part you want to repair.
+4. Press <kbd>CLR</kbd>. `REPAIR    ?` flashes in place of the entry. To keep the failure active, press <kbd>CLR</kbd> again.
+5. Press <kbd>ENT</kbd>. The part is repaired and leaves the list. When the list is empty, the cursor goes off; otherwise press the left <kbd>CRSR</kbd> to turn it off.
+
+[The FLR pages](/kln90b/pages/flr/) explain how to turn from one FLR page to the next. The message of a repaired part goes within a second, and the part works again at once, except where [What can fail](#what-can-fail) says that it takes effect at the next power-on.
+
+## Service
+
+A service repairs everything at once and puts in a new battery, as if the unit had been to the shop. Use it to start a flight with a sound unit, or after a loss of your data.
+
+To have the unit serviced:
+
+1. Open FLR 1 from SET 10.
+2. Press the left <kbd>CRSR</kbd> and turn the left outer knob to `SERVICE?`.
+3. Press <kbd>ENT</kbd>. The entry asks `CONFIRM?`. If you do not want the service, press <kbd>CLR</kbd>.
+4. Press <kbd>ENT</kbd>. The status line shows `SERVICED` for 5 seconds, and the cursor goes off.
+
+A service does three things:
+
+- It repairs every failure, the battery included.
+- It charges the battery to 100 %.
+- It sets the unit's clock to the right date and time.
+
+It does not bring back data the unit has already lost, nor the receiver's almanac data: after a loss of the memory the receiver still searches the sky (see [The battery](#the-battery)). A service leaves the `MTBF:` setting as it is, so with random failures on, the next failure can come at any time.
+
+## When the unit notices a failure
+
+The unit notices most failures of its own parts and reports them, in the self test at power-on and with a message on the MSG page in operation. Some failures it never notices; you find them only by what they do.
+
+At power-on the Self Test page shows a flashing `TEST FAIL` in place of `ANNUN ON` when the self test has found a fault. This happens for a failed ARINC 429 output, RS-232 output, nav super flag, EEPROM, GPS receiver or annunciator driver, and for every fault the GPS receiver reports with a code (see [The receiver and the antenna](#the-receiver-and-the-antenna)). `TEST FAIL` does not stop the power-on: approve the page as usual. [Power-on and initialization](/kln90b/unit/power-on/) explains the self test.
+
+<KlnScreen screen="failure-self-test-fail" />
+
+In operation the unit posts a failure's message on the MSG page once it notices the failure:
+
+- A fault inside the unit or the receiver, and a failed output, within a second.
+- A failed input from the aircraft after up to 10 seconds. At power-on the RS-232 input is reported as soon as the power-on pages are done, and the air data and altitude inputs about 5 seconds later.
+- A failed remote annunciator or nav super flag when the unit next switches it: the annunciator on or off, the flag out of view.
+
+No failure message appears before the power-on pages are done. A failure's message stays on the MSG page while the failure is active, also after you have read it, so the `msg` in the status line stays lit; it goes when the part is repaired. At the next power-on the message comes back unread, so `msg` flashes again once the power-on pages are done.
+
+The unit never notices a failed OBS input, a failed <Term t="RMI" /> output, a burnt-out bulb, a loss of antenna gain, jamming, spoofing or a faulty satellite. Of those, the GPS failures show in the receiver's own state and messages: lost satellites, `SATELLITE COVERAGE` `INADEQUATE FOR NAV`, the <Term t="RAIM" /> messages.
+
+## What can fail
+
+<Callout kind="availability">
+The failures of the inputs, of the outputs other than ARINC 429 and the nav super flag, and of the remote annunciators depend on how the unit is installed in the aircraft. FLR 3 offers only the failures of parts the aircraft has: an aircraft without an air data system offers no failure of the air data input.
+</Callout>
+
+Every aircraft has the GPS receiver, its antenna, the ARINC 429 output, the nav super flag, the EEPROM and the internal battery, so their failures are always offered. Each failure below has the name FLR 2 and FLR 3 show. An active failure ends when you repair it on FLR 2 or have the unit serviced on FLR 1; the entries say where something else ends it, or where it acts only from the next power-on. [Inside the GPS simulation](/kln90b/operation/gps-simulation/#the-simulated-failures-in-the-model) explains how the simulation produces the GPS failures, for the pilot who wants to know more.
+
+### The receiver and the antenna
+
+A failed receiver or antenna takes the position away within a second. STA 1 shows the GPS state `FAILR` with no satellites, STA 2 shows dashes for the <Term t="EPE" />, and the unit flags its navigation. Neither `SATELLITE COVERAGE` `INADEQUATE FOR NAV` nor a RAIM message appears while the receiver has failed; the receiver's own message says why. Navigate by other means. [The GPS states](/kln90b/operation/gps-receiver/#the-gps-states) explains `FAILR`.
+
+<KlnScreen screen="sta-1-failed" />
+
+The receiver reports its faults, and those of the antenna, with a code on the MSG page:
+
+```
+RCVR HARDWARE ERROR:
+ 0110
+```
+
+<KlnScreen screen="failure-msg-rcvr-hardware" />
+
+What you can act on is STA 1: with `FAILR` the receiver delivers nothing and you navigate by other means; without it the receiver works, and the code reports a fault it lives with, such as a slow first position. The entries below give each failure's code. Faults at the same time combine their codes: `0408` is `0400` and `0008`. The message appears once the power-on pages are done, stays while the code is not `0000`, and flashes unread again when a new fault joins. Every code also fails the self test.
+
+- `GPS ANTENNA`: the antenna or its cable has failed. The receiver finds no satellite: `FAILR` on STA 1 and the code `0010`, or `0110` for a short in the cable. It acts at once and at every power-on until it is repaired; after the repair the receiver acquires the satellites again.
+- `GPS RCVR`: the receiver does not answer the unit. `FAILR` on STA 1, and the message
+
+  ```
+  NO RCVR DATA
+  ```
+
+  in place of `RCVR HARDWARE ERROR:`, which the unit cannot read from a receiver that does not answer.
+- `RCVR HW`: a hardware fault of the receiver, with one of the codes `0002`, `0004`, `0080`, `2000` and `8000`. `2000` and `8000` act at once; `0002`, `0004` and `0080` are found by the receiver's test at power-on, so a fault that comes in flight acts only from the next power-on. Once it acts, STA 1 shows `FAILR`.
+- `RCVR MEMORY`: the receiver loses its almanac data and its ephemeris data at the next power-on. The unit keeps its own memory, but the receiver must search the sky and collect new almanac data first, which takes about 20 minutes ([Acquiring satellites](/kln90b/operation/gps-receiver/#acquiring-satellites)). `FAST` on SET 10 cannot help at that power-on. Code `0008`, which goes once the receiver tracks its first satellite.
+- `RCVR INIT`: at the next power-on the unit cannot hand its position, its time and the altitude input to the receiver. The receiver searches from its own memory, a date or position you enter does not reach it, and `FAST` does nothing. Without the altitude input STA 1 never shows `NAV A`: three satellites are no longer enough for a position, and RAIM needs five. This lasts the whole power-on, also if you repair the failure in flight. Code `0400`.
+- `RCVR EEPROM`: the receiver has lost the calibration of its oscillator, so at the next power-on it does not know the exact frequency of the satellites' signals and must search a wider range of frequencies for each one. Finding each satellite takes two to four times as long as usual, so the first position comes later; once it has a position, it knows its oscillator again, and a later search takes the usual time. Code `0800`.
+- `ANT GAIN`: the antenna's gain has dropped. Every satellite's signal strength on STA 1 falls by 6 to 15 dB, satellites low in the sky are lost, and RAIM and the position may follow with their messages. The unit gives no message of its own and passes the self test.
+
+`RCVR MEMORY`, `RCVR INIT` and `RCVR EEPROM` act at the power-on after the failure. Each may be a passing fault: it then acts at that one power-on and repairs itself, leaving FLR 2. Otherwise it acts at every power-on until it is repaired.
+
+### Interference and a faulty satellite
+
+These three failures never come at random and the unit never notices them; they let you practice recognizing a GPS problem from what the receiver shows. A jammer or a spoofer is a transmitter on the ground. Started in flight, it stands ahead on your track, and its effect grows as you fly on; started on the ground, it is close by and acts within seconds. Once you have flown past one, the next one waits ahead until you repair the failure.
+
+- `JAMMING`: a jammer drowns the satellites' signals. As you close in, the signal strengths on STA 1 fall, the satellites lowest in the sky first. `RAIM NOT AVAILABLE` `CROSS CHECK POSITION` comes first, then the position goes with `SATELLITE COVERAGE` `INADEQUATE FOR NAV`, and STA 1 shows `ACQ`. The higher you fly, the farther the jammer reaches; banking away from it, descending until the jammer lies beyond your radio horizon, or flying out of its range brings the satellites back. A descent while the jammer is still within your radio horizon changes hardly anything. After the repair the position returns within about 40 seconds.
+- `SPOOFING`: a spoofer sends false signals for a sky seen from another place at another time. The real satellites weaken as with a jammer, and the false satellites appear on STA 1 like any other, but all with nearly the same signal strength whatever their elevation. Usually there is a phase in which real and false satellites are both in use: the position wanders off and `RAIM POSITION ERROR` `CROSS CHECK POSITION` appears. Then the spoofer captures the receiver: the position jumps to a place far away, often an airport, the groundspeed drops to 0 kt although you fly on, and the unit's clock jumps by hours with `SYSTEM TIME UPDATED` `TO GPS TIME`. A captured unit raises `RAIM POSITION ERROR` only if the altitude input disagrees with the false place. When you leave the spoofer's range, the unit loses the position, searches again and returns to the true position and time.
+- `SATELLITE`: the clock of one satellite goes wrong. Its error grows over 2 to 5 minutes and then stays, and with it the range the receiver measures to that satellite. STA 1 looks normal and the groundspeed stays right, but the position drifts away from the truth. While RAIM is available, it catches the error early, long before it has grown to its full size, with `RAIM POSITION ERROR` `CROSS CHECK POSITION`; the unit keeps using the position. Without RAIM nothing warns you, so cross-check with other navigation whenever `RAIM NOT AVAILABLE` stands. Such a failure is rare in real life but not unrealistic, because it takes a while before a faulty satellite is flagged as unhealthy.
+
+How to tell them apart on the unit, together with the antenna's lost gain. On STA 1 of a healthy unit a satellite near the horizon is weaker, about 41, than the satellites higher up, 45 to 47:
+
+<KlnScreen screen="sta-1-nav" />
+
+- `ANT GAIN`: signal strengths lower by the same amount on every satellite, high and low alike, in every direction and attitude, and no worse as you fly on. Compare the high satellite 14 with the healthy page: it has lost as much as the others.
+
+  <KlnScreen screen="gpsfail-ant-gain" />
+
+- Jamming: signal strengths falling as you fly on, satellites lost one after another, lowest first, coming back when you turn away or descend until the jammer lies beyond your horizon, and no `RAIM POSITION ERROR`. Here the low satellites are already lost while the high ones still hold, weaker than they should be.
+
+  <KlnScreen screen="gpsfail-jamming" />
+
+- Spoofing: weakening satellites, then satellites that all read nearly the same signal strength, a wandering position with `RAIM POSITION ERROR`, and then a position that jumps far away, a groundspeed of 0 kt in flight or the time changing by hours. Look at the signal strengths of a captured unit: nearly the same at every elevation. A captured unit with an altitude input usually keeps `RAIM POSITION ERROR` on, which a faulty satellite gives too.
+
+  <KlnScreen screen="gpsfail-spoofing-captured" />
+
+- A faulty satellite: `RAIM POSITION ERROR` with a position near the truth, a sensible groundspeed and the usual spread of signal strengths on STA 1, stronger high in the sky. The page looks like the healthy one; only the message and a cross-check tell.
+
+  <KlnScreen screen="gpsfail-satellite" />
+
+[RAIM](/kln90b/operation/gps-receiver/#raim) and [Messages of the receiver](/kln90b/operation/gps-receiver/#messages-of-the-receiver) explain the messages.
+
+### The inputs from the aircraft
+
+Each input carries data the aircraft sends to the unit; a failed input loses that data, and the unit works as if the aircraft did not send it.
+
+- `ALTITUDE`: the encoding altimeter's altitude, where the aircraft has one and no air data system. The altitude is lost: the receiver navigates without the [altitude input](/kln90b/operation/gps-receiver/#the-altitude-input), STA 1 shows `NAV` instead of `NAV A`, and three satellites are no longer enough for a position. Message `ALTITUDE FAIL`.
+- `429 AIRDATA`: the air data from an air data system over the ARINC 429 input, the digital bus that carries the pressure altitude, the airspeeds and the temperatures. All of them are lost, OTH 9 and OTH 10 show dashes, and the altitude input is lost as above. The baro setting the aircraft sends keeps its last value. Messages `ARINC 429 AIR DATA FAIL` and `ALTITUDE FAIL`.
+- `RS-232 IN` and `RS-232 DATA`: the RS-232 input, the serial line over which a fuel management system, an air data system or a heading source sends its data. The unit loses all of them: the fuel on board, the fuel flow and the fuel used from the fuel management system (a fuel on board you entered stays), the air data with the altitude input as above, and the heading, so that NAV 5 and Super NAV 5 draw north up, OTH 9 shows the wind as without a heading, CAL 3 asks you for the heading and the autopilot gets no roll steering. The baro setting the aircraft sends keeps its last value. The two failures act alike: `RS-232 IN` is a line that has gone silent, with the message `NO RS-232 DATA`, `RS-232 DATA` a line that delivers garbled data, with `RS-232 DATA ERROR`. `ALTITUDE FAIL` follows if the air data come over this line.
+- `OBS INPUT`: the course you set on the course knob of the CDI or HSI, which the unit reads in OBS mode. The unit no longer receives it: set the OBS course on MOD 2 instead, as in an aircraft without the input. No message.
+
+### The outputs to the aircraft
+
+Each output carries data from the unit to the aircraft's instruments. The unit's own screen is not affected, and the deviation on the CDI or HSI keeps working, because it has a line of its own. What an instrument shows when its data stop depends on the aircraft.
+
+The navigation data go over the output the aircraft takes them from: ARINC 429 in most aircraft, RS-232 in the others. When that output fails, the navigation data a moving map, a distance display or an electronic HSI takes from the unit stop (distance, bearing, groundspeed, track and times), the route the aircraft's flight planner takes over from FPL 0 empties, and the route exchange with the simulator's EFB stops: a route sent from the EFB is ignored, and a request from the EFB gets no answer.
+
+- `429 OUTPUT`: the ARINC 429 output, the digital bus to the aircraft's electronic instruments and autopilot. Besides the navigation data where the aircraft takes them over it, it always carries the roll steering command to the autopilot, the course for a remotely set course pointer, the integrity warning, and in some aircraft the bearing for the RMI; all of that stops. Message `ARINC 429 OUTPUT FAIL`; the self test fails.
+- `RS-232 OUT`: the RS-232 output, the serial line over which some aircraft take the navigation data instead of ARINC 429. The navigation data stop as above. Message `RS-232 OUTPUT ERROR`; the self test fails.
+- `RMI OUTPUT`: the line to an RMI that the unit drives directly. The RMI needle no longer gets the bearing to the active waypoint. No message.
+- `SUPERFLAG`: the nav super flag, the line that takes the NAV flag of the CDI or HSI out of view. The flag stays in view, as with the unit off, while the deviation still moves. Message `NAV SUPER FLAG FAILURE`, once the unit tries to clear the flag: with an active waypoint, or during the self test, which fails.
+
+### The annunciators
+
+The aircraft may have remote annunciators for the unit: MSG and WPT, and ARM and ACTV on the GPS APR button. Each remote annunciator the aircraft has can fail in three ways. The unit's own screen keeps telling the truth, so the `msg` in the status line and the unit's own indications are the check on a remote annunciator you doubt.
+
+| Failure | The remote annunciator | Message | Self test |
+| --- | --- | --- | --- |
+| `MSG BULB`, `WPT BULB`, `ARM BULB`, `ACTV BULB` | never lights: its bulb has burnt out | none | passes |
+| `MSG WIRING`, `WPT WIRING`, `ARM WIRING`, `ACTV WIRING` | never lights: a short in the wiring | `CHECK MSG ANNUNCIATOR` and so on, once the unit turns the annunciator on | passes |
+| `MSG DRIVER`, `WPT DRIVER`, `ARM DRIVER`, `ACTV DRIVER` | is lit all the time while the unit is on: its driver in the unit is stuck | `MSG ANNUNCIATOR FAIL` and so on, once the unit turns the annunciator off | fails |
+
+The self test lights every remote annunciator, so a failed wiring is found at every power-on and its message appears once the power-on pages are done. An annunciator with a stuck driver and a burnt-out bulb or broken wiring stays dark.
+
+### The memory of the unit
+
+- `EEPROM`: the memory that holds the unit's calibration from the shop. The unit reads it only at power-on, so a failure, and a repair, take effect at the next power-on. From then on the whole picture on the screen sits a few pixels off center, and the deviation the unit sends to the CDI or HSI is off: wrongly scaled and shifted by up to 30 % of full scale. Messages, and the self test fails:
+
+  ```
+  EEPROM FAILURE: IC1045
+   EXTERNAL D-BAR INVALID
+  ```
+
+  Do not fly by the GPS deviation on the CDI or HSI while the message stands; the D-bar on the unit's own screen is right. The offsets are the same at every failure of the same unit.
+- `BATTERY`: the internal battery; see [The battery](#the-battery).
+
+## The battery
+
+The KLN 90B keeps its user data, its clock and the receiver's almanac data in a memory that its internal battery holds while the unit is off. FLR 1 shows the battery's charge in percent after `BATTERY`. A new battery runs down over 3 to 5 years, counted in the simulator's calendar: each time you start the simulator with the aircraft, the battery loses the charge of the days since your last flight in that aircraft, by the simulator's date. Flying and switching the unit on and off cost nothing, and setting the date back gains nothing.
+
+At a charge of 1.5 % or less, and whenever the `BATTERY` failure is active, the MSG page warns. FLR 1 rounds the charge up, so it shows `2` or less by then:
+
+```
+BATTERY LOW: SERVICE
+ REQUIRED TO PREVENT
+ LOSS OF USER DATA
+```
+
+<KlnScreen screen="failure-msg-battery-low" />
+
+The warning appears once the power-on pages are done and stays until a service gives the unit a new battery. Repairing `BATTERY` on FLR 2 repairs the failure but not the charge: an empty battery still warns.
+
+<Callout kind="warning">
+Every power-on while the `BATTERY` failure is active erases all user waypoints, flight plans, remarks and settings, and they cannot be brought back. A power-on is also loading the aircraft again with the unit switched on, and the return of the aircraft's power after an interruption. Have the unit serviced on FLR 1 before the unit is next turned on, that is before you turn it off or end the flight; a battery only repaired on FLR 2 stays empty and can fail again at random.
+</Callout>
+
+The memory is lost when the unit is turned on while the `BATTERY` failure is active, that is while FLR 2 lists it. An empty battery alone loses nothing; with random failures on, the battery can fail at random once its charge is 0, and you can fail it on FLR 3 at any time. A loss also needs a real power-on: nothing is lost while the unit runs, nor over an interruption of the aircraft's power shorter than about 1.5 seconds.
+
+At such a power-on the unit loses:
+
+- every user waypoint, every flight plan (FPL 0 to FPL 25) and every remark;
+- the active waypoint and a direct-to;
+- its settings, which go back to their defaults: the lines of the Turn-On page, the time zone, the baro setting and its unit, the nearest airport criteria, the airspace and altitude alerts, turn anticipation, the flight timer setting on SET 4, the map settings of NAV 5 and Super NAV 5, the entries on the CAL, TRI and OTH pages, and the totals on STA 4;
+- the waypoint each of the APT, VOR, NDB, INT and SUP pages showed last;
+- its clock, which starts at 1 JAN 1988 00:00, and its stored position;
+- the receiver's almanac data and ephemeris data.
+
+It keeps the `GPS:` setting on SET 10, the failures, the `MTBF:` setting and the battery's charge.
+
+After that power-on the Self Test page shows `TEST FAIL` and the 1988 date, and the MSG page holds `USER DATA LOST` with the battery's warning and `RCVR HARDWARE ERROR:` `0008`:
+
+<KlnScreen screen="failure-msg-user-data-lost" />
+
+The receiver must search the sky and collect new almanac data, which takes about 20 minutes; `FAST` on SET 10 cannot help at this power-on. Without a stored position the first position raises no `POSITION DIFFERS FROM` message.
+
+The clock in 1988 makes the date wrong. The satellites give the date only within a span of about 20 years, and the unit takes the span from its own clock: the first position sets the clock about 39 years too early, with `SYSTEM TIME UPDATED` `TO GPS TIME`. The wrong date then stays, also over power-off, at every later position and with `FAST`. Enter the right date before the first position, and the first position keeps it.
+
+To set the date after a loss of the memory:
+
+1. On the Self Test page, which shows the 1988 date, enter today's date on the right page and press <kbd>ENT</kbd> ([Power-on and initialization](/kln90b/unit/power-on/) explains the fields).
+2. Enter the time and press <kbd>ENT</kbd>.
+3. Approve the Self Test page as usual. The receiver searches from the date you entered.
+
+While the receiver still searches, SET 2 accepts the date as well. Once the unit has a position, SET 2 no longer lets you change the date: have the unit serviced on FLR 1, which sets the clock right with or without a position, or enter the date at a later power-on before the first position.
+
+A service is the only way to a full battery. It does not bring the lost data back, but everything you enter afterwards is kept as usual.
+
+## Further reading
+
+- [The FLR pages](/kln90b/pages/flr/): the fields of FLR 1 to FLR 3 and the way in from SET 10.
+- [GPS reception and RAIM](/kln90b/operation/gps-receiver/): the GPS states, RAIM and the receiver's messages.
+- [Power-on and initialization](/kln90b/unit/power-on/): the self test and what the unit keeps while it is off.
+- [Message page messages](/kln90b/lists/messages/): every message of the unit.

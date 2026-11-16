@@ -1,0 +1,11 @@
+<Field id="state" title="GPS state">
+	`STATE` and the GPS state. While enough satellites remain, the unit keeps navigating under jamming, here with the altitude input (`NAV A`).
+</Field>
+
+<Field id="list" title="Satellites">
+	The satellites with their numbers, signal strengths and elevations. Under jamming every satellite reads lower than usual by the same amount, so that even a satellite high in the sky reads in the low 30s, and the satellites low in the sky are lost first (`*` and `00`). The closer the jammer, the lower the readings.
+</Field>
+
+<Field id="page" title="Page identification">
+	The page identification on the left side. `STA+1` means that the list continues on a second page.
+</Field>

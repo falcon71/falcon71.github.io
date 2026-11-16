@@ -1,138 +1,150 @@
 # Package: failures (the FLR chapter; Simulated failures)
 
-Second package of the full run, at the maintainer's request: the FLR pages are new and pilots need guidance for
-them. Everything in this package is Simulator only (style guide, sections 3 and 11).
-
-The pointers below come from the planning survey of the code (paths relative to `vendor/kln90b/kln90b/`). They tell
-the researcher where to look; they are not checked facts.
+Written on 2026-11-16 and approved by the maintainer the same day. The second package of the full run, at the
+maintainer's request: the FLR pages are new and
+pilots need guidance for them. Everything in this package is Simulator only (style guide, sections 3 and 11). The
+pages this package links to for the basics (Controls and display, Power-on, the message lists, the SET chapter) are
+not written yet; it links to them by the planned anchors and page links of the index.
 
 ## Pages
 
-### Simulated failures (`operation/failures.mdx`), Operation, new
+### Simulated failures (`operation/failures.mdx`), Operation
 
-Planned sections (the session settles them after the research):
+As written, with the anchors. The list of the failures stayed on the page.
 
-1. Summary, in the Simulator only box's company: the simulation can let parts of the unit and of its installation
-   fail, at random or at the pilot's command, and they stay failed until they are repaired.
-2. Turning random failures on and off; what the setting means; which failures never come at random.
-3. Failing a part on purpose, and repairing it.
-4. Service: what it repairs and resets.
-5. What can fail, as a lookup list in groups (the receiver and the antenna, interference and a faulty satellite, the
-   inputs from the aircraft, the outputs to the aircraft, the annunciators, the unit's memory, the battery). Each
-   entry: the name as FLR shows it, what the pilot notices, the message if there is one (quoted, linked to the list),
-   what ends it. Only failures of equipment the aircraft has are offered: say so in pilot terms (Availability box if
-   it fits), never with a configuration key.
-6. When the unit notices a failure: the self test (`TEST FAIL`), the delay in operation, failures the unit never
-   reports.
-7. The battery: how it runs down, the warning, the loss of the user data at power-on, what survives. A Good to know
-   box is likely here.
-8. Links on: the FLR pages, GPS reception and RAIM, Power-on and initialization, the message lists.
+1. Summary and the Simulator only box.
+2. `#random-failures`: the setting of FLR 1, what the hours mean, which failures never come at random.
+3. `#failing-a-part-and-repairing-it`: the two procedures on FLR 3 and FLR 2.
+4. `#service`: what a service repairs and resets.
+5. `#when-the-unit-notices-a-failure`: the self test (`TEST FAIL`), in operation, never; the failure messages, which
+   come back unread at every power-on.
+6. `#what-can-fail`, opened by an Availability box (only failures of equipment the aircraft has are offered), with
+   `#the-receiver-and-the-antenna`, `#interference-and-a-faulty-satellite` (it ends with how to tell the failures
+   of the reception apart on the unit), `#the-inputs-from-the-aircraft`, `#the-outputs-to-the-aircraft` (with the
+   paragraph on which output carries the navigation data and the route exchange with the EFB),
+   `#the-annunciators`, `#the-memory-of-the-unit`.
+7. `#the-battery`: how the internal battery runs down, the warning, the loss of the user data at a power-on while
+   the battery has failed, what is lost and what survives, the wrong date afterwards and the procedure that sets
+   it.
+8. `#further-reading`: the links on.
 
-Split the page if the list of section 5 outgrows it: the session decides after the research whether the list
-becomes a page of its own.
+### FLR pages (`pages/flr.mdx`), page reference
 
-### FLR pages (`pages/flr.mdx`), page reference, new
+As written, with the anchors. The headings of the numbered pages start with the page name; the page links go to
+them.
 
-1. The FLR pages as a type: Simulator only box; they are not on the left outer knob; how they open from SET 10 and
-   how the pilot leaves them. This section owns that topic.
-2. FLR 1: random failures, the battery and service. Variants: the confirmation of the service, the status line
-   after it.
-3. FLR 2: the active failures. Variants: an empty list, the repair question.
-4. FLR 3: the failures that can be set. Variant: the fail question.
-5. Links to Simulated failures.
+1. Summary and the Simulator only box.
+2. `#the-flr-pages-failing-and-repairing-parts-of-the-unit`: the way in from SET 10, with
+   `#turning-from-one-flr-page-to-the-next` and `#leaving-the-flr-pages` (the outer knob closes the pages and moves
+   on from SET 10 in the same step; the Direct To page and the ALT page open over the FLR pages). This section owns
+   the way in and out.
+3. `FLR 1: random failures, internal battery and service`, with `#entering-the-hours-of-the-random-failures`,
+   `#the-battery`, `#servicing-the-unit`.
+4. `FLR 2: the active failures`, with `#repairing-a-failure`.
+5. `FLR 3: the inactive failures`, opened by an Availability box, with `#failing-a-part`.
+6. `#where-the-flr-pages-are-used`: the links on.
 
 ### Inside the GPS simulation (`operation/gps-simulation.mdx`): the failures part
 
-The package sta writes this optional page about the model of the receiver (style guide, section 17, "Inside the
-GPS simulation"; `docs/plan/sta.md`). It leaves out the failures. This package adds one section to it, in the
-page's manner (prose with explanatory drawings, optional reading): how a faulty satellite, jamming and spoofing act
-on the model (on the ranges, on the signal strength, on the clock), why each looks the way it does on STA 1 and
-STA 2 and in the messages, and how a pilot can tell them apart. Simulated failures stays the lookup of what each
-failure does; the added section explains the mechanism and links there. Read the page first and use its terms and
-its drawings' style.
+One section added before "Where the model simplifies": `#the-simulated-failures-in-the-model`, with
+`#a-faulty-satellite`, `#jamming`, `#spoofing` and `#the-receiver-and-the-antenna`. It explains the mechanism and
+links to Simulated failures for what the pilot sees and does; telling the failures apart is on Simulated failures.
+"Where the model simplifies" was corrected where the new section contradicted it (what weakens a signal, the
+satellites' clocks and health) and lists the simulation's own choices for the transmitters.
+
+The drawings are `GpsFailureRamp.astro` (the position error of a faulty satellite in the page's two skies, and the
+moment RAIM detects it), `GpsFailureJammer.astro` (the signal strength against the distance to a jammer) and
+`GpsFailureSpoofer.astro` (the fake and the real signal strengths against the distance to a spoofer) and
+`GpsFailureHorizon.astro` (the curvature of the earth shielding a jammer or a spoofer; added at the maintainer's
+review). Each one's comment holds the numbers it was computed from.
+
+At the maintainer's review the section also got an example screen of STA 1 for each failure (below, "Screens"),
+so that the pilot learns by looking how they differ.
 
 ## Topics this package owns
 
-Simulated failures owns what can fail, what each failure does, detection, random failures, the battery and the
-loss of user data, and service. The FLR chapter owns the pages and the way into them. Other pages say nothing about
-failures; the message lists give text, meaning and the link.
+Simulated failures owns what can fail, what each failure does, telling the failures apart on the unit, detection,
+random failures, the battery and the loss of user data, and service. The FLR chapter owns the pages, their fields
+and the way into them and out. Inside the GPS simulation owns how the failures of the reception act on the model.
+Other pages say nothing about failures; the message lists give text, meaning and the link.
 
-What these pages link to instead of explaining: the receiver states and RAIM (GPS reception and RAIM, package sta);
-the self test and the power-on sequence (Power-on, planned); what the unit normally keeps while off (Power-on,
-planned); the cursor and lists with `CLR` and `ENT` (Controls and display, planned anchors); SET 10 as a page (the
-SET chapter, planned).
-
-## Where to look
-
-- The pages: `pages/left/Flr1Page.tsx`, `Flr2Page.tsx`, `Flr3Page.tsx`, `FailureListPage.tsx`; the way in:
-  `pages/left/Set10Page.tsx`, `pages/MainPage.tsx` (`openFailurePages`); the entry of the hours:
-  `controls/editors/MtbfEditor.tsx`.
-- The failures: `failures/FailureCatalog.ts` (every failure, its name on FLR, its message, when it is offered),
-  `failures/Failures.ts`, `FailureTrigger.ts` (random failures), `FailureDetector.ts` (when the unit notices),
-  `Battery.ts`, `GpsFailures.ts`, `ReceiverErrors.ts`, `Transmitters.ts`, `EepromCalibration.ts`,
-  `FailureOutputs.ts`.
-- The effects elsewhere: `PowerSupply.ts` and `settings/UserMemory.ts` (the loss of user data),
-  `pages/left/SelfTestLeftPage.tsx` (`TEST FAIL`), `pages/left/Sta1Page.tsx`, `Sensors.ts` and `Interconnect.ts`
-  (inputs and outputs), `data/PersistentMessages.ts` (the failure messages).
-- Tests that pin each failure: `test/render/failures/`, `test/unit/failures/`.
-- **Not a source:** `vendor/kln90b/docs/failures.md` and `docs/superpowers/specs/`, which the code comments cite
-  (style guide, section 4). The researcher and the writers do not open them.
+**The wording** (style guide, word list): a failure is active or inactive, as FLR 2 and FLR 3 head their lists;
+the pilot fails a part and repairs it; the fail question and the repair question. The names FLR shows for the
+failures are in code formatting, with no glossary entry and no `<Term>`.
 
 ## Screens
 
-Planned by this package's session after its research. The session checks first that the generator can open the FLR
-pages through SET 10 and set a failure; what it cannot stage is listed here afterwards.
+The screens are in `kln90b/screens/`: `set-10-failures`, `flr-1`, `flr-1-set`, `flr-1-mtbf-entry`,
+`flr-1-confirm`, `flr-1-serviced` (shown as an excerpt of the status line), `flr-2-empty`, `flr-2`,
+`flr-2-repair`, `flr-3`, `flr-3-fail` (the FLR chapter) and `failure-self-test-fail`,
+`failure-msg-rcvr-hardware`, `failure-msg-battery-low`, `failure-msg-user-data-lost` (Simulated failures, which
+also shows `sta-1-failed`), and the STA 1 examples `gpsfail-satellite`, `gpsfail-ant-gain`, `gpsfail-jamming`,
+`gpsfail-jamming-lost`, `gpsfail-spoofing-mixed`, `gpsfail-spoofing-captured` (Inside the GPS simulation; Simulated
+failures shows four of them and `sta-1-nav` where it tells the failures apart).
 
-## Notes for the session
+The `gpsfail-` screens are built in their descriptions the way the kln90b tests build the states: the helpers
+`kln90b/screens/shared/jammer.ts` and `spoofer.ts` store a transmitter at a known site and fly the aircraft toward
+it until the satellites are lost or the receiver is captured. The first run of this package had given these
+states up as not stageable; the style guide (section 13) now asks for this before a state is given up.
 
-- **Page links.** The FLR pages are not in `kln90b/src/data/pageTree.ts`, which lists the knob order for the knob
-  demo and the page links. Before the writers start, the coordinator reads README, "Page links", and
-  `kln90b/src/plugins/remarkPageLinks.*` and settles how FLR 1 to FLR 3 become page names that link to
-  `pages/flr`, without the knob demo treating FLR as a stop of the outer knob. That is a change to the site, so it
-  goes to the maintainer first.
-- **The sidebar** generates the page reference from the folder; the session sets `sidebar.order` so that FLR stands
-  after SET, and checks the order of the chapters that exist.
-- The failures are the simulation's own design: the real manuals do not describe the FLR pages, so the reviewer
-  checks the facts against the code and the staged unit, and checks against the real manuals only the names of
-  real things (the messages, the annunciators, the interfaces) and the behavior of the real unit that a failure
-  imitates.
-- The code marks the draws and delays as its own choice. The pages describe what the pilot observes and give a
-  number only where the pilot can use it.
-- Names of interfaces (ARINC 429, RS-232) appear on FLR as the unit shows them. The pages explain each in pilot
-  terms (what the aircraft gets from it or sends over it) and name no configuration.
-- Models: Sonnet for the FLR chapter; Opus for Simulated failures and for the reviews.
-- Glossary: the names FLR shows for the failures are used on these screens only, so they are explained in the
-  field explanations and in the list of Simulated failures, not in the glossary (style guide, section 14).
+How they were staged: the FLR pages open through kln90b's own test helpers for them; a failure is set on the unit
+directly after the settle. A screen whose failure leaves a message pending sets `keepMessages: true` and reads the
+message first, so the half that is shown has no `msg`.
+
+Variants without a screen:
+
+- An empty FLR 3, which occurs only when the pilot has failed every part by hand; the chapter says it in a
+  sentence, and `flr-2-empty` shows the same look.
+- The effects on the remote annunciators and on the outputs are not on the unit's screen.
+
+## Bugs
+
+Filed on 2026-11-16; the paragraph carries the `kln90b#NN` comment.
+
+- kln90b#483: the service question `CONFIRM?` of FLR 1 is not withdrawn when the cursor leaves the button or is
+  turned off (the FLR chapter, "Servicing the unit").
+- kln90b#484: with `ANT GAIN` and `JAMMING` or `SPOOFING` active together the lower antenna gain does not lower the
+  transmitter's own level, so the loss is counted too high (Inside the GPS simulation, "The receiver and the
+  antenna"; the paragraph describes the loss alone).
+
+Not filed:
+
+- An empty internal battery alone loses nothing: the user data are lost only at a power-on while the failure
+  `BATTERY` is active. Intended (maintainer, 2026-11-16); no later session files it.
+- The faulty satellite gets an error of the range that grows evenly and holds, with no error of the rate. The
+  failure imitates a fault of a satellite's clock (maintainer, 2026-11-16); the pages say so and never call it a
+  jump, and "Where the model simplifies" names the missing rate error.
+- A random failure rebuilds the lists of FLR 2 and FLR 3 and withdraws an open question; a code comment pins it,
+  so it is taken as intended and described.
+
+## The maintainer's review (2026-11-16)
+
+Applied in this package: the reason for the longer search with `RCVR EEPROM` (the lost calibration of the
+oscillator); `SATELLITE` as a fault of a satellite's clock, uncommon but not unrealistic (the remark stands on
+Simulated failures only); the STA 1 example screens and the horizon drawing; the box about the loss of the user
+data as the new Warning box. Rules added to the style guide: the Warning box (section 11) and "A state the pilot
+must tell from another gets its screen" (section 13).
 
 ## Notes from other packages
 
-### From the package sta (2026-11-16)
-
-What the pages of the package sta say about failures, each with a link to Simulated failures; this package must
-bear them out:
-
-- GPS reception and RAIM, under the GPS states: `FAILR` means the receiver has failed, and a failed receiver or
-  antenna and the other failures of the receiver are described in Simulated failures.
-- Under RAIM: `RAIM POSITION ERROR` `CROSS CHECK POSITION` is caused only by a simulated failure of a satellite or
-  by a spoofer.
-- Under real and fast acquisition: `FAST` cannot help at a power-on after a simulated failure erased the unit's
-  memory.
-- The STA chapter, STA 1, "A failed receiver": shows the screen `sta-1-failed` (`STATE FAILR`, no satellite rows)
-  and links.
-
-Pointers for this package's research (check in the code):
-
-- `SATELLITE COVERAGE INADEQUATE FOR NAV` is suppressed while the receiver has failed.
-- A persistent message such as `NO RCVR DATA` stays on the MSG page after it is read and keeps a steady `msg` in
-  the status line. The generator refuses a screen with any `msg` unless its description sets `keepMessages: true`;
-  the screens of persistent messages need it (`kln90b/screens/sta-1-failed/screen.ts` shows how).
-- The RAIM test of the simulation reacts only to an injected satellite fault, never to the ordinary errors or to
-  the altitude; Inside the GPS simulation says so under "Detecting an error".
-
-None yet. The package sta notes here what its pages said about a failed receiver, jamming, spoofing and a faulty
-satellite, so that this package uses the same terms.
+Used. What the pages of the package sta said about failures is borne out, with one correction: `FAILR` also shows
+for a failed antenna and for the receiver hardware faults that stop the receiver, so GPS reception and RAIM and
+the STA chapter now say "the receiver or its antenna has failed".
 
 ## Changes to earlier pages
 
-To be listed by the session: the sentences of the sta package's pages that name a failure get their link to the
-section that now exists.
+All went through the reviewer of the failures part of Inside the GPS simulation.
+
+- `operation/gps-simulation.mdx`: the new section; "Where the model simplifies" as above; the description names
+  the failures.
+- `operation/gps-receiver.mdx`: the links to Simulated failures go to its sections; `FAILR` as above; the entry of
+  `SYSTEM TIME UPDATED` says that the date is wrong after a simulated failure erased the unit's memory, with the
+  link to `#the-battery`.
+- `pages/sta.mdx`, "A failed receiver": the link goes to `#the-receiver-and-the-antenna`, and the sentence names
+  the antenna too.
+
+## Changes to the site
+
+- `kln90b/src/data/pageTree.ts` has `offKnobTree` with FLR 1 to FLR 3, and the page links
+  (`kln90b/src/plugins/remarkPageLinks.ts`) read it, so the FLR page names link to the chapter. The knob demo
+  reads only the two knob trees (approved by the maintainer, 2026-11-16).

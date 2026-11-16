@@ -71,6 +71,27 @@ From the package apt: text about the scan that the review cut from the APT chapt
 From the planning survey: the FLR pages are a page type that the outer knob does not reach
 (`docs/plan/failures.md`); the page tree of this page says so in one sentence and links to the FLR chapter.
 
+### From the package failures (2026-11-16)
+
+Found in the review of the FLR chapter, which links to the planned anchors `#selecting-a-page` and
+`#entering-data-with-the-cursor` for them (check each in the code):
+
+- **The cursor** stops at the first and the last field without wrapping (`pages/CursorController.ts`). In a list
+  that was scrolled, the cursor comes back on the top entry shown, not on the first entry (`controls/List.tsx`).
+  An ENT that the left side does not take goes to the right page (`pages/MainPage.tsx`).
+- **A question is withdrawn** when the cursor leaves it or is turned off; the service question of FLR 1 is the
+  exception (kln90b#483).
+- **Pages opened over the page tree** (the Direct To page, the ALT page, and the FLR pages over SET 10). With its
+  cursor off, an outer knob step on such a page closes it and passes the step on to the page beneath, until a page
+  takes the step. So a step on the Direct To page opened over the FLR pages closes both and moves on from SET 10.
+  The inner knob does the same, except on a page with pages of its own to turn through, as the FLR pages have
+  (`pages/MainPage.tsx`).
+- **The outer knob selects, in each page type, the page last shown in it** (`pages/PageTreeController.ts`). The
+  FLR chapter therefore says only that leaving the FLR pages moves on from SET 10 to the next page type.
+- The FLR pages are in `kln90b/src/data/pageTree.ts` as `offKnobTree`, which the page links read and the knob
+  demo does not. Where Controls and display describes the page tree, the FLR pages are named as pages that no
+  knob reaches, with the link to the FLR chapter.
+
 ## Changes to earlier pages
 
 The seam check compares the Quickstart with Controls and display: the terms, the names of the controls, and the
