@@ -21,7 +21,7 @@ export const glossary: Record<string, GlossaryEntry> = {
 		text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam.',
 	},
 	GS: {
-		expansion: 'Ground speed',
+		expansion: 'Groundspeed',
 		text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
 	},
 	ETE: {
@@ -61,7 +61,7 @@ export const glossary: Record<string, GlossaryEntry> = {
 	},
 	AFIS: {
 		expansion: 'Aerodrome flight information service',
-		text: 'On APT 4, the label of the frequency of a flight service station of the airport.',
+		text: 'On APT 4, the frequency type of a flight service station of the airport.',
 	},
 	AWOS: {
 		expansion: 'Automated weather observing system',
@@ -176,7 +176,7 @@ export const glossary: Record<string, GlossaryEntry> = {
 	},
 	'RWY LEN': {
 		expansion: 'Runway length',
-		text: 'The label of the runway entry of a user airport on APT 3.',
+		text: 'The label of the runway entry of a user-defined airport on APT 3.',
 	},
 	HRD: {
 		expansion: 'Hard surface',
@@ -184,7 +184,7 @@ export const glossary: Record<string, GlossaryEntry> = {
 	},
 	SFT: {
 		expansion: 'Soft surface',
-		text: 'Soft surface, the choice for the runway of a user airport on APT 3 that is not HRD. On SET 3, HRD SFT lets the nearest list include airports with soft runways.',
+		text: 'Soft surface, the choice for the runway of a user-defined airport on APT 3 that is not HRD. On SET 3, HRD SFT lets the nearest list include airports with soft runways.',
 	},
 	TRF: {
 		expansion: 'Turf',
@@ -232,35 +232,101 @@ export const glossary: Record<string, GlossaryEntry> = {
 	},
 	GRND: {
 		expansion: 'Ground control',
-		text: 'A frequency label of APT 4.',
+		text: 'A frequency type of APT 4.',
 	},
 	TWR: {
 		expansion: 'Tower',
-		text: 'A frequency label of APT 4.',
+		text: 'A frequency type of APT 4.',
 	},
 	CLR: {
 		expansion: 'Clearance delivery',
-		text: 'A frequency label of APT 4. On the front panel, CLR is the clear key.',
+		text: 'A frequency type of APT 4. On the front panel, CLR is the clear button.',
 	},
 	APR: {
 		expansion: 'Approach',
-		text: 'On APT 4, the label of the approach control frequency. On APT 2 and in FPL 0 the short form of an approach procedure, as in NO APR and CHANGE APR?.',
+		text: 'On APT 4, the frequency type of approach control. On APT 2 and in FPL 0 the short form of an approach procedure, as in NO APR and CHANGE APR?.',
 	},
 	DEP: {
 		expansion: 'Departure control',
-		text: 'A frequency label of APT 4.',
+		text: 'A frequency type of APT 4.',
 	},
 	CTR: {
 		expansion: 'Center',
-		text: 'On APT 4, the label of the frequency of a center that provides approach and departure control for the airport. CTR is also the right-side page group with the nearest centers.',
+		text: 'On APT 4, the frequency type of a center that provides approach and departure control for the airport. CTR is also the right-side page type with the nearest centers.',
 	},
 	PTAX: {
 		expansion: 'Pre-taxi clearance',
-		text: 'A frequency label of APT 4, for a frequency on which you get your clearance before taxi.',
+		text: 'A frequency type of APT 4, for the frequency on which you get your clearance before taxi.',
 	},
 	RMKS: {
 		expansion: 'Remarks',
 		text: 'The remarks of an airport on APT 5, as in RMKS FULL and APTS W/RMKS.',
+	},
+	msg: {
+		text: 'The message prompt. It shows in the status line when the unit holds a message and flashes while you have not read all of them. You read the messages with the MSG button.',
+	},
+	ent: {
+		text: 'The enter prompt. It flashes in the status line when ENT accepts what you have entered or selected.',
+	},
+	CRSR: {
+		expansion: 'Cursor',
+		text: 'Replaces the page name in the status line while the cursor is on for that side. Pressing the CRSR button of that side turns the cursor off again.',
+	},
+	KYBD: {
+		expansion: 'Keyboard',
+		text: 'Flashes in the status line in place of CRSR while keyboard mode is on for that side.',
+	},
+	'enr-leg': {
+		expansion: 'Enroute-Leg mode',
+		text: 'The navigation mode in which you fly along a leg from one waypoint to the next while en route.',
+	},
+	DIS: {
+		expansion: 'Distance',
+		text: 'The distance to the active waypoint, in NM.',
+	},
+	BRG: {
+		expansion: 'Bearing',
+		text: 'The magnetic bearing from your position to the active waypoint.',
+	},
+	'enr:': {
+		expansion: 'En route, OBS mode',
+		text: 'The navigation mode in which you fly the course you selected with the OBS, followed by that course in degrees.',
+	},
+	'arm-leg': {
+		expansion: 'Approach armed, leg mode',
+		text: 'The navigation mode in which the unit has armed an approach and still navigates along legs.',
+	},
+	'arm:': {
+		expansion: 'Approach armed, OBS mode',
+		text: 'The navigation mode in which the unit has armed an approach while you fly an OBS course, shown with that course in degrees.',
+	},
+	'apr-leg': {
+		expansion: 'Approach active, leg mode',
+		text: 'The navigation mode in which the approach is active and the unit navigates along its legs.',
+	},
+	'OBS IN': {
+		expansion: 'OBS input',
+		text: 'The course that the unit reads from the OBS setting of the course indicator in the aircraft, in degrees magnetic.',
+	},
+	OUT: {
+		expansion: 'OBS output',
+		text: 'On the Self Test page, the desired track that the unit sends out; it shows a fixed test value.',
+	},
+	RMI: {
+		expansion: 'Radio magnetic indicator',
+		text: 'An instrument that shows bearings; the unit sends it the bearing to the active waypoint.',
+	},
+	ANNUN: {
+		expansion: 'Annunciators',
+		text: 'The lamps of the aircraft that the unit lights to show its state, such as msg and the approach and waypoint lamps.',
+	},
+	ALT: {
+		expansion: 'Altitude',
+		text: 'The indicated altitude from the altitude input of the aircraft, rounded to 100 ft.',
+	},
+	BARO: {
+		expansion: 'Altimeter baro setting',
+		text: 'The baro setting of the altimeter, in inches of mercury, which the unit uses for altitude.',
 	},
 };
 

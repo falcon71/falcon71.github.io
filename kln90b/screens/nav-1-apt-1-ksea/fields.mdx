@@ -1,0 +1,63 @@
+<Field id="from" title="From waypoint">
+	The waypoint at the start of the active leg, in five characters. On a direct-to, the leg starts where you started the direct-to, and the field shows a `d` right in front of the arrow.
+</Field>
+
+<Field id="arrow" title="Active leg arrow">
+	The `›` between the two waypoints marks the leg you are flying. It points from the waypoint on the left to the active waypoint on the right.
+</Field>
+
+<Field id="to" title="Active waypoint">
+	The waypoint you are flying to, in five characters. The page measures distance, groundspeed, time and bearing to it. It is blank when there is no active waypoint.
+</Field>
+
+<Field id="cdi" title="D-bar">
+	The D-bar is a scale of dots with a marker that shows how far you are from the desired course; the center of the scale is on course. The ends of the scale are full deflection of 5 NM, 1 NM or 0.3 NM. You can select the scale on MOD 1 and MOD 2, and the unit changes it for approaches. The center shows whether you fly to or from the active waypoint. An inverse `F L A G` replaces the middle of the scale when the unit has no valid navigation.
+</Field>
+
+<Field id="dis" title="Distance to the active waypoint">
+	<Term t="DIS">`DIS`</Term> is the distance to the active waypoint, in NM. It shows one decimal below 100 NM and whole numbers from 100 NM on, and dashes when the unit has no distance.
+</Field>
+
+<Field id="gs" title="Groundspeed">
+	Your groundspeed in kt, from the GPS. It shows dashes until the unit is NAV ready.
+</Field>
+
+<Field id="ete" title="Estimated time en route">
+	The time to the active waypoint at your present groundspeed, as hours and minutes. Below one hour the hours stay blank (`:22` is 22 minutes). It shows `--:--` when the unit cannot calculate it.
+</Field>
+
+<Field id="brg" title="Bearing to the active waypoint">
+	<Term t="BRG">`BRG`</Term> is the magnetic bearing from your position to the active waypoint, in degrees. It shows `---°` when the unit has no bearing.
+</Field>
+
+<Field id="ident" title="Airport identifier">
+	The identifier of the airport, three or four characters. A `›` in front of it means that the airport is the [active waypoint](/kln90b/operation/navigation-modes/#the-active-waypoint). With the right cursor on, you change it with the right knobs.
+</Field>
+
+<Field id="name" title="Airport name">
+	The name of the airport in two rows of 11 characters. A user-defined airport has no name, and the rows stay blank.
+</Field>
+
+<Field id="pos" title="Airport position">
+	The position of the airport: latitude above, longitude below, as `N 47°26.99'` and `W122°18.71'` (degrees, minutes and hundredths of a minute). For an airport of the database the position cannot be changed.
+</Field>
+
+<Field id="class" title="Airspace and type of the airport">
+	The airspace the airport lies in (`CL B`, `CL C`, <Term t="TMA" /> or <Term t="CTA" />) on the left, and <Term t="MILTRY">`MILTRY`</Term> or <Term t="PRIVAT">`PRIVAT`</Term> on the right where they apply. The row is blank for a user airport.
+</Field>
+
+<Field id="lpage" title="Page identification of the left side">
+	The page identification on the left side, in five characters. A `+` in place of the space (`STA+1`) means that the page has more than one subpage. While the left cursor is on, <Term t="CRSR">`CRSR`</Term> replaces the page identification.
+</Field>
+
+<Field id="mode" title="Mode annunciation">
+	The mode annunciation, which shows the navigation mode. <Term t="enr-leg">`enr-leg`</Term> is Enroute-Leg mode: en route navigation along a leg, from one waypoint to the next. In [OBS mode](/kln90b/operation/navigation-modes/) the field shows <Term t="enr:">`enr:`</Term> and the course you selected, and for approaches <Term t="arm-leg">`arm-leg`</Term>, <Term t="arm:">`arm:`</Term> or <Term t="apr-leg">`apr-leg`</Term>. For about 5 seconds, a short message of the unit, such as `NO SUCH WPT`, replaces this field and the next one.
+</Field>
+
+<Field id="prompt" title="Message and enter prompt">
+	The three cells after the mode annunciation are blank while the unit holds no message and nothing waits for <kbd>ENT</kbd>. <Term t="msg">`msg`</Term> in inverse video means that the unit holds a message; it flashes while you have not read all of them. A flashing <Term t="ent">`ent`</Term> means that <kbd>ENT</kbd> accepts what you have entered.
+</Field>
+
+<Field id="rpage" title="Page identification of the right side">
+	The page identification on the right side, in five characters. A `+` in place of the space (`APT+3`) means that the page has more than one subpage. While the right cursor is on, <Term t="CRSR">`CRSR`</Term> replaces the page identification.
+</Field>

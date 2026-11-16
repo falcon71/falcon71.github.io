@@ -1,42 +1,97 @@
 ---
 title: Quickstart
-description: The two halves of the screen, the knobs and the cursor, enough to get going.
+description: The least you need to operate the KLN 90B, from turning it on to selecting pages, entering data and using the mouse.
 ---
 
 import KnobDemo from '../../../components/KnobDemo.astro';
+import Callout from '../../../components/Callout.astro';
+import KlnScreen from '../../../components/KlnScreen.astro';
+import DirectToKey from '../../../components/DirectToKey.astro';
 import Term from '../../../components/Term.astro';
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
+The KLN 90B shows two pages side by side. You choose a page with the knobs, not from a menu, turn the cursor on to change a field, and accept most changes with <kbd>ENT</kbd>.
 
-## Two screens in one
+## Turning the unit on
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Usually NAV 1 is on the left and APT 1 on the right. The
-left half shows your <Term t="DTK" />, <Term t="XTK" />
-and <Term t="GS" />, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+You turn the KLN 90B on by pushing in the power/brightness knob, at the upper right of the unit. The avionics of the aircraft must have power, with the avionics bus on and no circuit breaker pulled. Some aircraft need a right click on the knob, see [the controls in the simulator](#the-controls-in-the-simulator).
+
+<Callout kind="info">
+The screen stays dark for up to 6 seconds after you turn the unit on while it warms up, and then brightens over about 4 seconds. A unit that was off for less than 10 minutes is dark for a shorter time. Do not push the knob again, which turns the unit off.
+</Callout>
+
+The Turn-On page is what the screen shows as it brightens; the unit runs its self test while that page is shown, and the Self Test page follows about 17 seconds after power-on. The screen also stays dim while you keep the knob turned down.
+
+To get from the Turn-On page to the normal pages:
+
+1. Wait for the Self Test page.
+
+<KlnScreen screen="self-test" />
+
+2. Press <kbd>ENT</kbd> until the cursor is on `APPROVE?`. The cursor starts on the baro setting and moves one field on with each press. Once it is on `APPROVE?`, <Term t="ent">`ent`</Term> flashes in the status line.
+3. Press <kbd>ENT</kbd>. The unit shows the Database page, with the cursor on `ACKNOWLEDGE?`.
+4. Press <kbd>ENT</kbd>. The unit shows its normal pages.
+
+Depending on the installation, another page can appear before the Self Test page or before the Database page. Until the unit is NAV ready (it has a position good enough to navigate), the navigation pages show dashes instead of values. [Power-on and initialization](/kln90b/unit/power-on/) explains the self test, the Database page and the search for the position and the NAV ready state, including those pages and what to do when the search takes too long.
+
+## The two sides of the screen
+
+The screen is a left page and a right page with the status line under them, and each side has six lines. The left knobs and the left <kbd>CRSR</kbd> button operate the left page, the right knobs and the right <kbd>CRSR</kbd> button the right page. A few pages, such as the MSG page, use both sides.
+
+<KlnScreen screen="nav-1-apt-1-ksea" />
+
+The status line holds the page identifications of both pages with the mode annunciation between them. A flashing <Term t="msg">`msg`</Term> means that the unit holds a message you have not read; press <kbd>MSG</kbd> to read it. [The screen](/kln90b/unit/controls-and-display/#the-screen) describes both halves and the status line.
 
 ## Selecting a page
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Try it: turn the knobs below and watch the page names on the
-status line.
+The pages of each side come in page types, and each page type has its own pages: NAV 1 to NAV 5 are the NAV pages, a page type. With the cursor off, the outer knob of a side selects the page type and the inner knob the page within the page type. Clockwise goes to the next page type or page, counterclockwise to the previous one, and after the last the unit wraps around to the first. A page type comes back with the page you last used in it. A page number that has more than one page shows a `+` in its name (`APT+3`), and the inner knob steps through those pages before it goes on to the next page number.
+
+Try it: turn the knobs below and watch the page names in the status line. The demo shows page names only, not the pages behind a `+`, and the unit skips the dashed pages where the installation has none.
 
 <KnobDemo />
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor. More in
-[Controls and display](/kln90b/unit/controls-and-display/).
+[Selecting a page](/kln90b/unit/controls-and-display/#selecting-a-page) lists all pages and explains the knobs in full.
 
-## The cursor
+## Changing a field with the knobs
 
-Press <kbd>CRSR</kbd> lorem ipsum dolor sit amet, consectetur adipiscing elit. Turn the left inner knob, then press
-<kbd>ENT</kbd>. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.
+Press the left <kbd>CRSR</kbd> button for the left page or the right <kbd>CRSR</kbd> button for the right page, and the cursor appears in inverse video on a field of that page. Press the same button again to turn it off. With the cursor on, the knobs of that side no longer select pages: the inner knob changes the field, and the outer knob moves the cursor to the next or previous field.
 
-## Operating the unit with the mouse
+On many fields the inner knob steps through a list of values, and each step takes effect at once. You need no <kbd>ENT</kbd>, and <kbd>CLR</kbd> has nothing to take back. On SET 3, one step of the left inner knob has changed the minimum runway length:
 
-Lorem ipsum dolor sit amet: the mouse controls differ between aircraft, consectetur adipiscing elit. See
-[Using the controls in the simulator](/kln90b/unit/controls-and-display/#using-the-controls-in-the-simulator) and
-[keyboard mode](/kln90b/unit/keyboard-mode/).
+<KlnScreen screen="set-3-cursor" />
+
+The identifier on the waypoint pages (APT, VOR, NDB, INT and SUP) works this way too: the page shows the waypoint as soon as you change a character, and the unit fills in the characters to the right of the cursor with the first waypoint that matches. To show Seattle-Tacoma on the APT pages:
+
+1. Turn the right outer knob to the APT pages and the right inner knob to APT 1.
+2. Press the right <kbd>CRSR</kbd> button. The cursor stands on the first character of the identifier.
+3. Turn the right inner knob until the first character is K.
+4. Turn the right outer knob one step clockwise. The cursor moves to the next character.
+5. Turn the right inner knob to S. If you pass a character, turn the inner knob back.
+6. Repeat steps 4 and 5 until the page shows KSEA. Because the unit fills in the rest at each character, the page can show KSEA before the last one, and then nothing remains to turn. That saves a lot of knob turning.
+7. Press the right <kbd>CRSR</kbd> button to turn the cursor off.
+
+## Entering a value with ENT
+
+Other entries, such as a waypoint on the Direct To page, a time or a date, take effect only when you press <kbd>ENT</kbd>. The first step of the inner knob opens the entry and replaces the old value: a number or a time starts from its first cell, and an identifier starts with `A` for a clockwise step or `9` for a counterclockwise step and is filled in at once. The entry shows in inverse video with the cell under the cursor flashing. While the entry is open, the outer knob moves only between its characters. <kbd>ENT</kbd> accepts the entry and moves the cursor to the next field, and <kbd>CLR</kbd> takes it back: a value returns to what it was, and an identifier is blanked. If you turn the cursor off before you press <kbd>ENT</kbd>, the entry is lost.
+
+To fly direct to Boeing Field:
+
+1. Press <DirectToKey />. The Direct To page appears on the left side with the cursor on the identifier.
+2. Enter KBFI with the left knobs: the inner knob selects a character, the outer knob moves to the next one.
+
+<KlnScreen screen="direct-to-ident-entry" />
+
+3. Press <kbd>ENT</kbd>. The unit shows the waypoint page of KBFI on the right so that you can check it, and `ent` flashes in the status line. If it is not the right place, turn the left inner knob to enter the identifier again.
+4. Press <kbd>ENT</kbd> again. The direct-to is now active.
+
+[Entering data with the cursor](/kln90b/unit/controls-and-display/#entering-data-with-the-cursor) covers the cursor, the knobs, <kbd>ENT</kbd> and <kbd>CLR</kbd> for every kind of field, and [Waypoints and the database](/kln90b/operation/waypoints/) explains the confirmation of a waypoint.
+
+## The controls in the simulator
+
+In some aircraft the power/brightness knob needs a right click to turn the unit on. If you use the right mouse button to pan the camera, hold the left mouse button before you right click. [Using the controls in the simulator](/kln90b/unit/controls-and-display/#using-the-controls-in-the-simulator) says more.
+
+Keyboard mode lets you use the keys of your PC instead of the knobs. With the cursor on, left click on <Term t="CRSR">`CRSR`</Term> in the status line, and <Term t="KYBD">`KYBD`</Term> flashes in its place. While it flashes, the simulator ignores all other input, joysticks included. [Keyboard mode](/kln90b/unit/keyboard-mode/) explains how to leave it and which keys it uses.
 
 ## Where to go next
 
-- [Tutorial flight 1](/kln90b/getting-started/tutorial-1/) lorem ipsum dolor sit amet.
-- [Page reference](/kln90b/pages/nav/) consectetur adipiscing elit.
+- [Tutorial flight 1](/kln90b/getting-started/tutorial-1/) takes you through power-on and a flight with direct-to navigation.
+- [Controls and display](/kln90b/unit/controls-and-display/) describes every control of the unit in full.

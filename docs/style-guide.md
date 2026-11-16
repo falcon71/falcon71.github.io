@@ -121,6 +121,8 @@ against this guide.
 - A reviewer may read the real manuals. It never quotes them and never shows a page or a figure of one.
 - A finding states the error in the reviewer's own words: "Direct-to, step 3: the draft says A; the unit does B." It
   names no manual page. It reaches the writer only through the coordinator.
+- A reviewer checks that the draft uses the official terms (section 12, "Official terms") and reports each term that
+  differs, as the term alone.
 - Where the manual and the code disagree, the finding is a kln90b bug (section 5), not a change to the draft.
 
 ### Where the manuals are
@@ -203,7 +205,7 @@ The model packs several facts into every paragraph and wastes no words. So does 
   rule it qualifies (section 11).
 - **Say each fact once,** in the place a pilot would look for it, and link to it from everywhere else. A field is
   explained in its screen's field explanation; a task in Operation; a page's overall purpose in the page reference.
-  This holds above all for the basic operation of the unit: how a page group is selected, how the cursor and the knobs
+  This holds above all for the basic operation of the unit: how a page type is selected, how the cursor and the knobs
   enter characters, how the scan works, how a waypoint identifier is entered and confirmed. A chapter that opens by
   explaining those again is fatiguing to read, because every chapter would, and the pilot who studies the manual
   reads them all. Such a chapter says in one sentence that the operation is the same as everywhere and links to the
@@ -212,6 +214,17 @@ The model packs several facts into every paragraph and wastes no words. So does 
   moment they try: that a line has as many characters as it has, which characters a field accepts, that the cursor
   stops on every field in turn. Say what they cannot see: the limits, what is stored and where, what happens at the
   edges. If a sentence would make a pilot feel talked down to, cut it.
+- **Say what is, not what is not.** Do not state what the manual leaves out, what the site does not offer or what the
+  unit does not do, unless a pilot would otherwise expect it and act on it. "This manual does not say how version 1.x
+  differs" sounds as if something were withheld; "the download buttons never offer a pre-release" answers a question
+  nobody asked. Cut such sentences.
+- **Nothing about how the simulation is built,** not even in pilot words: that the unit only receives the commands
+  of its controls, which part of the aircraft decides what a click does, how the aircraft switches the unit in. Say
+  what the pilot does and sees (section 2).
+- **A gotcha must not be overlooked.** Where the unit regularly catches pilots off guard (the screen stays dark for a
+  few seconds after power-on while it warms up), the fact never stands in a subordinate clause. It gets the Good to
+  know box (section 11) at the place where the pilot meets it, and the text around it keeps its natural order: a
+  gotcha moved to the front of a section makes the section read out of order.
 - **Paragraphs of two to five sentences.** Sentences mostly of 10 to 25 words. Split a sentence that carries two
   conditions.
 - **Lists** for parallel items: the fields of a page, the choices of a menu, the conditions of a message. Prose for
@@ -243,7 +256,7 @@ it uses; the names link to the page reference by themselves.
 
 ### Page reference
 
-It answers "what is this page and what is this field". One chapter per page group, in page tree order (section 17).
+It answers "what is this page and what is this field". One chapter per page type, in page tree order (section 17).
 Each page gets its section:
 
 1. A heading with the page name (section 9).
@@ -253,9 +266,9 @@ Each page gets its section:
    and the right side, the variants of the page and what selects them (section 13 says which variants get a screen).
 5. A sentence linking to the Operation sections that use the page.
 
-A chapter explains what is specific to its page group and nothing that is the same on other pages. The waypoint
+A chapter explains what is specific to its page type and nothing that is the same on other pages. The waypoint
 pages (APT, VOR, NDB, INT, SUP) share the way an identifier is entered, the scan through the database, the nearest
-list, the offer to create a user waypoint, the ACT page and the waypoint confirmation; Waypoints and the database
+list, the offer to create a user waypoint, the ACT page and the approving of the waypoint page; Waypoints and the database
 explains all of that once, and each waypoint chapter says in one sentence that it works as it does everywhere, links
 there, and goes on with what its kind of waypoint shows and does differently. The same applies to the cursor and data
 entry (Controls and display) and to every topic the plan assigns to another page.
@@ -320,32 +333,56 @@ before you reuse one):
   every aircraft has one." It never names a configuration key. Put it at the start of the section about the feature.
 - **The Simulator only box** (`<Callout kind="sim-only">`) marks a feature that the real unit does not have. Put it at
   the start of the section about the feature.
+- **The Good to know box** (`<Callout kind="info">`) holds a fact that regularly catches pilots off guard and that a
+  pilot may open the page to find: the screen stays dark for a few seconds after power-on while the unit warms up. Put
+  it where the pilot meets the surprise, so that the text around it stays in its natural order. Two or three
+  sentences. It is rare: a page has at most one, and most pages have none; an ordinary exception stays a sentence or a
+  note.
 - There are no other boxes. If a new kind is needed, ask the coordinator; it is added to `Callout` with one fixed title,
   so that pilots learn to recognize it.
 
 ## 12. Words and notation
 
+### Official terms
+
+The manual names the things of the unit as the real unit's documentation names them: the controls, the pages, the
+parts of the screen, the prompts, the modes and the functions. Terms are not copyrighted, and a pilot who meets two
+names for one thing takes them for two things.
+
+- A writer cannot know the official term, because a writer never reads the real manuals (section 4). The writer uses
+  the terms of the word list below and of the pages already written, and otherwise the name the unit's screen or the
+  code suggests.
+- **The reviewer checks every term against the real manuals** and reports each difference as a finding: the draft's
+  term and the official term, nothing else. A term is a name of a few words; no sentence around it comes along.
+- The coordinator adds the official term to the word list below, so that every later writer uses it without a
+  reviewer having to find it again.
+
 ### Controls
 
-- **Keys** are written with `<kbd>` and their label: <kbd>CRSR</kbd>, <kbd>ENT</kbd>, <kbd>CLR</kbd>, <kbd>MSG</kbd>,
-  <kbd>ALT</kbd>. A key that exists on both sides gets its side: "the left <kbd>CRSR</kbd>". In prose, "press" a key.
-- **The Direct To key** is the one exception: write `<DirectToKey />`, which shows D→ with the arrow centered on the
-  D. The fonts of the site have no arrow of their own, so `<kbd>D→</kbd>` shows it too low. A page that names the key
+- **Buttons** are written with `<kbd>` and their label: <kbd>CRSR</kbd>, <kbd>ENT</kbd>, <kbd>CLR</kbd>,
+  <kbd>MSG</kbd>, <kbd>ALT</kbd>. A button that exists on both sides gets its side: "the left <kbd>CRSR</kbd>". In
+  prose, "press" a button. The unit has buttons, not keys; "key" is only for the keys of the PC keyboard (Keyboard
+  mode).
+- **The Direct To button** is the one exception: write `<DirectToKey />`, which shows D→ with the arrow centered on the
+  D. The fonts of the site have no arrow of their own, so `<kbd>D→</kbd>` shows it too low. A page that names the button
   is therefore `.mdx`.
 - **Knobs** are the left outer knob, the left inner knob, the right outer knob and the right inner knob. You "turn" a
   knob, "one step" or "clockwise" and "counterclockwise", and you "pull" or "push" the right inner knob.
+- **The power/brightness knob** turns the unit on and off (pushed in for on) and sets the brightness of the screen
+  (turned).
 - The Controls and display page names every control of the front panel, including the power and brightness controls.
   Every other page uses exactly those names.
-- **Mouse and keyboard.** How a knob or key reacts to the mouse depends on the aircraft (click zones, the mouse wheel, a
-  right click for power). Write "turn" and "press", as on the real panel; only Controls and display, the Quickstart and
-  Keyboard mode talk about the mouse.
+- **Mouse and keyboard.** Most aircraft follow the simulator's own control schemes, which need no description, and
+  pilots on Xbox use a controller. Write "turn" and "press", as on the real panel, and never describe a control scheme.
+  Only Controls and display, the Quickstart and Keyboard mode talk about the mouse, and they name just the special
+  cases that catch pilots (below, "Quickstart").
 
 ### Pages of the unit
 
 - **A page name is written as the unit's page tree names it** (`kln90b/src/data/pageTree.ts`), with a space before
   the number: NAV 1, SET 10, FPL 0, D/T 2, APT 8, Super NAV 5. The status line writes some of them without the space
   (SET10, FPL10); in prose, use the space.
-- **A page without a number** is written with "page": the VOR page, the REF page. A group is "the APT pages".
+- **A page without a number** is written with "page": the VOR page, the REF page. The pages of one kind are a page type, written "the APT pages".
 - **The full-screen pages** are Super NAV 1, Super NAV 5, the MSG page and SET 0.
 - **Do not link page names by hand.** The site links them when it builds (README, "Page links"). Write the name plainly
   in the text, outside code formatting.
@@ -386,7 +423,12 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | flight plan; the active flight plan (FPL 0) | flightplan |
 | waypoint; active waypoint; user waypoint | |
 | en route | enroute, en-route (except the unit's `enr-leg`) |
-| ground speed | groundspeed |
+| groundspeed | ground speed |
+| button (the buttons of the unit) | key |
+| page type (the APT pages are a page type) | page group, group |
+| Enroute-Leg mode (the unit shows `enr-leg`) | en route leg mode |
+| NAV ready (the unit is NAV ready once it has a position good enough to navigate) | has found its position |
+| D-bar (the course deviation bar of NAV 1 and the Self Test page) | CDI bar, deviation bar |
 | leg mode, OBS mode | LEG mode |
 | turn anticipation, waypoint alerting, waypoint sequencing | |
 | self test (noun), self-test (adjective) | selftest |
@@ -395,6 +437,19 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | the message page; the MSG page | |
 | cursor; turn the cursor on, turn the cursor off | activate the cursor |
 | identifier; ident only in screen text | ID |
+| hot-swapping (noun), hot-swap (verb): an aircraft that offers the unit as one of several GPS units | take turns, switch in |
+| the power/brightness knob | the brightness knob, the power button, the power knob |
+| waypoint type (airport, VOR, NDB, intersection, supplemental) | kind of waypoint |
+| procedure header, approach header (the line of FPL 0 that names a loaded procedure) | |
+| DME arc waypoint | arc entry |
+| several pages with one page name ("there is more than one APT 3 page", shown by the `+`) | subpage |
+| SID, STAR; SIDs, STARs; SID and STAR procedures; a SID procedure, a STAR procedure | departure, arrival (as names of the procedures) |
+| suffix (the letter after a waypoint of a loaded procedure) | mark, marker |
+| user-defined airport; user waypoint stays the short form of user-defined waypoint | user airport |
+| approve the waypoint page; the waypoint page shown for approval | waypoint confirmation |
+| frequency type (of a frequency on APT 4) | frequency label |
+| page identification (the segment of the status line that shows a page's name); "page name" in running text | |
+| mode annunciation (the segment of the status line between the page identifications) | mode field |
 | Microsoft Flight Simulator 2024, then "the simulator" | MSFS, FS2024 (except on Installation) |
 
 ### Spelling and style
@@ -426,7 +481,7 @@ general; the screen shows one concrete case.
   message; a step that raises one answers it before the screen is captured. For the same reason the screens run with the
   airspace alert off, unless a screen is about the airspace alert and turns it on.
 - **Show half a screen** when only one side matters. The generator keeps the line between the halves.
-- **Show an excerpt** when only one line or a few lines of a page matter: the shared top line of a page group, a
+- **Show an excerpt** when only one line or a few lines of a page matter: the shared top line of a page type, a
   question the unit asks, a prompt in the status line. A page shows the rows of a generated screen with `rows`
   (README, "Writing a screen"); the fields on those rows keep their explanations. Where the text describes a line in
   detail, the reader needs to see it, so the excerpt stands next to the description instead of leaving the line to the
@@ -508,13 +563,13 @@ The sidebar has these chapters and pages. Operation explains tasks ("how do I…
 | --- | --- |
 | Getting started | Table of contents (home page) · Installation · Quickstart · Tutorial flight 1 · Tutorial flight 2 |
 | The unit | Controls and display (knobs, buttons, the two halves, status line, cursor and data entry, scan, page tree) · Keyboard mode · Power-on and initialization |
-| Operation | Waypoints and the database · Nearest · Direct-to · Flight plans · Navigation modes (leg and OBS) · Sequencing and turn anticipation · Departures and arrivals · Non-precision approaches · VNAV · Messages · Airspace and altitude alerting · Trip planning and calculators · Fuel and air data |
-| Page reference | One chapter per page group in page tree order. Left: TRI, MOD, FPL, NAV, CAL, STA, SET, OTH. Right: CTR, REF, ACT, D/T, NAV, APT, VOR, NDB, INT, SUP. Each page with its screen. |
+| Operation | Waypoints and the database · Nearest · Direct-to · Flight plans · Navigation modes (leg and OBS) · Sequencing and turn anticipation · SID and STAR procedures · Non-precision approaches · VNAV · Messages · Airspace and altitude alerting · Trip planning and calculators · Fuel and air data |
+| Page reference | One chapter per page type in page tree order. Left: TRI, MOD, FPL, NAV, CAL, STA, SET, OTH. Right: CTR, REF, ACT, D/T, NAV, APT, VOR, NDB, INT, SUP. Each page with its screen. |
 | Reference lists | Message page messages · Status line messages · Glossary |
 | Help | External hardware · FAQ and troubleshooting · Known limitations · Contact |
 
 The NAV pages exist on both sides. The page reference has one NAV chapter that covers both sides, in its place among
-the left groups (after FPL); the right groups skip it. The page links depend on this: a group has exactly one chapter.
+the left page types (after FPL); the right ones skip it. The page links depend on this: a page type has exactly one chapter.
 
 ### Installation
 
@@ -522,9 +577,13 @@ the left groups (after FPL); the right groups skip it. The page links depend on 
   another version, the Releases page of the kln90b GitHub repository and the zip attached to a release. Some pilots
   download the source code by mistake; say which file to take.
 - Version 1.x is for Microsoft Flight Simulator 2020, version 2.x for Microsoft Flight Simulator 2024.
-- Where the package goes in the Community folder, and the folder structure it must have there.
+- Where the package goes in the Community folder, and the folder structure it must have there. The zip contains the
+  folder `falcon71-kln90b` itself. Do not say where the Community folder is; pilots know.
+- Updating: delete the old folder and install the new one. Flight plans, user waypoints and settings are kept
+  (confirmed by the maintainer, 2026-11-16).
 - Installing the package puts the unit into no aircraft by itself. The pilot needs an aircraft that carries the unit
-  (link the wiki page "Aircraft using the KLN 90B") or one into which the unit can be hot-swapped.
+  (link the wiki page "Aircraft using the KLN 90B"). Some aircraft offer it by hot-swapping; of that the page says
+  only that the KLN 90B may have to be selected in the configuration of the aircraft before it appears.
 
 ### Quickstart
 
@@ -533,7 +592,18 @@ daunting. The Quickstart gets a pilot going with as little reading as possible: 
 knobs, the cursor, and data entry, each in a few sentences, each linking to the full treatment.
 
 - It contains the interactive knob demo, which walks the real page tree.
-- It says that the mouse controls differ between aircraft, describes the common pattern and points to Keyboard mode.
+- **Turning the unit on.** It says prominently that the screen stays dark for a few seconds while the unit warms up
+  in a Good to know box (sections 8 and 11): pilots open this page to find out why their unit does not turn on. It shows the Self Test
+  page, which a pilot at that point has never seen; the other power-on pages need no screen here. It does not mention
+  the beep on approval, which needs an audio output that the aircraft so far lack; that belongs to Power-on and
+  initialization.
+- **Two ways of entering data, each in its own section:** fields that the knobs change directly, and entries that
+  flash and take effect only with <kbd>ENT</kbd>. The code calls the second kind editors; that is no term of the unit
+  and stays out of the manual.
+- **The controls in the simulator** is short. It describes no control scheme and nothing about how the aircraft and
+  the unit work together. It names the two special cases (in some aircraft the power knob needs a right click; in
+  some control schemes a click needs a second mouse button held) and describes keyboard mode in a few sentences with
+  the link.
 
 ### Keyboard mode
 
@@ -542,17 +612,17 @@ Its own page, based on the wiki page "Keyboard Mode" and the code, marked Simula
 ### Power-on and initialization
 
 The self test, the database confirmation, position and time initialization and GPS acquisition, with the time each
-takes and what the pilot does when the unit cannot find its position.
+takes and what the pilot does when the unit does not become NAV ready.
 
 ### SET 10
 
 Documented in the page reference like the other SET pages and marked Simulator only. Based on the wiki page "SET 10
 Page" and the code.
 
-### Departures, arrivals and approaches
+### SID and STAR procedures and approaches
 
 Two rules of procedure selection surprise pilots used to other GPS units, who then take them for bugs. They are the
-unit's correct behavior (confirmed by the maintainer, 2026-10-22). State both plainly in Departures and arrivals, in
+unit's correct behavior (confirmed by the maintainer, 2026-10-22). State both plainly in SID and STAR procedures, in
 Non-precision approaches, on APT 7 and APT 8 in the page reference, and as an FAQ entry:
 
 - **A transition must be selected whenever the procedure has one.** A SID, a STAR or an approach with transitions
@@ -617,7 +687,7 @@ STARs (APT 7) work without it, so that such a pilot does not skip the whole proc
   that.
 - **The EFB afterwards.** Once FPL 0 is complete, the pilot can load it into the simulator's EFB as a reference: open
   the flight planner app, select the Route tab, click Import and choose `REQUEST FROM AVIONICS` from the menu. The
-  unit then sends FPL 0 to the EFB, the en route waypoints together with the departure, arrival and approach by name
+  unit then sends FPL 0 to the EFB, the en route waypoints together with the SID, the STAR and the approach by name
   and transition (`KlnEfbSaver` in the kln90b code). No Availability box: the unit answers in every aircraft that is
   suited for the tutorials (see the aircraft requirement above).
 - Tutorial flight 1 offers no flight plan either, because its lesson is flying without one.
@@ -754,7 +824,8 @@ Before a writer hands in a page:
 - [ ] Every fact checked in the code or on the generated screen; no fact from memory or from another unit.
 - [ ] Exact numbers instead of vague words; every exception after its rule.
 - [ ] Procedures: numbered, one action per step, sides named, way back given, stable end state.
-- [ ] Keys in `<kbd>`, the Direct To key as `<DirectToKey />`, screen text in code formatting, page names plain and with a space before the number.
+- [ ] Buttons in `<kbd>`, the Direct To button as `<DirectToKey />`, screen text in code formatting, page names plain and with a space before the number.
+- [ ] The terms of the word list used; no second name for a thing that a page already written names.
 - [ ] `<Term>` at the first use of each glossary term; operating concepts linked to their section instead; new terms
       and words reported to the coordinator.
 - [ ] Nothing re-explained that another page owns; the basic operation of the unit linked, not repeated.
@@ -767,5 +838,5 @@ Before a writer hands in a page:
       the `kln90b#NN` comment once the issue is filed.
 - [ ] `npm run build` in `kln90b/` passes without new `[page links]` warnings.
 
-A reviewer checks the same list, then the facts against the code and the real manuals, and reports each finding in
-their own words, with the place in the draft, what it says and what is right.
+A reviewer checks the same list, then the facts against the code and the real manuals and every term against the
+official terms of the real manuals (section 12), and reports each finding in their own words, with the place in the draft, what it says and what is right.

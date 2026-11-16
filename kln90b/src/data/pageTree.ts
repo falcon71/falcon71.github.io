@@ -21,7 +21,8 @@ export const leftTree: PageGroup[] = [
 	{ name: 'NAV', pages: numbered('NAV', 1, 5) },
 	{ name: 'CAL', pages: numbered('CAL', 1, 7) },
 	{ name: 'STA', pages: numbered('STA', 1, 5) },
-	{ name: 'SET', pages: numbered('SET', 1, 10) },
+	// SET 0, the full-screen page, comes after SET 10 on the knob
+	{ name: 'SET', pages: [...numbered('SET', 1, 10), 'SET 0'] },
 	{ name: 'OTH', pages: numbered('OTH', 1, 10), optional: ['OTH 5', 'OTH 6', 'OTH 7', 'OTH 8', 'OTH 9', 'OTH10'] },
 ];
 

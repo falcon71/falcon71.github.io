@@ -12,14 +12,14 @@
 	The identifier of the airport that the ACT page shows. It cannot be changed here.
 </Field>
 
-<Field id="type" title="Kind of waypoint">
-	`A` for airport, the kind of waypoint the ACT page shows. The APT pages do not show it.
+<Field id="type" title="Waypoint type">
+	`A` for airport, the waypoint type the ACT page shows.
 </Field>
 
 <Field id="name" title="Airport name">
 	The name of the airport in two rows of 11 characters. The unit shows only letters, digits, blanks and hyphens and drops every other character, such as `/`, without leaving a blank. A name of more than 22 characters loses the words `CITY OF`, `GREATER` and `THE` and gets short forms (`NORTH` becomes `N`, `INTERNATIONAL` becomes `INT`, `REGIONAL` becomes `REG`, `SAINT` becomes `ST`, among others); the first word keeps its full form unless it is longer than 8 characters; what is still longer than 22 characters is cut off. The break between the rows falls after the eleventh character, in the middle of a word if need be.
 
-	A user airport has no name, and the rows stay blank.
+	A user-defined airport has no name, and the rows stay blank.
 </Field>
 
 <Field id="pos" title="Airport position">
@@ -29,9 +29,9 @@
 <Field id="class" title="Airspace and type of the airport">
 	The row under the name. On the left it shows `CL B` or `CL C` when the airport lies inside the lateral outline of a class B or class C airspace, and `TMA` or `CTA` when it lies inside an airspace whose name contains <Term t="TMA" /> or <Term t="CTA" />. Class B takes precedence over class C, class C over `TMA`, and `TMA` over `CTA`. Airspaces of other classes show nothing. At the right end of the row the unit shows <Term t="MILTRY">`MILTRY`</Term> for a military airport and <Term t="PRIVAT">`PRIVAT`</Term> for a private one; a public airport shows nothing there.
 
-	The unit compares only the outline on the map and not the floor of the airspace, so an airport below a class B shelf also shows `CL B`. The row is blank for a user airport, and it can stay blank for a moment after the page appears.
+	The unit compares only the outline on the map and not the floor of the airspace, so an airport below a class B shelf also shows `CL B`. The row is blank for a user-defined airport, and it can stay blank for a moment after the page appears.
 </Field>
 
-<Field id="page" title="Page name">
-	The name of the page on the right side. For an airport, the ACT page shows the APT pages of that airport as ACT 1, ACT 2 and so on; the right inner knob, with the cursor off, turns to the others.
+<Field id="page" title="Page identification">
+	The page identification on the right side. For an airport, the ACT page shows the APT pages of that airport as ACT 1, ACT 2 and so on; the right inner knob, with the cursor off, turns to the others.
 </Field>
