@@ -1,0 +1,34 @@
+# Package: help (External hardware; FAQ and troubleshooting; Known limitations; Contact)
+
+Requirements: style guide, section 17, for each page. The pages come after the pages they point into. Screens: none
+planned, except where an FAQ answer needs one that exists.
+
+## Pages
+
+- **External hardware** (`help/external-hardware.md`): based on the wiki page `External-Hardware.md` and
+  `vendor/kln90b/kln90b/HEvents.ts`. The only page that may show copyable configuration.
+- **FAQ and troubleshooting** (`help/faq.md`): based on the wiki's `FAQ.md` (its part about version 1.x does not
+  apply) and on the Good to know boxes and gotchas of the pages written. Each answer in its first sentence, then
+  the link to the full treatment. Required entries (style guide, section 17): the two rules of procedure selection;
+  loading an airway by hand.
+- **Known limitations** (`help/known-limitations.md`): based on the wiki page `Known-Limitations.md` and on what
+  the packages noted.
+- **Contact** (`help/contact.md`).
+
+## Notes from other packages
+
+Candidates for the FAQ and Known limitations, collected by earlier packages; every later package adds its own here.
+
+- From the package getting-started: the package cannot be installed on Xbox, so only aircraft that bundle their own
+  copy offer the unit there (wiki, "Bundling the KLN with your aircraft").
+- From the package getting-started: keyboard mode has two H events for hardware
+  (`KLN90B_LeftKeyboard_Toggle`, `KLN90B_RightKeyboard_Toggle`; kln90b README) for External hardware.
+- From the package apt: the simulation has no search of an airport by name or city (Known limitations).
+- From the planning survey, as candidates to verify: the screen stays dark after power-on (FAQ, linked to the
+  Quickstart's box); slow acquisition and the setting on SET 10 (FAQ, linked to GPS reception and RAIM); the unit
+  does not sequence (FAQ, linked to Sequencing); OTH 1 lists no flight service stations; course reversals and holds
+  are not flown as legs.
+
+## Changes to earlier pages
+
+None planned.
