@@ -193,9 +193,6 @@ it is written when those owners exist. A package that proves too large in its re
 
 ## Open questions for the maintainer
 
-- **From the package sta** (`docs/plan/sta.md`, "Bugs"): whether the weekly jump of the simulated sky gets a
-  kln90b issue; whether the altitude error should enter the RAIM test; whether the two cosmetic differences (the
-  ninth predicted satellite in `ACQ`, the format of STA 2) get issues.
 - **The FAA extract** carries no state and only public airports, so APT 2's state abbreviation and the private and
   military flags cannot be staged. Changing that is an extract change, not a manual change.
 

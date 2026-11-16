@@ -1,0 +1,47 @@
+---
+/**
+ * Synthetic drawing: the Doppler shift. A satellite moving to the right sent a wave crest every step; each crest is a
+ * circle around the place it was sent from. Ahead of the satellite the crests are squeezed together, behind it they are
+ * stretched out, so a receiver the satellite is closing on receives a higher frequency than one it moves away from.
+ * The speed: about 3.9 km/s, the circular orbit speed sqrt(mu / a) from the SDK's mu = 3.986005e14 m³/s² and the
+ * semi-major axis of the broadcast ephemeris data (sqrtA about 5153.7, a about 26,560 km, the same for every PRN).
+ * Spacing: a crest every 22 units of travel, radius growing by 40 per step (not to scale).
+ */
+import GpsFigure from './GpsFigure.astro';
+
+interface Props {
+	caption: string;
+}
+const { caption } = Astro.props;
+
+const crests = [1, 2, 3, 4, 5].map((k) => ({ cx: 330 - 22 * k, r: 40 * k }));
+---
+
+<GpsFigure caption={caption} viewBox="0 0 560 262" id="gps-doppler">
+	<defs>
+		<clipPath id="gps-doppler-clip">
+			<rect x="0" y="10" width="560" height="180" />
+		</clipPath>
+		<marker id="gps-doppler-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+			<path d="M0 0 L10 5 L0 10 Z" class="dot" />
+		</marker>
+	</defs>
+	<g clip-path="url(#gps-doppler-clip)">
+		{crests.map((c) => <circle cx={c.cx} cy="100" r={c.r} class="muted" />)}
+	</g>
+	<!-- the satellite: body and two panels -->
+	<g transform="translate(330 100)">
+		<rect x="-28" y="-5" width="18" height="10" class="solid" />
+		<rect x="10" y="-5" width="18" height="10" class="solid" />
+		<rect x="-9" y="-9" width="18" height="18" rx="2" class="solid" />
+	</g>
+	<line x1="312" y1="62" x2="376" y2="62" class="accent" marker-end="url(#gps-doppler-arrow)" />
+	<text x="344" y="46" text-anchor="middle" class="t t-accent ko">3.9 km/s</text>
+	<!-- the receivers -->
+	<circle cx="411" cy="100" r="9" class="ring" />
+	<circle cx="51" cy="100" r="9" class="ring" />
+	<text x="411" y="226" text-anchor="middle" class="t">closing</text>
+	<text x="411" y="250" text-anchor="middle" class="t small t-accent">higher frequency</text>
+	<text x="70" y="226" text-anchor="middle" class="t">moving away</text>
+	<text x="70" y="250" text-anchor="middle" class="t small">lower frequency</text>
+</GpsFigure>

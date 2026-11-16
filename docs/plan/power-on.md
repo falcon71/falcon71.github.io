@@ -55,7 +55,8 @@ Pointers from the code (`Gps.ts`, `GpsSearch.ts`, `pages/WelcomePage.tsx`); chec
   aircraft whose installation enables it (Availability box). In the pinned code a take-home unit turned on cold and
   dark never gets a position, and one started with the engine running loses it for good after a power cycle
   (`Gps.ts:562-574, 746, 948-955`). kln90b#455 (closed) is about this; check whether the pin contains its fix
-  before the page describes the behavior, and add the `kln90b#455` comment if it does not.
+  before the page describes the behavior, and add the `kln90b#455` comment if it does not. The maintainer wants
+  no new issue for it (2026-11-16).
 - GPS reception and RAIM owns acquisition (`#acquiring-satellites`, `#the-gps-states`,
   `#real-and-fast-acquisition`); this page says what the pilot does while waiting and links.
 

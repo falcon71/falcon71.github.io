@@ -116,18 +116,18 @@ Filed on 2026-11-16; the paragraphs carry the `kln90b#NN` comments.
   and "Signal strength").
 - kln90b#478: without a position the unit's clock runs in real time (Inside the GPS simulation, "Time").
 
-Not filed, for the maintainer (`docs/manual-plan.md`, "Open questions"):
+Not filed, by the maintainer's decision (2026-11-16): these are non-issues or not important, and no later
+session files them.
 
-- Take-home mode after a cold-and-dark start never gets a position. kln90b#455 (closed) is about this; the note
-  is in `docs/plan/power-on.md`.
 - In `ACQ` after power-on STA 1 lists the predicted satellites without cutting the list to eight, so a ninth is
-  never shown. Cosmetic; the pages say nothing about it.
-- STA 2 shows the error with a leading zero and a capital `NM`; the reviewer believes the real unit shows neither.
-  The screen shows what the simulation shows.
+  never shown.
+- The format of the error on STA 2. The reviewer took it for a difference from the real unit; the maintainer has
+  photos that show the simulation is right and the real manual's rendition wrong.
 - The simulated sky jumps once a week, because the simulator's SDK wraps the time of the orbits by a whole week.
   The page says only that the sky repeats every week.
-- The RAIM test reacts only to wrong satellite data, never to a wrong altitude; the page says so. Whether the
-  altitude error should enter the test is the maintainer's decision.
+- The RAIM test reacts only to wrong satellite data, never to a wrong altitude; the page says so.
+- Take-home mode after a cold-and-dark start never gets a position in the pinned code (kln90b#455, closed, is
+  about this); the note for the page that describes take-home mode is in `docs/plan/power-on.md`.
 
 ## Notes from other packages
 

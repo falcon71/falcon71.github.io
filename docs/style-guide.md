@@ -211,8 +211,8 @@ The model packs several facts into every paragraph and wastes no words. So does 
   reads them all. Such a chapter says in one sentence that the operation is the same as everywhere and links to the
   page that explains it (section 10, "Page reference").
 - **Assume a capable reader.** Do not tell the pilot what the screen shows them plainly or what they find out the
-  moment they try: that a line has as many characters as it has, which characters a field accepts, that the cursor
-  stops on every field in turn. Say what they cannot see: the limits, what is stored and where, what happens at the
+  moment they try: that a line has as many characters as it has, how many characters a field holds, which
+  characters a field accepts, that the cursor stops on every field in turn. Say what they cannot see: the limits, what is stored and where, what happens at the
   edges. If a sentence would make a pilot feel talked down to, cut it.
 - **Say what is, not what is not.** Do not state what the manual leaves out, what the site does not offer or what the
   unit does not do, unless a pilot would otherwise expect it and act on it. "This manual does not say how version 1.x

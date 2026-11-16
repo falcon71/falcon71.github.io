@@ -11,6 +11,7 @@ import Term from '../../../components/Term.astro';
 import GpsSkyGeometry from '../../../components/drawings/GpsSkyGeometry.astro';
 import GpsSignalCurve from '../../../components/drawings/GpsSignalCurve.astro';
 import GpsAntennaBank from '../../../components/drawings/GpsAntennaBank.astro';
+import GpsDoppler from '../../../components/drawings/GpsDoppler.astro';
 import GpsFilterStep from '../../../components/drawings/GpsFilterStep.astro';
 import GpsSearchFlow from '../../../components/drawings/GpsSearchFlow.astro';
 import GpsRaimSpare from '../../../components/drawings/GpsRaimSpare.astro';
@@ -94,9 +95,13 @@ The error of the altitude is not drawn at random: it is the real difference betw
 
 ## Groundspeed, track and the filter
 
-The receiver measures the velocity from the Doppler shift of the signals, which the simulation gives an error of only 0.05 m/s per satellite. The groundspeed and the track come from that velocity, not from the change of the position, so they are accurate to a fraction of a knot and, in cruise, to a fraction of a degree. Standing still, the measured groundspeed is a fraction of a knot; the unit shows a track only from 2 kt, so that the noise of a standing aircraft shows no track.
+The receiver measures the velocity, not only the position: it reads it from the Doppler shift of the signals.
 
-A filter combines the measured position with the measured velocity, separately for north and east. It moves the position on with the velocity every second and corrects it toward each new measurement, and it is tuned for accelerations of about 3 m/s², a hard maneuver of a light aircraft. Because the velocity is measured so precisely, the filter follows every turn and every acceleration without lag: in a takeoff run from 0 to 120 kt the groundspeed stays within 1 kt of the truth.
+<GpsDoppler caption="A satellite moves along its orbit at about 3.9 km/s, and the crests of its signal crowd together ahead of it and spread out behind it. A receiver the satellite is closing on receives a higher frequency, one it is moving away from a lower one. The receiver knows each satellite's motion from its ephemeris data and takes it out; what is left of the shift is the aircraft's own velocity along the line to that satellite. Because the velocity is measured at every moment, groundspeed and track follow a maneuver without lag." />
+
+The simulation gives the velocity from each satellite an error of only 0.05 m/s. The groundspeed and the track come from that velocity, not from the change of the position, so they are accurate to a fraction of a knot and, in cruise, to a fraction of a degree. Standing still, the measured groundspeed is a fraction of a knot; the unit shows a track only from 2 kt, so that the noise of a standing aircraft shows no track.
+
+A filter combines the measured position with the measured velocity, separately for north and east. It moves the position on with the velocity every second and corrects it toward each new measurement, and it is tuned for accelerations of about 3 m/s², a hard maneuver of a light aircraft. Because it trusts the precise velocity, the filter adds no lag of its own: in a takeoff run from 0 to 120 kt the groundspeed stays within 1 kt of the truth.
 
 What the filter smooths are the steps of the measured position. When a satellite joins or leaves the solution, the set of range errors and the geometry change at once, and the measured position steps by a few meters, sometimes some tens of meters. The filter spreads such a step over about 10 seconds in a good sky and over a minute or more in a poor one, because it trusts the measured position less in the direction in which the geometry is poor.
 
