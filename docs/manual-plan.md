@@ -127,7 +127,7 @@ questions differ by one word and stand for both.
 | Page | Status |
 | --- | --- |
 | APT pages (page reference) | done for the dry run (2026-11-04): two review passes, every finding that matters applied; the maintainer's feedback of the same day applied (group section cut to what is specific to airports, concepts linked instead of tooltipped, choices in screen order, excerpts of screens for the ACT page and the confirmation, APT 5 trimmed); bug candidates unfiled. The maintainer keeps the branch as the example for the full run. |
-| Installation, Quickstart (package "getting started") | in review with the maintainer (2026-11-16): one full review and a second round for the fixes; the maintainer's feedback of the same day applied and written into the style guide (sections 8, 12, 17), with a review of the changes; open points in `docs/plan/getting-started.md`, "Open" |
+| Installation, Quickstart (package "getting started") | done, approved by the maintainer (2026-11-16): one full review and a second round for the fixes; the maintainer's feedback of the same day applied and written into the style guide (sections 8, 12, 17), with a review of the changes; open points in `docs/plan/getting-started.md`, "Open" |
 | Every other page | not started (dry run) |
 
 ## Open questions for the maintainer
@@ -138,9 +138,8 @@ questions differ by one word and stand for both.
   procedures"; the slug stays, because pages link to it. Left as they are, because they are generic enough
   (maintainer): runway threshold, position of the airport, runway list.
 - For the final pass: the placeholder pages still use the old terms (key, page group); their writers replace them.
-- The first approved Installation and Quickstart pages become the examples of their kinds, if the maintainer
-  approves them as such.
-
+- Whether the approved Installation and Quickstart pages are the examples of their kinds (style guide, section 10)
+  is for the planning session to record under the example pages.
 - Plan approval was skipped for the dry run; the full run stops here.
 - The maintainer's feedback on the dry run (2026-11-04) is written into the style guide as rules: the basic
   operation is said once and linked (sections 8 and 10), a capable reader is assumed (section 8), choices are named
