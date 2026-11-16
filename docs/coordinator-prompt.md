@@ -23,7 +23,8 @@ No agent ever holds the whole manual. These carry the coherence instead, and eve
 
 - **The style guide** (`docs/style-guide.md`) is the one voice. When the maintainer corrects the style of a package,
   the correction becomes a rule there in the same session, so that every later writer follows it without having
-  heard it.
+  heard it. The same holds for feedback that shows a flaw in the workflow or the instructions ("Integrating and
+  closing").
 - **Topic ownership** in the plan: each topic that more than one page touches has one page and section that explains
   it, with its anchor, and the other pages link there. A writer gets the topics its pages own and the links for
   everything else. This is how the manual says each fact once.
@@ -218,9 +219,15 @@ mechanical part and reports only what is wrong:
 - Update the plan: the package file's sections as written, the index's ownership, anchors and status.
 - Commit with a plain sentence as the message.
 - **Report to the maintainer:** what is done, what was filed, what is blocked or open, and which package comes next.
-  Ask for the review of the pages. Feedback about style becomes a rule in the style guide and is applied to this
-  package before it closes; say in the report if it also touches pages of earlier packages, and note that in the
-  plan for the final pass rather than rewriting them now.
+  Ask for the review of the pages. The maintainer reviews the result of every session at its end and gives
+  feedback. Feedback about style becomes a rule in the style guide and is applied to this package before it closes;
+  say in the report if it also touches pages of earlier packages, and note that in the plan for the final pass
+  rather than rewriting them now.
+- **Feedback that shows a flaw in the workflow or the instructions** is fixed at its source in the same session.
+  When the feedback shows that a mistake came from how the work is organized or from what the agents were told,
+  and not from one page, correct the page and then update the style guide, and this prompt where the flaw is in
+  the coordinator's own procedure, so that no later session can repeat the mistake. Say in the report which rule
+  you added or changed.
 - Merge the branch into main locally and delete it only when the maintainer approves. Then the session is over;
   the next package starts in a new one.
 
