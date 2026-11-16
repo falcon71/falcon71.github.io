@@ -87,7 +87,7 @@ reference has its own ids. Status per screen: planned, generated, done.
 | `apt-1-ksea-cursor` | APT 1, KSEA, cursor on the identifier | APT 1 |
 | `apt-1-nearest` | APT 1, a nearest entry (`nr n`, longest runway, bearing and distance), aircraft 10 NM from KSEA | APT 1 |
 | `apt-1-user-airport` | APT 1, a user airport created at the present position | APT 1 |
-| `apt-1-user-pos` | APT 1, entering the position of a new user airport (`USER POS?`), the latitude entered | APT group |
+| `apt-1-user-pos` | APT 1, entering the position of a new user airport (`USER POS?`), the latitude entered | APT pages |
 | `apt-1-nearest-cursor` | APT 1, nearest entry with the cursor parked on `nr n` | APT 1 |
 | `apt-create-new-wpt` | The offer `CREATE NEW WPT AT` after an unknown identifier | APT group |
 | `apt-act-1` | ACT 1 of the destination airport of an active flight plan (FPL 0 number and `A` on the top line) | APT group |
@@ -132,10 +132,14 @@ questions differ by one word and stand for both.
 
 ## Open questions for the maintainer
 
-- For the final pass, from the package "getting started": the APT chapter and the placeholders were written before
-  the rule on official terms (style guide, section 12). The APT chapter needs the reviewer's term check and the terms
-  the maintainer decided on 2026-11-16 (button, page type, groundspeed, NAV ready, D-bar); the package that next
-  touches the chapter may do it earlier.
+- The APT chapter was re-reviewed on 2026-11-16 against the rules added that day (style guide sections 8, 11 and
+  12) and corrected. Official terms from that review that contradict the word list or the topic names, and which the
+  maintainer decides: "suffix" for the marks of procedure waypoints (the plan says markers), "SID/STAR" for departure
+  and arrival, "user-defined airport" for user airport, "approving the waypoint page" for the waypoint confirmation,
+  "page identification" for the page name in the status line. Official terms the writer left as optional: "frequency
+  type" (label), "runway fix" (runway threshold), "airport reference point" (position of the airport), "primary
+  APT 3 page" (runway list).
+- For the final pass: the placeholder pages still use the old terms (key, page group); their writers replace them.
 - The first approved Installation and Quickstart pages become the examples of their kinds, if the maintainer
   approves them as such.
 

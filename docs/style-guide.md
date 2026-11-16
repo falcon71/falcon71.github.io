@@ -439,6 +439,10 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | identifier; ident only in screen text | ID |
 | hot-swapping (noun), hot-swap (verb): an aircraft that offers the unit as one of several GPS units | take turns, switch in |
 | the power/brightness knob | the brightness knob, the power button, the power knob |
+| waypoint type (airport, VOR, NDB, intersection, supplemental) | kind of waypoint |
+| procedure header, approach header (the line of FPL 0 that names a loaded procedure) | |
+| DME arc waypoint | arc entry |
+| several pages with one page name ("there is more than one APT 3 page", shown by the `+`) | subpage |
 | Microsoft Flight Simulator 2024, then "the simulator" | MSFS, FS2024 (except on Installation) |
 
 ### Spelling and style
