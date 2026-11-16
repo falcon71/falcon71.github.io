@@ -61,7 +61,7 @@ export const glossary: Record<string, GlossaryEntry> = {
 	},
 	AFIS: {
 		expansion: 'Aerodrome flight information service',
-		text: 'On APT 4, the label of the frequency of a flight service station of the airport.',
+		text: 'On APT 4, the frequency type of a flight service station of the airport.',
 	},
 	AWOS: {
 		expansion: 'Automated weather observing system',
@@ -176,7 +176,7 @@ export const glossary: Record<string, GlossaryEntry> = {
 	},
 	'RWY LEN': {
 		expansion: 'Runway length',
-		text: 'The label of the runway entry of a user airport on APT 3.',
+		text: 'The label of the runway entry of a user-defined airport on APT 3.',
 	},
 	HRD: {
 		expansion: 'Hard surface',
@@ -184,7 +184,7 @@ export const glossary: Record<string, GlossaryEntry> = {
 	},
 	SFT: {
 		expansion: 'Soft surface',
-		text: 'Soft surface, the choice for the runway of a user airport on APT 3 that is not HRD. On SET 3, HRD SFT lets the nearest list include airports with soft runways.',
+		text: 'Soft surface, the choice for the runway of a user-defined airport on APT 3 that is not HRD. On SET 3, HRD SFT lets the nearest list include airports with soft runways.',
 	},
 	TRF: {
 		expansion: 'Turf',
@@ -232,31 +232,31 @@ export const glossary: Record<string, GlossaryEntry> = {
 	},
 	GRND: {
 		expansion: 'Ground control',
-		text: 'A frequency label of APT 4.',
+		text: 'A frequency type of APT 4.',
 	},
 	TWR: {
 		expansion: 'Tower',
-		text: 'A frequency label of APT 4.',
+		text: 'A frequency type of APT 4.',
 	},
 	CLR: {
 		expansion: 'Clearance delivery',
-		text: 'A frequency label of APT 4. On the front panel, CLR is the clear button.',
+		text: 'A frequency type of APT 4. On the front panel, CLR is the clear button.',
 	},
 	APR: {
 		expansion: 'Approach',
-		text: 'On APT 4, the label of the approach control frequency. On APT 2 and in FPL 0 the short form of an approach procedure, as in NO APR and CHANGE APR?.',
+		text: 'On APT 4, the frequency type of approach control. On APT 2 and in FPL 0 the short form of an approach procedure, as in NO APR and CHANGE APR?.',
 	},
 	DEP: {
 		expansion: 'Departure control',
-		text: 'A frequency label of APT 4.',
+		text: 'A frequency type of APT 4.',
 	},
 	CTR: {
 		expansion: 'Center',
-		text: 'On APT 4, the label of the frequency of a center that provides approach and departure control for the airport. CTR is also the right-side page type with the nearest centers.',
+		text: 'On APT 4, the frequency type of a center that provides approach and departure control for the airport. CTR is also the right-side page type with the nearest centers.',
 	},
 	PTAX: {
 		expansion: 'Pre-taxi clearance',
-		text: 'A frequency label of APT 4, for a frequency on which you get your clearance before taxi.',
+		text: 'A frequency type of APT 4, for the frequency on which you get your clearance before taxi.',
 	},
 	RMKS: {
 		expansion: 'Remarks',

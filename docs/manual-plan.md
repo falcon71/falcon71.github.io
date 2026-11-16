@@ -38,21 +38,21 @@ and shared by all of them.
 
 1. **The APT pages as a group:** the shared airport identifier, the header line (identifier, `nr n`), entering an
    identifier on any APT page, the subpages (`APT+3`, `APT+4`, `APT+7`), scanning with the right inner knob pulled out,
-   an identifier the database does not know (the offer to create a user airport, in one paragraph with a link),
-   the nearest-airport variant of the header, the ACT page and the waypoint confirmation showing the same pages.
+   an identifier the database does not know (the offer to create a user-defined airport, in one paragraph with a link),
+   the nearest-airport variant of the header, the ACT page and approving the waypoint page showing the same pages.
 2. **APT 1: name, position and airspace.** Database airport; cursor on the identifier; nearest variant (runway,
-   lighting, bearing, distance; the cursor parked on `nr n`); user airport.
-3. **APT 2: city, elevation, time zone and approach type.** Database airport; user airport (elevation entry).
-4. **APT 3: runways.** The diagram; the list pages (codes for surface and lighting); user airport (one runway).
+   lighting, bearing, distance; the cursor parked on `nr n`); user-defined airport.
+3. **APT 2: city, elevation, time zone and approach type.** Database airport; user-defined airport (elevation entry).
+4. **APT 3: runways.** The diagram; the list pages (codes for surface and lighting); user-defined airport (one runway).
 5. **APT 4: communication frequencies.** The frequency type labels; several pages; no data.
 6. **APT 5: remarks.** Entering, limits, where they are deleted (OTH 4, link).
 7. **APT 6: services.** What the simulator cannot supply.
-8. **APT 7: departures and arrivals.** The lists; the selection flow for a SID and for a STAR (runway, transition,
+8. **APT 7: SID and STAR procedures.** The lists; the selection flow for a SID and for a STAR (runway, transition,
    when a step is skipped); the waypoint list and `LOAD IN FPL`; the add-airport question; the replace question; no
    procedure; what the loader drops (legs without a fix, holds); the two rules of section 17 of the style guide.
 9. **APT 8: approaches.** Availability box; the list; approach names; the IAF list; the waypoint list; the questions;
    no approach; what is not offered (RF legs, RNP AR, ILS/LOC); the two rules.
-10. Links on: Waypoints and the database, Nearest, Direct-to, Flight plans, Departures and arrivals, Non-precision
+10. Links on: Waypoints and the database, Nearest, Direct-to, Flight plans, SID and STAR procedures, Non-precision
     approaches.
 
 ## Topic ownership
@@ -65,16 +65,16 @@ touches are listed.
 | The cursor, entering characters with the knobs, the scan (right inner knob pulled out) | Controls and display | APT chapter (one sentence each, link) |
 | The screen halves and the status line, page selection, the cursor and data entry, the mouse controls: planned anchors `#the-screen`, `#selecting-a-page`, `#entering-data-with-the-cursor`, `#using-the-controls-in-the-simulator` | Controls and display | the Quickstart gives each in a few sentences and links |
 | Download, versions, the Community folder, the aircraft that carries the unit | Installation | the home page has the download buttons; other pages link |
-| Waypoint pages in general: the five kinds, how an identifier is entered, the ACT page and the waypoint confirmation | Waypoints and the database (Operation) | APT chapter says what is special to airports and links (one sentence for the general operation; maintainer's feedback of 2026-11-04, style guide section 10) |
+| Waypoint pages in general: the five kinds, how an identifier is entered, the ACT page and approving the waypoint page | Waypoints and the database (Operation) | APT chapter says what is special to airports and links (one sentence for the general operation; maintainer's feedback of 2026-11-04, style guide section 10) |
 | Creating a user waypoint (`CREATE NEW WPT AT`, user or present position, the 250 limit, `USR DB FULL`); user waypoints as a concept, linked as `/kln90b/operation/waypoints/#user-waypoints` | Waypoints and the database | APT chapter shows the offer once, names the user-airport fields on APT 1 to APT 3, links |
 | The nearest lists: criteria (SET 3), radius, count, how they are reached, the MSG + ENT shortcut; the nearest list as a concept, linked as `/kln90b/operation/nearest/` | Nearest (Operation) | APT chapter explains the nearest *variant of the pages* (header `nr n`, the fields that change on APT 1, the cursor parked on `nr n`) and links for the rest |
 | The active waypoint and the active leg, linked as `/kln90b/operation/navigation-modes/#the-active-waypoint` | Navigation modes (Operation) | every page that names the active waypoint links at its first use (no glossary entry, style guide section 14) |
 | Waypoint alerting, linked as `/kln90b/operation/sequencing/#waypoint-alerting`; turn anticipation | Sequencing and turn anticipation (Operation) | every page that names them links at its first use (no glossary entry) |
-| What a loaded procedure does in FPL 0: where it is inserted, headers and markers, `CHANGE`/`DELETE` on a header, editing procedure waypoints, the make-room question, the 30/45 limits | Flight plans (Operation), with Departures and arrivals and Non-precision approaches | APT 7 and APT 8 say in one sentence where the procedure goes and link |
+| What a loaded procedure does in FPL 0: where it is inserted, headers and suffixes, `CHANGE`/`DELETE` on a header, editing procedure waypoints, the make-room question, the 30/45 limits | Flight plans (Operation), with SID and STAR procedures and Non-precision approaches | APT 7 and APT 8 say in one sentence where the procedure goes and link |
 | Approach arming and activation, `PRESS ALT TO SET BARO`, the CDI scale | Non-precision approaches | APT 8 links |
 | Remarks: deleting on OTH 4 | OTH chapter | APT 5 links |
 | Message texts and what to do | Message page messages / Status line messages (lists) | APT chapter quotes the text at the place it is raised and links |
-| The two rules (a transition must be selected; an approach starts only at an IAF) | Departures and arrivals, Non-precision approaches (Operation); FAQ | APT 7 and APT 8 state them plainly too (style guide, section 17) |
+| The two rules (a transition must be selected; an approach starts only at an IAF) | SID and STAR procedures, Non-precision approaches (Operation); FAQ | APT 7 and APT 8 state them plainly too (style guide, section 17) |
 
 ## Screens
 
@@ -86,20 +86,20 @@ reference has its own ids. Status per screen: planned, generated, done.
 | `apt-1-ksea` | APT 1, KSEA, database airport, cursor off (existing; field explanations rewritten) | APT 1 |
 | `apt-1-ksea-cursor` | APT 1, KSEA, cursor on the identifier | APT 1 |
 | `apt-1-nearest` | APT 1, a nearest entry (`nr n`, longest runway, bearing and distance), aircraft 10 NM from KSEA | APT 1 |
-| `apt-1-user-airport` | APT 1, a user airport created at the present position | APT 1 |
-| `apt-1-user-pos` | APT 1, entering the position of a new user airport (`USER POS?`), the latitude entered | APT pages |
+| `apt-1-user-airport` | APT 1, a user-defined airport created at the present position | APT 1 |
+| `apt-1-user-pos` | APT 1, entering the position of a new user-defined airport (`USER POS?`), the latitude entered | APT pages |
 | `apt-1-nearest-cursor` | APT 1, nearest entry with the cursor parked on `nr n` | APT 1 |
 | `apt-create-new-wpt` | The offer `CREATE NEW WPT AT` after an unknown identifier | APT group |
 | `apt-act-1` | ACT 1 of the destination airport of an active flight plan (FPL 0 number and `A` on the top line) | APT group |
 | `apt-confirm` | both halves: the Direct To page with an identifier entered and APT 1 of that airport with `ent` flashing in the status line | APT group |
 | (`apt-1-nearest`, rows 1) | the shared top line with the `nr` rank, as an excerpt | APT group |
 | `apt-2-ksea` | APT 2, KSEA, with the time zone answered | APT 2 |
-| `apt-2-user-airport` | APT 2 of a user airport with the elevation entered | APT 2 |
+| `apt-2-user-airport` | APT 2 of a user-defined airport with the elevation entered | APT 2 |
 | `apt-3-diagram-kpdx` | APT 3 runway diagram of KPDX (map) | APT 3 |
 | `apt-3-list-ksea` | APT 3 first list page of KSEA (`APT+3`) | APT 3 |
-| `apt-3-user-airport` | APT 3 of a user airport with a runway entered | APT 3 |
+| `apt-3-user-airport` | APT 3 of a user-defined airport with a runway entered | APT 3 |
 | `apt-4-kykm` | APT 4 first page of KYKM (`APT+4`) | APT 4 |
-| `apt-4-no-data` | APT 4 with `COMM FREQ DATA NOT AVAILABLE` (a user airport) | APT 4 |
+| `apt-4-no-data` | APT 4 with `COMM FREQ DATA NOT AVAILABLE` (a user-defined airport) | APT 4 |
 | `apt-5-ktiw` | APT 5 of KTIW with a remark entered | APT 5 |
 | `apt-6-ksea` | APT 6 of KSEA | APT 6 |
 | `apt-7-sids-ksea` | APT 7 first page, SIDs of KSEA, cursor on a departure | APT 7 |
@@ -133,12 +133,10 @@ questions differ by one word and stand for both.
 ## Open questions for the maintainer
 
 - The APT chapter was re-reviewed on 2026-11-16 against the rules added that day (style guide sections 8, 11 and
-  12) and corrected. Official terms from that review that contradict the word list or the topic names, and which the
-  maintainer decides: "suffix" for the marks of procedure waypoints (the plan says markers), "SID/STAR" for departure
-  and arrival, "user-defined airport" for user airport, "approving the waypoint page" for the waypoint confirmation,
-  "page identification" for the page name in the status line. Official terms the writer left as optional: "frequency
-  type" (label), "runway fix" (runway threshold), "airport reference point" (position of the airport), "primary
-  APT 3 page" (runway list).
+  12) and corrected, the official terms included; the maintainer decided the terms that changed the word list (they
+  are in it now). The Operation page with the slug `operation/departures-arrivals` is titled "SID and STAR
+  procedures"; the slug stays, because pages link to it. Left as they are, because they are generic enough
+  (maintainer): runway threshold, position of the airport, runway list.
 - For the final pass: the placeholder pages still use the old terms (key, page group); their writers replace them.
 - The first approved Installation and Quickstart pages become the examples of their kinds, if the maintainer
   approves them as such.

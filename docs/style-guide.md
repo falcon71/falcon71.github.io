@@ -268,7 +268,7 @@ Each page gets its section:
 
 A chapter explains what is specific to its page type and nothing that is the same on other pages. The waypoint
 pages (APT, VOR, NDB, INT, SUP) share the way an identifier is entered, the scan through the database, the nearest
-list, the offer to create a user waypoint, the ACT page and the waypoint confirmation; Waypoints and the database
+list, the offer to create a user waypoint, the ACT page and the approving of the waypoint page; Waypoints and the database
 explains all of that once, and each waypoint chapter says in one sentence that it works as it does everywhere, links
 there, and goes on with what its kind of waypoint shows and does differently. The same applies to the cursor and data
 entry (Controls and display) and to every topic the plan assigns to another page.
@@ -443,6 +443,13 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | procedure header, approach header (the line of FPL 0 that names a loaded procedure) | |
 | DME arc waypoint | arc entry |
 | several pages with one page name ("there is more than one APT 3 page", shown by the `+`) | subpage |
+| SID, STAR; SIDs, STARs; SID and STAR procedures; a SID procedure, a STAR procedure | departure, arrival (as names of the procedures) |
+| suffix (the letter after a waypoint of a loaded procedure) | mark, marker |
+| user-defined airport; user waypoint stays the short form of user-defined waypoint | user airport |
+| approve the waypoint page; the waypoint page shown for approval | waypoint confirmation |
+| frequency type (of a frequency on APT 4) | frequency label |
+| page identification (the segment of the status line that shows a page's name); "page name" in running text | |
+| mode annunciation (the segment of the status line between the page identifications) | mode field |
 | Microsoft Flight Simulator 2024, then "the simulator" | MSFS, FS2024 (except on Installation) |
 
 ### Spelling and style
@@ -556,7 +563,7 @@ The sidebar has these chapters and pages. Operation explains tasks ("how do I…
 | --- | --- |
 | Getting started | Table of contents (home page) · Installation · Quickstart · Tutorial flight 1 · Tutorial flight 2 |
 | The unit | Controls and display (knobs, buttons, the two halves, status line, cursor and data entry, scan, page tree) · Keyboard mode · Power-on and initialization |
-| Operation | Waypoints and the database · Nearest · Direct-to · Flight plans · Navigation modes (leg and OBS) · Sequencing and turn anticipation · Departures and arrivals · Non-precision approaches · VNAV · Messages · Airspace and altitude alerting · Trip planning and calculators · Fuel and air data |
+| Operation | Waypoints and the database · Nearest · Direct-to · Flight plans · Navigation modes (leg and OBS) · Sequencing and turn anticipation · SID and STAR procedures · Non-precision approaches · VNAV · Messages · Airspace and altitude alerting · Trip planning and calculators · Fuel and air data |
 | Page reference | One chapter per page type in page tree order. Left: TRI, MOD, FPL, NAV, CAL, STA, SET, OTH. Right: CTR, REF, ACT, D/T, NAV, APT, VOR, NDB, INT, SUP. Each page with its screen. |
 | Reference lists | Message page messages · Status line messages · Glossary |
 | Help | External hardware · FAQ and troubleshooting · Known limitations · Contact |
@@ -612,10 +619,10 @@ takes and what the pilot does when the unit does not become NAV ready.
 Documented in the page reference like the other SET pages and marked Simulator only. Based on the wiki page "SET 10
 Page" and the code.
 
-### Departures, arrivals and approaches
+### SID and STAR procedures and approaches
 
 Two rules of procedure selection surprise pilots used to other GPS units, who then take them for bugs. They are the
-unit's correct behavior (confirmed by the maintainer, 2026-10-22). State both plainly in Departures and arrivals, in
+unit's correct behavior (confirmed by the maintainer, 2026-10-22). State both plainly in SID and STAR procedures, in
 Non-precision approaches, on APT 7 and APT 8 in the page reference, and as an FAQ entry:
 
 - **A transition must be selected whenever the procedure has one.** A SID, a STAR or an approach with transitions
@@ -680,7 +687,7 @@ STARs (APT 7) work without it, so that such a pilot does not skip the whole proc
   that.
 - **The EFB afterwards.** Once FPL 0 is complete, the pilot can load it into the simulator's EFB as a reference: open
   the flight planner app, select the Route tab, click Import and choose `REQUEST FROM AVIONICS` from the menu. The
-  unit then sends FPL 0 to the EFB, the en route waypoints together with the departure, arrival and approach by name
+  unit then sends FPL 0 to the EFB, the en route waypoints together with the SID, the STAR and the approach by name
   and transition (`KlnEfbSaver` in the kln90b code). No Availability box: the unit answers in every aircraft that is
   suited for the tutorials (see the aircraft requirement above).
 - Tutorial flight 1 offers no flight plan either, because its lesson is flying without one.
