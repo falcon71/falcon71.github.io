@@ -1,0 +1,11 @@
+<Field id="state" title="GPS state">
+	`STATE` and the GPS state. In the mixed phase of spoofing the unit still navigates, here with `NAV D` while the receiver collects the data of a fake satellite it has just found, but its position wanders.
+</Field>
+
+<Field id="list" title="Satellites">
+	Real and fake satellites in use together. A fake satellite looks like any other, but it reads stronger than its elevation explains, here `01` at 21° with 48, while the real satellites, weakened by the spoofer's noise, read in the 30s and low 40s.
+</Field>
+
+<Field id="page" title="Page identification">
+	The page identification on the left side. `STA+1` means that the list continues on a second page.
+</Field>

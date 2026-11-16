@@ -342,6 +342,12 @@ before you reuse one):
 - **The Optional reading box** (`<Callout kind="optional">`) opens a page or a section that goes deeper than a
   pilot needs to operate the unit, and says in one or two sentences that nothing in it is needed and where the
   operating knowledge is. So far only Inside the GPS simulation has one (section 17).
+- **The Warning box** (`<Callout kind="warning">`), the one red box, stands where an action of the pilot destroys
+  their data or settings for good and nothing on the unit asks first: a power-on with a failed internal battery
+  erases the user waypoints, the flight plans and the settings. It says what is lost, what triggers the loss and how
+  to avoid it, in two or three sentences, right before the text that describes the loss. A loss of data is never a
+  Good to know box. It is rarer still than that box: a hazard to the flight in the simulator, a surprise or an
+  ordinary caution is no warning (maintainer, 2026-11-16).
 - There are no other boxes. If a new kind is needed, ask the coordinator; it is added to `Callout` with one fixed title,
   so that pilots learn to recognize it.
 
@@ -513,6 +519,11 @@ general; the screen shows one concrete case.
   (README, "Writing a screen"); the fields on those rows keep their explanations. Where the text describes a line in
   detail, the reader needs to see it, so the excerpt stands next to the description instead of leaving the line to the
   imagination. The screen is still generated whole, so the same screen serves the page that shows it in full.
+- **A state the pilot must tell from another gets its screen.** Where the text teaches how to recognize a state on
+  a page (a failure on STA 1, a mode in the status line), each state is shown, so that the pilot learns the
+  difference by looking; this holds on the optional pages too. A state that the steps of a screen cannot reach by
+  operating the unit is built in the screen's description, by setting up the unit's own objects the way the kln90b
+  tests do, before it is given up as not stageable (maintainer, 2026-11-16).
 - **Flashing.** The site draws flashing text as a static dashed box and explains it under the screen. Say in the text
   what flashes and when.
 

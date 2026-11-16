@@ -5,9 +5,10 @@
  *   sim-only       exists only in the simulation, not in the real unit
  *   info           something that regularly catches pilots off guard
  *   optional       a page or section that goes deeper than a pilot needs to operate the unit
+ *   warning        an action that destroys the pilot's data or settings for good
  */
 interface Props {
-	kind: 'availability' | 'sim-only' | 'info' | 'optional';
+	kind: 'availability' | 'sim-only' | 'info' | 'optional' | 'warning';
 }
 
 const titles = {
@@ -15,6 +16,7 @@ const titles = {
 	'sim-only': 'Simulator only',
 	info: 'Good to know',
 	optional: 'Optional reading',
+	warning: 'Warning',
 };
 
 const { kind } = Astro.props;
@@ -43,6 +45,15 @@ const { kind } = Astro.props;
 	}
 	.kln-callout-optional {
 		--kln-callout-color: #8a8f98;
+	}
+	.kln-callout-warning {
+		--kln-callout-color: #d0342c;
+		border: 1px solid var(--kln-callout-color);
+		border-left-width: 4px;
+		background: color-mix(in srgb, var(--kln-callout-color) 12%, var(--kln-figure-bg));
+	}
+	.kln-callout-warning .kln-callout-title {
+		color: var(--kln-callout-color);
 	}
 	.kln-callout-title {
 		margin: 0;

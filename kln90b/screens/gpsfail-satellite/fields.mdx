@@ -1,0 +1,11 @@
+<Field id="state" title="GPS state">
+	`STATE` and the GPS state. With a faulty satellite the state stays a navigation state, here `NAV A`: the receiver has its position and RAIM, and the faulty satellite stays in use.
+</Field>
+
+<Field id="list" title="Satellites">
+	The satellites with their numbers, signal strengths and elevations, as on a healthy unit. A faulty satellite keeps its signal strength and its health, and nothing in the list shows which satellite it is: only `RAIM POSITION ERROR` on the MSG page tells you that one range is wrong, and only while RAIM is available; without RAIM nothing tells you.
+</Field>
+
+<Field id="page" title="Page identification">
+	The page identification on the left side. `STA+1` means that the list continues on a second page.
+</Field>

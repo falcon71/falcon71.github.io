@@ -53,8 +53,12 @@ satellites' clocks and health) and lists the simulation's own choices for the tr
 
 The drawings are `GpsFailureRamp.astro` (the position error of a faulty satellite in the page's two skies, and the
 moment RAIM detects it), `GpsFailureJammer.astro` (the signal strength against the distance to a jammer) and
-`GpsFailureSpoofer.astro` (the fake and the real signal strengths against the distance to a spoofer). Each one's
-comment holds the numbers it was computed from.
+`GpsFailureSpoofer.astro` (the fake and the real signal strengths against the distance to a spoofer) and
+`GpsFailureHorizon.astro` (the curvature of the earth shielding a jammer or a spoofer; added at the maintainer's
+review). Each one's comment holds the numbers it was computed from.
+
+At the maintainer's review the section also got an example screen of STA 1 for each failure (below, "Screens"),
+so that the pilot learns by looking how they differ.
 
 ## Topics this package owns
 
@@ -73,7 +77,14 @@ The screens are in `kln90b/screens/`: `set-10-failures`, `flr-1`, `flr-1-set`, `
 `flr-1-confirm`, `flr-1-serviced` (shown as an excerpt of the status line), `flr-2-empty`, `flr-2`,
 `flr-2-repair`, `flr-3`, `flr-3-fail` (the FLR chapter) and `failure-self-test-fail`,
 `failure-msg-rcvr-hardware`, `failure-msg-battery-low`, `failure-msg-user-data-lost` (Simulated failures, which
-also shows `sta-1-failed`).
+also shows `sta-1-failed`), and the STA 1 examples `gpsfail-satellite`, `gpsfail-ant-gain`, `gpsfail-jamming`,
+`gpsfail-jamming-lost`, `gpsfail-spoofing-mixed`, `gpsfail-spoofing-captured` (Inside the GPS simulation; Simulated
+failures shows four of them and `sta-1-nav` where it tells the failures apart).
+
+The `gpsfail-` screens are built in their descriptions the way the kln90b tests build the states: the helpers
+`kln90b/screens/shared/jammer.ts` and `spoofer.ts` store a transmitter at a known site and fly the aircraft toward
+it until the satellites are lost or the receiver is captured. The first run of this package had given these
+states up as not stageable; the style guide (section 13) now asks for this before a state is given up.
 
 How they were staged: the FLR pages open through kln90b's own test helpers for them; a failure is set on the unit
 directly after the settle. A screen whose failure leaves a message pending sets `keepMessages: true` and reads the
@@ -83,9 +94,7 @@ Variants without a screen:
 
 - An empty FLR 3, which occurs only when the pilot has failed every part by hand; the chapter says it in a
   sentence, and `flr-2-empty` shows the same look.
-- A faulty satellite, a unit captured by a spoofer, and a jammed unit that has lost its satellites: they need a
-  flight over time and a transmitter whose place the simulation draws at random, which the generator cannot
-  guarantee. The effects on the remote annunciators and on the outputs are not on the unit's screen.
+- The effects on the remote annunciators and on the outputs are not on the unit's screen.
 
 ## Bugs
 
@@ -93,17 +102,27 @@ Filed on 2026-11-16; the paragraph carries the `kln90b#NN` comment.
 
 - kln90b#483: the service question `CONFIRM?` of FLR 1 is not withdrawn when the cursor leaves the button or is
   turned off (the FLR chapter, "Servicing the unit").
+- kln90b#484: with `ANT GAIN` and `JAMMING` or `SPOOFING` active together the lower antenna gain does not lower the
+  transmitter's own level, so the loss is counted too high (Inside the GPS simulation, "The receiver and the
+  antenna"; the paragraph describes the loss alone).
 
-Not filed; for the maintainer to decide (reported at the end of the session):
+Not filed:
 
 - An empty internal battery alone loses nothing: the user data are lost only at a power-on while the failure
-  `BATTERY` is active, which with random failures off never happens by itself, although the warning announces a
-  loss. The code's comment says this is intended; the reviewer notes that it differs from the real unit. The page
-  describes the code.
-- With `ANT GAIN` and `JAMMING` active together the lower antenna gain does not lower the jammer's own level, so
-  the loss is counted too high. It matters only with both at once.
+  `BATTERY` is active. Intended (maintainer, 2026-11-16); no later session files it.
+- The faulty satellite gets an error of the range that grows evenly and holds, with no error of the rate. The
+  failure imitates a fault of a satellite's clock (maintainer, 2026-11-16); the pages say so and never call it a
+  jump, and "Where the model simplifies" names the missing rate error.
 - A random failure rebuilds the lists of FLR 2 and FLR 3 and withdraws an open question; a code comment pins it,
   so it is taken as intended and described.
+
+## The maintainer's review (2026-11-16)
+
+Applied in this package: the reason for the longer search with `RCVR EEPROM` (the lost calibration of the
+oscillator); `SATELLITE` as a fault of a satellite's clock, uncommon but not unrealistic (the remark stands on
+Simulated failures only); the STA 1 example screens and the horizon drawing; the box about the loss of the user
+data as the new Warning box. Rules added to the style guide: the Warning box (section 11) and "A state the pilot
+must tell from another gets its screen" (section 13).
 
 ## Notes from other packages
 

@@ -131,7 +131,7 @@ What you can act on is STA 1: with `FAILR` the receiver delivers nothing and you
 - `RCVR HW`: a hardware fault of the receiver, with one of the codes `0002`, `0004`, `0080`, `2000` and `8000`. `2000` and `8000` act at once; `0002`, `0004` and `0080` are found by the receiver's test at power-on, so a fault that comes in flight acts only from the next power-on. Once it acts, STA 1 shows `FAILR`.
 - `RCVR MEMORY`: the receiver loses its almanac data and its ephemeris data at the next power-on. The unit keeps its own memory, but the receiver must search the sky and collect new almanac data first, which takes about 20 minutes ([Acquiring satellites](/kln90b/operation/gps-receiver/#acquiring-satellites)). `FAST` on SET 10 cannot help at that power-on. Code `0008`, which goes once the receiver tracks its first satellite.
 - `RCVR INIT`: at the next power-on the unit cannot hand its position, its time and the altitude input to the receiver. The receiver searches from its own memory, a date or position you enter does not reach it, and `FAST` does nothing. Without the altitude input STA 1 never shows `NAV A`: three satellites are no longer enough for a position, and RAIM needs five. This lasts the whole power-on, also if you repair the failure in flight. Code `0400`.
-- `RCVR EEPROM`: at the next power-on the receiver takes two to four times as long as usual to its first position. Code `0800`.
+- `RCVR EEPROM`: the receiver has lost the calibration of its oscillator, so at the next power-on it does not know the exact frequency of the satellites' signals and must search a wider range of frequencies for each one. Finding each satellite takes two to four times as long as usual, so the first position comes later; once it has a position, it knows its oscillator again, and a later search takes the usual time. Code `0800`.
 - `ANT GAIN`: the antenna's gain has dropped. Every satellite's signal strength on STA 1 falls by 6 to 15 dB, satellites low in the sky are lost, and RAIM and the position may follow with their messages. The unit gives no message of its own and passes the self test.
 
 `RCVR MEMORY`, `RCVR INIT` and `RCVR EEPROM` act at the power-on after the failure. Each may be a passing fault: it then acts at that one power-on and repairs itself, leaving FLR 2. Otherwise it acts at every power-on until it is repaired.
@@ -142,14 +142,27 @@ These three failures never come at random and the unit never notices them; they 
 
 - `JAMMING`: a jammer drowns the satellites' signals. As you close in, the signal strengths on STA 1 fall, the satellites lowest in the sky first. `RAIM NOT AVAILABLE` `CROSS CHECK POSITION` comes first, then the position goes with `SATELLITE COVERAGE` `INADEQUATE FOR NAV`, and STA 1 shows `ACQ`. The higher you fly, the farther the jammer reaches; banking away from it, descending until the jammer lies beyond your radio horizon, or flying out of its range brings the satellites back. A descent while the jammer is still within your radio horizon changes hardly anything. After the repair the position returns within about 40 seconds.
 - `SPOOFING`: a spoofer sends false signals for a sky seen from another place at another time. The real satellites weaken as with a jammer, and the false satellites appear on STA 1 like any other, but all with nearly the same signal strength whatever their elevation. Usually there is a phase in which real and false satellites are both in use: the position wanders off and `RAIM POSITION ERROR` `CROSS CHECK POSITION` appears. Then the spoofer captures the receiver: the position jumps to a place far away, often an airport, the groundspeed drops to 0 kt although you fly on, and the unit's clock jumps by hours with `SYSTEM TIME UPDATED` `TO GPS TIME`. A captured unit raises `RAIM POSITION ERROR` only if the altitude input disagrees with the false place. When you leave the spoofer's range, the unit loses the position, searches again and returns to the true position and time.
-- `SATELLITE`: one satellite sends a range that grows wrong over 2 to 5 minutes and then stays wrong. STA 1 looks normal, but the position drifts away from the truth. While RAIM is available, it catches the error early, long before it has grown to its full size, with `RAIM POSITION ERROR` `CROSS CHECK POSITION`; the unit keeps using the position. Without RAIM nothing warns you, so cross-check with other navigation whenever `RAIM NOT AVAILABLE` stands.
+- `SATELLITE`: the clock of one satellite goes wrong. Its error grows over 2 to 5 minutes and then stays, and with it the range the receiver measures to that satellite. STA 1 looks normal and the groundspeed stays right, but the position drifts away from the truth. While RAIM is available, it catches the error early, long before it has grown to its full size, with `RAIM POSITION ERROR` `CROSS CHECK POSITION`; the unit keeps using the position. Without RAIM nothing warns you, so cross-check with other navigation whenever `RAIM NOT AVAILABLE` stands. Such a failure is rare in real life but not unrealistic, because it takes a while before a faulty satellite is flagged as unhealthy.
 
-How to tell them apart on the unit, together with the antenna's lost gain:
+How to tell them apart on the unit, together with the antenna's lost gain. On STA 1 of a healthy unit a satellite near the horizon is weaker, about 41, than the satellites higher up, 45 to 47:
 
-- Signal strengths lower by the same amount on every satellite, in every direction and attitude, and no worse as you fly on: `ANT GAIN`.
-- Signal strengths falling as you fly on, satellites lost one after another, lowest first, coming back when you turn away or descend until the jammer lies beyond your horizon, and no `RAIM POSITION ERROR`: jamming.
-- Weakening satellites, then satellites that all read nearly the same signal strength, a wandering position with `RAIM POSITION ERROR`, and then a position that jumps far away, a groundspeed of 0 kt in flight or the time changing by hours: spoofing. A captured unit with an altitude input usually keeps `RAIM POSITION ERROR` on, so look at the position, the groundspeed and STA 1.
-- `RAIM POSITION ERROR` with a position near the truth, a sensible groundspeed and the usual spread of signal strengths on STA 1, stronger high in the sky: a faulty satellite.
+<KlnScreen screen="sta-1-nav" />
+
+- `ANT GAIN`: signal strengths lower by the same amount on every satellite, high and low alike, in every direction and attitude, and no worse as you fly on. Compare the high satellite 14 with the healthy page: it has lost as much as the others.
+
+  <KlnScreen screen="gpsfail-ant-gain" />
+
+- Jamming: signal strengths falling as you fly on, satellites lost one after another, lowest first, coming back when you turn away or descend until the jammer lies beyond your horizon, and no `RAIM POSITION ERROR`. Here the low satellites are already lost while the high ones still hold, weaker than they should be.
+
+  <KlnScreen screen="gpsfail-jamming" />
+
+- Spoofing: weakening satellites, then satellites that all read nearly the same signal strength, a wandering position with `RAIM POSITION ERROR`, and then a position that jumps far away, a groundspeed of 0 kt in flight or the time changing by hours. Look at the signal strengths of a captured unit: nearly the same at every elevation. A captured unit with an altitude input usually keeps `RAIM POSITION ERROR` on, which a faulty satellite gives too.
+
+  <KlnScreen screen="gpsfail-spoofing-captured" />
+
+- A faulty satellite: `RAIM POSITION ERROR` with a position near the truth, a sensible groundspeed and the usual spread of signal strengths on STA 1, stronger high in the sky. The page looks like the healthy one; only the message and a cross-check tell.
+
+  <KlnScreen screen="gpsfail-satellite" />
 
 [RAIM](/kln90b/operation/gps-receiver/#raim) and [Messages of the receiver](/kln90b/operation/gps-receiver/#messages-of-the-receiver) explain the messages.
 
@@ -213,11 +226,11 @@ BATTERY LOW: SERVICE
 
 The warning appears once the power-on pages are done and stays until a service gives the unit a new battery. Repairing `BATTERY` on FLR 2 repairs the failure but not the charge: an empty battery still warns.
 
-The memory is lost when the unit is turned on while the `BATTERY` failure is active, that is while FLR 2 lists it. An empty battery alone loses nothing; with random failures on, the battery can fail at random once its charge is 0, and you can fail it on FLR 3 at any time. A loss also needs a real power-on: nothing is lost while the unit runs, nor over an interruption of the aircraft's power shorter than about 1.5 seconds.
-
-<Callout kind="info">
-Every power-on with a failed battery erases your user waypoints, your flight plans and your settings, again at each power-on until the battery is repaired. Repair it or have the unit serviced before you turn the unit off, and the data stay.
+<Callout kind="warning">
+Every power-on while the `BATTERY` failure is active erases all user waypoints, flight plans, remarks and settings, and they cannot be brought back. A power-on is also loading the aircraft again with the unit switched on, and the return of the aircraft's power after an interruption. Have the unit serviced on FLR 1 before the unit is next turned on, that is before you turn it off or end the flight; a battery only repaired on FLR 2 stays empty and can fail again at random.
 </Callout>
+
+The memory is lost when the unit is turned on while the `BATTERY` failure is active, that is while FLR 2 lists it. An empty battery alone loses nothing; with random failures on, the battery can fail at random once its charge is 0, and you can fail it on FLR 3 at any time. A loss also needs a real power-on: nothing is lost while the unit runs, nor over an interruption of the aircraft's power shorter than about 1.5 seconds.
 
 At such a power-on the unit loses:
 

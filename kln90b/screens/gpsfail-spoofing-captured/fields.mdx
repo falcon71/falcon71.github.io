@@ -1,0 +1,11 @@
+<Field id="state" title="GPS state">
+	`STATE` and a navigation state: a captured receiver navigates normally on the fake satellites. `NAV A` shows that the altitude input is in use; because it does not fit the false position, the unit posts `RAIM POSITION ERROR`.
+</Field>
+
+<Field id="list" title="Satellites">
+	Every satellite in use is a fake one. All read the same signal strength, about 50, whatever their elevation: a real satellite at 7° reads about 39, not 50.
+</Field>
+
+<Field id="page" title="Page identification">
+	The page identification on the left side. `STA+1` means that the list continues on a second page.
+</Field>
