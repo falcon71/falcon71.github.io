@@ -1,0 +1,36 @@
+---
+/**
+ * Synthetic drawing: an aircraft seen from behind in a 30° bank to the right. Two satellites stand 15° above the
+ * horizon, one abeam each wing. Above the antenna's plane the one on the low wing's side stands at 45°, the one on the
+ * high wing's side at −15°, under the plane: the curve gives it the floor of 25 and the lock rule loses it.
+ */
+import GpsFigure from './GpsFigure.astro';
+
+interface Props {
+	caption: string;
+}
+const { caption } = Astro.props;
+---
+
+<GpsFigure caption={caption} viewBox="0 0 560 300" id="gps-bank">
+	<line x1="20" y1="200" x2="540" y2="200" class="dash" />
+	<text x="20" y="224" class="t small">horizon</text>
+	<line x1="115.5" y1="105" x2="444.5" y2="295" class="muted" />
+	<text x="352" y="268" transform="rotate(30 352 268)" class="t small">antenna plane</text>
+	<line x1="280" y1="200" x2="57.8" y2="140.5" class="grid" />
+	<line x1="280" y1="200" x2="502.2" y2="140.5" class="grid" />
+	<g transform="translate(280 200) rotate(30)">
+		<rect x="-95" y="-3" width="190" height="6" rx="3" class="solid" />
+		<rect x="-30" y="-36" width="60" height="5" rx="2.5" class="solid" />
+		<rect x="-2.5" y="-48" width="5" height="40" class="solid" />
+		<circle cx="0" cy="0" r="13" class="solid" />
+		<rect x="-5" y="-19" width="10" height="7" class="dot" />
+	</g>
+	<circle cx="57.8" cy="140.5" r="9" class="ring" />
+	<circle cx="502.2" cy="140.5" r="9" class="dot" />
+	<text x="57.8" y="120" text-anchor="middle" class="t">−15°</text>
+	<text x="502.2" y="120" text-anchor="middle" class="t t-accent">+45°</text>
+	<text x="20" y="180" class="t small">SNR 25: lost</text>
+	<text x="540" y="180" text-anchor="end" class="t small">SNR 48</text>
+	<text x="280" y="40" text-anchor="middle" class="t">30° bank</text>
+</GpsFigure>

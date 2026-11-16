@@ -1,0 +1,161 @@
+---
+title: Inside the GPS simulation
+description: How the simulation models the KLN 90B's GPS receiver, from the satellites and their signal strength to the position error, the filter, the search for satellites and RAIM, and what each part makes you see on the unit.
+sidebar:
+  order: 11
+---
+
+import KlnScreen from '../../../components/KlnScreen.astro';
+import Callout from '../../../components/Callout.astro';
+import Term from '../../../components/Term.astro';
+import GpsSkyGeometry from '../../../components/drawings/GpsSkyGeometry.astro';
+import GpsSignalCurve from '../../../components/drawings/GpsSignalCurve.astro';
+import GpsAntennaBank from '../../../components/drawings/GpsAntennaBank.astro';
+import GpsFilterStep from '../../../components/drawings/GpsFilterStep.astro';
+import GpsSearchFlow from '../../../components/drawings/GpsSearchFlow.astro';
+import GpsRaimSpare from '../../../components/drawings/GpsRaimSpare.astro';
+import GpsProtectionLevel from '../../../components/drawings/GpsProtectionLevel.astro';
+
+The KLN 90B in the simulation does not take the aircraft's position from the simulator. It simulates a GPS receiver: satellites in their orbits, the strength of each signal at a tilting antenna, range errors that turn into a position error through the geometry of the satellites, a filter, the search for satellites after power-on, and <Term t="RAIM" />. This page explains that model, its numbers and what each part makes you see on the unit.
+
+<Callout kind="optional">
+Nothing on this page is needed to operate the unit. What you need in the cockpit is on [GPS reception and RAIM](/kln90b/operation/gps-receiver/).
+</Callout>
+
+## The true and the measured position
+
+The simulation knows two positions: where the aircraft really is, which the simulator says, and where the unit believes it is, which the simulated receiver measures. The measured position is the true one plus the error that the satellites in use cause, smoothed by a filter. Everything the unit shows and sends is based on the measured position: distance and bearing to the waypoints, <Term t="DTK" /> and <Term t="XTK" />, the nearest lists, the airspace alerts, the groundspeed and the track, and the course deviation it sends to your CDI or HSI and to the autopilot. The true position only feeds the model.
+
+With a good sky the two positions lie about 5 m apart. That is less than the smallest step of any distance the unit shows, so you never notice it, but the course deviation and the autopilot work from the measured position, as they would with a real receiver.
+
+The model follows what you do in the simulator. When you pause the simulator, the unit holds its position, groundspeed and track until you continue. When you slew the aircraft or move it to another place, the filter starts over at the new place, so the unit's position follows at once instead of gliding there; the same happens after a gap of more than 30 seconds in the simulator's time. The range errors of the satellites carry on unchanged. Only a new position, after power-on or after the unit has lost its position, starts with new errors.
+
+## The simulated sky
+
+The sky holds 32 satellites. Their orbits come from the ephemeris data that the real GPS satellites broadcast on 1 July 2022, and the simulation moves each satellite along its orbit to the simulator's time. Only the time within the week counts, so the simulated sky repeats every week and the date does not change it. The satellites belong to five generations of GPS satellites, which differ in signal strength (see [Signal strength](#signal-strength)).
+
+The positions of the satellites are recomputed every 5 seconds. That is why the satellites' elevations on STA 1 and the <Term t="EPE" /> on STA 2 change in steps, never in between.
+
+A satellite is in view when it stands high enough above the horizon: 4.5° at sea level. From altitude the horizon lies lower, so a satellite counts as in view down to about 1.4° at FL350. Only the search after power-on uses a fixed limit of 5° for the satellites it expects (see [Finding the satellites](#finding-the-satellites)); once found, a satellite is tracked by this horizon rule. The receiver has eight channels and tracks at most eight satellites at a time. Usually more are in view; it then picks those that give the best geometry, and changes the pick as satellites rise and set. Once the unit navigates, STA 1 lists the satellites of the eight channels.
+
+{/* kln90b#477: describes the current behavior; the fix makes the unit track and use no satellite below 5° */}
+
+## Signal strength
+
+Every second the simulation computes for each satellite the signal-to-noise ratio, SNR, in dB-Hz. STA 1 shows it for each satellite in use; a satellite that is not in use shows a `*` and `00`.
+
+<KlnScreen screen="sta-1-nav" rows="2-6" />
+
+The SNR depends first on the satellite's elevation above the antenna. A GPS satellite sends nearly the same power to every place on earth, but the aircraft's antenna receives less toward its own horizon: it falls steeply in the lowest 10° to 20° and is nearly flat above 45°. The simulation uses the curve 50 + 12 × log10(sin elevation), which gives 37 dB-Hz at 5°, 41 at 10°, 46 at 30° and 50 overhead, and never less than 25. The curve and its numbers are the simulation's own choice.
+
+Three more parts make each satellite read a little differently:
+
+- **The generation of the satellite.** The IIR-B satellites read the curve unchanged. The newer satellites of the IIF and IIR-M blocks read 1 dB and 0.5 dB stronger, the IIR-A satellites 1 dB weaker. The newest, GPS III, read 1.5 dB weaker up to 30° elevation and 4 dB weaker from 50° up. A GPS III satellite overhead can therefore read lower on STA 1 than an older one at 30°.
+- **A slow fade**, from the reflections off the airframe and the ground. In flight it is about 0.3 dB for a high satellite and 1.2 dB for a low one, and it changes over about 20 seconds. On the ground it is larger, 0.5 to 2 dB, and changes over about 2 minutes.
+- **Jitter**: the receiver's estimate of the SNR is itself noisy, by 0.15 dB at 45 dB-Hz and by up to 1.5 dB for the weakest signals.
+
+So the SNR column of STA 1 drifts by a dB or two within a minute, more for the low satellites than for the high ones, and the weakest also flicker from second to second.
+
+<GpsSignalCurve caption="The signal strength over the elevation above the antenna, before the offset of the satellite's generation, the fade and the jitter. A tracked satellite is lost below 30 dB-Hz and found again only at 35; the dots mark where the curve crosses them, at 1.2° and 3.2°. Above 30° the curve rises slowly to 50 overhead." />
+
+One rule decides when a satellite is lost and found, whatever weakened it: a satellite the receiver tracks is lost when its SNR falls below 30, and a lost or new satellite is found again only at 35 or more. The gap of 5 dB keeps a satellite near the limit from coming and going every second. At sea level a satellite rises into view at 4.5° with about 37 dB-Hz, so the horizon decides. From high altitude the signal decides for a rising satellite, which is found at about 3°; a setting one is kept down to the horizon, about 1.4° at FL350.
+
+{/* kln90b#477: describes the current behavior; the fix makes the unit track and use no satellite below 5° */}
+
+### The antenna in a bank
+
+The antenna sits on top of the fuselage, and the elevation that counts is the elevation above the antenna's plane, which tilts with the aircraft. In a bank the satellites abeam the low wing climb by the bank angle, and those abeam the high wing sink by it; satellites ahead and behind change less. Pitch does the same fore and aft.
+
+<GpsAntennaBank caption="In a 30° bank to the right, a satellite 15° above the horizon off the left wing stands 15° below the antenna's plane, gets the lowest signal strength and is lost. Its twin off the right wing stands 45° above the plane." />
+
+A satellite abeam the high wing is lost when its elevation is less than the bank angle plus about 1°: in a 30° bank, every satellite abeam the high wing below about 31°. Ahead and behind the loss is smaller. In a steep turn the receiver therefore loses the low satellites on the outside of the turn. STA 1 shows them with a `*`, and the EPE on STA 2 grows as the geometry gets worse. When the remaining satellites are too few, the unit loses its position, as described in [The GPS states](/kln90b/operation/gps-receiver/#the-gps-states). Once you roll out, the signals return, and the receiver has the satellites in use again within about 20 seconds.
+
+## From ranges to a position
+
+A receiver measures its distance, its range, to each satellite. Four unknowns come out of the ranges: the three coordinates of the position and the error of the receiver's own clock. That is why a position needs four satellites, or three and the [altitude input](/kln90b/operation/gps-receiver/#the-altitude-input).
+
+Each range in the simulation has two errors. The slow one stands for the ionosphere and the error of the broadcast ephemeris data: about 4.9 m, and it changes over about 5 minutes. The fast one is the receiver's noise, about 1 m, new every second. Together they make about 5 m per satellite: a single-frequency receiver of today's GPS. The real KLN 90B saw errors many times larger in its first years, until the deliberate degradation of the signals, selective availability, was switched off in 2000; the simulation models the signals as they are now. Each satellite keeps its own slow error while it is in use; a satellite that leaves the solution and comes back starts with a new one.
+
+### The geometry of the satellites
+
+How much position error the range errors make depends on where the satellites stand. Satellites spread over the sky cross their ranges at wide angles, and the errors largely cancel. Satellites bunched in one part of the sky cross at narrow angles, and a small range error moves the position far. The factor between the two is the horizontal dilution of precision, HDOP: the horizontal position error is about 5 m times the HDOP.
+
+<GpsSkyGeometry caption="Two skies seen from above, the horizon as the outer ring, 30° and 60° elevation as the inner rings. Eight satellites spread over the sky give an HDOP of 0.9 and an EPE of 9 m; six satellites bunched to the east give an HDOP of 8.2 and an EPE of 82 m." />
+
+The EPE on STA 2 is twice that typical error: 2 × HDOP × 5 m. Twice the typical error covers about 95% of the cases, and the simulation's own tests show the true error inside the EPE at least 90% of the time. With a normal sky the HDOP is about 1, the EPE about 10 m, and STA 2 shows `0.00NM` or `0.01NM`. The EPE comes from the geometry alone: it does not know the actual error of the moment.
+
+The HDOP and the EPE change only when the geometry changes: when a satellite joins or leaves, and every 5 seconds as the satellites move.
+
+### The altitude as a measurement
+
+With an altitude input, the receiver adds the altitude to its measurements. It weights that row as if the altitude were good to 30 m, six times the error of a satellite's range. With many satellites the altitude therefore counts for little; with three satellites it carries the position. It lowers the HDOP, most when the satellites alone stand poorly.
+
+The error of the altitude is not drawn at random: it is the real difference between the altitude the unit gets, corrected with its baro setting, and the aircraft's true altitude. A wrong baro setting makes it, and so does the simulator's weather, in which the indicated altitude differs from the true altitude, and an encoding altimeter, which reports in steps of 100 ft. A baro setting 1 inHg wrong, about 900 ft, moves the position by less than 25 m with all satellites, and by several hundred meters with three satellites and the altitude. The EPE does not show this, because it knows only the geometry.
+
+## Groundspeed, track and the filter
+
+The receiver measures the velocity from the Doppler shift of the signals, which the simulation gives an error of only 0.05 m/s per satellite. The groundspeed and the track come from that velocity, not from the change of the position, so they are accurate to a fraction of a knot and, in cruise, to a fraction of a degree. Standing still, the measured groundspeed is a fraction of a knot; the unit shows a track only from 2 kt, so that the noise of a standing aircraft shows no track.
+
+A filter combines the measured position with the measured velocity, separately for north and east. It moves the position on with the velocity every second and corrects it toward each new measurement, and it is tuned for accelerations of about 3 m/s², a hard maneuver of a light aircraft. Because the velocity is measured so precisely, the filter follows every turn and every acceleration without lag: in a takeoff run from 0 to 120 kt the groundspeed stays within 1 kt of the truth.
+
+What the filter smooths are the steps of the measured position. When a satellite joins or leaves the solution, the set of range errors and the geometry change at once, and the measured position steps by a few meters, sometimes some tens of meters. The filter spreads such a step over about 10 seconds in a good sky and over a minute or more in a poor one, because it trusts the measured position less in the direction in which the geometry is poor.
+
+<GpsFilterStep caption="The unit's answer to a step of 20 m to the east in the measured position, with the two skies of the geometry drawing. In the good sky the position is within 1 m of the new value after about 12 seconds. In the poor sky, whose satellites all stand to the east, it has covered 23% of the step after 10 seconds, 52% after 30 and 77% after a minute." />
+
+The filter does not remove the slow range errors, which change over minutes: it cannot tell them from a real movement. The unit's position therefore wanders slowly by a few meters, as a real receiver's does.
+
+## Finding the satellites
+
+After power-on the receiver chooses how to search from what it remembers: the stored position, which it saves every 60 seconds and at power-off, its clock, the almanac data and the ephemeris data of each satellite. [Acquiring satellites](/kln90b/operation/gps-receiver/#acquiring-satellites) gives the times to first fix that a pilot meets; this section explains where they come from.
+
+<GpsSearchFlow caption="The kinds of search after power-on, with the GPS state STA 1 shows for each and the time from power-on to the first fix. A search that finds four measurements, four satellites or three and the altitude input, goes through transition (TRAN) for one second to a navigation state." />
+
+When the ephemeris data is less than 2 hours old and the stored position within 2 NM of where the aircraft is, the start is hot. The receiver finds each satellite in 6 to 12 seconds and can use it at once, and the unit is NAV ready before the Self Test page appears, about 17 seconds after power-on.
+
+In every other start with current almanac data, the time to find a satellite is drawn once at each power-on, between 2 and 75 seconds, and each satellite takes that time within 3 seconds. The draw is common to all satellites because the warm-up of the receiver's oscillator and the moment in the satellites' 30-second data frame are the same for every channel. With ephemeris data less than 2 hours old but a stored position more than 2 NM away, a satellite is usable as soon as it is found, and the first fix comes 2 to about 75 seconds after power-on. Without current ephemeris data each satellite then needs 30 seconds to send it, and the first fix comes after 30 seconds to 2 minutes.
+
+In acquisition (`ACQ`) the receiver searches only the satellites that its almanac data predicts above 5° at the stored position and at the time of its clock. With a stored position far away, it finds those of them that are also in view where the aircraft really is, and the first fix comes when four are found. When fewer than four of the predicted satellites are in view, the receiver finds those and gets no first fix. When the clock is more than 10 minutes off, the predictions are wrong altogether and it finds none. After 5 minutes in `ACQ` it gives up and searches the whole sky blind, in initialization (`INIT`): one satellite after another on its eight channels, 90 seconds give or take 30 for each satellite it finds, and 4 minutes before it gives up on one that is not in view. The first fix comes within about 12 minutes.
+
+When the almanac data is 6 months old or older, the receiver searches blind for one satellite, which takes about 6½ minutes, give or take one. It then reads the almanac data from that satellite for 12.5 minutes, learns the right time with it, and searches as in `ACQ`. The first fix comes after about 20 minutes.
+
+The receiver renews its almanac data whenever it has tracked satellites for 12.5 minutes, and it keeps the ephemeris data of the satellites it tracks. The setting `FAST` on SET 10 is the same receiver with the same times: it only sets the memory to the truth at power-on, so that every start is a hot one ([Real and fast acquisition](/kln90b/operation/gps-receiver/#real-and-fast-acquisition)).
+
+In flight a lost satellite comes back in 6 to 12 seconds while the aircraft is within 2 NM of where the receiver last had a position, and otherwise in about 40 seconds. After it is found, the receiver takes it into the solution at the next update of the satellites, within 5 seconds.
+
+## RAIM inside the receiver
+
+RAIM checks the position with a measurement more than the position needs. With exactly as many measurements as unknowns, every set of ranges fits some position, and a wrong range moves the position without a trace. With one measurement more, the ranges no longer meet in one point when one of them is wrong, and the misfit shows the error.
+
+<GpsRaimSpare caption="Drawn flat, each line is the set of positions that fit one measurement; the ring is the true position, the dot the computed one. Left, with just enough measurements, a wrong one (the thick green line) moves the position and nothing disagrees. Right, with one more, the wrong one misses the crossing of the others, and the misfit reveals it. In the unit, just enough are four measurements and one more is five." />
+
+### When RAIM is available
+
+Detecting an error is not enough: the receiver must detect it before it moves the position by more than the limit of the flight phase, 2 NM en route, 1 NM in the approach arm mode and 0.3 NM in the approach active mode. For each measurement the receiver works out how much an error in it moves the position for each meter of misfit it causes. The largest of these ratios, times the misfit the test is sure to see (5.3 times the 5 m of a range), is the protection level: the position error that the receiver would catch at least 999 times in 1,000. RAIM is available when the protection level lies within the limit of the flight phase.
+
+<GpsProtectionLevel caption="The protection level of the two skies of the geometry drawing, without the altitude input, against the limits of the flight phases. The spread sky gives 0.02 NM, the bunched sky 0.17 NM: RAIM is available even in the approach active mode. Without its highest satellite the bunched sky gives 0.34 NM, too much for the approach active mode; without its lowest it gives 2.53 NM, too much even en route, though its EPE stays at 82 m. Four satellites give no protection level at all." />
+
+The EPE and RAIM measure different things. The EPE says how far the ordinary range errors move the position; the protection level says how well the satellites check each other. The bunched sky has an EPE nine times that of the spread sky and still has RAIM for an approach, and losing its lowest satellite costs RAIM even en route while the EPE does not change.
+
+When the protection level exceeds the limit, STA 1 shows navigation with position degradation, `DEGRD`; with fewer than five measurements there is no protection level, and STA 1 shows no `DEGRD`. The unit shows the protection level nowhere, only its consequences: `DEGRD`, the messages and whether an approach becomes active. A satellite more or less, or a satellite in a better place, can move it across the limit, which is why RAIM comes and goes in a turn or as a satellite sets. The messages that RAIM is not available wait until the condition has lasted more than 10 seconds, so that a satellite that drops out for a moment posts nothing.
+
+### Detecting an error
+
+The test adds up the squares of the misfits of all ranges and compares the sum with a threshold. The threshold is set so high that the ordinary range errors of a few meters would cross it only once in 15,000 checks. In the simulation the test sees only a satellite that sends wrong data: the ordinary range errors and the altitude never enter it. A wrong baro setting therefore moves the position without a RAIM message, and the unit never raises a false alarm. When the test finds an error, the unit posts `RAIM POSITION ERROR` and does not exclude the satellite: it stays in the solution, and its error stays in the position.
+
+### The prediction on STA 5
+
+STA 5 and the activation of an approach predict RAIM with a second, imagined receiver. The unit places it at the waypoint and the ETA to predict, lets it pick its eight satellites from the almanac data as the real receiver would, and runs the same check for the 0.3 NM limit. The imagined receiver is always at sea level, has the altitude input when the unit has one, and knows nothing of the aircraft's attitude or of satellites lost to a weak signal. The 10 seconds that STA 5 takes for its answer are a time the simulation chooses for the unit, not the time the calculation needs.
+
+## Time
+
+The unit has its own clock, which runs on a battery while the unit is off. While the unit has a position, the satellites set the clock every second. If they move it by more than 10 minutes, the unit posts `SYSTEM TIME UPDATED`. Without a position the clock runs on by itself. GPS time in the simulation is the simulator's time.
+
+{/* kln90b#478: describes the current behavior; the fix makes the clock follow the simulator's time without a position too */}
+
+GPS counts weeks only up to 1024, about 19.6 years, and then starts again at zero. The receiver works with that count and takes the era from the unit's clock. A date wrong by a whole 1024 weeks therefore stays wrong after the first position, as happened to older receivers at the rollovers of 1999 and 2019.
+
+## Where the model simplifies
+
+The model reproduces what a receiver shows, not every piece of physics behind it. The orbits are those of one day in 2022 and repeat weekly. Satellite clock errors, relativity and the satellites' health are left out: every simulated satellite is healthy. The earth is a sphere for the question of what is in view, and only the earth and the tilt of the antenna weaken a signal: mountains and hangars do not. The sizes of the range errors, the antenna curve, the thresholds of 30 and 35 dB-Hz, the factor of RAIM and the false-alarm rate of its test are numbers the simulation chooses; the limits of 2, 1 and 0.3 NM are the standard ones for GPS receivers of the unit's class.
+
+How the simulated failures act on this model (a faulty satellite, jamming, spoofing, a failed receiver) is explained in [Simulated failures](/kln90b/operation/failures/).

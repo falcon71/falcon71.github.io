@@ -1,0 +1,31 @@
+<Field id="title" title="Page title">
+	`RAIM STATUS`: the page predicts <Term t="RAIM" /> for a destination at a time.
+</Field>
+
+<Field id="dest" title="Destination">
+	`DEST:` and the identifier of the waypoint to predict RAIM for. The field is blank when the page has no destination to offer.
+
+	With the left cursor on the field, you enter an identifier as everywhere in the unit, see [Waypoints and the database](/kln90b/operation/waypoints/). Approving the waypoint starts a new calculation.
+</Field>
+
+<Field id="eta" title="Estimated time of arrival">
+	`ETA:` and the time of day for which the unit predicts RAIM, in hours (0 to 23) and minutes in the time zone below it. `__:__` shows while the field is blank.
+
+	With the left cursor on the field, you enter the time with the left knobs. <kbd>ENT</kbd> starts a new calculation.
+</Field>
+
+<Field id="zone" title="Time zone">
+	The time zone of the ETA. It is the time zone of the unit, the one of SET 2, and changing it here changes it everywhere. With the left cursor on the field, the left inner knob steps through the zones. A new zone shows the ETA in that zone and starts no calculation.
+</Field>
+
+<Field id="result" title="Bar graph without a calculation">
+	A row of short marks while the page has no destination or no ETA and therefore no calculation.
+</Field>
+
+<Field id="scale" title="Scale of the bar graph">
+	The scale under the bars: `-15` under the first bar, `0` under the fourth and `15` under the last. The numbers are minutes before and after the ETA.
+</Field>
+
+<Field id="page" title="Page identification">
+	The page identification on the left side. STA 5 is the only STA page with fields for the cursor.
+</Field>

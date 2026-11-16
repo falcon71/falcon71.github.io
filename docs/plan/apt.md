@@ -33,32 +33,26 @@ them: APT 3 `RUNWAY DATA NOT AVAILABLE` (every airport of the extract has a runw
 screens of their own; the APT 7 questions differ by one word and stand for both. The tutorial screens
 (`tut2-apt-*`) stay the tutorial's.
 
-## Bug candidates
+## Bugs
 
-Not filed during the dry run. The maintainer has an agent triage them later (2026-11-16). The paragraphs carry a `{/* kln90b bug candidate: … */}`
-comment instead of `kln90b#NN`; when an issue is filed, the coordinator replaces the comment.
+The candidates of the dry run were triaged and filed on 2026-11-16; the paragraphs of the chapter carry the
+`kln90b#NN` comments.
 
-Worth filing, confirmed in the code and not settled by the real manual:
-
-1. APT 4 shows blank rows after the airport changes while a later frequency page is shown.
-2. APT 3: typing an unknown identifier and then a valid one on a list page jumps to the diagram and drops the
-   cursor.
-3. The APT 3 diagram throws for airports with helipad-style runway entries and stays blank; the extract of the
-   screens turns helipads into such entries, and whether the simulator's data does is unverified.
-
-Confirmed against the real manual, belonging to other pages:
-
-4. A route from the EFB loads an approach into a unit not installed for approaches; `CHANGE APR?` then throws.
-   (Also noted in `docs/plan/flight-plans.md`.)
-5. The real unit finds an airport by typing its name on APT 1 or its city on APT 2; the simulation has no such
-   search. A missing feature that the chapter leaves out (style guide, section 3); Known limitations names it.
-
-Not settled by the manual, the maintainer decides:
-
-6. A STAR or an approach is inserted before the first occurrence of the airport, which puts it at the start of a
-   round trip. (Also noted in `docs/plan/sid-star.md`.)
-7. The frequencies of the simulator's flight service stations are labeled `AFIS` on APT 4; the real unit uses that
-   label differently and has a label of its own for radio frequencies.
+- kln90b#474: APT 4 shows blank rows after the airport changes while a later frequency page is shown.
+- kln90b#475: APT 3: typing an unknown identifier and then a valid one on a list page jumps to the diagram and
+  drops the cursor.
+- kln90b#476: the APT 3 diagram throws for airports with helipad-style runway entries and stays blank; the extract
+  of the screens turns helipads into such entries, and whether the simulator's data does is unverified.
+- kln90b#479: a route from the EFB loads an approach into a unit not installed for approaches; `CHANGE APR?` then
+  throws. Belongs to Flight plans (`docs/plan/flight-plans.md`).
+- kln90b#482 (an enhancement, not a bug): the simulation has no search for an airport by its name or city. The
+  chapter leaves it out (style guide, section 3); Known limitations names it and can link the issue
+  (`docs/plan/help.md`).
+- kln90b#480 (the maintainer decides): a STAR or an approach is inserted before the first occurrence of the airport,
+  which puts it at the start of a round trip. Belongs to SID and STAR procedures (`docs/plan/sid-star.md`).
+- kln90b#481 (the maintainer decides): the frequencies of the simulator's flight service stations are labeled
+  `AFIS` on APT 4. The chapter has no comment for it yet; the package waypoint-pages, which changes the chapter,
+  adds the comment to the paragraph or the field explanation that names the frequency types.
 
 Dropped after review (the real unit behaves the same, or the manual leans the code's way): the airspace text of
 APT 1 ignores the airspace floor; a `/` in an airport name is deleted without a blank; a remark blanked out on APT 5

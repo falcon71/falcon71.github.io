@@ -46,8 +46,8 @@ The depth is that of the real unit's manual: a pilot who knows this manual well 
 is wrong, and so is deeper than a pilot needs (section 3).
 
 The manual is not for software developers. It shows no code and no truth tables, and it leaves out everything a pilot
-cannot see or use: class names, settings keys, H event names, how the simulation computes something. The one exception is
-the External hardware page (section 17). Aircraft developers are not readers either; integration details stay on the
+cannot see or use: class names, settings keys, H event names, how the simulation computes something. The exceptions are
+the External hardware page and the optional page Inside the GPS simulation (section 17). Aircraft developers are not readers either; integration details stay on the
 GitHub wiki of the kln90b project.
 
 ## 3. Scope
@@ -220,7 +220,8 @@ The model packs several facts into every paragraph and wastes no words. So does 
   nobody asked. Cut such sentences.
 - **Nothing about how the simulation is built,** not even in pilot words: that the unit only receives the commands
   of its controls, which part of the aircraft decides what a click does, how the aircraft switches the unit in. Say
-  what the pilot does and sees (section 2).
+  what the pilot does and sees (section 2). The one page that explains a model of the simulation is Inside the GPS
+  simulation (section 17), and it is marked as optional reading.
 - **A gotcha must not be overlooked.** Where the unit regularly catches pilots off guard (the screen stays dark for a
   few seconds after power-on while it warms up), the fact never stands in a subordinate clause. It gets the Good to
   know box (section 11) at the place where the pilot meets it, and the text around it keeps its natural order: a
@@ -338,6 +339,9 @@ before you reuse one):
   it where the pilot meets the surprise, so that the text around it stays in its natural order. Two or three
   sentences. It is rare: a page has at most one, and most pages have none; an ordinary exception stays a sentence or a
   note.
+- **The Optional reading box** (`<Callout kind="optional">`) opens a page or a section that goes deeper than a
+  pilot needs to operate the unit, and says in one or two sentences that nothing in it is needed and where the
+  operating knowledge is. So far only Inside the GPS simulation has one (section 17).
 - There are no other boxes. If a new kind is needed, ask the coordinator; it is added to `Callout` with one fixed title,
   so that pilots learn to recognize it.
 
@@ -398,6 +402,9 @@ names for one thing takes them for two things.
 - A message is quoted in full. A message page message of several lines is quoted with its lines as the MSG page
   shows them, in a code block; this holds for the message lists and wherever a page explains the message. A
   sentence that only names a message of one line quotes it in code formatting: `ADJ NAV IND CRS TO 271°`.
+  A sentence that only names a message of several lines, which the page or the list quotes in full, names it by
+  its first line in code formatting, and by its second line too, as a code span of its own, where two messages
+  share the first: "`RAIM NOT AVAILABLE` `CROSS CHECK POSITION`".
 - Field labels are quoted the same way, then named in words when it helps: "`ETE`, the estimated time en route".
 - **Choices in the screen's order.** When the text names several choices, menu entries, questions or fields that the
   unit shows together, it names them in the order they appear on the screen, top to bottom, and describes the knob
@@ -453,6 +460,17 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | page identification (the segment of the status line that shows a page's name); "page name" in running text | |
 | mode annunciation (the segment of the status line between the page identifications) | mode field |
 | Microsoft Flight Simulator 2024, then "the simulator" | MSFS, FS2024 (except on Installation) |
+| GPS state (the `STATE` of STA 1); the states by name: initialization (`INIT`), acquisition (`ACQ`), transition (`TRAN`), navigation (`NAV`), navigation with altitude aiding (`NAV A`), navigation with data collection (`NAV D`), navigation with position degradation (`DEGRD`), receiver failure (`FAILR`) | receiver state |
+| ephemeris data; almanac data | orbit data |
+| satellite health (the mark before a satellite's number on STA 1) | satellite mark |
+| time to first fix | time to NAV ready |
+| the altitude input | altitude aiding (except in the name of `NAV A`) |
+| RAIM prediction; the bar graph of STA 5, a bar above the line, a bar below the line | high bar, low bar |
+| ETA (the field of STA 5 and wherever the unit shows `ETA`) | arrival time |
+| approach arm mode, approach active mode | approach armed, armed mode, active mode |
+| the GPS APR button | |
+| total operational time (STA 4) | total operating time |
+| software revision status (STA 3) | software version |
 
 ### Spelling and style
 
@@ -570,7 +588,7 @@ The sidebar has these chapters and pages. Operation explains tasks ("how do I…
 | --- | --- |
 | Getting started | Table of contents (home page) · Installation · Quickstart · Tutorial flight 1 · Tutorial flight 2 |
 | The unit | Controls and display (knobs, buttons, the two halves, status line, cursor and data entry, scan, page tree) · Keyboard mode · Power-on and initialization |
-| Operation | Waypoints and the database · Nearest · Direct-to · Flight plans · Navigation modes (leg and OBS) · Sequencing and turn anticipation · SID and STAR procedures · Non-precision approaches · VNAV · GPS reception and RAIM · Messages · Airspace and altitude alerting · Trip planning and calculators · Fuel and air data · Simulated failures |
+| Operation | Waypoints and the database · Nearest · Direct-to · Flight plans · Navigation modes (leg and OBS) · Sequencing and turn anticipation · SID and STAR procedures · Non-precision approaches · VNAV · GPS reception and RAIM · Inside the GPS simulation (optional) · Messages · Airspace and altitude alerting · Trip planning and calculators · Fuel and air data · Simulated failures |
 | Page reference | One chapter per page type in page tree order. Left: TRI, MOD, FPL, NAV, CAL, STA, SET, FLR, OTH. Right: CTR, REF, ACT, D/T, NAV, APT, VOR, NDB, INT, SUP. Each page with its screen. |
 | Reference lists | Message page messages · Status line messages · Glossary |
 | Help | External hardware · FAQ and troubleshooting · Known limitations · Contact |
@@ -642,6 +660,28 @@ observes, never by how the simulation draws or times it (section 8).
 
 The Operation page for the receiver: acquisition, the receiver states, the position error, RAIM and its
 prediction. The STA chapter explains the pages and their fields and links there for how the receiver works.
+
+### Inside the GPS simulation
+
+An optional excursion for the curious pilot, after GPS reception and RAIM in the Operation chapter (maintainer,
+2026-11-16): how the simulation models the satellites, their signals, the errors of the position, the filter,
+the search for satellites and RAIM. Nothing on it is needed to use or understand the unit, and it says so at its
+start in the Optional reading box (section 11); the richness of the model is what pilots appreciate here.
+
+- It is the one page that explains how the simulation works inside (sections 2 and 8). It still speaks to a pilot:
+  it explains the model and its numbers in words and shows what each part makes the pilot see on the unit. It shows
+  no code, names no class, file or setting key, and uses a formula only where the formula is the plainest way to
+  say it.
+- **Prose first.** It is written in the manual's style, in paragraphs that explain and give reasons, not as a
+  poster of bullet points. Lists are for parallel items, as everywhere (section 8).
+- **Explanatory drawings** carry what words explain badly: the geometry of the satellites, the signal strength
+  over the elevation, a filter's answer to a jump, RAIM with and without a spare measurement. They follow section
+  16, and every number in a drawing is one the code uses.
+- Operating knowledge stays on GPS reception and RAIM and in the STA chapter; the excursion links there and does
+  not repeat it. How each simulated failure acts on the model is added by the package that writes Simulated
+  failures.
+- The simulation models a receiver; where the model simplifies or chooses a number of its own, the page may say
+  so, because that is what the curious reader asks.
 
 ### SID and STAR procedures and approaches
 

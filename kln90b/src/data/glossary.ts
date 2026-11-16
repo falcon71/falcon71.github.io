@@ -30,7 +30,11 @@ export const glossary: Record<string, GlossaryEntry> = {
 	},
 	RAIM: {
 		expansion: 'Receiver autonomous integrity monitoring',
-		text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, quis nostrud exercitation ullamco laboris.',
+		text: 'The receiver checks its own position for errors by comparing more measurements than a position needs. It needs five measurements, and the altitude input counts as one.',
+	},
+	EPE: {
+		expansion: 'Estimated position error',
+		text: 'An estimate of how far the position of the receiver may be from the truth, worked out from the geometry of the satellites in use. STA 2 shows it in NM.',
 	},
 	'Turn anticipation': {
 		text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, duis aute irure dolor in reprehenderit.',

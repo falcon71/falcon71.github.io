@@ -1,0 +1,36 @@
+---
+/**
+ * Synthetic drawing: two skies seen from above, the horizon as the outer ring, 30° and 60° elevation as the inner
+ * rings, north up. Left eight satellites spread over the sky, right six bunched in one quarter. The EPE under each is
+ * 2 × HDOP × 5 m of the simulation's geometry, computed for exactly these satellite positions (HDOP 0.93 and 8.2).
+ */
+import GpsFigure from './GpsFigure.astro';
+
+interface Props {
+	caption: string;
+}
+const { caption } = Astro.props;
+
+const good = [[154.1, 123.1], [191.7, 158.8], [114.9, 208.9], [59.6, 110.7], [171.4, 53.9], [108.2, 85], [167.2, 214.7], [50.4, 172.6]];
+const poor = [[478.2, 106.4], [468.9, 140], [494.7, 167.2], [463.2, 183.2], [504.3, 125.1], [451.8, 158.3]];
+const centers = [140, 420];
+---
+
+<GpsFigure caption={caption} viewBox="0 0 560 312" id="gps-sky">
+	{centers.map((cx) => (
+		<g>
+			<circle cx={cx} cy="140" r="110" class="ax" />
+			<circle cx={cx} cy="140" r="73.3" class="grid" />
+			<circle cx={cx} cy="140" r="36.7" class="grid" />
+			<line x1={cx} y1="30" x2={cx} y2="250" class="grid" />
+			<line x1={cx - 110} y1="140" x2={cx + 110} y2="140" class="grid" />
+			<text x={cx} y="22" text-anchor="middle" class="t small">N</text>
+		</g>
+	))}
+	{good.map(([x, y]) => <circle cx={x} cy={y} r="8" class="dot" />)}
+	{poor.map(([x, y]) => <circle cx={x} cy={y} r="8" class="dot" />)}
+	<text x="140" y="282" text-anchor="middle" class="t">8 satellites, spread</text>
+	<text x="140" y="306" text-anchor="middle" class="t t-accent">EPE 9 m</text>
+	<text x="420" y="282" text-anchor="middle" class="t">6 satellites, bunched</text>
+	<text x="420" y="306" text-anchor="middle" class="t t-accent">EPE 82 m</text>
+</GpsFigure>

@@ -1,0 +1,234 @@
+---
+title: GPS reception and RAIM
+description: How the KLN 90B finds its position after power-on, what slows it down, how good the position is, what RAIM is and when you have it, and what the receiver's messages mean.
+sidebar:
+  order: 10
+---
+
+import KlnScreen from '../../../components/KlnScreen.astro';
+import Callout from '../../../components/Callout.astro';
+import Term from '../../../components/Term.astro';
+
+The KLN 90B navigates only while its GPS receiver has a position good enough to navigate; the unit is then NAV ready. With the default setting, that is about 17 seconds after power-on, and at once in an aircraft loaded with the engine running; with the setting `REAL` on SET 10 the time to first fix is up to 20 minutes, depending on what the unit remembers. In flight, <Term t="RAIM" /> checks the position for errors, and the unit tells you on the STA pages and with messages when it cannot.
+
+## Acquiring satellites
+
+At every power-on the receiver starts from what it remembered at power-off: its position, its clock, the almanac data (the orbits of all satellites) and the ephemeris data (the precise orbits) of the satellites it last tracked. From these it predicts which satellites are in view and searches for them. The better that memory matches the truth, the shorter the time to first fix.
+
+While the receiver searches, STA 1 shows `ACQ` and lists the satellites it expects, with the elevation it predicts for them. A satellite gets its signal strength on the page once the receiver uses it.
+
+<KlnScreen screen="sta-1-acq" />
+
+With the setting `REAL` on SET 10 (see [Real and fast acquisition](#real-and-fast-acquisition)), the time to first fix depends on the memory like this:
+
+| What the unit remembers | STA 1 | Time to first fix after power-on |
+| --- | --- | --- |
+| Ephemeris data less than 2 hours old, and a position within 2 NM of where it is now | `ACQ` | before the Self Test page appears, about 17 seconds |
+| Ephemeris data less than 2 hours old, and a position more than 2 NM away | `ACQ` | between a few seconds and about 75 seconds |
+| Ephemeris data 2 hours old or older | `ACQ` | between about 30 seconds and 2 minutes |
+| A position several hundred NM away | `ACQ` | usually within 5 minutes |
+| A clock off by more than 10 minutes, or a position so far away that none of the expected satellites is in view | `ACQ` for 5 minutes, then `INIT` | within about 12 minutes |
+| Almanac data 6 months old or older | `INIT` | about 20 minutes |
+
+The receiver collects ephemeris data while it tracks satellites, so the age counts from the last time the unit navigated. The time counts in the simulator's date and time: a flight loaded for the next day is more than 2 hours later. The unit's clock runs on while the unit is off, so it is wrong only after someone entered a wrong date or time, or after a [simulated failure](/kln90b/operation/failures/) erased the unit's memory. The receiver renews its almanac data whenever it tracks satellites for 12.5 minutes, so the almanac data grows old only when the simulator's date is set 6 months or more away from your last flight with the unit.
+
+A stored position far away slows the search because the receiver looks for the satellites in view at that position. The more of them are also in view where you are, the sooner it finds four. With a wrong clock it predicts the wrong satellites altogether: it gives up after 5 minutes in `ACQ` and searches the whole sky in `INIT`, one satellite after another. With old almanac data it first searches blind for a single satellite, collects new almanac data from it in 12.5 minutes, and then acquires as usual.
+
+If you know that the stored position, the date or the time is wrong, correct it while the unit searches: the receiver starts over from the corrected values at once, and is usually NAV ready within 150 seconds. [Power-on and initialization](/kln90b/unit/power-on/) explains how. Once the unit is NAV ready, the satellites supply the position and the time, and an entry changes nothing.
+
+An aircraft loaded with the engine running skips all this: the unit is NAV ready at once ([Power-on and initialization](/kln90b/unit/power-on/)).
+
+## The GPS states
+
+STA 1 shows the GPS state in its top line. The unit is NAV ready in the four navigation states, `NAV`, `NAV A`, `NAV D` and `DEGRD`, and not in the others.
+
+<KlnScreen screen="sta-1-nav" rows="1" />
+
+- Initialization, `INIT`: the receiver searches the whole sky, collects new almanac data, or has been without a position for 5 minutes in flight. No position.
+- Acquisition, `ACQ`: the receiver searches the satellites it expects, or has lost its position and searches the satellites again. No position.
+- Transition, `TRAN`: the receiver has enough satellites, and the unit accepts the position 1 second later.
+- Navigation, `NAV`: the unit navigates on satellites alone, four or more.
+- Navigation with altitude aiding, `NAV A`: the unit navigates, and the altitude input is one of its measurements (see [The altitude input](#the-altitude-input)).
+- Navigation with data collection, `NAV D`: the unit navigates while the receiver collects the ephemeris data of a satellite it has just found.
+- Navigation with position degradation, `DEGRD`: the unit navigates, but the satellites stand in a geometry too poor for [RAIM](#raim) at the limit of the flight phase.
+- Receiver failure, `FAILR`: the receiver has failed. A failed receiver or antenna and the other failures of the receiver are described in [Simulated failures](/kln90b/operation/failures/).
+
+`DEGRD` wins over `NAV D`, and both win over `NAV A` and `NAV`. After power-on the states follow one another as `INIT` or `ACQ`, then `TRAN`, then one of the navigation states. In flight they change between the navigation states as satellites rise and set and as you enter the approach arm mode and the approach active mode.
+
+A position needs four measurements: four satellites, or three satellites and the altitude input. It also needs satellites spread well enough over the sky: when the [estimated position error](#the-estimated-position-error) would exceed 3.8 NM, the unit has no position, however many satellites it tracks.
+
+### Losing the position in flight
+
+When the measurements drop below four, the unit loses its position at once. STA 1 shows `ACQ`, STA 2 shows dashes, the unit flags its navigation and posts `SATELLITE COVERAGE` (see [Messages of the receiver](#messages-of-the-receiver)). As the satellites come back, the receiver finds each again within about 40 seconds, or 6 to 12 seconds while the aircraft is still within 2 NM of where the position was lost, and the unit goes through `TRAN` to a navigation state.
+
+After 5 minutes without a position STA 1 shows `INIT`. The receiver keeps its almanac data, its position and its clock and goes on searching the satellites it expects in view; the position returns about a minute after four satellites are back.
+
+## Real and fast acquisition
+
+<Callout kind="sim-only">
+SET 10 and its setting `GPS:` exist only in the simulation. The real KLN 90B always acquires as with `REAL`.
+</Callout>
+
+The setting on SET 10 chooses how long the first position after power-on takes. `FAST`, the default, makes every power-on a start with a perfect memory; `REAL` keeps the memory as the unit left it, with the times of [Acquiring satellites](#acquiring-satellites).
+
+With `FAST`, the unit sets its stored position, its clock, its almanac data and its ephemeris data to the truth at every power-on, as if you had entered the right position and time and had flown a moment ago. The receiver still acquires the satellites one by one, and the unit is usually NAV ready before the Self Test page appears, about 17 seconds after power-on. Because the memory matches the truth, `FAST` never posts `POSITION DIFFERS FROM` or `SYSTEM TIME UPDATED`.
+
+To switch to fast acquisition while the unit searches:
+
+1. Turn the left outer knob to the SET pages and the left inner knob to SET 10.
+2. Press the left <kbd>CRSR</kbd>. The cursor is on `REAL`.
+3. Turn the left inner knob to `FAST`. The receiver starts over from the true position and time, and the unit is NAV ready within about 15 seconds.
+4. Press the left <kbd>CRSR</kbd> to turn the cursor off.
+
+Switching to `FAST` while the unit is NAV ready changes nothing until the next power-on. Switching to `REAL` also takes effect at the next power-on. The setting is kept with the aircraft, and `FAST` cannot help at a power-on after a simulated failure that erased the unit's memory. [Selecting a page](/kln90b/unit/controls-and-display/#selecting-a-page) and [Entering data with the cursor](/kln90b/unit/controls-and-display/#entering-data-with-the-cursor) explain the knobs and the cursor.
+
+## The altitude input
+
+<Callout kind="availability">
+The altitude input depends on how the unit is installed in the aircraft. Not every aircraft has one.
+</Callout>
+
+When the aircraft gives the unit an altitude, from an encoding altimeter or an air data computer, the receiver uses it as one more measurement. STA 1 then shows `NAV A` while the unit navigates, unless `DEGRD` or `NAV D` shows; three satellites are enough for a position, and four satellites give RAIM the measurements it needs.
+
+The receiver uses the indicated altitude, corrected with the baro setting of the unit ([Airspace and altitude alerting](/kln90b/operation/alerts/)). A wrong baro setting moves the position a little, and more when few satellites are in use.
+
+A unit installed without an altitude input, or one whose altitude input has failed, shows `ALTITUDE FAIL` on the MSG page as long as the altitude is missing; a unit installed for VFR only does not. STA 1 then never shows `NAV A`, the unit needs four satellites for a position, and five for RAIM.
+
+## The estimated position error
+
+STA 2 shows the <Term t="EPE" />, the receiver's estimate of how far its position may be from the truth. It follows the geometry of the satellites in use: many satellites spread over the sky give a small error, few satellites or satellites bunched together a large one. Above 3.8 NM the unit has no position (see [The GPS states](#the-gps-states)).
+
+<KlnScreen screen="sta-2-epe" />
+
+The EPE is an estimate from the geometry, not a measurement. A satellite that sends wrong data does not raise it; only RAIM detects that.
+
+## RAIM
+
+RAIM checks the position for errors from the satellites themselves. The receiver compares its measurements with each other, and when one does not fit, it raises an alarm. This works only with a measurement more than a position needs: five or more measurements, which are five satellites, or four satellites and the altitude input.
+
+RAIM is available when those measurements stand in a geometry that lets the receiver detect an error before it moves the position by more than the limit of the flight phase:
+
+- 2 NM en route, in leg or OBS mode.
+- 1 NM in the approach arm mode, in leg or OBS mode.
+- 0.3 NM in the approach active mode.
+
+RAIM is not available with too few measurements, or when the geometry does not meet the limit (STA 1 then shows `DEGRD`). Without RAIM the unit keeps navigating: en route and in the approach arm mode it only posts a message, and you cross-check the position with other navigation. A missing RAIM never costs you the position; in the approach active mode it can cost you the navigation (see below).
+
+When RAIM finds an error, the unit posts `RAIM POSITION ERROR` at once and goes on using the position; it does not exclude the faulty satellite. Only a simulated failure of a satellite, or a spoofer, causes it.
+
+An approach needs RAIM for the 0.3 NM limit, at the <Term t="FAF" /> and the <Term t="MAP" /> as well as now. When RAIM is missing, the unit tells you with a message what to do: predict RAIM on STA 5 when it does not activate the approach, and press the GPS APR button for the missed approach when it flags its navigation in the approach. [Non-precision approaches](/kln90b/operation/approaches/) explains what RAIM decides in an approach.
+
+## Predicting RAIM
+
+STA 5 predicts whether RAIM will be available for the 0.3 NM limit of the approach active mode at a waypoint, for seven times from 15 minutes before an ETA to 15 minutes after it. Use it before an approach, or when the unit has refused to activate one. STA 5 also explains the destination and ETA the page fills in, and how the page behaves.
+
+A flight plan or a direct-to must be active, and the groundspeed above 2 kt, so that the page can fill in the destination and the ETA.
+
+To predict RAIM for the destination of the active flight plan:
+
+1. Turn the left outer knob to the STA pages and the left inner knob to STA 5. The line of the bar graph shows `COMPUTING`.
+
+   <KlnScreen screen="sta-5-computing" />
+
+2. Wait 10 seconds. The bar graph appears: a bar above the line means RAIM is predicted available at that time, a bar below the line that it is not. The middle bar, over the `0`, is the ETA.
+
+   <KlnScreen screen="sta-5-result" />
+
+STA 5 must be shown on the left side to enter another destination or another ETA, on the ground for example.
+
+To predict RAIM for another destination or another ETA:
+
+1. Press the left <kbd>CRSR</kbd>. The cursor is on the destination. To keep the destination, turn the left outer knob one step clockwise to the ETA and go on with step 5.
+2. Enter the identifier with the left knobs. If you entered the wrong one, press <kbd>CLR</kbd> and enter it again.
+3. Press <kbd>ENT</kbd>. The unit shows the waypoint page on the right for approval ([Waypoints and the database](/kln90b/operation/waypoints/)).
+4. Press <kbd>ENT</kbd>. The cursor moves on to the ETA.
+5. Enter the ETA with the left inner and outer knobs. Before you press <kbd>ENT</kbd>, <kbd>CLR</kbd> takes the entry back.
+6. Press <kbd>ENT</kbd>. The line of the bar graph shows `COMPUTING`.
+7. Press the left <kbd>CRSR</kbd> to turn the cursor off.
+8. Wait 10 seconds for the bar graph.
+
+**Note:** Enter the ETA in UTC: the unit takes the hours and minutes you enter as UTC, whatever time zone the page shows.
+
+{/* kln90b#472: describes the current behavior; the fix makes the unit predict for the ETA in the time zone shown */}
+
+## Messages of the receiver
+
+The receiver tells you about its position and RAIM with messages on the MSG page. Most stay on the MSG page as long as their condition lasts, also after you have read them, and come back unread when the condition returns; the messages about the clock and the first position go once you have read them. [Messages](/kln90b/operation/messages/) explains how messages arrive and are read, and the [message list](/kln90b/lists/messages/) has every message of the unit.
+
+```
+SATELLITE COVERAGE
+ INADEQUATE FOR NAV
+```
+
+The unit had a position since power-on and has lost it. It appears at once and goes when the unit navigates again. During the search after power-on it does not appear. Navigate by other means until it goes.
+
+```
+RAIM NOT AVAILABLE
+ CROSS CHECK POSITION
+```
+
+The unit navigates en route or in the approach arm mode, and RAIM has not been available for more than 10 seconds. Cross-check the position with other navigation. It goes when RAIM is available again.
+
+<KlnScreen screen="gps-msg-raim-not-available" />
+
+```
+BAD SATELLITE GEOMETRY
+ SEE EPE ON STA 2 PAGE
+```
+
+Comes with `RAIM NOT AVAILABLE` `CROSS CHECK POSITION` when the cause is the geometry of the satellites, not their number. STA 2 shows how large the error may be.
+
+```
+BAD SATELLITE GEOMETRY
+ AND RAIM NOT AVAILABLE
+```
+
+The unit is in the approach active mode and RAIM has not been available for more than 10 seconds, for either cause. It replaces the two messages above. [Non-precision approaches](/kln90b/operation/approaches/) says what follows.
+
+```
+RAIM POSITION ERROR
+ CROSS CHECK POSITION
+```
+
+RAIM has found a measurement that does not fit. It appears at once and stays while the error is found. Cross-check the position.
+
+```
+RAIM NOT AVAILABLE
+ APR MODE INHIBITED
+ PREDICT RAIM ON STA 5
+```
+
+The unit has not activated the approach, because RAIM is missing now or predicted missing at the FAF or the MAP, or RAIM has found an error. Use STA 5 to find out when RAIM returns.
+
+```
+PRESS GPS APR FOR NAV
+```
+
+The unit has flagged its navigation in the approach active mode for a lost position or a lack of RAIM. Press the GPS APR button to get navigation back for the missed approach.
+
+```
+SYSTEM TIME UPDATED
+ TO GPS TIME
+```
+
+The satellites have moved the unit's clock by more than 10 minutes, usually at the first position after power-on when the clock was wrong, or when the simulator's time was changed in flight. Nothing to do; the clock is now right.
+
+```
+POSITION DIFFERS FROM
+ LAST POSITION BY >2NM
+```
+
+The first position after power-on is more than 2 NM from the position stored at power-off, for example because the aircraft was loaded at another airport. Nothing to do if you know why; a position regained in flight never posts it.
+
+`ALTITUDE FAIL` is described in [The altitude input](#the-altitude-input).
+
+## Checking the receiver in flight
+
+Each question about the receiver has its page:
+
+- Is the unit navigating, and with the altitude input? The GPS state on STA 1.
+- Which satellites does it use, and how strong are they? The list on STA 1.
+- How good is the position? The EPE on STA 2.
+- Will RAIM be there for the approach? The RAIM prediction on STA 5.
+
+[Power-on and initialization](/kln90b/unit/power-on/) says what to do while the unit searches, and [Non-precision approaches](/kln90b/operation/approaches/) what RAIM decides in an approach. [Inside the GPS simulation](/kln90b/operation/gps-simulation/) explains how the simulation models the satellites, the position error and RAIM, for the pilot who wants to know more.

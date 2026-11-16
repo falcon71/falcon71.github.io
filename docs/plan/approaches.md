@@ -42,6 +42,28 @@ legs), `data/flightplan/ActiveWaypoint.ts`, `data/navdata/NavCalculator.ts`, `pa
 
 ## Notes from other packages
 
+### From the package sta (2026-11-16)
+
+GPS reception and RAIM says only that an approach needs RAIM, quotes the messages and links here. Its review moved
+this out, because this page owns what RAIM decides in an approach. Pointers from the code (`services/ModeController.ts`,
+`data/PersistentMessages.ts`, `Gps.ts`); check each before it is written:
+
+- The unit makes an approach active only when RAIM is available now, against the limit of the approach, and is
+  predicted for the FAF and the MAP at the times the aircraft reaches them. Otherwise it stays in the approach arm
+  mode and posts the message whose lines are `RAIM NOT AVAILABLE`, `APR MODE INHIBITED`, `PREDICT RAIM ON STA 5`.
+- After a refusal the unit checks again every 10 seconds while the aircraft is within 2 NM of the FAF. The message
+  goes when the approach becomes active, when the unit leaves the approach arm mode, or when it stops checking.
+- In the approach active mode the unit flags its navigation at once when the position is lost or RAIM finds an
+  error, and after 2 minutes without RAIM (the code marks the 2 minutes with low confidence). It then posts
+  `PRESS GPS APR FOR NAV`; the GPS APR button returns the unit to the approach arm mode, with navigation for the
+  missed approach, and the message goes with the flag.
+- `BAD SATELLITE GEOMETRY` `AND RAIM NOT AVAILABLE` is the message of the approach active mode for RAIM lost;
+  `RAIM POSITION ERROR` `CROSS CHECK POSITION` also flags the navigation there.
+- Official terms from the review: approach arm mode, approach active mode, the GPS APR button (style guide, word
+  list).
+- The STA chapter has a section "What the result means for an approach" under STA 5, and GPS reception and RAIM
+  the anchors `#raim`, `#predicting-raim` and `#messages-of-the-receiver`; link there for RAIM itself.
+
 - From the package apt: the text about the arming distance that the review cut from the APT chapter is in the git
   history (`docs/plan/apt.md`).
 - The worked example uses an approach of the FAA extract; Tutorial flight 2 flies the RNAV (GPS) Y approach to

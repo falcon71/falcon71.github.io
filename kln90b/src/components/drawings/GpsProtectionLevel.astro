@@ -1,0 +1,52 @@
+---
+/**
+ * Synthetic drawing: the protection level of four skies against the alert limits of the flight phases (0.3 NM in the
+ * approach active mode, 1 NM in the approach arm mode, 2 NM en route). The protection levels are the simulation's
+ * formula (largest slope × 5 m × 5.3), without the altitude input, for the skies of GpsSkyGeometry (elevation, azimuth):
+ *   8 satellites spread, the left sky: 0.02 NM (EPE 9 m)
+ *   6 satellites bunched, the right sky (35°/60°, 50°/90°, 25°/110°, 40°/135°, 20°/80°, 60°/120°): 0.17 NM (EPE 82 m)
+ *   the right sky without its highest satellite (60°/120°): 0.34 NM (EPE 83 m)
+ *   the right sky without its lowest satellite (20°/80°): 2.53 NM (EPE 82 m)
+ */
+import GpsFigure from './GpsFigure.astro';
+
+interface Props {
+	caption: string;
+}
+const { caption } = Astro.props;
+
+const scale = (nm: number) => 40 + nm * 171.4;
+const limits: [string[], string, number][] = [
+	[['approach', 'active'], '0.3', 0.3],
+	[['approach', 'arm'], '1', 1],
+	[['en route'], '2 NM', 2],
+];
+const rows: [string, number, number][] = [
+	['8 satellites, spread (left sky)', 0.02, 100],
+	['6 satellites, bunched (right sky)', 0.168, 158],
+	['right sky without its highest satellite', 0.34, 216],
+	['right sky without its lowest satellite', 2.53, 274],
+];
+---
+
+<GpsFigure caption={caption} viewBox="0 0 560 360" id="gps-pl">
+	<line x1="40" y1="306" x2="520" y2="306" class="ax" />
+	<line x1="40" y1="312" x2="40" y2="306" class="ax" />
+	<text x="40" y="332" text-anchor="middle" class="t small">0</text>
+	{limits.map(([phase, label, nm]) => (
+		<g>
+			<line x1={scale(nm)} y1="54" x2={scale(nm)} y2="312" class="dash" />
+			{phase.map((word, i) => (
+				<text x={scale(nm)} y={phase.length === 1 ? 44 : 22 + i * 22} text-anchor="middle" class="t small">{word}</text>
+			))}
+			<text x={scale(nm)} y="332" text-anchor="middle" class="t small">{label}</text>
+		</g>
+	))}
+	{rows.map(([label, nm, y]) => (
+		<g>
+			<text x="40" y={y - 16} class="t small ko">{label}</text>
+			<rect x="40" y={y - 9} width={scale(nm) - 40} height="18" class="box-accent" />
+		</g>
+	))}
+	<text x="520" y="356" text-anchor="end" class="t small">protection level</text>
+</GpsFigure>

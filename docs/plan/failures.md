@@ -41,6 +41,16 @@ becomes a page of its own.
 4. FLR 3: the failures that can be set. Variant: the fail question.
 5. Links to Simulated failures.
 
+### Inside the GPS simulation (`operation/gps-simulation.mdx`): the failures part
+
+The package sta writes this optional page about the model of the receiver (style guide, section 17, "Inside the
+GPS simulation"; `docs/plan/sta.md`). It leaves out the failures. This package adds one section to it, in the
+page's manner (prose with explanatory drawings, optional reading): how a faulty satellite, jamming and spoofing act
+on the model (on the ranges, on the signal strength, on the clock), why each looks the way it does on STA 1 and
+STA 2 and in the messages, and how a pilot can tell them apart. Simulated failures stays the lookup of what each
+failure does; the added section explains the mechanism and links there. Read the page first and use its terms and
+its drawings' style.
+
 ## Topics this package owns
 
 Simulated failures owns what can fail, what each failure does, detection, random failures, the battery and the
@@ -95,6 +105,29 @@ pages through SET 10 and set a failure; what it cannot stage is listed here afte
   field explanations and in the list of Simulated failures, not in the glossary (style guide, section 14).
 
 ## Notes from other packages
+
+### From the package sta (2026-11-16)
+
+What the pages of the package sta say about failures, each with a link to Simulated failures; this package must
+bear them out:
+
+- GPS reception and RAIM, under the GPS states: `FAILR` means the receiver has failed, and a failed receiver or
+  antenna and the other failures of the receiver are described in Simulated failures.
+- Under RAIM: `RAIM POSITION ERROR` `CROSS CHECK POSITION` is caused only by a simulated failure of a satellite or
+  by a spoofer.
+- Under real and fast acquisition: `FAST` cannot help at a power-on after a simulated failure erased the unit's
+  memory.
+- The STA chapter, STA 1, "A failed receiver": shows the screen `sta-1-failed` (`STATE FAILR`, no satellite rows)
+  and links.
+
+Pointers for this package's research (check in the code):
+
+- `SATELLITE COVERAGE INADEQUATE FOR NAV` is suppressed while the receiver has failed.
+- A persistent message such as `NO RCVR DATA` stays on the MSG page after it is read and keeps a steady `msg` in
+  the status line. The generator refuses a screen with any `msg` unless its description sets `keepMessages: true`;
+  the screens of persistent messages need it (`kln90b/screens/sta-1-failed/screen.ts` shows how).
+- The RAIM test of the simulation reacts only to an injected satellite fault, never to the ordinary errors or to
+  the altitude; Inside the GPS simulation says so under "Detecting an error".
 
 None yet. The package sta notes here what its pages said about a failed receiver, jamming, spoofing and a faulty
 satellite, so that this package uses the same terms.

@@ -1,0 +1,43 @@
+---
+/**
+ * Synthetic drawing: the signal strength the simulation gives a satellite over its elevation above the antenna's plane,
+ * 50 + 12 × log10(sin elevation) dB-Hz with a floor of 25, plotted from 0° to 30°. The dashed lines are the thresholds of
+ * the lock rule: a tracked satellite is lost below 30 and found again only at 35. The dots mark where the curve crosses
+ * them, at 1.2° and 3.2°.
+ */
+import GpsFigure from './GpsFigure.astro';
+
+interface Props {
+	caption: string;
+}
+const { caption } = Astro.props;
+
+const curve = '70,227.1 77.2,227.1 78.4,222 80.7,213.7 83,207.1 85.3,201.5 89.2,193.9 93,187.6 96.8,182.3 100.7,177.8 108.3,170.1 116,163.9 123.7,158.6 131.3,154 146.7,146.4 162,140.2 177.3,134.9 192.7,130.4 223.3,122.8 254,116.6 284.7,111.5 330.7,105 376.7,99.6 438,93.7 484,89.9 530,86.6';
+const yTicks: [string, number][] = [['25', 227.1], ['30', 194.3], ['35', 161.4], ['40', 128.6], ['45', 95.7], ['50', 62.9]];
+const xTicks: [string, number][] = [['0°', 70], ['5°', 146.7], ['10°', 223.3], ['20°', 376.7], ['30°', 530]];
+---
+
+<GpsFigure caption={caption} viewBox="0 0 560 312" id="gps-signal">
+	{yTicks.map(([label, y]) => (
+		<g>
+			<line x1="64" y1={y} x2="70" y2={y} class="ax" />
+			<text x="58" y={y + 6} text-anchor="end" class="t small">{label}</text>
+		</g>
+	))}
+	{xTicks.map(([label, x]) => (
+		<g>
+			<line x1={x} y1="260" x2={x} y2="266" class="ax" />
+			<text x={x} y="286" text-anchor="middle" class="t small">{label}</text>
+		</g>
+	))}
+	<line x1="70" y1="161.4" x2="530" y2="161.4" class="dash" />
+	<line x1="70" y1="194.3" x2="530" y2="194.3" class="dash" />
+	<polyline points="70,30 70,260 530,260" class="ax" />
+	<polyline points={curve} class="accent" />
+	<circle cx="119.4" cy="161.4" r="6" class="dot-plain" />
+	<circle cx="88.9" cy="194.3" r="6" class="dot-plain" />
+	<text x="526" y="152" text-anchor="end" class="t">found again at 35</text>
+	<text x="526" y="185" text-anchor="end" class="t">lost below 30</text>
+	<text x="80" y="40" class="t small">SNR</text>
+	<text x="526" y="310" text-anchor="end" class="t small">elevation above the antenna</text>
+</GpsFigure>

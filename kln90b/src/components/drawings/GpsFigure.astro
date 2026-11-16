@@ -1,0 +1,135 @@
+---
+/**
+ * The frame and the shared styles of the drawings on Inside the GPS simulation. A drawing passes its SVG content in
+ * the slot. Everything is drawn with currentColor and the theme variables, so it works in light and dark mode.
+ * Text that crosses a line gets the class `ko`: a stroke in the figure's background knocks the line out behind it.
+ */
+interface Props {
+	caption: string;
+	viewBox: string;
+	id: string;
+}
+const { caption, viewBox, id } = Astro.props;
+---
+
+<figure class="gps-drawing">
+	<svg viewBox={viewBox} role="img" aria-labelledby={`${id}-title`}>
+		<title id={`${id}-title`}>{caption}</title>
+		<slot />
+	</svg>
+	<figcaption>{caption}</figcaption>
+</figure>
+
+<style>
+	.gps-drawing {
+		margin: 1.5rem 0 2rem;
+		max-width: 36rem;
+		padding: 1rem;
+		background: var(--kln-figure-bg);
+		border-radius: 6px;
+		color: var(--sl-color-gray-2);
+	}
+	svg {
+		width: 100%;
+		height: auto;
+		display: block;
+		overflow: visible;
+	}
+	@media (max-width: 40rem) {
+		.gps-drawing {
+			padding: 0.5rem;
+		}
+	}
+	figcaption {
+		margin-top: 0.5rem;
+		font-size: var(--sl-text-sm);
+		color: var(--sl-color-gray-3);
+	}
+	/* Lines */
+	.gps-drawing :global(.ax) {
+		stroke: currentColor;
+		stroke-width: 1.5;
+		fill: none;
+	}
+	.gps-drawing :global(.grid) {
+		stroke: var(--sl-color-gray-4);
+		stroke-width: 1;
+		fill: none;
+	}
+	.gps-drawing :global(.dash) {
+		stroke: currentColor;
+		stroke-width: 2;
+		stroke-dasharray: 7 5;
+		fill: none;
+	}
+	.gps-drawing :global(.line) {
+		stroke: currentColor;
+		stroke-width: 2.5;
+		fill: none;
+	}
+	.gps-drawing :global(.accent) {
+		stroke: var(--kln-affordance);
+		stroke-width: 3;
+		fill: none;
+	}
+	.gps-drawing :global(.muted) {
+		stroke: var(--sl-color-gray-3);
+		stroke-width: 2.5;
+		fill: none;
+	}
+	/* Shapes */
+	.gps-drawing :global(.dot) {
+		fill: var(--kln-affordance);
+	}
+	.gps-drawing :global(.dot-plain) {
+		fill: currentColor;
+	}
+	.gps-drawing :global(.ring) {
+		fill: var(--kln-figure-bg);
+		stroke: currentColor;
+		stroke-width: 2.5;
+	}
+	.gps-drawing :global(.area) {
+		fill: var(--kln-affordance-bg);
+		stroke: none;
+	}
+	.gps-drawing :global(.box) {
+		fill: var(--kln-figure-bg);
+		stroke: currentColor;
+		stroke-width: 2;
+	}
+	.gps-drawing :global(.box-accent) {
+		fill: var(--kln-affordance-bg);
+		stroke: var(--kln-affordance);
+		stroke-width: 2.5;
+	}
+	.gps-drawing :global(.solid) {
+		fill: var(--sl-color-white);
+	}
+	.gps-drawing :global(.arrowhead) {
+		fill: currentColor;
+	}
+	/* Text */
+	.gps-drawing :global(.t) {
+		fill: currentColor;
+		font-family: var(--kln-font-heading);
+		font-weight: 600;
+		font-size: 20px;
+	}
+	.gps-drawing :global(.big) {
+		font-size: 24px;
+		fill: var(--sl-color-white);
+	}
+	.gps-drawing :global(.small) {
+		font-size: 18px;
+	}
+	.gps-drawing :global(.t-accent) {
+		fill: var(--kln-affordance);
+	}
+	.gps-drawing :global(.ko) {
+		paint-order: stroke;
+		stroke: var(--kln-figure-bg);
+		stroke-width: 6px;
+		stroke-linejoin: round;
+	}
+</style>

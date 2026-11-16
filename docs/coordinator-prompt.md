@@ -196,6 +196,12 @@ later writers use it. It also checks the page against topic ownership: a fact th
 owns is a finding, and so is a term or a name that differs from the section the page links to. It reports each
 finding as "place: the draft says A; it should say B, because …" in its own words.
 
+The reviewer writes its findings file in two parts: first the findings for the writer, and then, under a heading
+"For the coordinator only", the official terms, the bug candidates with what the real unit does, and what belongs
+to other pages. Only the first part goes to the writer, as a file of its own; what a manual says about the real
+unit never reaches a writer (style guide, section 4). When a review renames a term or an anchor, tell every writer
+of the package whose page uses it, also the one whose own review is still running.
+
 A finding where the manual and the code disagree is a kln90b bug: the page keeps describing the code, and you file
 the issue.
 

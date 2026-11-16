@@ -1,83 +1,133 @@
-# Package: sta (the STA chapter; GPS reception and RAIM)
+# Package: sta (the STA chapter; GPS reception and RAIM; Inside the GPS simulation)
 
-First package of the full run, at the maintainer's request: the STA pages are new and pilots need guidance for them.
-The pages this package links to for the basics (Controls and display, Power-on, the message lists, Non-precision
-approaches) are not written yet; it links to them by the planned anchors and page links of the index.
-
-The pointers below come from the planning survey of the code (paths relative to `vendor/kln90b/kln90b/`). They tell
-the researcher where to look; they are not checked facts.
+Written on 2026-11-16, the first package of the full run, at the maintainer's request. In review with the
+maintainer. The pages this package links to for the basics (Controls and display, Power-on, Waypoints and the
+database, the message lists, Non-precision approaches, Simulated failures) are not written yet; it links to them by
+the planned anchors and page links of the index.
 
 ## Pages
 
-### GPS reception and RAIM (`operation/gps-receiver.mdx`), Operation, new
-
-Planned sections (the session settles them after the research):
-
-1. Summary: the unit navigates only while its receiver has a position good enough, and it says on the STA pages and
-   with messages how good the position is.
-2. How the receiver finds its position: acquisition after power-on, what makes it fast or slow (the stored
-   position, the clock, the time off), the states it goes through, NAV ready. The task of correcting the position or
-   the time is Power-on's; link.
-3. Real and fast acquisition: the setting on SET 10 (Simulator only box).
-4. Reading the receiver's state in flight: which STA page answers which question.
-5. RAIM: what it is, what it needs, what the unit does when it is not available or finds an error, the messages
-   (quote the text, link to the list), altitude as an extra measurement.
-6. Predicting RAIM for an arrival: the task on STA 5.
-7. Take-home mode, if the research shows a pilot can meet it (Availability box); otherwise it stays with Power-on.
-8. Links on: Power-on and initialization, Non-precision approaches, Simulated failures, the STA pages.
-
 ### STA pages (`pages/sta.mdx`), page reference
 
-Sections in page order, headings as "STA 1: …" (style guide, section 9):
+As written, with the anchors. The headings of the numbered pages start with the page name; the page links go to
+them.
 
-1. The STA pages as a type: one opening section only if something is common to them.
-2. STA 1: the receiver state and the satellites. Variants: acquiring, navigating, more satellites than fit on one
-   page (`STA+1`), a failed receiver.
-3. STA 2: the estimated position error. Variant: no position.
-4. STA 3: the software versions and the OBS calibration.
-5. STA 4: the operating time and the count of power-ons.
-6. STA 5: the RAIM prediction. Variants: before the calculation, calculating, the result.
-7. Links to GPS reception and RAIM and to Non-precision approaches.
+1. Summary.
+2. `#the-sta-pages-status-of-the-receiver-and-the-unit`: what is common to the type.
+3. `STA 1: GPS state and satellites`, with `#the-second-page-of-the-list`, `#while-the-unit-has-no-position`,
+   `#a-failed-receiver`.
+4. `STA 2: estimated position error`.
+5. `STA 3: software revision status`.
+6. `STA 4: total operational time and power-ons`.
+7. `STA 5: RAIM prediction`, with `#calculating`, `#without-a-destination-or-an-eta`,
+   `#the-eta-in-another-time-zone`, `#what-the-result-means-for-an-approach`. This section owns how the page
+   behaves: the default destination and ETA, the time of the calculation, that the entries are forgotten, the
+   unit-wide time zone.
+8. `#where-the-sta-pages-are-used`: the links on.
+
+### GPS reception and RAIM (`operation/gps-receiver.mdx`), Operation
+
+As written, with the anchors:
+
+1. Summary.
+2. `#acquiring-satellites`: the time to first fix and what decides it.
+3. `#the-gps-states`, with `#losing-the-position-in-flight`.
+4. `#real-and-fast-acquisition` (Simulator only box): the setting of SET 10.
+5. `#the-altitude-input`.
+6. `#the-estimated-position-error`.
+7. `#raim`.
+8. `#predicting-raim`: the two procedures on STA 5.
+9. `#messages-of-the-receiver`: every message of the receiver, quoted, with the condition and what follows.
+10. `#checking-the-receiver-in-flight`: which STA page answers which question, and the links on, with the one link
+    to Inside the GPS simulation.
+
+Take-home mode is not on this page: a pilot meets it only as the warning page of the power-on sequence
+(`docs/plan/power-on.md`).
+
+### Inside the GPS simulation (`operation/gps-simulation.mdx`), Operation, optional reading
+
+Added at the maintainer's request (2026-11-16): an excursion into the model of the receiver, in prose with
+explanatory drawings, opened by the Optional reading box (style guide, sections 11 and 17). The outline is the
+coordinator's and the facts come from the code. The maintainer's infographic in kln90b's `docs/` showed the wish
+for the level of detail; it is not a writer's source, because that folder is behind the wall and the infographic
+cites an installation manual.
+
+As written, with the anchors:
+
+1. Summary and the Optional reading box.
+2. `#the-true-and-the-measured-position`.
+3. `#the-simulated-sky`.
+4. `#signal-strength`, with `#the-antenna-in-a-bank`.
+5. `#from-ranges-to-a-position`, with `#the-geometry-of-the-satellites`, `#the-altitude-as-a-measurement`.
+6. `#groundspeed-track-and-the-filter`.
+7. `#finding-the-satellites`.
+8. `#raim-inside-the-receiver`, with `#when-raim-is-available`, `#detecting-an-error`,
+   `#the-prediction-on-sta-5`.
+9. `#time`.
+10. `#where-the-model-simplifies`.
+
+The drawings are the components `Gps*.astro` in `kln90b/src/components/drawings/`; `GpsFigure.astro` is their
+shared frame. Each one's comment holds the numbers it was computed from: the two skies of the geometry drawing
+(which the filter drawing and the protection-level drawing reuse), the signal strength curve, the bank, the search
+diagram, RAIM with and without a spare measurement.
+
+The package failures adds a section on how the faulty satellite, jamming and spoofing act on this model
+(`docs/plan/failures.md`).
 
 ## Topics this package owns
 
-GPS reception and RAIM owns the receiver states, the satellites, acquisition, NAV ready as a state, the position
-error, RAIM and RAIM prediction, real and fast acquisition. The STA chapter owns the pages and their fields. The
-session records the anchors in the index when the pages are written.
-
-What the pages link to instead of explaining: page selection and the cursor (Controls and display, planned
-anchors); initializing position and time (Power-on); what RAIM decides in an approach (Non-precision approaches); a
-failed receiver, jamming, spoofing and a faulty satellite (Simulated failures, written in the next package: one
-sentence and the link, and the session notes in `docs/plan/failures.md` what it said); message texts (the lists).
-
-## Where to look
-
-- The pages: `pages/left/Sta1Page.tsx` to `Sta5Page.tsx`. The `+` rule: `pages/MainPage.tsx` (`leftPageName`).
-- The receiver: `Gps.ts`, `GpsSearch.ts`, `GpsSolution.ts`, `GpsSignal.ts`; SET 10 in `pages/left/Set10Page.tsx`;
-  the wiki page `SET-10-Page.md`; the wiki FAQ on slow acquisition.
-- RAIM messages: `data/PersistentMessages.ts` (the RAIM, geometry and position classes); one-time messages about
-  time and position in `Gps.ts`.
-- The approach gate that uses RAIM: `services/ModeController.ts` (for the link, not for this package's text).
-- Tests: `test/render/GpsAcquisition.test.ts`, `GpsSolution.test.ts`, `SatelliteReachability.test.ts`,
-  `test/unit/GpsSearch.test.ts`, `GpsSignal.test.ts`.
-- Code comments point to `docs/failures.md` and `docs/superpowers/specs/`; these are not a writer's source (style
-  guide, section 4).
+GPS reception and RAIM owns the GPS states, the satellites, acquisition, NAV ready as a state, the altitude input,
+the position error, RAIM, the receiver's messages as the pilot meets them, RAIM prediction as a task, and real and
+fast acquisition. The STA chapter owns the pages, their fields and how STA 5 behaves. Inside the GPS simulation
+owns the model underneath and repeats no operating knowledge. The index has the anchors.
 
 ## Screens
 
-Planned by this package's session after its research. The session checks first that the generator can stage the
-receiver states (an acquisition in progress, more than four satellites, a RAIM prediction and its calculating
-state); what it cannot stage is listed here afterwards.
+The screens are in `kln90b/screens/`: `sta-1-nav`, `sta-1-nav-2`, `sta-1-acq`, `sta-1-failed`, `sta-2-epe`,
+`sta-2-no-position`, `sta-3`, `sta-4`, `sta-5-entry`, `sta-5-computing`, `sta-5-result` (the STA chapter) and
+`gps-msg-raim-not-available` (GPS reception and RAIM). Inside the GPS simulation shows rows of `sta-1-nav` and has
+no screen of its own.
 
-## Notes for the session
+How the states before a position were staged: the generator settles to a position before the steps of a screen
+run, so `sta-1-acq` and `sta-2-no-position` set the acquisition to `REAL`, erase the ephemeris data and cycle the
+power inside their steps. `sta-1-failed` fails the receiver after the settle and sets `keepMessages: true`, because
+the receiver's message stays pending; the left half that is shown has no `msg`.
 
-- Models: Sonnet for the STA chapter; Opus for GPS reception and RAIM (RAIM is intricate and a mistake there is
-  costly) and for the reviews.
-- The code marks several timings and limits of the receiver as its own choice or a guess. The pages describe what
-  the pilot observes; the reviewer says where the real manuals know better.
-- Official terms: the reviewer checks the names of the receiver states and of the STA pages against the real
-  manuals.
-- The Operation page of this package is the first of its kind (`docs/manual-plan.md`, "Example pages").
+Variants without a screen, because they cannot be staged honestly:
+
+- The GPS states `INIT`, `TRAN`, `NAV D` and `DEGRD` on STA 1. `TRAN` lasts one second; `NAV D` shows only while
+  the receiver collects the ephemeris data of a newly acquired satellite; `DEGRD` and `INIT` depend on a sky or a
+  search the generator cannot guarantee.
+- A STA 5 result with bars on both sides of the line: it needs a sky that gives it, and none was found. The text
+  says what a bar below the line means.
+
+`sta-3` reads the software revision from kln90b's `package.json` through a mock in its `screen.ts`, because the
+source tree holds a template that only the kln90b build fills in. The value on the screen therefore changes with
+the pin (`docs/manual-plan.md`, "Site and generator notes").
+
+## Bugs
+
+Filed on 2026-11-16; the paragraphs carry the `kln90b#NN` comments.
+
+- kln90b#472: STA 5 takes an ETA entered in a time zone other than UTC as UTC (the STA chapter, "The ETA in
+  another time zone"; GPS reception and RAIM, the note under "Predicting RAIM").
+- kln90b#473: STA 5 computes the default ETA once, when the page is selected (the STA chapter, STA 5).
+- kln90b#477: satellites below the 5° mask are tracked and used (Inside the GPS simulation, "The simulated sky"
+  and "Signal strength").
+- kln90b#478: without a position the unit's clock runs in real time (Inside the GPS simulation, "Time").
+
+Not filed, for the maintainer (`docs/manual-plan.md`, "Open questions"):
+
+- Take-home mode after a cold-and-dark start never gets a position. kln90b#455 (closed) is about this; the note
+  is in `docs/plan/power-on.md`.
+- In `ACQ` after power-on STA 1 lists the predicted satellites without cutting the list to eight, so a ninth is
+  never shown. Cosmetic; the pages say nothing about it.
+- STA 2 shows the error with a leading zero and a capital `NM`; the reviewer believes the real unit shows neither.
+  The screen shows what the simulation shows.
+- The simulated sky jumps once a week, because the simulator's SDK wraps the time of the orbits by a whole week.
+  The page says only that the sky repeats every week.
+- The RAIM test reacts only to wrong satellite data, never to a wrong altitude; the page says so. Whether the
+  altitude error should enter the test is the maintainer's decision.
 
 ## Notes from other packages
 
@@ -85,4 +135,7 @@ None.
 
 ## Changes to earlier pages
 
-None planned. The Quickstart links to Power-on for the time after the self test and needs no change.
+- `pages/apt.mdx` and `pages/oth.mdx`: only `sidebar.order`, so that the chapters stand in page tree order
+  (`docs/manual-plan.md`, "Site and generator notes").
+- `pages/apt.mdx`: the three bug-candidate comments became `kln90b#474`, `#475` and `#476`, after the triage
+  session of the same day (`docs/plan/apt.md`).

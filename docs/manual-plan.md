@@ -30,7 +30,8 @@ as `/kln90b/<slug>/`) and its package. Pages that do not exist yet are linked by
 | | SID and STAR procedures | `operation/departures-arrivals` | sid-star |
 | | Non-precision approaches | `operation/approaches` | approaches |
 | | VNAV | `operation/vnav` | vnav-alerts |
-| | GPS reception and RAIM (new) | `operation/gps-receiver` | sta |
+| | GPS reception and RAIM (new) | `operation/gps-receiver` | sta (in review) |
+| | Inside the GPS simulation (new, optional reading) | `operation/gps-simulation` | sta (in review); the failures part: failures |
 | | Messages | `operation/messages` | messages |
 | | Airspace and altitude alerting | `operation/alerts` | vnav-alerts |
 | | Trip planning and calculators | `operation/trip-planning` | trip-planning |
@@ -41,7 +42,7 @@ as `/kln90b/<slug>/`) and its package. Pages that do not exist yet are linked by
 | | FPL | `pages/fpl` | flight-plans |
 | | NAV (both sides, with Super NAV 1 and Super NAV 5) | `pages/nav` | nav-pages |
 | | CAL | `pages/cal` | trip-planning |
-| | STA | `pages/sta` | sta |
+| | STA | `pages/sta` | sta (in review) |
 | | SET (with SET 0 and SET 10) | `pages/set` | set |
 | | FLR (new; opened from SET 10) | `pages/flr` | failures |
 | | OTH | `pages/oth` | fuel-air-data |
@@ -105,7 +106,9 @@ that writes the owner records the anchors in this table, and the final pass shar
 | Initializing position, date and time (the task; SET 1 and SET 2 are its pages) | Power-on and initialization | SET chapter: the pages and fields; GPS reception and RAIM links |
 | What the unit keeps while it is off, and what it forgets after a longer time off | Power-on and initialization | owners of the single items (procedures in FPL 0, the direct-to, the entered magnetic variation) say their own item in one sentence and link |
 | Features that depend on the installation, each in its Availability box | the page that owns the feature | no list of installation options anywhere (style guide, section 3) |
-| The receiver states, the satellites, acquisition and what slows it, NAV ready as a state, the position error, RAIM (what it is, when it is needed, its messages), RAIM prediction as a task, real and fast acquisition | GPS reception and RAIM | STA chapter: the pages and fields; Power-on: what the pilot does while waiting, and the link; Non-precision approaches: what RAIM decides in an approach; SET chapter (SET 10): the setting and the link |
+| The GPS states, the satellites, acquisition and what slows it, NAV ready as a state, the altitude input, the position error, RAIM (what it is, when it is needed, its messages), RAIM prediction as a task, real and fast acquisition | GPS reception and RAIM: `#acquiring-satellites`, `#the-gps-states`, `#real-and-fast-acquisition`, `#the-altitude-input`, `#the-estimated-position-error`, `#raim`, `#predicting-raim`, `#messages-of-the-receiver` | STA chapter: the pages and fields; Power-on: what the pilot does while waiting, and the link; Non-precision approaches: what RAIM decides in an approach; SET chapter (SET 10): the setting and the link |
+| How STA 5 behaves: the default destination and ETA, the time of the calculation, the forgotten entries | STA chapter, `STA 5: RAIM prediction` | GPS reception and RAIM: the procedures and the link |
+| The model of the receiver in the simulation: the satellites and their signals, the errors of the position, the filter, the kinds of search, the RAIM mathematics | Inside the GPS simulation (optional reading) | GPS reception and RAIM: one link; every other page: nothing (style guide, section 8). The failures part is written by the package failures |
 | The failures: what can fail, what each failure does, when the unit notices, random failures, the battery and the loss of user data, service | Simulated failures | FLR chapter: the pages and fields; a page whose values a failure blanks says nothing about failures; the message lists give the text, the meaning and the link |
 | Opening the FLR pages from SET 10 and leaving them | FLR chapter, the type's opening section | SET chapter (SET 10): one sentence and the link |
 | Waypoint pages in general: the waypoint types, entering an identifier, the scan through the database, duplicate identifiers, the waypoint page shown for approval, the ACT pages as a concept | Waypoints and the database | waypoint chapters (APT, VOR, NDB, INT, SUP, ACT): one sentence, the link, then what is specific |
@@ -161,8 +164,8 @@ anchors and page links above. After them the order follows "owners before the pa
 | --- | --- | --- | --- |
 | – | getting-started | Installation, Quickstart | done (2026-11-16) |
 | – | apt | APT chapter | done (dry run 2026-11-04, corrected 2026-11-16) |
-| 1 | sta | STA chapter; GPS reception and RAIM | not started |
-| 2 | failures | FLR chapter; Simulated failures | not started |
+| 1 | sta | STA chapter; GPS reception and RAIM; Inside the GPS simulation | in review (2026-11-16) |
+| 2 | failures | FLR chapter; Simulated failures; the failures part of Inside the GPS simulation | not started |
 | 3 | controls | Controls and display; Keyboard mode | not started |
 | 4 | power-on | Power-on and initialization | not started |
 | 5 | waypoints | Waypoints and the database | not started |
@@ -190,8 +193,9 @@ it is written when those owners exist. A package that proves too large in its re
 
 ## Open questions for the maintainer
 
-- **Suspected bugs of the APT chapter are still unfiled** (`docs/plan/apt.md`, "Bug candidates"). The maintainer
-  has an agent triage them later (2026-11-16); the paragraphs carry `kln90b bug candidate` comments until then.
+- **From the package sta** (`docs/plan/sta.md`, "Bugs"): whether the weekly jump of the simulated sky gets a
+  kln90b issue; whether the altitude error should enter the RAIM test; whether the two cosmetic differences (the
+  ninth predicted satellite in `ACQ`, the format of STA 2) get issues.
 - **The FAA extract** carries no state and only public airports, so APT 2's state abbreviation and the private and
   military flags cannot be staged. Changing that is an extract change, not a manual change.
 
@@ -210,12 +214,24 @@ it is written when those owners exist. A package that proves too large in its re
   reviewer of Navigation modes checks the names of all modes.
 - Every planned anchor of the topic ownership table exists; page links that a later package could sharpen to a
   section are sharpened.
+- The first Operation pages (sta, failures) have `sidebar.order` numbers that later Operation pages must fit
+  around ("Site and generator notes").
 - The pages of the packages sta and failures were written before Controls and display, Power-on and the message
   lists existed; they are checked against those pages (terms, names of controls, links).
 
 ## Site and generator notes
 
 Not manual text; for the maintainer or a session that works on the site.
+
+- **The order of the page reference in the sidebar** is each chapter's `sidebar.order`, in page tree order: TRI 1,
+  MOD 2, FPL 3, NAV 4, CAL 5, STA 6, SET 7, FLR 8, OTH 9, CTR 10, REF 11, ACT 12, D/T 13, APT 14, VOR 15, NDB 16,
+  INT 17, SUP 18. The Operation pages take their number from the order of the style guide's chapter list (section
+  17); GPS reception and RAIM has 10 and Inside the GPS simulation 11, so the pages after them count on from 12.
+- The source tree of kln90b holds the software revision as a template that only its build fills in, and the
+  generator fails on it. `kln90b/screens/sta-3/screen.ts` works around this with a mock that reads the version
+  from kln90b's `package.json`. A substitution in the generator for every screen would be the cleaner place.
+- The build does not check the anchors of links, only the pages. A dead anchor is found by the seam check and the
+  final pass.
 
 - The generator does not fail when cells with text belong to no field, which is how a row of a Quickstart screen
   went unexplained. A check that every non-blank cell of a shown half belongs to a field, with an explicit opt-out

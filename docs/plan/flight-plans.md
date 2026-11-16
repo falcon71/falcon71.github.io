@@ -43,7 +43,7 @@ part about version 1.x does not apply.
 
 ## Notes from other packages
 
-- From the package apt, bug candidate 4: a route from the EFB loads an approach into a unit not installed for
+- From the package apt, filed as kln90b#479: a route from the EFB loads an approach into a unit not installed for
   approaches; `CHANGE APR?` then throws. Confirmed against the real manual by the dry run's reviewer; unfiled
   (`docs/plan/apt.md`). The researcher of this package reproduces it; the coordinator files it with the
   maintainer's word.
