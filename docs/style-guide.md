@@ -64,8 +64,8 @@ GitHub wiki of the kln90b project.
   8, an air data computer for OTH 9 and OTH 10, VFR-only units, altitude alerting) are described the way a pilot meets
   them: the feature depends on how the unit is installed in the aircraft. Never name the panel.xml key or any other
   configuration that controls it. Use the Availability box (section 11).
-- **Features that exist only in the simulation** (the SET 10 page, keyboard mode) are marked with the Simulator only box
-  (section 11).
+- **Features that exist only in the simulation** (the SET 10 page, the FLR pages and the failures they set, keyboard
+  mode) are marked with the Simulator only box (section 11).
 
 ## 4. Roles and the copyright wall
 
@@ -395,7 +395,9 @@ names for one thing takes them for two things.
 
 - Quote text from the screen exactly as shown, in code formatting: `DIS`, `FLY R 0.4nm`, `enr-leg`. The
   unit's small letters (`nm`, `kt`, `ft`, `enr-leg`) stay small.
-- A message is quoted in full: `ADJ NAV IND CRS TO 271°`.
+- A message is quoted in full. A message page message of several lines is quoted with its lines as the MSG page
+  shows them, in a code block; this holds for the message lists and wherever a page explains the message. A
+  sentence that only names a message of one line quotes it in code formatting: `ADJ NAV IND CRS TO 271°`.
 - Field labels are quoted the same way, then named in words when it helps: "`ETE`, the estimated time en route".
 - **Choices in the screen's order.** When the text names several choices, menu entries, questions or fields that the
   unit shows together, it names them in the order they appear on the screen, top to bottom, and describes the knob
@@ -455,8 +457,9 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 ### Spelling and style
 
 - American spelling. Sentence case for headings and titles.
-- Abbreviations: write them as the unit and pilots do (DTK, XTK, RAIM), and explain them with a tooltip (section 14),
-  not with a parenthesis.
+- Abbreviations: write them as the unit and pilots do (DTK, XTK, RAIM). One that has a glossary entry is explained
+  with a tooltip (section 14), not with a parenthesis; one that a single screen uses is explained in that screen's
+  field explanation.
 - No exclamation marks in a row, no emphasis by capitals, bold only for a word the pilot must not miss.
 
 ## 13. Screens
@@ -512,9 +515,13 @@ The explanations of a screen's fields live in its `fields.mdx` and appear wherev
 
 - `<Term t="XTK" />` shows the abbreviation with a dotted underline and its explanation on hover, focus or tap.
   `<Term t="XTK">cross-track error</Term>` explains other words with the same entry.
-- **Every abbreviation the unit shows** has a glossary entry, so that the Glossary page is a complete lookup list, and
-  so does a term of GPS navigation or of this unit that names a thing (a fence in the flight plan, a RAIM prediction).
-  Common pilot vocabulary that the unit does not display needs no entry.
+- **The glossary holds the common terms:** the aviation and GPS navigation terms and abbreviations that the unit
+  shows on several pages or that the text uses across chapters (DTK, XTK, RAIM, a RAIM prediction). It stays short
+  enough to read.
+- **An abbreviation or a code that a single screen uses is no glossary term.** The codes for runway surface and
+  lighting on APT 3, the frequency types of APT 4 and the names of the failures on the FLR pages are explained in
+  the field explanation of their screen, and in the text of that page where it describes them. They get no glossary
+  entry and no `<Term>` (maintainer, 2026-11-16: the glossary had become cluttered).
 - **Operating concepts are not glossary terms.** The nearest list, the active waypoint, waypoint alerting, turn
   anticipation, the scan, OBS mode, user waypoints and the like are ways the unit works, explained in their Operation
   section. A tooltip cannot explain how something works, so these get no glossary entry and no `<Term>`; the text
@@ -563,13 +570,17 @@ The sidebar has these chapters and pages. Operation explains tasks ("how do I…
 | --- | --- |
 | Getting started | Table of contents (home page) · Installation · Quickstart · Tutorial flight 1 · Tutorial flight 2 |
 | The unit | Controls and display (knobs, buttons, the two halves, status line, cursor and data entry, scan, page tree) · Keyboard mode · Power-on and initialization |
-| Operation | Waypoints and the database · Nearest · Direct-to · Flight plans · Navigation modes (leg and OBS) · Sequencing and turn anticipation · SID and STAR procedures · Non-precision approaches · VNAV · Messages · Airspace and altitude alerting · Trip planning and calculators · Fuel and air data |
-| Page reference | One chapter per page type in page tree order. Left: TRI, MOD, FPL, NAV, CAL, STA, SET, OTH. Right: CTR, REF, ACT, D/T, NAV, APT, VOR, NDB, INT, SUP. Each page with its screen. |
+| Operation | Waypoints and the database · Nearest · Direct-to · Flight plans · Navigation modes (leg and OBS) · Sequencing and turn anticipation · SID and STAR procedures · Non-precision approaches · VNAV · GPS reception and RAIM · Messages · Airspace and altitude alerting · Trip planning and calculators · Fuel and air data · Simulated failures |
+| Page reference | One chapter per page type in page tree order. Left: TRI, MOD, FPL, NAV, CAL, STA, SET, FLR, OTH. Right: CTR, REF, ACT, D/T, NAV, APT, VOR, NDB, INT, SUP. Each page with its screen. |
 | Reference lists | Message page messages · Status line messages · Glossary |
 | Help | External hardware · FAQ and troubleshooting · Known limitations · Contact |
 
 The NAV pages exist on both sides. The page reference has one NAV chapter that covers both sides, in its place among
 the left page types (after FPL); the right ones skip it. The page links depend on this: a page type has exactly one chapter.
+
+A page of the unit that belongs to no page type (the Direct To page, the ALT page, the MSG page, the pages of the
+power-on sequence, the duplicate waypoint page, the make-room pages) has no chapter in the page reference. The
+Operation page that owns its task shows its screen with the field explanations; the plan says which.
 
 ### Installation
 
@@ -618,6 +629,19 @@ takes and what the pilot does when the unit does not become NAV ready.
 
 Documented in the page reference like the other SET pages and marked Simulator only. Based on the wiki page "SET 10
 Page" and the code.
+
+### The FLR pages and Simulated failures
+
+The FLR pages set and repair simulated failures. They are not a stop of the left outer knob: they open from SET 10.
+Their chapter stands after SET in the page reference and is marked Simulator only, and so is the Operation page
+Simulated failures, which says what can fail and what each failure does. Both are written from the code alone; the
+design notes in kln90b's `docs/` are not a writer's source (section 4). A failure is described by what the pilot
+observes, never by how the simulation draws or times it (section 8).
+
+### GPS reception and RAIM
+
+The Operation page for the receiver: acquisition, the receiver states, the position error, RAIM and its
+prediction. The STA chapter explains the pages and their fields and links there for how the receiver works.
 
 ### SID and STAR procedures and approaches
 

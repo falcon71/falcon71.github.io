@@ -1,0 +1,53 @@
+# Package: nearest-direct-to (Nearest; Direct-to)
+
+Two Operation pages for getting somewhere now. Pointers come from the planning survey of the code (paths relative
+to `vendor/kln90b/kln90b/`); they are not checked facts. Screens are planned by the session after its research.
+
+## Pages
+
+### Nearest (`operation/nearest.mdx`)
+
+1. Summary.
+2. The nearest lists: which waypoint types have one, how many entries, how far, how often they are renewed.
+3. Showing the nearest airports, VORs and NDBs: by scanning; what the pages show for a nearest waypoint (link to the
+   waypoint chapters).
+4. The nearest airport in a hurry: MSG and ENT.
+5. Which airports count: the criteria of SET 3.
+6. Flying to a nearest waypoint (link to Direct-to); the nearest VOR on NAV 2 and the center on OTH 2, as links.
+
+### Direct-to (`operation/direct-to.mdx`)
+
+The candidate for the example page of the task pages (`docs/manual-plan.md`, "Example pages").
+
+1. Summary.
+2. Flying direct to a waypoint: the Direct To page (shown and explained here), entering the identifier, approving.
+3. Which waypoint the Direct To page offers.
+4. Direct to a waypoint of the active flight plan, and what happens to the flight plan afterwards (one paragraph,
+   link to Flight plans).
+5. Recentering the D-bar.
+6. Canceling a direct-to.
+7. Direct-to in OBS mode (link to Navigation modes).
+8. What the unit forgets while it is off (one sentence, link to Power-on).
+
+## Topics this package owns
+
+See the index: the nearest lists; direct-to. Links instead of explanations: entering and approving a waypoint
+(Waypoints and the database); the active waypoint and OBS mode (Navigation modes, planned); waypoint alerting
+(Sequencing, planned anchor).
+
+## Where to look
+
+Nearest: `data/navdata/NearestList.ts`, `NearestUtils.ts`, `NearestAirportFinder.ts`,
+`controls/selects/NearestSelector.tsx`, `pages/right/WaypointPage.tsx`, `controls/MessagePage.tsx`,
+`pages/left/Set3Page.tsx`. Direct-to: `pages/left/DirectToPage.tsx`, `pages/MainPage.tsx` (the Direct To button),
+`data/flightplan/ActiveWaypoint.ts`, `services/ModeController.ts`; test
+`test/flight/flights/directToPlanWaypoint.test.ts`. The Quickstart has the screen `direct-to-ident-entry`; reuse or
+replace it.
+
+## Notes from other packages
+
+None.
+
+## Changes to earlier pages
+
+The APT chapter's "A nearest airport" is compared with Nearest and cut back if it says what Nearest now owns.

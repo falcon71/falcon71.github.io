@@ -1,7 +1,7 @@
 # Package: getting started (Installation and Quickstart)
 
-Worked ahead of the planning session at the maintainer's request (2026-11-16), because pilots need these two pages
-first. The pages they link to for the full treatment (Controls and display, Keyboard mode, Power-on) are not written
+Done. Worked ahead of the planning session at the maintainer's request (2026-11-16), because pilots need these two
+pages first. The pages they link to for the full treatment (Controls and display, Keyboard mode, Power-on) are not written
 yet, so the Quickstart links to planned anchors, and the package that writes Controls and display must create them
 (see "Planned anchors" below).
 
@@ -90,72 +90,12 @@ Settled by the maintainer's review (2026-11-16) and written into the style guide
 mouse pattern is described; an update keeps all user data; the page does not say where the Community folder is; the
 zip contains the folder itself.
 
-## Notes for packages that are not planned yet
+## Notes for other packages
 
-The planning session moves these into the files of the packages that own the topics. All facts are from the code and
-the staged unit, found by the writers and the reviewer of this package.
-
-**Power-on and initialization** (facts for its writer; all from the code and the staged unit):
-
-- The power control is a knob that is also the brightness control; pushing it toggles the unit on and off
-  (`PowerSupply.ts`). Name to be fixed with Controls and display.
-- The display warms up for up to about 6 seconds after a long time off, less after a short one (`BrightnessManager.ts`,
-  `TIME_TO_WARM`, `TIME_UNTIL_COLD` 10 minutes).
-- The Turn-On page shows `SELF TEST IN PROGRESS` for 17 seconds (`WelcomePage.tsx`, `TEST_TIME`). While the left cursor
-  is on there (editing the four lines of the Turn-On page), the unit stays on it.
-- In take-home mode a Take-Home warning page comes before the Self Test page (`WelcomePage.showSelfTestPage`).
-- The Self Test page opens with the cursor on the barometric setting; each ENT moves the cursor on, also where the
-  field had nothing to accept, until `APPROVE?` (`SelfTestRightPage.tsx`, `enterAlwaysMoves`). With an air data input
-  the setting is read only and not a cursor field. ENT on `APPROVE?` gives five short beeps.
-- After approval: the VFR-only page with `ACKNOWLEDGE?` in a VFR-only installation; then the OBS warning page if the
-  unit is in OBS mode, which has no acknowledgement and stays until the aircraft's GPS CRS switch selects leg mode;
-  then the database page (expires or expired, with `ACKNOWLEDGE?`).
-- The normal pages then show NAV 2 on the left and, on the right, the page of the last active waypoint (APT 4 for an
-  airport), or the SUP page when there was none (`PageManager.startMainPage`).
-- An aircraft loaded with its engine running skips the Turn-On page, the self test and the database page, and the GPS
-  acquires at once; every later power-on runs the full sequence (`KLN90BCore.isForceReadyToUse`, harness
-  `FrontPanel.powerCycle`). A failed self test shows `TEST FAIL` and the message `DATA BASE CHECKSUM ERR`
-  (`WelcomePage.leaveFailed`).
-- Power losses of up to 1.5 seconds are carried without a restart (`PowerSupply.ts`, `RIDE_THROUGH_TIME`).
-
-**Controls and display**:
-
-- The anchor `#selecting-a-page` that the Quickstart links does not exist yet on the placeholder page; the other planned
-  anchors do.
-- The `+` appears on the left only on STA 1, TRI 2, TRI 4 and TRI 6, never on FPL pages; on the right on APT 3, APT 4,
-  APT 7, CTR 2, the ACT pages and the waypoint confirmation (`numPages` in those page classes).
-- SET 0 follows SET 10 in the knob order; while it is shown, the status line shows no mode and no right page name.
-
-**Keyboard mode**: keyboard mode works only while that side's cursor is on and the page has a status line; it ends with
-a right click on the screen, with Escape, with a click outside the instrument's view, and when the cursor goes off
-(`PageContainer.tsx`). The H events `KLN90B_LeftKeyboard_Toggle` and `KLN90B_RightKeyboard_Toggle` toggle it from
-hardware (kln90b README); the External hardware page can carry them.
-
-**Generator** (coordinator): the generator does not fail when cells with text belong to no field, which is how the
-`CL B` row of `quickstart-screen` went unexplained. A check that every non-blank cell of a shown half belongs to a
-field (with an explicit opt-out for free text) would catch this in future screens. `home-nav-1` has the same gap, but
-it is shown without fields.
-
-**Controls and display, from the Quickstart's writer**: text cut from the
-Quickstart because Controls and display owns it: some aircraft need a right click on the knob to turn the unit on, and
-a pilot who uses the right mouse button to pan the camera holds the left mouse button before the right click (wiki).
-On the identifier of a waypoint page, the first step of the inner knob goes from the existing character on through
-the character set (from `0` to `1`), not to `A`.
-
-**Power-on, from the maintainer (2026-11-16)**: the beeps on approval of the self test need an audio output of the
-aircraft, which none of the aircraft that carry the unit has so far; the Quickstart leaves the beep out and Power-on
-says it with that condition. A turned-down power/brightness knob also keeps the screen dark.
-
-**Power-on, from the Quickstart's writer**: after the database page the unit shows NAV 2 on the left and the SUP page
-on the right when no waypoint was last active, or the page of the last active waypoint (APT 4 for an airport)
-(`PageManager.startMainPage`). Three presses of ENT move the cursor from the barometer setting to `APPROVE?`, a fourth
-approves.
-
-**FAQ and Known limitations, from the Installation writer**: the package cannot be installed on Xbox, so only
-aircraft that bundle their own copy offer the unit there (wiki, "Bundling the KLN with your aircraft").
-
-**The home page** (`Downloads.astro`): its fallback text names the zip "falcon71-kln90b"; the file is named
-`falcon71-kln90b-` and the version, ending in `.zip` (`releases.ts`). A wording mismatch only.
+The planning session of 2026-11-16 moved the notes this package left for pages that were not planned yet into the
+files of the packages that own them: `docs/plan/power-on.md`, `docs/plan/controls.md` (with Keyboard mode) and
+`docs/plan/help.md`; the notes about the generator and the home page are in `docs/manual-plan.md`, "Site and
+generator notes".
 
 ## Notes from other packages
 
