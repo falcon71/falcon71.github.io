@@ -81,7 +81,7 @@ It does not bring back data the unit has already lost, nor the receiver's almana
 
 The unit notices most failures of its own parts and reports them, in the self test at power-on and with a message on the MSG page in operation. Some failures it never notices; you find them only by what they do.
 
-At power-on the Self Test page shows a flashing `TEST FAIL` in place of `ANNUN ON` when the self test has found a fault. This happens for a failed ARINC 429 output, RS-232 output, nav super flag, EEPROM, GPS receiver or annunciator driver, and for every fault the GPS receiver reports with a code (see [The receiver and the antenna](#the-receiver-and-the-antenna)). `TEST FAIL` does not stop the power-on: approve the page as usual. [Power-on and initialization](/kln90b/unit/power-on/) explains the self test.
+At power-on the Self Test page shows a flashing `TEST FAIL` in place of `ANNUN ON` when the self test has found a fault. This happens for a failed ARINC 429 output, RS-232 output, nav super flag, EEPROM, GPS receiver or annunciator driver, and for every fault the GPS receiver reports with a code (see [The receiver and the antenna](#the-receiver-and-the-antenna)). `TEST FAIL` does not stop the power-on: approve the page as usual. [Power-on and initialization](/kln90b/unit/power-on/#the-self-test-page) explains the self test.
 
 <KlnScreen screen="failure-self-test-fail" />
 
@@ -253,7 +253,7 @@ The clock in 1988 makes the date wrong. The satellites give the date only within
 
 To set the date after a loss of the memory:
 
-1. On the Self Test page, which shows the 1988 date, enter today's date on the right page and press <kbd>ENT</kbd> ([Power-on and initialization](/kln90b/unit/power-on/) explains the fields).
+1. On the Self Test page, which shows the 1988 date, enter today's date on the right page and press <kbd>ENT</kbd> ([Power-on and initialization](/kln90b/unit/power-on/#the-self-test-page) explains the fields).
 2. Enter the time and press <kbd>ENT</kbd>.
 3. Approve the Self Test page as usual. The receiver searches from the date you entered.
 

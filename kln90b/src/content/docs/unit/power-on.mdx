@@ -1,0 +1,218 @@
+---
+title: Power-on and initialization
+description: What the KLN 90B shows at power-on, which pages you approve or acknowledge, how to give it a position and the time, and what it keeps while it is off.
+sidebar:
+  order: 3
+---
+
+import KlnScreen from '../../../components/KlnScreen.astro';
+import Callout from '../../../components/Callout.astro';
+import Term from '../../../components/Term.astro';
+
+Every power-on with the knob runs the same sequence. The Turn-On page is shown first, you approve the self test on the Self Test page and you acknowledge the Database page; depending on the installation, a VFR-only warning page and an OBS warning page come in between. The unit finds its position by itself, and you correct the position, the date or the time only when the search takes too long.
+
+## Turning the unit on
+
+You turn the unit on by pushing in the power/brightness knob and off by pulling it out. The avionics of the aircraft must have power, and [Controls and display](/kln90b/unit/controls-and-display/#using-the-controls-in-the-simulator) says what to do in an aircraft whose knob needs a right click. Pulling the knob out turns the unit off at once and without a question, and the next power-on starts the sequence from the Turn-On page, however short the time off.
+
+<Callout kind="info">
+The screen stays dark for up to 6 seconds after you turn the unit on while it warms up, and then brightens over about 4 seconds. A unit that was off for less than 10 minutes stays dark for a proportionally shorter time. An aircraft loaded cold and dark counts as off for a long time.
+</Callout>
+
+A loss of electrical power to the unit of up to 1.5 seconds changes nothing: the unit carries on. A longer loss turns the unit off like the knob, and when the power returns with the knob pushed in, the unit starts the sequence from the Turn-On page.
+
+### An aircraft loaded with the engine running
+
+<Callout kind="sim-only">
+The real unit always runs the whole sequence. The simulator skips it when you load an aircraft that is already running.
+</Callout>
+
+An aircraft that loads with its engine running, as when you start a flight on the runway or in the air, comes up with the unit fully ready: it shows the [first pages](#the-first-pages) as soon as its data has loaded, and it is NAV ready at once ([GPS reception and RAIM](/kln90b/operation/gps-receiver/#acquiring-satellites)). A self test that fails at such a start still shows the Self Test page ([`TEST FAIL` on the Self Test page](#test-fail-on-the-self-test-page)).
+
+Every later power-on, with the knob or after a longer power loss, runs the whole sequence.
+
+## The Turn-On page
+
+The Turn-On page shows `GPS` and the ORS level, the copyright line, four lines of text that you write yourself and `SELF TEST IN PROGRESS`. It stays for about 15 to 20 seconds, and then the Self Test page follows.
+
+<KlnScreen screen="turn-on-page" />
+
+The four lines are for the name of the aircraft or a reminder. They are blank until you write them, and the unit keeps them while it is off and shows them at every power-on.
+
+The left cursor holds the page: with the left cursor on, the unit stays on the Turn-On page beyond that time, and it goes on to the Self Test page once you turn the cursor off.
+
+To write the four lines:
+
+1. Press the left <kbd>CRSR</kbd> while the Turn-On page is shown. The cursor is on the first line.
+2. Turn the left outer knob to the line you want to write.
+3. Turn the left inner knob one step. The line opens with underscores, and the cursor is on its first character.
+4. Turn the left inner knob to the character you want, and the left outer knob one step to the next. Cells that you leave untouched become blanks.
+5. Press <kbd>ENT</kbd>. The unit keeps the line and moves the cursor to the next line. After the fourth line the cursor stays where it is.
+6. Press the left <kbd>CRSR</kbd> to turn the cursor off. The unit goes on to the Self Test page, at once if the time of the page is up.
+
+<KlnScreen screen="turn-on-page-cursor" />
+
+To drop a line you have opened, turn the cursor off before you press <kbd>ENT</kbd>: the line keeps its old text. To empty a line, open it and press <kbd>ENT</kbd> at once, which stores a blank line.
+
+## The Self Test page
+
+The Self Test page lets you check the instruments of the aircraft against its test values, and the clock and the altitude against what you know; you correct the clock, the time zone and the baro setting. It stays until you approve it.
+
+<KlnScreen screen="self-test" />
+
+The left page holds fixed test values: a distance of 34.5 NM, a half-scale deflection of the D-bar to the right with the FROM flag, an `OBS OUT` course of 315° and a bearing of 130° for the <Term t="RMI" />. The unit sends them to the aircraft that it drives, so that the CDI or HSI and the RMI show the same values and the autopilot receives the bearing. `ANNUN` `ON` lights the remote annunciators that the aircraft has. The one live value is <Term t="OBS IN" />, the course of the OBS setting of the aircraft, which follows when you turn the OBS knob.
+
+On the right page you check the date and the time, in the time zone beside them, the altitude and the baro setting, and correct them where they are wrong. The cursor is on the baro setting when the page appears ([Entering data with the cursor](/kln90b/unit/controls-and-display/#entering-data-with-the-cursor)).
+
+- **The baro setting** takes effect with every change, and the altitude follows. In an aircraft whose air data system sends its baro setting, the setting follows the aircraft, the cursor skips it and starts on `APPROVE?`.
+- **The date and the time** matter while the unit has no position, with the acquisition on `REAL`: a correction makes the search for satellites start over from it ([Initializing the position and the time](#initializing-the-position-and-the-time)). Once the unit has a position, the satellites set the clock again within a second, so a correction does not last. The Database page that follows compares the date with the end of the database cycle.
+- **The time zone** changes how the unit shows the date and the time everywhere, and the unit keeps it.
+
+To approve the self test:
+
+1. Compare the instruments of the aircraft with the left page, and the clock and the altitude with what you know.
+2. Correct the baro setting and, where needed, the date and the time.
+3. Press <kbd>ENT</kbd> until the cursor is on `APPROVE?`. With the cursor on the baro setting, that takes three presses: each moves the cursor on, also where there was nothing to accept.
+4. Press <kbd>ENT</kbd>. The unit approves the self test, the annunciators go off, and the next power-on page appears.
+
+With the cursor off, <kbd>ENT</kbd> does not approve. Press the right <kbd>CRSR</kbd> to turn the cursor on, which starts on the date, and turn the right outer knob to `APPROVE?`.
+
+<Callout kind="availability">
+The five short beeps that confirm the approval sound only in an aircraft that gives the unit a sound output.
+</Callout>
+
+After the memory of the unit was lost, the page shows a date in 1988. Enter the right date and time here, before the unit finds its position ([The battery](/kln90b/operation/failures/#the-battery) says why and what else is lost).
+
+### `TEST FAIL` on the Self Test page
+
+A flashing `TEST FAIL` in place of `ANNUN` `ON` means that the self test has found a fault. The unit does not stop: approve the page as usual, go on through the pages that follow it, and open the MSG page as soon as the first pages show. The message there names the nature of the problem, for example `DATA BASE CHECKSUM ERR` when the unit could not load the navigation data of the simulator, or the code of a receiver fault.
+
+<KlnScreen screen="failure-self-test-fail" />
+
+What to do depends on the cause. Turn the unit off and on again once: a failure to load the navigation data can go away, and so can a passing fault of the receiver, which acts at one power-on and repairs itself. A simulated failure stays until you repair it, and the self test then fails at every power-on; [When the unit notices a failure](/kln90b/operation/failures/#when-the-unit-notices-a-failure) says which failures the self test finds.
+
+## The pages after the self test
+
+Three pages can follow the Self Test page, in this order. Each one asks for a single press of <kbd>ENT</kbd> on `ACKNOWLEDGE?`, except the OBS warning page, which has no `ACKNOWLEDGE?`.
+
+### The VFR-only warning page
+
+<Callout kind="availability">
+The VFR-only warning page appears only if the unit is installed for VFR flight only. Not every aircraft has such an installation.
+</Callout>
+
+The VFR-only warning page says `FOR VFR USE ONLY`, with the cursor on `ACKNOWLEDGE?`. Press <kbd>ENT</kbd> to leave it. The next page is the OBS warning page when the unit is in OBS mode, and otherwise the Database page.
+
+<KlnScreen screen="vfr-only-page" />
+
+### The OBS warning page
+
+<Callout kind="availability">
+The OBS warning page appears only in an aircraft with a switch for leg and OBS mode, the GPS CRS button, and only while that switch selects OBS.
+</Callout>
+
+The unit starts every power-on in leg mode (`ENR-LEG`), so only the switch of the aircraft can put it in OBS mode before this page. The OBS warning page tells you so: it has no `ACKNOWLEDGE?` and no cursor, and it leaves by itself, with the Database page next, as soon as you press the GPS CRS button of the aircraft to select leg mode. [Navigation modes](/kln90b/operation/navigation-modes/#obs-mode) explains OBS mode.
+
+<KlnScreen screen="obs-warning-page" />
+
+### The Database page
+
+The Database page tells you how the navigation database stands. It appears at every power-on that runs the whole sequence. It shows the last day of the database cycle and `DATA BASE EXPIRES` while the unit's date is not past it. Press <kbd>ENT</kbd> with the cursor on `ACKNOWLEDGE?` to go on.
+
+<KlnScreen screen="database-page" />
+
+When the date of the unit is past the end of the cycle, the page says `DATA BASE EXPIRED` and adds `ALL DATA MUST BE` `CONFIRMED BEFORE USE`. You can press <kbd>ENT</kbd> all the same: the unit works with the data it has.
+
+<KlnScreen screen="database-page-expired" />
+
+The unit uses the navigation data of the simulator; [How do I update the database?](/kln90b/help/faq/#how-do-i-update-the-database) says how to get a current cycle. `EXPIRES` shows for every current database, however many days it has left. The unit judges the date on its clock at that moment, so a date entered on the Self Test page counts. [Waypoints and the database](/kln90b/operation/waypoints/) explains the database and its cycle.
+
+## The first pages
+
+After the Database page the unit shows NAV 2 on the left and, on the right, the page of the waypoint that was active when you turned the unit off: APT 4 for an airport, the VOR, NDB or INT page for such a waypoint, or the SUP page for a user waypoint. With no active waypoint at the last power-off, the right page is the SUP page. A waypoint that has left the database meanwhile brings a message such as `WAYPOINT KSEA DELETED`, with its identifier.
+
+## Initializing the position and the time
+
+The unit finds its position from the satellites by itself, and you enter a position, a date or a time only to shorten the search when what the unit remembers is wrong. With the default setting `FAST` on SET 10 the unit is usually NAV ready before the Self Test page appears and you enter nothing; with `REAL` the search starts from the position and the clock that the unit stored ([Real and fast acquisition](/kln90b/operation/gps-receiver/#real-and-fast-acquisition)).
+
+What the unit remembers is wrong when you load the aircraft at another airport than the one where it was last turned off, when someone entered a wrong date or time, and after a loss of the unit's memory. The clock itself follows the date and time of the simulator while the unit is off.
+
+While the unit searches, STA 1 shows the GPS state `ACQ` or `INIT` and the pages that need a position show dashes. The unit is NAV ready when the state reaches one of the navigation states; [The GPS states](/kln90b/operation/gps-receiver/#the-gps-states) lists them, and [Acquiring satellites](/kln90b/operation/gps-receiver/#acquiring-satellites) gives the times under `REAL`. A correction restarts the search from the corrected values at once, and the unit is usually NAV ready within 150 seconds. It helps only while the unit has no position: once the unit is NAV ready, the satellites supply the position and the time and an entry changes nothing.
+
+To correct the position on SET 1:
+
+1. Turn the left outer knob to the SET pages and the left inner knob to SET 1. The page shows the position that the unit believes.
+2. Press the left <kbd>CRSR</kbd>. The cursor is on `WPT:`.
+3. Enter the identifier of a waypoint close to the aircraft with the left knobs.
+4. Press <kbd>ENT</kbd>. The unit shows the waypoint page on the right for you to approve.
+5. Press <kbd>ENT</kbd> again. The unit puts the latitude and longitude of the waypoint on SET 1 and moves the cursor to `CONFIRM?`.
+6. Press <kbd>ENT</kbd>. The unit takes the position, and the cursor goes off.
+
+The closer the waypoint is to the aircraft, the shorter the search. To drop the entry, turn the cursor off before the last <kbd>ENT</kbd>.
+
+You can enter the latitude and longitude instead of an identifier. The first step of the left inner knob on either opens its entry, as here on the latitude:
+
+<KlnScreen screen="set-1-latitude-entry" />
+
+[Entries that take effect with ENT](/kln90b/unit/controls-and-display/#entries-that-take-effect-with-ent) gives the steps.
+
+To correct the date and the time on SET 2:
+
+1. Turn the left outer knob to the SET pages and the left inner knob to SET 2.
+2. Press the left <kbd>CRSR</kbd>. The cursor is on the date.
+3. Turn the left inner knob one step to open the date, and enter the day, the month and the two digits of the year, with the left outer knob moving from cell to cell.
+4. Press <kbd>ENT</kbd>. The unit applies the date and moves the cursor to the time.
+5. Open the time with the left inner knob and enter hours and minutes in the time zone that the page shows, with the left outer knob moving from cell to cell.
+6. Press <kbd>ENT</kbd>. The seconds start at 00.
+7. Press the left <kbd>CRSR</kbd> to turn the cursor off.
+
+<KlnScreen screen="set-2-date-entry" />
+
+SET 2 takes no date and no time once the unit has a position; the cursor skips them. The Self Test page takes the date and the time too, until you approve it.
+
+A correction that moves the database from current to expired or back posts a message on SET 2:
+
+```
+RECYCLE POWER TO USE
+ CORRECT DATA BASE DATA
+```
+
+Turn the unit off and on, so that the Database page judges the new date. The receiver's messages about the first position are in [Messages of the receiver](/kln90b/operation/gps-receiver/#messages-of-the-receiver): `POSITION DIFFERS FROM` `LAST POSITION BY >2NM`, which says that the first position lies more than 2 NM from where the unit was turned off, and `SYSTEM TIME UPDATED` `TO GPS TIME`.
+
+If the unit does not become NAV ready:
+
+1. Look at STA 1. `ACQ` and `INIT` mean that the search goes on, and the time it takes under `REAL` depends on what the unit remembers.
+2. Correct the position, the date and the time as above where one of them is wrong.
+3. Set the acquisition to `FAST` on SET 10, which makes the unit start from the true position and time ([Real and fast acquisition](/kln90b/operation/gps-receiver/#real-and-fast-acquisition)). It does not help after a loss of the memory.
+4. With `FAILR` on STA 1, the receiver or its antenna has failed ([Simulated failures](/kln90b/operation/failures/#the-receiver-and-the-antenna)).
+
+## What the unit keeps while it is off
+
+The unit keeps its data while it is off, and it forgets some of it after more than five minutes. The time off counts from the turning off, or from 1.5 seconds after the electrical power was lost.
+
+**Kept for any time off:**
+
+- the four lines of the Turn-On page, the time zone, and the baro setting and its unit;
+- the user waypoints, the flight plans and the remarks, the active waypoint, and the waypoint that each waypoint page showed last;
+- the last position, the clock and the receiver's almanac and ephemeris data;
+- the settings of the pages: the nearest airport criteria, the airspace and altitude alerts, turn anticipation, the flight timer setting, the maps of NAV 5 and Super NAV 5, and the entries on CAL 1 to CAL 5 and the TRI pages, the reserve on the OTH pages, and the acquisition setting on SET 10;
+- the total operational time and the number of power-ons on STA 4.
+
+**Kept for up to five minutes:** the procedures in FPL 0, a direct-to to the active waypoint and the magnetic variation that you entered. After more than five minutes off the unit drops them. A restart of the simulator drops them too.
+
+**Forgotten at every power-on:**
+
+- the navigation mode, which starts in leg mode, with no OBS course, and the scale of the D-bar, which starts at 5 NM;
+- the approach arm mode and the entries of NAV 4, including the selected altitude and the VNAV entries;
+- the departure time and the flight timer of D/T 4, the entries of CAL 6 and CAL 7 and the fuel on board;
+- the page last shown in each page type;
+- the messages ([Messages](/kln90b/operation/messages/) says how they come back).
+
+A failed internal battery erases the user data at a power-on, and [The battery](/kln90b/operation/failures/#the-battery) says what is lost.
+
+## Where to go next
+
+- [Controls and display](/kln90b/unit/controls-and-display/): the knobs, the cursor and how entries work.
+- [GPS reception and RAIM](/kln90b/operation/gps-receiver/): the search for satellites, the GPS states and the times to the first position.
+- [Waypoints and the database](/kln90b/operation/waypoints/): the database, its cycle and the waypoint pages.
+- [Simulated failures](/kln90b/operation/failures/): the failures that the self test finds and the loss of memory.

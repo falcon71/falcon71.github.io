@@ -112,7 +112,9 @@ The first session writes the plan of the whole manual and no page.
 2. **The package plan.** From the researcher's summary, settle the sections and the screens in the package file,
    and check them against topic ownership. A fact sheet lists every rule the code has; the plan takes only what the
    pilot needs (style guide, section 8, "What feels natural in use needs no rule"), and plans no section that writes
-   out behavior the pilot meets naturally, such as which side takes ENT. If the research shows that a topic's owner must change, or that the
+   out behavior the pilot meets naturally, such as which side takes ENT. It does plan a section of its own for every
+   warning or state the pilot may search for (style guide, section 9), and never shrinks one to "one sentence and
+   the link" because another page owns its cause. If the research shows that a topic's owner must change, or that the
    package is too large for the session, change the plan first; split a package rather than rush it.
 3. **Writing.** One writer per page or per few small pages, in parallel only where they own different files,
    topics and screens. A writer writes its pages, describes and generates its screens and writes their field
@@ -215,6 +217,9 @@ mechanical part and reports only what is wrong:
 - Every link from the new pages reaches a page and an anchor that exists or is marked as planned in the index; every
   planned anchor that the new pages own now exists.
 - Word forms and `<Term>` use match the word list and the glossary.
+- **Numbers repeated elsewhere.** A duration, a limit or a count that the new pages own and that other pages repeat:
+  the other pages refer to the event instead (style guide, section 8). No trademark of a manufacturer on the new
+  pages or their screens (section 3).
 - **Earlier pages that now say too much.** When this package writes the owner of a topic that an earlier page had to
   explain for lack of it, that page is cut back to the sentence and the link. List these changes in the package
   file first; they are the only changes a package makes to pages outside it, and they go through the reviewer.

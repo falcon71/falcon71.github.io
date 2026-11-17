@@ -1,53 +1,53 @@
 <Field id="dis" title="Test distance">
-	A fixed test value, 34.5 NM, in place of the distance to the active waypoint. While the Self Test page is shown, the left page carries test values in all its fields except `OBS IN`, and the unit sends them to the instruments of the aircraft that it drives.
+	A fixed test value, 34.5 NM, in place of the distance to the active waypoint. Every field of the left page except `OBS IN` holds a fixed test value, which the unit also sends to the instruments of the aircraft that it drives, so that you can check that they respond.
 </Field>
 
 <Field id="cdi" title="Test deflection of the D-bar">
-	A fixed test deflection of the D-bar. It shows that the bar and the instruments that the unit drives respond.
+	A fixed test deflection of the D-bar: half scale to the right, with the FROM flag. The CDI or HSI of the aircraft shows the same deflection when the unit drives it.
 </Field>
 
-<Field id="obs" title="OBS IN field">
-	<Term t="OBS IN">`OBS IN`</Term> is the course that the unit reads from the OBS setting of the course indicator in the aircraft, in degrees magnetic.
+<Field id="obs" title="OBS setting of the aircraft">
+	<Term t="OBS IN">`OBS IN`</Term> is the course that the unit reads from the OBS setting of the course indicator in the aircraft, in degrees magnetic. It is the one live value of the left page: turn the OBS knob and it follows.
 </Field>
 
-<Field id="out" title="OBS OUT field">
-	<Term t="OUT">`OUT`</Term> is a fixed test value, 315°, for the desired track that the unit sends out.
+<Field id="out" title="OBS OUT test course">
+	<Term t="OUT">`OUT`</Term>, the `OBS OUT` course, is a fixed test value, 315°, for the desired track that the unit sends out.
 </Field>
 
-<Field id="rmi" title="RMI field">
-	A fixed test value, 130°, for the bearing to the active waypoint that the unit sends to the <Term t="RMI" /> of the aircraft.
+<Field id="rmi" title="Test bearing for the RMI">
+	A fixed test value, 130°, for the bearing to the active waypoint that the unit sends to the <Term t="RMI" /> of the aircraft and to its autopilot.
 </Field>
 
 <Field id="annun" title="Annunciator test">
-	<Term t="ANNUN">`ANNUN`</Term> `ON` means that the unit lights the annunciator lamps that the aircraft has, so that you can check them. A flashing `TEST FAIL` replaces it when the self test has failed.
+	<Term t="ANNUN">`ANNUN`</Term> `ON` means that the unit lights its remote annunciators, as far as the aircraft has them, so that you can check them. A flashing `TEST FAIL` takes its place when the self test has found a fault.
 </Field>
 
 <Field id="title" title="Page title">
-	The title of the right page.
+	`DATE/TIME` heads the right page: the clock of the unit, the altitude and the baro setting.
 </Field>
 
 <Field id="date" title="Date">
-	The date of the unit: day, month and two-digit year, in the time zone shown on the line below. You change it with the cursor and accept it with <kbd>ENT</kbd>. Entering the date speeds up the unit's search for satellites.
+	The date of the unit: day, month and year in two digits, in the time zone shown on the line below. The years 88 to 99 are 1988 to 1999 and 00 to 87 are 2000 to 2087. You change the date with the cursor and accept it with <kbd>ENT</kbd>. While the unit has no position, a new date makes its search for satellites start over from it. Once the unit has a position, the satellites set the clock again.
 </Field>
 
 <Field id="time" title="Time">
-	The time of the unit in hours and minutes, in the time zone beside it. You change it with the cursor and accept it with <kbd>ENT</kbd>; the seconds then start at 00. Entering the time speeds up the unit's search for satellites.
+	The time of the unit in hours and minutes, 00:00 to 23:59, in the time zone beside it. You change it with the cursor and accept it with <kbd>ENT</kbd>; the seconds then start at 00. It acts on the search for satellites like the date.
 </Field>
 
 <Field id="seconds" title="Seconds">
-	The seconds of the time. They count on by themselves and cannot be changed on their own.
+	The seconds of the time. They count on by themselves and cannot be entered.
 </Field>
 
 <Field id="zone" title="Time zone">
-	The code of the time zone in which the unit shows the date and the time (`UTC` for universal time). With the cursor on it, the right inner knob steps through the time zones.
+	The code of the time zone in which the unit shows the date and the time: `UTC`, then Greenland, Atlantic, Eastern, Central, Mountain, Pacific, Alaska, Hawaii and Samoa, each as standard time (`EST`) and as daylight time (`EDT`). With the cursor on it, the right inner knob steps through the zones. The unit keeps the zone while it is off.
 </Field>
 
 <Field id="alt" title="Indicated altitude">
-	<Term t="ALT">`ALT`</Term> is the altitude that the aircraft's altitude input gives, rounded to 100 ft. It shows dashes while the unit receives no altitude.
+	<Term t="ALT">`ALT`</Term> is the altitude that the aircraft's altitude input gives, corrected for the baro setting and rounded to 100 ft. It shows dashes while the unit receives no altitude.
 </Field>
 
 <Field id="baro" title="Altimeter baro setting">
-	<Term t="BARO">`BARO`</Term> is the altimeter baro setting of the unit in inches of mercury, which the unit uses for altitude. You change it digit by digit with the cursor. It cannot be changed where the aircraft transmits the setting to the unit.
+	<Term t="BARO">`BARO`</Term> is the altimeter baro setting of the unit, in inches of mercury (`29.92"`) or, as SET 7 sets it, in millibars (`1013MB`). You change it digit by digit with the cursor, and each change takes effect at once. The unit keeps the setting while it is off. Where the aircraft transmits its own setting to the unit, the field follows it and the cursor skips it.
 </Field>
 
 <Field id="approve" title="Approval of the self test">
@@ -62,6 +62,6 @@
 	The three cells after the mode annunciation. <Term t="MSG">`MSG`</Term> in inverse video means that the unit holds a message, and a flashing <Term t="ENT">`ENT`</Term> means that <kbd>ENT</kbd> accepts what the cursor is on. They are blank when neither applies.
 </Field>
 
-<Field id="crsr" title="Cursor indication">
-	<Term t="CRSR">`CRSR`</Term> shows that the right cursor is on. This page shows no page names. Pressing the right <kbd>CRSR</kbd> button turns the cursor off.
+<Field id="crsr" title="CRSR annunciation">
+	<Term t="CRSR">`CRSR`</Term> shows that the right cursor is on. This page shows no page identifications. Pressing the right <kbd>CRSR</kbd> button turns the cursor off.
 </Field>
