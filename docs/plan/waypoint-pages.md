@@ -48,6 +48,31 @@ None.
   plus sign"). Cut it to one sentence and the link when this package cuts the APT chapter back (seam check of the
   package controls, 2026-11-17).
 
+### From the package waypoints (2026-11-17)
+
+Waypoints and the database and User waypoints now exist; each chapter links there for the identifier entry
+(`/kln90b/operation/waypoints/#entering-an-identifier`), the scan (`#scanning-through-the-database`), duplicates
+(`#duplicate-identifiers`), approval (`#approving-the-waypoint-page`), the ACT pages as a concept (`#the-act-pages`),
+and for creating, editing and deleting user waypoints (`/kln90b/operation/user-waypoints/`, anchors in the index).
+Terms: the Duplicate Waypoint page, the complete list, the Active Waypoint pages (word list).
+
+- **For the ACT chapter** (cut from Waypoints and the database; check in the code): the number of the waypoint in
+  FPL 0 stands before the identifier, blank for a direct-to waypoint outside the flight plan. A letter ends the top
+  row: `A`, `V`, `N`, `I`, `S`, and `T` for a fix of a terminal procedure (`pages/right/IntPage.tsx:80-85`). The
+  reviewer reports a `D` before the `V` for a VOR with DME; not verified. `NO ACTIVE` `WAYPOINT` is named on the
+  waypoints page as the one concept sentence; the ACT chapter owns the rest.
+- **VOR page:** typing an identifier skips localizers, VOTs and TACAN-only stations, the scan and the left fields do
+  not (kln90b#489). The VOR chapter describes the entry as it is; where it describes the scan, it carries the
+  comment.
+- **SUP and INT pages:** a reference entered after the radial and the distance does not create the waypoint
+  (kln90b#488); User waypoints says "enter the reference first". The reference, radial and distance are not stored
+  with the waypoint; the page shows the nearest VOR again on return. The REF field fills in after a search of about
+  8 seconds (said in the `ref` field of `sup-user-waypoint`; do not repeat it).
+- **Screens to reuse:** `sup-user-waypoint`, `sup-create-by-radial`, `waypoint-no-sup-wpts` (the SUP page with none
+  stored), `direct-to-create-waypoint` (the SUP page in its creation state).
+- **The APT chapter cut-back:** its paragraphs on the offer to create, `USER POS?`/`PRES POS?` and approval now have
+  their owners; the links to `#user-waypoints` were already moved to `/kln90b/operation/user-waypoints/`.
+
 ## Changes to earlier pages
 
 The APT chapter was written before its owner existed. Its opening section ("The APT pages: one airport on every

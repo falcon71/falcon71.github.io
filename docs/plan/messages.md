@@ -92,6 +92,18 @@ page `External-Annunciators.md` as background.
   unit raises it), and the receiver's `POSITION DIFFERS FROM` `LAST POSITION BY >2NM` and `SYSTEM TIME UPDATED`
   `TO GPS TIME`, which GPS reception and RAIM owns.
 
+### From the package waypoints (2026-11-17)
+
+Waypoints and the database has a section per message to link to: `#data-base-out-of-date`, `#recycle-power-to-use`,
+`#outdated-db`, `#no-such-wpt`, `#dup-ident`, and `#no-sup-wpts-and-the-other-empty-lists` (`NO APT WPTS` and its
+kind). User waypoints owns `#usr-db-full`; `ACTIVE WPT` and `USED IN FPL` are in its `#deleting-a-user-waypoint`.
+
+- `WAYPOINT <ident> DELETED` and `OTHER WAYPOINTS DELETED`: when the cycle lacks a stored waypoint, the first is
+  posted at power-on for each waypoint of the flight plans and the active waypoint, up to ten; more than ten gives the
+  first ten, then `OTHER WAYPOINTS DELETED` (`services/Flightplanloader.ts:19-60`, `KLN90BCore.ts:360-376`). A user
+  waypoint never causes it at power-on; a route from the EFB with the user database full does (User waypoints,
+  `#usr-db-full`). Waypoints and the database names the message once and links to Messages.
+
 ## Changes to earlier pages
 
 To be listed by the session: links from earlier pages to single entries.

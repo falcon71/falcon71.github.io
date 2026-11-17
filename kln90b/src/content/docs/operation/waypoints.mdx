@@ -1,0 +1,183 @@
+---
+title: Waypoints and the database
+description: What the KLN 90B database holds and when it expires, how you enter an identifier, scan through the waypoints, choose between identical identifiers and approve a waypoint page.
+sidebar:
+  order: 1
+---
+
+import KlnScreen from '../../../components/KlnScreen.astro';
+import DirectToKey from '../../../components/DirectToKey.astro';
+import Term from '../../../components/Term.astro';
+
+The KLN 90B finds every waypoint by its identifier in its database of airports, VORs, NDBs and intersections and among the user waypoints that you add to them. You enter an identifier on a waypoint page or in a field of a left page, step through the waypoints of one waypoint type with the scan, and approve a waypoint page before the unit takes a waypoint into a field.
+
+## The database
+
+The database holds the navigation data of the simulator. It has four waypoint types, and each has its own pages:
+
+- **Airports,** on the APT pages, with the runways, frequencies, SIDs, STARs and approaches that APT 1 to APT 8 show.
+- **VORs,** on the VOR page: VOR, VOR/DME and VORTAC stations.
+- **NDBs,** on the NDB page.
+- **Intersections,** on the INT page. The list holds every intersection of the data, including the fixes of terminal procedures.
+
+The fifth waypoint type, supplemental, has no part in the database: the SUP page lists user waypoints only. User waypoints of the other types stand in the lists of their own type, mixed in by identifier. [User waypoints](/kln90b/operation/user-waypoints/) explains how you make them. [How do I update the database?](/kln90b/help/faq/#how-do-i-update-the-database) says where to get a current cycle.
+
+The unit reads one database cycle when you load the aircraft. The Database page shows the last day of that cycle at every power-on that runs the whole sequence ([the Database page](/kln90b/unit/power-on/#the-database-page)). The cycle is expired when the date of the unit is past that day. The unit compares the date on its own clock, which you set on SET 2 and the satellites correct, and tests only the end: a date before the cycle began counts as current. An expired database changes nothing about what the unit can do: every waypoint and procedure stays available. The unit says so on the Database page, with `DATA BASE OUT OF DATE` when the cycle runs out while the unit is on, and with `OUTDATED DB` on APT 7 and APT 8.
+
+A flight plan and the active waypoint are stored by identifier. When you install a newer cycle that no longer has a waypoint of them, the unit drops that waypoint at the next power-on and tells you with a message such as `WAYPOINT xxxxx DELETED` ([Messages](/kln90b/operation/messages/)). A unit that cannot load the navigation data at all fails its self test and posts `DATA BASE CHECKSUM ERR` ([`TEST FAIL` on the Self Test page](/kln90b/unit/power-on/#test-fail-on-the-self-test-page)).
+
+### `NO SUP WPTS` and the other empty lists
+
+A waypoint page whose list holds no waypoint shows `0` in place of the identifier and raises a message in the status line each time you select it: `NO SUP WPTS` on the SUP page, and `NO APT WPTS`, `NO VOR WPTS`, `NO NDB WPTS` or `NO INT WPTS` on the pages of the other types. `NO SUP WPTS` is the one you meet: a unit without a user waypoint says it whenever you select the SUP page. The other four lists are empty only when the navigation data holds no waypoint of that type.
+
+<KlnScreen screen="waypoint-no-sup-wpts" />
+
+The scan does nothing in an empty list. APT 1, the INT page and the SUP page offer to create a user waypoint under the identifier `0`, and the VOR and NDB pages show empty fields; [Creating a user waypoint](/kln90b/operation/user-waypoints/#creating-a-user-waypoint) explains both.
+
+### `DATA BASE OUT OF DATE`
+
+```
+DATA BASE OUT OF DATE
+ ALL DATA MUST BE
+ CONFIRMED BEFORE USE
+```
+
+The database has just turned from current to expired while the unit is on. That happens when you enter a date or a time on SET 2 that lies past the end of the cycle, when the satellites correct the date past it, and when the cycle ends during a flight. It appears once for each change to expired. At a power-on with a date that is already past the end the unit posts nothing, and the Database page says `DATA BASE EXPIRED`.
+
+The unit keeps working with the data it has. To remove the cause, install a current cycle ([How do I update the database?](/kln90b/help/faq/#how-do-i-update-the-database)).
+
+### `RECYCLE POWER TO USE`
+
+```
+RECYCLE POWER TO USE
+ CORRECT DATA BASE DATA
+```
+
+A date or a time that you entered on SET 2 has changed whether the unit counts the database as current, in either direction. It appears once. Turn the unit off and on again, so that the Database page judges the new date. Either way the unit goes on with the same cycle of data: a power-on loads no other one.
+
+### `OUTDATED DB`
+
+`OUTDATED DB` appears in the status line each time you turn the cursor on, on APT 7 or APT 8 while the database is expired. It reminds you that the procedures come from an expired cycle, and you can still select and load them.
+
+## Entering an identifier
+
+You enter an identifier in two places, and the unit treats them differently: the identifier of a waypoint page takes effect with each character, and the identifier in a field of a left page takes effect with <kbd>ENT</kbd>. [Entering data with the cursor](/kln90b/unit/controls-and-display/#entering-data-with-the-cursor) explains the cursor, the knobs and how each kind of field takes a character.
+
+### On a waypoint page
+
+A waypoint page shows the waypoint as soon as you change a character, and you press no <kbd>ENT</kbd>. It searches only its own waypoint type, so the VOR page never finds an airport. When no waypoint matches, the cells show what you typed and the page has no waypoint. APT 1, the INT page and the SUP page then offer to create a user waypoint ([Creating a user waypoint](/kln90b/operation/user-waypoints/#creating-a-user-waypoint)); the VOR and NDB pages show empty fields.
+
+<KlnScreen screen="apt-1-ksea-cursor" />
+
+A waypoint page keeps its waypoint when you select other pages and while the unit is off.
+
+### In a field of a left page
+
+A field of a left page searches the waypoints of every type, and nothing takes effect until you press <kbd>ENT</kbd>.
+
+<KlnScreen screen="direct-to-ident-entry" />
+
+<kbd>ENT</kbd> looks for exactly the identifier you entered, and the result decides what happens next:
+
+- **One waypoint:** the unit shows its waypoint page on the right for approval ([Approving the waypoint page](#approving-the-waypoint-page)).
+- **Several waypoints:** the unit shows the Duplicate Waypoint page first ([Duplicate identifiers](#duplicate-identifiers)).
+- **None:** the Direct To page and every FPL page offer to create a user waypoint with the identifier, always a supplemental waypoint ([Creating a user waypoint](/kln90b/operation/user-waypoints/#creating-a-user-waypoint)). Every other left page and the REF fields answer `NO SUCH WPT`.
+
+To enter an identifier in a field of a left page:
+
+1. Press the left <kbd>CRSR</kbd> and turn the left outer knob to the field. On the Direct To page, which opens with <DirectToKey />, the cursor is on the field already.
+2. Enter the identifier with the left knobs ([Entries that take effect with ENT](/kln90b/unit/controls-and-display/#entries-that-take-effect-with-ent)).
+3. Press <kbd>ENT</kbd>. The unit shows the waypoint page, the Duplicate Waypoint page or the offer to create a waypoint, as above.
+4. Approve the waypoint page with a second <kbd>ENT</kbd>.
+
+### `NO SUCH WPT`
+
+`NO SUCH WPT` replaces the middle of the status line ([The status line](/kln90b/unit/controls-and-display/#the-status-line)) when you press <kbd>ENT</kbd> on an identifier that no waypoint has, on a left page that cannot offer to create one. The entry stays open: correct the identifier and press <kbd>ENT</kbd> again, or press <kbd>CLR</kbd>.
+
+<KlnScreen screen="waypoint-no-such-wpt" />
+
+## Scanning through the database
+
+The scan steps through the waypoints of the page's waypoint type, one waypoint per click of the right inner knob. [Scanning](/kln90b/unit/controls-and-display/#scanning) explains how you pull the knob out and which pages scan.
+
+The scan goes through the complete list of the page's waypoint type: every waypoint of the type, the waypoints of the database and your user waypoints mixed in one list. The complete list of the SUP page holds only the user waypoints and the waypoints the unit made by itself. The list is in order of identifier: digits come before letters, and a shorter identifier comes before a longer one that starts with it (`AB` before `ABC`). Waypoints with the same identifier stand next to each other, and the scan steps through them one by one.
+
+The scan starts at the waypoint the page shows. When the identifier you typed matches no waypoint, it starts at the last waypoint the identifier matched, not at the place of the typed identifier in the alphabet.
+
+The faster you turn the knob, the larger the steps; a slow turn steps one waypoint at a time. Turned fast enough, the scan jumps from one first character to the next, so that you cross the whole list in a few turns.
+
+The complete list does not wrap around, and the ends differ:
+
+- **At the last waypoint,** a step clockwise does nothing.
+- **At the first waypoint of the APT, VOR and NDB lists,** a step counterclockwise leads into the nearest list, to its last entry; a step clockwise from the last entry of the nearest list leads back to the first waypoint of the complete list ([Nearest](/kln90b/operation/nearest/)).
+- **On the INT and SUP pages** both ends stop the scan, because they have no nearest list.
+
+## Duplicate identifiers
+
+Several waypoints can have one identifier: waypoints of one type in different regions of the data, or waypoints of different types, such as a supplemental waypoint `SEA` that you made next to the VORTAC `SEA`. A waypoint page searches only its own waypoint type and a left field searches all of them, so the two meet duplicates differently.
+
+### Choosing between duplicate identifiers
+
+When <kbd>ENT</kbd> on an identifier in a left field finds more than one waypoint, the unit shows the Duplicate Waypoint page on the left, with the cursor on the first entry. It shows the identifier and the number of waypoints that have it, and one row for each: the number, the waypoint type, the area and a question mark. The rows are ordered by the distance from where the aircraft is when you press <kbd>ENT</kbd>, nearest first.
+
+<KlnScreen screen="waypoint-dup-page" />
+
+The page shows four entries, and a longer list scrolls under the two top rows. <kbd>CLR</kbd> does nothing on this page. When the field belongs to a right page, as the REF field does, the page appears on the right instead.
+
+To choose between waypoints with the same identifier:
+
+1. Enter the identifier in the left field and press <kbd>ENT</kbd>. The unit shows the Duplicate Waypoint page.
+2. Turn the left outer knob clockwise until the cursor is on the waypoint you mean.
+3. Press <kbd>ENT</kbd>. The page closes, the identifier returns to the field and flashes, and the unit shows the waypoint page of the waypoint you chose on the right.
+4. Press <kbd>ENT</kbd> again to approve it.
+
+To leave without choosing, turn the cursor off and turn a left knob: the page closes, and your entry is open again on the page beneath.
+
+### `DUP IDENT`
+
+`DUP IDENT` appears in the status line when the identifier of a waypoint page matches two or more waypoints of the page's waypoint type. A user waypoint cannot take the identifier of a waypoint of its own type, so this needs two waypoints from different regions of the data. The page shows the first of them. Scan to reach the others: each one is an entry of the list.
+
+## Approving the waypoint page
+
+A waypoint that you enter in a left field takes effect only when you approve its waypoint page. The unit shows the waypoint on the right, the enter prompt <Term t="ENT">`ENT`</Term> flashing in the status line, and the identifier in the field flashing on the left, so that you can check that it is the waypoint you meant.
+
+<KlnScreen screen="apt-confirm" />
+
+The page is the page of the waypoint's type: APT 1 for an airport, the VOR, NDB or INT page, and the SUP page for a supplemental waypoint. A user-defined airport shows APT 1 as well. The right inner knob turns through the other pages of the type, so you can look at APT 4 before you accept an airport.
+
+- **<kbd>ENT</kbd> approves.** The page closes, the unit does what the field is for (the Direct To page makes the waypoint the direct-to waypoint, an FPL page inserts it, and the other pages take it into their field), and the cursor moves on to the next field. Your own right page is back.
+- **Enter the identifier again** with the left inner knob if it is the wrong waypoint. The first step starts a new entry and drops the approval.
+- **<kbd>CLR</kbd> closes the page and blanks the identifier,** which waits for <kbd>ENT</kbd> ([Entries that take effect with ENT](/kln90b/unit/controls-and-display/#entries-that-take-effect-with-ent) says what <kbd>ENT</kbd> does on the blank).
+- **A turn of the right outer knob closes the page** and moves the right side on to the next page type, but <kbd>ENT</kbd> still approves the waypoint.
+
+The identifier cannot be changed on a page shown for approval, and the scan does nothing there.
+
+### Taking the waypoint of the right page
+
+You need not enter an identifier that the right page already shows. <kbd>ENT</kbd> on a waypoint field of a left page, with the cursor on it and no entry started, takes the waypoint of the right page when that is a waypoint page with a waypoint, a nearest entry or the ACT page. The unit shows the waypoint page for approval, and a second <kbd>ENT</kbd> approves it. That saves entering again a waypoint that you scanned to.
+
+To take the waypoint of the right page into a field:
+
+1. Show the waypoint on the right page, by entering it or by scanning to it, and leave the right cursor off.
+2. Press the left <kbd>CRSR</kbd> and turn the left outer knob to the field.
+3. Press <kbd>ENT</kbd>. The unit shows the waypoint page for approval.
+4. Press <kbd>ENT</kbd> again to approve it.
+
+When the right page is not a waypoint page, or a waypoint page that shows no waypoint, <kbd>ENT</kbd> does nothing. The Direct To page fills its field by itself ([Direct-to](/kln90b/operation/direct-to/)), and the FPL pages add rules of their own ([Flight plans](/kln90b/operation/flight-plans/)).
+
+## The ACT pages
+
+The Active Waypoint pages, the ACT pages, show the pages of the active waypoint: the APT pages of an airport as ACT 1 and so on, and the VOR, NDB, INT or SUP page of another waypoint. Without an active waypoint the page shows `NO ACTIVE` `WAYPOINT`. You cannot change the identifier, and the scan steps through the waypoints of FPL 0 instead of the database. The ACT chapter describes the pages and their fields; the [active waypoint](/kln90b/operation/navigation-modes/#the-active-waypoint) is explained with the navigation modes.
+
+<KlnScreen screen="apt-act-1" />
+
+## Changing the data of a database waypoint
+
+You cannot change a waypoint of the database. Its name, position, frequency and magnetic variation are read-only. Two things act on such a waypoint without changing it: the REF field of the INT and SUP pages takes any waypoint and then shows the radial and distance from it, and APT 5 keeps your own remarks for any airport. To work with other data, create a user waypoint, which you can change ([Editing a user waypoint](/kln90b/operation/user-waypoints/#editing-a-user-waypoint)).
+
+## Where to go next
+
+- [User waypoints](/kln90b/operation/user-waypoints/): creating, editing and deleting your own waypoints.
+- [Nearest](/kln90b/operation/nearest/): the lists of the nearest airports, VORs and NDBs, which the scan leads into.
+- [Direct-to](/kln90b/operation/direct-to/): the Direct To page, which uses the entry and the approval described here.
+- [Flight plans](/kln90b/operation/flight-plans/): entering waypoints in FPL pages.

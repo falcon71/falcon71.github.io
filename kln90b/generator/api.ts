@@ -7,7 +7,7 @@ export type {FieldDef, Locator} from './lib/fields.ts';
 export {facility, place} from './lib/navdata.ts';
 export {moveAircraft, settle, NEAREST_SEARCH_WAIT_MS} from '../../vendor/kln90b/test/harness/boot';
 export {courseDeg, pointFrom} from '../../vendor/kln90b/test/harness/flight/geo';
-export {savedFlightplan} from '../../vendor/kln90b/test/harness/storage';
+export {savedFlightplan, savedUserWaypoints} from '../../vendor/kln90b/test/harness/storage';
 export {panelXml, APR_ARM_SWITCH} from '../../vendor/kln90b/test/harness/panelXml';
 export {showSuperNav5} from '../../vendor/kln90b/test/harness/render/superNav5';
 

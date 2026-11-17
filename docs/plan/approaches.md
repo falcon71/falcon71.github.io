@@ -70,6 +70,11 @@ this out, because this page owns what RAIM decides in an approach. Pointers from
   runway 32L at Boeing Field, so this page takes another one.
 - The word list has approach header, DME arc waypoint, suffix.
 
+### From the package waypoints (2026-11-17)
+
+- User waypoints names DME arc waypoints among the waypoints the unit makes (`#waypoints-the-unit-creates-by-itself`)
+  and links here for how they are named (`SidStar.ts`; the names were not staged).
+
 ## Changes to earlier pages
 
 APT 8's "Questions before the load and where the approach goes" is compared with this page and cut back where this

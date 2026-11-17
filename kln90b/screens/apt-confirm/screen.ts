@@ -2,7 +2,7 @@ import {defineScreen, place, pointFrom} from '../../generator/api.ts';
 import {positionRows} from '../shared/positions.ts';
 
 defineScreen(import.meta.url, {
-	title: 'Waypoint confirmation of an airport',
+	title: 'The waypoint page of an airport shown for approval',
 	show: 'both',
 	// 20 NM south of KSEA
 	boot: {position: pointFrom(place('KSEA'), 180, 20)},

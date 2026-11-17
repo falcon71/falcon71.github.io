@@ -64,6 +64,18 @@ part about version 1.x does not apply.
   starts the new entry (`FlightplanListItem.tsx:468`); Keyboard mode links to Flight plans for `INVALID ADD` on an
   approach waypoint and the make-room question when the plan is full.
 
+### From the package waypoints (2026-11-17)
+
+- On an FPL page, ENT on a closed row that holds a waypoint first opens a new row, and the next ENT takes the right
+  page's waypoint (`FlightplanListItem.tsx:216-224`, not verified by a run). Waypoints and the database
+  (`#taking-the-waypoint-of-the-right-page`) links here for it.
+- An unknown identifier on an FPL page brings up the offer to create a supplemental user waypoint (User waypoints,
+  `#creating-a-user-waypoint`); link, do not explain.
+- User waypoints gives one clause each for the reference and center waypoints and the waypoints of a route from the
+  EFB, and links here for how they are made and named. The EFB import reports `WAYPOINT … DELETED` when the user
+  database is full; User waypoints says so in `#usr-db-full`. The Simulator only box of the EFB import is this
+  page's.
+
 ## Changes to earlier pages
 
 None planned.

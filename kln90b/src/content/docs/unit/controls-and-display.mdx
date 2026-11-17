@@ -213,14 +213,12 @@ To give the unit a position on SET 1, for example the latitude `N 47°26.99'`:
 <KlnScreen screen="direct-to-ident-entry" />
 
 - <kbd>ENT</kbd> on a number, a time or a date checks the entry. If it is good, the unit applies it, closes the entry and moves the cursor to the next field. If it is not, the status line shows `INVALID ENT` and the entry stays open.
-- <kbd>ENT</kbd> on an identifier shows the waypoint page for approval (below) and leaves the cursor where it is. An identifier that the database lacks brings up the offer to create a user waypoint where the page offers one ([Waypoints and the database](/kln90b/operation/waypoints/)).
+- <kbd>ENT</kbd> on an identifier shows the waypoint page for approval (below) and leaves the cursor where it is. An identifier that the database lacks brings up the offer to create a user waypoint where the page offers one ([Creating a user waypoint](/kln90b/operation/user-waypoints/#creating-a-user-waypoint)).
 - Cells that are still underscores count as 0, so <kbd>ENT</kbd> on `N __°__.__'` stores `N  0°00.00'`. Fill every cell before you press it.
 - <kbd>CLR</kbd> takes a number, a time or a date back to its old value and closes the entry, and the cursor stays on the field. It blanks an identifier, which then waits for <kbd>ENT</kbd>, and on the Direct To page <kbd>ENT</kbd> on the blank identifier cancels the direct-to. The identifier of SET 1 is the exception: <kbd>CLR</kbd> only closes its entry.
 - If you turn the cursor off before <kbd>ENT</kbd>, the entry is lost and the old value returns.
 
-After <kbd>ENT</kbd> on an identifier of a left page, the unit shows the waypoint page of that waypoint on the right with `ENT` flashing, and a second <kbd>ENT</kbd> approves it. [Waypoints and the database](/kln90b/operation/waypoints/) describes the approval.
-
-<KlnScreen screen="apt-confirm" />
+After <kbd>ENT</kbd> on an identifier of a left page, the unit shows the waypoint page of that waypoint on the right with `ENT` flashing, and a second <kbd>ENT</kbd> approves it. [Approving the waypoint page](/kln90b/operation/waypoints/#approving-the-waypoint-page) describes the approval.
 
 ### Questions in lists
 
@@ -228,7 +226,7 @@ A list entry that can be deleted asks first. With the cursor on the entry, <kbd>
 
 <KlnScreen screen="fpl-0-delete-question" />
 
-<kbd>CLR</kbd> again withdraws the question, and so does moving the cursor with the outer knob or turning the cursor off. Nothing tells you that it went. Flight plan waypoints, the user waypoints on OTH 3 and the remarks on OTH 4 ask this way; for a user waypoint the unit shows its waypoint page on the right while the question is open. An entry can refuse the deletion with a message first (`IN ACT LIST`, `USED IN FPL`).
+<kbd>CLR</kbd> again withdraws the question, and so does moving the cursor with the outer knob or turning the cursor off. Nothing tells you that it went. Flight plan waypoints, the user waypoints on OTH 3 and the remarks on OTH 4 ask this way. An entry can refuse the deletion with a message first (`IN ACT LIST`, `USED IN FPL`).
 
 On an FPL page, <kbd>CLR</kbd> with the cursor off turns the cursor on and asks `DELETE FPL?`; <kbd>CLR</kbd> again withdraws it and turns the cursor off. A <kbd>CLR</kbd> aimed at a field on the right page with no entry open there can start it when an FPL page is on the left with its cursor off. The two FLR lists have questions of their own ([the FLR pages](/kln90b/pages/flr/)).
 
@@ -253,5 +251,5 @@ Keyboard mode lets you type identifiers and numbers with the keys of your PC whi
 ## Where to go next
 
 - [Quickstart](/kln90b/getting-started/quickstart/) walks through the unit with the least reading.
-- [Waypoints and the database](/kln90b/operation/waypoints/) explains identifiers, the scan and the nearest lists.
+- [Waypoints and the database](/kln90b/operation/waypoints/) explains identifiers, the scan and approving the waypoint page.
 - [Direct-to](/kln90b/operation/direct-to/) uses the Direct To page.

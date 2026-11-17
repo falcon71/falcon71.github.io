@@ -499,6 +499,11 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | suffix (the letter after a waypoint of a loaded procedure) | mark, marker |
 | user-defined airport; user waypoint stays the short form of user-defined waypoint | user airport |
 | approve the waypoint page; the waypoint page shown for approval | waypoint confirmation |
+| the Duplicate Waypoint page (the list of waypoints with one identifier) | the duplicate waypoint page, the duplicates page |
+| the complete list (the waypoints of a type that the scan goes through), the nearest list | the list of a page, the database list |
+| the Active Waypoint pages at the first mention, then the ACT pages | the active pages |
+| user database (where the user waypoints are stored, with `USR DB FULL`) | database of user waypoints |
+| the waypoints the unit makes by name: reference waypoint, center waypoint, DME arc waypoint, the waypoints of a route from the EFB | temporary waypoint |
 | frequency type (of a frequency on APT 4) | frequency label |
 | page identification (the part of the status line that shows a page's name); "page name" in running text | |
 | mode annunciation (in the middle part of the status line, between the page identifications) | mode field |
@@ -645,7 +650,7 @@ The sidebar has these chapters and pages. Operation explains tasks ("how do I…
 | --- | --- |
 | Getting started | Table of contents (home page) · Installation · Quickstart · Tutorial flight 1 · Tutorial flight 2 |
 | The unit | Controls and display (knobs, buttons, the two halves, status line, cursor and data entry, scan, page tree) · Keyboard mode · Power-on and initialization |
-| Operation | Waypoints and the database · Nearest · Direct-to · Flight plans · Navigation modes (leg and OBS) · Sequencing and turn anticipation · SID and STAR procedures · Non-precision approaches · VNAV · GPS reception and RAIM · Inside the GPS simulation (optional) · Messages · Airspace and altitude alerting · Trip planning and calculators · Fuel and air data · Simulated failures |
+| Operation | Waypoints and the database · User waypoints · Nearest · Direct-to · Flight plans · Navigation modes (leg and OBS) · Sequencing and turn anticipation · SID and STAR procedures · Non-precision approaches · VNAV · GPS reception and RAIM · Inside the GPS simulation (optional) · Messages · Airspace and altitude alerting · Trip planning and calculators · Fuel and air data · Simulated failures |
 | Page reference | One chapter per page type in page tree order. Left: TRI, MOD, FPL, NAV, CAL, STA, SET, FLR, OTH. Right: CTR, REF, ACT, D/T, NAV, APT, VOR, NDB, INT, SUP. Each page with its screen. |
 | Reference lists | Message page messages · Status line messages · Glossary |
 | Help | External hardware · FAQ and troubleshooting · Known limitations · Contact |
@@ -654,7 +659,7 @@ The NAV pages exist on both sides. The page reference has one NAV chapter that c
 the left page types (after FPL); the right ones skip it. The page links depend on this: a page type has exactly one chapter.
 
 A page of the unit that belongs to no page type (the Direct To page, the ALT page, the MSG page, the pages of the
-power-on sequence, the duplicate waypoint page, the make-room pages) has no chapter in the page reference. The
+power-on sequence, the Duplicate Waypoint page, the make-room pages) has no chapter in the page reference. The
 Operation page that owns its task shows its screen with the field explanations; the plan says which.
 
 ### Installation
