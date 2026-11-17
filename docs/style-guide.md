@@ -463,8 +463,11 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | user-defined airport; user waypoint stays the short form of user-defined waypoint | user airport |
 | approve the waypoint page; the waypoint page shown for approval | waypoint confirmation |
 | frequency type (of a frequency on APT 4) | frequency label |
-| page identification (the segment of the status line that shows a page's name); "page name" in running text | |
-| mode annunciation (the segment of the status line between the page identifications) | mode field |
+| page identification (the part of the status line that shows a page's name); "page name" in running text | |
+| mode annunciation (in the middle part of the status line, between the page identifications) | mode field |
+| the CRSR annunciation (`CRSR` in place of a page identification while that side's cursor is on) | CRSR indicator |
+| the message prompt (`msg`), the enter prompt (`ent`); both stand at the right end of the middle part of the status line | prompt segment |
+| the status line has three parts: the left page identification, the middle part (mode annunciation and prompts), the right page identification | four segments |
 | Microsoft Flight Simulator 2024, then "the simulator" | MSFS, FS2024 (except on Installation) |
 | GPS state (the `STATE` of STA 1); the states by name: initialization (`INIT`), acquisition (`ACQ`), transition (`TRAN`), navigation (`NAV`), navigation with altitude aiding (`NAV A`), navigation with data collection (`NAV D`), navigation with position degradation (`DEGRD`), receiver failure (`FAILR`) | receiver state |
 | ephemeris data; almanac data | orbit data |

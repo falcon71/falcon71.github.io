@@ -67,6 +67,20 @@ page `External-Annunciators.md` as background.
   as read, so it does not stop a flashing `msg` (`data/MessageHandler.ts`). The FLR chapter says only that
   `SERVICED` shows for 5 seconds; the owner says the rest once.
 
+### From the package controls (2026-11-17)
+
+- **ENT on the MSG page** closes it and, if the nearest list is not empty, shows APT 1 with the nearest airport on the
+  right (as read by the writer of Controls and display; check in `pages/MainPage.tsx`). Controls and display leaves
+  this to Messages.
+- The MSG page shows no page identification on either side of the status line.
+
+- <kbd>MSG</kbd> on the MSG page pages through the messages and then closes the page (`MainPage.tsx`, `EVT_MSG`); a turn
+  of the right inner knob while it is pulled out does not close the MSG page (`MainPage.tsx:164-168`).
+- A status line message is in the message list only while it shows, about 5 seconds (`controls/StatusLine.tsx:211-249`),
+  so the MSG page lists it only during that time. The reviewer of Controls and display noted that the real unit never
+  lists status line messages on the MSG page; the maintainer may want this as a kln90b issue (open question in the
+  report of the package controls).
+
 ## Changes to earlier pages
 
 To be listed by the session: links from earlier pages to single entries.

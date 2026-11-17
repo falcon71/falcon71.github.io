@@ -7,29 +7,40 @@ The basics every other page links to. Pointers come from the planning survey of 
 
 ### Controls and display (`unit/controls-and-display.mdx`)
 
-Requirements: style guide, section 12 ("Controls", "Mouse and keyboard") and section 17. Planned sections; the
-anchors marked planned are linked already and must exist with exactly these names:
+As written (2026-11-17), with the anchors:
 
 1. Summary.
-2. The front panel: every control with its name (a drawing or the unit's picture with the names). Every other page
-   uses exactly these names.
-3. `#the-screen` (planned): the two sides, the status line and its segments (page identification, mode
-   annunciation, `ent`, `msg`), flashing.
-4. `#selecting-a-page` (planned): page types and pages, the outer and the inner knobs, several pages with one name
-   (`+`), the page tree as a table or drawing, the full-screen pages and what brings them up, pages that open by a
-   button and close with the outer knob.
-5. `#page-pairs` (planned): right pages that work with the left page (D/T, REF and CTR with an FPL page on the
-   left).
-6. `#entering-data-with-the-cursor` (planned): the cursor, the two ways of entering data, ENT and CLR, which side
-   they act on, lists with a delete question.
-7. `#scanning` (planned): the right inner knob pulled out, as a control.
-8. `#using-the-controls-in-the-simulator` (planned): the mouse special cases; keyboard mode in one sentence.
-9. Links on.
+2. `#the-front-panel`: the drawing of the unit (`KlnUnit.astro` with its optional `markers` prop; the Hero is
+   unchanged) with numbered markers and the names in an HTML table under it; the power/brightness knob (pushed in for
+   on, pulled out for off; brightness in 20 steps). The text uses the status-line names of the page types, not the
+   words printed on the panel (which match the real face).
+3. `#the-screen`: the two sides. `#the-status-line`: three parts (left page identification, the middle part with the
+   mode annunciation and the enter prompt or message prompt, right page identification), the CRSR annunciation, the
+   `+`, status line messages. `#what-flashes`.
+4. `#selecting-a-page`: the knobs, the page last shown in a page type (forgotten at power-off). `#the-page-tree` (a
+   table; the FLR pages as pages no knob reaches, linked to the FLR chapter; the ACT pages), `#pages-with-a-plus-sign`,
+   `#pages-that-no-knob-reaches` (Direct To, ALT with NAV 4, FLR over SET 10; how a knob step closes them),
+   `#pages-that-use-the-whole-screen` (Super NAV 1, Super NAV 5, the MSG page, SET 0; the right knobs work on the
+   hidden right side).
+5. `#page-pairs`: the general rule; D/T, REF and CTR give their own variants.
+6. `#entering-data-with-the-cursor`: the cursor, its start field. `#fields-the-knob-changes-directly` (the character
+   cycle), `#entries-that-take-effect-with-ent` (with the procedure for the position on SET 1),
+   `#which-side-takes-ent-and-clr` (also with the cursor off), `#questions-in-lists`.
+7. `#scanning`: the pulled right inner knob as a control; order and speed are left to Waypoints and the database.
+8. `#using-the-controls-in-the-simulator`: the mouse special cases; keyboard mode in one sentence.
+9. Where to go next.
+
+Screens: `nav-1-apt-1-ksea`, `apt-1-ksea-cursor`, `set-3-cursor`, `direct-to-ident-entry`, `apt-confirm`,
+`home-nav-1` (in the drawing, without fields), and the new `status-line-crsr-both-sides`, `page-pair-fpl-0-dt-1`,
+`set-1-latitude-entry`, `fpl-0-delete-question` (helper `screens/shared/fpl-0-olm.ts`, KPDX KOLM KSEA). Not staged:
+Super NAV 5 with its scan window or menu (the generator cannot stage them).
 
 ### Keyboard mode (`unit/keyboard-mode.mdx`)
 
-Simulator only. Based on the wiki page `Keyboard-Mode.md` and the code: entering and leaving it, the keys, where it
-works, the two hardware toggles (with the link to External hardware).
+Simulator only, from the wiki page `Keyboard-Mode.md` and the code (the wiki is incomplete; the page follows the
+code). Sections: `#entering-keyboard-mode`, `#the-keys` (a table), `#typing-into-a-field` (a refused key still opens
+an entry: kln90b#485), `#leaving-keyboard-mode`, `#switching-keyboard-mode-on-and-off-with-hardware` (links to
+External hardware, names no event). Screen: `keyboard-mode-kybd`.
 
 ## Topics this package owns
 
@@ -47,52 +58,16 @@ sides share ENT and CLR; `kln90b/src/data/pageTree.ts` of the site; the Quicksta
 
 ## Notes from other packages
 
-From the package getting-started (facts from the code and the staged unit, to be checked again):
-
-- The anchor `#selecting-a-page` does not exist on the placeholder page; the other three planned anchors of the
-  Quickstart do.
-- The `+` appears on the left only on STA 1, TRI 2, TRI 4 and TRI 6, never on FPL pages; on the right on APT 3, APT
-  4, APT 7, CTR 2, the ACT pages and the waypoint page shown for approval (`numPages` in those page classes).
-- SET 0 follows SET 10 in the knob order; while it is shown, the status line shows no mode and no right page name.
-- Text cut from the Quickstart because this page owns it: some aircraft need a right click on the knob to turn the
-  unit on, and a pilot who uses the right mouse button to pan the camera holds the left mouse button before the
-  right click (wiki). On the identifier of a waypoint page, the first step of the inner knob goes from the existing
-  character on through the character set (from `0` to `1`), not to `A`.
-- The power control is a knob that is also the brightness control; pushing it toggles the unit on and off
-  (`PowerSupply.ts`). Its name is in the word list: the power/brightness knob.
-- Keyboard mode works only while that side's cursor is on and the page has a status line; it ends with a right
-  click on the screen, with Escape, with a click outside the instrument's view, and when the cursor goes off
-  (`PageContainer.tsx`). The H events `KLN90B_LeftKeyboard_Toggle` and `KLN90B_RightKeyboard_Toggle` toggle it from
-  hardware (kln90b README); the External hardware page carries them.
-
-From the package apt: text about the scan that the review cut from the APT chapter is in the git history
-(`docs/plan/apt.md`, "Text the review moved out of the chapter").
-
-From the planning survey: the FLR pages are a page type that the outer knob does not reach
-(`docs/plan/failures.md`); the page tree of this page says so in one sentence and links to the FLR chapter.
-
-### From the package failures (2026-11-16)
-
-Found in the review of the FLR chapter, which links to the planned anchors `#selecting-a-page` and
-`#entering-data-with-the-cursor` for them (check each in the code):
-
-- **The cursor** stops at the first and the last field without wrapping (`pages/CursorController.ts`). In a list
-  that was scrolled, the cursor comes back on the top entry shown, not on the first entry (`controls/List.tsx`).
-  An ENT that the left side does not take goes to the right page (`pages/MainPage.tsx`).
-- **A question is withdrawn** when the cursor leaves it or is turned off; the service question of FLR 1 is the
-  exception (kln90b#483).
-- **Pages opened over the page tree** (the Direct To page, the ALT page, and the FLR pages over SET 10). With its
-  cursor off, an outer knob step on such a page closes it and passes the step on to the page beneath, until a page
-  takes the step. So a step on the Direct To page opened over the FLR pages closes both and moves on from SET 10.
-  The inner knob does the same, except on a page with pages of its own to turn through, as the FLR pages have
-  (`pages/MainPage.tsx`).
-- **The outer knob selects, in each page type, the page last shown in it** (`pages/PageTreeController.ts`). The
-  FLR chapter therefore says only that leaving the FLR pages moves on from SET 10 to the next page type.
-- The FLR pages are in `kln90b/src/data/pageTree.ts` as `offKnobTree`, which the page links read and the knob
-  demo does not. Where Controls and display describes the page tree, the FLR pages are named as pages that no
-  knob reaches, with the link to the FLR chapter.
+All used by this package (2026-11-17).
 
 ## Changes to earlier pages
+
+- **Quickstart, the Good to know box on the warm-up:** "Do not push the knob again, which turns the unit off" teaches
+  a movement the knob does not have; the knob is pushed in for on and pulled out for off. It becomes "Do not pull the
+  knob out, which turns the unit off" (review of Controls and display, 2026-11-17).
+- **Shared screens:** the field explanations of the left and right page identification of `nav-1-apt-1-ksea` say
+  "subpage", which the word list forbids; the character cycle in `apt-1-ksea-cursor` is given in the same order as on
+  Controls and display.
 
 The seam check compares the Quickstart with Controls and display: the terms, the names of the controls, and the
 four planned anchors. The pages of the packages sta and failures get their links checked against the anchors that

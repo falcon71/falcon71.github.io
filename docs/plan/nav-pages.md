@@ -40,6 +40,14 @@ which page pair brings up a full-screen page (Controls and display).
 - From the planning survey: the wiki's Known limitations names a missing outline of text on NAV 5; that belongs to
   Known limitations, not to this chapter.
 
+### From the package controls (2026-11-17)
+
+- **Super NAV 5:** with its right menu open, pulling the right inner knob closes the menu and shows the scan window.
+  Controls and display says only that Super NAV 5 uses the pulled knob for its scan window; the NAV chapter owns the
+  rest. The generator cannot stage the scan window or the menu (`kln90b/generator/README.md`, "Super NAV 5").
+- Controls and display says which page pair brings up Super NAV 1 and Super NAV 5, and that the right knobs keep
+  working on the hidden right side while a full-screen page is shown.
+
 ## Changes to earlier pages
 
 None planned.

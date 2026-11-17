@@ -108,6 +108,15 @@ Pointers for this package's research (check each in the code):
   and `RCVR INIT` active.
 - Terms settled in this package (style guide, word list): internal battery, remote annunciators.
 
+### From the package controls (2026-11-17)
+
+- After power-on the left page is NAV 2 and the right page the waypoint page of the last active waypoint (APT 4 for an
+  airport), as the reviewer of Controls and display read it; check. Every power-on builds a new page tree, so the
+  memory of the page last shown in each page type starts over (`PageManager.ts:63-111`,
+  `PageTreeController.ts:127-131`); Controls and display says this in one sentence.
+- The power/brightness knob is pushed in for on and pulled out for off; the knob turns the unit off at once and the
+  next power-on starts the whole sequence (`PowerSupply.ts:162-172, 204-227`). Use these words.
+
 ## Changes to earlier pages
 
 The seam check compares the Quickstart's "Turning the unit on" with this page (terms, the screen `self-test`). The

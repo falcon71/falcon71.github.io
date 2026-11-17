@@ -53,6 +53,21 @@ reference and center waypoints as tasks (Flight plans).
 - From the planning survey: the real unit's search by name is not simulated; Known limitations names it, this page
   does not (style guide, section 3).
 
+### From the package controls (2026-11-17)
+
+Cut from Controls and display, which keeps only the scan as a control and links here (check each in the code):
+
+- **The scan:** the pulled right inner knob steps through the waypoints of the page's waypoint type; the order puts
+  digits before letters; quick turning makes larger steps, up to 250 waypoints per click (`pages/WaypointPage.tsx:14-15,
+  41-50`); the list stops at its end, and going back leads into the nearest list. It acts only with the cursor off.
+  The pulled state survives a power cycle (`Hardware.ts`, `KLN90BCore.ts:232-252`).
+- **An unknown identifier** on the Direct To page and in a flight plan brings up the offer to create a user waypoint
+  instead of `NO SUCH WPT` (`controls/editors/WaypointEditor.tsx`, `offerCreation`, about lines 28-32, 98-104).
+- ENT on an identifier entry shows the waypoint page for approval without moving the cursor
+  (`WaypointEditor.tsx:190-196`); ENT on a closed identifier takes the waypoint shown on the right page.
+- On a waypoint page's identifier, the first step of the inner knob goes from the existing character on through the
+  character set; Controls and display gives the character cycle.
+
 ## Changes to earlier pages
 
 The package waypoint-pages, which follows, cuts the APT chapter back to this owner. This package itself changes no

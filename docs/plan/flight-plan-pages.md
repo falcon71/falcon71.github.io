@@ -31,6 +31,20 @@ calculators, planned).
 From the planning survey: a comment in `Ctr2Page.tsx` says the layout of CTR 2 without waypoints is a guess. The
 reviewer checks that state against the real manuals; if they show it differently, that is a kln90b bug.
 
+### From the package controls (2026-11-17)
+
+- **D/T 1 with an FPL page on the left** shows, for each waypoint of the flight plan, the cumulative distance and ETE
+  from the present position, blank for waypoints already passed; the distance is the distance to the active waypoint
+  plus the leg lengths (`pages/right/Dt1FplPage.tsx`, as read by the writer of Controls and display; check it). The
+  screen `page-pair-fpl-0-dt-1` and its field explanations, shown on Controls and display `#page-pairs`, say this; the
+  D/T chapter must agree with them or have them corrected in its review.
+- Controls and display `#page-pairs` gives the general rule only; each of D/T, REF and CTR says in one sentence that
+  it works with the left page, links there, and then gives its own variants.
+
+- Cut from Controls and display: with a page other than an FPL page on the left, D/T 1 to D/T 3 show the active leg and
+  the legs after it; REF and CTR show `DISPLAY DESIRED FPL ON LEFT PAGE` without an FPL page on the left. These are
+  the chapters' own variants.
+
 ## Changes to earlier pages
 
 None planned.

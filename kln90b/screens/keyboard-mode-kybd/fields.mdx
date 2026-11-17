@@ -1,0 +1,23 @@
+<Field id="ident" title="Typed part of the identifier">
+	The characters of the identifier to the left of the cursor, which you typed. Each key replaces the character under the cursor and moves the cursor on, and the unit completes the characters to the right of the cursor with the first airport that matches.
+</Field>
+
+<Field id="char" title="Character under the cursor">
+	The character that the next letter or digit key replaces. After the last character the cursor stays here, because the page has no field after the identifier.
+</Field>
+
+<Field id="name" title="Airport name">
+	The name of the airport, in two rows of 11 characters.
+</Field>
+
+<Field id="pos" title="Airport position">
+	The position of the airport, latitude above and longitude below. You cannot change it for an airport of the database.
+</Field>
+
+<Field id="class" title="Airspace and type of the airport">
+	The airspace the airport lies in (`CL B`, `CL C`, <Term t="TMA" /> or <Term t="CTA" />) on the left, and <Term t="MILTRY">`MILTRY`</Term> or <Term t="PRIVAT">`PRIVAT`</Term> on the right where they apply.
+</Field>
+
+<Field id="kybd" title="Keyboard mode annunciation">
+	<Term t="KYBD">`KYBD`</Term> flashes in place of `CRSR` while keyboard mode is on for the right side. When it ends, `CRSR` returns; the cursor stays on.
+</Field>

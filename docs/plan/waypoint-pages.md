@@ -35,6 +35,19 @@ to Nearest (planned); the active waypoint links to Navigation modes (planned anc
 
 None.
 
+### From the package controls (2026-11-17)
+
+- **The ACT pages:** the right inner knob turns the pages of the active waypoint's type (ACT 1 to ACT 7 for an airport,
+  ACT 8 where APT 8 exists, one page for other types); Controls and display says this in one sentence in its page
+  tree. The ACT chapter gives the detail.
+- **APT 7 after a scan:** the researcher of the package controls found that a scan on APT 7 changes the shared airport
+  while APT 7 keeps showing the old one (`Apt7Page.tsx:99-110`). Filed as kln90b#486; the APT 7
+  section of the APT chapter, if it describes the scan, carries the `kln90b#486` comment.
+- **The `+` on APT pages:** the APT chapter's introduction explains the `+` page names and how the inner knob steps
+  through them at more length than a sentence; Controls and display owns it now (`#selecting-a-page`, "Pages with a
+  plus sign"). Cut it to one sentence and the link when this package cuts the APT chapter back (seam check of the
+  package controls, 2026-11-17).
+
 ## Changes to earlier pages
 
 The APT chapter was written before its owner existed. Its opening section ("The APT pages: one airport on every

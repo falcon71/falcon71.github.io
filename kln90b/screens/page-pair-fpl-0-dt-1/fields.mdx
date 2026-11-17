@@ -1,0 +1,27 @@
+<Field id="plan" title="Flight plan on the left page">
+	The waypoints of FPL 0, one per row, numbered from 1. The marks in front of the first two waypoints show the active leg.
+</Field>
+
+<Field id="header" title="Column headings">
+	<Term t="DIS">`DIS`</Term> is the distance and <Term t="ETE">`ETE`</Term> the estimated time en route. When the left page is an FPL page, each row of D/T 1 gives both for the waypoint in the same row of the flight plan.
+</Field>
+
+<Field id="active" title="The active waypoint">
+	The distance in NM from your present position to the waypoint, and the time it takes at your present groundspeed, as hours and minutes. Below one hour the hours stay blank (`:32` is 32 minutes).
+</Field>
+
+<Field id="next" title="A later waypoint">
+	The distance from your present position to the waypoint along the flight plan, that is, to the active waypoint and from there along each leg. The time is that distance at your present groundspeed.
+</Field>
+
+<Field id="lname" title="Page identification of the left side">
+	The page identification on the left side. FPL 0 is the active flight plan.
+</Field>
+
+<Field id="mode" title="Mode annunciation">
+	The mode annunciation, which shows the navigation mode of the unit. <Term t="enr-leg">`enr-leg`</Term> is Enroute-Leg mode.
+</Field>
+
+<Field id="rname" title="Page identification of the right side">
+	The page identification on the right side. D/T 1 lines its rows up with the rows of the flight plan while the left page is an FPL page, and shows the active leg and the legs after it for any other left page.
+</Field>
