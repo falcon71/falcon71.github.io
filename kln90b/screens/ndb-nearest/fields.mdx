@@ -1,0 +1,29 @@
+<Field id="ident" title="NDB identifier">
+	The identifier of the NDB. It shows an NDB of the [nearest list](/kln90b/operation/nearest/) here.
+</Field>
+
+<Field id="rank" title="Rank in the nearest list">
+	The rank of the NDB in the list of the nearest NDBs, from <Term t="NR">`NR 1`</Term> for the nearest to `NR 9`. The rank flashes while the cursor is elsewhere. The unit recalculates distances and order every second, so the number changes within a second when another NDB comes nearer. Which NDBs belong to the list is searched anew every 10 seconds, so the number disappears within 10 seconds after the NDB has dropped out of the list.
+
+	With the cursor on the rank, the page keeps showing whichever NDB holds that rank, so it follows the list as the aircraft moves.
+</Field>
+
+<Field id="name" title="Station name">
+	The name of the station, cut to 11 characters. A user-defined NDB has no name, and the row stays blank.
+</Field>
+
+<Field id="freq" title="Frequency">
+	The frequency of the NDB in kHz after `FREQ`; the unit does not show the unit. An NDB on a whole kilohertz shows the whole number, and one on a half kilohertz shows the tenth.
+</Field>
+
+<Field id="bearing" title="Bearing to the NDB">
+	The magnetic bearing from the aircraft to the NDB, in three digits and followed by `TO` (`255°TO`). It shows `---°TO` while the aircraft is exactly over the NDB. The bearing and the distance replace the position of the station.
+</Field>
+
+<Field id="distance" title="Distance to the NDB">
+	The distance from the aircraft to the NDB in NM, with one decimal place and a leading zero below 10 NM (`05.0NM`).
+</Field>
+
+<Field id="page" title="Page identification">
+	The page identification on the right side.
+</Field>

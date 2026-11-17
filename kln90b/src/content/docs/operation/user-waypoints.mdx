@@ -14,8 +14,8 @@ A user waypoint is a waypoint that you make yourself, at a position you enter or
 
 You create a user waypoint by entering an identifier that no waypoint of the page's waypoint type has and answering the offer that the unit makes, or, for a VOR and an NDB, by entering the position. Which of the five waypoint types you get depends on the page:
 
-- On the APT pages you create a user-defined airport. Its elevation and its runway are entered on APT 1 to APT 3 ([User-defined airports](/kln90b/pages/apt/#user-defined-airports)).
-- On the VOR page you create a user VOR with a position and, if you like, a frequency and a magnetic variation. It shows the class `U` for unknown.
+- On the APT pages you create a user-defined airport. Its position is set on APT 1 at creation, its elevation on APT 2 and its runway on APT 3 ([User-defined airports](/kln90b/pages/apt/#user-defined-airports)).
+- On the VOR page you create a user VOR with a position and, if you like, a frequency and a magnetic variation. It shows the class `U` for undefined.
 - On the NDB page you create a user NDB with a position and, if you like, a frequency.
 - On the INT page you create an intersection, and on the SUP page a supplemental waypoint. Both are defined by a position, or by a reference waypoint with a radial and a distance.
 - On the Direct To page and in a flight plan, an identifier that no waypoint of any type has creates a supplemental waypoint.
@@ -74,7 +74,9 @@ In a flight plan, step 3 inserts the waypoint instead. If you change the identif
 
 ### Creating a user VOR or a user NDB
 
-The VOR page and the NDB page make no offer. When the identifier you enter matches no VOR or NDB, the page shows empty fields: frequency and, for a VOR, the magnetic variation, then latitude and longitude. Enter latitude and longitude, each with <kbd>ENT</kbd>; the frequency and the variation are optional. The unit creates the waypoint when it has both coordinates, and shows `ENT LAT/LON` after the first of them. Without a variation, the unit takes the magnetic variation at the position.
+The VOR page and the NDB page make no offer. When the identifier you enter matches no VOR or NDB, the page shows empty fields: frequency and, for a VOR, the magnetic variation, then latitude and longitude. Enter latitude and longitude, each with <kbd>ENT</kbd>; the frequency and the variation are optional. The unit creates the waypoint when it has both coordinates, and shows `ENT LAT/LON` after every entry while the position is incomplete, the frequency and the variation included. Without a variation, the unit takes the magnetic variation at the position.
+
+<KlnScreen screen="vor-user-empty" />
 
 ## `USR DB FULL`
 

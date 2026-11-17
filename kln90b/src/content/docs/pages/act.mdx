@@ -1,0 +1,75 @@
+---
+title: ACT pages
+description: What the Active Waypoint pages show, how the number and the type letter on the top line read, which pages each waypoint type has, how you scan through FPL 0, and what NO ACTIVE WAYPOINT means.
+sidebar:
+  order: 12
+---
+
+import KlnScreen from '../../../components/KlnScreen.astro';
+import Callout from '../../../components/Callout.astro';
+
+The Active Waypoint pages, the ACT pages, show the waypoint page of the [active waypoint](/kln90b/operation/navigation-modes/#the-active-waypoint): the APT pages for an airport, the VOR, NDB, INT or SUP page for any other waypoint. You cannot change the identifier. With the scan you step through the waypoints of FPL 0 instead of the database.
+
+Approving a waypoint that you enter in a field, such as the reference of the INT page, and editing a user waypoint work as on every waypoint page; see [Waypoints and the database](/kln90b/operation/waypoints/), which also introduces [the ACT pages as a concept](/kln90b/operation/waypoints/#the-act-pages).
+
+## ACT pages: the waypoint pages of the active waypoint
+
+The ACT pages are the waypoint pages of the active waypoint, with a top line of their own. Everything below the top line is the page of the waypoint's type, and the other chapters explain its fields: [APT pages](/kln90b/pages/apt/), [VOR page](/kln90b/pages/vor/), [NDB page](/kln90b/pages/ndb/), [INT page](/kln90b/pages/int/) and [SUP page](/kln90b/pages/sup/).
+
+The top line reads from the left as follows.
+
+<KlnScreen screen="act-vor-olm" />
+
+- The arrow `›`, as on every waypoint page, marks the waypoint as the active waypoint. On the ACT pages it stands only on the copy of the waypoint that is the active one, so a waypoint that FPL 0 holds twice shows the arrow on one copy only. It flashes during [waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting).
+- The number of the waypoint in FPL 0, the number that FPL 0 shows in front of it. It is blank for a waypoint outside FPL 0 ([below](#a-direct-to-waypoint-outside-the-flight-plan)). A direct-to to a waypoint that FPL 0 holds shows its number.
+- The identifier. It is read-only, on every ACT page.
+- For a VOR, a `D` when the station has DME, as on the VOR page.
+- The waypoint type, the letter at the right end: `A` for an airport, `V` for a VOR, `N` for an NDB, `I` for an intersection, `T` for a terminal waypoint and `S` for a supplemental waypoint. `T` marks a waypoint that the database files under an airport: the fixes of approaches, many fixes of SIDs and STARs, and runway fixes. A fix of a procedure that is also an en route intersection shows `I`.
+
+What the cursor can change depends on the page. The right <kbd>CRSR</kbd> does nothing on the VOR and NDB pages of a database waypoint. On the INT page it reaches the reference (`REF`), and on ACT 7 and ACT 8 it selects from the lists of procedures, as on APT 7 and APT 8. A user-defined waypoint can be edited on its ACT page as on its own page.
+
+### Which pages the active waypoint has
+
+An airport has the pages APT 1 to APT 7 as ACT 1 to ACT 7, and the right inner knob, pushed in and with the cursor off, turns through them. The top line stays on every one of them except the runway diagram of ACT 3, which has none, as on APT 3; the page's own content starts below it.
+
+<KlnScreen screen="apt-act-1" />
+
+<Callout kind="availability">
+ACT 8, the approaches of the active airport, is available only if the unit is installed for non-precision approaches. Not every aircraft has such an installation. Without it, the ACT pages of an airport end at ACT 7.
+</Callout>
+
+The ACT pages of every other type have one page each, and the status line reads `ACT`. A terminal waypoint, such as CAKPU of KBKE, shows the INT page:
+
+<KlnScreen screen="act-terminal-fix" />
+
+### Scanning through FPL 0
+
+With the right inner knob pulled out and the cursor off, the scan steps through the waypoints of FPL 0, one at a time, in the order of the flight plan, and the number follows. It stops at the first and at the last waypoint and does not wrap. The page changes to the type of each waypoint, and an airport comes back as ACT 1.
+
+The scan never leaves FPL 0, and it does not use the nearest lists. A waypoint you scan to is not the active waypoint, so the arrow is gone from its page. On a direct-to waypoint outside FPL 0 the scan does nothing, because the waypoint has no place in FPL 0. A direct-to to a waypoint that FPL 0 holds shows its number, and the scan works from it.
+
+When the unit sequences to the next waypoint of FPL 0, or you fly a direct-to to another waypoint of FPL 0 while the ACT page stays on the right side, the page stays on the waypoint it showed, without the arrow. One step of the scan brings the page to the new active waypoint.
+
+{/* kln90b#491: describes the current behavior; the fix makes the ACT page follow the active waypoint */}
+
+### A direct-to waypoint outside the flight plan
+
+A [direct-to](/kln90b/operation/direct-to/) to a waypoint that FPL 0 does not hold makes that waypoint the active waypoint. The ACT page shows it with a blank number and the arrow, whatever its type. When the ACT page stays on the right side, it changes to the new direct-to waypoint by itself.
+
+<KlnScreen screen="act-direct-to" />
+
+### `NO ACTIVE WAYPOINT`
+
+`NO ACTIVE` `WAYPOINT` means that the unit has no active waypoint: it has no direct-to and FPL 0 has fewer than two waypoints, so that it has no leg to fly. A flight plan with a single waypoint leaves the page empty. The page shows no fields.
+
+<KlnScreen screen="act-no-active" />
+
+To have an active waypoint, fly a [direct-to](/kln90b/operation/direct-to/), enter a second waypoint into FPL 0 or activate a stored flight plan of at least two waypoints ([Flight plans](/kln90b/operation/flight-plans/)). The page shows the waypoint by itself as soon as one is active. The right <kbd>CRSR</kbd> turns the `CRSR` annunciation and the `ENT` prompt on, but there is no field to change; press <kbd>CRSR</kbd> or <kbd>ENT</kbd> to turn the cursor off.
+
+{/* kln90b#492: describes the current behavior; the fix makes CRSR do nothing on this page */}
+
+## Where the ACT pages are used
+
+- [Waypoints and the database](/kln90b/operation/waypoints/): the ACT pages as a concept and approving the waypoint page.
+- [Direct-to](/kln90b/operation/direct-to/): the waypoint you fly to.
+- [Flight plans](/kln90b/operation/flight-plans/): the waypoints that the scan steps through.

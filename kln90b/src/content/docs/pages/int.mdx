@@ -1,0 +1,50 @@
+---
+title: INT page
+description: What the INT page shows about an intersection (position, and radial and distance from the nearest VOR), how the reference VOR is found and changed, and how a user-defined intersection works.
+sidebar:
+  order: 17
+---
+
+import KlnScreen from '../../../components/KlnScreen.astro';
+import Callout from '../../../components/Callout.astro';
+
+The INT page of the KLN 90B shows one intersection: its identifier, its position, and its distance and direction from a reference VOR. The intersections of the database and the ones you define yourself stand in one list, and you choose one on this page.
+
+You enter an identifier, scan through the list, deal with duplicate identifiers and approve the page as on every waypoint page; [Waypoints and the database](/kln90b/operation/waypoints/) explains all of it. This chapter covers what the INT page shows and does differently.
+
+## INT page: intersection, position and reference
+
+The INT page gives the identifier of an intersection, the reference waypoint with the radial and the distance of the intersection from it, and the latitude and the longitude. Use it to check where an intersection lies and to find it from a VOR you know.
+
+<KlnScreen screen="int-lofal" />
+
+The complete list of the INT page holds every intersection of the navigation data and the user-defined intersections, mixed by identifier. It includes the terminal waypoints, the waypoints of terminal procedures. Two airports can have a terminal waypoint with the same identifier, so `DUP IDENT` is common for them; the latitude and the longitude tell them apart. The ACT pages mark a terminal waypoint with a `T` ([ACT pages](/kln90b/pages/act/)). With the cursor on, you can change the identifier and the reference waypoint of an intersection of the database; its radial, distance and position cannot be changed. When the list is empty, the page shows `0` and raises `NO INT WPTS` ([The other empty lists](/kln90b/operation/waypoints/#no-sup-wpts-and-the-other-empty-lists)).
+
+### The reference waypoint
+
+The reference waypoint is the VOR nearest to the intersection, and `RAD` and `DIS` give the radial from it to the intersection and the distance from it. The unit measures from the intersection, not from the aircraft. It considers every VOR within 1,000 NM, whatever its class, and a user VOR counts like one of the database. When no VOR lies within that distance, the three fields stay dashed.
+
+<Callout kind="info">
+The reference is not there when the page appears. `REF`, `RAD` and `DIS` show dashes for about 8 seconds while the unit looks for the VOR, and every change of the intersection, by a typed character or a scan, starts the wait again. Scanning through the list therefore keeps the dashes until you rest on an intersection.
+</Callout>
+
+The reference does not belong to the intersection. A reference you entered is gone when you leave the page or scan to another intersection, and the page shows the nearest VOR again after the search.
+
+To use another waypoint as the reference, turn the right cursor on, turn the right outer knob to `REF` and enter its identifier. The reference can be a waypoint of any type: an airport, a VOR, an NDB, an intersection or a user waypoint. Press <kbd>ENT</kbd>; the unit shows the waypoint page of the reference for approval, and a second <kbd>ENT</kbd> approves it ([Approving the waypoint page](/kln90b/operation/waypoints/#approving-the-waypoint-page)). A reference you enter during the wait is kept, and the search does not replace it. An identifier that no waypoint has gives `NO SUCH WPT`, and an identifier of several waypoints brings up the Duplicate Waypoint page ([Duplicate identifiers](/kln90b/operation/waypoints/#duplicate-identifiers)).
+
+### A user-defined intersection
+
+A user-defined intersection has the same page as an intersection of the database, but every field except the identifier can be changed. It is stored in the user database and kept while the unit is off.
+
+<KlnScreen screen="int-user" />
+
+You create one by entering an identifier that no intersection has and answering the offer of the unit ([Creating a user waypoint](/kln90b/operation/user-waypoints/#creating-a-user-waypoint)); [`USR DB FULL`](/kln90b/operation/user-waypoints/#usr-db-full) says what happens when the user database has no room. The new intersection takes its reference from your entries, or finds it as above. [Editing a user waypoint](/kln90b/operation/user-waypoints/#editing-a-user-waypoint) explains how you change one, and [Deleting a user waypoint](/kln90b/operation/user-waypoints/#deleting-a-user-waypoint) how you delete it.
+
+When you define an intersection by a reference, a radial and a distance, enter the reference first: if you enter it last, nothing is created. {/* kln90b#488: describes the current behavior; the fix creates the waypoint whatever the order */}
+
+## Where the INT page is used
+
+- [Waypoints and the database](/kln90b/operation/waypoints/): choosing an intersection and using the reference.
+- [User waypoints](/kln90b/operation/user-waypoints/): creating, editing and deleting an intersection of your own.
+- [Direct-to](/kln90b/operation/direct-to/): flying direct to an intersection.
+- [Flight plans](/kln90b/operation/flight-plans/): adding an intersection to a flight plan.

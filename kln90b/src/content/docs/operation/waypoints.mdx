@@ -32,7 +32,7 @@ A waypoint page whose list holds no waypoint shows `0` in place of the identifie
 
 <KlnScreen screen="waypoint-no-sup-wpts" />
 
-The scan does nothing in an empty list. APT 1, the INT page and the SUP page offer to create a user waypoint under the identifier `0`, and the VOR and NDB pages show empty fields; [Creating a user waypoint](/kln90b/operation/user-waypoints/#creating-a-user-waypoint) explains both.
+The scan does nothing in an empty list. The APT pages, the INT page and the SUP page offer to create a user waypoint under the identifier `0`, and the VOR and NDB pages show empty fields; [Creating a user waypoint](/kln90b/operation/user-waypoints/#creating-a-user-waypoint) explains both.
 
 ### `DATA BASE OUT OF DATE`
 
@@ -65,7 +65,7 @@ You enter an identifier in two places, and the unit treats them differently: the
 
 ### On a waypoint page
 
-A waypoint page shows the waypoint as soon as you change a character, and you press no <kbd>ENT</kbd>. It searches only its own waypoint type, so the VOR page never finds an airport. When no waypoint matches, the cells show what you typed and the page has no waypoint. APT 1, the INT page and the SUP page then offer to create a user waypoint ([Creating a user waypoint](/kln90b/operation/user-waypoints/#creating-a-user-waypoint)); the VOR and NDB pages show empty fields.
+A waypoint page shows the waypoint as soon as you change a character, and you press no <kbd>ENT</kbd>. It searches only its own waypoint type, so the VOR page never finds an airport. When no waypoint matches, the cells show what you typed and the page has no waypoint. The APT pages, the INT page and the SUP page then offer to create a user waypoint ([Creating a user waypoint](/kln90b/operation/user-waypoints/#creating-a-user-waypoint)); the VOR and NDB pages show empty fields.
 
 <KlnScreen screen="apt-1-ksea-cursor" />
 
@@ -100,7 +100,7 @@ To enter an identifier in a field of a left page:
 
 The scan steps through the waypoints of the page's waypoint type, one waypoint per click of the right inner knob. [Scanning](/kln90b/unit/controls-and-display/#scanning) explains how you pull the knob out and which pages scan.
 
-The scan goes through the complete list of the page's waypoint type: every waypoint of the type, the waypoints of the database and your user waypoints mixed in one list. The complete list of the SUP page holds only the user waypoints and the waypoints the unit made by itself. The list is in order of identifier: digits come before letters, and a shorter identifier comes before a longer one that starts with it (`AB` before `ABC`). Waypoints with the same identifier stand next to each other, and the scan steps through them one by one.
+The scan goes through the complete list of the page's waypoint type: every waypoint of the type, the waypoints of the database and your user waypoints mixed in one list. The complete list of the SUP page holds only the supplemental waypoints, which include the ones the unit made by itself. The list is in order of identifier: digits come before letters, and a shorter identifier comes before a longer one that starts with it (`AB` before `ABC`). Waypoints with the same identifier stand next to each other, and the scan steps through them one by one.
 
 The scan starts at the waypoint the page shows. When the identifier you typed matches no waypoint, it starts at the last waypoint the identifier matched, not at the place of the typed identifier in the alphabet.
 

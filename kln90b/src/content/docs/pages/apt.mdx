@@ -9,37 +9,27 @@ import KlnScreen from '../../../components/KlnScreen.astro';
 import Callout from '../../../components/Callout.astro';
 import Term from '../../../components/Term.astro';
 
-The APT pages of the KLN 90B show everything the database holds about one airport, one kind of information per page. APT 1 to APT 6 give the airport's data, APT 7 its SID and STAR procedures, and APT 8 its approaches. All of them show the same airport, which you choose on any of them.
+The APT pages of the KLN 90B show everything the database holds about one airport, one kind of information per page. APT 1 to APT 6 give the airport's data and your remarks, APT 7 its SID and STAR procedures, and APT 8 its approaches. All of them show the same airport, which you choose on any of them.
 
 ## The APT pages: one airport on every page
 
-The airport you enter, scan to or create on one APT page is the airport on all the others, and the unit remembers it when you turn it off. One exception is the airport of the last active waypoint: if that was an airport, the unit comes on with it, shown on APT 4. Another is an airport that you only approve or that is the active waypoint: the ACT page and the waypoint page shown for approval show their own airport and leave the shared one alone.
+Entering an identifier, scanning through the database and approving the waypoint page work as on every waypoint page; see [Waypoints and the database](/kln90b/operation/waypoints/).
 
-The right inner knob goes through APT 1 to APT 7 and then back to APT 1; APT 8 follows APT 7 only in an aircraft whose unit is installed for approaches. A page number with more than one page shows a `+` in its name (`APT+3`): the inner knob steps through those pages before it goes on to the next page number, and back through them the other way.
+The airport you enter, scan to or create on one APT page is the airport on all the others, and the unit remembers it when you turn it off. One exception is the airport of the last active waypoint: if that was an airport, the unit comes on with it, shown on APT 4. Another is an airport that you only approve or that is the active waypoint: the Active Waypoint pages and the waypoint page shown for approval show their own airport and leave the shared one alone.
+
+The right inner knob goes through APT 1 to APT 7 and then back to APT 1; APT 8 follows APT 7 only in an aircraft whose unit is installed for approaches. A page number with more than one page shows a `+` in its name (`APT+3`); [Pages with a plus sign](/kln90b/unit/controls-and-display/#pages-with-a-plus-sign) explains how the inner knob steps through them.
 
 The top line is the same on every page except the APT 3 runway diagram, which has no top line. It shows the identifier of the airport and, at the right end, <Term t="NR">`NR`</Term> and a rank when you reached the airport through the [nearest list](/kln90b/operation/nearest/). An airport of the list keeps its `NR` on all APT pages. A `›` in the first column marks the airport as the [active waypoint](/kln90b/operation/navigation-modes/#the-active-waypoint); it flashes during [waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting).
 
 <KlnScreen screen="apt-1-nearest" rows="1" />
 
-How you enter an identifier, scan through the database and create a user waypoint is the same on every waypoint page; see [Waypoints and the database](/kln90b/operation/waypoints/).
-
 ### User-defined airports
 
-When the identifier you enter matches no airport, every APT page offers to create a [user-defined airport](/kln90b/operation/user-waypoints/) with it, at a position you enter (`USER POS?`) or at the present position (`PRES POS?`). Whichever page made the offer, the new airport appears on APT 1. A user-defined airport has a position, an elevation and one runway, which you enter on APT 1 to APT 3; it has no name, no city and no frequencies.
+When the identifier you enter on an APT page matches no airport, the unit offers to create a user-defined airport; [Creating a user waypoint](/kln90b/operation/user-waypoints/#creating-a-user-waypoint) explains the offer and how you answer it. Whichever page made the offer, the new airport appears on APT 1. A user-defined airport has a position, an elevation and one runway, which you enter on APT 1 (the position), APT 2 (the elevation) and APT 3 (the runway); it has no name, no city and no frequencies. Like every airport, it can hold remarks on APT 5.
 
-<KlnScreen screen="apt-create-new-wpt" />
+### The ACT pages of an airport
 
-### The ACT page and approving the waypoint page of an airport
-
-When the active waypoint is an airport, the ACT page shows its APT pages, named ACT 1 and so on, and the identifier cannot be changed there. The top line adds the number of the airport in FPL 0, the same number FPL 0 shows (blank for a direct-to waypoint that is not in FPL 0), and an `A` for airport at the right end. The scan steps through the waypoints of FPL 0 instead of through the database.
-
-<KlnScreen screen="apt-act-1" />
-
-When you enter an airport identifier on another page, such as the Direct To page, the unit shows APT 1 of that airport on the right side for you to approve, with `ENT` flashing in the status line:
-
-<KlnScreen screen="apt-confirm" />
-
-[Waypoints and the database](/kln90b/operation/waypoints/) explains the ACT page and approving the waypoint page for every kind of waypoint.
+When the active waypoint is an airport, its APT pages appear as ACT 1 to ACT 7 and, where APT 8 exists, ACT 8.
 
 ## APT 1: name, position and airspace
 
@@ -69,9 +59,7 @@ A user-defined airport shows only its identifier and its position. You can chang
 
 <KlnScreen screen="apt-1-user-airport" />
 
-With `USER POS?`, APT 1 opens with the cursor on the empty latitude and no airport yet. The airport exists when you have entered both coordinates. After the first <kbd>ENT</kbd>, which accepts the latitude, the status line shows `ENT LAT/LON`: a reminder to enter the longitude, not an error.
-
-<KlnScreen screen="apt-1-user-pos" />
+With `USER POS?`, APT 1 opens with the cursor on the empty latitude, and the airport exists when you have entered both coordinates; [Creating a user waypoint](/kln90b/operation/user-waypoints/#creating-a-user-waypoint) shows the steps.
 
 [Waypoints and the database](/kln90b/operation/waypoints/) and [Nearest](/kln90b/operation/nearest/) describe the tasks that use APT 1.
 
@@ -81,7 +69,7 @@ APT 2 shows where the airport is, how high it lies, which time zone it is in, an
 
 <KlnScreen screen="apt-2-ksea" />
 
-Nothing on this page can be changed for an airport of the database. The row for the time zone stays blank where no time zone is known. The radar symbol <Term t="(R)">`(R)`</Term> at the end of the approach row shows that approach and departure control have radar, so that you can expect vectors; it appears only for airports whose data marks radar coverage.
+Nothing on this page can be changed for an airport of the database. The row for the time zone stays blank where no time zone is known. The radar symbol `(R)` at the end of the approach row appears only for airports whose data marks radar coverage.
 
 A user-defined airport shows only its elevation, as an entry, because the city, the time zone and the approaches are unknown.
 
@@ -123,20 +111,20 @@ Each line holds a four-character frequency type and a frequency in MHz with two 
 
 | Frequency type | Frequency of |
 | --- | --- |
-| `ATIS` | The <Term t="ATIS" /> broadcast |
-| `MCOM` | The <Term t="MCOM" /> frequency |
-| `UNIC` | The <Term t="UNIC" /> frequency |
-| `CTAF` | The <Term t="CTAF" /> |
+| `ATIS` | Automatic terminal information service |
+| `MCOM` | Multicom |
+| `UNIC` | Unicom |
+| `CTAF` | Common traffic advisory frequency |
 | `GRND` | Ground control |
 | `TWR` | Tower |
 | `CLR` | Clearance delivery, also remote clearance delivery |
 | `APR` | Approach control |
 | `DEP` | Departure control |
 | `CTR` | A center, where it provides approach and departure control |
-| `AFIS` | A flight service station of the airport (<Term t="AFIS" />) |
-| `AWOS` | An <Term t="AWOS" /> broadcast |
-| `ASOS` | An <Term t="ASOS" /> broadcast |
-| <Term t="PTAX">`PTAX`</Term> | Pre-taxi clearance |
+| `AFIS` | A flight service station of the airport (aerodrome flight information service) |
+| `AWOS` | Automated weather observing system |
+| `ASOS` | Automated surface observing system |
+| `PTAX` | Pre-taxi clearance |
 
 A frequency of another type is listed without a frequency type. A frequency of no type is not listed.
 
@@ -397,7 +385,7 @@ and procedure turns, altitude restrictions) and how it treats DME arcs is the sa
 ### Questions before the load and where the approach goes
 
 The questions are those of APT 7. If the airport is not in FPL 0, the unit asks whether to add it, with
-`AND APPR TO` (<Term t="APPR" /> for approach). If FPL 0 already holds an approach, any approach, the unit asks
+`AND APPR TO` (`APPR` is short for approach). If FPL 0 already holds an approach, any approach, the unit asks
 whether to replace it, with `APPROACH` above `APPROVE?`; FPL 0 holds one approach at a time.
 
 The unit inserts the approach right in front of its airport in FPL 0, after a STAR that is already there. An

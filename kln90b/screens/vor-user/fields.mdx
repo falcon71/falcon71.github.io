@@ -1,0 +1,23 @@
+<Field id="ident" title="Identifier of the user-defined VOR">
+	The identifier of the user-defined VOR. A new identifier on the page looks up another VOR and does not rename this one; [Editing a user waypoint](/kln90b/operation/user-waypoints/#editing-a-user-waypoint) says how to rename a waypoint.
+</Field>
+
+<Field id="class" title="Class of the station">
+	`U` for undefined: the unit knows no class for a user-defined VOR. It cannot be changed.
+</Field>
+
+<Field id="freq" title="Frequency">
+	The frequency of the VOR in MHz with two decimals, or dashes when you have not entered one. With the cursor on, you enter it with the knobs, and it takes effect with <kbd>ENT</kbd>. The unit accepts frequencies from 108.00 to 117.95 MHz and answers `INVALID ENT` to any other frequency.
+</Field>
+
+<Field id="magvar" title="Published magnetic variation">
+	The published magnetic variation of the VOR, in whole degrees from 0 to 99 and followed by `E` or `W`. If you do not enter one, the unit uses the magnetic variation at the position of the waypoint and stores it with the VOR. While the VOR is the active waypoint, a new value is refused with `IN ACT LIST`, and the field shows the stored value again.
+</Field>
+
+<Field id="pos" title="Position of the VOR">
+	The position of the VOR: latitude above, longitude below, as `N 47°30.00'` and `W122°00.00'` (degrees, minutes and hundredths of a minute). With the cursor on, a new value takes effect with <kbd>ENT</kbd> and moves the VOR for every flight plan and page that uses it.
+</Field>
+
+<Field id="page" title="Page identification">
+	The page identification on the right side.
+</Field>

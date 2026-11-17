@@ -115,6 +115,8 @@ that writes the owner records the anchors in this table, and the final pass shar
 | The failures: what can fail, what each failure does, telling the failures of the reception apart on the unit, when the unit notices, random failures, the battery and the loss of user data (with the wrong date afterwards), service | Simulated failures: `#random-failures`, `#failing-a-part-and-repairing-it`, `#service`, `#when-the-unit-notices-a-failure`, `#what-can-fail` (with `#the-receiver-and-the-antenna`, `#interference-and-a-faulty-satellite`, `#the-inputs-from-the-aircraft`, `#the-outputs-to-the-aircraft`, `#the-annunciators`, `#the-memory-of-the-unit`), `#the-battery` | FLR chapter: the pages and fields; a page whose values a failure blanks says nothing about failures; the message lists give the text, the meaning and the link |
 | Opening the FLR pages from SET 10 and leaving them | FLR chapter, `#the-flr-pages-failing-and-repairing-parts-of-the-unit` | SET chapter (SET 10): one sentence and the link |
 | Waypoint pages in general: the waypoint types, entering an identifier, the scan through the database, duplicate identifiers, the waypoint page shown for approval, the ACT pages as a concept | Waypoints and the database: `#entering-an-identifier`, `#scanning-through-the-database`, `#duplicate-identifiers`, `#approving-the-waypoint-page`, `#the-act-pages` | waypoint chapters (APT, VOR, NDB, INT, SUP, ACT): one sentence, the link, then what is specific |
+| The ACT pages in detail: the top line (number in FPL 0, type letter), which pages exist per waypoint type, the scan through FPL 0, `NO ACTIVE WAYPOINT` | ACT chapter: `#which-pages-the-active-waypoint-has`, `#scanning-through-fpl-0`, `#no-active-waypoint` | Waypoints and the database: the concept in a few sentences; APT chapter: one sentence and the link |
+| The reference waypoint of the INT and SUP pages: the nearest VOR, the search and its duration, another reference, not stored | INT chapter, `#the-reference-waypoint` | SUP chapter and the field explanations: one sentence and the link; User waypoints: the order of entry when creating |
 | User waypoints: creating (`CREATE NEW WPT AT`, `USER POS?`, present position), the limit, `USR DB FULL`, editing, deleting, temporary waypoints | User waypoints: `#creating-a-user-waypoint`, `#usr-db-full`, `#editing-a-user-waypoint`, `#deleting-a-user-waypoint`, `#waypoints-the-unit-creates-by-itself` | waypoint chapters: the fields of a user waypoint of their type; OTH chapter: OTH 3 as a page |
 | The database: cycle, expiry, the messages about it | Waypoints and the database, `#the-database` (with a section per message, `#data-base-out-of-date`) | Power-on: the Database page; SET chapter: SET 0 |
 | Updating the database (the simulator's navigation data) | FAQ, `#how-do-i-update-the-database` (planned) | Power-on (the Database page) and Waypoints and the database: where the data comes from in one sentence, and the link |
@@ -173,7 +175,7 @@ anchors and page links above. After them the order follows "owners before the pa
 | 3 | controls | Controls and display; Keyboard mode | done (2026-11-17) |
 | 4 | power-on | Power-on and initialization | done (2026-11-17) |
 | 5 | waypoints | Waypoints and the database; User waypoints | done (2026-11-17) |
-| 6 | waypoint-pages | VOR, NDB, INT, SUP and ACT chapters; the APT chapter cut back to its owner | not started |
+| 6 | waypoint-pages | VOR, NDB, INT, SUP and ACT chapters; the APT chapter cut back to its owner | in review (2026-11-17) |
 | 7 | nearest-direct-to | Nearest; Direct-to | not started |
 | 8 | navigation | Navigation modes; Sequencing and turn anticipation; MOD chapter | not started |
 | 9 | nav-pages | NAV chapter with Super NAV 1 and Super NAV 5 | not started |
@@ -202,11 +204,9 @@ it is written when those owners exist. A package that proves too large in its re
 
 ## For the final pass
 
-- **The glossary is cleared of single-screen entries** (style guide, section 14, rule of 2026-11-16). The APT
-  chapter and the Quickstart were written under the earlier rule, which gave every abbreviation of the unit an
-  entry and a tooltip. The package waypoint-pages, which changes the APT chapter anyway, moves the entries that
-  only one APT screen uses into that screen's field explanation and removes their `<Term>` tags; the final pass
-  does the same for whatever is left.
+- **The glossary is cleared of single-screen entries** (style guide, section 14, rule of 2026-11-16). The package
+  waypoint-pages did this for the APT chapter (2026-11-17); the Quickstart and other pages written under the earlier
+  rule are left for the final pass.
 
 - The placeholder pages use old terms (key, page group); the packages that replace them remove these.
 - The glossary holds the placeholder entry `Turn anticipation`, used by the filler text of Navigation modes. It goes

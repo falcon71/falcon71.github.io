@@ -505,6 +505,13 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | user database (where the user waypoints are stored, with `USR DB FULL`) | database of user waypoints |
 | the waypoints the unit makes by name: reference waypoint, center waypoint, DME arc waypoint, the waypoints of a route from the EFB | temporary waypoint |
 | frequency type (of a frequency on APT 4) | frequency label |
+| terminal area (`TMA` on APT 1) | terminal control area |
+| pilot-controlled lighting (`LPC` on APT 1 and APT 3) | lighting you turn on by radio |
+| terminal waypoint (a waypoint of a SID, a STAR or an approach, shown on the INT page; `T` on the ACT pages) | terminal fix, fix of a terminal procedure |
+| user-defined intersection; supplemental waypoint | |
+| published magnetic variation (of a VOR) | magnetic variation of the station |
+| the class `U` of a VOR: undefined | unknown |
+| underscores (the empty cells of an open entry, as the screen draws them) | dashes (dashes are a field without a value) |
 | page identification (the part of the status line that shows a page's name); "page name" in running text | |
 | mode annunciation (in the middle part of the status line, between the page identifications) | mode field |
 | the CRSR annunciation (`CRSR` in place of a page identification while that side's cursor is on) | CRSR indicator |

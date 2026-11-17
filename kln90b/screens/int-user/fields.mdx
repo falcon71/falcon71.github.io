@@ -1,0 +1,27 @@
+<Field id="ident" title="Identifier of the user-defined intersection">
+	The identifier of the [user-defined intersection](/kln90b/operation/user-waypoints/). A `›` in front of it means that the intersection is the [active waypoint](/kln90b/operation/navigation-modes/#the-active-waypoint). The unit lists it with the intersections of the database, in alphabetical order. The identifier cannot be changed after the intersection is created.
+</Field>
+
+<Field id="ref" title="Reference waypoint">
+	The waypoint that `RAD` and `DIS` are measured from: the VOR nearest to the intersection, which the unit finds after a search ([The reference waypoint](/kln90b/pages/int/#the-reference-waypoint)), or the waypoint of any type that you entered. A user VOR counts as a VOR. A new reference moves nothing: the page then shows radial and distance from it. <kbd>CLR</kbd> on `REF` dashes the reference but leaves `RAD` and `DIS` as they were, and a radial or a distance you enter afterwards then moves nothing. {/* kln90b#490: describes the current behavior; the fix keeps RAD and DIS in step with the position */} The reference is not stored with the intersection.
+</Field>
+
+<Field id="rad" title="Radial from the reference waypoint">
+	The magnetic course from the reference waypoint to the intersection, in degrees and tenths, with the variation of the reference. North shows as `000.0`; a radial of 360.0 or more gives `INVALID ENT`. A new radial moves the intersection onto the new radial at the same distance from the reference. As long as there is no reference, a radial you enter is shown but moves nothing. After you change the latitude or the longitude, the radial and the distance follow only when the page is shown again. {/* kln90b#490: describes the current behavior; the fix keeps RAD and DIS in step with the position */}
+</Field>
+
+<Field id="dis" title="Distance from the reference waypoint">
+	The distance from the reference waypoint to the intersection in NM, to a tenth, up to 999.9. A new distance moves the intersection along the same radial. As long as there is no reference, a distance you enter is shown but moves nothing. After you change the latitude or the longitude, the radial and the distance follow only when the page is shown again. {/* kln90b#490: describes the current behavior; the fix keeps RAD and DIS in step with the position */}
+</Field>
+
+<Field id="lat" title="Latitude of the intersection">
+	The latitude of the intersection, in degrees and minutes to hundredths. A new latitude takes effect with <kbd>ENT</kbd> and moves the stored intersection at once; the longitude stays.
+</Field>
+
+<Field id="lon" title="Longitude of the intersection">
+	The longitude of the intersection, in degrees and minutes to hundredths. A new longitude takes effect with <kbd>ENT</kbd> and moves the stored intersection at once; the latitude stays.
+</Field>
+
+<Field id="page" title="Page identification">
+	The page identification on the right side.
+</Field>

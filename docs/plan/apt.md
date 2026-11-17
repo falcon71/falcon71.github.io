@@ -11,7 +11,7 @@ As written, with the anchors:
 
 1. Summary: the airport waypoint pages, one airport on every page.
 2. `#the-apt-pages-one-airport-on-every-page`: what is specific to airports in the general operation of a waypoint
-   page, with `#user-defined-airports` and `#the-act-page-and-approving-the-waypoint-page-of-an-airport`.
+   page, with `#user-defined-airports` and `#the-act-pages-of-an-airport`.
 3. `APT 1: name, position and airspace`, with `#a-nearest-airport` and `#a-user-defined-airport`.
 4. `APT 2: city, elevation, time zone and approaches`.
 5. `APT 3: runways`.

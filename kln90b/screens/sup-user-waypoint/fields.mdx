@@ -1,17 +1,17 @@
 <Field id="ident" title="Identifier of the user waypoint">
-	The identifier of the [user waypoint](/kln90b/operation/user-waypoints/). It cannot be changed after the waypoint is created.
+	The identifier of the [user waypoint](/kln90b/operation/user-waypoints/). A `›` in front of it means that the waypoint is the [active waypoint](/kln90b/operation/navigation-modes/#the-active-waypoint). The identifier cannot be changed after the waypoint is created.
 </Field>
 
 <Field id="ref" title="Reference waypoint">
-	The waypoint that `RAD` and `DIS` are measured from. For a waypoint that was not made from a reference, the unit looks for the nearest VOR about 8 seconds after the page appears, and the field stays empty until it has found one. You can enter any waypoint instead: the unit shows it on its waypoint page for approval, and the page then shows radial and distance from it.
+	The waypoint that `RAD` and `DIS` are measured from. For a waypoint that was not made from a reference, the unit fills it in with the VOR nearest to the waypoint after a search, and the field shows dashes until it has found one ([The reference waypoint](/kln90b/pages/int/#the-reference-waypoint)). You can enter any waypoint instead: the unit shows it on its waypoint page for approval, and the page then shows radial and distance from it. A new reference moves nothing. <kbd>CLR</kbd> on `REF` dashes the reference but leaves `RAD` and `DIS` as they were, and a radial or a distance you enter afterwards then moves nothing. {/* kln90b#490: describes the current behavior; the fix keeps RAD and DIS in step with the position */}
 </Field>
 
 <Field id="rad" title="Radial from the reference waypoint">
-	The magnetic course from the reference waypoint to the user waypoint, in degrees and tenths. A new radial moves the user waypoint along the new radial at the same distance from the reference waypoint. As long as there is no reference waypoint, a radial you enter is shown but moves nothing.
+	The magnetic course from the reference waypoint to the user waypoint, in degrees and tenths, magnetic with the variation of the reference. A new radial moves the user waypoint along the new radial at the same distance from the reference waypoint. As long as there is no reference waypoint, a radial you enter is shown but moves nothing. After you change the latitude or the longitude, the radial and the distance keep their old values until the page is shown again; a reference waypoint, a center waypoint or a DME arc waypoint that the unit made keeps the radial and the distance it was made with even then. {/* kln90b#490: describes the current behavior; the fix keeps RAD and DIS in step with the position */}
 </Field>
 
 <Field id="dis" title="Distance from the reference waypoint">
-	The distance from the reference waypoint to the user waypoint in NM, to a tenth. A new distance moves the user waypoint along the same radial. As long as there is no reference waypoint, a distance you enter is shown but moves nothing.
+	The distance from the reference waypoint to the user waypoint in NM, to a tenth. A new distance moves the user waypoint along the same radial. As long as there is no reference waypoint, a distance you enter is shown but moves nothing. After you change the latitude or the longitude, the radial and the distance keep their old values until the page is shown again; a reference waypoint, a center waypoint or a DME arc waypoint that the unit made keeps the radial and the distance it was made with even then. {/* kln90b#490: describes the current behavior; the fix keeps RAD and DIS in step with the position */}
 </Field>
 
 <Field id="lat" title="Latitude of the user waypoint">

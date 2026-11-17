@@ -1,0 +1,33 @@
+<Field id="ident" title="VOR identifier">
+	The identifier of the VOR. A `›` in front of it means that the VOR is the [active waypoint](/kln90b/operation/navigation-modes/#the-active-waypoint). [Entering an identifier](/kln90b/operation/waypoints/#entering-an-identifier) explains how the page looks up a VOR.
+
+	The identifier is the only field that you can change on a VOR of the database. If you enter an identifier that no VOR has, the page shows no waypoint and empty fields, so that you can define a user-defined VOR ([A user-defined VOR](/kln90b/pages/vor/#a-user-defined-vor)).
+</Field>
+
+<Field id="dme" title="DME of the station">
+	`D` means that the station has distance measuring equipment: a VOR/DME, a VORTAC or a DME without a VOR. A station without DME shows a blank. A user-defined VOR never shows `D`, because the unit does not know whether it has DME.
+</Field>
+
+<Field id="name" title="Station name">
+	The name of the station, cut to 11 characters. A user-defined VOR has no name, and the row stays blank.
+</Field>
+
+<Field id="class" title="Class of the station">
+	The class of the station: `T` for a terminal VOR, `L` for a low altitude VOR and `H` for a high altitude VOR. A station of another class, and every user-defined VOR, shows `U` for undefined.
+</Field>
+
+<Field id="freq" title="Frequency">
+	The frequency of the station in MHz with two decimals. It cannot be changed on a VOR of the database. A user-defined VOR shows dashes until you have entered a frequency.
+</Field>
+
+<Field id="magvar" title="Published magnetic variation">
+	The magnetic variation that the station carries, in whole degrees and followed by `E` or `W`. It can differ from the variation that the unit uses at the position of the aircraft. It cannot be changed on a VOR of the database.
+</Field>
+
+<Field id="pos" title="Position of the station">
+	The position of the station: latitude above, longitude below, as `N 47°55.19'` and `W122°16.67'` (degrees, minutes and hundredths of a minute). It cannot be changed on a VOR of the database.
+</Field>
+
+<Field id="page" title="Page identification">
+	The page identification on the right side.
+</Field>
