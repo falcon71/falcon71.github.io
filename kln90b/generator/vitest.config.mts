@@ -62,7 +62,7 @@ const config: ViteUserConfig = {
 			{
 				extends: true,
 				test: {
-					name: 'screens', environment: 'happy-dom', include: ['screens/*/screen.ts'],
+					name: 'screens', environment: 'happy-dom', include: ['screens/**/screen.ts'],
 					setupFiles, testTimeout: 120_000,
 				},
 			},

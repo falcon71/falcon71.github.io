@@ -14,6 +14,7 @@ import {checkCoverage, recordMapElements, type MapElement} from './mapElements.t
 import {mapToSvg} from './mapSvg.ts';
 import {airspacesOf, facilitiesOf, loadAirspaces, loadExtract, loadProcedures, pointNamesOf} from './navdata.ts';
 import {decimalYear, declination, screenModel, SCREEN_DEGREE} from './wmm.ts';
+import {screenId} from './paths.ts';
 
 export interface ScreenDescription {
 	title: string;
@@ -149,15 +150,15 @@ async function generate(dir: string, id: string, d: ScreenDescription): Promise<
 }
 
 /**
- * Boots the unit, brings it to the page, captures one blink cycle and writes `screen.txt` into `dir`. The id of the
- * screen is the name of the folder.
+ * Boots the unit, brings it to the page, captures one blink cycle and writes `screen.txt` into `dir`.
  * @throws Error `screen <id>: ...` for anything that stops the screen from being generated; `screen.txt` is written only
  * after every check has passed, among them that every element drawn on a map the screen shows belongs to one map field.
  * The maps of NAV 5 and APT 3 are written next to it as `map-L.svg` and `map-R.svg`, the map of Super NAV 5 as
- * `map-F.svg`.
+ * `map-F.svg`. The id of the screen is its path below `screens/` (`pages/apt/apt-1-ksea`); a folder elsewhere is named
+ * by its basename.
  */
 export async function generateScreen(dir: string, d: ScreenDescription): Promise<void> {
-	const id = path.basename(dir);
+	const id = screenId(dir);
 	try {
 		await generate(dir, id, d);
 	} catch (e) {
@@ -168,5 +169,5 @@ export async function generateScreen(dir: string, d: ScreenDescription): Promise
 /** Registers the test that generates the screen of the folder that contains the module at `moduleUrl` (`import.meta.url`). */
 export function defineScreen(moduleUrl: string, d: ScreenDescription): void {
 	const dir = path.dirname(fileURLToPath(moduleUrl));
-	it(path.basename(dir), () => generateScreen(dir, d), 120_000);
+	it(screenId(dir), () => generateScreen(dir, d), 120_000);
 }
