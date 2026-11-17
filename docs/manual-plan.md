@@ -22,6 +22,7 @@ as `/kln90b/<slug>/`) and its package. Pages that do not exist yet are linked by
 | | Keyboard mode | `unit/keyboard-mode` | controls |
 | | Power-on and initialization | `unit/power-on` | power-on (done) |
 | Operation | Waypoints and the database | `operation/waypoints` | waypoints |
+| | User waypoints (new) | `operation/user-waypoints` | waypoints |
 | | Nearest | `operation/nearest` | nearest-direct-to |
 | | Direct-to | `operation/direct-to` | nearest-direct-to |
 | | Flight plans | `operation/flight-plans` | flight-plans |
@@ -60,11 +61,13 @@ as `/kln90b/<slug>/`) and its package. Pages that do not exist yet are linked by
 | | Known limitations | `help/known-limitations` | help |
 | | Contact | `help/contact` | help |
 
-Three pages are new against the style guide's first chapter list; section 17 of the style guide names them now:
+Four pages are new against the style guide's first chapter list; section 17 of the style guide names them now:
 
 - **GPS reception and RAIM** (Operation): what the receiver does and how the pilot reads it. It exists so that the
   STA chapter, Power-on, Non-precision approaches and Simulated failures have one place to link to for the receiver
   states, RAIM and the position error.
+- **User waypoints** (Operation), split from Waypoints and the database by the package waypoints (2026-11-17),
+  because creating, editing and deleting user waypoints is a subject of its own with its own screens.
 - **Simulated failures** (Operation) and the **FLR chapter** (page reference), both Simulator only. The FLR pages
   are not on the left outer knob; they open from SET 10. The chapter stands after SET.
 
@@ -75,7 +78,7 @@ explanations stand on the page that owns their task:
 | --- | --- |
 | The Turn-On page, the Self Test page, the VFR-only warning page, the OBS warning page, the Database page | Power-on and initialization |
 | The Direct To page | Direct-to |
-| The duplicate waypoint page; the waypoint page shown for approval | Waypoints and the database |
+| The Duplicate Waypoint page; the waypoint page shown for approval | Waypoints and the database |
 | The waypoint type page, the make-room pages | Flight plans (the make-room question for a procedure: SID and STAR procedures, linked from Non-precision approaches) |
 | The ALT page | Airspace and altitude alerting |
 | The MSG page | Messages |
@@ -111,9 +114,9 @@ that writes the owner records the anchors in this table, and the final pass shar
 | The model of the receiver in the simulation: the satellites and their signals, the errors of the position, the filter, the kinds of search, the RAIM mathematics | Inside the GPS simulation (optional reading) | GPS reception and RAIM: one link; every other page: nothing (style guide, section 8). How the failures of the reception act on the model: `#the-simulated-failures-in-the-model`; Simulated failures links there once |
 | The failures: what can fail, what each failure does, telling the failures of the reception apart on the unit, when the unit notices, random failures, the battery and the loss of user data (with the wrong date afterwards), service | Simulated failures: `#random-failures`, `#failing-a-part-and-repairing-it`, `#service`, `#when-the-unit-notices-a-failure`, `#what-can-fail` (with `#the-receiver-and-the-antenna`, `#interference-and-a-faulty-satellite`, `#the-inputs-from-the-aircraft`, `#the-outputs-to-the-aircraft`, `#the-annunciators`, `#the-memory-of-the-unit`), `#the-battery` | FLR chapter: the pages and fields; a page whose values a failure blanks says nothing about failures; the message lists give the text, the meaning and the link |
 | Opening the FLR pages from SET 10 and leaving them | FLR chapter, `#the-flr-pages-failing-and-repairing-parts-of-the-unit` | SET chapter (SET 10): one sentence and the link |
-| Waypoint pages in general: the waypoint types, entering an identifier, the scan through the database, duplicate identifiers, the waypoint page shown for approval, the ACT pages as a concept | Waypoints and the database | waypoint chapters (APT, VOR, NDB, INT, SUP, ACT): one sentence, the link, then what is specific |
-| User waypoints: creating (`CREATE NEW WPT AT`, `USER POS?`, present position), the limit, `USR DB FULL`, editing, deleting, temporary waypoints | Waypoints and the database, `#user-waypoints` (planned) | waypoint chapters: the fields of a user waypoint of their type; OTH chapter: OTH 3 as a page |
-| The database: cycle, expiry, the messages about it | Waypoints and the database | Power-on: the Database page; SET chapter: SET 0 |
+| Waypoint pages in general: the waypoint types, entering an identifier, the scan through the database, duplicate identifiers, the waypoint page shown for approval, the ACT pages as a concept | Waypoints and the database: `#entering-an-identifier`, `#scanning-through-the-database`, `#duplicate-identifiers`, `#approving-the-waypoint-page`, `#the-act-pages` | waypoint chapters (APT, VOR, NDB, INT, SUP, ACT): one sentence, the link, then what is specific |
+| User waypoints: creating (`CREATE NEW WPT AT`, `USER POS?`, present position), the limit, `USR DB FULL`, editing, deleting, temporary waypoints | User waypoints: `#creating-a-user-waypoint`, `#usr-db-full`, `#editing-a-user-waypoint`, `#deleting-a-user-waypoint`, `#waypoints-the-unit-creates-by-itself` | waypoint chapters: the fields of a user waypoint of their type; OTH chapter: OTH 3 as a page |
+| The database: cycle, expiry, the messages about it | Waypoints and the database, `#the-database` (with a section per message, `#data-base-out-of-date`) | Power-on: the Database page; SET chapter: SET 0 |
 | Updating the database (the simulator's navigation data) | FAQ, `#how-do-i-update-the-database` (planned) | Power-on (the Database page) and Waypoints and the database: where the data comes from in one sentence, and the link |
 | Airport remarks | APT chapter (APT 5) | OTH chapter: OTH 4 as a page (deleting) |
 | The nearest lists: criteria (SET 3), radius, count, refresh, how they are reached, the MSG and ENT shortcut | Nearest, `/kln90b/operation/nearest/` | waypoint chapters: the nearest variant of their page; SET chapter: SET 3 as a page |
@@ -169,7 +172,7 @@ anchors and page links above. After them the order follows "owners before the pa
 | 2 | failures | FLR chapter; Simulated failures; the failures part of Inside the GPS simulation | done (2026-11-16) |
 | 3 | controls | Controls and display; Keyboard mode | done (2026-11-17) |
 | 4 | power-on | Power-on and initialization | done (2026-11-17) |
-| 5 | waypoints | Waypoints and the database | not started |
+| 5 | waypoints | Waypoints and the database; User waypoints | done (2026-11-17) |
 | 6 | waypoint-pages | VOR, NDB, INT, SUP and ACT chapters; the APT chapter cut back to its owner | not started |
 | 7 | nearest-direct-to | Nearest; Direct-to | not started |
 | 8 | navigation | Navigation modes; Sequencing and turn anticipation; MOD chapter | not started |
@@ -221,8 +224,7 @@ it is written when those owners exist. A package that proves too large in its re
   `nav-5-ksea`, `oth-2-zse` and the tutorial screens still have filler text in their field explanations (found by
   the writer of Controls and display, 2026-11-17). The packages that show them fill them in; the final pass removes
   the screens no page shows.
-- **Left over from the package power-on (2026-11-17):** the Quickstart says "the confirmation of a waypoint" (word
-  list: approve the waypoint page). The glossary entries `OBS IN` and `OUT` are used only by the Self Test screens
+- **Left over from the package power-on (2026-11-17):** the glossary entries `OBS IN` and `OUT` are used only by the Self Test screens
   and go into their field explanations (section 14); `OUT`'s expansion "OBS output" should match the field name
   `OBS OUT`. Simulated failures, `#the-battery`, says the Self Test page shows `TEST FAIL` after a memory loss:
   check which receiver code causes it.
@@ -237,10 +239,17 @@ Not manual text; for the maintainer or a session that works on the site.
 - **The order of the page reference in the sidebar** is each chapter's `sidebar.order`, in page tree order: TRI 1,
   MOD 2, FPL 3, NAV 4, CAL 5, STA 6, SET 7, FLR 8, OTH 9, CTR 10, REF 11, ACT 12, D/T 13, APT 14, VOR 15, NDB 16,
   INT 17, SUP 18. The Operation pages take their number from the order of the style guide's chapter list (section
-  17); GPS reception and RAIM has 10, Inside the GPS simulation 11 and Simulated failures 16, so Messages to Fuel and air data take 12 to 15.
+  17); Waypoints and the database has 1, User waypoints 2, GPS reception and RAIM 11, Inside the GPS simulation 12 and Simulated
+  failures 17, so Nearest to VNAV take 3 to 10 and Messages to Fuel and air data 13 to 16 (renumbered when User
+  waypoints was added, 2026-11-17; the placeholders Direct-to and Navigation modes have 4 and 6).
 - The source tree of kln90b holds the software revision as a template that only its build fills in, and the
   generator fails on it. `kln90b/screens/sta-3/screen.ts` works around this with a mock that reads the version
   from kln90b's `package.json`. A substitution in the generator for every screen would be the cleaner place.
+- The generator cannot show the middle part of the status line on a half screen (`show: 'left'` or `'right'`
+  allows fields only on the page identification); the style guide (section 13) lets a screen about a status line
+  message show both halves.
+- `kln90b/generator/api.ts` re-exports the harness's `savedUserWaypoints` next to `savedFlightplan`, for screens
+  that need stored user waypoints (`sup-usr-db-full`).
 - The build does not check the anchors of links, only the pages. A dead anchor is found by the seam check and the
   final pass.
 

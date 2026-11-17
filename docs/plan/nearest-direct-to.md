@@ -48,6 +48,15 @@ replace it.
 
 None.
 
+### From the package waypoints (2026-11-17)
+
+- Waypoints and the database says in one sentence that scanning back past the first waypoint of the complete list
+  leads into the nearest list (APT, VOR and NDB pages only), and links to Nearest. A run showed it arrives at `NR 9`;
+  the count is Nearest's.
+- An unknown identifier on the Direct To page brings up the offer to create a supplemental user waypoint (screen
+  `direct-to-create-waypoint`); Direct-to links to User waypoints, `#creating-a-user-waypoint`.
+- kln90b#487: Direct To prefills a user waypoint that was deleted on OTH 3 while its page still shows it.
+
 ## Changes to earlier pages
 
 The APT chapter's "A nearest airport" is compared with Nearest and cut back if it says what Nearest now owns.

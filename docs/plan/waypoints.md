@@ -6,27 +6,52 @@ planned by the session after its research.
 
 ## Pages
 
-### Waypoints and the database (`operation/waypoints.mdx`)
+The research (2026-11-17) found two subjects of about equal size: how any waypoint is found, chosen and approved,
+and the user waypoints with their own tasks and screens. The package therefore writes two Operation pages, as this
+file foresaw; the anchor `#user-waypoints` moved to the new page, and the links to it are corrected (below).
 
-Planned sections:
+### Waypoints and the database (`operation/waypoints.mdx`, sidebar order 1)
 
-1. Summary.
-2. The database: what it holds, the waypoint types, the cycle and its expiry, the messages about it.
-3. Selecting a waypoint by its identifier: on a waypoint page, and in a field of another page.
-4. Selecting a waypoint by scanning: what the scan goes through, where the nearest waypoints stand in it (link to
-   Nearest).
-5. Duplicate identifiers: the duplicate waypoint page.
-6. Approving the waypoint page: the page shown for approval, ENT and CLR, taking the waypoint of the right page
-   into a field.
-7. The active waypoint's pages (ACT), as a concept; the ACT chapter has the pages.
-8. `#user-waypoints` (planned): what a user waypoint is, creating one (`CREATE NEW WPT AT`, `USER POS?`, the present
-   position, a position by radial and distance), the limit and `USR DB FULL`, editing, deleting on OTH 3, waypoints
-   the unit creates and removes by itself.
-9. Changing data of a database waypoint, if the research confirms a pilot can.
-10. Links on.
+As written (2026-11-17), with the anchors:
 
-If the research shows the page is too large, the user waypoints become a page of their own
-(`operation/user-waypoints`); the planned anchor then moves, and the session corrects the links to it.
+- Summary.
+- `#the-database`: the waypoint types, where the data comes from, the cycle and its expiry; under it
+  `#no-sup-wpts-and-the-other-empty-lists` (screen `waypoint-no-sup-wpts`), `#data-base-out-of-date`,
+  `#recycle-power-to-use`, `#outdated-db`.
+- `#entering-an-identifier`: `#on-a-waypoint-page` (screen `apt-1-ksea-cursor`), `#in-a-field-of-a-left-page`
+  (screen `direct-to-ident-entry`), `#no-such-wpt` (screen `waypoint-no-such-wpt`).
+- `#scanning-through-the-database`: the complete list, its order and ends, the step into the nearest list.
+- `#duplicate-identifiers`: `#choosing-between-duplicate-identifiers` (the Duplicate Waypoint page, screen
+  `waypoint-dup-page`), `#dup-ident`.
+- `#approving-the-waypoint-page` (screen `apt-confirm`): `#taking-the-waypoint-of-the-right-page` (screens
+  `waypoint-take-right-before`, `waypoint-take-right-after`, added at the maintainer's review).
+- `#the-act-pages` (screen `apt-act-1`): the concept only.
+- `#changing-the-data-of-a-database-waypoint`.
+- `#where-to-go-next`.
+
+`PRES POS?` without a position fix stores the last position the unit held; User waypoints describes it. The
+maintainer does not know the real unit's behavior and decided not to file it (2026-11-17).
+
+Not staged: `DUP IDENT` (a same-type duplicate needs stored user data the extract cannot give; the text quotes it).
+The message screens show both halves (style guide, section 13).
+
+### User waypoints (`operation/user-waypoints.mdx`, new, sidebar order 2)
+
+As written (2026-11-17), with the anchors:
+
+- Summary: what a user waypoint is, its five waypoint types, the limit.
+- `#creating-a-user-waypoint`: `#creating-a-waypoint-on-a-waypoint-page` (screens `apt-create-new-wpt`,
+  `apt-1-user-pos`), `#creating-a-waypoint-from-a-reference-waypoint` (screen `sup-create-by-radial`; kln90b#488),
+  `#creating-a-waypoint-from-the-direct-to-page-or-a-flight-plan` (screen `direct-to-create-waypoint`),
+  `#creating-a-user-vor-or-a-user-ndb`.
+- `#usr-db-full` (screen `sup-usr-db-full`).
+- `#editing-a-user-waypoint` (screen `sup-user-waypoint`).
+- `#deleting-a-user-waypoint` (screens `oth-3-user-waypoints`, `oth-3-delete-question`, `oth-3-used-in-fpl`;
+  kln90b#487).
+- `#waypoints-the-unit-creates-by-itself`: reference, center and DME arc waypoints, the waypoints of a route from
+  the EFB.
+- `#keeping-user-waypoints`: one sentence each and the links to Power-on and Simulated failures.
+- `#where-to-go-next`.
 
 ## Topics this package owns
 
@@ -77,5 +102,19 @@ Cut from Controls and display, which keeps only the scan as a control and links 
 
 ## Changes to earlier pages
 
-The package waypoint-pages, which follows, cuts the APT chapter back to this owner. This package itself changes no
-earlier page; its seam check verifies that `#user-waypoints` exists.
+- The links to `/kln90b/operation/waypoints/#user-waypoints` (APT chapter, the APT user-airport screens and
+  `apt-create-new-wpt`) go to `/kln90b/operation/user-waypoints/` instead. A link change only, made by the
+  coordinator.
+- The sidebar orders of the Operation pages after User waypoints move up by one, so that the order of the style
+  guide's chapter list holds (index, "Site and generator notes").
+- The package waypoint-pages, which follows, cuts the APT chapter back to these owners.
+- From the seam check (2026-11-17):
+  - Power-on and initialization, SET 2 section: the quoted `RECYCLE POWER TO USE` block and its explanation become
+    one sentence that names the message and links to `/kln90b/operation/waypoints/#recycle-power-to-use`.
+  - Controls and display: the ENT-on-an-identifier bullet links to `#entering-an-identifier`; the paragraph on the
+    approval keeps its sentence, links to `#approving-the-waypoint-page` and drops the `apt-confirm` screen, which
+    Waypoints and the database shows; "Questions in lists" drops the clause about the waypoint page of a user
+    waypoint, which User waypoints owns.
+  - Quickstart: "the confirmation of a waypoint" becomes "approving the waypoint page" (word list).
+  - `<Term t="CRSR">` added to the CRSR fields of `oth-3-used-in-fpl`, `sup-usr-db-full` and
+    `direct-to-create-waypoint`, like the other screens.

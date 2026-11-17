@@ -64,6 +64,13 @@ Only the pages and their fields.
 - A date on SET 2 that moves the database from current to expired or back posts `RECYCLE POWER TO USE`
   `CORRECT DATA BASE DATA`.
 
+### From the package waypoints (2026-11-17)
+
+- SET 0 shows the database cycle status again, behind `UPDATE PUBLISHED DB`, and loads nothing (check in
+  `pages/left/Set0Page.tsx`). Link `/kln90b/operation/waypoints/#the-database` for the cycle and its expiry.
+- `RECYCLE POWER TO USE` (with the database out of date) comes from a date entered on SET 2, not from the Self Test
+  page; Waypoints and the database owns it (`#recycle-power-to-use`). SET 2 links there.
+
 ## Changes to earlier pages
 
 The pages that named a SET page before this chapter existed link to it by the page links; the seam check verifies

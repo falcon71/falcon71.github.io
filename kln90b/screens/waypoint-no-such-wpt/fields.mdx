@@ -1,0 +1,23 @@
+<Field id="title" title="Page title">
+	`INIT POSN` heads SET 1, where you give the unit a position.
+</Field>
+
+<Field id="wpt" title="Waypoint for the position">
+	The identifier of a waypoint whose position the unit takes as its own. You enter it as an identifier that takes effect with <kbd>ENT</kbd>: <kbd>ENT</kbd> looks for exactly this identifier among all waypoint types and shows the waypoint page for approval. When no waypoint has it, SET 1 raises `NO SUCH WPT`, and the entry stays open for you to correct.
+</Field>
+
+<Field id="crsr" title="CRSR annunciation">
+	<Term t="CRSR">`CRSR`</Term> replaces the page identification while the left cursor is on.
+</Field>
+
+<Field id="message" title="Status line message">
+	`NO SUCH WPT` replaces the middle of the status line in inverse video. It says that an identifier you entered is in no database and that the page cannot offer to create a user waypoint with it.
+</Field>
+
+<Field id="other" title="The right page">
+	The right page, NAV 2 in this state: the present position and the radial and distance from the nearest VOR. It has no part in what the screen shows.
+</Field>
+
+<Field id="page" title="Page identification">
+	The page identification on the right side.
+</Field>

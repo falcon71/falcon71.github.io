@@ -2,7 +2,7 @@
 title: Direct-to
 description: Fly a straight course to any waypoint in the database.
 sidebar:
-  order: 1
+  order: 4
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
