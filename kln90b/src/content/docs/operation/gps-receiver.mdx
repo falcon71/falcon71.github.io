@@ -9,7 +9,7 @@ import KlnScreen from '../../../components/KlnScreen.astro';
 import Callout from '../../../components/Callout.astro';
 import Term from '../../../components/Term.astro';
 
-The KLN 90B navigates only while its GPS receiver has a position good enough to navigate; the unit is then NAV ready. With the default setting, that is about 17 seconds after power-on, and at once in an aircraft loaded with the engine running; with the setting `REAL` on SET 10 the time to first fix is up to 20 minutes, depending on what the unit remembers. In flight, <Term t="RAIM" /> checks the position for errors, and the unit tells you on the STA pages and with messages when it cannot.
+The KLN 90B navigates only while its GPS receiver has a position good enough to navigate; the unit is then NAV ready. With the default setting, that is usually while the Turn-On page is shown, and at once in an aircraft loaded with the engine running; with the setting `REAL` on SET 10 the time to first fix is up to 20 minutes, depending on what the unit remembers. In flight, <Term t="RAIM" /> checks the position for errors, and the unit tells you on the STA pages and with messages when it cannot.
 
 ## Acquiring satellites
 
@@ -23,7 +23,7 @@ With the setting `REAL` on SET 10 (see [Real and fast acquisition](#real-and-fas
 
 | What the unit remembers | STA 1 | Time to first fix after power-on |
 | --- | --- | --- |
-| Ephemeris data less than 2 hours old, and a position within 2 NM of where it is now | `ACQ` | before the Self Test page appears, about 17 seconds |
+| Ephemeris data less than 2 hours old, and a position within 2 NM of where it is now | `ACQ` | before the Self Test page appears |
 | Ephemeris data less than 2 hours old, and a position more than 2 NM away | `ACQ` | between a few seconds and about 75 seconds |
 | Ephemeris data 2 hours old or older | `ACQ` | between about 30 seconds and 2 minutes |
 | A position several hundred NM away | `ACQ` | usually within 5 minutes |
@@ -71,7 +71,7 @@ SET 10 and its setting `GPS:` exist only in the simulation. The real KLN 90B alw
 
 The setting on SET 10 chooses how long the first position after power-on takes. `FAST`, the default, makes every power-on a start with a perfect memory; `REAL` keeps the memory as the unit left it, with the times of [Acquiring satellites](#acquiring-satellites).
 
-With `FAST`, the unit sets its stored position, its clock, its almanac data and its ephemeris data to the truth at every power-on, as if you had entered the right position and time and had flown a moment ago. The receiver still acquires the satellites one by one, and the unit is usually NAV ready before the Self Test page appears, about 17 seconds after power-on. Because the memory matches the truth, `FAST` never posts `POSITION DIFFERS FROM` or `SYSTEM TIME UPDATED`.
+With `FAST`, the unit sets its stored position, its clock, its almanac data and its ephemeris data to the truth at every power-on, as if you had entered the right position and time and had flown a moment ago. The receiver still acquires the satellites one by one, and the unit is usually NAV ready before the Self Test page appears. Because the memory matches the truth, `FAST` never posts `POSITION DIFFERS FROM` or `SYSTEM TIME UPDATED`.
 
 To switch to fast acquisition while the unit searches:
 

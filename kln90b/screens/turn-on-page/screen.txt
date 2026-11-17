@@ -6,8 +6,8 @@ status no
 text
 | GPS             ORS 20|
 | ©1994 ALLIEDSIGNAL INC|
-|CESSNA 172S SKYHAWK    |
-|N172SP                 |
+|CLUB TRAINING AIRCRAFT |
+|AIRCRAFT NUMBER 2      |
 |HOME BASE KSEA         |
 |CHECK FUEL AND TRIM    |
 | SELF TEST IN PROGRESS |
@@ -21,8 +21,8 @@ mask
 |.IIIIIIIIIIIIIIIIIIIII.|
 field title 0 1 23
 field copyright 1 1 23
-field line1 2 0 19
-field line2 3 0 6
+field line1 2 0 22
+field line2 3 0 17
 field line3 4 0 14
 field line4 5 0 19
 field test 6 1 22

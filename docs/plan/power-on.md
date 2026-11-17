@@ -18,11 +18,12 @@ Written and reviewed 2026-11-17. The sections as written, with their anchors:
    a line, and that the left cursor holds the page.
 4. The Self Test page (`#the-self-test-page`): what the pilot checks (the test values of the outputs, the D-bar half
    scale to the right, the annunciators, the clock, the altitude) and corrects (the clock, the time zone, the baro
-   setting), approving and the beep with its condition, the air data variant, `TEST FAIL` with the link to
-   Simulated failures, the 1988 date after a memory loss with the link to `#the-battery`.
+   setting), approving and the beep with its condition, the air data variant, the 1988 date after a memory loss
+   with the link to `#the-battery`. Subsection `#test-fail-on-the-self-test-page` (screen `failure-self-test-fail`):
+   what it means, going on to the MSG page, what a power cycle cures.
 5. The pages after the self test (`#the-pages-after-the-self-test`): `#the-vfr-only-warning-page` (Availability
    box), `#the-obs-warning-page` (Availability box: aircraft with a GPS CRS button), `#the-database-page` (current
-   and expired).
+   and expired; where the data comes from, with the planned FAQ link `#how-do-i-update-the-database`).
 6. The first pages (`#the-first-pages`): NAV 2 on the left, the page of the last active waypoint on the right, or
    the SUP page; `WAYPOINT xxxxx DELETED`.
 7. Initializing the position and the time (`#initializing-the-position-and-the-time`): when it is needed, what to
@@ -66,4 +67,6 @@ All used by this package (2026-11-17).
 
 Made in this package and reviewed: the Quickstart's "Turning the unit on" no longer says a page can appear before
 the Self Test page; the links to this page in GPS reception and RAIM, Simulated failures and the STA chapter point to
-its sections. The field titles "Cursor indication" of every screen became "CRSR annunciation" (word list).
+its sections. After the maintainer's review the Turn-On time is said once, as about 15 to 20 seconds, and the
+Quickstart, GPS reception and RAIM, Inside the GPS simulation and its drawing `GpsSearchFlow` refer to the event
+instead. The field titles "Cursor indication" of every screen became "CRSR annunciation" (word list).

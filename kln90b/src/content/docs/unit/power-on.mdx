@@ -9,7 +9,7 @@ import KlnScreen from '../../../components/KlnScreen.astro';
 import Callout from '../../../components/Callout.astro';
 import Term from '../../../components/Term.astro';
 
-Every power-on with the knob runs the same sequence. The Turn-On page shows for 17 seconds, you approve the self test on the Self Test page and you acknowledge the Database page; depending on the installation, a VFR-only warning page and an OBS warning page come in between. The unit finds its position by itself, and you correct the position, the date or the time only when the search takes too long.
+Every power-on with the knob runs the same sequence. The Turn-On page is shown first, you approve the self test on the Self Test page and you acknowledge the Database page; depending on the installation, a VFR-only warning page and an OBS warning page come in between. The unit finds its position by itself, and you correct the position, the date or the time only when the search takes too long.
 
 ## Turning the unit on
 
@@ -19,8 +19,6 @@ You turn the unit on by pushing in the power/brightness knob and off by pulling 
 The screen stays dark for up to 6 seconds after you turn the unit on while it warms up, and then brightens over about 4 seconds. A unit that was off for less than 10 minutes stays dark for a proportionally shorter time. An aircraft loaded cold and dark counts as off for a long time.
 </Callout>
 
-The 17 seconds of the Turn-On page count from the power-on, not from the moment the screen is bright. After a long time off the page therefore appears about 6 seconds into its 17 and is fully bright only for the last 7.
-
 A loss of electrical power to the unit of up to 1.5 seconds changes nothing: the unit carries on. A longer loss turns the unit off like the knob, and when the power returns with the knob pushed in, the unit starts the sequence from the Turn-On page.
 
 ### An aircraft loaded with the engine running
@@ -29,28 +27,28 @@ A loss of electrical power to the unit of up to 1.5 seconds changes nothing: the
 The real unit always runs the whole sequence. The simulator skips it when you load an aircraft that is already running.
 </Callout>
 
-An aircraft that loads with its engine running, as when you start a flight on the runway or in the air, comes up with the unit on and skips the sequence: no Turn-On page for 17 seconds, no Self Test page, no VFR-only warning page, no OBS warning page and no Database page. The unit shows the [first pages](#the-first-pages) as soon as its data has loaded, and it is NAV ready at once ([GPS reception and RAIM](/kln90b/operation/gps-receiver/#acquiring-satellites)). A self test that fails at such a start still shows the Self Test page with `TEST FAIL`, which you approve as usual; the VFR-only warning page, the OBS warning page and the Database page then follow as after any approval.
+An aircraft that loads with its engine running, as when you start a flight on the runway or in the air, comes up with the unit fully ready: it shows the [first pages](#the-first-pages) as soon as its data has loaded, and it is NAV ready at once ([GPS reception and RAIM](/kln90b/operation/gps-receiver/#acquiring-satellites)). A self test that fails at such a start still shows the Self Test page ([`TEST FAIL` on the Self Test page](#test-fail-on-the-self-test-page)).
 
 Every later power-on, with the knob or after a longer power loss, runs the whole sequence.
 
 ## The Turn-On page
 
-The Turn-On page shows `GPS` and the ORS level, the copyright line, four lines of text that you write yourself and `SELF TEST IN PROGRESS`. It stays for 17 seconds from the power-on, and then the Self Test page follows.
+The Turn-On page shows `GPS` and the ORS level, the copyright line, four lines of text that you write yourself and `SELF TEST IN PROGRESS`. It stays for about 15 to 20 seconds, and then the Self Test page follows.
 
 <KlnScreen screen="turn-on-page" />
 
 The four lines are for the name of the aircraft or a reminder. They are blank until you write them, and the unit keeps them while it is off and shows them at every power-on.
 
-The left cursor holds the page: with the left cursor on, the unit stays on the Turn-On page beyond the 17 seconds, and it goes on to the Self Test page once you turn the cursor off.
+The left cursor holds the page: with the left cursor on, the unit stays on the Turn-On page beyond that time, and it goes on to the Self Test page once you turn the cursor off.
 
 To write the four lines:
 
-1. Press the left <kbd>CRSR</kbd> within the 17 seconds. The cursor is on the first line.
+1. Press the left <kbd>CRSR</kbd> while the Turn-On page is shown. The cursor is on the first line.
 2. Turn the left outer knob to the line you want to write.
 3. Turn the left inner knob one step. The line opens with underscores, and the cursor is on its first character.
 4. Turn the left inner knob to the character you want, and the left outer knob one step to the next. Cells that you leave untouched become blanks.
 5. Press <kbd>ENT</kbd>. The unit keeps the line and moves the cursor to the next line. After the fourth line the cursor stays where it is.
-6. Press the left <kbd>CRSR</kbd> to turn the cursor off. The unit goes on to the Self Test page, at once if the 17 seconds are over.
+6. Press the left <kbd>CRSR</kbd> to turn the cursor off. The unit goes on to the Self Test page, at once if the time of the page is up.
 
 <KlnScreen screen="turn-on-page-cursor" />
 
@@ -80,12 +78,18 @@ To approve the self test:
 With the cursor off, <kbd>ENT</kbd> does not approve. Press the right <kbd>CRSR</kbd> to turn the cursor on, which starts on the date, and turn the right outer knob to `APPROVE?`.
 
 <Callout kind="availability">
-The five short beeps that confirm the approval sound only in an aircraft that gives the unit a sound output. The aircraft that carry the unit so far give it none, so that you hear nothing.
+The five short beeps that confirm the approval sound only in an aircraft that gives the unit a sound output.
 </Callout>
 
-A flashing `TEST FAIL` in place of `ANNUN` `ON` means that the self test has found a fault; the page can be approved all the same. Which simulated failures the self test finds, and how it looks, is in [When the unit notices a failure](/kln90b/operation/failures/#when-the-unit-notices-a-failure). The unit also shows `TEST FAIL` when it cannot load the navigation data of the simulator, and the message page then holds `DATA BASE CHECKSUM ERR`.
-
 After the memory of the unit was lost, the page shows a date in 1988. Enter the right date and time here, before the unit finds its position ([The battery](/kln90b/operation/failures/#the-battery) says why and what else is lost).
+
+### `TEST FAIL` on the Self Test page
+
+A flashing `TEST FAIL` in place of `ANNUN` `ON` means that the self test has found a fault. The unit does not stop: approve the page as usual, go on through the pages that follow it, and open the MSG page as soon as the first pages show. The message there names the nature of the problem, for example `DATA BASE CHECKSUM ERR` when the unit could not load the navigation data of the simulator, or the code of a receiver fault.
+
+<KlnScreen screen="failure-self-test-fail" />
+
+What to do depends on the cause. Turn the unit off and on again once: a failure to load the navigation data can go away, and so can a passing fault of the receiver, which acts at one power-on and repairs itself. A simulated failure stays until you repair it, and the self test then fails at every power-on; [When the unit notices a failure](/kln90b/operation/failures/#when-the-unit-notices-a-failure) says which failures the self test finds.
 
 ## The pages after the self test
 
@@ -121,7 +125,7 @@ When the date of the unit is past the end of the cycle, the page says `DATA BASE
 
 <KlnScreen screen="database-page-expired" />
 
-`EXPIRES` shows for every current database, however many days it has left. The unit judges the date on its clock at that moment, so a date entered on the Self Test page counts. [Waypoints and the database](/kln90b/operation/waypoints/) explains the database and its cycle.
+The unit uses the navigation data of the simulator; [How do I update the database?](/kln90b/help/faq/#how-do-i-update-the-database) says how to get a current cycle. `EXPIRES` shows for every current database, however many days it has left. The unit judges the date on its clock at that moment, so a date entered on the Self Test page counts. [Waypoints and the database](/kln90b/operation/waypoints/) explains the database and its cycle.
 
 ## The first pages
 

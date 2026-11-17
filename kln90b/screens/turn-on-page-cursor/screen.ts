@@ -6,8 +6,8 @@ defineScreen(import.meta.url, {
 	boot: {
 		position: place('KSEA'),
 		storage: {
-			welcome1: 'CESSNA 172S SKYHAWK',
-			welcome2: 'N172SP',
+			welcome1: 'CLUB TRAINING AIRCRAFT',
+			welcome2: 'AIRCRAFT NUMBER 2',
 			welcome3: 'HOME BASE KSEA',
 			welcome4: 'CHECK FUEL AND TRIM',
 		},

@@ -119,7 +119,7 @@ After power-on the receiver chooses how to search from what it remembers: the st
 
 <GpsSearchFlow caption="The kinds of search after power-on, with the GPS state STA 1 shows for each and the time from power-on to the first fix. A search that finds four measurements, four satellites or three and the altitude input, goes through transition (TRAN) for one second to a navigation state." />
 
-When the ephemeris data is less than 2 hours old and the stored position within 2 NM of where the aircraft is, the start is hot. The receiver finds each satellite in 6 to 12 seconds and can use it at once, and the unit is NAV ready before the Self Test page appears, about 17 seconds after power-on.
+When the ephemeris data is less than 2 hours old and the stored position within 2 NM of where the aircraft is, the start is hot. The receiver finds each satellite in 6 to 12 seconds and can use it at once, and the unit is NAV ready before the Self Test page appears.
 
 In every other start with current almanac data, the time to find a satellite is drawn once at each power-on, between 2 and 75 seconds, and each satellite takes that time within 3 seconds. The draw is common to all satellites because the warm-up of the receiver's oscillator and the moment in the satellites' 30-second data frame are the same for every channel. With ephemeris data less than 2 hours old but a stored position more than 2 NM away, a satellite is usable as soon as it is found, and the first fix comes 2 to about 75 seconds after power-on. Without current ephemeris data each satellite then needs 30 seconds to send it, and the first fix comes after 30 seconds to 2 minutes.
 

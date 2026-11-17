@@ -64,6 +64,15 @@ GitHub wiki of the kln90b project.
   8, an air data system for OTH 9 and OTH 10, VFR-only units, altitude alerting) are described the way a pilot meets
   them: the feature depends on how the unit is installed in the aircraft. Never name the panel.xml key or any other
   configuration that controls it. Use the Availability box (section 11).
+- **Nothing that goes stale between releases.** The manual is updated when kln90b releases a version (section 19), not
+  when a new aircraft comes out. Never say what the aircraft that carry the unit offer or lack today ("the aircraft
+  so far give it no sound output"); describe the feature and its condition, and leave it there (maintainer,
+  2026-11-17).
+- **No trademarks of manufacturers.** Never name an aircraft or avionics maker or its products, in the text, on a
+  screen or in a drawing: no Cessna, no Skyhawk, no Bendix/King. The unit is the KLN 90B and nothing more. A
+  company name that the unit itself shows and whose company no longer exists (AlliedSignal on the Turn-On page)
+  may stay; text the pilot writes into the unit on a screen uses neutral words (maintainer, 2026-11-17). Microsoft
+  Flight Simulator is named, because the manual is for it.
 - **Features that exist only in the simulation** (the SET 10 page, the FLR pages and the failures they set, keyboard
   mode) are marked with the Simulator only box (section 11).
 
@@ -200,6 +209,15 @@ The model packs several facts into every paragraph and wastes no words. So does 
 - **Exact values.** Give the numbers the unit uses: distances, times, limits, ranges, step sizes, the number of
   entries: "up to 30 waypoints", "26 flight plans", "in steps of 100 ft". Never "a few", "several", "some time" where
   the code has a number.
+- **A time measured on the real unit is approximate.** Where the simulation copies a duration from recordings of
+  the real unit (the Turn-On page stays for 15 to 20 seconds), the real unit varies, so give it as a range with
+  "about" ("about 15 to 20 seconds"), never as the exact number the code happens to use (maintainer, 2026-11-17).
+- **A number is said once, at its owner.** Other pages, and the rest of the owning page, refer to the event instead
+  of repeating the number: "while the Turn-On page is shown", not "about 17 seconds after power-on" on every page.
+  A repeated number reads as a lecture and goes wrong everywhere at once when it changes (maintainer, 2026-11-17).
+- **Only details that change what the pilot does or expects.** That one timer counts from the power-on and another
+  from a later moment, and how the two overlap, is true in the code and of no use in the cockpit; leave it out
+  (maintainer, 2026-11-17).
 - **Every exception.** Someone studying a chapter wants the edge cases: what happens with no GPS fix, with an empty flight plan,
   in OBS mode, when the field is dashed, when the list is full, when a value is out of range. Put each right after the
   rule it qualifies (section 11).
@@ -221,7 +239,8 @@ The model packs several facts into every paragraph and wastes no words. So does 
 - **Say what is, not what is not.** Do not state what the manual leaves out, what the site does not offer or what the
   unit does not do, unless a pilot would otherwise expect it and act on it. "This manual does not say how version 1.x
   differs" sounds as if something were withheld; "the download buttons never offer a pre-release" answers a question
-  nobody asked. Cut such sentences.
+  nobody asked. Cut such sentences. This holds for lists of what is skipped as well: an aircraft loaded with the
+  engine running "comes up ready to navigate"; the pages it does not show are not listed (maintainer, 2026-11-17).
 - **Nothing about how the simulation is built,** not even in pilot words: that the unit only receives the commands
   of its controls, which part of the aircraft decides what a click does, how the aircraft switches the unit in. Say
   what the pilot does and sees (section 2). The one page that explains a model of the simulation is Inside the GPS
@@ -249,6 +268,10 @@ The model packs several facts into every paragraph and wastes no words. So does 
 - **The summary.** The text before the first heading is one to three sentences that answer the page's main question on
   their own. A pilot who reads only these sentences must come away with something correct and useful.
 - **Then the detail,** under `##` headings, each section again opening with the sentence that answers its heading.
+- **What a pilot searches for gets its own heading.** A warning or a state the unit shows that alarms a pilot
+  (`TEST FAIL` on the Self Test page, an expired database) is something they type into the search. It gets a
+  section of its own, named after what the pilot sees, that says what it means and what to do next, not one
+  sentence inside another section with a link (maintainer, 2026-11-17).
 - **Headings in sentence case.** In Operation, a heading names the task as a gerund: "Adding a waypoint to a flight
   plan", "Canceling a direct-to". In the page reference, a heading starts with the page name, then a colon and what the
   page is for in lowercase: "APT 4: communication frequencies". The page name must come first; the page links depend on

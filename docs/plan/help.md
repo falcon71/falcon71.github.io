@@ -29,6 +29,14 @@ Candidates for the FAQ and Known limitations, collected by earlier packages; eve
   does not sequence (FAQ, linked to Sequencing); OTH 1 lists no flight service stations; course reversals and holds
   are not flown as legs.
 
+### From the package power-on (2026-11-17)
+
+- **The FAQ entry "How do I update the database?"** with the planned anchor `#how-do-i-update-the-database`, which
+  Power-on and initialization (the Database page) links to already: the unit uses the navigation data of the
+  simulator, so its database is as current as the simulator's; how to update the simulator's navigation data, and
+  the workaround of an earlier date in the simulator (wiki, FAQ, "The AIRAC is out of date"). Name no company
+  (style guide, section 3) beyond what a pilot needs to find the update.
+
 ## Changes to earlier pages
 
 None planned.
