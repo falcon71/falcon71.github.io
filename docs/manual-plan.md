@@ -197,10 +197,6 @@ it is written when those owners exist. A package that proves too large in its re
 
 ## Open questions for the maintainer
 
-- **`PRES POS?` without a position fix** (package waypoints): the unit creates the waypoint at the last position it
-  held, even after a battery loss at N 0°, E 0°. User waypoints describes this. The real unit's documentation does
-  not say whether it refuses; not filed. Should it be a kln90b issue?
-
 - **The FAA extract** carries no state and only public airports, so APT 2's state abbreviation and the private and
   military flags cannot be staged. Changing that is an extract change, not a manual change.
 
@@ -250,8 +246,8 @@ Not manual text; for the maintainer or a session that works on the site.
   generator fails on it. `kln90b/screens/sta-3/screen.ts` works around this with a mock that reads the version
   from kln90b's `package.json`. A substitution in the generator for every screen would be the cleaner place.
 - The generator cannot show the middle part of the status line on a half screen (`show: 'left'` or `'right'`
-  allows fields only on the page identification), so a screen about a status line message shows both halves and
-  explains the other half's fields too (package waypoints, 2026-11-17).
+  allows fields only on the page identification); the style guide (section 13) lets a screen about a status line
+  message show both halves.
 - `kln90b/generator/api.ts` re-exports the harness's `savedUserWaypoints` next to `savedFlightplan`, for screens
   that need stored user waypoints (`sup-usr-db-full`).
 - The build does not check the anchors of links, only the pages. A dead anchor is found by the seam check and the

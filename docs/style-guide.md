@@ -558,7 +558,12 @@ general; the screen shows one concrete case.
 - **No message prompt** unless the message is what the text explains. A screen shows no flashing `MSG` and no pending
   message; a step that raises one answers it before the screen is captured. For the same reason the screens run with the
   airspace alert off, unless a screen is about the airspace alert and turns it on.
-- **Show half a screen** when only one side matters. The generator keeps the line between the halves.
+- **Show half a screen** when only one side matters. The generator keeps the line between the halves. A screen
+  about a status line message shows both halves, because a half screen cannot show the middle part of the status
+  line; the other half's fields are explained like any others (maintainer, 2026-11-17).
+- **A step that carries data from one side to the other gets a screen** that shows both halves: where the data
+  comes from and where it goes, such as the identifier of the right page taken into a field of the left page. The
+  pilot learns such a step by seeing it (maintainer, 2026-11-17).
 - **Show an excerpt** when only one line or a few lines of a page matter: the shared top line of a page type, a
   question the unit asks, a prompt in the status line. A page shows the rows of a generated screen with `rows`
   (README, "Writing a screen"); the fields on those rows keep their explanations. Where the text describes a line in

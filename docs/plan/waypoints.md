@@ -23,14 +23,17 @@ As written (2026-11-17), with the anchors:
 - `#scanning-through-the-database`: the complete list, its order and ends, the step into the nearest list.
 - `#duplicate-identifiers`: `#choosing-between-duplicate-identifiers` (the Duplicate Waypoint page, screen
   `waypoint-dup-page`), `#dup-ident`.
-- `#approving-the-waypoint-page` (screen `apt-confirm`): `#taking-the-waypoint-of-the-right-page`.
+- `#approving-the-waypoint-page` (screen `apt-confirm`): `#taking-the-waypoint-of-the-right-page` (screens
+  `waypoint-take-right-before`, `waypoint-take-right-after`, added at the maintainer's review).
 - `#the-act-pages` (screen `apt-act-1`): the concept only.
 - `#changing-the-data-of-a-database-waypoint`.
 - `#where-to-go-next`.
 
+`PRES POS?` without a position fix stores the last position the unit held; User waypoints describes it. The
+maintainer does not know the real unit's behavior and decided not to file it (2026-11-17).
+
 Not staged: `DUP IDENT` (a same-type duplicate needs stored user data the extract cannot give; the text quotes it).
-The message screens show both halves, because the generator cannot put the middle part of the status line on a
-half screen.
+The message screens show both halves (style guide, section 13).
 
 ### User waypoints (`operation/user-waypoints.mdx`, new, sidebar order 2)
 

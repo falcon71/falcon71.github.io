@@ -114,7 +114,9 @@ The first session writes the plan of the whole manual and no page.
    pilot needs (style guide, section 8, "What feels natural in use needs no rule"), and plans no section that writes
    out behavior the pilot meets naturally, such as which side takes ENT. It does plan a section of its own for every
    warning or state the pilot may search for (style guide, section 9), and never shrinks one to "one sentence and
-   the link" because another page owns its cause. If the research shows that a topic's owner must change, or that the
+   the link" because another page owns its cause. It plans a screen for every step whose result the pilot must
+   recognize (style guide, section 13), including a step that carries data from one side to the other, where the
+   screen shows both halves. If the research shows that a topic's owner must change, or that the
    package is too large for the session, change the plan first; split a package rather than rush it.
 3. **Writing.** One writer per page or per few small pages, in parallel only where they own different files,
    topics and screens. A writer writes its pages, describes and generates its screens and writes their field
