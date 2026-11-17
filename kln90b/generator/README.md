@@ -21,8 +21,8 @@ of that is a dependency of `kln90b/package.json`, and the site builds without th
 Run them from `kln90b/`:
 
 - `npm run screens` generates all screens (Vitest project `screens`) and, when that succeeds, records the submodule's
-  commit in `screens/kln90b-commit.txt`. Extra arguments are Vitest filters, for example `npm run screens -- screens/pages/nav/nav-1`;
-  such a run refuses to start while `screens/kln90b-commit.txt` is missing or names another commit than the submodule's,
+  commit in `screens/kln90b-commit.txt`. Extra arguments are Vitest filters, for example `npm run screens -- screens/pages/nav/nav-1`
+  for one screen or `npm run screens -- screens/pages/apt` for a package; such a run refuses to start while `screens/kln90b-commit.txt` is missing or names another commit than the submodule's,
   because the screens it does not generate would stay at the old one. Run `npm run screens` without filters then.
 - `npm run screens:test` runs the generator's own tests (projects `unit` and `capture`). Neither the manifest nor its check
   concerns them.
@@ -50,7 +50,9 @@ working directory, because the harness resolves `resources/` from `process.cwd()
 ## Describing a screen
 
 `screens/<id>/screen.ts` calls `defineScreen(import.meta.url, {...})` from `generator/api.ts`, which also re-exports what a
-description needs from the harness. See `screens/pages/apt/apt-1-ksea/`, `screens/pages/nav/nav-5-ksea/` and `screens/pages/nav/home-nav-1/`.
+description needs from the harness. The id is the path of the folder below `screens/` (`lib/paths.ts`, `screenId`): a
+folder with a `screen.ts` is a screen, any other folder a package, nested to any depth, and every folder name of the id
+is lowercase letters, digits and hyphens. A screen folder holds no other screen. See `screens/pages/apt/apt-1-ksea/`, `screens/pages/nav/nav-5-ksea/` and `screens/pages/nav/home-nav-1/`.
 
 - `boot.position`: `place('KSEA')` is an airport, VOR, NDB or fix of the FAA extract by the ident the unit shows;
   `pointFrom(place, bearingTrue, nm)` and `courseDeg(from, to)` place the aircraft relative to it.

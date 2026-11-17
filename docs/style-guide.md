@@ -167,7 +167,7 @@ manual page cited in the code to the page of the PDF and lists topics and facts.
 | What | Where |
 | --- | --- |
 | A page of the manual | `kln90b/src/content/docs/<chapter>/<page>.md` or `.mdx` (`.mdx` when it uses a component) |
-| A screen and its field explanations | `kln90b/screens/<id>/screen.ts` and `fields.mdx` |
+| A screen and its field explanations | `kln90b/screens/<id>/screen.ts` and `fields.mdx`, `<id>` being the screen's path below `screens/`, packages included |
 | A glossary entry | `kln90b/src/data/glossary.ts` |
 | The sidebar | `kln90b/astro.config.mjs` |
 | The page tree (knob order, optional pages) | `kln90b/src/data/pageTree.ts` |
@@ -563,8 +563,11 @@ general; the screen shows one concrete case.
   identifiers like any other screen. If you need a screen that does not exist yet, describe it in a new
   `screens/<id>/screen.ts` and generate it.
 - **One screen, one id, one meaning.** The same page with other values or in another state is another screen with its
-  own id. Ids are lowercase with hyphens: the page, then what distinguishes it (`apt-1-ksea`, `vor-user-waypoint`,
-  `fpl-0-approach`). Tutorial screens start with `tut1-` or `tut2-`.
+  own id. The id is the screen's path below `kln90b/screens/`: its package, then its name, both lowercase with hyphens.
+  A screen of one page of the unit goes into `pages/<page>/` and is named for the page, then what distinguishes it
+  (`pages/apt/apt-1-ksea`, `pages/vor/vor-user`). A screen whose point is a mechanism or a sequence rather than a page
+  goes into the package of that topic and drops the prefix the package already says (`direct-to/ident-entry`,
+  `power-on/self-test`, `tutorial-2/apt-7-sid-load`).
 - **Real places.** Screens show real, well-known US places from the FAA data (section 18). Never invent identifiers.
 - **No message prompt** unless the message is what the text explains. A screen shows no flashing `MSG` and no pending
   message; a step that raises one answers it before the screen is captured. For the same reason the screens run with the
@@ -604,7 +607,7 @@ The explanations of a screen's fields live in its `fields.mdx` and appear wherev
   field spans every cell of the cursor, the entry's number and padding included, so that pointing anywhere at what the
   cursor marks opens the explanation. The generator widens a field to its cursor and fails when one cursor would mark
   two fields.
-- Field explanations are indexed by the search and can be linked one by one (`#screen-nav-1--dis`), so the FAQ and
+- Field explanations are indexed by the search and can be linked one by one (`#screen-pages/nav/nav-1--dis`), so the FAQ and
   answers on Discord can point to a single field.
 
 ## 14. Glossary and tooltips
@@ -900,7 +903,7 @@ These are built. They are listed here so that they stay true; changes to them go
   keeps it open until the pilot clicks elsewhere or presses Escape. Keyboard users reach the fields with Tab.
 - Fields are not marked at rest; they highlight when pointed at. A short line under each screen tells the pilot to point
   at a field.
-- Every field explanation has a direct link (`#screen-nav-1--dis`).
+- Every field explanation has a direct link (`#screen-pages/nav/nav-1--dis`).
 - Under each screen, a collapsed list holds all its field explanations; the search indexes it.
 - Nothing flashes. Text that flashes on the unit has a static dashed box, explained in a legend under the screen.
 - When only one side matters, only that half is shown, with the middle line kept.
