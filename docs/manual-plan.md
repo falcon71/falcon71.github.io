@@ -20,7 +20,7 @@ as `/kln90b/<slug>/`) and its package. Pages that do not exist yet are linked by
 | | Tutorial flight 2 | `getting-started/tutorial-2` | tutorial-2 |
 | The unit | Controls and display | `unit/controls-and-display` | controls |
 | | Keyboard mode | `unit/keyboard-mode` | controls |
-| | Power-on and initialization | `unit/power-on` | power-on |
+| | Power-on and initialization | `unit/power-on` | power-on (done) |
 | Operation | Waypoints and the database | `operation/waypoints` | waypoints |
 | | Nearest | `operation/nearest` | nearest-direct-to |
 | | Direct-to | `operation/direct-to` | nearest-direct-to |
@@ -168,7 +168,7 @@ anchors and page links above. After them the order follows "owners before the pa
 | 1 | sta | STA chapter; GPS reception and RAIM; Inside the GPS simulation | done (2026-11-16) |
 | 2 | failures | FLR chapter; Simulated failures; the failures part of Inside the GPS simulation | done (2026-11-16) |
 | 3 | controls | Controls and display; Keyboard mode | done (2026-11-17) |
-| 4 | power-on | Power-on and initialization | in review (2026-11-17) |
+| 4 | power-on | Power-on and initialization | done (2026-11-17) |
 | 5 | waypoints | Waypoints and the database | not started |
 | 6 | waypoint-pages | VOR, NDB, INT, SUP and ACT chapters; the APT chapter cut back to its owner | not started |
 | 7 | nearest-direct-to | Nearest; Direct-to | not started |
