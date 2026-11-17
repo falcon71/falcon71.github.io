@@ -166,7 +166,7 @@ anchors and page links above. After them the order follows "owners before the pa
 | – | apt | APT chapter | done (dry run 2026-11-04, corrected 2026-11-16) |
 | 1 | sta | STA chapter; GPS reception and RAIM; Inside the GPS simulation | done (2026-11-16) |
 | 2 | failures | FLR chapter; Simulated failures; the failures part of Inside the GPS simulation | done (2026-11-16) |
-| 3 | controls | Controls and display; Keyboard mode | in review (2026-11-17) |
+| 3 | controls | Controls and display; Keyboard mode | done (2026-11-17) |
 | 4 | power-on | Power-on and initialization | not started |
 | 5 | waypoints | Waypoints and the database | not started |
 | 6 | waypoint-pages | VOR, NDB, INT, SUP and ACT chapters; the APT chapter cut back to its owner | not started |
