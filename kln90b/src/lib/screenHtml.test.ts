@@ -210,9 +210,9 @@ describe('map fields', () => {
 		});
 
 		it('makes the elements of the committed map of NAV 5 fields', () => {
-			const {capture: nav5, maps} = loadCapture('nav-5-ksea');
+			const {capture: nav5, maps} = loadCapture('pages/nav/nav-5-ksea');
 			const documented = new Set(nav5.mapFields.keys());
-			const out = screenHtml(blocksFromCapture(nav5, documented), documented, maps, {screen: 'nav-5-ksea', mapFields: nav5.mapFields});
+			const out = screenHtml(blocksFromCapture(nav5, documented), documented, maps, {screen: 'pages/nav/nav-5-ksea', mapFields: nav5.mapFields});
 			for (const id of nav5.mapFields.keys()) expect(out).toMatch(new RegExp(`<g class="kln-field" tabindex="0" role="img" data-field="${id}"`));
 		});
 
@@ -540,13 +540,13 @@ describe('an excerpt of some rows', () => {
 		});
 	});
 
-	it('draws only the fields on the rows as fields, against the committed screen apt-1-nearest', () => {
-		const {capture: nearest} = loadCapture('apt-1-nearest');
+	it('draws only the fields on the rows as fields, against the committed screen pages/apt/apt-1-nearest', () => {
+		const {capture: nearest} = loadCapture('pages/apt/apt-1-nearest');
 		const documented = new Set(nearest.fields.keys());
-		const rows = parseRows('1', nearest, 'apt-1-nearest');
+		const rows = parseRows('1', nearest, 'pages/apt/apt-1-nearest');
 		const shown = fieldsOnRows(nearest, documented, rows);
 		expect(shown).toEqual(new Set(['ident', 'rank']));
-		const html = screenHtml(blocksFromCapture(nearest, shown, 'apt-1-nearest', rows), shown);
+		const html = screenHtml(blocksFromCapture(nearest, shown, 'pages/apt/apt-1-nearest', rows), shown);
 		expect([...html.matchAll(/data-field="([^"]+)"/g)].map(m => m[1])).toEqual(['ident', 'rank']);
 		expect(html).toContain('KRNT');
 		expect(html).not.toContain('RENTON');

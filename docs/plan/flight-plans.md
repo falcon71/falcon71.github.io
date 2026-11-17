@@ -56,10 +56,10 @@ part about version 1.x does not apply.
 - **The leg marks of an FPL page** (as read by the writer of Controls and display in `controls/FlightplanArrow.tsx`;
   check them): one mark at the from-waypoint, one at the active waypoint, another for a direct-to, another for a
   waypoint inside a procedure; they vanish while an entry is open. The FPL chapter owns them; the field explanations
-  of `status-line-crsr-both-sides` and `fpl-0-delete-question` name only the marks of the active leg.
+  of `display/status-line-crsr-both-sides` and `pages/fpl/fpl-0-delete-question` name only the marks of the active leg.
 - **CLR with the cursor off on an FPL page** asks `DELETE FPL?`, even when the CLR was meant for a field on the right
   side (fact sheet of the package controls). Controls and display does not describe it; say it here if it surprises.
-  The screen `fpl-0-delete-question` shows the delete question of a waypoint in the list.
+  The screen `pages/fpl/fpl-0-delete-question` shows the delete question of a waypoint in the list.
 - Keyboard mode: typing into a filled waypoint of a flight plan inserts a new waypoint in front of it, and the key
   starts the new entry (`FlightplanListItem.tsx:468`); Keyboard mode links to Flight plans for `INVALID ADD` on an
   approach waypoint and the make-room question when the plan is full.

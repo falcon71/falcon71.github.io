@@ -24,7 +24,7 @@ How the receiver finds its position, what its states mean and what RAIM is belon
 
 STA 1 shows the GPS state and the satellites the receiver hears, with their signal strength and elevation. It is the first page to open when the unit does not navigate: the state in the top line says whether the unit has a position, and the list says which satellites it receives and how well.
 
-<KlnScreen screen="sta-1-nav" />
+<KlnScreen screen="pages/sta/sta-1-nav" />
 
 The list holds up to eight satellites in the order of their numbers, four on a page. [The GPS states](/kln90b/operation/gps-receiver/#the-gps-states) says what each state means.
 
@@ -32,7 +32,7 @@ The list holds up to eight satellites in the order of their numbers, four on a p
 
 The list has a second page as soon as it holds a fifth satellite, and the status line then shows `STA+1` (several pages with one name, see [Controls and display](/kln90b/unit/controls-and-display/#selecting-a-page)). The second page repeats the column headings and shows the fifth to the eighth satellite.
 
-<KlnScreen screen="sta-1-nav-2" />
+<KlnScreen screen="pages/sta/sta-1-nav-2" />
 
 When the list falls back to four satellites or fewer while the second page is shown, the unit returns to the first page, and the name loses its `+`.
 
@@ -40,7 +40,7 @@ When the list falls back to four satellites or fewer while the second page is sh
 
 When the unit has no position, the state reads `ACQ`, `INIT` or `TRAN`. During the acquisition after power-on, the list shows the satellites that the unit expects to find, from the position and the time it remembers, with the elevation it predicts for them. Every satellite starts with a `*` and a signal strength of `00`; each loses the `*` and gains a signal strength when the receiver takes it into the position.
 
-<KlnScreen screen="sta-1-acq" />
+<KlnScreen screen="pages/sta/sta-1-acq" />
 
 During `INIT` the list shows the satellites that the receiver searches without knowing where they stand, so their elevations are dashes until the unit has the ephemeris data of the satellite. A unit that loses its position in flight goes back to `ACQ` at once, and its list then shows the satellites it still tracks with their real elevations; [Losing the position in flight](/kln90b/operation/gps-receiver/#losing-the-position-in-flight) describes what the unit does then.
 
@@ -48,7 +48,7 @@ During `INIT` the list shows the satellites that the receiver searches without k
 
 With a failed receiver or antenna the state reads `FAILR` and the list is empty, so the page has no second page. STA 2 shows dashes.
 
-<KlnScreen screen="sta-1-failed" />
+<KlnScreen screen="pages/sta/sta-1-failed" />
 
 [Simulated failures](/kln90b/operation/failures/#the-receiver-and-the-antenna) describes the failures of the receiver and the antenna. [GPS reception and RAIM](/kln90b/operation/gps-receiver/) uses STA 1 to follow the receiver from power-on to a position.
 
@@ -56,17 +56,17 @@ With a failed receiver or antenna the state reads `FAILR` and the list is empty,
 
 STA 2 shows the estimated position error, the unit's own estimate in nautical miles of how far its position can be off. Look at it when the unit raises `BAD SATELLITE GEOMETRY` `SEE EPE ON STA 2 PAGE`, which happens en route or in the approach arm mode; in the approach active mode the unit raises `BAD SATELLITE GEOMETRY` `AND RAIM NOT AVAILABLE`, which does not name STA 2.
 
-<KlnScreen screen="sta-2-epe" />
+<KlnScreen screen="pages/sta/sta-2-epe" />
 
 [The estimated position error](/kln90b/operation/gps-receiver/#the-estimated-position-error) explains what the <Term t="EPE" /> is made of. Without a position the page shows dashes instead of the number:
 
-<KlnScreen screen="sta-2-no-position" />
+<KlnScreen screen="pages/sta/sta-2-no-position" />
 
 ## STA 3: software revision status
 
 STA 3 shows the software revision of the unit, the software revision of the receiver and the OBS calibration. You need it only to check which release of the KLN 90B your aircraft runs, for example after an update.
 
-<KlnScreen screen="sta-3" />
+<KlnScreen screen="pages/sta/sta-3" />
 
 The values are fixed. Nothing on the page can be changed, and the revision of the unit is that of the release you installed.
 
@@ -74,7 +74,7 @@ The values are fixed. Nothing on the page can be changed, and the revision of th
 
 STA 4 shows how many hours the unit has been on in all and how many times you have turned it on.
 
-<KlnScreen screen="sta-4" />
+<KlnScreen screen="pages/sta/sta-4" />
 
 The hours are whole hours, rounded down, and the value does not count up while the page is shown. Both values stay when you turn the unit off.
 
@@ -82,7 +82,7 @@ The hours are whole hours, rounded down, and the value does not count up while t
 
 STA 5 predicts whether RAIM will be available at a destination at a time you choose, from 15 minutes before to 15 minutes after. You use it before an approach, and the unit sends you here when it cannot activate an approach for lack of RAIM.
 
-<KlnScreen screen="sta-5-result" />
+<KlnScreen screen="pages/sta/sta-5-result" />
 
 The prediction is for the destination and the time at the top of the page, which the page fills in for you when it can. The destination is the last waypoint of the active flight plan, counted from the active leg; when FPL 0 holds an approach, that is the missed approach point. With a direct-to or in OBS mode it is the active waypoint, and the field is blank when nothing is active. The ETA is the present time plus the time en route to the destination, which exists only while the groundspeed is above 2 kt: on the ground the ETA is blank, and you enter it yourself. The page fills in the destination and the ETA once, when you select it. A time that has already passed today counts as tomorrow.
 
@@ -96,7 +96,7 @@ The bar graph shows seven predictions, one for the ETA and one for each of six t
 
 Selecting the page and every new destination or ETA start a calculation, which takes 10 seconds. Until it is done, the line of the bar graph reads `COMPUTING`:
 
-<KlnScreen screen="sta-5-computing" />
+<KlnScreen screen="pages/sta/sta-5-computing" />
 
 A new time zone changes only how the ETA is shown and starts no calculation.
 
@@ -104,7 +104,7 @@ A new time zone changes only how the ETA is shown and starts no calculation.
 
 While the page has no destination or no ETA, it calculates nothing, and the line of the bar graph holds a row of short marks. Enter the missing value:
 
-<KlnScreen screen="sta-5-entry" />
+<KlnScreen screen="pages/sta/sta-5-entry" />
 
 ### The ETA in another time zone
 

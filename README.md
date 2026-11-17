@@ -47,12 +47,16 @@ Build and deployment → Source must be set to "GitHub Actions" once.
 A screen of the unit is generated from the simulated unit (see `kln90b/generator/README.md`), and a page shows it by its id:
 
 ```mdx
-<KlnScreen screen="apt-1-ksea" />
+<KlnScreen screen="pages/apt/apt-1-ksea" />
 ```
 
 The folder `kln90b/screens/<id>/` holds the description (`screen.ts`), the explanations of the fields (`fields.mdx`, with
-`<Field id title>` and `<Term>` written without imports) and the generated `screen.txt`. `npm run screens -- <id>` in
-`kln90b/` writes it, and `npm run screens` without a filter also records the kln90b commit of all screens in
+`<Field id title>` and `<Term>` written without imports) and the generated `screen.txt`. A folder with a `screen.ts` is a
+screen; any other folder is a package, which may hold screens and further packages to any depth. Packages are optional,
+and the id is the path of the screen's folder below `kln90b/screens/` with `/` (`pages/apt/apt-1-ksea`), the same in
+`screen="..."`, in the figure's anchor (`#screen-pages/apt/apt-1-ksea`) and in the error messages. A screen folder holds
+no other screen; the build fails on one that does. `npm run screens -- <id>` in `kln90b/` writes a screen, and the path
+of a package (`npm run screens -- screens/pages/apt`) writes all screens in it, and `npm run screens` without a filter also records the kln90b commit of all screens in
 `kln90b/screens/kln90b-commit.txt`; a run with a filter refuses while that file is missing or names another commit. The
 build fails, naming the screen and the command to run, when a page names a screen that was never generated or when the
 explanations and the fields of the screen differ. `title="..."` replaces the title of the generated

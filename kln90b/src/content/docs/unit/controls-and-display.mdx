@@ -20,7 +20,7 @@ Under the screen sit five buttons that act on the unit as a whole. The controls 
 <figure>
 	<div style={{ overflowX: 'auto' }}>
 		<div style={{ minWidth: '36rem' }}>
-			<KlnUnit screen="home-nav-1" label="The front panel of the KLN 90B with its controls numbered 1 to 12, as in the table below" markers />
+			<KlnUnit screen="pages/nav/home-nav-1" label="The front panel of the KLN 90B with its controls numbered 1 to 12, as in the table below" markers />
 		</div>
 	</div>
 	<figcaption>The front panel. The numbers lead from the left side over the buttons under the screen to the right side.</figcaption>
@@ -47,7 +47,7 @@ Turning the power/brightness knob dims and brightens the screen. At the darkest 
 
 The screen holds a left page and a right page, each of six lines, and under them the status line. The left knobs and the left <kbd>CRSR</kbd> button operate the left page, the right ones the right page. A few pages use the whole screen (see [Selecting a page](#selecting-a-page)).
 
-<KlnScreen screen="nav-1-apt-1-ksea" />
+<KlnScreen screen="pages/nav/nav-1-apt-1-ksea" />
 
 ### The status line
 
@@ -159,7 +159,7 @@ A step of any knob of either side moves that side's page, so the two NAV pages a
 
 Some right pages work with the left page. The unit looks only at whether the left page is an FPL page, not at which one, and it follows the left page at once when you change it.
 
-<KlnScreen screen="page-pair-fpl-0-dt-1" />
+<KlnScreen screen="display/page-pair-fpl-0-dt-1" />
 
 D/T 1 to D/T 3 give one row per waypoint of the flight plan, in the rows of the FPL page beside it, when an FPL page is on the left. The REF page and CTR 1 work on the flight plan of the left page. The D/T pages, the REF page and the CTR pages each describe their variants.
 
@@ -169,7 +169,7 @@ Other pairs belong to a task: the Direct To page on the left with the waypoint p
 
 The cursor is a mark in inverse video on one field of a page. Press the <kbd>CRSR</kbd> button of a side to turn it on and press it again to turn it off. Each side has its own cursor, and the CRSR annunciation of each side shows while it is on.
 
-<KlnScreen screen="status-line-crsr-both-sides" />
+<KlnScreen screen="display/status-line-crsr-both-sides" />
 
 The cursor starts on the start field of the page every time you turn it on, usually the first field and never where it was last. On a list that has scrolled it starts on the top entry shown. On a page with no field, such as NAV 2, the button does nothing and gives no sign.
 
@@ -181,11 +181,11 @@ Turning the cursor off leaves the page as it is, with two losses: an entry that 
 
 On many fields the inner knob steps through the values of the field, wraps from the last to the first, and each step takes effect at once. <kbd>ENT</kbd> and <kbd>CLR</kbd> do nothing on them. Many settings work this way, such as the minimum runway length on SET 3, and so does the range of NAV 5.
 
-<KlnScreen screen="set-3-cursor" />
+<KlnScreen screen="pages/set/set-3-cursor" />
 
 The identifier on the waypoint pages is such a field too. The first step of the inner knob starts from the character shown (from `0` to `1`, from `K` to `L`), and the unit searches the database for the characters up to the one you turned and fills in the characters to the right of the cursor with the first waypoint that matches. The outer knob moves from character to character.
 
-<KlnScreen screen="apt-1-ksea-cursor" />
+<KlnScreen screen="pages/apt/apt-1-ksea-cursor" />
 
 Clockwise, a character in an identifier runs through `A` to `Z` and `0` to `9` and then starts again at `A`, with a blank between `9` and `A` in every cell but the first, which never takes a blank. Counterclockwise runs the other way. The remarks of APT 5 add the hyphen after `9`. A digit cell steps through `0` to `9`, except the tens of a latitude, which stop at `8`; cells for hours, months or the hemisphere have ranges of their own.
 
@@ -195,7 +195,7 @@ Clockwise, a character in an identifier runs through `A` to `Z` and `0` to `9` a
 
 Other fields open an entry that takes effect only when you press <kbd>ENT</kbd>: a waypoint on the Direct To page or in a flight plan, a latitude, a time, a date. The first step of the inner knob opens it. In an identifier the step shows `A` clockwise or `9` counterclockwise and the unit fills in the rest at once, as for the waypoint pages. In a number, a time or a date the old value gives way to underscores, and the first cell shows its first value in either direction (`N` for a latitude, `01` for a day).
 
-<KlnScreen screen="set-1-latitude-entry" />
+<KlnScreen screen="pages/set/set-1-latitude-entry" />
 
 The entry stays in inverse video, the cell under the cursor flashes, and `ENT` flashes in the status line. The inner knob changes the cell, wrapping around, and the outer knob moves between its cells and stops at the first and the last. It does not leave the entry.
 
@@ -210,7 +210,7 @@ To give the unit a position on SET 1, for example the latitude `N 47°26.99'`:
 7. Enter the longitude the same way, with <kbd>ENT</kbd> at its end.
 8. Turn the left outer knob clockwise until the cursor is on `CONFIRM?`, and press <kbd>ENT</kbd>. The unit takes the position you entered, and the cursor goes off.
 
-<KlnScreen screen="direct-to-ident-entry" />
+<KlnScreen screen="direct-to/ident-entry" />
 
 - <kbd>ENT</kbd> on a number, a time or a date checks the entry. If it is good, the unit applies it, closes the entry and moves the cursor to the next field. If it is not, the status line shows `INVALID ENT` and the entry stays open.
 - <kbd>ENT</kbd> on an identifier shows the waypoint page for approval (below) and leaves the cursor where it is. An identifier that the database lacks brings up the offer to create a user waypoint where the page offers one ([Creating a user waypoint](/kln90b/operation/user-waypoints/#creating-a-user-waypoint)).
@@ -224,7 +224,7 @@ After <kbd>ENT</kbd> on an identifier of a left page, the unit shows the waypoin
 
 A list entry that can be deleted asks first. With the cursor on the entry, <kbd>CLR</kbd> turns it into a question that flashes in inverse video (`DEL xxxxx ?`), and <kbd>ENT</kbd> deletes the entry.
 
-<KlnScreen screen="fpl-0-delete-question" />
+<KlnScreen screen="pages/fpl/fpl-0-delete-question" />
 
 <kbd>CLR</kbd> again withdraws the question, and so does moving the cursor with the outer knob or turning the cursor off. Nothing tells you that it went. Flight plan waypoints, the user waypoints on OTH 3 and the remarks on OTH 4 ask this way. An entry can refuse the deletion with a message first (`IN ACT LIST`, `USED IN FPL`).
 

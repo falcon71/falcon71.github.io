@@ -17,7 +17,7 @@ At every power-on the receiver starts from what it remembered at power-off: its 
 
 While the receiver searches, STA 1 shows `ACQ` and lists the satellites it expects, with the elevation it predicts for them. A satellite gets its signal strength on the page once the receiver uses it.
 
-<KlnScreen screen="sta-1-acq" />
+<KlnScreen screen="pages/sta/sta-1-acq" />
 
 With the setting `REAL` on SET 10 (see [Real and fast acquisition](#real-and-fast-acquisition)), the time to first fix depends on the memory like this:
 
@@ -42,7 +42,7 @@ An aircraft loaded with the engine running skips all this: the unit is NAV ready
 
 STA 1 shows the GPS state in its top line. The unit is NAV ready in the four navigation states, `NAV`, `NAV A`, `NAV D` and `DEGRD`, and not in the others.
 
-<KlnScreen screen="sta-1-nav" rows="1" />
+<KlnScreen screen="pages/sta/sta-1-nav" rows="1" />
 
 - Initialization, `INIT`: the receiver searches the whole sky, collects new almanac data, or has been without a position for 5 minutes in flight. No position.
 - Acquisition, `ACQ`: the receiver searches the satellites it expects, or has lost its position and searches the satellites again. No position.
@@ -98,7 +98,7 @@ A unit installed without an altitude input, or one whose altitude input has fail
 
 STA 2 shows the <Term t="EPE" />, the receiver's estimate of how far its position may be from the truth. It follows the geometry of the satellites in use: many satellites spread over the sky give a small error, few satellites or satellites bunched together a large one. Above 3.8 NM the unit has no position (see [The GPS states](#the-gps-states)).
 
-<KlnScreen screen="sta-2-epe" />
+<KlnScreen screen="pages/sta/sta-2-epe" />
 
 The EPE is an estimate from the geometry, not a measurement. A satellite that sends wrong data does not raise it; only RAIM detects that.
 
@@ -128,11 +128,11 @@ To predict RAIM for the destination of the active flight plan:
 
 1. Turn the left outer knob to the STA pages and the left inner knob to STA 5. The line of the bar graph shows `COMPUTING`.
 
-   <KlnScreen screen="sta-5-computing" />
+   <KlnScreen screen="pages/sta/sta-5-computing" />
 
 2. Wait 10 seconds. The bar graph appears: a bar above the line means RAIM is predicted available at that time, a bar below the line that it is not. The middle bar, over the `0`, is the ETA.
 
-   <KlnScreen screen="sta-5-result" />
+   <KlnScreen screen="pages/sta/sta-5-result" />
 
 STA 5 must be shown on the left side to enter another destination or another ETA, on the ground for example.
 
@@ -169,7 +169,7 @@ RAIM NOT AVAILABLE
 
 The unit navigates en route or in the approach arm mode, and RAIM has not been available for more than 10 seconds. Cross-check the position with other navigation. It goes when RAIM is available again.
 
-<KlnScreen screen="gps-msg-raim-not-available" />
+<KlnScreen screen="gps/raim-not-available" />
 
 ```
 BAD SATELLITE GEOMETRY

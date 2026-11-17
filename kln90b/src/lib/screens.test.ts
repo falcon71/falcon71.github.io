@@ -1,6 +1,6 @@
 import {describe, expect, it} from 'vitest';
 import type {CellAttr, ScreenCapture} from './screenFile.ts';
-import {checkExplanations, documentedFields, loadCapture} from './screens.ts';
+import {checkExplanations, documentedFields, loadCapture, nestedScreen, screenIdOfFile} from './screens.ts';
 
 function capture(fieldIds: string[], mapFieldIds: string[] = []): ScreenCapture {
 	return {
@@ -18,7 +18,7 @@ describe('loadCapture', () => {
 	});
 
 	it('reads the generated file of a screen', () => {
-		const {capture: c, maps} = loadCapture('apt-1-ksea');
+		const {capture: c, maps} = loadCapture('pages/apt/apt-1-ksea');
 		expect(c.show).toBe('right');
 		expect(c.text[0]).toContain('KSEA');
 		expect([...c.fields.keys()]).toContain('ident');
@@ -65,5 +65,29 @@ describe('documentedFields', () => {
 
 	it('leaves out an explanation that has no field', () => {
 		expect([...documentedFields(capture(['ident']), mdx)]).toEqual(['ident']);
+	});
+});
+
+describe('screenIdOfFile', () => {
+	it('is the path below screens/ of the folder that holds the file', () => {
+		expect(screenIdOfFile('../../screens/pages/apt/apt-1-ksea/screen.txt')).toBe('pages/apt/apt-1-ksea');
+		expect(screenIdOfFile('../../screens/nav-1/map-L.svg')).toBe('nav-1');
+	});
+});
+
+describe('nestedScreen', () => {
+	it('takes a shared prefix for no nesting', () => {
+		expect(nestedScreen(['pages/apt/apt-1-ksea', 'pages/apt/apt-1-ksea-cursor', 'nav-1'])).toBeNull();
+	});
+
+	it('names the screen and the screen that lies inside it', () => {
+		expect(nestedScreen(['pages/nav', 'pages/nav/nav-1'])).toEqual(['pages/nav', 'pages/nav/nav-1']);
+		expect(nestedScreen(['pages/nav/nav-1', 'pages/nav'])).toEqual(['pages/nav', 'pages/nav/nav-1']);
+	});
+
+	it('finds no screen inside a screen among the committed screens', () => {
+		const keys = Object.keys(import.meta.glob('../../screens/**/screen.ts'));
+		expect(keys).toContain('../../screens/pages/nav/nav-5-ksea/screen.ts');
+		expect(nestedScreen(keys.map(screenIdOfFile))).toBeNull();
 	});
 });

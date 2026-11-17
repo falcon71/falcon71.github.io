@@ -3,14 +3,14 @@
  * An example screen of the unit, drawn in the KLN font.
  *
  * A generated screen is shown by its id, with its explanations from screens/<id>/fields.mdx:
- *   <KlnScreen screen="apt-1-ksea" />
+ *   <KlnScreen screen="pages/apt/apt-1-ksea" />
  * It does not repeat any text or field. `title` replaces the title of the generated file. The explanation file writes
  * <Field> and <Term> without imports.
  *
  * `rows` shows only some consecutive rows of a generated screen, numbered from 1 at the top line of the page, 7 the
  * status line (on a full page, 1 to 7 are its seven rows):
- *   <KlnScreen screen="apt-1-nearest" rows="1" />      <KlnScreen screen="apt-1-nearest" rows="1-2" />
- * Only the fields on those rows are explained and listed. The figure is #screen-apt-1-nearest--rows-1-2, so that it
+ *   <KlnScreen screen="pages/apt/apt-1-nearest" rows="1" />      <KlnScreen screen="pages/apt/apt-1-nearest" rows="1-2" />
+ * Only the fields on those rows are explained and listed. The figure is #screen-pages/apt/apt-1-nearest--rows-1-2, so that it
  * does not collide with the whole screen on the same page. A screen with a map is always shown whole.
  *
  * Hand-built screens are the exception, for an illustration that is no state of the unit (a status line alone, say). They
@@ -46,7 +46,7 @@ import {
 import { checkExplanations, documentedFields, loadCapture } from '../lib/screens';
 
 interface Props {
-	/** Id of a generated screen, e.g. "nav-1": the folder in screens/. The figure is #screen-nav-1 */
+	/** Id of a generated screen: its folder's path below screens/, e.g. "pages/nav/nav-1". The figure is #screen-pages/nav/nav-1 */
 	screen?: string;
 	/** Id of a hand-built screen, e.g. "nav-1". The figure is #screen-nav-1, a field explanation links as #screen-nav-1--dis */
 	id?: string;
@@ -205,7 +205,7 @@ const stageHtml = screenHtml(blocks, documented, maps, mapCheck);
 		}
 	}
 
-	// A link like #screen-nav-1--dis opens that field's explanation
+	// A link like #screen-pages/nav/nav-1--dis opens that field's explanation
 	function openFromHash() {
 		const match = /^#(screen-.+)--([a-z0-9-]+)$/.exec(location.hash);
 		const figure = match && document.getElementById(match[1]);

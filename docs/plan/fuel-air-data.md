@@ -42,7 +42,7 @@ Fuel management and air data; the OTH pages and their fields. Links instead of e
 ### From the package waypoints (2026-11-17)
 
 - OTH 3 is shown on User waypoints for the deleting task (`#deleting-a-user-waypoint`): the screens
-  `oth-3-user-waypoints`, `oth-3-delete-question` and `oth-3-used-in-fpl` exist; the OTH chapter reuses them and
+  `pages/oth/oth-3-user-waypoints`, `pages/oth/oth-3-delete-question` and `pages/oth/oth-3-used-in-fpl` exist; the OTH chapter reuses them and
   links back for the task. OTH 3 checks only the active waypoint and the flight plans before it deletes; what happens
   to a deleted waypoint that TRI, CAL 7, NAV 4 or STA 5 holds was not settled.
 

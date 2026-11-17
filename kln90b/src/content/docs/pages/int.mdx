@@ -16,7 +16,7 @@ You enter an identifier, scan through the list, deal with duplicate identifiers 
 
 The INT page gives the identifier of an intersection, the reference waypoint with the radial and the distance of the intersection from it, and the latitude and the longitude. Use it to check where an intersection lies and to find it from a VOR you know.
 
-<KlnScreen screen="int-lofal" />
+<KlnScreen screen="pages/int/int-lofal" />
 
 The complete list of the INT page holds every intersection of the navigation data and the user-defined intersections, mixed by identifier. It includes the terminal waypoints, the waypoints of terminal procedures. Two airports can have a terminal waypoint with the same identifier, so `DUP IDENT` is common for them; the latitude and the longitude tell them apart. The ACT pages mark a terminal waypoint with a `T` ([ACT pages](/kln90b/pages/act/)). With the cursor on, you can change the identifier and the reference waypoint of an intersection of the database; its radial, distance and position cannot be changed. When the list is empty, the page shows `0` and raises `NO INT WPTS` ([The other empty lists](/kln90b/operation/waypoints/#no-sup-wpts-and-the-other-empty-lists)).
 
@@ -36,7 +36,7 @@ To use another waypoint as the reference, turn the right cursor on, turn the rig
 
 A user-defined intersection has the same page as an intersection of the database, but every field except the identifier can be changed. It is stored in the user database and kept while the unit is off.
 
-<KlnScreen screen="int-user" />
+<KlnScreen screen="pages/int/int-user" />
 
 You create one by entering an identifier that no intersection has and answering the offer of the unit ([Creating a user waypoint](/kln90b/operation/user-waypoints/#creating-a-user-waypoint)); [`USR DB FULL`](/kln90b/operation/user-waypoints/#usr-db-full) says what happens when the user database has no room. The new intersection takes its reference from your entries, or finds it as above. [Editing a user waypoint](/kln90b/operation/user-waypoints/#editing-a-user-waypoint) explains how you change one, and [Deleting a user waypoint](/kln90b/operation/user-waypoints/#deleting-a-user-waypoint) how you delete it.
 

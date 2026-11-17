@@ -41,7 +41,7 @@ Nearest: `data/navdata/NearestList.ts`, `NearestUtils.ts`, `NearestAirportFinder
 `controls/selects/NearestSelector.tsx`, `pages/right/WaypointPage.tsx`, `controls/MessagePage.tsx`,
 `pages/left/Set3Page.tsx`. Direct-to: `pages/left/DirectToPage.tsx`, `pages/MainPage.tsx` (the Direct To button),
 `data/flightplan/ActiveWaypoint.ts`, `services/ModeController.ts`; test
-`test/flight/flights/directToPlanWaypoint.test.ts`. The Quickstart has the screen `direct-to-ident-entry`; reuse or
+`test/flight/flights/directToPlanWaypoint.test.ts`. The Quickstart has the screen `direct-to/ident-entry`; reuse or
 replace it.
 
 ## Notes from other packages
@@ -54,7 +54,7 @@ None.
   leads into the nearest list (APT, VOR and NDB pages only), and links to Nearest. A run showed it arrives at `NR 9`;
   the count is Nearest's.
 - An unknown identifier on the Direct To page brings up the offer to create a supplemental user waypoint (screen
-  `direct-to-create-waypoint`); Direct-to links to User waypoints, `#creating-a-user-waypoint`.
+  `direct-to/create-waypoint`); Direct-to links to User waypoints, `#creating-a-user-waypoint`.
 - kln90b#487: Direct To prefills a user waypoint that was deleted on OTH 3 while its page still shows it.
 
 ### From the package waypoint-pages (2026-11-17)
@@ -62,9 +62,9 @@ None.
 - After a direct-to the unit puts NAV 1 on the right side unless the left side already shows NAV 1
   (`DirectToPage.tsx:148-150`, found by the ACT review). Direct-to owns it.
 - The VOR, NDB and APT chapters each have "A nearest …" with the `NR` and rank and one sentence linking Nearest. The
-  screens `vor-nearest` and `ndb-nearest` reach the list by scanning back past the first station, not by the MSG
-  shortcut; Nearest may want a screen of the shortcut. The rank fields of `apt-1-nearest`, `vor-nearest` and
-  `ndb-nearest` say what Nearest owns about the count and the refresh only by link; check them against Nearest.
+  screens `pages/vor/vor-nearest` and `pages/ndb/ndb-nearest` reach the list by scanning back past the first station, not by the MSG
+  shortcut; Nearest may want a screen of the shortcut. The rank fields of `pages/apt/apt-1-nearest`, `pages/vor/vor-nearest` and
+  `pages/ndb/ndb-nearest` say what Nearest owns about the count and the refresh only by link; check them against Nearest.
 - kln90b#489 also covers the left identifier fields (Direct To page, FPL pages): typing an identifier there skips
   localizers and VOTs as on the VOR page. Nothing describes the left-field half yet; Direct-to does, where it
   describes entering a VOR, with the comment.

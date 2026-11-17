@@ -32,7 +32,7 @@ Only the pages and their fields.
 ## Where to look
 
 `pages/left/Set0Page.tsx` to `Set10Page.tsx`, `pages/PageTreeController.ts` (the order), the wiki page
-`SET-10-Page.md`. The screen `set-3-cursor` of the Quickstart exists; reuse or replace.
+`SET-10-Page.md`. The screen `pages/set/set-3-cursor` of the Quickstart exists; reuse or replace.
 
 ## Notes from other packages
 
@@ -45,8 +45,8 @@ Only the pages and their fields.
 ### From the package failures (2026-11-16)
 
 - SET 10 opens the FLR pages. The FLR chapter owns the way in and out (`/kln90b/pages/flr/`, its opening section)
-  and has the screen `set-10-failures` (SET 10 with the cursor on `FAILURES?`), which the SET chapter may show.
-  The SET chapter says one sentence and links. The existing screen `set-10` still has placeholder field
+  and has the screen `pages/set/set-10-failures` (SET 10 with the cursor on `FAILURES?`), which the SET chapter may show.
+  The SET chapter says one sentence and links. The existing screen `pages/set/set-10` still has placeholder field
   explanations.
 - After a loss of the unit's memory SET 2 takes a date only until the unit has a position (Simulated failures,
   `#the-battery`).
@@ -54,8 +54,8 @@ Only the pages and their fields.
 ### From the package power-on (2026-11-17)
 
 - Power-on and initialization, `#initializing-the-position-and-the-time`, owns the task of correcting the position
-  on SET 1 and the date and time on SET 2, with procedures and the screens `set-1-latitude-entry` and
-  `set-2-date-entry`. The SET chapter explains the pages and fields and links there for the task.
+  on SET 1 and the date and time on SET 2, with procedures and the screens `pages/set/set-1-latitude-entry` and
+  `pages/set/set-2-date-entry`. The SET chapter explains the pages and fields and links there for the task.
 - SET 2 takes no date and no time once the unit has a position; the cursor skips them. The Self Test page still takes
   them until it is approved.
 - Suspected and not verified: `CONFIRM?` on SET 1 still sets the position while the unit has one
