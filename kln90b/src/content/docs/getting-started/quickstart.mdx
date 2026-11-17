@@ -25,7 +25,7 @@ To get from the Turn-On page to the normal pages:
 
 1. Wait for the Self Test page.
 
-<KlnScreen screen="self-test" />
+<KlnScreen screen="power-on/self-test" />
 
 2. Press <kbd>ENT</kbd> until the cursor is on `APPROVE?`. The cursor starts on the baro setting and moves one field on with each press. Once it is on `APPROVE?`, <Term t="ENT">`ENT`</Term> flashes in the status line.
 3. Press <kbd>ENT</kbd>. The unit shows the Database page, with the cursor on `ACKNOWLEDGE?`.
@@ -37,7 +37,7 @@ Depending on the installation, another page can appear between the Self Test pag
 
 The screen is a left page and a right page with the status line under them, and each side has six lines. The left knobs and the left <kbd>CRSR</kbd> button operate the left page, the right knobs and the right <kbd>CRSR</kbd> button the right page. A few pages, such as the MSG page, use both sides.
 
-<KlnScreen screen="nav-1-apt-1-ksea" />
+<KlnScreen screen="pages/nav/nav-1-apt-1-ksea" />
 
 The status line holds the page identifications of both pages with the mode annunciation between them. A flashing <Term t="MSG">`MSG`</Term> means that the unit holds a message you have not read; press <kbd>MSG</kbd> to read it. [The screen](/kln90b/unit/controls-and-display/#the-screen) describes both halves and the status line.
 
@@ -57,7 +57,7 @@ Press the left <kbd>CRSR</kbd> button for the left page or the right <kbd>CRSR</
 
 On many fields the inner knob steps through a list of values, and each step takes effect at once. You need no <kbd>ENT</kbd>, and <kbd>CLR</kbd> has nothing to take back. On SET 3, one step of the left inner knob has changed the minimum runway length:
 
-<KlnScreen screen="set-3-cursor" />
+<KlnScreen screen="pages/set/set-3-cursor" />
 
 The identifier on the waypoint pages (APT, VOR, NDB, INT and SUP) works this way too: the page shows the waypoint as soon as you change a character, and the unit fills in the characters to the right of the cursor with the first waypoint that matches. To show Seattle-Tacoma on the APT pages:
 
@@ -78,7 +78,7 @@ To fly direct to Boeing Field:
 1. Press <DirectToKey />. The Direct To page appears on the left side with the cursor on the identifier.
 2. Enter KBFI with the left knobs: the inner knob selects a character, the outer knob moves to the next one.
 
-<KlnScreen screen="direct-to-ident-entry" />
+<KlnScreen screen="direct-to/ident-entry" />
 
 3. Press <kbd>ENT</kbd>. The unit shows the waypoint page of KBFI on the right so that you can check it, and `ENT` flashes in the status line. If it is not the right place, turn the left inner knob to enter the identifier again.
 4. Press <kbd>ENT</kbd> again. The direct-to is now active.

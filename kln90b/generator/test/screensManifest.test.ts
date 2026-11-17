@@ -39,11 +39,11 @@ describe('planScreensRun', () => {
 	});
 
 	it('lets a filtered run proceed when the manifest is the pinned commit, and does not write it', () => {
-		expect(planScreensRun([...SCREENS, 'screens/nav-1'], PINNED, PINNED)).toEqual({problem: null, writeManifest: false});
+		expect(planScreensRun([...SCREENS, 'screens/pages/nav/nav-1'], PINNED, PINNED)).toEqual({problem: null, writeManifest: false});
 	});
 
 	it('refuses a filtered run when the manifest is missing, naming the pin and saying to run all screens', () => {
-		const {problem, writeManifest} = planScreensRun([...SCREENS, 'screens/nav-1'], null, PINNED);
+		const {problem, writeManifest} = planScreensRun([...SCREENS, 'screens/pages/nav/nav-1'], null, PINNED);
 		expect(writeManifest).toBe(false);
 		expect(problem).toContain(PINNED);
 		expect(problem).toContain('npm run screens');
@@ -51,7 +51,7 @@ describe('planScreensRun', () => {
 	});
 
 	it('refuses a filtered run when the manifest differs, naming both commits', () => {
-		const {problem, writeManifest} = planScreensRun([...SCREENS, 'screens/nav-1'], OLD, PINNED);
+		const {problem, writeManifest} = planScreensRun([...SCREENS, 'screens/pages/nav/nav-1'], OLD, PINNED);
 		expect(writeManifest).toBe(false);
 		expect(problem).toContain(OLD);
 		expect(problem).toContain(PINNED);
@@ -59,13 +59,13 @@ describe('planScreensRun', () => {
 	});
 
 	it('takes every argument beyond --project screens for a filter, a test name pattern as well', () => {
-		for (const extra of [['-t', 'nav'], ['screens/nav-1'], ['--reporter', 'verbose']]) {
+		for (const extra of [['-t', 'nav'], ['screens/pages/nav/nav-1'], ['--reporter', 'verbose']]) {
 			expect(planScreensRun([...SCREENS, ...extra], OLD, PINNED).problem, extra.join(' ')).toContain('without filters');
 		}
 	});
 
 	it('finds the screens project wherever --project is', () => {
-		expect(planScreensRun(['screens/nav-1', '--project', 'screens'], OLD, PINNED).problem).toContain('without filters');
+		expect(planScreensRun(['screens/pages/nav/nav-1', '--project', 'screens'], OLD, PINNED).problem).toContain('without filters');
 		expect(planScreensRun(['--project', 'unit', '--project', 'screens'], OLD, PINNED).writeManifest).toBe(true);
 	});
 });

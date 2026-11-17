@@ -11,7 +11,7 @@ import {blocksOf, checkCoverage, FrameElements, recordMapElements, type MapEleme
 import {facilitiesOf, loadExtract, place, pointNamesOf} from '../lib/navdata.ts';
 
 /**
- * The capture of NAV 5 20 NM south of KSEA with a Direct To KSEA, as screens/nav-5-ksea shows it, recorded from the
+ * The capture of NAV 5 20 NM south of KSEA with a Direct To KSEA, as screens/pages/nav/nav-5-ksea shows it, recorded from the
  * steps on as generateScreen records it.
  */
 async function nav5DirectTo(names = pointNamesOf(loadExtract())) {

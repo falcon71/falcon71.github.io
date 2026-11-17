@@ -18,7 +18,7 @@ describe('loadCapture', () => {
 	});
 
 	it('reads the generated file of a screen', () => {
-		const {capture: c, maps} = loadCapture('apt-1-ksea');
+		const {capture: c, maps} = loadCapture('pages/apt/apt-1-ksea');
 		expect(c.show).toBe('right');
 		expect(c.text[0]).toContain('KSEA');
 		expect([...c.fields.keys()]).toContain('ident');
@@ -87,7 +87,7 @@ describe('nestedScreen', () => {
 
 	it('finds no screen inside a screen among the committed screens', () => {
 		const keys = Object.keys(import.meta.glob('../../screens/**/screen.ts'));
-		expect(keys).toContain('../../screens/nav-5-ksea/screen.ts');
+		expect(keys).toContain('../../screens/pages/nav/nav-5-ksea/screen.ts');
 		expect(nestedScreen(keys.map(screenIdOfFile))).toBeNull();
 	});
 });

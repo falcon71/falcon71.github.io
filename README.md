@@ -47,7 +47,7 @@ Build and deployment → Source must be set to "GitHub Actions" once.
 A screen of the unit is generated from the simulated unit (see `kln90b/generator/README.md`), and a page shows it by its id:
 
 ```mdx
-<KlnScreen screen="apt-1-ksea" />
+<KlnScreen screen="pages/apt/apt-1-ksea" />
 ```
 
 The folder `kln90b/screens/<id>/` holds the description (`screen.ts`), the explanations of the fields (`fields.mdx`, with

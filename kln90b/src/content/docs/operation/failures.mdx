@@ -83,7 +83,7 @@ The unit notices most failures of its own parts and reports them, in the self te
 
 At power-on the Self Test page shows a flashing `TEST FAIL` in place of `ANNUN ON` when the self test has found a fault. This happens for a failed ARINC 429 output, RS-232 output, nav super flag, EEPROM, GPS receiver or annunciator driver, and for every fault the GPS receiver reports with a code (see [The receiver and the antenna](#the-receiver-and-the-antenna)). `TEST FAIL` does not stop the power-on: approve the page as usual. [Power-on and initialization](/kln90b/unit/power-on/#the-self-test-page) explains the self test.
 
-<KlnScreen screen="failure-self-test-fail" />
+<KlnScreen screen="failures/self-test-fail" />
 
 In operation the unit posts a failure's message on the MSG page once it notices the failure:
 
@@ -107,7 +107,7 @@ Every aircraft has the GPS receiver, its antenna, the ARINC 429 output, the nav 
 
 A failed receiver or antenna takes the position away within a second. STA 1 shows the GPS state `FAILR` with no satellites, STA 2 shows dashes for the <Term t="EPE" />, and the unit flags its navigation. Neither `SATELLITE COVERAGE` `INADEQUATE FOR NAV` nor a RAIM message appears while the receiver has failed; the receiver's own message says why. Navigate by other means. [The GPS states](/kln90b/operation/gps-receiver/#the-gps-states) explains `FAILR`.
 
-<KlnScreen screen="sta-1-failed" />
+<KlnScreen screen="pages/sta/sta-1-failed" />
 
 The receiver reports its faults, and those of the antenna, with a code on the MSG page:
 
@@ -116,7 +116,7 @@ RCVR HARDWARE ERROR:
  0110
 ```
 
-<KlnScreen screen="failure-msg-rcvr-hardware" />
+<KlnScreen screen="failures/msg-rcvr-hardware" />
 
 What you can act on is STA 1: with `FAILR` the receiver delivers nothing and you navigate by other means; without it the receiver works, and the code reports a fault it lives with, such as a slow first position. The entries below give each failure's code. Faults at the same time combine their codes: `0408` is `0400` and `0008`. The message appears once the power-on pages are done, stays while the code is not `0000`, and flashes unread again when a new fault joins. Every code also fails the self test.
 
@@ -146,23 +146,23 @@ These three failures never come at random and the unit never notices them; they 
 
 How to tell them apart on the unit, together with the antenna's lost gain. On STA 1 of a healthy unit a satellite near the horizon is weaker, about 41, than the satellites higher up, 45 to 47:
 
-<KlnScreen screen="sta-1-nav" />
+<KlnScreen screen="pages/sta/sta-1-nav" />
 
 - `ANT GAIN`: signal strengths lower by the same amount on every satellite, high and low alike, in every direction and attitude, and no worse as you fly on. Compare the high satellite 14 with the healthy page: it has lost as much as the others.
 
-  <KlnScreen screen="gpsfail-ant-gain" />
+  <KlnScreen screen="gps/failures/ant-gain" />
 
 - Jamming: signal strengths falling as you fly on, satellites lost one after another, lowest first, coming back when you turn away or descend until the jammer lies beyond your horizon, and no `RAIM POSITION ERROR`. Here the low satellites are already lost while the high ones still hold, weaker than they should be.
 
-  <KlnScreen screen="gpsfail-jamming" />
+  <KlnScreen screen="gps/failures/jamming" />
 
 - Spoofing: weakening satellites, then satellites that all read nearly the same signal strength, a wandering position with `RAIM POSITION ERROR`, and then a position that jumps far away, a groundspeed of 0 kt in flight or the time changing by hours. Look at the signal strengths of a captured unit: nearly the same at every elevation. A captured unit with an altitude input usually keeps `RAIM POSITION ERROR` on, which a faulty satellite gives too.
 
-  <KlnScreen screen="gpsfail-spoofing-captured" />
+  <KlnScreen screen="gps/failures/spoofing-captured" />
 
 - A faulty satellite: `RAIM POSITION ERROR` with a position near the truth, a sensible groundspeed and the usual spread of signal strengths on STA 1, stronger high in the sky. The page looks like the healthy one; only the message and a cross-check tell.
 
-  <KlnScreen screen="gpsfail-satellite" />
+  <KlnScreen screen="gps/failures/satellite" />
 
 [RAIM](/kln90b/operation/gps-receiver/#raim) and [Messages of the receiver](/kln90b/operation/gps-receiver/#messages-of-the-receiver) explain the messages.
 
@@ -222,7 +222,7 @@ BATTERY LOW: SERVICE
  LOSS OF USER DATA
 ```
 
-<KlnScreen screen="failure-msg-battery-low" />
+<KlnScreen screen="failures/msg-battery-low" />
 
 The warning appears once the power-on pages are done and stays until a service gives the unit a new battery. Repairing `BATTERY` on FLR 2 repairs the failure but not the charge: an empty battery still warns.
 
@@ -245,7 +245,7 @@ It keeps the `GPS:` setting on SET 10, the failures, the `MTBF:` setting and the
 
 After that power-on the Self Test page shows `TEST FAIL` and the 1988 date, and the MSG page holds `USER DATA LOST` with the battery's warning and `RCVR HARDWARE ERROR:` `0008`:
 
-<KlnScreen screen="failure-msg-user-data-lost" />
+<KlnScreen screen="failures/msg-user-data-lost" />
 
 The receiver must search the sky and collect new almanac data, which takes about 20 minutes; `FAST` on SET 10 cannot help at this power-on. Without a stored position the first position raises no `POSITION DIFFERS FROM` message.
 

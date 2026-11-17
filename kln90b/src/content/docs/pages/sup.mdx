@@ -15,7 +15,7 @@ You enter an identifier, scan through the list, deal with duplicate identifiers 
 
 The SUP page shows the identifier of the waypoint, the reference waypoint with the radial and the distance of the waypoint from it, and the latitude and the longitude. A supplemental waypoint is always a [user waypoint](/kln90b/operation/user-waypoints/), so every field except the identifier can be changed with the cursor.
 
-<KlnScreen screen="sup-user-waypoint" />
+<KlnScreen screen="pages/sup/sup-user-waypoint" />
 
 The reference works as on the INT page: the unit finds the VOR nearest to the waypoint after a search, and you can enter another waypoint as the reference ([The reference waypoint](/kln90b/pages/int/#the-reference-waypoint)).
 
@@ -27,17 +27,17 @@ Three kinds of waypoint that the unit made show their reference, radial and dist
 
 A unit without a supplemental waypoint shows `0` in place of the identifier, the offer to create a waypoint, and `NO SUP WPTS` on the status line each time you select the page. [The other empty lists](/kln90b/operation/waypoints/#no-sup-wpts-and-the-other-empty-lists) explains the message.
 
-<KlnScreen screen="waypoint-no-sup-wpts" />
+<KlnScreen screen="waypoint/no-sup-wpts" />
 
 ### Defining a new waypoint
 
 When the identifier you enter has no match in the list, the SUP page shows `CREATE NEW WPT AT:` with `USER POS?` and `PRES POS?` instead of the fields; [Creating a user waypoint](/kln90b/operation/user-waypoints/#creating-a-user-waypoint) explains the two answers. The offer also appears on the SUP page when <kbd>ENT</kbd> on the Direct To page or an FPL page finds no waypoint of any type ([Creating a waypoint from the Direct To page or a flight plan](/kln90b/operation/user-waypoints/#creating-a-waypoint-from-the-direct-to-page-or-a-flight-plan)). You then cannot change the identifier on the SUP page, and the scan does nothing while the offer is shown.
 
-<KlnScreen screen="direct-to-create-waypoint" />
+<KlnScreen screen="direct-to/create-waypoint" />
 
 When you define a waypoint by a reference, a radial and a distance, enter the reference first: if you enter it last, nothing is created. {/* kln90b#488: describes the current behavior; the fix creates the waypoint whatever the order */}
 
-<KlnScreen screen="sup-create-by-radial" />
+<KlnScreen screen="pages/sup/sup-create-by-radial" />
 
 ## Where the SUP page is used
 

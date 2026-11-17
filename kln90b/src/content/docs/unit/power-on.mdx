@@ -35,7 +35,7 @@ Every later power-on, with the knob or after a longer power loss, runs the whole
 
 The Turn-On page shows `GPS` and the ORS level, the copyright line, four lines of text that you write yourself and `SELF TEST IN PROGRESS`. It stays for about 15 to 20 seconds, and then the Self Test page follows.
 
-<KlnScreen screen="turn-on-page" />
+<KlnScreen screen="power-on/turn-on-page" />
 
 The four lines are for the name of the aircraft or a reminder. They are blank until you write them, and the unit keeps them while it is off and shows them at every power-on.
 
@@ -50,7 +50,7 @@ To write the four lines:
 5. Press <kbd>ENT</kbd>. The unit keeps the line and moves the cursor to the next line. After the fourth line the cursor stays where it is.
 6. Press the left <kbd>CRSR</kbd> to turn the cursor off. The unit goes on to the Self Test page, at once if the time of the page is up.
 
-<KlnScreen screen="turn-on-page-cursor" />
+<KlnScreen screen="power-on/turn-on-page-cursor" />
 
 To drop a line you have opened, turn the cursor off before you press <kbd>ENT</kbd>: the line keeps its old text. To empty a line, open it and press <kbd>ENT</kbd> at once, which stores a blank line.
 
@@ -58,7 +58,7 @@ To drop a line you have opened, turn the cursor off before you press <kbd>ENT</k
 
 The Self Test page lets you check the instruments of the aircraft against its test values, and the clock and the altitude against what you know; you correct the clock, the time zone and the baro setting. It stays until you approve it.
 
-<KlnScreen screen="self-test" />
+<KlnScreen screen="power-on/self-test" />
 
 The left page holds fixed test values: a distance of 34.5 NM, a half-scale deflection of the D-bar to the right with the FROM flag, an `OBS OUT` course of 315° and a bearing of 130° for the <Term t="RMI" />. The unit sends them to the aircraft that it drives, so that the CDI or HSI and the RMI show the same values and the autopilot receives the bearing. `ANNUN` `ON` lights the remote annunciators that the aircraft has. The one live value is <Term t="OBS IN" />, the course of the OBS setting of the aircraft, which follows when you turn the OBS knob.
 
@@ -87,7 +87,7 @@ After the memory of the unit was lost, the page shows a date in 1988. Enter the 
 
 A flashing `TEST FAIL` in place of `ANNUN` `ON` means that the self test has found a fault. The unit does not stop: approve the page as usual, go on through the pages that follow it, and open the MSG page as soon as the first pages show. The message there names the nature of the problem, for example `DATA BASE CHECKSUM ERR` when the unit could not load the navigation data of the simulator, or the code of a receiver fault.
 
-<KlnScreen screen="failure-self-test-fail" />
+<KlnScreen screen="failures/self-test-fail" />
 
 What to do depends on the cause. Turn the unit off and on again once: a failure to load the navigation data can go away, and so can a passing fault of the receiver, which acts at one power-on and repairs itself. A simulated failure stays until you repair it, and the self test then fails at every power-on; [When the unit notices a failure](/kln90b/operation/failures/#when-the-unit-notices-a-failure) says which failures the self test finds.
 
@@ -103,7 +103,7 @@ The VFR-only warning page appears only if the unit is installed for VFR flight o
 
 The VFR-only warning page says `FOR VFR USE ONLY`, with the cursor on `ACKNOWLEDGE?`. Press <kbd>ENT</kbd> to leave it. The next page is the OBS warning page when the unit is in OBS mode, and otherwise the Database page.
 
-<KlnScreen screen="vfr-only-page" />
+<KlnScreen screen="power-on/vfr-only-page" />
 
 ### The OBS warning page
 
@@ -113,17 +113,17 @@ The OBS warning page appears only in an aircraft with a switch for leg and OBS m
 
 The unit starts every power-on in leg mode (`ENR-LEG`), so only the switch of the aircraft can put it in OBS mode before this page. The OBS warning page tells you so: it has no `ACKNOWLEDGE?` and no cursor, and it leaves by itself, with the Database page next, as soon as you press the GPS CRS button of the aircraft to select leg mode. [Navigation modes](/kln90b/operation/navigation-modes/#obs-mode) explains OBS mode.
 
-<KlnScreen screen="obs-warning-page" />
+<KlnScreen screen="power-on/obs-warning-page" />
 
 ### The Database page
 
 The Database page tells you how the navigation database stands. It appears at every power-on that runs the whole sequence. It shows the last day of the database cycle and `DATA BASE EXPIRES` while the unit's date is not past it. Press <kbd>ENT</kbd> with the cursor on `ACKNOWLEDGE?` to go on.
 
-<KlnScreen screen="database-page" />
+<KlnScreen screen="power-on/database-page" />
 
 When the date of the unit is past the end of the cycle, the page says `DATA BASE EXPIRED` and adds `ALL DATA MUST BE` `CONFIRMED BEFORE USE`. You can press <kbd>ENT</kbd> all the same: the unit works with the data it has.
 
-<KlnScreen screen="database-page-expired" />
+<KlnScreen screen="power-on/database-page-expired" />
 
 The unit uses the navigation data of the simulator; [How do I update the database?](/kln90b/help/faq/#how-do-i-update-the-database) says how to get a current cycle. `EXPIRES` shows for every current database, however many days it has left. The unit judges the date on its clock at that moment, so a date entered on the Self Test page counts. [Waypoints and the database](/kln90b/operation/waypoints/) explains the database and its cycle.
 
@@ -152,7 +152,7 @@ The closer the waypoint is to the aircraft, the shorter the search. To drop the 
 
 You can enter the latitude and longitude instead of an identifier. The first step of the left inner knob on either opens its entry, as here on the latitude:
 
-<KlnScreen screen="set-1-latitude-entry" />
+<KlnScreen screen="pages/set/set-1-latitude-entry" />
 
 [Entries that take effect with ENT](/kln90b/unit/controls-and-display/#entries-that-take-effect-with-ent) gives the steps.
 
@@ -166,7 +166,7 @@ To correct the date and the time on SET 2:
 6. Press <kbd>ENT</kbd>. The seconds start at 00.
 7. Press the left <kbd>CRSR</kbd> to turn the cursor off.
 
-<KlnScreen screen="set-2-date-entry" />
+<KlnScreen screen="pages/set/set-2-date-entry" />
 
 SET 2 takes no date and no time once the unit has a position; the cursor skips them. The Self Test page takes the date and the time too, until you approve it.
 

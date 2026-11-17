@@ -225,8 +225,8 @@ it is written when those owners exist. A package that proves too large in its re
 - The pages of the packages sta and failures were written before Controls and display, Power-on and the message
   lists existed; they are checked against those pages (terms, names of controls, links).
 
-- **Placeholder field explanations.** `screen-layout`, `cursor-example`, `home-nav-1`, `set-10`, `nav-1`,
-  `nav-5-ksea`, `oth-2-zse` and the tutorial screens still have filler text in their field explanations (found by
+- **Placeholder field explanations.** `display/screen-layout`, `display/cursor-example`, `pages/nav/home-nav-1`, `pages/set/set-10`, `pages/nav/nav-1`,
+  `pages/nav/nav-5-ksea`, `pages/oth/oth-2-zse` and the tutorial screens still have filler text in their field explanations (found by
   the writer of Controls and display, 2026-11-17). The packages that show them fill them in; the final pass removes
   the screens no page shows.
 - **Left over from the package power-on (2026-11-17):** the glossary entries `OBS IN` and `OUT` are used only by the Self Test screens
@@ -254,7 +254,7 @@ Not manual text; for the maintainer or a session that works on the site.
   allows fields only on the page identification); the style guide (section 13) lets a screen about a status line
   message show both halves.
 - `kln90b/generator/api.ts` re-exports the harness's `savedUserWaypoints` next to `savedFlightplan`, for screens
-  that need stored user waypoints (`sup-usr-db-full`).
+  that need stored user waypoints (`pages/sup/sup-usr-db-full`).
 - The build does not check the anchors of links, only the pages. A dead anchor is found by the seam check and the
   final pass.
 

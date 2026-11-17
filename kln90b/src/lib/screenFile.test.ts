@@ -116,7 +116,7 @@ describe('screen file', () => {
 	it('re-serializes every committed screen file to the same text', () => {
 		const files = import.meta.glob<string>('../../screens/**/screen.txt', {query: '?raw', import: 'default', eager: true});
 		// The glob finds them: a screen with a map is among them
-		expect(Object.keys(files)).toContain('../../screens/nav-5-ksea/screen.txt');
+		expect(Object.keys(files)).toContain('../../screens/pages/nav/nav-5-ksea/screen.txt');
 		for (const [name, text] of Object.entries(files)) {
 			expect(serializeScreenFile(parseScreenFile(text)), name).toBe(text);
 		}

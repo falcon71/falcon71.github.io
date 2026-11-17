@@ -14,7 +14,7 @@ import {checkCoverage, recordMapElements, type MapElement} from './mapElements.t
 import {mapToSvg} from './mapSvg.ts';
 import {airspacesOf, facilitiesOf, loadAirspaces, loadExtract, loadProcedures, pointNamesOf} from './navdata.ts';
 import {decimalYear, declination, screenModel, SCREEN_DEGREE} from './wmm.ts';
-import {screenId} from './paths.ts';
+import {isScreenId, screenId} from './paths.ts';
 
 export interface ScreenDescription {
 	title: string;
@@ -39,7 +39,6 @@ const MSG_ANNUNCIATOR = 'msg';
 // Super NAV 5 has no status line; its message indicator is in row 5 from column 6, over the map
 const SUPER_NAV5_MSG = {row: 5, from: 6, to: 9};
 const MAP_SIDES: MapSide[] = ['L', 'R', 'F'];
-const ID = /^[a-z0-9-]+$/;
 const MAP_FILE = /^map-.*\.svg$/;
 
 interface ShownMap {
@@ -85,7 +84,7 @@ export function screenStorage(position?: { lat: number; lon: number }, own?: Rec
 }
 
 async function generate(dir: string, id: string, d: ScreenDescription): Promise<void> {
-	if (!ID.test(id)) throw new Error(`the folder name must match ${ID}`);
+	if (!isScreenId(id)) throw new Error('every folder name of the id must match [a-z0-9-]+');
 	// Only the places of the FAA extract exist, and the variation is the model's at the date the unit starts
 	const year = decimalYear(d.boot?.start ?? DEFAULT_START);
 	const extract = loadExtract();

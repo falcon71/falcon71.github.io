@@ -18,7 +18,7 @@ The ACT pages are the waypoint pages of the active waypoint, with a top line of 
 
 The top line reads from the left as follows.
 
-<KlnScreen screen="act-vor-olm" />
+<KlnScreen screen="pages/act/act-vor-olm" />
 
 - The arrow `›`, as on every waypoint page, marks the waypoint as the active waypoint. On the ACT pages it stands only on the copy of the waypoint that is the active one, so a waypoint that FPL 0 holds twice shows the arrow on one copy only. It flashes during [waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting).
 - The number of the waypoint in FPL 0, the number that FPL 0 shows in front of it. It is blank for a waypoint outside FPL 0 ([below](#a-direct-to-waypoint-outside-the-flight-plan)). A direct-to to a waypoint that FPL 0 holds shows its number.
@@ -32,7 +32,7 @@ What the cursor can change depends on the page. The right <kbd>CRSR</kbd> does n
 
 An airport has the pages APT 1 to APT 7 as ACT 1 to ACT 7, and the right inner knob, pushed in and with the cursor off, turns through them. The top line stays on every one of them except the runway diagram of ACT 3, which has none, as on APT 3; the page's own content starts below it.
 
-<KlnScreen screen="apt-act-1" />
+<KlnScreen screen="pages/act/apt-act-1" />
 
 <Callout kind="availability">
 ACT 8, the approaches of the active airport, is available only if the unit is installed for non-precision approaches. Not every aircraft has such an installation. Without it, the ACT pages of an airport end at ACT 7.
@@ -40,7 +40,7 @@ ACT 8, the approaches of the active airport, is available only if the unit is in
 
 The ACT pages of every other type have one page each, and the status line reads `ACT`. A terminal waypoint, such as CAKPU of KBKE, shows the INT page:
 
-<KlnScreen screen="act-terminal-fix" />
+<KlnScreen screen="pages/act/act-terminal-fix" />
 
 ### Scanning through FPL 0
 
@@ -56,13 +56,13 @@ When the unit sequences to the next waypoint of FPL 0, or you fly a direct-to to
 
 A [direct-to](/kln90b/operation/direct-to/) to a waypoint that FPL 0 does not hold makes that waypoint the active waypoint. The ACT page shows it with a blank number and the arrow, whatever its type. When the ACT page stays on the right side, it changes to the new direct-to waypoint by itself.
 
-<KlnScreen screen="act-direct-to" />
+<KlnScreen screen="pages/act/act-direct-to" />
 
 ### `NO ACTIVE WAYPOINT`
 
 `NO ACTIVE` `WAYPOINT` means that the unit has no active waypoint: it has no direct-to and FPL 0 has fewer than two waypoints, so that it has no leg to fly. A flight plan with a single waypoint leaves the page empty. The page shows no fields.
 
-<KlnScreen screen="act-no-active" />
+<KlnScreen screen="pages/act/act-no-active" />
 
 To have an active waypoint, fly a [direct-to](/kln90b/operation/direct-to/), enter a second waypoint into FPL 0 or activate a stored flight plan of at least two waypoints ([Flight plans](/kln90b/operation/flight-plans/)). The page shows the waypoint by itself as soon as one is active. The right <kbd>CRSR</kbd> turns the `CRSR` annunciation and the `ENT` prompt on, but there is no field to change; press <kbd>CRSR</kbd> or <kbd>ENT</kbd> to turn the cursor off.
 

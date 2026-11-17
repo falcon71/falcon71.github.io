@@ -26,7 +26,7 @@ The fields of each type are explained in the page reference, in the chapters of 
 
 When the identifier you enter on an APT page, the INT page or the SUP page matches no waypoint of that type, the page shows `CREATE NEW WPT AT:` and two choices. [Entering an identifier](/kln90b/operation/waypoints/#entering-an-identifier) explains how you enter it.
 
-<KlnScreen screen="apt-create-new-wpt" />
+<KlnScreen screen="pages/apt/apt-create-new-wpt" />
 
 To create a user waypoint at the position of the aircraft:
 
@@ -42,7 +42,7 @@ To create a user waypoint at a position you enter, choose `USER POS?` in step 3 
 1. Enter the latitude and press <kbd>ENT</kbd>. The cursor moves to the longitude, and the status line shows `ENT LAT/LON` as a reminder that the waypoint is not created yet.
 2. Enter the longitude and press <kbd>ENT</kbd>. The unit creates the waypoint, shows its page and turns the cursor off.
 
-<KlnScreen screen="apt-1-user-pos" />
+<KlnScreen screen="pages/apt/apt-1-user-pos" />
 
 Turning the cursor off before the longitude is accepted creates nothing.
 
@@ -54,7 +54,7 @@ On the INT page and the SUP page you can define the position relative to another
 2. Enter the radial in degrees magnetic and press <kbd>ENT</kbd>. The radial is magnetic with the variation of the reference waypoint.
 3. Enter the distance in NM and press <kbd>ENT</kbd>. The unit creates the waypoint at that place, and latitude and longitude show where it is.
 
-<KlnScreen screen="sup-create-by-radial" />
+<KlnScreen screen="pages/sup/sup-create-by-radial" />
 
 Enter the reference first: a radial and a distance entered before it leave the waypoint uncreated. {/* kln90b#488: describes the current behavior; the fix creates the waypoint when the reference is entered last */} The reference, the radial and the distance are not stored with the waypoint. When you come back to its page, the unit shows radial and distance from the nearest VOR again. A duplicate identifier of the reference brings up the [Duplicate Waypoint page](/kln90b/operation/waypoints/#duplicate-identifiers).
 
@@ -62,7 +62,7 @@ Enter the reference first: a radial and a distance entered before it leave the w
 
 On the Direct To page and on every FPL page, <kbd>ENT</kbd> on an identifier that matches no waypoint of any type brings up the offer on the right side, instead of `NO SUCH WPT`. The right page is the SUP page, and the new waypoint is a supplemental waypoint. The cursor is on `USER POS?`, the left entry stays open and keeps the identifier, and the offer works as above, including a reference waypoint, radial and distance.
 
-<KlnScreen screen="direct-to-create-waypoint" />
+<KlnScreen screen="direct-to/create-waypoint" />
 
 To fly direct to a new user waypoint:
 
@@ -76,13 +76,13 @@ In a flight plan, step 3 inserts the waypoint instead. If you change the identif
 
 The VOR page and the NDB page make no offer. When the identifier you enter matches no VOR or NDB, the page shows empty fields: frequency and, for a VOR, the magnetic variation, then latitude and longitude. Enter latitude and longitude, each with <kbd>ENT</kbd>; the frequency and the variation are optional. The unit creates the waypoint when it has both coordinates, and shows `ENT LAT/LON` after every entry while the position is incomplete, the frequency and the variation included. Without a variation, the unit takes the magnetic variation at the position.
 
-<KlnScreen screen="vor-user-empty" />
+<KlnScreen screen="pages/vor/vor-user-empty" />
 
 ## `USR DB FULL`
 
 `USR DB FULL` on the status line means that the user database is full and the unit cannot store another waypoint.
 
-<KlnScreen screen="sup-usr-db-full" />
+<KlnScreen screen="pages/sup/sup-usr-db-full" />
 
 Nothing is created, and the page keeps what you entered, so repeating the request gives the same message. Delete a waypoint on OTH 3 to make room ([Deleting a user waypoint](#deleting-a-user-waypoint)). The same message appears when the REF page or the CTR pages cannot add a waypoint of their own. A route that you import from the EFB leaves out each waypoint that does not fit and reports it with `WAYPOINT` and its identifier, followed by `DELETED`.
 
@@ -90,7 +90,7 @@ Nothing is created, and the page keeps what you entered, so repeating the reques
 
 You change a user waypoint on its own waypoint page: select the page, turn the cursor on and move it to the field. The latitude and the longitude can be changed on every type, and each new value takes effect with <kbd>ENT</kbd> and moves the waypoint for every flight plan and every page that uses it. A user VOR and a user NDB also let you change the frequency, a user VOR the magnetic variation. The identifier and the waypoint type cannot be changed: to rename a waypoint, create a new one and delete the old.
 
-<KlnScreen screen="sup-user-waypoint" />
+<KlnScreen screen="pages/sup/sup-user-waypoint" />
 
 On the INT page and the SUP page the position can also be changed with the reference waypoint, the radial and the distance. A new reference moves nothing; the page then shows radial and distance from it. A new distance moves the waypoint along the same radial, and a new radial moves it onto that radial at the same distance. The unit looks for the nearest VOR as the reference after the page of a waypoint appears. Until the reference is shown, a radial or a distance you enter is shown but moves nothing.
 
@@ -100,7 +100,7 @@ The magnetic variation of a user VOR that is the active waypoint cannot be chang
 
 You delete user waypoints on OTH 3, the only place that does it. The page lists every user waypoint with its waypoint type and the flight plan that holds it.
 
-<KlnScreen screen="oth-3-user-waypoints" />
+<KlnScreen screen="pages/oth/oth-3-user-waypoints" />
 
 To delete a user waypoint:
 
@@ -111,13 +111,13 @@ To delete a user waypoint:
 5. Press <kbd>ENT</kbd> to delete it, or <kbd>CLR</kbd> to keep it.
 6. Press the left <kbd>CRSR</kbd> button to turn the cursor off.
 
-<KlnScreen screen="oth-3-delete-question" />
+<KlnScreen screen="pages/oth/oth-3-delete-question" />
 
 Moving the cursor with the outer knob also withdraws the question ([Questions in lists](/kln90b/unit/controls-and-display/#questions-in-lists)).
 
 The unit refuses to delete two kinds of waypoint, with a message on the status line and without a question. `ACTIVE WPT` means that the waypoint is the active waypoint: the target of a direct-to, or the active leg of FPL 0. `USED IN FPL` means that a flight plan holds the waypoint, any of FPL 0 to FPL 25. The number in the last cell of the row names the lowest-numbered of them; take the waypoint out of that plan, and out of the others that hold it, and then delete it.
 
-<KlnScreen screen="oth-3-used-in-fpl" rows="5-7" />
+<KlnScreen screen="pages/oth/oth-3-used-in-fpl" rows="5-7" />
 
 OTH 3 checks only the active waypoint and the flight plans. A waypoint page that showed the deleted waypoint keeps showing it, and the SUP page adds `NO SUP WPTS` while it does, when the deleted waypoint was the last supplemental waypoint. The Direct To page can still pick the deleted waypoint up from there. Selecting another waypoint on the page ends it. {/* kln90b#487: describes the current behavior; the fix moves the page on to another waypoint after the deletion */}
 

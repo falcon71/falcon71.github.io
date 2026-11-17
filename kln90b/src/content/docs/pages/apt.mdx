@@ -21,7 +21,7 @@ The right inner knob goes through APT 1 to APT 7 and then back to APT 1; APT 8 f
 
 The top line is the same on every page except the APT 3 runway diagram, which has no top line. It shows the identifier of the airport and, at the right end, <Term t="NR">`NR`</Term> and a rank when you reached the airport through the [nearest list](/kln90b/operation/nearest/). An airport of the list keeps its `NR` on all APT pages. A `›` in the first column marks the airport as the [active waypoint](/kln90b/operation/navigation-modes/#the-active-waypoint); it flashes during [waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting).
 
-<KlnScreen screen="apt-1-nearest" rows="1" />
+<KlnScreen screen="pages/apt/apt-1-nearest" rows="1" />
 
 ### User-defined airports
 
@@ -35,21 +35,21 @@ When the active waypoint is an airport, its APT pages appear as ACT 1 to ACT 7 a
 
 APT 1 shows the name of the airport, its position and the airspace it lies in. It is the page where you check that you have the right airport, and where a new user-defined airport ends up.
 
-<KlnScreen screen="apt-1-ksea" />
+<KlnScreen screen="pages/apt/apt-1-ksea" />
 
 With the cursor on, you can change the identifier; on a nearest airport the cursor can also rest on the rank (see below). The name, the airspace row and the position of an airport of the database cannot be changed.
 
-<KlnScreen screen="apt-1-ksea-cursor" />
+<KlnScreen screen="pages/apt/apt-1-ksea-cursor" />
 
 ### A nearest airport
 
 The page changes when you reach the airport through the nearest list, with <kbd>MSG</kbd> and <kbd>ENT</kbd> or by scanning back past the first airport. An airport that you enter by its identifier shows the plain page, even when it is the nearest. The rank `NR 2` appears at the right of the top line, and the three rows below the name give the longest runway (length and surface), its lighting, and the bearing and distance from the aircraft. The unit recalculates bearing, distance and the order of the list every second, and searches anew which airports belong to the list every 10 seconds.
 
-<KlnScreen screen="apt-1-nearest" />
+<KlnScreen screen="pages/apt/apt-1-nearest" />
 
 The page keeps the airport it shows. As the aircraft moves, the rank counts up within a second when another airport comes nearer, and it disappears within 10 seconds after the airport has dropped out of the list; the page then shows the position and the airspace again. With the cursor on the rank, the page does the opposite: it keeps the rank and shows whichever airport holds it.
 
-<KlnScreen screen="apt-1-nearest-cursor" />
+<KlnScreen screen="pages/apt/apt-1-nearest-cursor" />
 
 Entering another identifier turns the page back into the plain airport page.
 
@@ -57,7 +57,7 @@ Entering another identifier turns the page back into the plain airport page.
 
 A user-defined airport shows only its identifier and its position. You can change the position with the cursor; the new value is stored when you press <kbd>ENT</kbd>.
 
-<KlnScreen screen="apt-1-user-airport" />
+<KlnScreen screen="pages/apt/apt-1-user-airport" />
 
 With `USER POS?`, APT 1 opens with the cursor on the empty latitude, and the airport exists when you have entered both coordinates; [Creating a user waypoint](/kln90b/operation/user-waypoints/#creating-a-user-waypoint) shows the steps.
 
@@ -67,13 +67,13 @@ With `USER POS?`, APT 1 opens with the cursor on the empty latitude, and the air
 
 APT 2 shows where the airport is, how high it lies, which time zone it is in, and the best kind of approach it has. Use it to find out the local time difference and whether you can expect an instrument approach.
 
-<KlnScreen screen="apt-2-ksea" />
+<KlnScreen screen="pages/apt/apt-2-ksea" />
 
 Nothing on this page can be changed for an airport of the database. The row for the time zone stays blank where no time zone is known. The radar symbol `(R)` at the end of the approach row appears only for airports whose data marks radar coverage.
 
 A user-defined airport shows only its elevation, as an entry, because the city, the time zone and the approaches are unknown.
 
-<KlnScreen screen="apt-2-user-airport" />
+<KlnScreen screen="pages/apt/apt-2-user-airport" />
 
 [Waypoints and the database](/kln90b/operation/waypoints/) describes the tasks that use APT 2.
 
@@ -81,7 +81,7 @@ A user-defined airport shows only its elevation, as an entry, because the city, 
 
 APT 3 shows the runways of the airport, first as a diagram and then as a list of lengths, surfaces and lighting. Use the diagram to see how the runways lie to each other and the list for their data.
 
-<KlnScreen screen="apt-3-diagram-kpdx" />
+<KlnScreen screen="pages/apt/apt-3-diagram-kpdx" />
 
 The diagram is the first APT 3 page of an airport that has runways, and the status line therefore reads `APT+3`. It shows no identifier and no top line, so the page has no field: the right <kbd>CRSR</kbd> does nothing, and you cannot change the identifier there. Scanning works. At an airport whose runway data lists a helipad, the diagram can stay blank, while the list pages work.
 
@@ -89,7 +89,7 @@ The diagram is the first APT 3 page of an airport that has runways, and the stat
 
 The runway list follows: the unit lists at most the five longest runways, longest first, two runways per page.
 
-<KlnScreen screen="apt-3-list-ksea" />
+<KlnScreen screen="pages/apt/apt-3-list-ksea" />
 
 An airport without a runway entry has no diagram, and its one page reads `RUNWAY DATA NOT AVAILABLE`. If you enter an identifier that no airport has while a list page is shown, and then correct it to an airport that has a diagram, the unit shows that diagram and turns the cursor off, so that the next click of the right inner knob selects another page instead of changing a character.
 
@@ -97,7 +97,7 @@ An airport without a runway entry has no diagram, and its one page reads `RUNWAY
 
 A user-defined airport has one page, which holds its single runway: the length and the surface, which you enter. It appears in the nearest list only when the runway meets the minimum length of SET 3 and, where SET 3 allows hard surfaces only, has the surface `HRD` (hard); a runway without an entered surface counts as soft.
 
-<KlnScreen screen="apt-3-user-airport" />
+<KlnScreen screen="pages/apt/apt-3-user-airport" />
 
 [Waypoints and the database](/kln90b/operation/waypoints/) and [Nearest](/kln90b/operation/nearest/) describe the tasks that use APT 3.
 
@@ -105,7 +105,7 @@ A user-defined airport has one page, which holds its single runway: the length a
 
 APT 4 lists the communication frequencies of the airport. The unit only shows them; you tune the radio yourself.
 
-<KlnScreen screen="apt-4-kykm" />
+<KlnScreen screen="pages/apt/apt-4-kykm" />
 
 Each line holds a four-character frequency type and a frequency in MHz with two decimals; the unit rounds the half up (128.075 shows as `128.08`). A frequency up to and including 30 MHz is a high frequency and shows in kHz without a decimal point. The page lists the frequencies in the order of the database, without sorting or merging them, so a frequency that the database lists twice shows twice. These are the labels:
 
@@ -134,7 +134,7 @@ The page shows five frequencies. An airport with more than five has more pages, 
 
 An airport without a usable frequency, and every user-defined airport, shows `COMM FREQ DATA NOT AVAILABLE`.
 
-<KlnScreen screen="apt-4-no-data" />
+<KlnScreen screen="pages/apt/apt-4-no-data" />
 
 [Waypoints and the database](/kln90b/operation/waypoints/) describes the tasks that use APT 4.
 
@@ -142,7 +142,7 @@ An airport without a usable frequency, and every user-defined airport, shows `CO
 
 APT 5 holds three lines of notes of your own about the airport, for example a frequency or a procedure you want to remember, which the page shows whenever you choose that airport. The unit keeps them when it is turned off.
 
-<KlnScreen screen="apt-5-ktiw" />
+<KlnScreen screen="pages/apt/apt-5-ktiw" />
 
 The unit keeps the remarks by identifier: if you delete a user-defined airport, its remarks stay, and a user-defined airport that you create again with the same identifier shows them again. It keeps the remarks of up to 100 airports. A remark for the 101st raises <Term t="RMKS">`RMKS FULL`</Term> and is not stored; changing the remarks of an airport already in the list is always accepted.
 
@@ -154,7 +154,7 @@ OTH 4 (`APTS W/RMKS`) lists the airports that have remarks; you delete an airpor
 
 APT 6 is meant for the fuel, the oxygen, the customs and the fee information of the airport. The simulator holds none of it, so the page shows the same texts for every airport, user-defined airports included, and the line for customs stays blank.
 
-<KlnScreen screen="apt-6-ksea" />
+<KlnScreen screen="pages/apt/apt-6-ksea" />
 
 ## APT 7: SID and STAR procedures
 
@@ -167,18 +167,18 @@ the SIDs, the second the STARs. Turning the right inner knob clockwise from APT 
 turning it counterclockwise from APT 8, or from APT 1 in a unit without APT 8, brings you to the STARs first. An
 airport with only one kind of procedure has one APT 7 page with that list.
 
-<KlnScreen screen="apt-7-stars-ksea" />
+<KlnScreen screen="pages/apt/apt-7-stars-ksea" />
 
 Press the right <kbd>CRSR</kbd> to turn the cursor on. It comes on at the first entry, or at the top entry shown when
 you had scrolled the list before. The bottom row of the list always shows the last entry, and the rows above it scroll as you turn the right outer knob. The cursor flashes on an entry that <kbd>ENT</kbd> selects, and on
 `LOAD IN FPL` and `APPROVE?` later on. With an expired database, each press of the right <kbd>CRSR</kbd> that turns the
 cursor on shows `OUTDATED DB` on the status line; you can still select and load procedures.
 
-<KlnScreen screen="apt-7-sids-ksea" />
+<KlnScreen screen="pages/apt/apt-7-sids-ksea" />
 
 An airport for which the database has no procedure the unit can fly shows this text instead of the lists:
 
-<KlnScreen screen="apt-7-none" />
+<KlnScreen screen="pages/apt/apt-7-none" />
 
 On ACT 7, when the active waypoint is an airport, the same lists of that airport appear, and you select and load a
 procedure the same way. The airport identifier cannot be changed there.
@@ -199,17 +199,17 @@ To load a SID or a STAR into FPL 0, the airport must be on the APT pages (see
 3. Press <kbd>ENT</kbd>. The unit shows the first list it needs, `RUNWAY` or `TRANSITION`, with the cursor on its
    first entry, or, when there is nothing to choose, the waypoints of the procedure (step 5).
 
-   <KlnScreen screen="apt-7-runway" />
+   <KlnScreen screen="pages/apt/apt-7-runway" />
 
 4. Turn the right outer knob to the runway or the transition and press <kbd>ENT</kbd>. If a second list follows,
    select its entry the same way.
 
-   <KlnScreen screen="apt-7-transition" />
+   <KlnScreen screen="pages/apt/apt-7-transition" />
 
 5. Check the waypoints of the procedure as they go into FPL 0, which the unit now shows with the cursor on
    `LOAD IN FPL`, and press <kbd>ENT</kbd>.
 
-   <KlnScreen screen="apt-7-load" />
+   <KlnScreen screen="pages/apt/apt-7-load" />
 
 6. If the unit asks a question (below), press <kbd>ENT</kbd> to approve it. The unit loads the procedure and shows
    FPL 0 on the left side, so that you can check where it went. APT 7 shows its list again with the cursor off.
@@ -246,14 +246,14 @@ When you press <kbd>ENT</kbd> on `LOAD IN FPL`, the unit loads at once if FPL 0 
 no procedure of the same kind. If the airport is not in FPL 0, also when FPL 0 is empty, it asks whether to add the
 airport with the procedure:
 
-<KlnScreen screen="apt-7-add-airport" />
+<KlnScreen screen="pages/apt/apt-7-add-airport" />
 
 If FPL 0 already holds a procedure of the same kind, a SID when you load a SID or a STAR when you load
 a STAR, the unit asks whether to replace it, also when it is the same procedure. This is then the only question:
 if the airport is missing, the unit adds it without asking. A procedure of the other kind does not count: loading a
 STAR while FPL 0 holds a SID asks nothing about the SID.
 
-<KlnScreen screen="apt-7-replace" />
+<KlnScreen screen="pages/apt/apt-7-replace" />
 
 Press <kbd>ENT</kbd> to approve the question, or <kbd>CLR</kbd> to go back to the waypoints with FPL 0 unchanged.
 
@@ -299,7 +299,7 @@ installation. Without it, the APT pages end at APT 7, and the unit has no ACT 8 
 APT 8 lists the non-precision approaches of the airport on the APT pages and loads the one you select, with its missed
 approach, into FPL 0. You use it en route before the descent, usually after loading the STAR on APT 7.
 
-<KlnScreen screen="apt-8-approaches-ksea" />
+<KlnScreen screen="pages/apt/apt-8-approaches-ksea" />
 
 The bottom row of the list always shows the last approach. Press the right <kbd>CRSR</kbd> to turn the
 cursor on: it comes on at the first approach, or at the top approach shown on a scrolled list. As on APT 7, an expired
@@ -327,7 +327,7 @@ approaches. It leaves out ILS, localizer, LDA and SDF approaches, RNAV approache
 minima, approaches that need RNP AR, and approaches with an RF leg anywhere, the missed approach included. Of KSEA's
 approaches, the list shows the six RNAV approaches. An airport without an approach the unit can fly shows this:
 
-<KlnScreen screen="apt-8-none" />
+<KlnScreen screen="pages/apt/apt-8-none" />
 
 On ACT 8, when the active waypoint is an airport, the same list of that airport appears, and you select and load an approach the same way.
 
@@ -343,16 +343,16 @@ To load an approach into FPL 0, the airport must be on the APT pages (see
 3. Press <kbd>ENT</kbd>. The unit shows the list after `IAF` with the cursor on the first entry, or, when the approach
    has one transition or none, its waypoints (step 5).
 
-   <KlnScreen screen="apt-8-iaf" />
+   <KlnScreen screen="pages/apt/apt-8-iaf" />
 
 4. Turn the right outer knob to the IAF and press <kbd>ENT</kbd>.
 5. Check the waypoints of the approach, which the unit now shows from that IAF to the end of the missed approach with
    the cursor on `LOAD IN FPL`: turn the right outer knob counterclockwise to scroll the list, and clockwise back down
    to `LOAD IN FPL`. The list stays scrolled.
 
-   <KlnScreen screen="apt-8-load" />
+   <KlnScreen screen="pages/apt/apt-8-load" />
 
-   <KlnScreen screen="apt-8-load-scrolled" />
+   <KlnScreen screen="pages/apt/apt-8-load-scrolled" />
 
 6. Press <kbd>ENT</kbd>.
 7. If the unit asks a question (below), press <kbd>ENT</kbd> to approve it. The unit loads the approach and shows
