@@ -16,7 +16,7 @@ The KLN 90B shows two pages side by side. You choose a page with the knobs, not 
 You turn the KLN 90B on by pushing in the power/brightness knob, at the upper right of the unit. The avionics of the aircraft must have power, with the avionics bus on and no circuit breaker pulled. Some aircraft need a right click on the knob, see [the controls in the simulator](#the-controls-in-the-simulator).
 
 <Callout kind="info">
-The screen stays dark for up to 6 seconds after you turn the unit on while it warms up, and then brightens over about 4 seconds. A unit that was off for less than 10 minutes is dark for a shorter time. Do not push the knob again, which turns the unit off.
+The screen stays dark for up to 6 seconds after you turn the unit on while it warms up, and then brightens over about 4 seconds. A unit that was off for less than 10 minutes is dark for a shorter time. Do not pull the knob out, which turns the unit off.
 </Callout>
 
 The Turn-On page is what the screen shows as it brightens; the unit runs its self test while that page is shown, and the Self Test page follows about 17 seconds after power-on. The screen also stays dim while you keep the knob turned down.
@@ -27,7 +27,7 @@ To get from the Turn-On page to the normal pages:
 
 <KlnScreen screen="self-test" />
 
-2. Press <kbd>ENT</kbd> until the cursor is on `APPROVE?`. The cursor starts on the baro setting and moves one field on with each press. Once it is on `APPROVE?`, <Term t="ent">`ent`</Term> flashes in the status line.
+2. Press <kbd>ENT</kbd> until the cursor is on `APPROVE?`. The cursor starts on the baro setting and moves one field on with each press. Once it is on `APPROVE?`, <Term t="ENT">`ENT`</Term> flashes in the status line.
 3. Press <kbd>ENT</kbd>. The unit shows the Database page, with the cursor on `ACKNOWLEDGE?`.
 4. Press <kbd>ENT</kbd>. The unit shows its normal pages.
 
@@ -39,11 +39,11 @@ The screen is a left page and a right page with the status line under them, and 
 
 <KlnScreen screen="nav-1-apt-1-ksea" />
 
-The status line holds the page identifications of both pages with the mode annunciation between them. A flashing <Term t="msg">`msg`</Term> means that the unit holds a message you have not read; press <kbd>MSG</kbd> to read it. [The screen](/kln90b/unit/controls-and-display/#the-screen) describes both halves and the status line.
+The status line holds the page identifications of both pages with the mode annunciation between them. A flashing <Term t="MSG">`MSG`</Term> means that the unit holds a message you have not read; press <kbd>MSG</kbd> to read it. [The screen](/kln90b/unit/controls-and-display/#the-screen) describes both halves and the status line.
 
 ## Selecting a page
 
-The pages of each side come in page types, and each page type has its own pages: NAV 1 to NAV 5 are the NAV pages, a page type. With the cursor off, the outer knob of a side selects the page type and the inner knob the page within the page type. Clockwise goes to the next page type or page, counterclockwise to the previous one, and after the last the unit wraps around to the first. A page type comes back with the page you last used in it. A page number that has more than one page shows a `+` in its name (`APT+3`), and the inner knob steps through those pages before it goes on to the next page number.
+The pages of each side come in page types, and each page type has its own pages: NAV 1 to NAV 5 are the NAV pages, a page type. With the cursor off, the outer knob of a side selects the page type and the inner knob the page within the page type. Clockwise goes to the next page type or page, counterclockwise to the previous one, and after the last the outer knob wraps around to the first page type and the inner knob to the first page of its page type. A page type comes back with the page you last used in it. A page number that has more than one page shows a `+` in its name (`APT+3`), and the inner knob steps through those pages before it goes on to the next page number.
 
 Try it: turn the knobs below and watch the page names in the status line. The demo shows page names only, not the pages behind a `+`, and the unit skips the dashed pages where the installation has none.
 
@@ -71,7 +71,7 @@ The identifier on the waypoint pages (APT, VOR, NDB, INT and SUP) works this way
 
 ## Entering a value with ENT
 
-Other entries, such as a waypoint on the Direct To page, a time or a date, take effect only when you press <kbd>ENT</kbd>. The first step of the inner knob opens the entry and replaces the old value: a number or a time starts from its first cell, and an identifier starts with `A` for a clockwise step or `9` for a counterclockwise step and is filled in at once. The entry shows in inverse video with the cell under the cursor flashing. While the entry is open, the outer knob moves only between its characters. <kbd>ENT</kbd> accepts the entry and moves the cursor to the next field, and <kbd>CLR</kbd> takes it back: a value returns to what it was, and an identifier is blanked. If you turn the cursor off before you press <kbd>ENT</kbd>, the entry is lost.
+Other entries, such as a waypoint on the Direct To page, a time or a date, take effect only when you press <kbd>ENT</kbd>. The first step of the inner knob opens the entry and replaces the old value: a number or a time starts from its first cell, and an identifier starts with `A` for a clockwise step or `9` for a counterclockwise step and is filled in at once. The entry shows in inverse video with the cell under the cursor flashing. While the entry is open, the outer knob moves only between its characters. <kbd>ENT</kbd> accepts the entry and moves the cursor to the next field (for an identifier it first shows the waypoint page for approval, see below), and <kbd>CLR</kbd> takes it back: a value returns to what it was, and an identifier is blanked. If you turn the cursor off before you press <kbd>ENT</kbd>, the entry is lost.
 
 To fly direct to Boeing Field:
 
@@ -80,7 +80,7 @@ To fly direct to Boeing Field:
 
 <KlnScreen screen="direct-to-ident-entry" />
 
-3. Press <kbd>ENT</kbd>. The unit shows the waypoint page of KBFI on the right so that you can check it, and `ent` flashes in the status line. If it is not the right place, turn the left inner knob to enter the identifier again.
+3. Press <kbd>ENT</kbd>. The unit shows the waypoint page of KBFI on the right so that you can check it, and `ENT` flashes in the status line. If it is not the right place, turn the left inner knob to enter the identifier again.
 4. Press <kbd>ENT</kbd> again. The direct-to is now active.
 
 [Entering data with the cursor](/kln90b/unit/controls-and-display/#entering-data-with-the-cursor) covers the cursor, the knobs, <kbd>ENT</kbd> and <kbd>CLR</kbd> for every kind of field, and [Waypoints and the database](/kln90b/operation/waypoints/) explains the confirmation of a waypoint.

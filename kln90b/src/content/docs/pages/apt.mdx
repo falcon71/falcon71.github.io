@@ -17,7 +17,7 @@ The airport you enter, scan to or create on one APT page is the airport on all t
 
 The right inner knob goes through APT 1 to APT 7 and then back to APT 1; APT 8 follows APT 7 only in an aircraft whose unit is installed for approaches. A page number with more than one page shows a `+` in its name (`APT+3`): the inner knob steps through those pages before it goes on to the next page number, and back through them the other way.
 
-The top line is the same on every page except the APT 3 runway diagram, which has no top line. It shows the identifier of the airport and, at the right end, <Term t="nr">`nr`</Term> and a rank when you reached the airport through the [nearest list](/kln90b/operation/nearest/). An airport of the list keeps its `nr` on all APT pages. A `›` in the first column marks the airport as the [active waypoint](/kln90b/operation/navigation-modes/#the-active-waypoint); it flashes during [waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting).
+The top line is the same on every page except the APT 3 runway diagram, which has no top line. It shows the identifier of the airport and, at the right end, <Term t="NR">`NR`</Term> and a rank when you reached the airport through the [nearest list](/kln90b/operation/nearest/). An airport of the list keeps its `NR` on all APT pages. A `›` in the first column marks the airport as the [active waypoint](/kln90b/operation/navigation-modes/#the-active-waypoint); it flashes during [waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting).
 
 <KlnScreen screen="apt-1-nearest" rows="1" />
 
@@ -35,7 +35,7 @@ When the active waypoint is an airport, the ACT page shows its APT pages, named 
 
 <KlnScreen screen="apt-act-1" />
 
-When you enter an airport identifier on another page, such as the Direct To page, the unit shows APT 1 of that airport on the right side for you to approve, with `ent` flashing in the status line:
+When you enter an airport identifier on another page, such as the Direct To page, the unit shows APT 1 of that airport on the right side for you to approve, with `ENT` flashing in the status line:
 
 <KlnScreen screen="apt-confirm" />
 
@@ -53,7 +53,7 @@ With the cursor on, you can change the identifier; on a nearest airport the curs
 
 ### A nearest airport
 
-The page changes when you reach the airport through the nearest list, with <kbd>MSG</kbd> and <kbd>ENT</kbd> or by scanning back past the first airport. An airport that you enter by its identifier shows the plain page, even when it is the nearest. The rank `nr 2` appears at the right of the top line, and the three rows below the name give the longest runway (length and surface), its lighting, and the bearing and distance from the aircraft. The unit recalculates bearing, distance and the order of the list every second, and searches anew which airports belong to the list every 10 seconds.
+The page changes when you reach the airport through the nearest list, with <kbd>MSG</kbd> and <kbd>ENT</kbd> or by scanning back past the first airport. An airport that you enter by its identifier shows the plain page, even when it is the nearest. The rank `NR 2` appears at the right of the top line, and the three rows below the name give the longest runway (length and surface), its lighting, and the bearing and distance from the aircraft. The unit recalculates bearing, distance and the order of the list every second, and searches anew which airports belong to the list every 10 seconds.
 
 <KlnScreen screen="apt-1-nearest" />
 
@@ -387,8 +387,8 @@ An entry is named after the first waypoint of its transition. That is usually th
 begins earlier, the IAF suffix appears on a later waypoint of the list. At KSEA, RNAV 16C offers `PAE`, and its waypoint
 list starts with `PAE` and gives `ERYKA` the IAF suffix. On a long list after `IAF`, `IAF` stays on the top row and the bottom row always shows the last entry.
 
-The waypoint list gives the fixes that have a role in the approach a suffix, a dash and a small letter after the
-identifier: `-i` marks the IAF, `-f` the <Term t="FAF" />, `-m` the <Term t="MAP" /> and `-h` the
+The waypoint list gives the fixes that have a role in the approach a suffix, a dash and a letter after the
+identifier: `-I` marks the IAF, `-F` the <Term t="FAF" />, `-M` the <Term t="MAP" /> and `-H` the
 <Term t="MAHP" />, the waypoint where the missed approach ends in a holding pattern. A fix that is both IAF and FAF
 appears twice, once with each suffix. What the unit leaves out of an approach (legs without a waypoint, holding patterns
 and procedure turns, altitude restrictions) and how it treats DME arcs is the same as on APT 7 (see

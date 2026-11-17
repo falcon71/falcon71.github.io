@@ -44,6 +44,13 @@ From the package power-on: tones need an audio output of the aircraft (maintaine
 the self test); the researcher checks whether the same holds for the altitude alert tones, and the page says it
 with that condition.
 
+### From the package controls (2026-11-17)
+
+- **The ALT page and NAV 4** open together (ALT on the left, NAV 4 on the right). With the cursors off, a step of a
+  left knob closes both; a step of a right knob closes only NAV 4 and moves the right page, and the ALT page stays
+  (`pages/MainPage.tsx`, `popRightPage`, `parentRemoved`; `pushLeftPage(altPage, null)`). Controls and display says
+  this in general under the pages that no knob reaches; this page owns when the ALT page's cursor stays off.
+
 ## Changes to earlier pages
 
 The NAV chapter's NAV 4 section links to these pages; the seam check sharpens those links.

@@ -1,40 +1,257 @@
 ---
 title: Controls and display
-description: The knobs, the buttons, the layout of the screen and how data is entered.
+description: The controls of the KLN 90B by name, the parts of the screen and the status line, how you select pages, and how the cursor, ENT, CLR and the scan enter data.
 sidebar:
   order: 1
 ---
 
 import KlnScreen from '../../../components/KlnScreen.astro';
+import KlnUnit from '../../../components/KlnUnit.astro';
+import Callout from '../../../components/Callout.astro';
+import DirectToKey from '../../../components/DirectToKey.astro';
+import Term from '../../../components/Term.astro';
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-aliqua.
+The KLN 90B shows two pages side by side, and each side has its own knobs and its own <kbd>CRSR</kbd> button. You select a page with the knobs, turn the cursor on to change a field, and accept most entries with <kbd>ENT</kbd>.
+
+## The front panel
+
+Under the screen sit five buttons that act on the unit as a whole. The controls beside the screen come in pairs: the left ones operate the left page and the right ones the right page.
+
+<figure>
+	<div style={{ overflowX: 'auto' }}>
+		<div style={{ minWidth: '36rem' }}>
+			<KlnUnit screen="home-nav-1" label="The front panel of the KLN 90B with its controls numbered 1 to 12, as in the table below" markers />
+		</div>
+	</div>
+	<figcaption>The front panel. The numbers lead from the left side over the buttons under the screen to the right side.</figcaption>
+</figure>
+
+| No. | Control | What it does |
+| --- | --- | --- |
+| 1 | Left <kbd>CRSR</kbd> button | Turns the cursor on the left page on and off. |
+| 2 | Left outer knob | Selects the page type on the left. With the left cursor on, it moves the cursor from field to field. |
+| 3 | Left inner knob | Selects the page within the page type on the left. With the left cursor on, it changes the field. |
+| 4 | <kbd>MSG</kbd> button | Shows the message page. [Messages](/kln90b/operation/messages/) explains it. |
+| 5 | <kbd>ALT</kbd> button | Shows the ALT page on the left and NAV 4 on the right. [Airspace and altitude alerting](/kln90b/operation/alerts/) explains it. |
+| 6 | <DirectToKey /> button | Shows the Direct To page on the left, with the cursor on the waypoint identifier. [Direct-to](/kln90b/operation/direct-to/) explains it. |
+| 7 | <kbd>CLR</kbd> button | Takes back an entry, withdraws a question, or asks to delete. |
+| 8 | <kbd>ENT</kbd> button | Accepts an entry or a question. |
+| 9 | Power/brightness knob | Pushed in, it turns the unit on; pulled out, it turns it off. Turned, it sets the brightness of the screen. |
+| 10 | Right <kbd>CRSR</kbd> button | Turns the cursor on the right page on and off. |
+| 11 | Right outer knob | Selects the page type on the right. With the right cursor on, it moves the cursor from field to field. |
+| 12 | Right inner knob | Selects the page within the page type on the right. With the right cursor on, it changes the field. You pull it out for the [scan](#scanning) and push it in again. |
+
+Turning the power/brightness knob dims and brightens the screen. At the darkest setting the screen is black while the unit keeps running and takes your input; turn the knob up to see it again. Pulling the knob out turns the unit off at once, without a question, and the next power-on starts the whole sequence again. [Power-on and initialization](/kln90b/unit/power-on/) describes the warm-up and the pages that follow.
 
 ## The screen
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Each half shows one page; the bottom row is the status line.
+The screen holds a left page and a right page, each of six lines, and under them the status line. The left knobs and the left <kbd>CRSR</kbd> button operate the left page, the right ones the right page. A few pages use the whole screen (see [Selecting a page](#selecting-a-page)).
 
-<KlnScreen screen="screen-layout" />
+<KlnScreen screen="nav-1-apt-1-ksea" />
+
+### The status line
+
+The status line has three parts, from left to right:
+
+- **The page identification of the left page,** the name of the page in five characters, such as `NAV 1`. A `+` in place of the space (`STA+1`) shows that the page name belongs to more than one page ([Selecting a page](#selecting-a-page)).
+- **The middle part.** Its first seven cells hold the mode annunciation, the navigation mode of the unit: `ENR-LEG`, `ENR:` with the OBS course, `ARM-LEG`, `ARM:` or `APR-LEG` ([Navigation modes](/kln90b/operation/navigation-modes/) explains them). The mode annunciation is blank while SET 0 is shown. The last three cells hold the enter prompt <Term t="ENT">`ENT`</Term> or the message prompt <Term t="MSG">`MSG`</Term>.
+- **The page identification of the right page.**
+
+While a cursor is on, the page identification of its side shows **the CRSR annunciation**: <Term t="CRSR">`CRSR`</Term> in inverse video. On the left side it stands in the last four of the five cells, one cell to the right of where the page name starts; on the right side it stands in the first four. It reminds you that the knobs of that side no longer select pages. In keyboard mode a flashing <Term t="KYBD">`KYBD`</Term> takes its place ([Keyboard mode](/kln90b/unit/keyboard-mode/)).
+
+`ENT` flashes whenever <kbd>ENT</kbd> would accept something: an entry that is open, a question, or a page that takes <kbd>ENT</kbd> with the cursor off (MOD 1, MOD 2, CTR 1 and a waypoint page shown for approval). `MSG` shows in inverse video while the unit holds messages. It is steady when you have read them all and flashes while at least one is unread; press <kbd>MSG</kbd> to read them. The enter prompt and the message prompt share their three cells, so `ENT` hides `MSG` for as long as it shows, and `MSG` comes back afterward.
+
+A short message of the unit, such as `NO SUCH WPT`, replaces the middle of the status line in inverse video for about 5 seconds, and a newer one replaces an older one at once. [Messages](/kln90b/operation/messages/) explains the message page.
+
+### What flashes
+
+Flashing text appears and disappears once a second. This manual shows flashing text with a dashed box and says under each screen what flashes. On the unit these flash:
+
+- `ENT`, `MSG` in inverse video, and `KYBD`.
+- The cell under the cursor in an open entry. The other cells of the entry stay in inverse video.
+- All cells of an identifier that waits for you to approve it with <kbd>ENT</kbd>.
+- A question in a list, such as `DEL xxxxx ?`.
+- A list entry with the cursor on it where <kbd>ENT</kbd> does something, such as `LOAD IN FPL`.
+
+A field that the knob changes directly shows its cursor in steady inverse video.
+
+## Selecting a page
+
+With the cursor off, the outer knob of a side selects the page type and the inner knob the page within the page type. Both wrap around: clockwise goes to the next, counterclockwise to the previous, and from the last the outer knob comes back to the first page type. The inner knob wraps within the page type and never moves on to the next one. On a page type with a single page, such as the REF page or the VOR page, the inner knob does nothing.
+
+The outer knob selects, in each page type, the page you last used there. The unit remembers this for each page type of each side until you turn it off. A page that has more than one page of its own comes back on its first one.
+
+<Callout kind="info">
+If a knob does not select pages, look at the status line. `CRSR` in place of a page name means that the cursor of that side is on: press the <kbd>CRSR</kbd> button of that side to turn it off. If the right inner knob scans instead of selecting pages, it is pulled out: push it in.
+</Callout>
+
+### The page tree
+
+The tables list the page types in the order of the outer knob and the pages in the order of the inner knob. The left side:
+
+| Page type | Pages |
+| --- | --- |
+| TRI | TRI 0 to TRI 6 |
+| MOD | MOD 1 and MOD 2 |
+| FPL | FPL 0 to FPL 25 |
+| NAV | NAV 1 to NAV 5 |
+| CAL | CAL 1 to CAL 7 |
+| STA | STA 1 to STA 5 |
+| SET | SET 1 to SET 10, then SET 0 |
+| OTH | OTH 1 to OTH 10 |
+
+The right side:
+
+| Page type | Pages |
+| --- | --- |
+| CTR | CTR 1 and CTR 2 |
+| REF | the REF page |
+| ACT | the ACT page, which turns through the pages of the active waypoint |
+| D/T | D/T 1 to D/T 4 |
+| NAV | NAV 1 to NAV 5 |
+| APT | APT 1 to APT 8 |
+| VOR | the VOR page |
+| NDB | the NDB page |
+| INT | the INT page |
+| SUP | the SUP page |
+
+Inside the ACT page, the right inner knob turns through the pages of the type of the active waypoint: for an airport ACT 1 to ACT 7, or ACT 8 where APT 8 exists; for any other waypoint one page.
+
+<Callout kind="availability">
+Some pages depend on how the unit is installed in the aircraft, and a page the installation lacks is not in the tree at all. OTH 5 to OTH 8 need a fuel management system, OTH 9 and OTH 10 an air data system, and APT 8 with ACT 8 an approach-certified installation. With an air data system but no fuel management system, the two air data pages are named OTH 5 and OTH 6.
+</Callout>
+
+### Pages with a plus sign
+
+A page number shows a `+` in the page identification when the page has more than one page of its own, as in `APT+3`. The inner knob steps through those pages first and then goes on to the next page number. Turned back from the first of them, it lands on the last page of the previous page number. No page with a two-digit number has more than one page, so none of them shows it.
+
+The `+` follows the data, so the same page number shows it at one time and not at another (`STA 1` and `STA+1`, `APT 4` and `APT+4`). It can appear on:
+
+- the left side: STA 1, TRI 2, TRI 4 and TRI 6, but never on an FPL page,
+- the right side: APT 3, APT 4, APT 7, CTR 2, the ACT pages and a waypoint page shown for approval.
+
+### Pages that no knob reaches
+
+The unit opens some pages by a button or a function. The Direct To page, the ALT page and the message page come from buttons, the FLR pages from `FAILURES?` on SET 10 ([the FLR pages](/kln90b/pages/flr/)), and the unit also opens the waypoint page shown for approval, the pages that ask a question (duplicate waypoints, a full flight plan, the waypoint type) and the steps inside APT 7 and APT 8. They are pushed over the page tree and leave the tree as it is.
+
+With the cursor off, a step of the outer knob on such a page closes it and passes the same step on to the page beneath, until a page takes it. The inner knob does the same, except on a page that has pages of its own to turn through, as the FLR pages have. With the cursor on, the knobs work the cursor and do not close the page.
+
+- **The Direct To page** shows `DIR` in the status line. It opens with its cursor on, and <DirectToKey /> pressed again does not close it. The second <kbd>ENT</kbd>, which approves the waypoint, makes the direct-to and closes the page. To leave without one, turn the cursor off and then turn a knob.
+- **The ALT page** shows `ALT` on the left and NAV 4 on the right. The left cursor stays off when no field of the ALT page can take it. <kbd>ALT</kbd> again closes both, and so does a step of a left knob with the left cursor off. A step of a right knob with the right cursor off closes only NAV 4 and moves the right page on; the ALT page stays.
+- **The FLR pages** show `FLR 1` to `FLR 3`. The inner knob turns through them, and a step of the left outer knob closes them and moves on from SET 10.
+
+### Pages that use the whole screen
+
+Four pages cover both halves. What brings each up, and how you leave it:
+
+| Page | What brings it up | Status line |
+| --- | --- | --- |
+| Super NAV 1 | NAV 1 on the left and on the right at once | `NAV 1` on both sides |
+| Super NAV 5 | NAV 5 on the left and on the right at once | none; its own message prompt shows `MSG` over the map |
+| SET 0 | The inner knob on the left, one step past SET 10 or back from SET 1 | `SET 0`, with no mode annunciation and no right page name |
+| The message page | <kbd>MSG</kbd> | blank page identifications, the mode annunciation and `MSG` |
+
+A step of any knob of either side moves that side's page, so the two NAV pages are no longer a pair and Super NAV 1 or Super NAV 5 gives way to the page you selected. SET 0 stays until the left side leaves it, and the right knobs go on moving the right page tree beneath it. You turn them without seeing the right page, and it is there when you leave SET 0.
+
+<kbd>MSG</kbd> again shows the next message and closes the page after the last ([Messages](/kln90b/operation/messages/)). A step of a knob that is pushed in and either <kbd>CRSR</kbd> button close the message page too, and the same step then acts on the page beneath, so the knob that closes it also changes a page. Scan turns of the pulled right inner knob do not close it. <kbd>CLR</kbd> does nothing on the message page. <kbd>ALT</kbd> and <DirectToKey /> close it and show their own page.
+
+## Page pairs
+
+Some right pages work with the left page. The unit looks only at whether the left page is an FPL page, not at which one, and it follows the left page at once when you change it.
+
+<KlnScreen screen="page-pair-fpl-0-dt-1" />
+
+D/T 1 to D/T 3 give one row per waypoint of the flight plan, in the rows of the FPL page beside it, when an FPL page is on the left. The REF page and CTR 1 work on the flight plan of the left page. The D/T pages, the REF page and the CTR pages each describe their variants.
+
+Other pairs belong to a task: the Direct To page on the left with the waypoint page on the right, the ALT page with NAV 4, and an identifier you enter on a left page with the waypoint page that the unit shows for approval on the right ([Waypoints and the database](/kln90b/operation/waypoints/)).
 
 ## Entering data with the cursor
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. While the cursor is on a waypoint identifier, the character
-under the cursor is shown inverse.
+The cursor is a mark in inverse video on one field of a page. Press the <kbd>CRSR</kbd> button of a side to turn it on and press it again to turn it off. Each side has its own cursor, and the CRSR annunciation of each side shows while it is on.
 
-<KlnScreen screen="cursor-example" />
+<KlnScreen screen="status-line-crsr-both-sides" />
 
-## Knobs and buttons
+The cursor starts on the start field of the page every time you turn it on, usually the first field and never where it was last. On a list that has scrolled it starts on the top entry shown. On a page with no field, such as NAV 2, the button does nothing and gives no sign.
 
-| Control              | Lorem ipsum                                      |
-| -------------------- | ------------------------------------------------ |
-| Left outer knob      | Lorem ipsum dolor sit amet                       |
-| Left inner knob      | Consectetur adipiscing elit                      |
-| <kbd>CRSR</kbd>      | Sed do eiusmod tempor incididunt                 |
-| <kbd>ENT</kbd>       | Ut labore et dolore magna aliqua                 |
-| <kbd>CLR</kbd>       | Ut enim ad minim veniam                          |
+With the cursor on, the knobs of that side no longer select pages. The inner knob changes the field and the outer knob moves the cursor to the next or the previous field. It stops at the first and the last field and does not wrap around. The knobs of the other side still select pages.
+
+Turning the cursor off leaves the page as it is, with two losses: an entry that is open returns to its old value, and a question is withdrawn.
+
+### Fields the knob changes directly
+
+On many fields the inner knob steps through the values of the field, wraps from the last to the first, and each step takes effect at once. <kbd>ENT</kbd> and <kbd>CLR</kbd> do nothing on them. Many settings work this way, such as the minimum runway length on SET 3, and so does the range of NAV 5.
+
+<KlnScreen screen="set-3-cursor" />
+
+The identifier on the waypoint pages is such a field too. The first step of the inner knob starts from the character shown (from `0` to `1`, from `K` to `L`), and the unit searches the database for the characters up to the one you turned and fills in the characters to the right of the cursor with the first waypoint that matches. The outer knob moves from character to character.
+
+<KlnScreen screen="apt-1-ksea-cursor" />
+
+Clockwise, a character in an identifier runs through `A` to `Z` and `0` to `9` and then starts again at `A`, with a blank between `9` and `A` in every cell but the first, which never takes a blank. Counterclockwise runs the other way. The remarks of APT 5 add the hyphen after `9`. A digit cell steps through `0` to `9`, except the tens of a latitude, which stop at `8`; cells for hours, months or the hemisphere have ranges of their own.
+
+[Waypoints and the database](/kln90b/operation/waypoints/) explains what the unit does with an identifier you enter.
+
+### Entries that take effect with ENT
+
+Other fields open an entry that takes effect only when you press <kbd>ENT</kbd>: a waypoint on the Direct To page or in a flight plan, a latitude, a time, a date. The first step of the inner knob opens it. In an identifier the step shows `A` clockwise or `9` counterclockwise and the unit fills in the rest at once, as for the waypoint pages. In a number, a time or a date the old value gives way to underscores, and the first cell shows its first value in either direction (`N` for a latitude, `01` for a day).
+
+<KlnScreen screen="set-1-latitude-entry" />
+
+The entry stays in inverse video, the cell under the cursor flashes, and `ENT` flashes in the status line. The inner knob changes the cell, wrapping around, and the outer knob moves between its cells and stops at the first and the last. It does not leave the entry.
+
+To give the unit a position on SET 1, for example the latitude `N 47°26.99'`:
+
+1. Turn the left outer knob to the SET pages and the left inner knob to SET 1.
+2. Press the left <kbd>CRSR</kbd> button.
+3. Turn the left outer knob clockwise until the cursor is on the latitude.
+4. Turn the left inner knob one step. The entry opens with `N` in the first cell and underscores in the others. Turn the left inner knob once more if you need `S`.
+5. Turn the left outer knob one step clockwise to the next cell, and turn the left inner knob to the digit you want. Repeat for each cell. If you made a mistake, press <kbd>CLR</kbd> to take the whole entry back and start again with step 4.
+6. Press <kbd>ENT</kbd>. The unit accepts the latitude and moves the cursor to the longitude.
+7. Enter the longitude the same way, with <kbd>ENT</kbd> at its end.
+8. Turn the left outer knob clockwise until the cursor is on `CONFIRM?`, and press <kbd>ENT</kbd>. The unit takes the position you entered, and the cursor goes off.
+
+<KlnScreen screen="direct-to-ident-entry" />
+
+- <kbd>ENT</kbd> on a number, a time or a date checks the entry. If it is good, the unit applies it, closes the entry and moves the cursor to the next field. If it is not, the status line shows `INVALID ENT` and the entry stays open.
+- <kbd>ENT</kbd> on an identifier shows the waypoint page for approval (below) and leaves the cursor where it is. An identifier that the database lacks brings up the offer to create a user waypoint where the page offers one ([Waypoints and the database](/kln90b/operation/waypoints/)).
+- Cells that are still underscores count as 0, so <kbd>ENT</kbd> on `N __°__.__'` stores `N  0°00.00'`. Fill every cell before you press it.
+- <kbd>CLR</kbd> takes a number, a time or a date back to its old value and closes the entry, and the cursor stays on the field. It blanks an identifier, which then waits for <kbd>ENT</kbd>, and on the Direct To page <kbd>ENT</kbd> on the blank identifier cancels the direct-to. The identifier of SET 1 is the exception: <kbd>CLR</kbd> only closes its entry.
+- If you turn the cursor off before <kbd>ENT</kbd>, the entry is lost and the old value returns.
+
+After <kbd>ENT</kbd> on an identifier of a left page, the unit shows the waypoint page of that waypoint on the right with `ENT` flashing, and a second <kbd>ENT</kbd> approves it. [Waypoints and the database](/kln90b/operation/waypoints/) describes the approval.
+
+<KlnScreen screen="apt-confirm" />
+
+### Questions in lists
+
+A list entry that can be deleted asks first. With the cursor on the entry, <kbd>CLR</kbd> turns it into a question that flashes in inverse video (`DEL xxxxx ?`), and <kbd>ENT</kbd> deletes the entry.
+
+<KlnScreen screen="fpl-0-delete-question" />
+
+<kbd>CLR</kbd> again withdraws the question, and so does moving the cursor with the outer knob or turning the cursor off. Nothing tells you that it went. Flight plan waypoints, the user waypoints on OTH 3 and the remarks on OTH 4 ask this way; for a user waypoint the unit shows its waypoint page on the right while the question is open. An entry can refuse the deletion with a message first (`IN ACT LIST`, `USED IN FPL`).
+
+On an FPL page, <kbd>CLR</kbd> with the cursor off turns the cursor on and asks `DELETE FPL?`; <kbd>CLR</kbd> again withdraws it and turns the cursor off. A <kbd>CLR</kbd> aimed at a field on the right page with no entry open there can start it when an FPL page is on the left with its cursor off. The two FLR lists have questions of their own ([the FLR pages](/kln90b/pages/flr/)).
+
+## Scanning
+
+The scan steps through waypoints with the right inner knob, which you pull out for it. Push the knob in to return to selecting pages. The knob keeps its position when you turn the unit off, and nothing on most screens shows that it is pulled out, so a pilot who forgets it finds that the right inner knob no longer selects pages.
+
+With the right cursor on, a pulled knob works as an ordinary inner knob and changes the field. With the cursor off, the page takes the scan, and only some pages do anything with it:
+
+- The APT, VOR, NDB, INT and SUP pages step through the waypoints of that page's waypoint type. The SUP page does not scan while it offers to create a waypoint.
+- The ACT pages step through the waypoints of the active flight plan instead of the database.
+- Super NAV 5 uses the pulled knob for its scan window.
+
+On every other page the pulled knob does nothing. [Waypoints and the database](/kln90b/operation/waypoints/) explains the scan through the database, and [Nearest](/kln90b/operation/nearest/) the nearest lists that it leads into.
 
 ## Using the controls in the simulator
 
-Lorem ipsum: how the knobs and buttons respond to the mouse depends on the aircraft (click areas, the mouse wheel, a
-right click for the power button). Dolor sit amet, consectetur adipiscing elit. To type identifiers instead, use
-[keyboard mode](/kln90b/unit/keyboard-mode/).
+In some aircraft the power/brightness knob needs a right click to turn the unit on. If you use the right mouse button to pan the camera, hold the left mouse button before you right click.
+
+Keyboard mode lets you type identifiers and numbers with the keys of your PC while a cursor is on; [Keyboard mode](/kln90b/unit/keyboard-mode/) explains how to start it and how to leave it.
+
+## Where to go next
+
+- [Quickstart](/kln90b/getting-started/quickstart/) walks through the unit with the least reading.
+- [Waypoints and the database](/kln90b/operation/waypoints/) explains identifiers, the scan and the nearest lists.
+- [Direct-to](/kln90b/operation/direct-to/) uses the Direct To page.

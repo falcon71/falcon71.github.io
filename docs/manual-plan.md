@@ -93,14 +93,14 @@ that writes the owner records the anchors in this table, and the final pass shar
 
 | Topic | Owner | What other pages may say |
 | --- | --- | --- |
-| The front panel: every control and its name | Controls and display | use exactly its names |
-| The two sides of the screen, the status line and its segments | Controls and display, `#the-screen` (planned) | Quickstart: a few sentences; others: nothing |
-| Selecting a page type and a page, several pages with one name (`+`), the page tree, the full-screen pages and what brings them up | Controls and display, `#selecting-a-page` (planned) | Quickstart: a few sentences; the NAV chapter says which page pair gives Super NAV 1 and Super NAV 5 |
-| The cursor; the two ways of entering data; ENT and CLR; which side an ENT or CLR acts on | Controls and display, `#entering-data-with-the-cursor` (planned) | one sentence and the link |
-| The scan with the right inner knob pulled out, as a control | Controls and display, `#scanning` (planned) | Waypoints and the database owns what the scan goes through |
-| Right pages that depend on the left page (D/T, REF, CTR with an FPL page on the left) | Controls and display, `#page-pairs` (planned) | each of those chapters: one sentence, the link, then its own variants |
-| The controls in the simulator (mouse special cases) | Controls and display, `#using-the-controls-in-the-simulator` (planned) | Quickstart: the two special cases |
-| Keyboard mode | Keyboard mode | Quickstart and Controls and display: one sentence and the link |
+| The front panel: every control and its name | Controls and display, `#the-front-panel` | use exactly its names |
+| The two sides of the screen, the status line and its three parts, what flashes | Controls and display, `#the-screen` (`#the-status-line`, `#what-flashes`) | Quickstart: a few sentences; others: nothing |
+| Selecting a page type and a page, several pages with one name (`+`), the page tree, the full-screen pages and what brings them up | Controls and display, `#selecting-a-page` (`#the-page-tree`, `#pages-with-a-plus-sign`, `#pages-that-no-knob-reaches`, `#pages-that-use-the-whole-screen`) | Quickstart: a few sentences; the NAV chapter says which page pair gives Super NAV 1 and Super NAV 5 |
+| The cursor; the two ways of entering data; ENT and CLR; which side an ENT or CLR acts on | Controls and display, `#entering-data-with-the-cursor` (`#fields-the-knob-changes-directly`, `#entries-that-take-effect-with-ent`, `#questions-in-lists`) | one sentence and the link |
+| The scan with the right inner knob pulled out, as a control | Controls and display, `#scanning` | Waypoints and the database owns what the scan goes through |
+| Right pages that depend on the left page (D/T, REF, CTR with an FPL page on the left) | Controls and display, `#page-pairs` | each of those chapters: one sentence, the link, then its own variants |
+| The controls in the simulator (mouse special cases) | Controls and display, `#using-the-controls-in-the-simulator` | Quickstart: the two special cases |
+| Keyboard mode: entering and leaving it, the keys and their gotchas, the hardware toggles | Keyboard mode (`#entering-keyboard-mode`, `#the-keys`, `#leaving-keyboard-mode`) | Quickstart and Controls and display: one sentence and the link |
 | Download, versions, the Community folder, the aircraft that carries the unit | Installation | the home page has the buttons; others link |
 | The power-on sequence and its pages; the screen warm-up; an aircraft loaded with the engine running | Power-on and initialization | Quickstart: what to press; Tutorial flight 1 walks through it and links |
 | Initializing position, date and time (the task; SET 1 and SET 2 are its pages) | Power-on and initialization | SET chapter: the pages and fields; GPS reception and RAIM links |
@@ -166,7 +166,7 @@ anchors and page links above. After them the order follows "owners before the pa
 | – | apt | APT chapter | done (dry run 2026-11-04, corrected 2026-11-16) |
 | 1 | sta | STA chapter; GPS reception and RAIM; Inside the GPS simulation | done (2026-11-16) |
 | 2 | failures | FLR chapter; Simulated failures; the failures part of Inside the GPS simulation | done (2026-11-16) |
-| 3 | controls | Controls and display; Keyboard mode | not started |
+| 3 | controls | Controls and display; Keyboard mode | done (2026-11-17) |
 | 4 | power-on | Power-on and initialization | not started |
 | 5 | waypoints | Waypoints and the database | not started |
 | 6 | waypoint-pages | VOR, NDB, INT, SUP and ACT chapters; the APT chapter cut back to its owner | not started |
@@ -215,6 +215,14 @@ it is written when those owners exist. A package that proves too large in its re
   around ("Site and generator notes").
 - The pages of the packages sta and failures were written before Controls and display, Power-on and the message
   lists existed; they are checked against those pages (terms, names of controls, links).
+
+- **Placeholder field explanations.** `screen-layout`, `cursor-example`, `home-nav-1`, `set-10`, `nav-1`,
+  `nav-5-ksea`, `oth-2-zse` and the tutorial screens still have filler text in their field explanations (found by
+  the writer of Controls and display, 2026-11-17). The packages that show them fill them in; the final pass removes
+  the screens no page shows.
+- The FLR chapter ("Leaving the FLR pages") repeats some general rules of pages opened over the page tree that
+  Controls and display now owns (`#pages-that-no-knob-reaches`); the final pass cuts them to the FLR specifics and
+  the link.
 
 ## Site and generator notes
 

@@ -1,0 +1,39 @@
+<Field id="lead" title="Active leg marks and waypoint number">
+	The number of the waypoint in FPL 0, counted from 1. The marks in front of the first two waypoints show the active leg: one stands at the waypoint the leg starts from, the other at the active waypoint.
+</Field>
+
+<Field id="wpt" title="Waypoint under the cursor">
+	The identifier of a waypoint of FPL 0, marked by the left cursor. With the cursor on, the left outer knob moves it from waypoint to waypoint, and the left inner knob and <kbd>ENT</kbd> change the plan. The left knobs no longer select pages.
+</Field>
+
+<Field id="rest" title="The other waypoints">
+	The remaining waypoints of FPL 0 in flight order, one per row. The empty numbered row at the end is where the next waypoint is added.
+</Field>
+
+<Field id="lcrsr" title="CRSR annunciation of the left side">
+	<Term t="CRSR">`CRSR`</Term> replaces the page identification of the left page, as the CRSR annunciation, while the left cursor is on. It stands one cell to the right of where the page name stands. The left <kbd>CRSR</kbd> button turns the cursor off, and the page name returns.
+</Field>
+
+<Field id="mode" title="Mode annunciation">
+	The mode annunciation, which shows the navigation mode of the unit. <Term t="ENR-LEG">`ENR-LEG`</Term> is Enroute-Leg mode. It does not depend on either cursor.
+</Field>
+
+<Field id="rcrsr" title="CRSR annunciation of the right side">
+	`CRSR` replaces the page identification of the right page while the right cursor is on. It stands at the left end of the five cells of the page name. The right <kbd>CRSR</kbd> button turns the cursor off, and the page name returns. Each side has its own cursor and its own CRSR annunciation.
+</Field>
+
+<Field id="ident" title="Identifier under the cursor">
+	The identifier of the airport on the right page. The right cursor stands on its first character, which the right inner knob changes. The page shows the airport at once, and the right outer knob moves the cursor to the next character.
+</Field>
+
+<Field id="name" title="Airport name">
+	The name of the airport in two rows of 11 characters.
+</Field>
+
+<Field id="class" title="Airspace of the airport">
+	The airspace the airport lies in, here `CL B` for class B.
+</Field>
+
+<Field id="pos" title="Airport position">
+	The position of the airport: latitude above, longitude below.
+</Field>

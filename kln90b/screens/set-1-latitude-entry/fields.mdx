@@ -1,0 +1,27 @@
+<Field id="title" title="Page title">
+	`INIT POSN` heads the page on which you tell the unit where the aircraft is.
+</Field>
+
+<Field id="wpt" title="Waypoint of the position">
+	The identifier of a waypoint that the position can be taken from. The field is blank until you enter one, and entering one fills in the latitude and longitude below.
+</Field>
+
+<Field id="lat" title="Latitude being entered">
+	The latitude as an entry that is not accepted yet: the unit shows it in inverse video, and the cell under the cursor flashes. The first step of the left inner knob opens the entry and replaces the old value with underscores, except for the first cell, which shows its first value, `N`. The left inner knob changes the cell under the cursor, and the left outer knob moves to the next cell. <kbd>ENT</kbd> accepts the entry, and cells that are still underscores count as 0. <kbd>CLR</kbd> restores the old value, and turning the cursor off drops the entry.
+</Field>
+
+<Field id="lon" title="Longitude">
+	The longitude, entered the same way as the latitude. <kbd>ENT</kbd> on the latitude moves the cursor to it.
+</Field>
+
+<Field id="speed" title="Groundspeed and track">
+	The groundspeed in kt and the magnetic track in degrees, each an entry that takes effect with <kbd>ENT</kbd>, like the latitude. `CONFIRM?` gives them to the unit together with the position.
+</Field>
+
+<Field id="confirm" title="Confirm the position">
+	`CONFIRM?` is a button: <kbd>ENT</kbd> with the cursor on it takes over the values of the page as the position of the aircraft.
+</Field>
+
+<Field id="crsr" title="CRSR annunciation">
+	<Term t="CRSR">`CRSR`</Term> replaces the page identification while the left cursor is on.
+</Field>

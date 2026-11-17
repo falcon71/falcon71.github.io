@@ -1,28 +1,67 @@
 ---
 title: Keyboard mode
-description: Enter identifiers and values with the computer keyboard instead of the knobs.
+description: How to enter identifiers and numbers with the keys of your PC instead of the knobs, which keys do what, and how to leave keyboard mode.
 sidebar:
   order: 2
 ---
 
 import Callout from '../../../components/Callout.astro';
+import KlnScreen from '../../../components/KlnScreen.astro';
+import Term from '../../../components/Term.astro';
 
 <Callout kind="sim-only">
-	Lorem ipsum: the real unit has no keyboard. This mode exists only in the simulation.
+The real KLN 90B has no keyboard. Keyboard mode exists only in the simulation, so that you can type an identifier instead of turning the knobs for every character.
 </Callout>
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-aliqua.
+Keyboard mode lets the keys of your PC do what the knobs, <kbd>ENT</kbd> and <kbd>CLR</kbd> do. You turn it on for one side with that side's cursor on, and <Term t="KYBD" /> flashes in the status line in place of the <Term t="CRSR">`CRSR`</Term> annunciation while it lasts. A right click on the screen or <kbd>Esc</kbd> ends it. It is the fast way to enter a flight plan: you type one identifier after the other.
 
-## Switching keyboard mode on and off
+<Callout kind="info">
+While `KYBD` flashes, the simulator passes all keyboard input to the unit and ignores everything else, joysticks included. Before you take the controls again, leave keyboard mode with a right click or <kbd>Esc</kbd>.
+</Callout>
 
-Lorem ipsum dolor sit amet, for example on SET10 or the APT pages, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+## Entering keyboard mode
 
-## Keys
+Keyboard mode works on one side at a time, and only while that side's cursor is on ([Entering data with the cursor](/kln90b/unit/controls-and-display/#entering-data-with-the-cursor)). Left click on the `CRSR` annunciation in the status line, at the left end for the left side and at the right end for the right side. If keyboard mode is on for the other side, it moves across. Super NAV 5 has no status line, so it has no keyboard mode.
 
-| Key                          | Acts as             |
-| ---------------------------- | ------------------- |
-| <kbd>Home</kbd>, <kbd>End</kbd>         | Outer knob |
-| <kbd>Page Up</kbd>, <kbd>Page Down</kbd> | Inner knob |
-| <kbd>Enter</kbd>             | <kbd>ENT</kbd>      |
-| <kbd>Delete</kbd>            | <kbd>CLR</kbd>      |
+Typing on a waypoint inserts the new waypoint in front of it, so with waypoints in FPL 0 you first move the cursor to the blank entry after the last one.
+
+To enter a flight plan in keyboard mode:
+
+1. Turn the left outer knob to the FPL pages and the left inner knob to FPL 0.
+2. Press the left <kbd>CRSR</kbd> button. The cursor stands on the blank first entry.
+3. Left click on the `CRSR` annunciation at the left end of the status line. `KYBD` flashes in its place.
+4. Type the identifier of the first waypoint, for example <kbd>K</kbd>, <kbd>P</kbd>, <kbd>D</kbd>, <kbd>X</kbd>.
+5. Press <kbd>Enter</kbd>. The waypoint page of KPDX appears on the right side, so that you can check the waypoint.
+6. Press <kbd>Enter</kbd> again to approve it. The cursor stands on the next entry, ready for the next identifier.
+7. Repeat steps 4 to 6 for every waypoint. After KSEA the screen looks like this:
+
+   <KlnScreen screen="keyboard-mode-fpl-0" />
+
+8. Right click anywhere on the screen to leave keyboard mode.
+9. Press the left <kbd>CRSR</kbd> button to turn the cursor off.
+
+## The keys
+
+| Key | Does |
+| --- | --- |
+| <kbd>Home</kbd> | Moves the cursor to the right |
+| <kbd>End</kbd> | Moves the cursor to the left |
+| <kbd>Backspace</kbd> | Brings the cursor back to the previous character, so that you can correct it |
+| <kbd>Page Up</kbd> | Turns the inner knob one step clockwise |
+| <kbd>Page Down</kbd> | Turns the inner knob one step counterclockwise |
+| <kbd>Enter</kbd> | The same as <kbd>ENT</kbd> |
+| <kbd>Delete</kbd> | The same as <kbd>CLR</kbd> |
+| <kbd>A</kbd> to <kbd>Z</kbd>, <kbd>0</kbd> to <kbd>9</kbd> and the digits of the numeric keypad | Type that character |
+| <kbd>Esc</kbd> | Leaves keyboard mode |
+
+The knob keys and the typed characters act on the side that shows `KYBD`; <kbd>Enter</kbd> and <kbd>Delete</kbd> go to the side that takes <kbd>ENT</kbd> and <kbd>CLR</kbd>. After each typed character the cursor moves on to the next one. A number or an identifier on the Direct To page or in a flight plan takes effect only when you press <kbd>Enter</kbd>.
+
+{/* kln90b#485: describes the current behavior; the fix makes a refused key change nothing */}A key that the first character of such an entry does not offer still opens the entry: the old value disappears, and the cursor stays on the first character. <kbd>Delete</kbd> does what <kbd>CLR</kbd> does there; [Entering data with the cursor](/kln90b/unit/controls-and-display/#entering-data-with-the-cursor) says what that is.
+
+## Leaving keyboard mode
+
+Keyboard mode ends with a right click anywhere on the screen, with <kbd>Esc</kbd>, and when the cursor of that side goes off. The cursor goes off when you press its <kbd>CRSR</kbd> button, and also when an <kbd>Enter</kbd> completes the task and takes the page away, as when you approve the waypoint page of a direct-to. Otherwise the cursor stays on and the `CRSR` annunciation returns.
+
+## Switching keyboard mode on and off with hardware
+
+An aircraft or a controller such as a Stream Deck can switch keyboard mode on and off, with one toggle for each side. It works like the left click on the `CRSR` annunciation, and in addition it turns the cursor of that side on if it is off, and ends keyboard mode if it is already on. [External hardware](/kln90b/help/external-hardware/) lists the names of the two events and explains how to bind them.

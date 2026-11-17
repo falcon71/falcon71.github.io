@@ -110,7 +110,9 @@ The first session writes the plan of the whole manual and no page.
    `vendor/kln90b`, and any suspected bug. Fact sheets never go into the repository. For a small page, skip the
    researcher and let the writer research.
 2. **The package plan.** From the researcher's summary, settle the sections and the screens in the package file,
-   and check them against topic ownership. If the research shows that a topic's owner must change, or that the
+   and check them against topic ownership. A fact sheet lists every rule the code has; the plan takes only what the
+   pilot needs (style guide, section 8, "What feels natural in use needs no rule"), and plans no section that writes
+   out behavior the pilot meets naturally, such as which side takes ENT. If the research shows that a topic's owner must change, or that the
    package is too large for the session, change the plan first; split a package rather than rush it.
 3. **Writing.** One writer per page or per few small pages, in parallel only where they own different files,
    topics and screens. A writer writes its pages, describes and generates its screens and writes their field

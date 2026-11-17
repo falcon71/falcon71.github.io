@@ -91,7 +91,7 @@ In operation the unit posts a failure's message on the MSG page once it notices 
 - A failed input from the aircraft after up to 10 seconds. At power-on the RS-232 input is reported as soon as the power-on pages are done, and the air data and altitude inputs about 5 seconds later.
 - A failed remote annunciator or nav super flag when the unit next switches it: the annunciator on or off, the flag out of view.
 
-No failure message appears before the power-on pages are done. A failure's message stays on the MSG page while the failure is active, also after you have read it, so the `msg` in the status line stays lit; it goes when the part is repaired. At the next power-on the message comes back unread, so `msg` flashes again once the power-on pages are done.
+No failure message appears before the power-on pages are done. A failure's message stays on the MSG page while the failure is active, also after you have read it, so the `MSG` in the status line stays lit; it goes when the part is repaired. At the next power-on the message comes back unread, so `MSG` flashes again once the power-on pages are done.
 
 The unit never notices a failed OBS input, a failed <Term t="RMI" /> output, a burnt-out bulb, a loss of antenna gain, jamming, spoofing or a faulty satellite. Of those, the GPS failures show in the receiver's own state and messages: lost satellites, `SATELLITE COVERAGE` `INADEQUATE FOR NAV`, the <Term t="RAIM" /> messages.
 
@@ -188,7 +188,7 @@ The navigation data go over the output the aircraft takes them from: ARINC 429 i
 
 ### The annunciators
 
-The aircraft may have remote annunciators for the unit: MSG and WPT, and ARM and ACTV on the GPS APR button. Each remote annunciator the aircraft has can fail in three ways. The unit's own screen keeps telling the truth, so the `msg` in the status line and the unit's own indications are the check on a remote annunciator you doubt.
+The aircraft may have remote annunciators for the unit: MSG and WPT, and ARM and ACTV on the GPS APR button. Each remote annunciator the aircraft has can fail in three ways. The unit's own screen keeps telling the truth, so the `MSG` in the status line and the unit's own indications are the check on a remote annunciator you doubt.
 
 | Failure | The remote annunciator | Message | Self test |
 | --- | --- | --- | --- |
