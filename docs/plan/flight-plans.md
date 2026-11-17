@@ -58,7 +58,7 @@ part about version 1.x does not apply.
   waypoint inside a procedure; they vanish while an entry is open. The FPL chapter owns them; the field explanations
   of `status-line-crsr-both-sides` and `fpl-0-delete-question` name only the marks of the active leg.
 - **CLR with the cursor off on an FPL page** asks `DELETE FPL?`, even when the CLR was meant for a field on the right
-  side (fact sheet of the package controls; Controls and display, "Which side takes ENT and CLR", says it in general).
+  side (fact sheet of the package controls). Controls and display does not describe it; say it here if it surprises.
   The screen `fpl-0-delete-question` shows the delete question of a waypoint in the list.
 - Keyboard mode: typing into a filled waypoint of a flight plan inserts a new waypoint in front of it, and the key
   starts the new entry (`FlightplanListItem.tsx:468`); Keyboard mode links to Flight plans for `INVALID ADD` on an

@@ -25,7 +25,8 @@ As written (2026-11-17), with the anchors:
 5. `#page-pairs`: the general rule; D/T, REF and CTR give their own variants.
 6. `#entering-data-with-the-cursor`: the cursor, its start field. `#fields-the-knob-changes-directly` (the character
    cycle), `#entries-that-take-effect-with-ent` (with the procedure for the position on SET 1),
-   `#which-side-takes-ent-and-clr` (also with the cursor off), `#questions-in-lists`.
+   `#questions-in-lists`. No section on which side takes ENT and CLR: the maintainer had it cut (2026-11-17), because
+   the rules feel natural in use (style guide, section 8).
 7. `#scanning`: the pulled right inner knob as a control; order and speed are left to Waypoints and the database.
 8. `#using-the-controls-in-the-simulator`: the mouse special cases; keyboard mode in one sentence.
 9. Where to go next.
@@ -38,9 +39,11 @@ Super NAV 5 with its scan window or menu (the generator cannot stage them).
 ### Keyboard mode (`unit/keyboard-mode.mdx`)
 
 Simulator only, from the wiki page `Keyboard-Mode.md` and the code (the wiki is incomplete; the page follows the
-code). Sections: `#entering-keyboard-mode`, `#the-keys` (a table), `#typing-into-a-field` (a refused key still opens
-an entry: kln90b#485), `#leaving-keyboard-mode`, `#switching-keyboard-mode-on-and-off-with-hardware` (links to
-External hardware, names no event). Screen: `keyboard-mode-kybd`.
+code). Sections: `#entering-keyboard-mode` (the example enters a flight plan on FPL 0, identifier after identifier,
+as the maintainer asked), `#the-keys` (a table; Home and End move the cursor right and left; under it, short, the gotchas of
+typing: a refused key still opens an entry, kln90b#485), `#leaving-keyboard-mode` (a right click,
+Esc, or the cursor going off), `#switching-keyboard-mode-on-and-off-with-hardware` (links to External hardware, names
+no event). Screen: `keyboard-mode-fpl-0`.
 
 ## Topics this package owns
 

@@ -214,6 +214,10 @@ The model packs several facts into every paragraph and wastes no words. So does 
   moment they try: that a line has as many characters as it has, how many characters a field holds, which
   characters a field accepts, that the cursor stops on every field in turn. Say what they cannot see: the limits, what is stored and where, what happens at the
   edges. If a sentence would make a pilot feel talked down to, cut it.
+- **What feels natural in use needs no rule.** Where the unit simply does what the pilot expects (which side an
+  <kbd>ENT</kbd> acts on, how each kind of field takes a typed key), do not write the rules out: a pilot who reads
+  them finds them more confusing than the unit. Describe the use case, the gotchas and what surprises, and leave the
+  rest to the unit. That every rule is in the code is no reason to write it down (maintainer, 2026-11-17).
 - **Say what is, not what is not.** Do not state what the manual leaves out, what the site does not offer or what the
   unit does not do, unless a pilot would otherwise expect it and act on it. "This manual does not say how version 1.x
   differs" sounds as if something were withheld; "the download buttons never offer a pre-release" answers a question
@@ -222,6 +226,11 @@ The model packs several facts into every paragraph and wastes no words. So does 
   of its controls, which part of the aircraft decides what a click does, how the aircraft switches the unit in. Say
   what the pilot does and sees (section 2). The one page that explains a model of the simulation is Inside the GPS
   simulation (section 17), and it is marked as optional reading.
+- **What the pilot sees, not what the unit does inside.** Describe a control by what it is for and a display by how
+  it looks, never by how the code implements them. <kbd>Backspace</kbd> in keyboard mode takes the cursor back to
+  the previous character so that you can correct it, even though it is a step of the outer knob inside; the
+  brightness knob dims the screen, and its internal step size is nobody's concern; text the unit draws in smaller
+  capitals is capitals (section 12), even though the code stores it as small letters (maintainer, 2026-11-17).
 - **A gotcha must not be overlooked.** Where the unit regularly catches pilots off guard (the screen stays dark for a
   few seconds after power-on while it warms up), the fact never stands in a subordinate clause. It gets the Good to
   know box (section 11) at the place where the pilot meets it, and the text around it keeps its natural order: a
@@ -403,8 +412,10 @@ names for one thing takes them for two things.
 
 ### Text the unit shows
 
-- Quote text from the screen exactly as shown, in code formatting: `DIS`, `FLY R 0.4nm`, `enr-leg`. The
-  unit's small letters (`nm`, `kt`, `ft`, `enr-leg`) stay small.
+- Quote text from the screen exactly as shown, in code formatting: `DIS`, `FLY R 0.4NM`, `ENR-LEG`. The unit
+  draws some text in smaller capitals (the units `NM`, `KT`, `FT`, the modes such as `ENR-LEG`, the prompts `ENT`
+  and `MSG`, `NR` of the nearest lists). It is capitals to the pilot and is quoted in capitals; the code stores it as
+  small letters only to select the smaller glyphs (maintainer, 2026-11-17).
 - A message is quoted in full. A message page message of several lines is quoted with its lines as the MSG page
   shows them, in a code block; this holds for the message lists and wherever a page explains the message. A
   sentence that only names a message of one line quotes it in code formatting: `ADJ NAV IND CRS TO 271°`.
@@ -437,11 +448,11 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | the Direct To page | the DCT page |
 | flight plan; the active flight plan (FPL 0) | flightplan |
 | waypoint; active waypoint; user waypoint | |
-| en route | enroute, en-route (except the unit's `enr-leg`) |
+| en route | enroute, en-route (except the unit's `ENR-LEG`) |
 | groundspeed | ground speed |
 | button (the buttons of the unit) | key |
 | page type (the APT pages are a page type) | page group, group |
-| Enroute-Leg mode (the unit shows `enr-leg`) | en route leg mode |
+| Enroute-Leg mode (the unit shows `ENR-LEG`) | en route leg mode |
 | NAV ready (the unit is NAV ready once it has a position good enough to navigate) | has found its position |
 | D-bar (the course deviation bar of NAV 1 and the Self Test page) | CDI bar, deviation bar |
 | leg mode, OBS mode | LEG mode |
@@ -466,7 +477,7 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | page identification (the part of the status line that shows a page's name); "page name" in running text | |
 | mode annunciation (in the middle part of the status line, between the page identifications) | mode field |
 | the CRSR annunciation (`CRSR` in place of a page identification while that side's cursor is on) | CRSR indicator |
-| the message prompt (`msg`), the enter prompt (`ent`); both stand at the right end of the middle part of the status line | prompt segment |
+| the message prompt (`MSG`), the enter prompt (`ENT`); both stand at the right end of the middle part of the status line | prompt segment |
 | the status line has three parts: the left page identification, the middle part (mode annunciation and prompts), the right page identification | four segments |
 | Microsoft Flight Simulator 2024, then "the simulator" | MSFS, FS2024 (except on Installation) |
 | GPS state (the `STATE` of STA 1); the states by name: initialization (`INIT`), acquisition (`ACQ`), transition (`TRAN`), navigation (`NAV`), navigation with altitude aiding (`NAV A`), navigation with data collection (`NAV D`), navigation with position degradation (`DEGRD`), receiver failure (`FAILR`) | receiver state |
@@ -513,7 +524,7 @@ general; the screen shows one concrete case.
   own id. Ids are lowercase with hyphens: the page, then what distinguishes it (`apt-1-ksea`, `vor-user-waypoint`,
   `fpl-0-approach`). Tutorial screens start with `tut1-` or `tut2-`.
 - **Real places.** Screens show real, well-known US places from the FAA data (section 18). Never invent identifiers.
-- **No message prompt** unless the message is what the text explains. A screen shows no flashing `msg` and no pending
+- **No message prompt** unless the message is what the text explains. A screen shows no flashing `MSG` and no pending
   message; a step that raises one answers it before the screen is captured. For the same reason the screens run with the
   airspace alert off, unless a screen is about the airspace alert and turns it on.
 - **Show half a screen** when only one side matters. The generator keeps the line between the halves.
