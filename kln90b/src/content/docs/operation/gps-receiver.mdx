@@ -34,9 +34,9 @@ The receiver collects ephemeris data while it tracks satellites, so the age coun
 
 A stored position far away slows the search because the receiver looks for the satellites in view at that position. The more of them are also in view where you are, the sooner it finds four. With a wrong clock it predicts the wrong satellites altogether: it gives up after 5 minutes in `ACQ` and searches the whole sky in `INIT`, one satellite after another. With old almanac data it first searches blind for a single satellite, collects new almanac data from it in 12.5 minutes, and then acquires as usual.
 
-If you know that the stored position, the date or the time is wrong, correct it while the unit searches: the receiver starts over from the corrected values at once, and is usually NAV ready within 150 seconds. [Power-on and initialization](/kln90b/unit/power-on/) explains how. Once the unit is NAV ready, the satellites supply the position and the time, and an entry changes nothing.
+If you know that the stored position, the date or the time is wrong, correct it while the unit searches: the receiver starts over from the corrected values at once, and is usually NAV ready within 150 seconds. [Power-on and initialization](/kln90b/unit/power-on/#initializing-the-position-and-the-time) explains how. Once the unit is NAV ready, the satellites supply the position and the time, and an entry changes nothing.
 
-An aircraft loaded with the engine running skips all this: the unit is NAV ready at once ([Power-on and initialization](/kln90b/unit/power-on/)).
+An aircraft loaded with the engine running skips all this: the unit is NAV ready at once ([Power-on and initialization](/kln90b/unit/power-on/#an-aircraft-loaded-with-the-engine-running)).
 
 ## The GPS states
 
@@ -231,4 +231,4 @@ Each question about the receiver has its page:
 - How good is the position? The EPE on STA 2.
 - Will RAIM be there for the approach? The RAIM prediction on STA 5.
 
-[Power-on and initialization](/kln90b/unit/power-on/) says what to do while the unit searches, and [Non-precision approaches](/kln90b/operation/approaches/) what RAIM decides in an approach. [Inside the GPS simulation](/kln90b/operation/gps-simulation/) explains how the simulation models the satellites, the position error and RAIM, for the pilot who wants to know more.
+[Power-on and initialization](/kln90b/unit/power-on/#initializing-the-position-and-the-time) says what to do while the unit searches, and [Non-precision approaches](/kln90b/operation/approaches/) what RAIM decides in an approach. [Inside the GPS simulation](/kln90b/operation/gps-simulation/) explains how the simulation models the satellites, the position error and RAIM, for the pilot who wants to know more.

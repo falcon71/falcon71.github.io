@@ -68,6 +68,13 @@ Cut from Controls and display, which keeps only the scan as a control and links 
 - On a waypoint page's identifier, the first step of the inner knob goes from the existing character on through the
   character set; Controls and display gives the character cycle.
 
+### From the package power-on (2026-11-17)
+
+- Power-on and initialization shows the Database page (screens `database-page`, `database-page-expired`) and links
+  here for the database and its cycle. The page shows the last day of the cycle (`data/navdata/Database.ts:20`,
+  the expiration minus one second), and `EXPIRES` for every current database, however many days it has left. This
+  page explains the cycle and expiry and links back to `/kln90b/unit/power-on/#the-database-page` for the page.
+
 ## Changes to earlier pages
 
 The package waypoint-pages, which follows, cuts the APT chapter back to this owner. This package itself changes no

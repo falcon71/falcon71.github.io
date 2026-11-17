@@ -79,6 +79,19 @@ page `External-Annunciators.md` as background.
 - A status line message is in the message list only while it shows, about 5 seconds (`controls/StatusLine.tsx:211-249`),
   so the MSG page lists it only during that time. This is intended (maintainer, 2026-11-17); describe it as it is.
 
+### From the package power-on (2026-11-17)
+
+- Power-on and initialization says of the messages only that they are forgotten at a power-on and links
+  `/kln90b/operation/messages/` for how they come back; the read and unread rule over a power cycle is this
+  package's (see the failures note above).
+- Messages that Power-on and initialization quotes where they are raised, for the lists (texts from the code):
+  `DATA BASE CHECKSUM ERR` (the navigation data cannot be loaded; the Self Test page shows `TEST FAIL`),
+  `WAYPOINT xxxxx DELETED` with the identifier (the last active waypoint left the database), the two-line
+  `RECYCLE POWER TO USE` `CORRECT DATA BASE DATA` (a date entered on SET 2 moves the database from current to
+  expired or back), `DATA BASE OUT OF DATE` (the harness posts it when it boots outside the cycle; check where the
+  unit raises it), and the receiver's `POSITION DIFFERS FROM` `LAST POSITION BY >2NM` and `SYSTEM TIME UPDATED`
+  `TO GPS TIME`, which GPS reception and RAIM owns.
+
 ## Changes to earlier pages
 
 To be listed by the session: links from earlier pages to single entries.

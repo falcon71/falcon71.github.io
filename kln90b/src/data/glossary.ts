@@ -322,7 +322,7 @@ export const glossary: Record<string, GlossaryEntry> = {
 	},
 	ANNUN: {
 		expansion: 'Annunciators',
-		text: 'The lamps of the aircraft that the unit lights to show its state, such as msg and the approach and waypoint lamps.',
+		text: 'The lamps of the aircraft that the unit lights to show its state, such as MSG and the approach and waypoint lamps.',
 	},
 	ALT: {
 		expansion: 'Altitude',

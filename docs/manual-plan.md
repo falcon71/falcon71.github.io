@@ -73,7 +73,7 @@ explanations stand on the page that owns their task:
 
 | Page of the unit | Shown and explained on |
 | --- | --- |
-| The Turn-On page, the Self Test page, the take-home warning, the VFR-only page, the OBS warning page, the database page | Power-on and initialization |
+| The Turn-On page, the Self Test page, the VFR-only warning page, the OBS warning page, the Database page | Power-on and initialization |
 | The Direct To page | Direct-to |
 | The duplicate waypoint page; the waypoint page shown for approval | Waypoints and the database |
 | The waypoint type page, the make-room pages | Flight plans (the make-room question for a procedure: SID and STAR procedures, linked from Non-precision approaches) |
@@ -102,9 +102,9 @@ that writes the owner records the anchors in this table, and the final pass shar
 | The controls in the simulator (mouse special cases) | Controls and display, `#using-the-controls-in-the-simulator` | Quickstart: the two special cases |
 | Keyboard mode: entering and leaving it, the keys and their gotchas, the hardware toggles | Keyboard mode (`#entering-keyboard-mode`, `#the-keys`, `#leaving-keyboard-mode`) | Quickstart and Controls and display: one sentence and the link |
 | Download, versions, the Community folder, the aircraft that carries the unit | Installation | the home page has the buttons; others link |
-| The power-on sequence and its pages; the screen warm-up; an aircraft loaded with the engine running | Power-on and initialization | Quickstart: what to press; Tutorial flight 1 walks through it and links |
-| Initializing position, date and time (the task; SET 1 and SET 2 are its pages) | Power-on and initialization | SET chapter: the pages and fields; GPS reception and RAIM links |
-| What the unit keeps while it is off, and what it forgets after a longer time off | Power-on and initialization | owners of the single items (procedures in FPL 0, the direct-to, the entered magnetic variation) say their own item in one sentence and link |
+| The power-on sequence and its pages; the screen warm-up; an aircraft loaded with the engine running | Power-on and initialization: `#turning-the-unit-on` (`#an-aircraft-loaded-with-the-engine-running`), `#the-turn-on-page`, `#the-self-test-page`, `#the-pages-after-the-self-test` (`#the-vfr-only-warning-page`, `#the-obs-warning-page`, `#the-database-page`), `#the-first-pages` | Quickstart: what to press; Tutorial flight 1 walks through it and links |
+| Initializing position, date and time (the task; SET 1 and SET 2 are its pages) | Power-on and initialization, `#initializing-the-position-and-the-time` | SET chapter: the pages and fields; GPS reception and RAIM links |
+| What the unit keeps while it is off, and what it forgets after more than five minutes off | Power-on and initialization, `#what-the-unit-keeps-while-it-is-off` | owners of the single items (procedures in FPL 0, the direct-to, the entered magnetic variation) say their own item in one sentence and link |
 | Features that depend on the installation, each in its Availability box | the page that owns the feature | no list of installation options anywhere (style guide, section 3) |
 | The GPS states, the satellites, acquisition and what slows it, NAV ready as a state, the altitude input, the position error, RAIM (what it is, when it is needed, its messages), RAIM prediction as a task, real and fast acquisition | GPS reception and RAIM: `#acquiring-satellites`, `#the-gps-states`, `#real-and-fast-acquisition`, `#the-altitude-input`, `#the-estimated-position-error`, `#raim`, `#predicting-raim`, `#messages-of-the-receiver` | STA chapter: the pages and fields; Power-on: what the pilot does while waiting, and the link; Non-precision approaches: what RAIM decides in an approach; SET chapter (SET 10): the setting and the link |
 | How STA 5 behaves: the default destination and ETA, the time of the calculation, the forgotten entries | STA chapter, `STA 5: RAIM prediction` | GPS reception and RAIM: the procedures and the link |
@@ -113,7 +113,7 @@ that writes the owner records the anchors in this table, and the final pass shar
 | Opening the FLR pages from SET 10 and leaving them | FLR chapter, `#the-flr-pages-failing-and-repairing-parts-of-the-unit` | SET chapter (SET 10): one sentence and the link |
 | Waypoint pages in general: the waypoint types, entering an identifier, the scan through the database, duplicate identifiers, the waypoint page shown for approval, the ACT pages as a concept | Waypoints and the database | waypoint chapters (APT, VOR, NDB, INT, SUP, ACT): one sentence, the link, then what is specific |
 | User waypoints: creating (`CREATE NEW WPT AT`, `USER POS?`, present position), the limit, `USR DB FULL`, editing, deleting, temporary waypoints | Waypoints and the database, `#user-waypoints` (planned) | waypoint chapters: the fields of a user waypoint of their type; OTH chapter: OTH 3 as a page |
-| The database: cycle, expiry, the messages about it | Waypoints and the database | Power-on: the database page; SET chapter: SET 0 |
+| The database: cycle, expiry, the messages about it | Waypoints and the database | Power-on: the Database page; SET chapter: SET 0 |
 | Airport remarks | APT chapter (APT 5) | OTH chapter: OTH 4 as a page (deleting) |
 | The nearest lists: criteria (SET 3), radius, count, refresh, how they are reached, the MSG and ENT shortcut | Nearest, `/kln90b/operation/nearest/` | waypoint chapters: the nearest variant of their page; SET chapter: SET 3 as a page |
 | Direct-to: every way to start one, the default waypoint, recentering, canceling, direct-to in OBS mode | Direct-to | Flight plans: a direct-to to a waypoint of FPL 0, in one paragraph with the link |
@@ -167,7 +167,7 @@ anchors and page links above. After them the order follows "owners before the pa
 | 1 | sta | STA chapter; GPS reception and RAIM; Inside the GPS simulation | done (2026-11-16) |
 | 2 | failures | FLR chapter; Simulated failures; the failures part of Inside the GPS simulation | done (2026-11-16) |
 | 3 | controls | Controls and display; Keyboard mode | done (2026-11-17) |
-| 4 | power-on | Power-on and initialization | not started |
+| 4 | power-on | Power-on and initialization | in review (2026-11-17) |
 | 5 | waypoints | Waypoints and the database | not started |
 | 6 | waypoint-pages | VOR, NDB, INT, SUP and ACT chapters; the APT chapter cut back to its owner | not started |
 | 7 | nearest-direct-to | Nearest; Direct-to | not started |
@@ -220,6 +220,11 @@ it is written when those owners exist. A package that proves too large in its re
   `nav-5-ksea`, `oth-2-zse` and the tutorial screens still have filler text in their field explanations (found by
   the writer of Controls and display, 2026-11-17). The packages that show them fill them in; the final pass removes
   the screens no page shows.
+- **Left over from the package power-on (2026-11-17):** the Quickstart says "the confirmation of a waypoint" (word
+  list: approve the waypoint page). The glossary entries `OBS IN` and `OUT` are used only by the Self Test screens
+  and go into their field explanations (section 14); `OUT`'s expansion "OBS output" should match the field name
+  `OBS OUT`. Simulated failures, `#the-battery`, says the Self Test page shows `TEST FAIL` after a memory loss:
+  check which receiver code causes it.
 - The FLR chapter ("Leaving the FLR pages") repeats some general rules of pages opened over the page tree that
   Controls and display now owns (`#pages-that-no-knob-reaches`); the final pass cuts them to the FLR specifics and
   the link.

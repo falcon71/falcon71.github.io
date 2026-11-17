@@ -7,24 +7,43 @@ checked facts. Screens are planned by the session after its research.
 
 ### Power-on and initialization (`unit/power-on.mdx`)
 
-Requirements: style guide, section 17. Planned sections:
+Written and reviewed 2026-11-17. The sections as written, with their anchors:
 
 1. Summary.
-2. Turning the unit on: the power/brightness knob, the warm-up of the screen (Good to know box, as in the
-   Quickstart), an aircraft loaded with the engine running.
-3. The Turn-On page, with its lines that the pilot can write.
-4. The Self Test page: what each side shows and why, what the pilot checks and enters, approving; `TEST FAIL` in one
-   sentence with the link to Simulated failures.
-5. The pages that may follow: the take-home warning, the VFR-only page (Availability boxes), the OBS warning page,
-   the database page.
-6. The first pages after power-on.
-7. Initializing the position and the time: the task on SET 1 and SET 2, when it is needed, what to do when the unit
-   does not become NAV ready. The receiver's side of it links to GPS reception and RAIM.
-8. What the unit keeps while it is off, and what it forgets after a longer time off.
-9. Links on.
+2. Turning the unit on (`#turning-the-unit-on`): the power/brightness knob, the warm-up of the screen (Good to know
+   box), short power losses that the unit rides through, turning it off. Subsection
+   `#an-aircraft-loaded-with-the-engine-running` (Simulator only box): what is skipped, and that the next power-on
+   runs the whole sequence.
+3. The Turn-On page (`#the-turn-on-page`): what it shows and how long, writing its four lines (procedure), emptying
+   a line, and that the left cursor holds the page.
+4. The Self Test page (`#the-self-test-page`): what the pilot checks (the test values of the outputs, the D-bar half
+   scale to the right, the annunciators, the clock, the altitude) and corrects (the clock, the time zone, the baro
+   setting), approving and the beep with its condition, the air data variant, `TEST FAIL` with the link to
+   Simulated failures, the 1988 date after a memory loss with the link to `#the-battery`.
+5. The pages after the self test (`#the-pages-after-the-self-test`): `#the-vfr-only-warning-page` (Availability
+   box), `#the-obs-warning-page` (Availability box: aircraft with a GPS CRS button), `#the-database-page` (current
+   and expired).
+6. The first pages (`#the-first-pages`): NAV 2 on the left, the page of the last active waypoint on the right, or
+   the SUP page; `WAYPOINT xxxxx DELETED`.
+7. Initializing the position and the time (`#initializing-the-position-and-the-time`): when it is needed, what to
+   do while the unit searches, the procedures on SET 1 and SET 2, `RECYCLE POWER TO USE`, the receiver's messages by
+   link, what to do when the unit does not become NAV ready.
+8. What the unit keeps while it is off (`#what-the-unit-keeps-while-it-is-off`): kept for any time off, kept for
+   up to five minutes, forgotten at every power-on.
+9. Where to go next.
 
-This page shows and explains the power-on pages, which are in no page type (index, "Pages of the unit that are in
-no page type"). It reuses or replaces the screen `self-test` of the Quickstart: one screen, one id.
+The power-on pages are in no page type; this page shows them and owns the field explanations of their screens,
+`self-test` included (the Quickstart shows it too).
+
+**Left out:** the take-home warning page. The setting that enables it is not officially supported, so no aircraft
+offers it (maintainer, 2026-11-17). Neither the page nor take-home mode is mentioned; kln90b#455 therefore needs no
+comment.
+
+## Screens
+
+All planned states were staged: `turn-on-page`, `turn-on-page-cursor`, `self-test`, `vfr-only-page`,
+`obs-warning-page`, `database-page`, `database-page-expired`, `set-2-date-entry`, and the existing
+`set-1-latitude-entry`.
 
 ## Topics this package owns
 
@@ -41,83 +60,10 @@ Links instead of explanations: the receiver states and acquisition (GPS receptio
 
 ## Notes from other packages
 
-### From the package sta (2026-11-16)
-
-Pointers from the code (`Gps.ts`, `GpsSearch.ts`, `pages/WelcomePage.tsx`); check each before it is written:
-
-- Correcting the position, the date or the time while the receiver has no position restarts the search, and the
-  position follows within about 150 seconds. While the unit has a position, the correction changes nothing for the
-  receiver.
-- The unit's clock follows the simulator's time while the unit is off.
-- With the acquisition set to `REAL`, loading the aircraft at another airport than the one it was last turned off
-  at posts `POSITION DIFFERS FROM` `LAST POSITION BY >2NM` at the first position.
-- **Take-home mode** stays with this package: a pilot meets it only as the warning page before the self test, in
-  aircraft whose installation enables it (Availability box). In the pinned code a take-home unit turned on cold and
-  dark never gets a position, and one started with the engine running loses it for good after a power cycle
-  (`Gps.ts:562-574, 746, 948-955`). kln90b#455 (closed) is about this; check whether the pin contains its fix
-  before the page describes the behavior, and add the `kln90b#455` comment if it does not. The maintainer wants
-  no new issue for it (2026-11-16).
-- GPS reception and RAIM owns acquisition (`#acquiring-satellites`, `#the-gps-states`,
-  `#real-and-fast-acquisition`); this page says what the pilot does while waiting and links.
-
-From the package getting-started (facts from the code and the staged unit, to be checked again):
-
-- The display warms up for up to about 6 seconds after a long time off, less after a short one
-  (`BrightnessManager.ts`, `TIME_TO_WARM`, `TIME_UNTIL_COLD` 10 minutes). A turned-down power/brightness knob also
-  keeps the screen dark (maintainer, 2026-11-16).
-- The Turn-On page shows `SELF TEST IN PROGRESS` for 17 seconds (`WelcomePage.tsx`, `TEST_TIME`). While the left
-  cursor is on there (editing the four lines of the Turn-On page), the unit stays on it.
-- In take-home mode a Take-Home warning page comes before the Self Test page (`WelcomePage.showSelfTestPage`).
-- The Self Test page opens with the cursor on the barometric setting; each ENT moves the cursor on, also where the
-  field had nothing to accept, until `APPROVE?` (`SelfTestRightPage.tsx`, `enterAlwaysMoves`). Three presses of ENT
-  move the cursor from the barometric setting to `APPROVE?`, a fourth approves. With an air data input the setting
-  is read only and not a cursor field. ENT on `APPROVE?` gives five short beeps.
-- The beeps need an audio output of the aircraft, which none of the aircraft that carry the unit has so far
-  (maintainer, 2026-11-16); the Quickstart leaves the beep out and this page says it with that condition.
-- After approval: the VFR-only page with `ACKNOWLEDGE?` in a VFR-only installation; then the OBS warning page if
-  the unit is in OBS mode, which has no acknowledgement and stays until the aircraft's GPS CRS switch selects leg
-  mode; then the database page (expires or expired, with `ACKNOWLEDGE?`).
-- The normal pages then show NAV 2 on the left and, on the right, the page of the last active waypoint (APT 4 for
-  an airport), or the SUP page when there was none (`PageManager.startMainPage`).
-- An aircraft loaded with its engine running skips the Turn-On page, the self test and the database page, and the
-  GPS acquires at once; every later power-on runs the full sequence (`KLN90BCore.isForceReadyToUse`). A failed self
-  test shows `TEST FAIL` and the message `DATA BASE CHECKSUM ERR` (`WelcomePage.leaveFailed`).
-- Power losses of up to 1.5 seconds are carried without a restart (`PowerSupply.ts`, `RIDE_THROUGH_TIME`).
-
-From the planning survey: after more than a few minutes off the unit also drops the procedures in FPL 0, the
-direct-to and an entered magnetic variation (`data/VolatileMemory.ts`, `reset` and `RESET_TIME`); the owners of
-those items (index) say their own item and link here.
-
-### From the package failures (2026-11-16)
-
-Pointers for this package's research (check each in the code):
-
-- **The Self Test page after a failure.** A failure that the self test finds makes the page show `TEST FAIL`;
-  Simulated failures, `#when-the-unit-notices-a-failure`, owns which failures those are and shows the screen
-  `failure-self-test-fail`. Power-on says what the pilot sees and does on the page, and links.
-- **After a loss of the unit's memory** (a power-on while the internal battery has failed; Simulated failures,
-  `#the-battery`, owns the cause and what is lost): the Self Test page shows a date in 1988, the message
-  `USER DATA LOST` is on the MSG page, and the first position sets the date about 39 years too early, where it
-  stays over power-offs. The right date and time must be entered before the first position, on the Self Test page
-  or on SET 2; once the unit has a position, SET 2 no longer takes a date. Simulated failures gives the procedure;
-  Power-on says it where it describes the entry of the date, and links.
-- **Failure messages come back unread at every power-on**, although a message that was read normally stays read
-  over a power cycle (`data/MessageHandler.ts`). Simulated failures says it for the failures; the general rule
-  belongs to Messages.
-- `FAST` acquisition does not help at a power-on after the memory was lost, nor with the failures `RCVR MEMORY`
-  and `RCVR INIT` active.
-- Terms settled in this package (style guide, word list): internal battery, remote annunciators.
-
-### From the package controls (2026-11-17)
-
-- After power-on the left page is NAV 2 and the right page the waypoint page of the last active waypoint (APT 4 for an
-  airport), as the reviewer of Controls and display read it; check. Every power-on builds a new page tree, so the
-  memory of the page last shown in each page type starts over (`PageManager.ts:63-111`,
-  `PageTreeController.ts:127-131`); Controls and display says this in one sentence.
-- The power/brightness knob is pushed in for on and pulled out for off; the knob turns the unit off at once and the
-  next power-on starts the whole sequence (`PowerSupply.ts:162-172, 204-227`). Use these words.
+All used by this package (2026-11-17).
 
 ## Changes to earlier pages
 
-The seam check compares the Quickstart's "Turning the unit on" with this page (terms, the screen `self-test`). The
-pages of the packages sta and failures get their links to this page sharpened to its sections.
+Made in this package and reviewed: the Quickstart's "Turning the unit on" no longer says a page can appear before
+the Self Test page; the links to this page in GPS reception and RAIM, Simulated failures and the STA chapter point to
+its sections. The field titles "Cursor indication" of every screen became "CRSR annunciation" (word list).

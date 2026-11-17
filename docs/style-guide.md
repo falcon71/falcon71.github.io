@@ -446,6 +446,9 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | --- | --- |
 | direct-to (noun and adjective: "a direct-to", "the direct-to waypoint"); fly direct to KSEA | Direct-To, direct to (as a noun) |
 | the Direct To page | the DCT page |
+| the pages of the power-on sequence: the Turn-On page, the Self Test page, the VFR-only warning page, the OBS warning page, the Database page | the VFR-only page, the database page |
+| `OBS OUT` (the test course output on the Self Test page); `OBS IN` | course out |
+| ORS level (the revision the unit shows as `ORS` and a number) | revision |
 | flight plan; the active flight plan (FPL 0) | flightplan |
 | waypoint; active waypoint; user waypoint | |
 | en route | enroute, en-route (except the unit's `ENR-LEG`) |

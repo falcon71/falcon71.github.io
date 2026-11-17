@@ -51,6 +51,19 @@ Only the pages and their fields.
 - After a loss of the unit's memory SET 2 takes a date only until the unit has a position (Simulated failures,
   `#the-battery`).
 
+### From the package power-on (2026-11-17)
+
+- Power-on and initialization, `#initializing-the-position-and-the-time`, owns the task of correcting the position
+  on SET 1 and the date and time on SET 2, with procedures and the screens `set-1-latitude-entry` and
+  `set-2-date-entry`. The SET chapter explains the pages and fields and links there for the task.
+- SET 2 takes no date and no time once the unit has a position; the cursor skips them. The Self Test page still takes
+  them until it is approved.
+- Suspected and not verified: `CONFIRM?` on SET 1 still sets the position while the unit has one
+  (`pages/left/Set1Page.tsx:104-114`), and the next calculation replaces it with the measured one. Check before the
+  chapter says anything about it.
+- A date on SET 2 that moves the database from current to expired or back posts `RECYCLE POWER TO USE`
+  `CORRECT DATA BASE DATA`.
+
 ## Changes to earlier pages
 
 The pages that named a SET page before this chapter existed link to it by the page links; the seam check verifies
