@@ -49,10 +49,10 @@ as `/kln90b/<slug>/`) and its package. Pages that do not exist yet are linked by
 | | OTH | `pages/oth` | fuel-air-data |
 | Page reference, right | CTR | `pages/ctr` | flight-plan-pages |
 | | REF | `pages/ref` | flight-plan-pages |
-| | ACT | `pages/act` | waypoint-pages |
+| | ACT | `pages/act` | waypoint-pages (done) |
 | | D/T | `pages/dt` | flight-plan-pages |
 | | APT | `pages/apt` | apt (done) |
-| | VOR, NDB, INT, SUP | `pages/vor`, `pages/ndb`, `pages/int`, `pages/sup` | waypoint-pages |
+| | VOR, NDB, INT, SUP | `pages/vor`, `pages/ndb`, `pages/int`, `pages/sup` | waypoint-pages (done) |
 | Reference lists | Message page messages | `lists/messages` | messages |
 | | Status line messages | `lists/status-line-messages` | messages |
 | | Glossary | `lists/glossary` | every package adds entries; messages checks the page |
@@ -175,7 +175,7 @@ anchors and page links above. After them the order follows "owners before the pa
 | 3 | controls | Controls and display; Keyboard mode | done (2026-11-17) |
 | 4 | power-on | Power-on and initialization | done (2026-11-17) |
 | 5 | waypoints | Waypoints and the database; User waypoints | done (2026-11-17) |
-| 6 | waypoint-pages | VOR, NDB, INT, SUP and ACT chapters; the APT chapter cut back to its owner | in review (2026-11-17) |
+| 6 | waypoint-pages | VOR, NDB, INT, SUP and ACT chapters; the APT chapter cut back to its owner | done (2026-11-17) |
 | 7 | nearest-direct-to | Nearest; Direct-to | not started |
 | 8 | navigation | Navigation modes; Sequencing and turn anticipation; MOD chapter | not started |
 | 9 | nav-pages | NAV chapter with Super NAV 1 and Super NAV 5 | not started |
