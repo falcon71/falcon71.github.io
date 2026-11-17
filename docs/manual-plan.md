@@ -210,7 +210,7 @@ it is written when those owners exist. A package that proves too large in its re
 - **Two rules of 2026-11-17 (maintainer, on the package waypoint-pages):** a code that a few pages show is no
   glossary term, and a display form such as `RW` is no abbreviation of the manual (style guide, section 14); the
   time a calculation takes is "a few seconds", never the code's number (section 8). `HRD`, `SFT` and `RW` are gone;
-  the final pass checks the other glossary entries (`NR`, `RMKS` and the like) and the durations stated on the
+  the final pass checks the other glossary entries (`NR` and `RMKS` are gone, 2026-11-17) and the durations stated on the
   pages written earlier (GPS reception and RAIM, Power-on, STA) against both rules.
 
 - The placeholder pages use old terms (key, page group); the packages that replace them remove these.

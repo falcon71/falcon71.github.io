@@ -19,7 +19,7 @@ The airport you enter, scan to or create on one APT page is the airport on all t
 
 The right inner knob goes through APT 1 to APT 7 and then back to APT 1; APT 8 follows APT 7 only in an aircraft whose unit is installed for approaches. A page number with more than one page shows a `+` in its name (`APT+3`); [Pages with a plus sign](/kln90b/unit/controls-and-display/#pages-with-a-plus-sign) explains how the inner knob steps through them.
 
-The top line is the same on every page except the APT 3 runway diagram, which has no top line. It shows the identifier of the airport and, at the right end, <Term t="NR">`NR`</Term> and a rank when you reached the airport through the [nearest list](/kln90b/operation/nearest/). An airport of the list keeps its `NR` on all APT pages. A `›` in the first column marks the airport as the [active waypoint](/kln90b/operation/navigation-modes/#the-active-waypoint); it flashes during [waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting).
+The top line is the same on every page except the APT 3 runway diagram, which has no top line. It shows the identifier of the airport and, at the right end, `NR` (for nearest) and the rank, counted from `NR 1` for the nearest airport, when you reached the airport through the [nearest list](/kln90b/operation/nearest/). An airport of the list keeps its `NR` on all APT pages. A `›` in the first column marks the airport as the [active waypoint](/kln90b/operation/navigation-modes/#the-active-waypoint); it flashes during [waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting).
 
 <KlnScreen screen="pages/apt/apt-1-nearest" rows="1" />
 
@@ -144,9 +144,9 @@ APT 5 holds three lines of notes of your own about the airport, for example a fr
 
 <KlnScreen screen="pages/apt/apt-5-ktiw" />
 
-The unit keeps the remarks by identifier: if you delete a user-defined airport, its remarks stay, and a user-defined airport that you create again with the same identifier shows them again. It keeps the remarks of up to 100 airports. A remark for the 101st raises <Term t="RMKS">`RMKS FULL`</Term> and is not stored; changing the remarks of an airport already in the list is always accepted.
+The unit keeps the remarks by identifier: if you delete a user-defined airport, its remarks stay, and a user-defined airport that you create again with the same identifier shows them again. It keeps the remarks of up to 100 airports. A remark for the 101st raises the message `RMKS FULL` (the remarks are full) and is not stored; changing the remarks of an airport already in the list is always accepted.
 
-OTH 4 (`APTS W/RMKS`) lists the airports that have remarks; you delete an airport's remarks there. An airport whose lines you have blanked out still counts as having remarks, stays on OTH 4 and counts toward the 100 until you delete it there.
+OTH 4 (`APTS W/RMKS`, airports with remarks) lists the airports that have remarks; you delete an airport's remarks there. An airport whose lines you have blanked out still counts as having remarks, stays on OTH 4 and counts toward the 100 until you delete it there.
 
 [Waypoints and the database](/kln90b/operation/waypoints/) describes the tasks that use APT 5.
 

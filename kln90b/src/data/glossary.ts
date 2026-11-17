@@ -82,14 +82,6 @@ export const glossary: Record<string, GlossaryEntry> = {
 		expansion: 'Required navigation performance, authorization required',
 		text: 'Procedures that need a special approval of aircraft and crew. The unit does not offer them.',
 	},
-	NR: {
-		expansion: 'Nearest rank',
-		text: 'The rank of a waypoint in the nearest list, from NR 1 for the nearest. It flashes while the cursor is elsewhere on the page.',
-	},
-	RMKS: {
-		expansion: 'Remarks',
-		text: 'The remarks of an airport on APT 5, as in RMKS FULL and APTS W/RMKS.',
-	},
 	MSG: {
 		text: 'The message prompt. It shows in the status line when the unit holds a message and flashes while you have not read all of them. You read the messages with the MSG button.',
 	},
