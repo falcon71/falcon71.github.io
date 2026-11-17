@@ -207,6 +207,11 @@ it is written when those owners exist. A package that proves too large in its re
 - **The glossary is cleared of single-screen entries** (style guide, section 14, rule of 2026-11-16). The package
   waypoint-pages did this for the APT chapter (2026-11-17); the Quickstart and other pages written under the earlier
   rule are left for the final pass.
+- **Two rules of 2026-11-17 (maintainer, on the package waypoint-pages):** a code that a few pages show is no
+  glossary term, and a display form such as `RW` is no abbreviation of the manual (style guide, section 14); the
+  time a calculation takes is "a few seconds", never the code's number (section 8). `HRD`, `SFT` and `RW` are gone;
+  the final pass checks the other glossary entries (`NR`, `RMKS` and the like) and the durations stated on the
+  pages written earlier (GPS reception and RAIM, Power-on, STA) against both rules.
 
 - The placeholder pages use old terms (key, page group); the packages that replace them remove these.
 - The glossary holds the placeholder entry `Turn anticipation`, used by the filler text of Navigation modes. It goes

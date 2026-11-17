@@ -82,21 +82,9 @@ export const glossary: Record<string, GlossaryEntry> = {
 		expansion: 'Required navigation performance, authorization required',
 		text: 'Procedures that need a special approval of aircraft and crew. The unit does not offer them.',
 	},
-	RW: {
-		expansion: 'Runway',
-		text: 'The prefix of a runway in the lists and waypoint names of the unit, such as RW34L, the threshold of runway 34L.',
-	},
 	NR: {
 		expansion: 'Nearest rank',
 		text: 'The rank of a waypoint in the nearest list, from NR 1 for the nearest. It flashes while the cursor is elsewhere on the page.',
-	},
-	HRD: {
-		expansion: 'Hard surface',
-		text: 'The runway surface code for concrete, asphalt and other hard surfaces.',
-	},
-	SFT: {
-		expansion: 'Soft surface',
-		text: 'Soft surface, the choice for the runway of a user-defined airport on APT 3 that is not HRD. On SET 3, HRD SFT lets the nearest list include airports with soft runways.',
 	},
 	RMKS: {
 		expansion: 'Remarks',

@@ -20,8 +20,8 @@ waypoint page. `sidebar.order`: ACT 12, VOR 15, NDB 16, INT 17, SUP 18.
 - **NDB** (`pages/ndb.mdx`): `#ndb-page-frequency-and-position-of-a-station`, `#a-nearest-ndb`,
   `#a-user-defined-ndb`, `#where-the-ndb-page-is-used`.
 - **INT** (`pages/int.mdx`): `#int-page-intersection-position-and-reference` (terminal waypoints in the list, in one
-  sentence), `#the-reference-waypoint` (owns the reference search: the nearest VOR to the waypoint, about 8 seconds,
-  in a Good to know box; another reference; not stored; 1,000 NM), `#a-user-defined-intersection` (`kln90b#488`),
+  sentence), `#the-reference-waypoint` (owns the reference search: the nearest VOR to the waypoint after a few
+  seconds, in a Good to know box; another reference; not stored; 1,000 NM), `#a-user-defined-intersection` (`kln90b#488`),
   `#where-the-int-page-is-used`.
 - **SUP** (`pages/sup.mdx`): `#sup-page-supplemental-waypoints` (the list holds only supplemental waypoints, those
   the unit makes included; REF as on the INT page, linked), `#no-supplemental-waypoints-stored`,
@@ -53,7 +53,8 @@ comment: the APT 7 section does not describe the scan.
   the ACT chapter show them).
 - **Glossary:** the entries of codes that a single APT page shows (APT 1 airspace types, APT 2 codes, APT 3 surface
   and lighting codes, APT 4 frequency types, APT 8 approach types) are gone; the field explanations explain them in
-  plain words. `HRD`, `SFT`, `NR`, `RW`, `RMKS` and the approach terms used across chapters stay.
+  plain words. `HRD`, `SFT` and `RW` went too, on the maintainer's review; `NR`, `RMKS` and the approach terms used across
+  chapters stay.
 - **Waypoints and the database:** every APT page offers to create a user waypoint; the complete list of the SUP page
   holds only the supplemental waypoints.
 - **User waypoints:** a user-defined airport's position is set on APT 1, the elevation on APT 2, the runway on APT 3;

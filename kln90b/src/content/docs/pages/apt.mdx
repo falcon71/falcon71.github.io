@@ -95,7 +95,7 @@ An airport without a runway entry has no diagram, and its one page reads `RUNWAY
 
 {/* kln90b#475: describes the current behavior; the fix makes the unit stay on the list page with the cursor on */}
 
-A user-defined airport has one page, which holds its single runway: the length and the surface, which you enter. It appears in the nearest list only when the runway meets the minimum length of SET 3 and, where SET 3 allows hard surfaces only, has the surface <Term t="HRD">`HRD`</Term>; a runway without an entered surface counts as soft.
+A user-defined airport has one page, which holds its single runway: the length and the surface, which you enter. It appears in the nearest list only when the runway meets the minimum length of SET 3 and, where SET 3 allows hard surfaces only, has the surface `HRD` (hard); a runway without an entered surface counts as soft.
 
 <KlnScreen screen="apt-3-user-airport" />
 
@@ -236,7 +236,7 @@ The unit skips a step when it has nothing to ask:
   KYKM's YKM7 SID has neither a runway nor a transition to choose, so <kbd>ENT</kbd> on it shows its waypoints at
   once.
 
-Each entry of the runway list is <Term t="RW" /> and the runway. Parallel runways that lead to the same waypoints share
+Each entry of the runway list is `RW` and the runway number, such as `RW10L`. Parallel runways that lead to the same waypoints share
 one entry with `B` for the parallels, such as `RW10B`, and selecting it loads the first of them. Runways of different
 numbers always have their own entries.
 

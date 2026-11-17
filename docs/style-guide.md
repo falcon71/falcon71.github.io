@@ -212,6 +212,10 @@ The model packs several facts into every paragraph and wastes no words. So does 
 - **A time measured on the real unit is approximate.** Where the simulation copies a duration from recordings of
   the real unit (the Turn-On page stays for 15 to 20 seconds), the real unit varies, so give it as a range with
   "about" ("about 15 to 20 seconds"), never as the exact number the code happens to use (maintainer, 2026-11-17).
+- **The time a calculation takes is no specification.** Where the unit shows a result as soon as it has computed
+  it (the reference VOR of the INT page, a search, a list that fills in), the delay in the code is the
+  simulation's choice, not a property of the unit. Say "a few seconds" and give no number (maintainer,
+  2026-11-17).
 - **A number is said once, at its owner.** Other pages, and the rest of the owning page, refer to the event instead
   of repeating the number: "while the Turn-On page is shown", not "about 17 seconds after power-on" on every page.
   A repeated number reads as a lecture and goes wrong everywhere at once when it changes (maintainer, 2026-11-17).
@@ -614,6 +618,12 @@ The explanations of a screen's fields live in its `fields.mdx` and appear wherev
   lighting on APT 3, the frequency types of APT 4 and the names of the failures on the FLR pages are explained in
   the field explanation of their screen, and in the text of that page where it describes them. They get no glossary
   entry and no `<Term>` (maintainer, 2026-11-16: the glossary had become cluttered).
+- **Nor is one that a few pages show.** A code the unit shows on a few pages only (`HRD` and `SFT` for the runway
+  surface on APT 1, APT 3 and SET 3) is explained in the field explanations of those pages, not in the glossary
+  (maintainer, 2026-11-17).
+- **A display form is no abbreviation of the manual.** Where the unit writes a word short because of the room on
+  its screen (`RW` before a runway number), the manual quotes it in the screen text and otherwise writes the word
+  ("runway 16L"); it gets no glossary entry (maintainer, 2026-11-17).
 - **Operating concepts are not glossary terms.** The nearest list, the active waypoint, waypoint alerting, turn
   anticipation, the scan, OBS mode, user waypoints and the like are ways the unit works, explained in their Operation
   section. A tooltip cannot explain how something works, so these get no glossary entry and no `<Term>`; the text
