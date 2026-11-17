@@ -274,6 +274,9 @@ const rightLabels2 = ['APT', 'VOR', 'NDB', 'INT', 'SUPL'];
 		left: calc(246 / 912 * 100%);
 		top: calc(30 / 290 * 100%);
 		width: calc(422 / 912 * 100%);
+		/* Inside a page's text, Starlight puts a top margin on every element after the first; it would push the
+		   screen down out of its window */
+		margin: 0;
 		container-type: inline-size;
 	}
 </style>
