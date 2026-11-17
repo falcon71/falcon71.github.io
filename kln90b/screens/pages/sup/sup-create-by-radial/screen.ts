@@ -25,9 +25,9 @@ defineScreen(import.meta.url, {
 	},
 	fields: [
 		{id: 'ident', find: {re: /HOME/, area: 'R', row: 0}},
-		{id: 'ref', find: {re: /REF:/, area: 'R', row: 1}},
-		{id: 'rad', find: {re: /RAD:/, area: 'R', row: 2}},
-		{id: 'dis', find: {re: /DIS:/, area: 'R', row: 3}},
+		{id: 'ref', find: {area: 'R', row: 1}},
+		{id: 'rad', find: {area: 'R', row: 2}},
+		{id: 'dis', find: {area: 'R', row: 3}},
 		{id: 'lat', find: {re: /[NS] *\d+°[\d.]+'/, area: 'R'}},
 		{id: 'lon', find: {re: /[EW] *\d+°[\d.]+'/, area: 'R'}},
 		{id: 'page', find: {re: /SUP/, area: 'S'}},

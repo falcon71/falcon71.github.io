@@ -602,7 +602,12 @@ The explanations of a screen's fields live in its `fields.mdx` and appear wherev
   resolution, when it shows dashes, whether and how the pilot can change it with the cursor, and what changing it does.
 - **Length:** one to four sentences for most fields; a complex field (the CDI, a selectable list) may take a few short
   paragraphs.
-- **Every field gets an explanation,** the status line fields included. A field is a label and its value together.
+- **Everything on a screen that carries information is a field, and every field gets an explanation,** the status line
+  fields included. That covers titles, labels, units, fixed text and the page identification as well as the values;
+  only blank cells and pure decoration (the line between the halves) need none. A field is a label and its value
+  together: its location covers both, so that pointing at `REF:` and at `SEA` opens the same explanation. Locate a
+  field with a regex that matches the label and the value (`/GS +\S+/`), or with a place that takes the whole row
+  (`{area: 'R', row: 1}`); a regex that finds the label alone leaves the value without a tooltip.
 - **A field covers everything the cursor marks.** Where the cursor (inverse or flashing inverse) marks an entry, the
   field spans every cell of the cursor, the entry's number and padding included, so that pointing anywhere at what the
   cursor marks opens the explanation. The generator widens a field to its cursor and fails when one cursor would mark
