@@ -1,0 +1,51 @@
+---
+title: VOR page
+description: What the VOR page shows about a VOR (frequency, class, magnetic variation and position) and how you define a VOR of your own.
+sidebar:
+  order: 15
+---
+
+import KlnScreen from '../../../components/KlnScreen.astro';
+import Term from '../../../components/Term.astro';
+
+The VOR page of the KLN 90B shows one VOR: its frequency, its class, the published magnetic variation of the station and its position. You use it to look up a station and to define a VOR of your own. Entering an identifier, scanning and approving the page work as on every waypoint page; see [Waypoints and the database](/kln90b/operation/waypoints/).
+
+## VOR page: frequency, class and position of a station
+
+The VOR page belongs to the right side and has a single page. The top line shows the identifier, a `D` when the station has DME, and at the right end the rank of a [nearest](#a-nearest-vor) VOR.
+
+<KlnScreen screen="vor-pae" />
+
+On a VOR of the database you can change only the identifier; on a nearest VOR the cursor can also rest on the rank (see below). The name, the class, the frequency, the published magnetic variation and the position are read-only. A `›` in the first column marks the VOR as the [active waypoint](/kln90b/operation/navigation-modes/#the-active-waypoint); it flashes during [waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting). When the active waypoint is a VOR, the [ACT pages](/kln90b/pages/act/) show this page for it.
+
+The identifier you type finds VOR, VOR/DME and VORTAC stations, DME-only stations and your own user-defined VORs. The scan does not make that distinction: it steps through every station of the complete list, so it also stops on any localizer, VOT or TACAN-only station that the navigation data lists. Such a station shows no `D`, and an identifier of more than three characters, a localizer's, is cut to three. {/* kln90b#489: describes the current behavior; the fix makes the scan skip localizers and VOTs, as typed entry does */}
+
+When the complete list holds no VOR, the page shows empty fields and the status line says `NO VOR WPTS`; see [`NO SUP WPTS` and the other empty lists](/kln90b/operation/waypoints/#no-sup-wpts-and-the-other-empty-lists).
+
+### A nearest VOR
+
+The page changes when you reach a VOR through the [nearest list](/kln90b/operation/nearest/): <Term t="NR">`NR`</Term> and the rank appear at the right of the top line, and the bearing and the distance from the aircraft replace the position. A VOR that you enter by its identifier shows the plain page, even when it is the nearest.
+
+<KlnScreen screen="vor-nearest" />
+
+With the cursor on the rank, the page follows the list: it shows whichever VOR holds that rank as the aircraft moves. Entering another identifier turns the page back into the plain VOR page.
+
+### A user-defined VOR
+
+When the identifier you enter matches no VOR, the page shows what you typed, the class `U` and underscores for the frequency, the published magnetic variation and the position, and the right outer knob moves the cursor on to the frequency. The VOR page makes no offer to create a waypoint, unlike the other waypoint pages that offer one. [Creating a user VOR or a user NDB](/kln90b/operation/user-waypoints/#creating-a-user-vor-or-a-user-ndb) explains the steps.
+
+<KlnScreen screen="vor-user-empty" />
+
+The page creates the VOR as soon as it has both coordinates; the cursor then goes off and the page shows the stored VOR.
+
+<KlnScreen screen="vor-user" />
+
+A user-defined VOR stands in the complete list of VORs with the VORs of the database, so the scan reaches it, and it appears in the nearest list. With the cursor on, you can change its frequency, its magnetic variation and its position, each with <kbd>ENT</kbd> ([Editing a user waypoint](/kln90b/operation/user-waypoints/#editing-a-user-waypoint)). You delete it on OTH 3 ([Deleting a user waypoint](/kln90b/operation/user-waypoints/#deleting-a-user-waypoint)).
+
+## Where the VOR page is used
+
+- [Waypoints and the database](/kln90b/operation/waypoints/): entering an identifier, the scan and the approval of the VOR page.
+- [User waypoints](/kln90b/operation/user-waypoints/): creating, editing and deleting a user-defined VOR.
+- [Nearest](/kln90b/operation/nearest/): the list of the nearest VORs and the shortcut to it.
+- [Direct-to](/kln90b/operation/direct-to/): flying direct to a VOR.
+- [Flight plans](/kln90b/operation/flight-plans/): adding a VOR to a flight plan.

@@ -1,0 +1,39 @@
+<Field id="arrow" title="Active waypoint arrow">
+	`›` marks the fix as the [active waypoint](/kln90b/operation/navigation-modes/#the-active-waypoint). It flashes during [waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting).
+</Field>
+
+<Field id="number" title="Number in the flight plan">
+	The number of the fix in the active flight plan, the same number that FPL 0 shows in front of it. It is blank when the fix is a direct-to waypoint that is not in FPL 0.
+</Field>
+
+<Field id="ident" title="Fix identifier">
+	The identifier of the fix that the ACT page shows. It cannot be changed here.
+</Field>
+
+<Field id="type" title="Waypoint type">
+	`T` marks a terminal waypoint, a waypoint that the database files under an airport: the fixes of approaches, many fixes of SIDs and STARs, and runway fixes. Any other intersection shows `I`, also a fix that a procedure uses but that is an en route intersection.
+</Field>
+
+<Field id="ref" title="Reference waypoint">
+	The waypoint that `RAD` and `DIS` are measured from. The unit fills it in with the VOR nearest to the fix, which it finds after a search; the field shows dashes until then ([The reference waypoint](/kln90b/pages/int/#the-reference-waypoint)). With the cursor on, you can enter another waypoint of any type as the reference.
+</Field>
+
+<Field id="rad" title="Radial from the reference waypoint">
+	The magnetic radial from the reference waypoint to the fix, in degrees and tenths. It shows dashes until the reference is known.
+</Field>
+
+<Field id="dis" title="Distance from the reference waypoint">
+	The distance from the reference waypoint to the fix, in NM and tenths. It shows dashes until the reference is known.
+</Field>
+
+<Field id="lat" title="Fix latitude">
+	The latitude of the fix, as `N 44°45.84'` (degrees, minutes and hundredths of a minute).
+</Field>
+
+<Field id="lon" title="Fix longitude">
+	The longitude of the fix, as `W117°33.94'`.
+</Field>
+
+<Field id="page" title="Page identification">
+	The page identification on the right side. The ACT page of an intersection is a single page and reads `ACT`.
+</Field>

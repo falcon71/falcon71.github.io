@@ -1,0 +1,35 @@
+<Field id="arrow" title="Active waypoint arrow">
+	`›` marks the waypoint as the [active waypoint](/kln90b/operation/navigation-modes/#the-active-waypoint). It flashes during [waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting). A direct-to waypoint outside FPL 0 always shows it, because the page can show no other waypoint.
+</Field>
+
+<Field id="number" title="Number in the flight plan">
+	The number of the waypoint in the active flight plan. It is blank because the waypoint is a direct-to waypoint that is not in FPL 0.
+</Field>
+
+<Field id="ident" title="NDB identifier">
+	The identifier of the NDB that the ACT page shows. It cannot be changed here.
+</Field>
+
+<Field id="type" title="Waypoint type">
+	`N` for NDB, the waypoint type the ACT page shows.
+</Field>
+
+<Field id="name" title="Station name">
+	The name of the NDB, cut to 11 characters. A user-defined NDB has no name, and the row stays blank.
+</Field>
+
+<Field id="freq" title="Frequency">
+	The frequency of the NDB in kHz after `FREQ`; the unit does not show the unit. An NDB on a whole kilohertz shows the whole number (`FREQ    365`), and one on a half kilohertz shows the tenth (`FREQ  251.5`). A user-defined NDB shows dashes until you have entered a frequency.
+</Field>
+
+<Field id="lat" title="NDB latitude">
+	The latitude of the NDB, as `N 47°58.06'` (degrees, minutes and hundredths of a minute).
+</Field>
+
+<Field id="lon" title="NDB longitude">
+	The longitude of the NDB, as `W117°25.58'`.
+</Field>
+
+<Field id="page" title="Page identification">
+	The page identification on the right side. The ACT page of an NDB is a single page and reads `ACT`.
+</Field>

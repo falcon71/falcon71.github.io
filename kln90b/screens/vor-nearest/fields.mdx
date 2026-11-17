@@ -1,0 +1,41 @@
+<Field id="ident" title="VOR identifier">
+	The identifier of the VOR. It shows a VOR of the [nearest list](/kln90b/operation/nearest/) here.
+</Field>
+
+<Field id="dme" title="DME of the station">
+	`D` means that the station has distance measuring equipment: a VOR/DME, a VORTAC or a DME without a VOR. A station without DME shows a blank.
+</Field>
+
+<Field id="rank" title="Rank in the nearest list">
+	The rank of the VOR in the list of the nearest VORs, from <Term t="NR">`NR 1`</Term> for the nearest to `NR 9`. The rank flashes while the cursor is elsewhere. The unit recalculates distances and order every second, so the number changes within a second when another VOR comes nearer. Which VORs belong to the list is searched anew every 10 seconds, so the number disappears within 10 seconds after the VOR has dropped out of the list.
+
+	With the cursor on the rank, the page keeps showing whichever VOR holds that rank, so it follows the list as the aircraft moves.
+</Field>
+
+<Field id="name" title="Station name">
+	The name of the station, cut to 11 characters. A user-defined VOR has no name, and the row stays blank.
+</Field>
+
+<Field id="class" title="Class of the station">
+	The class of the station: `T` for a terminal VOR, `L` for a low altitude VOR and `H` for a high altitude VOR. A station of another class, and every user-defined VOR, shows `U` for undefined.
+</Field>
+
+<Field id="freq" title="Frequency">
+	The frequency of the station in MHz with two decimals.
+</Field>
+
+<Field id="magvar" title="Published magnetic variation">
+	The magnetic variation that the station carries, in whole degrees and followed by `E` or `W`. It can differ from the variation that the unit uses at the position of the aircraft.
+</Field>
+
+<Field id="bearing" title="Bearing to the VOR">
+	The magnetic bearing from the aircraft to the VOR, in three digits and followed by `TO` (`255°TO`). The unit converts it with the magnetic variation at the position of the aircraft, not with the variation of the station. It shows `---°TO` while the aircraft is exactly over the VOR. The bearing and the distance replace the position of the station.
+</Field>
+
+<Field id="distance" title="Distance to the VOR">
+	The distance from the aircraft to the VOR in NM, with one decimal place and a leading zero below 10 NM (`08.0NM`).
+</Field>
+
+<Field id="page" title="Page identification">
+	The page identification on the right side.
+</Field>

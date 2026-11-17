@@ -55,6 +55,12 @@ tests `test/render/services/ModeController*.test.ts` and in `test/flight/flights
   guide, section 14: operating concepts are no glossary terms).
 - The FAQ entry "Why does the unit not sequence to the next waypoint?" links to Sequencing; note the anchor in
   `docs/plan/help.md`.
+- From the package waypoint-pages (2026-11-17): the ACT chapter, the APT chapter and the VOR, NDB, INT and SUP
+  chapters link `/kln90b/operation/navigation-modes/#the-active-waypoint` and
+  `/kln90b/operation/sequencing/#waypoint-alerting`; both anchors must exist. The ACT page keeps the passed
+  waypoint after the unit sequences (kln90b#491); the ACT chapter describes it, and Sequencing may name it in one
+  sentence with the link to `/kln90b/pages/act/`. The research noted that the active arrow does not go steady
+  during the turn, unlike the WPT annunciator and Super NAV 5; check this when writing waypoint alerting.
 
 ## Changes to earlier pages
 

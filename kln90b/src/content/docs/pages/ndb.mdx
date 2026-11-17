@@ -1,0 +1,49 @@
+---
+title: NDB page
+description: What the NDB page shows about an NDB (frequency and position) and how you define an NDB of your own.
+sidebar:
+  order: 16
+---
+
+import KlnScreen from '../../../components/KlnScreen.astro';
+import Term from '../../../components/Term.astro';
+
+The NDB page of the KLN 90B shows one NDB: its frequency and its position. You use it to look up a station and to define an NDB of your own. Entering an identifier, scanning and approving the page work as on every waypoint page; see [Waypoints and the database](/kln90b/operation/waypoints/).
+
+## NDB page: frequency and position of a station
+
+The NDB page belongs to the right side and has a single page. The top line shows the identifier and at the right end the rank of a [nearest](#a-nearest-ndb) NDB.
+
+<KlnScreen screen="ndb-fhr" />
+
+On an NDB of the database you can change only the identifier; on a nearest NDB the cursor can also rest on the rank (see below). The name, the frequency and the position are read-only. A `›` in the first column marks the NDB as the [active waypoint](/kln90b/operation/navigation-modes/#the-active-waypoint); it flashes during [waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting). When the active waypoint is an NDB, the [ACT pages](/kln90b/pages/act/) show this page for it.
+
+When the complete list holds no NDB, the page shows empty fields and the status line says `NO NDB WPTS`; see [`NO SUP WPTS` and the other empty lists](/kln90b/operation/waypoints/#no-sup-wpts-and-the-other-empty-lists).
+
+### A nearest NDB
+
+The page changes when you reach an NDB through the [nearest list](/kln90b/operation/nearest/): <Term t="NR">`NR`</Term> and the rank appear at the right of the top line, and the bearing and the distance from the aircraft replace the position. An NDB that you enter by its identifier shows the plain page, even when it is the nearest.
+
+<KlnScreen screen="ndb-nearest" />
+
+With the cursor on the rank, the page follows the list: it shows whichever NDB holds that rank as the aircraft moves. Entering another identifier turns the page back into the plain NDB page.
+
+### A user-defined NDB
+
+When the identifier you enter matches no NDB, the page shows what you typed and underscores for the frequency and the position, and the right outer knob moves the cursor on to the frequency. The NDB page makes no offer to create a waypoint, unlike the other waypoint pages that offer one. [Creating a user VOR or a user NDB](/kln90b/operation/user-waypoints/#creating-a-user-vor-or-a-user-ndb) explains the steps.
+
+<KlnScreen screen="ndb-user-empty" />
+
+The page creates the NDB as soon as it has both coordinates; the cursor then goes off and the page shows the stored NDB.
+
+<KlnScreen screen="ndb-user" />
+
+A user-defined NDB stands in the complete list of NDBs with the NDBs of the database, so the scan reaches it, and it appears in the nearest list. With the cursor on, you can change its frequency and its position, each with <kbd>ENT</kbd> ([Editing a user waypoint](/kln90b/operation/user-waypoints/#editing-a-user-waypoint)). You delete it on OTH 3 ([Deleting a user waypoint](/kln90b/operation/user-waypoints/#deleting-a-user-waypoint)).
+
+## Where the NDB page is used
+
+- [Waypoints and the database](/kln90b/operation/waypoints/): entering an identifier, the scan and the approval of the NDB page.
+- [User waypoints](/kln90b/operation/user-waypoints/): creating, editing and deleting a user-defined NDB.
+- [Nearest](/kln90b/operation/nearest/): the list of the nearest NDBs and the shortcut to it.
+- [Direct-to](/kln90b/operation/direct-to/): flying direct to an NDB.
+- [Flight plans](/kln90b/operation/flight-plans/): adding an NDB to a flight plan.
