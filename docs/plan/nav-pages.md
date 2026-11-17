@@ -34,7 +34,7 @@ which page pair brings up a full-screen page (Controls and display).
 
 ## Notes from other packages
 
-- The screens `nav-1-apt-1-ksea` (Quickstart) and `home-nav-1` (home page) exist; reuse or replace, one screen, one
+- The screens `pages/nav/nav-1-apt-1-ksea` (Quickstart) and `pages/nav/home-nav-1` (home page) exist; reuse or replace, one screen, one
   id.
 - The word list has D-bar, groundspeed, Enroute-Leg mode.
 - From the planning survey: the wiki's Known limitations names a missing outline of text on NAV 5; that belongs to
