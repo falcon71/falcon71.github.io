@@ -1,0 +1,149 @@
+---
+title: Direct-to
+description: How to fly direct to a waypoint with the KLN 90B, which waypoint the Direct To page offers, and how to recenter the D-bar, cancel a direct-to and use it in OBS mode.
+sidebar:
+  order: 4
+---
+
+import KlnScreen from '../../../components/KlnScreen.astro';
+import DirectToKey from '../../../components/DirectToKey.astro';
+import Callout from '../../../components/Callout.astro';
+import Term from '../../../components/Term.astro';
+
+A direct-to makes any waypoint the active waypoint and lays a course to it from where the aircraft is. You press <DirectToKey /> and approve the waypoint the Direct To page shows: one <kbd>ENT</kbd> when the page offers the waypoint you want, two when you enter its identifier. The direct-to starts at once, with the D-bar centered.
+
+## Flying direct to a waypoint
+
+You fly direct to a waypoint when you want the shortest way to it, whether or not it is in the flight plan. Any waypoint of the database or any user waypoint will do, and you need neither a flight plan nor a GPS fix to make the direct-to.
+
+To fly direct to a waypoint that you enter:
+
+1. Press <DirectToKey />. The Direct To page appears on the left side with the cursor on the identifier.
+2. Enter the identifier with the left knobs: the inner knob selects a character, the outer knob moves to the next one.
+
+<KlnScreen screen="direct-to/ident-entry" />
+
+3. Press <kbd>ENT</kbd>. The unit shows the waypoint page of the identifier on the right so that you can check that it is the right place, and the enter prompt <Term t="ENT">`ENT`</Term> flashes in the status line. If it is not the right place, turn the left inner knob to enter the identifier again.
+4. Press <kbd>ENT</kbd> again to approve the waypoint page. The direct-to is active: the Direct To page closes, the left page comes back with its cursor off, and the right side shows NAV 1.
+
+When more than one waypoint has the identifier, the first <kbd>ENT</kbd> shows the Duplicate Waypoint page, and the waypoint page follows your choice. [Entering an identifier](/kln90b/operation/waypoints/#entering-an-identifier) explains the entry and [Approving the waypoint page](/kln90b/operation/waypoints/#approving-the-waypoint-page) what the second <kbd>ENT</kbd> does. An identifier that no waypoint has brings up the offer to create one; see [Creating a waypoint from the Direct To page or a flight plan](/kln90b/operation/user-waypoints/#creating-a-waypoint-from-the-direct-to-page-or-a-flight-plan). The page finds an identifier among all waypoint types, localizers and VOTs included, which the VOR page never takes. {/* kln90b#489: describes the current behavior; the fix makes the Direct To page skip localizers and VOTs as the VOR page does */}
+
+<Callout kind="info">
+The Direct To page often opens with a waypoint already in it, and then one <kbd>ENT</kbd> is enough. That waypoint is not always the active one: with the page of another waypoint on the right, the page offers that one. Look at the right side before you press <kbd>ENT</kbd>. [The default waypoint](#the-default-waypoint) lists the rules.
+</Callout>
+
+### What the unit does
+
+The unit lays a great circle from the position where you approve the direct-to to the waypoint, makes the waypoint the active waypoint and centers the D-bar. It starts from the position the unit holds, which before the unit is NAV ready is the last position it knows.
+
+<KlnScreen screen="direct-to/nav-1" />
+
+The right side shows NAV 1, unless the left side shows NAV 1 itself, in which case the right side returns to the page it showed. Super NAV 1 returns to Super NAV 1. After a direct-to from Super NAV 5 the screen shows NAV 5 on the left and NAV 1 on the right, and Super NAV 5 does not come back.
+
+Where the unit does not turn your course indicator, a direct-to that changes the desired track by more than 5° raises `ADJ NAV IND CRS TO nnn°`. Turn the indicator to the course nnn; where the unit reads the indicator, the message then goes. It depends on how the unit is installed, and [Message page messages](/kln90b/lists/messages/) lists it.
+
+A direct-to in approach active mode returns the unit to approach arm mode ([Non-precision approaches](/kln90b/operation/approaches/)). A short power-off keeps the direct-to, and a longer one drops it and activates the closest leg of FPL 0; [What the unit keeps while it is off](/kln90b/unit/power-on/#what-the-unit-keeps-while-it-is-off) gives the time.
+
+## The default waypoint
+
+The Direct To page offers a default waypoint, the first of these that applies, and shows its waypoint page on the right side for approval, so that one <kbd>ENT</kbd> makes the direct-to:
+
+1. **FPL 0 on the left side with the cursor on a waypoint:** that waypoint. Only FPL 0 offers a waypoint, not FPL 1 to FPL 25.
+2. **Super NAV 5 with the right inner knob pulled out:** the waypoint of FPL 0 shown in the window at the bottom right. While the menu of the page covers the window, it offers nothing and the next rule applies.
+3. **A waypoint page on the right side that shows a waypoint:** that waypoint. These are the APT, VOR, NDB, INT and SUP pages, the ACT pages and every waypoint of a nearest list. The CTR, REF, D/T and NAV pages are no waypoint pages, and neither is a waypoint page without a waypoint, which the unit skips.
+4. **The active waypoint.** Once you have passed the <Term t="MAP" />, the unit offers the first waypoint of the missed approach instead, and a blank identifier when there is none.
+5. **A blank identifier,** when there is no active waypoint. The cursor stands on the empty cells, and the right side keeps its page.
+
+<KlnScreen screen="direct-to/approval" />
+
+To fly direct to the default waypoint:
+
+1. Press <DirectToKey />. The Direct To page shows the default waypoint, flashing, and the right side shows its waypoint page.
+2. Check the right side. If it is not the waypoint you want, enter another identifier with the left inner knob, or leave the page ([Leaving the Direct To page](#leaving-the-direct-to-page)).
+3. Press <kbd>ENT</kbd>. The direct-to is active: the Direct To page closes, and the left page comes back with its cursor off.
+
+A waypoint page that shows a user waypoint you have deleted on OTH 3 still offers it, and the unit makes the direct-to to it. {/* kln90b#487: describes the current behavior; the fix moves the waypoint page on to another waypoint after the deletion */}
+
+## Leaving the Direct To page
+
+You close the Direct To page without a direct-to by turning its cursor off and then turning a left knob.
+
+To close the Direct To page without a direct-to:
+
+1. Press the left <kbd>CRSR</kbd>. The unit drops the waypoint that waits for approval, and the right side shows its own page again. The status line shows `DIR` where it showed `CRSR`.
+2. Turn a left knob. The page closes, and the same step acts on the page beneath, so that the left outer knob also moves that page on to the next page type.
+
+<kbd>ENT</kbd> on a blank identifier closes the page too, but it cancels the direct-to that is active ([Canceling a direct-to](#canceling-a-direct-to)). <DirectToKey /> pressed again while the page is shown does nothing in leg mode; in OBS mode it switches between the `DIRECT TO` and the `ACTIVATE` annunciation ([Flying a direct-to in OBS mode](#flying-a-direct-to-in-obs-mode)). [Pages that no knob reaches](/kln90b/unit/controls-and-display/#pages-that-no-knob-reaches) explains how the knobs act on such pages.
+
+## Flying direct to a waypoint of the flight plan
+
+When the waypoint is in FPL 0, the direct-to takes you to it and the unit goes on from there along FPL 0. The legs before the waypoint stay in the flight plan, and the flight plan itself does not change.
+
+To fly direct to a waypoint of FPL 0:
+
+1. Turn the left outer knob to the FPL pages and the left inner knob to FPL 0.
+2. Press the left <kbd>CRSR</kbd> and turn the left outer knob until the cursor is on the waypoint.
+3. Press <DirectToKey />. The Direct To page offers that waypoint, and its waypoint page is on the right.
+4. Press <kbd>ENT</kbd>. FPL 0 comes back with its cursor off, and a `›` marks the direct-to waypoint.
+
+<KlnScreen screen="direct-to/fpl-0" />
+
+When you reach the waypoint, the unit sequences on to the next leg of FPL 0, with [waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting) as for any leg. A direct-to to a waypoint that FPL 0 does not hold leaves FPL 0 alone too, but nothing follows it: the unit does not sequence on, and the direct-to stays until you replace or cancel it. [Flight plans](/kln90b/operation/flight-plans/) explains FPL 0 and how to edit it.
+
+Only a direct-to from FPL 0 with the cursor on a waypoint keeps which occurrence you chose when FPL 0 holds the waypoint twice. A typed identifier, a recentering, the window of Super NAV 5, an ACT page and the first waypoint of the missed approach all go to the first occurrence in FPL 0, and the plan resumes after that one.
+
+{/* kln90b#493: describes the current behavior; the fix keeps the occurrence for a recentering, the window of Super NAV 5, the ACT pages and the first waypoint of the missed approach */}
+
+## Recentering the D-bar
+
+You recenter the D-bar with a direct-to to the active waypoint, when the aircraft has drifted off the course and you want a new course from where you are.
+
+The active waypoint must be the default waypoint: the right side shows no waypoint page or the waypoint page of the active waypoint, such as its ACT page, and FPL 0 has no cursor on another waypoint.
+
+To recenter the D-bar:
+
+1. Press <DirectToKey />. The Direct To page offers the active waypoint.
+2. Press <kbd>ENT</kbd>. The unit lays a new course from the present position to the waypoint, and the D-bar is centered.
+
+On a leg of the flight plan, this turns the leg into a direct-to: NAV 1 shows the Direct To symbol in place of the waypoint you came from. In OBS mode the direct-to sets the selected course ([Flying a direct-to in OBS mode](#flying-a-direct-to-in-obs-mode)).
+
+## Canceling a direct-to
+
+You cancel a direct-to to go back to the flight plan. The unit makes the leg of FPL 0 that is closest to the aircraft the active leg. FPL 0 must hold at least two waypoints; with fewer there is no active waypoint afterwards.
+
+To cancel a direct-to:
+
+1. Press <DirectToKey />. The Direct To page offers a waypoint.
+2. Press <kbd>CLR</kbd>. The identifier goes blank, and the right side shows its own page again.
+3. Press <kbd>ENT</kbd>. The page closes and the direct-to is canceled. The left page returns with its cursor off.
+
+The closest leg is often the leg you flew before the direct-to, but it need not be. The same three steps with no direct-to active select the closest leg anew, which can move the active waypoint to another leg. In OBS mode the cancel keeps the selected course and lays it through the new active waypoint, and the D-bar is not recentered.
+
+## Flying a direct-to in OBS mode
+
+In [OBS mode](/kln90b/operation/navigation-modes/#obs-mode) you fly the selected course to the active waypoint instead of the legs of the flight plan. A direct-to there has two forms, and <DirectToKey /> pressed while the Direct To page is shown switches between them: the `DIRECT TO` annunciation and the `ACTIVATE` annunciation at the top of the page.
+
+<KlnScreen screen="direct-to/obs-activate" />
+
+- **`DIRECT TO`** makes the waypoint the active waypoint, sets the selected course to the course of the direct path at the waypoint and centers the D-bar.
+- **`ACTIVATE`** activates the waypoint: it becomes the active waypoint, and the selected course stays and is laid through it. The D-bar is not recentered, and the number of the course can change a little ([OBS mode](/kln90b/operation/navigation-modes/#obs-mode)).
+
+Where the unit cannot turn your course indicator, `DIRECT TO` does not set the course on it; see the next section.
+
+### `CRS nnn°` in the status line
+
+<Callout kind="availability">
+This message appears only where the unit does not turn the course on your course indicator. That depends on how the unit is installed in the aircraft.
+</Callout>
+
+After a `DIRECT TO` in OBS mode the unit shows the Direct To symbol and `CRS` with a course, such as `CRS 351°`, in the status line. It is the selected course of the direct path, as a magnetic course. Turn your course indicator to it.
+
+<KlnScreen screen="direct-to/obs-crs-message" />
+
+Where the unit reads the course from an indicator that it cannot turn, the course on the indicator remains the selected course, and the unit lays it through the new waypoint. The D-bar centers when you turn the indicator to the course the message shows. `ACTIVATE` shows no message. [Status line messages](/kln90b/lists/status-line-messages/) lists the message.
+
+## Where to go next
+
+- [Waypoints and the database](/kln90b/operation/waypoints/) explains how you enter and approve an identifier.
+- [Nearest](/kln90b/operation/nearest/) shows how to fly to the nearest airport, VOR or NDB.
+- [Flight plans](/kln90b/operation/flight-plans/) covers FPL 0 and its legs.

@@ -48,6 +48,23 @@ which page pair brings up a full-screen page (Controls and display).
 - Controls and display says which page pair brings up Super NAV 1 and Super NAV 5, and that the right knobs keep
   working on the hidden right side while a full-screen page is shown.
 
+### From the package nearest-direct-to (2026-11-18)
+
+- NAV 1 shows the Direct To symbol (official term, written in words in prose) in place of the from waypoint after a
+  direct-to; the field explanations of `direct-to/nav-1` and `direct-to/obs-crs-message` describe NAV 1 briefly; keep
+  the NAV chapter's NAV 1 screens consistent with them.
+- Bug candidate for NAV 1 in OBS mode: the code always shows the from waypoint or the Direct To symbol before the
+  active arrow (`pages/left/Nav1Page.tsx:44-48`, `:79-82`), while the real unit shows only the arrow and the active
+  waypoint in OBS mode (reviewer of Direct-to). Filed as kln90b#495; describe the current behavior with the
+  `kln90b#495` comment.
+- Super NAV 5 draws the three nearest lists, filtered for airports by the nearest airport criteria of SET 3
+  (`SuperNav5Page.tsx:341`); Nearest mentions it in one clause and owns the criteria
+  (`/kln90b/operation/nearest/#setting-the-nearest-airport-criteria`).
+- The window of Super NAV 5 (official term) is a source of the Direct To page's default waypoint; Direct-to,
+  `#the-default-waypoint`, owns that. After a direct-to from Super NAV 5 the screen ends on NAV 5 and NAV 1; the
+  reviewer found this consistent with the unit's general rule; not filed.
+- NAV 2's nearest VOR is its own search (low or high VORs within 200 NM), not the nearest VOR list.
+
 ## Changes to earlier pages
 
 None planned.

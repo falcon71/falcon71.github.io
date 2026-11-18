@@ -23,8 +23,8 @@ as `/kln90b/<slug>/`) and its package. Pages that do not exist yet are linked by
 | | Power-on and initialization | `unit/power-on` | power-on (done) |
 | Operation | Waypoints and the database | `operation/waypoints` | waypoints |
 | | User waypoints (new) | `operation/user-waypoints` | waypoints |
-| | Nearest | `operation/nearest` | nearest-direct-to |
-| | Direct-to | `operation/direct-to` | nearest-direct-to |
+| | Nearest | `operation/nearest` | nearest-direct-to (done) |
+| | Direct-to | `operation/direct-to` | nearest-direct-to (done) |
 | | Flight plans | `operation/flight-plans` | flight-plans |
 | | Navigation modes | `operation/navigation-modes` | navigation |
 | | Sequencing and turn anticipation | `operation/sequencing` | navigation |
@@ -121,10 +121,10 @@ that writes the owner records the anchors in this table, and the final pass shar
 | The database: cycle, expiry, the messages about it | Waypoints and the database, `#the-database` (with a section per message, `#data-base-out-of-date`) | Power-on: the Database page; SET chapter: SET 0 |
 | Updating the database (the simulator's navigation data) | FAQ, `#how-do-i-update-the-database` (planned) | Power-on (the Database page) and Waypoints and the database: where the data comes from in one sentence, and the link |
 | Airport remarks | APT chapter (APT 5) | OTH chapter: OTH 4 as a page (deleting) |
-| The nearest lists: criteria (SET 3), radius, count, refresh, how they are reached, the MSG and ENT shortcut | Nearest, `/kln90b/operation/nearest/` | waypoint chapters: the nearest variant of their page; SET chapter: SET 3 as a page |
-| Direct-to: every way to start one, the default waypoint, recentering, canceling, direct-to in OBS mode | Direct-to | Flight plans: a direct-to to a waypoint of FPL 0, in one paragraph with the link |
+| The nearest lists: the nearest airport criteria (SET 3), radius, count, renewal, how they are reached, the MSG and ENT shortcut | Nearest: `#the-nearest-lists`, `#showing-a-nearest-list`, `#finding-the-nearest-airport-quickly`, `#no-airport-in-the-nearest-list`, `#setting-the-nearest-airport-criteria`, `#flying-to-a-nearest-waypoint` | waypoint chapters: the nearest variant of their page; SET chapter: SET 3 as a page and the link; a user-defined airport (APT 3): one sentence and the link |
+| Direct-to: the Direct To page, every way to start one, the default waypoint, leaving the page, recentering, canceling, direct-to in OBS mode and its course message | Direct-to: `#flying-direct-to-a-waypoint`, `#the-default-waypoint`, `#leaving-the-direct-to-page`, `#flying-direct-to-a-waypoint-of-the-flight-plan`, `#recentering-the-d-bar`, `#canceling-a-direct-to`, `#flying-a-direct-to-in-obs-mode` (`#crs-nnn-in-the-status-line`) | Flight plans: a direct-to to a waypoint of FPL 0, in one paragraph with the link; Controls and display: one sentence on leaving the page and the link |
 | The active waypoint and the active leg | Navigation modes, `#the-active-waypoint` (planned) | every page that names it links at its first use |
-| Leg and OBS mode, selecting them, the OBS course and where it is set, the mode annunciations, the CDI scale | Navigation modes | MOD chapter: the pages; NAV chapter: the fields; Non-precision approaches: the scale and the modes of an approach |
+| Leg and OBS mode (`#obs-mode` (planned)), selecting them, the selected course and where it is set, the mode annunciations, the CDI scale | Navigation modes | MOD chapter: the pages; NAV chapter: the fields; Non-precision approaches: the scale and the modes of an approach |
 | Magnetic variation: where the unit has none, the entered variation | Navigation modes | SET chapter (SET 2): the field |
 | Waypoint alerting | Sequencing and turn anticipation, `#waypoint-alerting` (planned) | every page that names it links at its first use |
 | Waypoint sequencing, turn anticipation (SET 6), fly-over waypoints, when the unit does not sequence | Sequencing and turn anticipation | SET chapter: SET 6 as a page; FAQ: the question and the link |
@@ -152,7 +152,7 @@ Every writer reads the example of its kind before it writes, and every reviewer 
 | --- | --- |
 | Page reference | the APT chapter, `pages/apt.mdx` |
 | Getting started | Installation and the Quickstart (approved 2026-11-16) |
-| Task page (Operation) | Direct-to, once it is written and approved (maintainer, 2026-11-16). Until then a writer of a task page reads the Quickstart for the form of procedures and the APT chapter for density and voice |
+| Task page (Operation) | Direct-to, `operation/direct-to.mdx` (approved 2026-11-18) |
 | Tutorial flight | Tutorial flight 1, once approved |
 | Lists | Message page messages, once approved |
 | FAQ, Known limitations | the pages of the help package, once approved |
@@ -176,7 +176,7 @@ anchors and page links above. After them the order follows "owners before the pa
 | 4 | power-on | Power-on and initialization | done (2026-11-17) |
 | 5 | waypoints | Waypoints and the database; User waypoints | done (2026-11-17) |
 | 6 | waypoint-pages | VOR, NDB, INT, SUP and ACT chapters; the APT chapter cut back to its owner | done (2026-11-17) |
-| 7 | nearest-direct-to | Nearest; Direct-to | not started |
+| 7 | nearest-direct-to | Nearest; Direct-to | done (2026-11-18) |
 | 8 | navigation | Navigation modes; Sequencing and turn anticipation; MOD chapter | not started |
 | 9 | nav-pages | NAV chapter with Super NAV 1 and Super NAV 5 | not started |
 | 10 | flight-plans | Flight plans; FPL chapter | not started |
@@ -214,6 +214,10 @@ it is written when those owners exist. A package that proves too large in its re
   pages written earlier (GPS reception and RAIM, Power-on, STA) against both rules.
 
 - The placeholder pages use old terms (key, page group); the packages that replace them remove these.
+- `unit/power-on.mdx`, "What the unit keeps while it is off", says "a direct-to to the active waypoint" is kept; a
+  direct-to is always to the active waypoint, so "the direct-to" says it (writer of Direct-to, 2026-11-18).
+- "OBS course" is now "selected course" (official term, 2026-11-18); earlier pages (Controls and display, Power-on,
+  Simulated failures) still say "OBS course".
 - The glossary holds the placeholder entry `Turn anticipation`, used by the filler text of Navigation modes. It goes
   when the package navigation replaces that page (style guide, section 14).
 - The glossary entries `enr:`, `arm-leg`, `arm:` and `apr-leg` were written before the rule on official terms; the

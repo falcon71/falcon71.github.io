@@ -13,7 +13,7 @@ package is too large for one session, Sequencing and turn anticipation becomes a
 2. `#the-active-waypoint` (planned): the active waypoint and the active leg, how the pages mark them.
 3. Leg mode: what the unit does in it.
 4. OBS mode: what changes; selecting leg and OBS on the MOD pages or with the aircraft's switch (Availability box);
-   the OBS course and where it is set; the messages that ask for a course on the indicator.
+   the selected course (official term; not "OBS course") and where it is set; the messages that ask for a course on the indicator.
 5. Changing between the modes in flight: what the unit keeps.
 6. The mode annunciations of the status line.
 7. The CDI scale: the scale of each mode, changing it, a drawing (style guide, section 16).
@@ -35,7 +35,7 @@ MOD 1 and MOD 2: the pages, their variants with the aircraft's switch, the field
 
 ## Topics this package owns
 
-See the index: the active waypoint, the modes, the OBS course, the mode annunciations, the CDI scale, magnetic
+See the index: the active waypoint, the modes, the selected course, the mode annunciations, the CDI scale, magnetic
 variation; waypoint alerting, sequencing, turn anticipation, fly-over waypoints.
 
 ## Where to look
@@ -61,6 +61,21 @@ tests `test/render/services/ModeController*.test.ts` and in `test/flight/flights
   waypoint after the unit sequences (kln90b#491); the ACT chapter describes it, and Sequencing may name it in one
   sentence with the link to `/kln90b/pages/act/`. The research noted that the active arrow does not go steady
   during the turn, unlike the WPT annunciator and Super NAV 5; check this when writing waypoint alerting.
+
+### From the package nearest-direct-to (2026-11-18)
+
+- Direct-to links `/kln90b/operation/navigation-modes/#obs-mode` (planned) and `#the-active-waypoint` (planned); create both.
+- The official term for the course set in OBS mode is "selected course" (word list); not "OBS course".
+- Direct-to, "Flying a direct-to in OBS mode", owns `DIRECT TO:` and `ACTIVATE:` in OBS mode and the course message
+  `CRS nnn°` in the status line (section of its own with the Availability box). Navigation modes says what the unit does
+  with the selected course in each installation (it sets it, reads it from an indicator it can or cannot turn, or has
+  no indicator input) and links Direct-to for the direct-to case; the reviewer found that the magnetic variation of
+  the selected course belongs here.
+- Sequencing: the waypoint alert before a direct-to waypoint (also one outside the flight plan) is Sequencing's; the
+  Direct-to page links `#waypoint-alerting` (planned). Writer's note from the code: the alert comes earlier before a
+  turn onto a following leg than before a plain direct-to waypoint; check the numbers in the code.
+- A direct-to to a waypoint of FPL 0 resumes sequencing after that waypoint; one outside FPL 0 is not sequenced.
+  Direct-to says it; Sequencing links there.
 
 ## Changes to earlier pages
 

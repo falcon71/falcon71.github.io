@@ -19,7 +19,7 @@ The airport you enter, scan to or create on one APT page is the airport on all t
 
 The right inner knob goes through APT 1 to APT 7 and then back to APT 1; APT 8 follows APT 7 only in an aircraft whose unit is installed for approaches. A page number with more than one page shows a `+` in its name (`APT+3`); [Pages with a plus sign](/kln90b/unit/controls-and-display/#pages-with-a-plus-sign) explains how the inner knob steps through them.
 
-The top line is the same on every page except the APT 3 runway diagram, which has no top line. It shows the identifier of the airport and, at the right end, `NR` (for nearest) and the rank, counted from `NR 1` for the nearest airport, when you reached the airport through the [nearest list](/kln90b/operation/nearest/). An airport of the list keeps its `NR` on all APT pages. A `›` in the first column marks the airport as the [active waypoint](/kln90b/operation/navigation-modes/#the-active-waypoint); it flashes during [waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting).
+The top line is the same on every page except the APT 3 runway diagram, which has no top line. It shows the identifier of the airport and, at the right end, `NR` (for nearest) and the rank, counted from `NR 1` for the nearest airport, when you reached the airport through the [nearest list](/kln90b/operation/nearest/). An airport of the list keeps its `NR` on APT 2 to APT 7; APT 8 shows its own text there. A `›` in the first column marks the airport as the [active waypoint](/kln90b/operation/navigation-modes/#the-active-waypoint); it flashes during [waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting).
 
 <KlnScreen screen="pages/apt/apt-1-nearest" rows="1" />
 
@@ -43,15 +43,15 @@ With the cursor on, you can change the identifier; on a nearest airport the curs
 
 ### A nearest airport
 
-The page changes when you reach the airport through the nearest list, with <kbd>MSG</kbd> and <kbd>ENT</kbd> or by scanning back past the first airport. An airport that you enter by its identifier shows the plain page, even when it is the nearest. The rank `NR 2` appears at the right of the top line, and the three rows below the name give the longest runway (length and surface), its lighting, and the bearing and distance from the aircraft. The unit recalculates bearing, distance and the order of the list every second, and searches anew which airports belong to the list every 10 seconds.
+The page changes when you reach the airport through the [nearest list](/kln90b/operation/nearest/#showing-a-nearest-list). The rank `NR 2` appears at the right of the top line, and the three rows below the name give the longest runway (length and surface), its lighting, and the bearing and distance from the aircraft in place of the position and the airspace. An airport that you enter by its identifier shows the plain page, even when it is the nearest.
 
 <KlnScreen screen="pages/apt/apt-1-nearest" />
 
-The page keeps the airport it shows. As the aircraft moves, the rank counts up within a second when another airport comes nearer, and it disappears within 10 seconds after the airport has dropped out of the list; the page then shows the position and the airspace again. With the cursor on the rank, the page does the opposite: it keeps the rank and shows whichever airport holds it.
+The page keeps the airport it shows, and its rank changes as the aircraft moves. When the airport drops out of the list, the rank disappears and the page shows the position and the airspace again. With the cursor on the rank, the page keeps the rank and shows whichever airport holds it.
 
 <KlnScreen screen="pages/apt/apt-1-nearest-cursor" />
 
-Entering another identifier turns the page back into the plain airport page.
+[Nearest](/kln90b/operation/nearest/) explains which airports the list holds, how it is renewed and how the cursor on the rank works.
 
 ### A user-defined airport
 
@@ -95,7 +95,7 @@ An airport without a runway entry has no diagram, and its one page reads `RUNWAY
 
 {/* kln90b#475: describes the current behavior; the fix makes the unit stay on the list page with the cursor on */}
 
-A user-defined airport has one page, which holds its single runway: the length and the surface, which you enter. It appears in the nearest list only when the runway meets the minimum length of SET 3 and, where SET 3 allows hard surfaces only, has the surface `HRD` (hard); a runway without an entered surface counts as soft.
+A user-defined airport has one page, which holds its single runway: the length and the surface, which you enter. The runway you enter decides whether the airport can be in the nearest list ([Setting the nearest airport criteria](/kln90b/operation/nearest/#setting-the-nearest-airport-criteria)).
 
 <KlnScreen screen="pages/apt/apt-3-user-airport" />
 
