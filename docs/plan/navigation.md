@@ -71,11 +71,9 @@ variation; waypoint alerting, sequencing, turn anticipation, fly-over waypoints.
 - kln90b#496 (filed 2026-11-18): canceling a direct-to in OBS mode (`pages/left/DirectToPage.tsx:104`) keeps OBS mode
   and the selected course but measures the deviation from the plan leg nearest the aircraft; comment in Direct-to,
   `#canceling-a-direct-to`.
-- Approved by the maintainer, not yet filed (the session's tool permissions refused it twice; the maintainer
-  files it or allows `mcp__github__issue_write`): OBS to leg mode on the FROM
-  side with an active waypoint outside FPL 0 keeps a direct-to to the passed waypoint instead of the nearest leg of
-  FPL 0 (`services/ModeController.ts:130-143`; kln90b#155 fixed the case of a waypoint in FPL 0). Its comment goes on
-  Modes of operation, `#changing-between-the-modes`, the bullet "Behind you (FROM), with a waypoint outside FPL 0".
+- kln90b#497 (filed 2026-11-18): OBS to leg mode on the FROM side with an active waypoint outside FPL 0 keeps a
+  direct-to to the passed waypoint instead of the nearest leg of FPL 0 (`services/ModeController.ts:130-143`;
+  kln90b#155 fixed the case of a waypoint in FPL 0); comment in Modes of operation, `#changing-between-the-modes`.
 - Not filed: the variation of the selected course at an approach waypoint (the code uses the model's variation,
   the real unit the published one; low confidence, the simulator's data may carry none). With the LEG/OBS switch
   and no active waypoint the code enters OBS mode anyway; the real unit's behavior is not documented.
