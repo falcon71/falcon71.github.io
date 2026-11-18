@@ -23,8 +23,8 @@ as `/kln90b/<slug>/`) and its package. Pages that do not exist yet are linked by
 | | Power-on and initialization | `unit/power-on` | power-on (done) |
 | Operation | Waypoints and the database | `operation/waypoints` | waypoints |
 | | User waypoints (new) | `operation/user-waypoints` | waypoints |
-| | Nearest | `operation/nearest` | nearest-direct-to (in review) |
-| | Direct-to | `operation/direct-to` | nearest-direct-to (in review) |
+| | Nearest | `operation/nearest` | nearest-direct-to (done) |
+| | Direct-to | `operation/direct-to` | nearest-direct-to (done) |
 | | Flight plans | `operation/flight-plans` | flight-plans |
 | | Navigation modes | `operation/navigation-modes` | navigation |
 | | Sequencing and turn anticipation | `operation/sequencing` | navigation |
@@ -152,7 +152,7 @@ Every writer reads the example of its kind before it writes, and every reviewer 
 | --- | --- |
 | Page reference | the APT chapter, `pages/apt.mdx` |
 | Getting started | Installation and the Quickstart (approved 2026-11-16) |
-| Task page (Operation) | Direct-to, once it is written and approved (maintainer, 2026-11-16). Until then a writer of a task page reads the Quickstart for the form of procedures and the APT chapter for density and voice |
+| Task page (Operation) | Direct-to, `operation/direct-to.mdx` (approved 2026-11-18) |
 | Tutorial flight | Tutorial flight 1, once approved |
 | Lists | Message page messages, once approved |
 | FAQ, Known limitations | the pages of the help package, once approved |
@@ -176,7 +176,7 @@ anchors and page links above. After them the order follows "owners before the pa
 | 4 | power-on | Power-on and initialization | done (2026-11-17) |
 | 5 | waypoints | Waypoints and the database; User waypoints | done (2026-11-17) |
 | 6 | waypoint-pages | VOR, NDB, INT, SUP and ACT chapters; the APT chapter cut back to its owner | done (2026-11-17) |
-| 7 | nearest-direct-to | Nearest; Direct-to | in review (2026-11-18) |
+| 7 | nearest-direct-to | Nearest; Direct-to | done (2026-11-18) |
 | 8 | navigation | Navigation modes; Sequencing and turn anticipation; MOD chapter | not started |
 | 9 | nav-pages | NAV chapter with Super NAV 1 and Super NAV 5 | not started |
 | 10 | flight-plans | Flight plans; FPL chapter | not started |
