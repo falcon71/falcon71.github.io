@@ -154,7 +154,7 @@ function checkRows(rows: Cell[][], max: number, where: string): void {
  * and the direct-to window (`.super-nav5-directto-window`, when open) in row 6 from column 17. Every other cell is the
  * map, blank here.
  */
-function readSuperNav5(container: Element): Cell[][] {
+export function readSuperNav5(container: Element): Cell[][] {
 	const left = visible(container, '.super-nav5-left-controls')!.cloneNode(true) as Element;
 	const overlayEl = left.querySelector('.super-nav5-mgs-range');
 	if (overlayEl === null) throw new Error('Super NAV 5: the left column has no message indicator and range');

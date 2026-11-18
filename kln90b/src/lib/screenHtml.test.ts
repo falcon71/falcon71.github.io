@@ -420,6 +420,14 @@ describe('Super NAV 5', () => {
 			expect(out.match(/data-field="window"/g)).toHaveLength(1);
 		});
 
+		it('rejects a documented field over the rectangle of a closed menu, which holds only the map', () => {
+			const c = superNav5({fields: new Map([...FIELDS, ['vor', [{row: 0, from: 16, to: 23}]]])});
+			expect(() => blocksFromCapture(c, new Set(['vor']), 'nav-s'))
+				.toThrow('screen nav-s: Super NAV 5: the field vor lies only over the map above the message indicator and the range, so the site draws it nowhere');
+			// The same field is drawn once the menu is open
+			expect(() => blocksFromCapture(withMenu({fields: new Map([...MENU_FIELDS])}), new Set(['vor']), 'nav-s')).not.toThrow();
+		});
+
 		it('draws neither block when the cells of the menu and of the window are blank', () => {
 			expect(blocksFromCapture(superNav5(), new Set()).blocks.map(b => b.cls)).toEqual(['kln-snav5-left', 'kln-snav5-overlay']);
 		});
