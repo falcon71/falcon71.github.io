@@ -220,8 +220,6 @@ it is written when those owners exist. A package that proves too large in its re
   GPS CRS switch, GPS APR switch, CDI scale factor and the TO/FROM indicator, and corrected the earlier pages the
   seam check found. The final pass searches for the old forms once more ("navigation mode", "OBS course", "course
   indicator", "GPS APR button").
-- **Page and section titles against the official names** (style guide, section 12, rule of 2026-11-18): the pages
-  written before the rule are checked by the readers of the final pass; a renamed page gets its new slug.
 - Every planned anchor of the topic ownership table exists; page links that a later package could sharpen to a
   section are sharpened.
 - The first Operation pages (sta, failures) have `sidebar.order` numbers that later Operation pages must fit

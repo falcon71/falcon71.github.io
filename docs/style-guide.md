@@ -400,11 +400,10 @@ names for one thing takes them for two things.
   code suggests.
 - **The reviewer checks every term against the real manuals** and reports each difference as a finding: the draft's
   term and the official term, nothing else. A term is a name of a few words; no sentence around it comes along.
-- **Titles of pages and sections too.** Where the real documentation names a topic (the section on leg and OBS
-  mode is "Modes of operation"), the manual's page or section for it takes that name, because it is the name a
-  pilot searches for. The reviewer reports a title that differs like any other term (maintainer, 2026-11-18).
-- **Slugs may change while the manual is being built.** A page renamed for its official title gets the matching
-  slug, and every link to it is changed in the same commit. Once the manual is published as complete, slugs stay.
+- **Titles are not terms.** The titles of pages and sections and the order of the manual are its own (section 4);
+  the reviewer does not check them against the real manuals, so that the manual never copies their structure.
+- **Slugs may change while the manual is being built.** A renamed page gets the matching slug, and every link to it
+  is changed in the same commit. Once the manual is published as complete, slugs stay.
 - The coordinator adds the official term to the word list below, so that every later writer uses it without a
   reviewer having to find it again.
 

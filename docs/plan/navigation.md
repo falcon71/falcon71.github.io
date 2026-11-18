@@ -7,8 +7,9 @@ written, with their anchors. Pointers are paths relative to `vendor/kln90b/kln90
 
 ### Modes of operation (`operation/modes-of-operation.mdx`, `sidebar.order` 6)
 
-The title is the official name of the topic; the text calls leg and OBS mode "course modes" (word list). Renamed
-from "Navigation modes" with a new slug at the maintainer's request, 2026-11-18.
+Renamed from "Navigation modes" with a new slug by a one-off decision of the maintainer (2026-11-18), because the
+name is the one pilots search for; it sets no rule for other titles. The text calls leg and OBS mode "course modes"
+(word list).
 
 1. Summary.
 2. `#the-active-waypoint`: the active waypoint and the active leg, how the pages mark them; `#no-active-waypoint`.
