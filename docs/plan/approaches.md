@@ -83,6 +83,26 @@ this out, because this page owns what RAIM decides in an approach. Pointers from
   unit goes back into the approach (`pages/left/DirectToPage.tsx:107-111`, `data/flightplan/ActiveWaypoint.ts:173`).
   Describe the current behavior with the `kln90b#493` comment.
 
+### From the package navigation (2026-11-18)
+
+- Navigation modes names the approach modes by their official names (Approach Arm-Leg, Approach Arm-OBS, Approach
+  Active-Leg) and gives arming and activation one sentence each with the link to this page; its screens
+  `navigation/arm-leg`, `arm-obs` and `apr-leg` (a direct-to JALON on the RNAV 34L of KSEA, 1.5 NM before it; arming
+  raises `PRESS ALT TO SET BARO`, answered with ALT) may be reused. The CDI scale factors and their automatic
+  changes are owned by Navigation modes, `#the-cdi-scale`; this page links there.
+- Research facts (`services/ModeController.ts`): the unit arms within 30 NM of the airport of the approach in FPL 0,
+  or at any distance with the GPS APR switch (`NO APPROACH` without one); the GPS APR switch in arm mode disarms until
+  the next press or a change of approach; the approach becomes active from Approach Arm-Leg mode only, with the FAF
+  active, within 2 NM of it, the track within 110° of the final course and integrity; a direct-to or the GPS APR
+  switch in active mode returns to arm mode. Approach Arm-OBS mode never becomes active.
+- At the MAP the waypoint alert starts about 20 seconds before where a turn would begin, though no turn follows
+  (`data/navdata/NavCalculator.ts:314`, the MAP excluded from turns at :281). Sequencing says the unit does not
+  sequence past the MAP and links here; holds and the procedure turn are this page's.
+- `pages/apt.mdx` says "within 4 NM of it in leg mode" for `IF REQUIRED SELECT OBS`; that number is this page's:
+  say it here and cut APT to the event and the link.
+- An approach loaded through the EFB route in an installation without APT 8 is armed within 30 NM (part of the open
+  kln90b#479).
+
 ## Changes to earlier pages
 
 APT 8's "Questions before the load and where the approach goes" is compared with this page and cut back where this

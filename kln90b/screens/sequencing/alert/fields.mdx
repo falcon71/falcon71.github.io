@@ -1,0 +1,43 @@
+<Field id="plan" title="Flight plan">
+	The waypoints of FPL 0, one per row. The arrow in front of KPDX marks the waypoint the active leg starts from, and the arrow in front of KOLM the active waypoint. During [waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting) the arrow of the active waypoint flashes. The blank row at the end is where a waypoint is added.
+</Field>
+
+<Field id="from" title="From waypoint">
+	The waypoint the active leg starts from.
+</Field>
+
+<Field id="to" title="Active waypoint">
+	The identifier of the active waypoint. The `›` in front of it marks it as the active waypoint and flashes during [waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting).
+</Field>
+
+<Field id="cdi" title="D-bar">
+	The D-bar moves along the scale with the cross-track distance from the desired track. On the center mark it shows that the aircraft is on the desired track. The center mark shows whether the active waypoint lies ahead of the aircraft (to) or behind it (from).
+</Field>
+
+<Field id="dis" title="Distance to the active waypoint">
+	The distance to the active waypoint, in NM.
+</Field>
+
+<Field id="gs" title="Groundspeed">
+	The groundspeed, in kt.
+</Field>
+
+<Field id="ete" title="Estimated time en route">
+	The time to the active waypoint at the present groundspeed, as hours and minutes. Below one hour the hours stay blank, and below one minute the page shows `:00`.
+</Field>
+
+<Field id="brg" title="Bearing to the active waypoint">
+	The magnetic bearing from the aircraft to the active waypoint.
+</Field>
+
+<Field id="left-page" title="Left page identification">
+	The page identification on the left side. FPL 0 is the active flight plan.
+</Field>
+
+<Field id="mode" title="Mode annunciation">
+	<Term t="ENR-LEG">`ENR-LEG`</Term>: the unit navigates en route in leg mode, along the legs of FPL 0.
+</Field>
+
+<Field id="right-page" title="Right page identification">
+	The page identification on the right side.
+</Field>

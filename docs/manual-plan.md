@@ -123,11 +123,11 @@ that writes the owner records the anchors in this table, and the final pass shar
 | Airport remarks | APT chapter (APT 5) | OTH chapter: OTH 4 as a page (deleting) |
 | The nearest lists: the nearest airport criteria (SET 3), radius, count, renewal, how they are reached, the MSG and ENT shortcut | Nearest: `#the-nearest-lists`, `#showing-a-nearest-list`, `#finding-the-nearest-airport-quickly`, `#no-airport-in-the-nearest-list`, `#setting-the-nearest-airport-criteria`, `#flying-to-a-nearest-waypoint` | waypoint chapters: the nearest variant of their page; SET chapter: SET 3 as a page and the link; a user-defined airport (APT 3): one sentence and the link |
 | Direct-to: the Direct To page, every way to start one, the default waypoint, leaving the page, recentering, canceling, direct-to in OBS mode and its course message | Direct-to: `#flying-direct-to-a-waypoint`, `#the-default-waypoint`, `#leaving-the-direct-to-page`, `#flying-direct-to-a-waypoint-of-the-flight-plan`, `#recentering-the-d-bar`, `#canceling-a-direct-to`, `#flying-a-direct-to-in-obs-mode` (`#crs-nnn-in-the-status-line`) | Flight plans: a direct-to to a waypoint of FPL 0, in one paragraph with the link; Controls and display: one sentence on leaving the page and the link |
-| The active waypoint and the active leg | Navigation modes, `#the-active-waypoint` (planned) | every page that names it links at its first use |
-| Leg and OBS mode (`#obs-mode` (planned)), selecting them, the selected course and where it is set, the mode annunciations, the CDI scale | Navigation modes | MOD chapter: the pages; NAV chapter: the fields; Non-precision approaches: the scale and the modes of an approach |
-| Magnetic variation: where the unit has none, the entered variation | Navigation modes | SET chapter (SET 2): the field |
-| Waypoint alerting | Sequencing and turn anticipation, `#waypoint-alerting` (planned) | every page that names it links at its first use |
-| Waypoint sequencing, turn anticipation (SET 6), fly-over waypoints, when the unit does not sequence | Sequencing and turn anticipation | SET chapter: SET 6 as a page; FAQ: the question and the link |
+| The active waypoint and the active leg | Navigation modes, `#the-active-waypoint` (`#no-active-waypoint`) | every page that names it links at its first use |
+| Leg and OBS mode (the course modes), selecting them, the GPS CRS switch, the selected course and where it is set, the course messages, changing between the modes, the mode annunciations, the CDI scale factor | Navigation modes: `#leg-mode`, `#obs-mode` (`#selecting-leg-or-obs-mode`, `#the-selected-course`), `#the-course-messages` (`#adj-nav-ind-crs-to-nnn`, `#adj-nav-ind-crs`, `#obs-wpt--200nm`), `#changing-between-the-modes`, `#the-mode-annunciations`, `#the-cdi-scale` | MOD chapter: the pages; NAV chapter: the fields; Non-precision approaches: arming and activation, linking `#the-cdi-scale` for the factors |
+| Magnetic variation: where the unit has none, the entered variation, `MAGNETIC VAR INVALID` | Navigation modes, `#magnetic-variation` (`#flying-without-a-magnetic-variation`, `#magnetic-var-invalid`) | SET chapter (SET 2): the field |
+| Waypoint alerting, the WPT annunciator | Sequencing and turn anticipation, `#waypoint-alerting` (`#the-wpt-annunciator`) | every page that names it links at its first use |
+| Waypoint sequencing, turn anticipation (SET 6), fly-over waypoints, when the unit does not sequence | Sequencing and turn anticipation: `#waypoint-sequencing` (`#when-the-unit-does-not-sequence`), `#turn-anticipation` (`#where-turn-anticipation-begins`, `#turning-off-turn-anticipation`), `#fly-over-waypoints` | SET chapter: SET 6 as a page; FAQ: the question and the link; Flight plans: the waypoint type identification page |
 | Flight plans: FPL 0 and the stored ones, creating, editing, the limits, activating and inverting, storing FPL 0, deleting, flying the active flight plan | Flight plans | FPL chapter: the page, its variants and fields |
 | A route from the EFB and FPL 0 sent to the EFB | Flight plans | Tutorial flight 2: the steps (style guide, section 17); FAQ: the question and the link |
 | Reference waypoints and center waypoints as tasks | Flight plans | REF and CTR chapters: the pages, their states and fields |
@@ -177,7 +177,7 @@ anchors and page links above. After them the order follows "owners before the pa
 | 5 | waypoints | Waypoints and the database; User waypoints | done (2026-11-17) |
 | 6 | waypoint-pages | VOR, NDB, INT, SUP and ACT chapters; the APT chapter cut back to its owner | done (2026-11-17) |
 | 7 | nearest-direct-to | Nearest; Direct-to | done (2026-11-18) |
-| 8 | navigation | Navigation modes; Sequencing and turn anticipation; MOD chapter | not started |
+| 8 | navigation | Navigation modes; Sequencing and turn anticipation; MOD chapter | in review (2026-11-18) |
 | 9 | nav-pages | NAV chapter with Super NAV 1 and Super NAV 5 | not started |
 | 10 | flight-plans | Flight plans; FPL chapter | not started |
 | 11 | flight-plan-pages | D/T, REF and CTR chapters | not started |
@@ -199,6 +199,9 @@ it is written when those owners exist. A package that proves too large in its re
 
 ## Open questions for the maintainer
 
+- **The title of Navigation modes.** The official term for leg and OBS mode as a kind is "course mode", which the
+  text now uses; the page keeps the title "Navigation modes" and its slug. Rename the title to "Course modes" (the
+  slug can stay)?
 - **The FAA extract** carries no state and only public airports, so APT 2's state abbreviation and the private and
   military flags cannot be staged. Changing that is an extract change, not a manual change.
 
@@ -216,12 +219,10 @@ it is written when those owners exist. A package that proves too large in its re
 - The placeholder pages use old terms (key, page group); the packages that replace them remove these.
 - `unit/power-on.mdx`, "What the unit keeps while it is off", says "a direct-to to the active waypoint" is kept; a
   direct-to is always to the active waypoint, so "the direct-to" says it (writer of Direct-to, 2026-11-18).
-- "OBS course" is now "selected course" (official term, 2026-11-18); earlier pages (Controls and display, Power-on,
-  Simulated failures) still say "OBS course".
-- The glossary holds the placeholder entry `Turn anticipation`, used by the filler text of Navigation modes. It goes
-  when the package navigation replaces that page (style guide, section 14).
-- The glossary entries `enr:`, `arm-leg`, `arm:` and `apr-leg` were written before the rule on official terms; the
-  reviewer of Navigation modes checks the names of all modes.
+- The package navigation (2026-11-18) brought the official terms course mode, selected course, external indicator,
+  GPS CRS switch, GPS APR switch, CDI scale factor and the TO/FROM indicator, and corrected the earlier pages the
+  seam check found. The final pass searches for the old forms once more ("navigation mode", "OBS course", "course
+  indicator", "GPS APR button").
 - Every planned anchor of the topic ownership table exists; page links that a later package could sharpen to a
   section are sharpened.
 - The first Operation pages (sta, failures) have `sidebar.order` numbers that later Operation pages must fit

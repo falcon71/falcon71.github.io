@@ -40,7 +40,7 @@ The unit lays a great circle from the position where you approve the direct-to t
 
 The right side shows NAV 1, unless the left side shows NAV 1 itself, in which case the right side returns to the page it showed. Super NAV 1 returns to Super NAV 1. After a direct-to from Super NAV 5 the screen shows NAV 5 on the left and NAV 1 on the right, and Super NAV 5 does not come back.
 
-Where the unit does not turn your course indicator, a direct-to that changes the desired track by more than 5° raises `ADJ NAV IND CRS TO nnn°`. Turn the indicator to the course nnn; where the unit reads the indicator, the message then goes. It depends on how the unit is installed, and [Message page messages](/kln90b/lists/messages/) lists it.
+Where the unit reads the external indicator but does not turn it, `ADJ NAV IND CRS TO nnn°` appears when the indicator stays off the new desired track; turn the indicator to the course nnn, and the message goes ([`ADJ NAV IND CRS TO nnn°`](/kln90b/operation/navigation-modes/#adj-nav-ind-crs-to-nnn) gives the limits). Where the unit cannot read the indicator, a direct-to raises no message, so turn the indicator to the desired track on NAV 3 yourself.
 
 A direct-to in approach active mode returns the unit to approach arm mode ([Non-precision approaches](/kln90b/operation/approaches/)). A short power-off keeps the direct-to, and a longer one drops it and activates the closest leg of FPL 0; [What the unit keeps while it is off](/kln90b/unit/power-on/#what-the-unit-keeps-while-it-is-off) gives the time.
 
@@ -128,15 +128,15 @@ In [OBS mode](/kln90b/operation/navigation-modes/#obs-mode) you fly the selected
 - **`DIRECT TO`** makes the waypoint the active waypoint, sets the selected course to the course of the direct path at the waypoint and centers the D-bar.
 - **`ACTIVATE`** activates the waypoint: it becomes the active waypoint, and the selected course stays and is laid through it. The D-bar is not recentered, and the number of the course can change a little ([OBS mode](/kln90b/operation/navigation-modes/#obs-mode)).
 
-Where the unit cannot turn your course indicator, `DIRECT TO` does not set the course on it; see the next section.
+Where the unit cannot turn the external indicator, `DIRECT TO` does not set the course on it; see the next section.
 
 ### `CRS nnn°` in the status line
 
 <Callout kind="availability">
-This message appears only where the unit does not turn the course on your course indicator. That depends on how the unit is installed in the aircraft.
+This message appears only where the unit does not turn the course on the external indicator. That depends on how the unit is installed in the aircraft.
 </Callout>
 
-After a `DIRECT TO` in OBS mode the unit shows the Direct To symbol and `CRS` with a course, such as `CRS 351°`, in the status line. It is the selected course of the direct path, as a magnetic course. Turn your course indicator to it.
+After a `DIRECT TO` in OBS mode the unit shows the Direct To symbol and `CRS` with a course, such as `CRS 351°`, in the status line. It is the selected course of the direct path, as a magnetic course. Turn the external indicator to it.
 
 <KlnScreen screen="direct-to/obs-crs-message" />
 

@@ -173,7 +173,7 @@ Each input carries data the aircraft sends to the unit; a failed input loses tha
 - `ALTITUDE`: the encoding altimeter's altitude, where the aircraft has one and no air data system. The altitude is lost: the receiver navigates without the [altitude input](/kln90b/operation/gps-receiver/#the-altitude-input), STA 1 shows `NAV` instead of `NAV A`, and three satellites are no longer enough for a position. Message `ALTITUDE FAIL`.
 - `429 AIRDATA`: the air data from an air data system over the ARINC 429 input, the digital bus that carries the pressure altitude, the airspeeds and the temperatures. All of them are lost, OTH 9 and OTH 10 show dashes, and the altitude input is lost as above. The baro setting the aircraft sends keeps its last value. Messages `ARINC 429 AIR DATA FAIL` and `ALTITUDE FAIL`.
 - `RS-232 IN` and `RS-232 DATA`: the RS-232 input, the serial line over which a fuel management system, an air data system or a heading source sends its data. The unit loses all of them: the fuel on board, the fuel flow and the fuel used from the fuel management system (a fuel on board you entered stays), the air data with the altitude input as above, and the heading, so that NAV 5 and Super NAV 5 draw north up, OTH 9 shows the wind as without a heading, CAL 3 asks you for the heading and the autopilot gets no roll steering. The baro setting the aircraft sends keeps its last value. The two failures act alike: `RS-232 IN` is a line that has gone silent, with the message `NO RS-232 DATA`, `RS-232 DATA` a line that delivers garbled data, with `RS-232 DATA ERROR`. `ALTITUDE FAIL` follows if the air data come over this line.
-- `OBS INPUT`: the course you set on the course knob of the CDI or HSI, which the unit reads in OBS mode. The unit no longer receives it: set the OBS course on MOD 2 instead, as in an aircraft without the input. No message.
+- `OBS INPUT`: the course you set on the course knob of the CDI or HSI, which the unit reads in OBS mode. The unit no longer receives it: set the selected course on MOD 2 instead, as in an aircraft without the input. No message.
 
 ### The outputs to the aircraft
 
@@ -188,7 +188,7 @@ The navigation data go over the output the aircraft takes them from: ARINC 429 i
 
 ### The annunciators
 
-The aircraft may have remote annunciators for the unit: MSG and WPT, and ARM and ACTV on the GPS APR button. Each remote annunciator the aircraft has can fail in three ways. The unit's own screen keeps telling the truth, so the `MSG` in the status line and the unit's own indications are the check on a remote annunciator you doubt.
+The aircraft may have remote annunciators for the unit: MSG and WPT, and ARM and ACTV on the GPS APR switch. Each remote annunciator the aircraft has can fail in three ways. The unit's own screen keeps telling the truth, so the `MSG` in the status line and the unit's own indications are the check on a remote annunciator you doubt.
 
 | Failure | The remote annunciator | Message | Self test |
 | --- | --- | --- | --- |

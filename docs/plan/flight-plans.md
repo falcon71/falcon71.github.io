@@ -76,6 +76,19 @@ part about version 1.x does not apply.
   database is full; User waypoints says so in `#usr-db-full`. The Simulator only box of the EFB import is this
   page's.
 
+### From the package navigation (2026-11-18)
+
+- The waypoint type identification page (official term; `TYPE WPT`, `1 EN ROUTE?`, `2 SID/STAR?`;
+  `pages/left/WaypointTypePage.tsx`, rule in `services/FlyOverWaypoints.ts`): after the pilot approves a terminal
+  intersection or NDB that some SID or STAR of its airport flies over, the unit asks how to insert it. `SID/STAR`
+  inserts it as a fly-over waypoint (no turn anticipation at it), `EN ROUTE` as a normal one, CLR cancels the entry;
+  the answer is stored with the flight plan and kept through an EFB route load. Sequencing,
+  `#fly-over-waypoints`, says what the answer does and links Flight plans for the page. A screen needs a terminal fix
+  of the CIFP extract.
+- Sequencing and Navigation modes link `/kln90b/operation/flight-plans/` without an anchor; sharpen in the final pass.
+- In OBS mode FPL 0 shows the Direct To symbol at the active waypoint (not described by Navigation modes); after OBS to
+  leg mode on the TO side the leg is flown as a direct-to. The FPL chapter describes what FPL 0 shows.
+
 ## Changes to earlier pages
 
 None planned.

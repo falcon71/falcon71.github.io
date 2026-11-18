@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 148 91" width="148" height="91" shape-rendering="crispEdges" fill="currentColor">
+<g data-field="active-leg" data-draw="arrow KPDX KOLM" data-box="72 49 10 42">
+<path d="M74 49h1v1h-1z"/>
+<path d="M73 50h4v1h-4z"/>
+<path d="M73 51h2v1h-2zM77 51h1v1h-1z"/>
+<path d="M72 52h1v1h-1zM75 52h1v1h-1z"/>
+<path d="M75 53h1v1h-1z"/>
+<path d="M75 54h1v1h-1z"/>
+<path d="M75 55h1v1h-1z"/>
+<path d="M76 56h1v1h-1z"/>
+<path d="M76 57h1v1h-1z"/>
+<path d="M76 58h1v1h-1z"/>
+<path d="M76 59h1v1h-1z"/>
+<path d="M77 60h1v1h-1z"/>
+<path d="M77 61h1v1h-1z"/>
+<path d="M77 62h1v1h-1z"/>
+<path d="M77 63h1v1h-1z"/>
+<path d="M77 64h1v1h-1z"/>
+<path d="M77 65h1v1h-1z"/>
+<path d="M78 66h1v1h-1z"/>
+<path d="M78 67h1v1h-1z"/>
+<path d="M78 68h1v1h-1z"/>
+<path d="M78 69h1v1h-1z"/>
+<path d="M78 70h1v1h-1z"/>
+<path d="M78 71h1v1h-1z"/>
+<path d="M78 72h1v1h-1z"/>
+<path d="M78 73h1v1h-1z"/>
+<path d="M78 74h1v1h-1z"/>
+<path d="M79 75h1v1h-1z"/>
+<path d="M79 76h1v1h-1z"/>
+<path d="M79 77h1v1h-1z"/>
+<path d="M79 78h1v1h-1z"/>
+<path d="M79 79h1v1h-1z"/>
+<path d="M79 80h1v1h-1z"/>
+<path d="M79 81h1v1h-1z"/>
+<path d="M79 82h1v1h-1z"/>
+<path d="M79 83h1v1h-1z"/>
+<path d="M80 84h1v1h-1z"/>
+<path d="M80 85h1v1h-1z"/>
+<path d="M80 86h1v1h-1z"/>
+<path d="M80 87h1v1h-1z"/>
+<path d="M80 88h1v1h-1z"/>
+<path d="M80 89h1v1h-1z"/>
+<path d="M81 90h1v1h-1z"/>
+</g>
+<g data-field="next-leg" data-draw="line KOLM KSEA" data-box="78 16 21 25">
+<path d="M98 16h1v1h-1z"/>
+<path d="M97 17h1v1h-1z"/>
+<path d="M96 18h1v1h-1z"/>
+<path d="M96 19h1v1h-1z"/>
+<path d="M95 20h1v1h-1z"/>
+<path d="M94 21h1v1h-1z"/>
+<path d="M93 22h1v1h-1z"/>
+<path d="M92 23h1v1h-1z"/>
+<path d="M91 24h1v1h-1z"/>
+<path d="M91 25h1v1h-1z"/>
+<path d="M90 26h1v1h-1z"/>
+<path d="M89 27h1v1h-1z"/>
+<path d="M88 28h1v1h-1z"/>
+<path d="M87 29h1v1h-1z"/>
+<path d="M86 30h1v1h-1z"/>
+<path d="M85 31h1v1h-1z"/>
+<path d="M85 32h1v1h-1z"/>
+<path d="M84 33h1v1h-1z"/>
+<path d="M83 34h1v1h-1z"/>
+<path d="M82 35h1v1h-1z"/>
+<path d="M81 36h1v1h-1z"/>
+<path d="M80 37h1v1h-1z"/>
+<path d="M80 38h1v1h-1z"/>
+<path d="M79 39h1v1h-1z"/>
+<path d="M78 40h1v1h-1z"/>
+</g>
+<g data-field="waypoints" data-draw="icon @ KOLM" data-box="73 44 3 3">
+<path d="M73 44h3v1h-3z"/>
+<path d="M73 45h3v1h-3z"/>
+<path d="M73 46h3v1h-3z"/>
+</g>
+<g data-field="waypoints" data-draw="label KOLM KOLM" data-box="49 36 23 7">
+<path d="M49 36h1v1h-1zM53 36h1v1h-1zM56 36h3v1h-3zM61 36h1v1h-1zM67 36h1v1h-1zM71 36h1v1h-1z"/>
+<path d="M49 37h1v1h-1zM52 37h1v1h-1zM55 37h1v1h-1zM59 37h1v1h-1zM61 37h1v1h-1zM67 37h2v1h-2zM70 37h2v1h-2z"/>
+<path d="M49 38h1v1h-1zM51 38h1v1h-1zM55 38h1v1h-1zM59 38h1v1h-1zM61 38h1v1h-1zM67 38h1v1h-1zM69 38h1v1h-1zM71 38h1v1h-1z"/>
+<path d="M49 39h2v1h-2zM55 39h1v1h-1zM59 39h1v1h-1zM61 39h1v1h-1zM67 39h1v1h-1zM69 39h1v1h-1zM71 39h1v1h-1z"/>
+<path d="M49 40h1v1h-1zM51 40h1v1h-1zM55 40h1v1h-1zM59 40h1v1h-1zM61 40h1v1h-1zM67 40h1v1h-1zM71 40h1v1h-1z"/>
+<path d="M49 41h1v1h-1zM52 41h1v1h-1zM55 41h1v1h-1zM59 41h1v1h-1zM61 41h1v1h-1zM67 41h1v1h-1zM71 41h1v1h-1z"/>
+<path d="M49 42h1v1h-1zM53 42h1v1h-1zM56 42h3v1h-3zM61 42h5v1h-5zM67 42h1v1h-1zM71 42h1v1h-1z"/>
+</g>
+<g data-field="waypoints" data-draw="icon @ KSEA" data-box="101 11 3 3">
+<path d="M101 11h3v1h-3z"/>
+<path d="M101 12h3v1h-3z"/>
+<path d="M101 13h3v1h-3z"/>
+</g>
+<g data-field="waypoints" data-draw="label KSEA KSEA" data-box="77 3 23 7">
+<path d="M77 3h1v1h-1zM81 3h1v1h-1zM84 3h3v1h-3zM89 3h5v1h-5zM96 3h3v1h-3z"/>
+<path d="M77 4h1v1h-1zM80 4h1v1h-1zM83 4h1v1h-1zM87 4h1v1h-1zM89 4h1v1h-1zM95 4h1v1h-1zM99 4h1v1h-1z"/>
+<path d="M77 5h1v1h-1zM79 5h1v1h-1zM83 5h1v1h-1zM89 5h1v1h-1zM95 5h1v1h-1zM99 5h1v1h-1z"/>
+<path d="M77 6h2v1h-2zM84 6h3v1h-3zM89 6h4v1h-4zM95 6h5v1h-5z"/>
+<path d="M77 7h1v1h-1zM79 7h1v1h-1zM87 7h1v1h-1zM89 7h1v1h-1zM95 7h1v1h-1zM99 7h1v1h-1z"/>
+<path d="M77 8h1v1h-1zM80 8h1v1h-1zM83 8h1v1h-1zM87 8h1v1h-1zM89 8h1v1h-1zM95 8h1v1h-1zM99 8h1v1h-1z"/>
+<path d="M77 9h1v1h-1zM81 9h1v1h-1zM84 9h3v1h-3zM89 9h5v1h-5zM95 9h1v1h-1zM99 9h1v1h-1z"/>
+</g>
+<g data-field="aircraft" data-draw="icon $ 46.9661,-122.9018" data-box="72 43 5 5">
+<path d="M74 43h1v1h-1z"/>
+<path d="M72 45h1v1h-1zM76 45h1v1h-1z"/>
+<path d="M74 47h1v1h-1z"/>
+</g>
+</svg>

@@ -1,0 +1,47 @@
+---
+/**
+ * Synthetic drawing: an anticipated turn of 90° at 120 kt, to scale (150 px to 1 NM). The standard-rate radius at
+ * 120 kt is 0.64 NM, so the circle of the turn touches the inbound leg 0.64 NM before the waypoint and the next leg
+ * 0.64 NM after it. Turn anticipation begins 0.12 NM earlier than that, 0.76 NM before the waypoint (the roll-in of
+ * the code). The waypoint alert starts 20 s of ground speed (0.67 NM) before that, 1.43 NM before the waypoint. The
+ * dashed line is the bisector of the turn, through the midpoint of the transition, where the next waypoint becomes
+ * active; the transition ends where the circle meets the next leg.
+ */
+import GpsFigure from './GpsFigure.astro';
+
+interface Props {
+	caption: string;
+}
+const { caption } = Astro.props;
+
+// The waypoint, the circle of the turn (center and radius) and the points along the path
+const wpt = { x: 260, y: 80 };
+const r = 96;
+const center = { x: wpt.x + r, y: wpt.y + r };
+const tangentIn = { x: wpt.x, y: wpt.y + r };
+const turnStart = { x: wpt.x, y: wpt.y + 114 };
+const alertStart = { x: wpt.x, y: wpt.y + 214 };
+const sequencing = { x: center.x - r / Math.SQRT2, y: center.y - r / Math.SQRT2 };
+const turnEnd = { x: center.x, y: wpt.y };
+---
+
+<GpsFigure caption={caption} viewBox="0 0 560 440" id="turn-anticipation">
+	<line x1="214" y1="34" x2="420" y2="240" class="dash" />
+		<polyline points={`${wpt.x},420 ${wpt.x},${wpt.y} 540,${wpt.y}`} class="muted" />
+	<path d={`M${wpt.x},420 L${tangentIn.x},${tangentIn.y} A${r},${r} 0 0 1 ${turnEnd.x},${turnEnd.y} L540,${wpt.y}`} class="accent" />
+	<polygon points={`${wpt.x},356 ${wpt.x - 8},372 ${wpt.x + 8},372`} class="arrowhead" />
+	<polygon points={`540,${wpt.y} 524,${wpt.y - 8} 524,${wpt.y + 8}`} class="arrowhead" />
+	<circle cx={wpt.x} cy={wpt.y} r="9" class="ring" />
+	<text x={wpt.x - 18} y={wpt.y - 8} text-anchor="end" class="t">waypoint</text>
+	<circle cx={alertStart.x} cy={alertStart.y} r="6" class="dot" />
+	<text x={alertStart.x - 18} y={alertStart.y + 6} text-anchor="end" class="t">alert starts</text>
+	<circle cx={turnStart.x} cy={turnStart.y} r="6" class="dot" />
+	<text x={turnStart.x - 18} y={turnStart.y - 4} text-anchor="end" class="t">turn anticipation</text>
+	<text x={turnStart.x - 18} y={turnStart.y + 18} text-anchor="end" class="t">begins</text>
+	<line x1={sequencing.x + 6} y1={sequencing.y + 6} x2="392" y2="150" class="ax" />
+	<circle cx={sequencing.x} cy={sequencing.y} r="6" class="dot" />
+	<text x="398" y="148" class="t">next waypoint</text>
+	<text x="398" y="172" class="t">becomes active</text>
+	<circle cx={turnEnd.x} cy={turnEnd.y} r="6" class="dot" />
+	<text x={turnEnd.x} y={turnEnd.y - 16} text-anchor="middle" class="t">transition ends</text>
+</GpsFigure>

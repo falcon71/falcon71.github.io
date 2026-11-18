@@ -482,7 +482,8 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | groundspeed | ground speed |
 | button (the buttons of the unit) | key |
 | page type (the APT pages are a page type) | page group, group |
-| Enroute-Leg mode (the unit shows `ENR-LEG`) | en route leg mode |
+| the modes by their official names: Enroute-Leg mode (`ENR-LEG`), Enroute-OBS mode (`ENR:` and the selected course), Approach Arm-Leg mode (`ARM-LEG`), Approach Arm-OBS mode (`ARM:` and the selected course), Approach Active-Leg mode (`APR-LEG`) | en route leg mode, en route in OBS mode |
+| course mode (leg mode or OBS mode, as a kind) | navigation mode |
 | NAV ready (the unit is NAV ready once it has a position good enough to navigate) | has found its position |
 | D-bar (the course deviation bar of NAV 1 and the Self Test page) | CDI bar, deviation bar |
 | leg mode, OBS mode | LEG mode |
@@ -530,7 +531,7 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | RAIM prediction; the bar graph of STA 5, a bar above the line, a bar below the line | high bar, low bar |
 | ETA (the field of STA 5 and wherever the unit shows `ETA`) | arrival time |
 | approach arm mode, approach active mode | approach armed, armed mode, active mode |
-| the GPS APR button | |
+| the GPS APR switch, the GPS CRS switch (the aircraft's switches with their annunciators; the unit's screen text says `BUTTON` and is quoted as it is) | the GPS APR button, the GPS CRS button |
 | total operational time (STA 4) | total operating time |
 | software revision status (STA 3) | software version |
 | remote annunciators (the annunciators outside the unit that it drives) | annunciator lamps, external annunciators |
@@ -543,9 +544,17 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | the window of Super NAV 5 (the waypoint the left side scans through) | the scan window, the waypoint window |
 | the `DIRECT TO` annunciation, the `ACTIVATE` annunciation (the top line of the Direct To page) | the heading, the page title |
 | selected course (the course set in OBS mode) | OBS course, OBS value |
+| CDI scale factor (the full-scale deflection of the D-bar, set on MOD 1) | CDI scale |
+| the TO/FROM indicator (the mark in the D-bar and of the external indicator) | the to/from flag |
+| the external indicator (the CDI or HSI of the aircraft that the unit drives); the KLN 90B is the displayed navigation source | course indicator; switched to the GPS |
+| primary coverage area (where the unit has a magnetic variation, from 74°N to 60°S) | |
 | activate a waypoint (what `ACTIVATE` does in OBS mode) | |
 | nearest airport criteria (the settings of SET 3) | nearest airport settings |
 | the fail question, the repair question (FLR 3, FLR 2) | |
+| transition (the curved path the unit guides through a turn at a waypoint); the midpoint of the transition (where the unit makes the next leg active) | curved path, bisector |
+| the beginning of turn anticipation (where the unit starts guiding the turn) | turn start |
+| abeam the waypoint; fly-over waypoint; the WPT annunciator (one of the remote annunciators) | |
+| the waypoint type identification page (`TYPE WPT`, `1 EN ROUTE?`, `2 SID/STAR?`) | the `TYPE WPT` question |
 
 ### Spelling and style
 

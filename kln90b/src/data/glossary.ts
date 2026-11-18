@@ -36,9 +36,6 @@ export const glossary: Record<string, GlossaryEntry> = {
 		expansion: 'Estimated position error',
 		text: 'An estimate of how far the position of the receiver may be from the truth, worked out from the geometry of the satellites in use. STA 2 shows it in NM.',
 	},
-	'Turn anticipation': {
-		text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, duis aute irure dolor in reprehenderit.',
-	},
 	SID: {
 		expansion: 'Standard instrument departure',
 		text: 'A published departure procedure from the runways of an airport to the en route structure. The unit lists the SIDs of an airport on APT 7 and loads one into FPL 0.',
@@ -98,7 +95,7 @@ export const glossary: Record<string, GlossaryEntry> = {
 	},
 	'ENR-LEG': {
 		expansion: 'Enroute-Leg mode',
-		text: 'The navigation mode in which you fly along a leg from one waypoint to the next while en route.',
+		text: 'The mode annunciation of leg mode en route: the unit guides you along the active leg of the flight plan or a direct-to.',
 	},
 	DIS: {
 		expansion: 'Distance',
@@ -109,20 +106,20 @@ export const glossary: Record<string, GlossaryEntry> = {
 		text: 'The magnetic bearing from your position to the active waypoint.',
 	},
 	'ENR:': {
-		expansion: 'En route, OBS mode',
-		text: 'The navigation mode in which you fly the course you selected with the OBS, followed by that course in degrees.',
+		expansion: 'Enroute-OBS mode',
+		text: 'The mode annunciation of OBS mode en route, followed by the selected course in degrees magnetic.',
 	},
 	'ARM-LEG': {
-		expansion: 'Approach armed, leg mode',
-		text: 'The navigation mode in which the unit has armed an approach and still navigates along legs.',
+		expansion: 'Approach Arm-Leg mode',
+		text: 'The mode annunciation of leg mode while the unit has armed the approach in the flight plan.',
 	},
 	'ARM:': {
-		expansion: 'Approach armed, OBS mode',
-		text: 'The navigation mode in which the unit has armed an approach while you fly an OBS course, shown with that course in degrees.',
+		expansion: 'Approach Arm-OBS mode',
+		text: 'The mode annunciation of OBS mode while the unit has armed the approach in the flight plan, followed by the selected course in degrees magnetic.',
 	},
 	'APR-LEG': {
-		expansion: 'Approach active, leg mode',
-		text: 'The navigation mode in which the approach is active and the unit navigates along its legs.',
+		expansion: 'Approach Active-Leg mode',
+		text: 'The mode annunciation of the active approach: the unit guides you along the legs of the approach with the approach CDI scale factor.',
 	},
 	'OBS IN': {
 		expansion: 'OBS input',

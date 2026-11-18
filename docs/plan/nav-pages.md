@@ -65,6 +65,18 @@ which page pair brings up a full-screen page (Controls and display).
   reviewer found this consistent with the unit's general rule; not filed.
 - NAV 2's nearest VOR is its own search (low or high VORs within 200 NM), not the nearest VOR list.
 
+### From the package navigation (2026-11-18)
+
+- DTK on NAV 3 and on Super NAV 5 flashes while the external indicator the unit reads is more than 10° off the desired
+  track (`controls/selects/ObsDtkElement.tsx`); Navigation modes owns it (`#the-selected-course`), the field
+  explanations say it and link.
+- Super NAV 5 shows the mode on its left side in a short form; Navigation modes says so in one sentence
+  (`#the-mode-annunciations`). The NAV chapter explains the field.
+- In OBS mode NAV 3 shows `OBS:nnn°` in place of `DTK`; the CDI scale factor, the TO/FROM indicator and the D-bar link
+  `/kln90b/operation/navigation-modes/#the-cdi-scale` and `#leg-mode`. The screens `navigation/leg` and
+  `navigation/obs` show NAV 1 in both modes.
+- `pages/nav/nav-1-apt-1-ksea/fields.mdx` no longer gives the scale factors; it links Navigation modes.
+
 ## Changes to earlier pages
 
 None planned.
