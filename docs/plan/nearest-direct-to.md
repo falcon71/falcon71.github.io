@@ -24,8 +24,7 @@ what was written, with their anchors. Pointers are paths relative to `vendor/kln
 
 ### Direct-to (`operation/direct-to.mdx`, `sidebar.order` 4)
 
-The candidate for the example page of the task pages (`docs/manual-plan.md`, "Example pages"); it becomes the example
-once the maintainer approves it.
+The example page of the task pages (`docs/manual-plan.md`, "Example pages"), approved 2026-11-18.
 
 1. Summary.
 2. `#flying-direct-to-a-waypoint`: the Direct To page (screens `direct-to/ident-entry`, `direct-to/approval`), the
