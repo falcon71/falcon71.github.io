@@ -358,6 +358,80 @@ describe('Super NAV 5', () => {
 		c.mask[4][22] = 'I';
 		expect(() => blocksFromCapture(c, new Set())).toThrow('Super NAV 5: row 4 column 22 lies over the map but holds " " with the mask "I"');
 	});
+
+	describe('with the right menu or the direct-to window', () => {
+		// The menu in rows 0-3 from column 15 (the cursor on the VOR entry), over what the left column and the map leave
+		const MENU_TEXT = {...TEXT, 0: '20.0 È         ÜVOR:OFF', 1: 'KSEA           ÝNDB:OFF', 2: 'Ê-Ë            ŸAPT:OFF', 3: ' 120 É          000° N^'};
+		const MENU_FIELDS = new Map([...FIELDS, ['vor', [{row: 0, from: 16, to: 23}]], ['orientation', [{row: 3, from: 21, to: 23}]]]);
+		const withMenu = (over: Partial<ScreenCapture> = {}) => {
+			const c = superNav5({fields: MENU_FIELDS, ...over}, MENU_TEXT);
+			for (let col = 20; col < 23; col++) c.mask[0][col] = 'I';
+			return c;
+		};
+		// The window in row 6 from column 17 with a waypoint, inverse; the range stays
+		const withWindow = (over: Partial<ScreenCapture> = {}) => {
+			const c = superNav5({fields: new Map([...FIELDS, ['window', [{row: 6, from: 17, to: 23}]]]), ...over}, {...TEXT, 6: 'Ö345° 40         KSEA  '});
+			for (let col = 17; col < 23; col++) c.mask[6][col] = 'I';
+			return c;
+		};
+
+		it('draws the menu as a block of its own after the overlay, 8 characters in 4 rows, cursor included', () => {
+			const {blocks} = blocksFromCapture(withMenu(), new Set());
+			expect(blocks.map(b => b.cls)).toEqual(['kln-snav5-left', 'kln-snav5-overlay', 'kln-snav5-menu']);
+			expect(text(blocks[2].rows)).toEqual(['ÜVOR:OFF', 'ÝNDB:OFF', 'ŸAPT:OFF', ' 000° N^']);
+			expect(blocks[2].rows[0]).toEqual([
+				{text: 'ÜVOR:', field: undefined, inverse: false, flash: false},
+				{text: 'OFF', field: undefined, inverse: true, flash: false},
+			]);
+			// Nothing of the menu stays in the left column
+			expect(text(blocks[0].rows)[0]).toBe('20.0 È');
+		});
+
+		it('draws the text of the menu with a field in it as a field, and accepts a field that lies only in the menu', () => {
+			const c = withMenu();
+			expect(() => blocksFromCapture(c, new Set(['vor', 'orientation']), 'nav-s')).not.toThrow();
+			const menu = html(['vor', 'orientation'], c).match(/<div class="kln-snav5-menu">.*?<\/div>/)![0];
+			expect(menu).toContain('Ü<span class="kln-field" tabindex="0" data-field="vor">VOR:</span><span class="kln-inv kln-field" tabindex="0" data-field="vor">OFF</span>');
+			expect(menu).toContain('<span class="kln-field" tabindex="0" data-field="orientation">N^</span>');
+		});
+
+		it('still rejects text over the map next to the menu or below it', () => {
+			const next = withMenu();
+			next.text[0] = next.text[0].slice(0, 14) + 'Y' + next.text[0].slice(15);
+			expect(() => blocksFromCapture(next, new Set())).toThrow('Super NAV 5: row 0 column 14 lies over the map but holds "Y"');
+			const below = withMenu();
+			below.text[4] = below.text[4].slice(0, 15) + 'X' + below.text[4].slice(16);
+			expect(() => blocksFromCapture(below, new Set())).toThrow('Super NAV 5: row 4 column 15 lies over the map but holds "X"');
+		});
+
+		it('draws the window as a block of its own and leaves its cells out of the overlay', () => {
+			const {blocks} = blocksFromCapture(withWindow(), new Set());
+			expect(blocks.map(b => b.cls)).toEqual(['kln-snav5-left', 'kln-snav5-overlay', 'kln-snav5-window']);
+			expect(text(blocks[1].rows)).toEqual([' '.repeat(11), '40' + ' '.repeat(9)]);
+			expect(text(blocks[2].rows)).toEqual(['KSEA  ']);
+			expect(blocks[2].rows[0]).toEqual([{text: 'KSEA  ', field: undefined, inverse: true, flash: false}]);
+		});
+
+		it('draws the field of the window in the window, where it is a field like the others', () => {
+			const c = withWindow();
+			expect(() => blocksFromCapture(c, new Set(['window']), 'nav-s')).not.toThrow();
+			const out = html(['window'], c);
+			expect(out).toContain('<div class="kln-snav5-window"><span class="kln-row"><span class="kln-inv kln-field" tabindex="0" data-field="window">KSEA  </span></span></div>');
+			expect(out.match(/data-field="window"/g)).toHaveLength(1);
+		});
+
+		it('draws neither block when the cells of the menu and of the window are blank', () => {
+			expect(blocksFromCapture(superNav5(), new Set()).blocks.map(b => b.cls)).toEqual(['kln-snav5-left', 'kln-snav5-overlay']);
+		});
+
+		it('draws the window of an empty direct-to list, which is inverse blanks', () => {
+			const c = superNav5();
+			for (let col = 17; col < 23; col++) c.mask[6][col] = 'I';
+			const {blocks} = blocksFromCapture(c, new Set());
+			expect(blocks.map(b => b.cls)).toEqual(['kln-snav5-left', 'kln-snav5-overlay', 'kln-snav5-window']);
+			expect(blocks[2].rows[0]).toEqual([{text: '      ', field: undefined, inverse: true, flash: false}]);
+		});
+	});
 });
 
 describe('an excerpt of some rows', () => {

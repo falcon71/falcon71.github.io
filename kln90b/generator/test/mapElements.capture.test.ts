@@ -197,4 +197,10 @@ describe('checkCoverage', () => {
 		expect(() => checkCoverage(map('#.#', '..#'), elements)).toThrow('the map pixel 2,0 is lit');
 		expect(() => checkCoverage(map('#..', '...'), elements)).toThrow('the map pixel 2,1 is dark');
 	});
+
+	it('does not compare the pixels it is told are hidden', () => {
+		const hidden = (x: number, y: number) => x === 2;
+		expect(checkCoverage(map('#.#', '...'), elements, hidden)).toBeUndefined();
+		expect(() => checkCoverage(map('..#', '..#'), elements, hidden)).toThrow('the map pixel 0,0 is dark');
+	});
 });

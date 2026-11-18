@@ -92,13 +92,15 @@ export function blocksOf(width: number, height: number, elements: MapElement[]):
  * Checks that the elements account for exactly the pixels of the map: a map that was drawn outside the recorded
  * calls, or cleared after its last frame, would otherwise get explanations for what it does not show.
  * @param blocks the map as `mapBlocks(canvasToAscii(canvas))` gives it
+ * @param hidden pixels that are not compared: the ones an opaque part of the screen covers, where elements that lie
+ * wholly under it were dropped
  * @throws Error naming the first pixel that differs
  */
-export function checkCoverage(blocks: string, elements: MapElement[]): void {
+export function checkCoverage(blocks: string, elements: MapElement[], hidden: (x: number, y: number) => boolean = () => false): void {
 	const rows = blocks.replace(/\n$/, '').split('\n');
 	const drawn = blocksOf(rows[0].length, rows.length, elements).replace(/\n$/, '').split('\n');
 	for (let y = 0; y < rows.length; y++) {
-		const x = Array.from(rows[y]).findIndex((c, i) => c !== drawn[y][i]);
+		const x = Array.from(rows[y]).findIndex((c, i) => c !== drawn[y][i] && !hidden(i, y));
 		if (x < 0) continue;
 		throw new Error(rows[y][x] === '#'
 			? `the map pixel ${x},${y} is lit, but no drawing call of the last frame lit it`

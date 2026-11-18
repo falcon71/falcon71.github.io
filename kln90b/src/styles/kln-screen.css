@@ -76,7 +76,9 @@
 .kln-stage .kln-full,
 .kln-stage .kln-status,
 .kln-stage .kln-snav5-left,
-.kln-stage .kln-snav5-overlay {
+.kln-stage .kln-snav5-overlay,
+.kln-stage .kln-snav5-menu,
+.kln-stage .kln-snav5-window {
 	position: absolute;
 	margin: 0;
 	white-space: pre;
@@ -125,6 +127,39 @@
 .kln-stage .kln-snav5-overlay {
 	top: calc(var(--u) * 68);
 	left: calc(var(--u) * 64);
+}
+
+/*
+ * The right menu of Super NAV 5 (the VOR, NDB, APT and orientation rows): opaque, 8 characters wide and 4 rows high from
+ * the top right (KLN90B.scss: .super-nav5-right-controls-parent). Its text starts 1 px in, behind the left border line;
+ * the bottom border line lies one pixel below the 4 rows. Both lines are the unit's and drawn over the map.
+ */
+.kln-stage .kln-snav5-menu {
+	top: calc(var(--u) * 3);
+	left: calc(var(--u) * 139);
+	box-sizing: border-box;
+	width: calc(var(--u) * 72);
+	height: calc(var(--u) * 52);
+	background: #000;
+	border-left: var(--u) solid var(--kln-phosphor);
+}
+
+.kln-stage .kln-snav5-menu::after {
+	content: "";
+	position: absolute;
+	left: calc(var(--u) * -1);
+	top: calc(var(--u) * 52);
+	width: calc(var(--u) * 72);
+	border-bottom: var(--u) solid var(--kln-phosphor);
+}
+
+/* The direct-to window of Super NAV 5: row 6, the last 6 characters, in inverse video (.super-nav5-directto-window) */
+.kln-stage .kln-snav5-window {
+	top: calc(var(--u) * 81);
+	left: calc(var(--u) * 157);
+	background: var(--kln-phosphor);
+	color: #000;
+	text-shadow: none;
 }
 
 /* The map of NAV 5 or APT 3 (an inline SVG in the phosphor color) fills the text area of its half, under the text */
