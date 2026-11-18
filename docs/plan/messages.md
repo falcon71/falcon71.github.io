@@ -104,6 +104,16 @@ kind). User waypoints owns `#usr-db-full`; `ACTIVE WPT` and `USED IN FPL` are in
   waypoint never causes it at power-on; a route from the EFB with the user database full does (User waypoints,
   `#usr-db-full`). Waypoints and the database names the message once and links to Messages.
 
+### From the package nearest-direct-to (2026-11-18)
+
+- The status line course message after a direct-to in OBS mode (the Direct To symbol, `CRS` and the course) is shown
+  and explained on Direct-to (`/kln90b/operation/direct-to/`, its section named after the message); the Status line
+  messages list gives the text and the meaning and links there. Direct-to also quotes `ADJ NAV IND CRS TO nnn°`
+  and links `/kln90b/operation/messages/`.
+- MSG then ENT shows the nearest airport (Nearest, `#finding-the-nearest-airport-quickly`); Messages says in one
+  sentence that ENT on the MSG page does this, and links. With no airport in the list the blank MSG page stays up (bug
+  drafted for filing, pending the maintainer).
+
 ## Changes to earlier pages
 
 To be listed by the session: links from earlier pages to single entries.

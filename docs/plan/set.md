@@ -71,6 +71,13 @@ Only the pages and their fields.
 - `RECYCLE POWER TO USE` (with the database out of date) comes from a date entered on SET 2, not from the Self Test
   page; Waypoints and the database owns it (`#recycle-power-to-use`). SET 2 links there.
 
+### From the package nearest-direct-to (2026-11-18)
+
+- SET 3: Nearest owns the nearest airport criteria (word list) and has the procedure for setting them
+  (`/kln90b/operation/nearest/#setting-the-nearest-airport-criteria`); the SET chapter explains the page and links.
+  The screen `pages/set/set-3` (no cursor, defaults) exists and its field explanations match those of
+  `nearest/msg-ent`; `pages/set/set-3-cursor` exists too.
+
 ## Changes to earlier pages
 
 The pages that named a SET page before this chapter existed link to it by the page links; the seam check verifies

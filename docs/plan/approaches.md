@@ -75,6 +75,14 @@ this out, because this page owns what RAIM decides in an approach. Pointers from
 - User waypoints names DME arc waypoints among the waypoints the unit makes (`#waypoints-the-unit-creates-by-itself`)
   and links here for how they are named (`SidStar.ts`; the names were not staged).
 
+### From the package nearest-direct-to (2026-11-18)
+
+- A direct-to sets approach active mode back to approach arm mode; Direct-to says it in one sentence and links here.
+- Bug candidate A (drafted for filing, pending the maintainer): a direct-to to the default waypoint after the MAP goes
+  to the first occurrence of a waypoint FPL 0 holds twice, so where the missed approach holding fix is also an IAF the
+  unit goes back into the approach (`pages/left/DirectToPage.tsx:107-111`, `data/flightplan/ActiveWaypoint.ts:173`).
+  Describe the current behavior with the `kln90b#` comment once filed.
+
 ## Changes to earlier pages
 
 APT 8's "Questions before the load and where the approach goes" is compared with this page and cut back where this

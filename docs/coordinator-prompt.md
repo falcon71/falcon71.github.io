@@ -179,7 +179,8 @@ A subagent knows only its prompt and the repository. Every prompt states:
 - **What it owns:** the exact pages, sections and screen ids it may create or change, and the topics its pages own
   according to the plan, with the anchors it must link to instead of explaining and how much it may still say there.
 - **What it must not touch:** other pages, the plan, `glossary.ts`, the word list, `astro.config.mjs`,
-  `vendor/kln90b`.
+  `vendor/kln90b`, and git: no branch, no checkout, no commit. Agents share your checkout, so a branch one of them
+  creates moves every other agent's work with it (a writer did, 2026-11-18).
 - **What to return,** briefly: the files changed and screens generated; new glossary entries (term, expansion, text)
   and new word forms; suspected bugs with a reproduction, the file and line, and the paragraph that describes the
   current behavior; what it found that belongs to another page, written out in full; questions it could not settle

@@ -1,0 +1,143 @@
+---
+title: Nearest
+description: How the KLN 90B keeps its lists of the nearest airports, VORs and NDBs, how you show them, how MSG and ENT bring up the nearest airport, and which airports SET 3 lets in.
+sidebar:
+  order: 3
+---
+
+import KlnScreen from '../../../components/KlnScreen.astro';
+import DirectToKey from '../../../components/DirectToKey.astro';
+
+The KLN 90B keeps a list of the nearest airports, of the nearest VORs and of the nearest NDBs: up to nine of each within 200 NM, nearest first. You show a list by scanning back past the first waypoint of the complete list, and you bring up the nearest airport at once with <kbd>MSG</kbd> and <kbd>ENT</kbd>.
+
+## The nearest lists
+
+The airports, the VORs and the NDBs each have a nearest list; intersections and supplemental waypoints have none. A list holds up to nine waypoints that lie within 200 NM of the aircraft, ordered by distance. The waypoint page of an entry shows its rank at the right end of the top line, as `NR` (for nearest) and a number: `NR 1` is the nearest waypoint of the list, `NR 9` the ninth.
+
+What a list holds depends on the waypoint type:
+
+- **Airports** that meet the nearest airport criteria of SET 3 ([Setting the nearest airport criteria](#setting-the-nearest-airport-criteria)). A heliport never counts, nor does a closed airport or one that the simulator classes as private.
+- **VORs** of the types VOR, VOR/DME and VORTAC, whatever their class, terminal VORs included. A DME without a VOR, a localizer, a VOT and a TACAN-only station are not in the list. NAV 2 shows the nearest VOR from a search of its own, which looks only for low and high altitude VORs.
+- **NDBs** of every kind.
+
+Your own waypoints take part in the list of their type, mixed in with those of the database: a user-defined VOR, NDB or airport competes for its place by distance like any other. A user waypoint therefore shows `NR 1` when it is the nearest.
+
+The lists measure from the position of the unit. Before the unit is NAV ready, or after it has lost its position, the unit keeps the last position it knew, so that the lists and the bearings and distances of the nearest pages stay where the last fix left them. Unlike the other pages that need a position ([Initializing the position and the time](/kln90b/unit/power-on/#initializing-the-position-and-the-time)), they show no dashes then.
+
+The unit recalculates the distance, the bearing and the order every second, so the rank of a waypoint changes within a second when another one comes nearer. It looks for waypoints that have come into range or dropped out every few seconds, so a waypoint enters or leaves the list with that delay. A list can be empty for a few seconds only when you load an aircraft with the unit already running, which shows its pages as soon as its data has loaded.
+
+## Showing a nearest list
+
+The nearest list lies in front of the complete list on the APT, VOR and NDB pages: the scan counterclockwise from the first waypoint of the complete list leads into it, to its last entry. [Scanning through the database](/kln90b/operation/waypoints/#scanning-through-the-database) explains the scan and the complete list, and [Scanning](/kln90b/unit/controls-and-display/#scanning) how you pull the knob out.
+
+The right cursor must be off.
+
+To show the nearest list of a waypoint type:
+
+1. Turn the right outer knob to the APT, VOR or NDB pages. For airports, turn the right inner knob to APT 1, which shows the bearing and distance of a nearest airport.
+2. Pull the right inner knob.
+3. Turn the right inner knob counterclockwise. At the first waypoint of the complete list, one more step counterclockwise leads into the nearest list: the page shows the last entry, `NR 9` in a full list.
+4. Keep turning counterclockwise. The rank counts down to `NR 1`, the nearest waypoint, where another step does nothing.
+5. Push the right inner knob in to select pages again.
+
+The way back is a turn clockwise: the rank counts up, and one step clockwise from the last entry leads to the first waypoint of the complete list.
+
+A nearest page shows the bearing and the distance from the aircraft to the waypoint in place of its position. The rank flashes while the cursor is not on it.
+
+<KlnScreen screen="pages/apt/apt-1-nearest" />
+
+The VOR and NDB pages show the same, and APT 2 to APT 7 keep the rank in their top line while they show their own content.
+
+<KlnScreen screen="pages/vor/vor-nearest" />
+
+The fields are explained in [A nearest airport](/kln90b/pages/apt/#a-nearest-airport), [A nearest VOR](/kln90b/pages/vor/#a-nearest-vor) and [A nearest NDB](/kln90b/pages/ndb/#a-nearest-ndb).
+
+### The page keeps its waypoint
+
+The page keeps the waypoint it shows, not its rank, so the rank changes while you look when the aircraft moves and another waypoint comes nearer. When the waypoint drops out of the list, which takes a few seconds, its rank disappears and the page becomes the plain waypoint page with the position of the waypoint (and, for an airport, its airspace). A scan then goes on in the complete list from that waypoint.
+
+### The cursor on the rank
+
+With the right cursor on, the cursor can stop on the rank. While it stays there, the page does the opposite and keeps the rank: it shows whichever waypoint holds that rank and changes by itself as the order changes. If the list shrinks below the rank, the page shows the last entry. A page whose waypoint has dropped out has no rank, and the cursor skips the place. The inner knob does nothing on the rank.
+
+<KlnScreen screen="pages/apt/apt-1-nearest-cursor" />
+
+Turn the right outer knob to move the cursor away from the rank, and the page keeps the waypoint it shows then.
+
+### Leaving a nearest list
+
+A nearest page becomes a plain waypoint page, without a rank, in these cases:
+
+- You scan clockwise past the last entry, which leads to the complete list.
+- You enter an identifier, even that of the nearest waypoint.
+- You turn the unit off and on again. The page keeps its waypoint, but the rank is gone.
+
+If you select another page type with the right outer knob, the waypoint and its rank wait with the page, and they are there when you return to it.
+
+## Finding the nearest airport quickly
+
+<kbd>MSG</kbd> followed by <kbd>ENT</kbd> shows APT 1 of the nearest airport on the right side, whatever the right side showed before and without a scan.
+
+To show the nearest airport:
+
+1. Press <kbd>MSG</kbd>. The MSG page covers the whole screen.
+2. Press <kbd>ENT</kbd>. The MSG page closes, and the right side shows APT 1 of the nearest airport with `NR 1`. The left side shows what it showed before.
+
+<KlnScreen screen="nearest/msg-ent" />
+
+You need no message for this: when the unit holds none, the MSG page is blank and <kbd>ENT</kbd> works all the same. When it holds messages, the page shows them, and <kbd>ENT</kbd> takes you on from the message page that is shown ([Messages](/kln90b/operation/messages/)).
+
+The airport is the first entry of the nearest airport list, so the nearest airport criteria and the 200 NM apply. The page is an ordinary nearest page: with the right inner knob pulled out, one step clockwise shows `NR 2`, and the page stays on this airport when another one becomes nearer. To keep it on the nearest airport, put the cursor on the rank ([The cursor on the rank](#the-cursor-on-the-rank)). To fly there, see [Flying to a nearest waypoint](#flying-to-a-nearest-waypoint).
+
+## No airport in the nearest list
+
+When no airport meets the criteria within 200 NM, <kbd>MSG</kbd> and <kbd>ENT</kbd> show no airport: the blank MSG page stays on the screen, and the unit gives no message. Press <kbd>MSG</kbd> to close it ([Pages that use the whole screen](/kln90b/unit/controls-and-display/#pages-that-use-the-whole-screen)).
+
+<KlnScreen screen="nearest/no-nearest-apt" />
+
+An empty list has three causes: a position far from any airport, criteria on SET 3 that no airport nearby meets, and an aircraft loaded with the unit already running. The same holds for the VOR and NDB lists. With an empty list, the scan counterclockwise from the first waypoint of the complete list does nothing, and the page keeps showing the waypoint it shows. No message announces that nothing is within range: `NO APT WPTS`, `NO VOR WPTS` and `NO NDB WPTS` mean that the complete list of the page is empty ([`NO SUP WPTS` and the other empty lists](/kln90b/operation/waypoints/#no-sup-wpts-and-the-other-empty-lists)).
+
+## Setting the nearest airport criteria
+
+SET 3 sets what an airport needs to be in the nearest list: a minimum runway length and a runway surface. The unit starts with 1,000 ft and `HRD SFT`.
+
+<KlnScreen screen="pages/set/set-3" />
+
+To set the nearest airport criteria:
+
+1. Turn the left outer knob to the SET pages and the left inner knob to SET 3.
+2. Press the left <kbd>CRSR</kbd>. The cursor is on the minimum length.
+3. Turn the left inner knob to the length you want.
+4. Turn the left outer knob one step clockwise. The cursor moves to the surface.
+5. Turn the left inner knob to `HRD SFT` or `HRD`.
+6. Press the left <kbd>CRSR</kbd> to turn the cursor off.
+
+The two criteria work like this:
+
+- **`MIN LENGTH`** goes from 1,000 ft to 5,000 ft in steps of 100 ft. A runway of exactly that length qualifies. The inner knob wraps around: one step counterclockwise from 1,000 gives 5,000.
+- **`SURFACE`** is `HRD SFT` or `HRD`. `HRD SFT` accepts hard and soft runways, `HRD` only hard ones. Hard runways are concrete, asphalt and similar paved surfaces; soft ones are grass, turf, gravel, dirt, sand and the like. A water runway never counts.
+
+One runway must meet both together. An airport with a long grass runway and a short paved one does not qualify for 3,000 ft and `HRD`.
+
+A user-defined airport has one runway, which you describe on APT 3. It qualifies when the length you entered reaches the minimum, and a runway without an entered surface counts as soft, so it needs `HRD SFT`. Until you have entered a length the airport is not in the list.
+
+A change takes effect as the knob turns, without <kbd>ENT</kbd>, and the list follows within a few seconds. The unit keeps the nearest airport criteria while it is off ([What the unit keeps while it is off](/kln90b/unit/power-on/#what-the-unit-keeps-while-it-is-off)). They filter the nearest airport list and everything that uses it: the shortcut of <kbd>MSG</kbd> and <kbd>ENT</kbd>, the rank on the APT pages and the airports Super NAV 5 draws. The entry of an identifier and the scan through the complete list ignore them.
+
+## Flying to a nearest waypoint
+
+With a nearest page on the right, the Direct To page offers the waypoint that page shows, unless the left side shows FPL 0 with the cursor on a waypoint, or Super NAV 5 shows a waypoint in its window: those come first ([The default waypoint](/kln90b/operation/direct-to/#the-default-waypoint)). With the cursor on the rank, the waypoint can change under you, and the Direct To page takes the one the page shows at that moment. The waypoint becomes a plain waypoint, and its rank does not carry over.
+
+To fly direct to the nearest airport:
+
+1. Press <kbd>MSG</kbd>.
+2. Press <kbd>ENT</kbd>. The right side shows APT 1 of the nearest airport.
+3. Press <DirectToKey />. The Direct To page appears on the left side with the identifier of the airport.
+4. Press <kbd>ENT</kbd>. The direct-to is active, and the Direct To page closes ([Flying direct to a waypoint](/kln90b/operation/direct-to/#flying-direct-to-a-waypoint) says what the unit shows then).
+
+If the left side showed FPL 0 with the cursor on a waypoint, check the identifier in step 3 before you press <kbd>ENT</kbd>.
+
+## Where to go next
+
+- [Waypoints and the database](/kln90b/operation/waypoints/): entering an identifier, the scan and approving a waypoint page.
+- [Direct-to](/kln90b/operation/direct-to/): flying to the waypoint of a nearest page.
+- [User waypoints](/kln90b/operation/user-waypoints/): your own airports, VORs and NDBs, which take part in the lists.

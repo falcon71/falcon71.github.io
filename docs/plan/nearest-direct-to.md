@@ -1,76 +1,70 @@
 # Package: nearest-direct-to (Nearest; Direct-to)
 
-Two Operation pages for getting somewhere now. Pointers come from the planning survey of the code (paths relative
-to `vendor/kln90b/kln90b/`); they are not checked facts. Screens are planned by the session after its research.
+Two Operation pages for getting somewhere now. Written in the package session of 2026-11-18; the sections below are
+what was written, with their anchors. Pointers are paths relative to `vendor/kln90b/kln90b/`.
 
 ## Pages
 
-### Nearest (`operation/nearest.mdx`)
+### Nearest (`operation/nearest.mdx`, `sidebar.order` 3)
 
 1. Summary.
-2. The nearest lists: which waypoint types have one, how many entries, how far, how often they are renewed.
-3. Showing the nearest airports, VORs and NDBs: by scanning; what the pages show for a nearest waypoint (link to the
-   waypoint chapters).
-4. The nearest airport in a hurry: MSG and ENT.
-5. Which airports count: the criteria of SET 3.
-6. Flying to a nearest waypoint (link to Direct-to); the nearest VOR on NAV 2 and the center on OTH 2, as links.
+2. `#the-nearest-lists`: the APT, VOR and NDB lists, the count and the radius, what each list holds (user waypoints,
+   the VOR types, airports by the nearest airport criteria; heliports, closed airports and private airports never), the
+   renewal ("a few seconds" for membership), the position the lists measure from before NAV ready (no dashes), an
+   empty list after loading an aircraft with the unit running.
+3. `#showing-a-nearest-list`: the procedure by scanning back past the first waypoint; `#the-page-keeps-its-waypoint`,
+   `#the-cursor-on-the-rank`, `#leaving-a-nearest-list`.
+4. `#finding-the-nearest-airport-quickly`: MSG, ENT, with the procedure that ends in a direct-to (screen
+   `nearest/msg-ent`).
+5. `#no-airport-in-the-nearest-list`: the empty lists; the blank MSG page that stays after MSG, ENT (screen
+   `nearest/no-nearest-apt`; bug drafted, see below).
+6. `#setting-the-nearest-airport-criteria`: SET 3, with a procedure (screen `pages/set/set-3`).
+7. `#flying-to-a-nearest-waypoint`: the default waypoint of the Direct To page, link to Direct-to.
+8. Where to go next.
 
-### Direct-to (`operation/direct-to.mdx`)
+### Direct-to (`operation/direct-to.mdx`, `sidebar.order` 4)
 
-The candidate for the example page of the task pages (`docs/manual-plan.md`, "Example pages").
+The candidate for the example page of the task pages (`docs/manual-plan.md`, "Example pages"); it becomes the example
+once the maintainer approves it.
 
 1. Summary.
-2. Flying direct to a waypoint: the Direct To page (shown and explained here), entering the identifier, approving.
-3. Which waypoint the Direct To page offers.
-4. Direct to a waypoint of the active flight plan, and what happens to the flight plan afterwards (one paragraph,
-   link to Flight plans).
-5. Recentering the D-bar.
-6. Canceling a direct-to.
-7. Direct-to in OBS mode (link to Navigation modes).
-8. What the unit forgets while it is off (one sentence, link to Power-on).
+2. `#flying-direct-to-a-waypoint`: the Direct To page (screens `direct-to/ident-entry`, `direct-to/approval`), the
+   procedure, one ENT for the default waypoint and two for a typed one, an unknown identifier (link to User waypoints),
+   localizers and VOTs (kln90b#489); `#what-the-unit-does`: the course from the present position, NAV 1 on the right
+   (screen `direct-to/nav-1`), `ADJ NAV IND CRS TO nnn°`, approach active mode back to arm mode, the waypoint alert
+   link, the five-minute rule (link to Power-on).
+3. `#the-default-waypoint`: the order of the sources (FPL 0 cursor, the window of Super NAV 5, a right waypoint page
+   including ACT and nearest pages, the active waypoint); kln90b#487.
+4. `#leaving-the-direct-to-page`: closing without a direct-to; the knob step that also acts on the page beneath.
+   Controls and display keeps one sentence and the link.
+5. `#flying-direct-to-a-waypoint-of-the-flight-plan`: FPL 0 unchanged, sequencing on after the waypoint, a waypoint
+   FPL 0 holds twice (bug A drafted), screen `direct-to/fpl-0`.
+6. `#recentering-the-d-bar`.
+7. `#canceling-a-direct-to`: DCT, CLR, ENT; the leg nearest the aircraft becomes active.
+8. `#flying-a-direct-to-in-obs-mode`: the `DIRECT TO` and `ACTIVATE` annunciations (screen `direct-to/obs-activate`);
+   `#crs-nnn-in-the-status-line`: the course message, with the Availability box (screen `direct-to/obs-crs-message`).
+9. Where to go next.
 
-## Topics this package owns
+## Screens
 
-See the index: the nearest lists; direct-to. Links instead of explanations: entering and approving a waypoint
-(Waypoints and the database); the active waypoint and OBS mode (Navigation modes, planned); waypoint alerting
-(Sequencing, planned anchor).
+All staged. The plan's `direct-to/offered-fpl-0` became `direct-to/fpl-0` (the result, because the Direct To page
+replaces FPL 0 on the left). The course message where the unit reads an indicator it cannot turn was not staged; the
+staged screen is the installation without an indicator input.
 
-## Where to look
+## Bugs found (2026-11-18)
 
-Nearest: `data/navdata/NearestList.ts`, `NearestUtils.ts`, `NearestAirportFinder.ts`,
-`controls/selects/NearestSelector.tsx`, `pages/right/WaypointPage.tsx`, `controls/MessagePage.tsx`,
-`pages/left/Set3Page.tsx`. Direct-to: `pages/left/DirectToPage.tsx`, `pages/MainPage.tsx` (the Direct To button),
-`data/flightplan/ActiveWaypoint.ts`, `services/ModeController.ts`; test
-`test/flight/flights/directToPlanWaypoint.test.ts`. The Quickstart has the screen `direct-to/ident-entry`; reuse or
-replace it.
+Drafted for filing and waiting for the maintainer's approval (the session could not file them); once filed, add the
+`kln90b#` comments to the paragraphs named:
 
-## Notes from other packages
+- MSG, ENT with no airport in the nearest list leaves the blank MSG page up (`controls/MessagePage.tsx:54-66`):
+  Nearest, `#no-airport-in-the-nearest-list`, first paragraph.
+- A: a direct-to to the default waypoint from the active waypoint, ACT or the Super NAV 5 window activates the first
+  occurrence of a waypoint FPL 0 holds twice (`pages/left/DirectToPage.tsx:107-111`,
+  `data/flightplan/ActiveWaypoint.ts:173`): Direct-to, `#flying-direct-to-a-waypoint-of-the-flight-plan`, the paragraph
+  on a waypoint FPL 0 holds twice.
+- NAV 1 in OBS mode shows the from waypoint (`pages/left/Nav1Page.tsx:44-48`): the NAV chapter (note in
+  `docs/plan/nav-pages.md`).
 
-None.
-
-### From the package waypoints (2026-11-17)
-
-- Waypoints and the database says in one sentence that scanning back past the first waypoint of the complete list
-  leads into the nearest list (APT, VOR and NDB pages only), and links to Nearest. A run showed it arrives at `NR 9`;
-  the count is Nearest's.
-- An unknown identifier on the Direct To page brings up the offer to create a supplemental user waypoint (screen
-  `direct-to/create-waypoint`); Direct-to links to User waypoints, `#creating-a-user-waypoint`.
-- kln90b#487: Direct To prefills a user waypoint that was deleted on OTH 3 while its page still shows it.
-
-### From the package waypoint-pages (2026-11-17)
-
-- After a direct-to the unit puts NAV 1 on the right side unless the left side already shows NAV 1
-  (`DirectToPage.tsx:148-150`, found by the ACT review). Direct-to owns it.
-- The VOR, NDB and APT chapters each have "A nearest …" with the `NR` and rank and one sentence linking Nearest. The
-  screens `pages/vor/vor-nearest` and `pages/ndb/ndb-nearest` reach the list by scanning back past the first station, not by the MSG
-  shortcut; Nearest may want a screen of the shortcut. The rank fields of `pages/apt/apt-1-nearest`, `pages/vor/vor-nearest` and
-  `pages/ndb/ndb-nearest` say what Nearest owns about the count and the refresh only by link; check them against Nearest.
-- kln90b#489 also covers the left identifier fields (Direct To page, FPL pages): typing an identifier there skips
-  localizers and VOTs as on the VOR page. Nothing describes the left-field half yet; Direct-to does, where it
-  describes entering a VOR, with the comment.
-- kln90b#491: the ACT page keeps the passed waypoint after a direct-to to another waypoint of FPL 0; the ACT chapter
-  describes it.
-
-## Changes to earlier pages
-
-The APT chapter's "A nearest airport" is compared with Nearest and cut back if it says what Nearest now owns.
+Not filed: after a direct-to from Super NAV 5 the screen ends on NAV 5 and NAV 1 (the reviewer found it consistent with
+the unit's general rule). Open for the maintainer: private airports never enter the nearest list
+(`data/navdata/NearestList.ts`); whether that is right depends on how the simulator classes private airfields.

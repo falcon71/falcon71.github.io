@@ -188,7 +188,7 @@ judge drafts against it; they report what to change in their own words, never wi
   the receiver inside), "the gauge", "the mod" or "the add-on". Talk about the simulation or the simulator itself only
   where it matters to the pilot: Simulator only boxes, Installation, Known limitations, the controls in the simulator,
   and the one sentence that says the simulator lacks the data for a feature (section 3).
-- **Say why** when the reason helps the pilot remember or predict the behavior: "The OBS course is shown as a magnetic
+- **Say why** when the reason helps the pilot remember or predict the behavior: "The selected course is shown as a magnetic
   course, because you set it on a course indicator that is read in magnetic." One clause is usually enough.
 - **Give the practical consequence.** After a rule, say what it means in the cockpit: "Flight plans are stored when the
   unit is off, so you can prepare tomorrow's route tonight."
@@ -538,6 +538,13 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | fuel management system | fuel computer |
 | air data system | air data computer |
 | a failure is active or inactive, as FLR 2 and FLR 3 head their lists; fail a part, repair a part | a failure is on or off; set a failure |
+| default waypoint (the waypoint the Direct To page offers when it opens) | offered waypoint, prefilled waypoint |
+| the Direct To symbol (the mark the unit draws for a direct-to, on NAV 1 and in the status line); written in words in prose | `d`, the d-arrow |
+| the window of Super NAV 5 (the waypoint the left side scans through) | the scan window, the waypoint window |
+| the `DIRECT TO` annunciation, the `ACTIVATE` annunciation (the top line of the Direct To page) | the heading, the page title |
+| selected course (the course set in OBS mode) | OBS course, OBS value |
+| activate a waypoint (what `ACTIVATE` does in OBS mode) | |
+| nearest airport criteria (the settings of SET 3) | nearest airport settings |
 | the fail question, the repair question (FLR 3, FLR 2) | |
 
 ### Spelling and style
@@ -661,7 +668,7 @@ The explanations of a screen's fields live in its `fields.mdx` and appear wherev
 ## 16. Drawings
 
 Draw a picture where it explains something words explain badly: the geometry of turn anticipation, the CDI scale in
-the modes, an OBS course to a waypoint, a holding pattern entry. Drawings are SVG components in
+the modes, a selected course to a waypoint, a holding pattern entry. Drawings are SVG components in
 `kln90b/src/components/drawings/`, in the site's colors, readable in light and dark themes, with a caption that says
 what to notice.
 
