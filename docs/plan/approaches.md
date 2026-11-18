@@ -85,11 +85,11 @@ this out, because this page owns what RAIM decides in an approach. Pointers from
 
 ### From the package navigation (2026-11-18)
 
-- Navigation modes names the approach modes by their official names (Approach Arm-Leg, Approach Arm-OBS, Approach
+- Modes of operation names the approach modes by their official names (Approach Arm-Leg, Approach Arm-OBS, Approach
   Active-Leg) and gives arming and activation one sentence each with the link to this page; its screens
   `navigation/arm-leg`, `arm-obs` and `apr-leg` (a direct-to JALON on the RNAV 34L of KSEA, 1.5 NM before it; arming
   raises `PRESS ALT TO SET BARO`, answered with ALT) may be reused. The CDI scale factors and their automatic
-  changes are owned by Navigation modes, `#the-cdi-scale`; this page links there.
+  changes are owned by Modes of operation, `#the-cdi-scale`; this page links there.
 - Research facts (`services/ModeController.ts`): the unit arms within 30 NM of the airport of the approach in FPL 0,
   or at any distance with the GPS APR switch (`NO APPROACH` without one); the GPS APR switch in arm mode disarms until
   the next press or a change of approach; the approach becomes active from Approach Arm-Leg mode only, with the FAF

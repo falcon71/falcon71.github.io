@@ -400,6 +400,11 @@ names for one thing takes them for two things.
   code suggests.
 - **The reviewer checks every term against the real manuals** and reports each difference as a finding: the draft's
   term and the official term, nothing else. A term is a name of a few words; no sentence around it comes along.
+- **Titles of pages and sections too.** Where the real documentation names a topic (the section on leg and OBS
+  mode is "Modes of operation"), the manual's page or section for it takes that name, because it is the name a
+  pilot searches for. The reviewer reports a title that differs like any other term (maintainer, 2026-11-18).
+- **Slugs may change while the manual is being built.** A page renamed for its official title gets the matching
+  slug, and every link to it is changed in the same commit. Once the manual is published as complete, slugs stay.
 - The coordinator adds the official term to the word list below, so that every later writer uses it without a
   reviewer having to find it again.
 
@@ -594,6 +599,10 @@ general; the screen shows one concrete case.
 - **A step that carries data from one side to the other gets a screen** that shows both halves: where the data
   comes from and where it goes, such as the identifier of the right page taken into a field of the left page. The
   pilot learns such a step by seeing it (maintainer, 2026-11-17).
+- **Show only the page the text is about.** A screen of both halves, or an excerpt of both halves, where the text
+  is about one page shows the other page's data as well, and where the other page repeats the same data (the top
+  line of NAV 1 and of NAV 3), the pilot sees it twice and wonders why. Show the one half, and let the other page
+  have its own screen where the text describes it (maintainer, 2026-11-18).
 - **Show an excerpt** when only one line or a few lines of a page matter: the shared top line of a page type, a
   question the unit asks, a prompt in the status line. A page shows the rows of a generated screen with `rows`
   (README, "Writing a screen"); the fields on those rows keep their explanations. Where the text describes a line in
@@ -696,7 +705,7 @@ The sidebar has these chapters and pages. Operation explains tasks ("how do I…
 | --- | --- |
 | Getting started | Table of contents (home page) · Installation · Quickstart · Tutorial flight 1 · Tutorial flight 2 |
 | The unit | Controls and display (knobs, buttons, the two halves, status line, cursor and data entry, scan, page tree) · Keyboard mode · Power-on and initialization |
-| Operation | Waypoints and the database · User waypoints · Nearest · Direct-to · Flight plans · Navigation modes (leg and OBS) · Sequencing and turn anticipation · SID and STAR procedures · Non-precision approaches · VNAV · GPS reception and RAIM · Inside the GPS simulation (optional) · Messages · Airspace and altitude alerting · Trip planning and calculators · Fuel and air data · Simulated failures |
+| Operation | Waypoints and the database · User waypoints · Nearest · Direct-to · Flight plans · Modes of operation (leg and OBS) · Sequencing and turn anticipation · SID and STAR procedures · Non-precision approaches · VNAV · GPS reception and RAIM · Inside the GPS simulation (optional) · Messages · Airspace and altitude alerting · Trip planning and calculators · Fuel and air data · Simulated failures |
 | Page reference | One chapter per page type in page tree order. Left: TRI, MOD, FPL, NAV, CAL, STA, SET, FLR, OTH. Right: CTR, REF, ACT, D/T, NAV, APT, VOR, NDB, INT, SUP. Each page with its screen. |
 | Reference lists | Message page messages · Status line messages · Glossary |
 | Help | External hardware · FAQ and troubleshooting · Known limitations · Contact |

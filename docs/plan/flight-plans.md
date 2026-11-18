@@ -85,8 +85,8 @@ part about version 1.x does not apply.
   the answer is stored with the flight plan and kept through an EFB route load. Sequencing,
   `#fly-over-waypoints`, says what the answer does and links Flight plans for the page. A screen needs a terminal fix
   of the CIFP extract.
-- Sequencing and Navigation modes link `/kln90b/operation/flight-plans/` without an anchor; sharpen in the final pass.
-- In OBS mode FPL 0 shows the Direct To symbol at the active waypoint (not described by Navigation modes); after OBS to
+- Sequencing and Modes of operation link `/kln90b/operation/flight-plans/` without an anchor; sharpen in the final pass.
+- In OBS mode FPL 0 shows the Direct To symbol at the active waypoint (not described by Modes of operation); after OBS to
   leg mode on the TO side the leg is flown as a direct-to. The FPL chapter describes what FPL 0 shows.
 
 ## Changes to earlier pages

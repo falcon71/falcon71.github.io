@@ -64,7 +64,7 @@ The Quickstart links to these; the writer of the owning page must create them:
 - `/kln90b/unit/controls-and-display/#using-the-controls-in-the-simulator`
 - `/kln90b/unit/keyboard-mode/`, `/kln90b/unit/power-on/`, `/kln90b/getting-started/tutorial-1/` (pages)
 - `/kln90b/operation/waypoints/` (page), and in the field explanations of `nav-1-apt-1-ksea`
-  `/kln90b/operation/navigation-modes/` with `#the-active-waypoint` (both already planned in the index)
+  `/kln90b/operation/modes-of-operation/` with `#the-active-waypoint` (both already planned in the index)
 
 ## Screens
 
@@ -77,7 +77,7 @@ SET chapter, Direct-to) reuse these screens or replace them; one screen, one id.
 ## Open
 
 - **The names of the other modes.** The glossary entries `enr:`, `arm-leg`, `arm:` and `apr-leg` were written before
-  the rule on official terms; only `enr-leg` (Enroute-Leg mode) was checked. The reviewer of Navigation modes checks
+  the rule on official terms; only `enr-leg` (Enroute-Leg mode) was checked. The reviewer of Modes of operation checks
   the names of all modes and the coordinator corrects the glossary.
 - **The knob demo** steps through optional pages (marked dashed) and shows no subpages; the Quickstart says so. SET 0
   was added after SET 10 in `pageTree.ts` in this package.

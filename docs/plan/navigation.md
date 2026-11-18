@@ -1,14 +1,14 @@
-# Package: navigation (Navigation modes; Sequencing and turn anticipation; the MOD chapter)
+# Package: navigation (Modes of operation; Sequencing and turn anticipation; the MOD chapter)
 
 The core of en route navigation. Written in the package session of 2026-11-18; the sections below are what was
 written, with their anchors. Pointers are paths relative to `vendor/kln90b/kln90b/`.
 
 ## Pages
 
-### Navigation modes (`operation/navigation-modes.mdx`, `sidebar.order` 6)
+### Modes of operation (`operation/modes-of-operation.mdx`, `sidebar.order` 6)
 
-The title and slug stay "Navigation modes"; the official term for leg and OBS mode as a kind is "course mode" (word
-list), which the text uses (open question to the maintainer in the index).
+The title is the official name of the topic; the text calls leg and OBS mode "course modes" (word list). Renamed
+from "Navigation modes" with a new slug at the maintainer's request, 2026-11-18.
 
 1. Summary.
 2. `#the-active-waypoint`: the active waypoint and the active leg, how the pages mark them; `#no-active-waypoint`.
@@ -67,10 +67,13 @@ variation; waypoint alerting, sequencing, turn anticipation, fly-over waypoints.
 
 - An approach loaded through the EFB route in an installation without APT 8 is armed within 30 NM: part of the open
   kln90b#479, not filed again.
-- To be filed with the maintainer's approval: clearing a direct-to in OBS mode (`pages/left/DirectToPage.tsx:104`)
-  keeps OBS mode and the selected course but measures the deviation from the plan leg nearest the aircraft; OBS to
-  leg mode on the FROM side with an active waypoint outside FPL 0 keeps a direct-to to the passed waypoint instead of
-  the nearest leg of FPL 0 (`services/ModeController.ts:130-143`; kln90b#155 fixed the case of a waypoint in FPL 0).
+- kln90b#496 (filed 2026-11-18): canceling a direct-to in OBS mode (`pages/left/DirectToPage.tsx:104`) keeps OBS mode
+  and the selected course but measures the deviation from the plan leg nearest the aircraft; comment in Direct-to,
+  `#canceling-a-direct-to`.
+- Approved by the maintainer, not yet filed (the session's tool permissions refused it): OBS to leg mode on the FROM
+  side with an active waypoint outside FPL 0 keeps a direct-to to the passed waypoint instead of the nearest leg of
+  FPL 0 (`services/ModeController.ts:130-143`; kln90b#155 fixed the case of a waypoint in FPL 0). Its comment goes on
+  Modes of operation, `#changing-between-the-modes`, the bullet "Behind you (FROM), with a waypoint outside FPL 0".
 - Not filed: the variation of the selected course at an approach waypoint (the code uses the model's variation,
   the real unit the published one; low confidence, the simulator's data may carry none). With the LEG/OBS switch
   and no active waypoint the code enters OBS mode anyway; the real unit's behavior is not documented.
@@ -88,7 +91,7 @@ Made by this package, through its reviewer and seam check:
   screens), course mode (Controls and display and the mode annunciation fields of older screens), selected course
   (Controls and display, Power-on, Simulated failures), GPS CRS switch (Power-on, the OBS warning page screen), the
   TO/FROM indicator (Power-on, the Self Test screen).
-- The CDI scale factors are said once, on Navigation modes: Power-on and the field explanations of
+- The CDI scale factors are said once, on Modes of operation: Power-on and the field explanations of
   `pages/nav/nav-1-apt-1-ksea` link there instead.
 - The placeholder drawing `CourseDeviation.astro` and the glossary's placeholder entry `Turn anticipation` are gone;
   the glossary expansions of the five mode annunciations carry the official mode names.

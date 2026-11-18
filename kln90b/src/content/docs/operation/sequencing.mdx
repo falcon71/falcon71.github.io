@@ -14,7 +14,7 @@ As you fly the active flight plan in leg mode, the KLN 90B makes the next waypoi
 
 ## Waypoint alerting
 
-Waypoint alerting tells you that you are about to reach the active waypoint, or the beginning of turn anticipation before it. During the alert the `›` that marks the [active waypoint](/kln90b/operation/navigation-modes/#the-active-waypoint) flashes on every page that shows it: NAV 1, NAV 3, Super NAV 1, the D/T pages, OTH 5 when the destination is the active waypoint, and the waypoint pages of the active waypoint, the ACT pages included. In FPL 0 the arrow in front of the active waypoint flashes.
+Waypoint alerting tells you that you are about to reach the active waypoint, or the beginning of turn anticipation before it. During the alert the `›` that marks the [active waypoint](/kln90b/operation/modes-of-operation/#the-active-waypoint) flashes on every page that shows it: NAV 1, NAV 3, Super NAV 1, the D/T pages, OTH 5 when the destination is the active waypoint, and the waypoint pages of the active waypoint, the ACT pages included. In FPL 0 the arrow in front of the active waypoint flashes.
 
 <KlnScreen screen="sequencing/alert" />
 
@@ -23,7 +23,7 @@ The alert starts:
 - **Before an anticipated turn:** about 20 seconds before the beginning of turn anticipation ([Turn anticipation](#turn-anticipation)). Turn anticipation begins before the waypoint, so this alert comes earlier, the larger the turn and the faster you fly.
 - **Before a waypoint without a turn:** about 15 seconds before the waypoint. These are the last waypoint of FPL 0, a [fly-over waypoint](#fly-over-waypoints), a waypoint followed by another one at the same place, and the waypoint of a direct-to to a waypoint that FPL 0 does not hold.
 - **With turn anticipation off, or before a turn of more than 175°:** about 36 seconds before the waypoint.
-- **In [OBS mode](/kln90b/operation/navigation-modes/#obs-mode):** as before a waypoint without a turn, and with turn anticipation off as in the case above.
+- **In [OBS mode](/kln90b/operation/modes-of-operation/#obs-mode):** as before a waypoint without a turn, and with turn anticipation off as in the case above.
 
 The times count at your present groundspeed. An alert before a turn ends when the transition ends, and any other alert ends as you pass the waypoint. The alert raises no message and shows nothing in the status line.
 
@@ -65,12 +65,12 @@ The unit keeps the active waypoint after you pass it in these cases:
 - **When you pass the waypoint turning away from the next leg.** You never reach the line through the midpoint of the transition, so the waypoint stays active, and the unit shows from. It sequences by the rule for [sequencing off the leg](#waypoint-sequencing), once you are that far off the leg you came along.
 
 <Callout kind="info">
-If the unit stays on a waypoint you have passed, look at the mode annunciation in the status line. A colon and a course, such as `ENR:351`, means OBS mode, in which the unit never sequences. [Navigation modes](/kln90b/operation/navigation-modes/#selecting-leg-or-obs-mode) tells you how to return to leg mode.
+If the unit stays on a waypoint you have passed, look at the mode annunciation in the status line. A colon and a course, such as `ENR:351`, means OBS mode, in which the unit never sequences. [Modes of operation](/kln90b/operation/modes-of-operation/#selecting-leg-or-obs-mode) tells you how to return to leg mode.
 </Callout>
 
 ## Turn anticipation
 
-With turn anticipation the unit leads you onto the next leg along a curved transition that begins before the waypoint, so that you roll out on the next leg instead of overshooting it. It does that in [leg mode](/kln90b/operation/navigation-modes/#leg-mode) at every waypoint of FPL 0 that has a leg after it, except at a fly-over waypoint, at a turn of more than 175°, at the missed approach point, and when the next waypoint is the same place as the active one.
+With turn anticipation the unit leads you onto the next leg along a curved transition that begins before the waypoint, so that you roll out on the next leg instead of overshooting it. It does that in [leg mode](/kln90b/operation/modes-of-operation/#leg-mode) at every waypoint of FPL 0 that has a leg after it, except at a fly-over waypoint, at a turn of more than 175°, at the missed approach point, and when the next waypoint is the same place as the active one.
 
 At the beginning of turn anticipation the desired track changes to the course of the next leg, while the waypoint you turn at stays the active waypoint until the midpoint of the transition. Shortly after, the D-bar measures your distance from the transition: turn as the desired track changes and keep the D-bar centered, and it leads you around the turn onto the next leg.
 
@@ -84,7 +84,7 @@ On Super NAV 5 at the same moment the identifier of the active waypoint is stead
 
 <KlnScreen screen="sequencing/super-nav-5-turn" />
 
-Where the unit cannot turn the external indicator itself, the beginning of turn anticipation can raise `ADJ NAV IND CRS TO nnn°`, which asks you to turn the indicator to the new course ([`ADJ NAV IND CRS TO nnn°`](/kln90b/operation/navigation-modes/#adj-nav-ind-crs-to-nnn)).
+Where the unit cannot turn the external indicator itself, the beginning of turn anticipation can raise `ADJ NAV IND CRS TO nnn°`, which asks you to turn the indicator to the new course ([`ADJ NAV IND CRS TO nnn°`](/kln90b/operation/modes-of-operation/#adj-nav-ind-crs-to-nnn)).
 
 ### Where turn anticipation begins
 
@@ -141,6 +141,6 @@ No page marks a fly-over waypoint. You recognize one by the procedure it belongs
 
 ## Where to go next
 
-- [Navigation modes](/kln90b/operation/navigation-modes/) explains leg mode, OBS mode and the D-bar.
+- [Modes of operation](/kln90b/operation/modes-of-operation/) explains leg mode, OBS mode and the D-bar.
 - [Flight plans](/kln90b/operation/flight-plans/) shows how to build FPL 0.
 - [Direct-to](/kln90b/operation/direct-to/) shows how to fly direct to a waypoint and how to recenter the D-bar.

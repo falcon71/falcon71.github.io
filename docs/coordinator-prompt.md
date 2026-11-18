@@ -159,7 +159,7 @@ Choose by the task:
   links, anchors, `<Term>` use or word forms against the lists.
 - **Sonnet** for most research and writing: the survey, the fact sheets, the page reference chapters, the simpler
   Operation pages, the lists and the Help pages.
-- **Opus** where the behavior is intricate or a mistake is costly: the reviews, the pages about navigation modes,
+- **Opus** where the behavior is intricate or a mistake is costly: the reviews, the pages about the modes of operation,
   sequencing and turn anticipation, approaches, VNAV and the tutorials, and the reading part of the final pass.
 
 A reviewer runs on a model at least as strong as the writer it reviews. Writers of the same kind of page run on the
@@ -197,7 +197,8 @@ after the other.
 Every page gets a reviewer that did not write it. The reviewer checks the facts against the code (staging screens
 where that settles a question) and against the real manuals, the text against the style guide and the example page,
 and the screens and field explanations. It checks every name of a thing of the unit (controls, pages, parts of the
-screen, prompts, modes, functions) against the official terms of the real manuals and reports each one that differs,
+screen, prompts, modes, functions), and the titles of the pages and sections, against the official terms of the real
+manuals and reports each one that differs,
 as the term alone (style guide, section 12, "Official terms"); you add the official term to the word list, so that
 later writers use it. It also checks the page against topic ownership: a fact that another page
 owns is a finding, and so is a term or a name that differs from the section the page links to. It reports each
