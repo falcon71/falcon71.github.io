@@ -177,7 +177,7 @@ anchors and page links above. After them the order follows "owners before the pa
 | 5 | waypoints | Waypoints and the database; User waypoints | done (2026-11-17) |
 | 6 | waypoint-pages | VOR, NDB, INT, SUP and ACT chapters; the APT chapter cut back to its owner | done (2026-11-17) |
 | 7 | nearest-direct-to | Nearest; Direct-to | done (2026-11-18) |
-| 8 | navigation | Modes of operation; Sequencing and turn anticipation; MOD chapter | in review (2026-11-18) |
+| 8 | navigation | Modes of operation; Sequencing and turn anticipation; MOD chapter | done (2026-11-18) |
 | 9 | nav-pages | NAV chapter with Super NAV 1 and Super NAV 5 | not started |
 | 10 | flight-plans | Flight plans; FPL chapter | not started |
 | 11 | flight-plan-pages | D/T, REF and CTR chapters | not started |
