@@ -16,7 +16,7 @@ The airports, the VORs and the NDBs each have a nearest list; intersections and 
 
 What a list holds depends on the waypoint type:
 
-- **Airports** that meet the nearest airport criteria of SET 3 ([Setting the nearest airport criteria](#setting-the-nearest-airport-criteria)). A heliport never counts, nor does a closed airport or one that the simulator classes as private.
+- **Airports** that meet the nearest airport criteria of SET 3 ([Setting the nearest airport criteria](#setting-the-nearest-airport-criteria)). A heliport never counts, nor does a closed airport.
 - **VORs** of the types VOR, VOR/DME and VORTAC, whatever their class, terminal VORs included. A DME without a VOR, a localizer, a VOT and a TACAN-only station are not in the list. NAV 2 shows the nearest VOR from a search of its own, which looks only for low and high altitude VORs.
 - **NDBs** of every kind.
 
@@ -92,6 +92,8 @@ The airport is the first entry of the nearest airport list, so the nearest airpo
 ## No airport in the nearest list
 
 When no airport meets the criteria within 200 NM, <kbd>MSG</kbd> and <kbd>ENT</kbd> show no airport: the blank MSG page stays on the screen, and the unit gives no message. Press <kbd>MSG</kbd> to close it ([Pages that use the whole screen](/kln90b/unit/controls-and-display/#pages-that-use-the-whole-screen)).
+
+{/* kln90b#494: describes the current behavior; the fix makes ENT remove the MSG page and leave both sides as they were */}
 
 <KlnScreen screen="nearest/no-nearest-apt" />
 

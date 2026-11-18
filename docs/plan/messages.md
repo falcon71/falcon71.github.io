@@ -111,8 +111,7 @@ kind). User waypoints owns `#usr-db-full`; `ACTIVE WPT` and `USED IN FPL` are in
   messages list gives the text and the meaning and links there. Direct-to also quotes `ADJ NAV IND CRS TO nnn°`
   and links `/kln90b/operation/messages/`.
 - MSG then ENT shows the nearest airport (Nearest, `#finding-the-nearest-airport-quickly`); Messages says in one
-  sentence that ENT on the MSG page does this, and links. With no airport in the list the blank MSG page stays up (bug
-  drafted for filing, pending the maintainer).
+  sentence that ENT on the MSG page does this, and links. With no airport in the list the blank MSG page stays up (kln90b#494).
 
 ## Changes to earlier pages
 

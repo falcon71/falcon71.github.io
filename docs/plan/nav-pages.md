@@ -55,8 +55,8 @@ which page pair brings up a full-screen page (Controls and display).
   the NAV chapter's NAV 1 screens consistent with them.
 - Bug candidate for NAV 1 in OBS mode: the code always shows the from waypoint or the Direct To symbol before the
   active arrow (`pages/left/Nav1Page.tsx:44-48`, `:79-82`), while the real unit shows only the arrow and the active
-  waypoint in OBS mode (reviewer of Direct-to). Drafted for filing, pending the maintainer's approval; once filed,
-  describe the current behavior with the `kln90b#` comment.
+  waypoint in OBS mode (reviewer of Direct-to). Filed as kln90b#495; describe the current behavior with the
+  `kln90b#495` comment.
 - Super NAV 5 draws the three nearest lists, filtered for airports by the nearest airport criteria of SET 3
   (`SuperNav5Page.tsx:341`); Nearest mentions it in one clause and owns the criteria
   (`/kln90b/operation/nearest/#setting-the-nearest-airport-criteria`).
