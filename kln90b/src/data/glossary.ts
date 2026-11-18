@@ -14,19 +14,19 @@ export interface GlossaryEntry {
 export const glossary: Record<string, GlossaryEntry> = {
 	DTK: {
 		expansion: 'Desired track',
-		text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
+		text: 'The magnetic course of the active leg at the point abeam the aircraft, or the selected course in OBS mode.',
 	},
 	XTK: {
 		expansion: 'Cross-track error',
-		text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam.',
+		text: 'How far the aircraft is to the side of the active leg or the selected course, in NM. The D-bar shows it, and the FLY line of NAV 3 gives it as a distance.',
 	},
 	GS: {
 		expansion: 'Groundspeed',
-		text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+		text: 'Your speed over the ground, from the GPS. It shows dashes while the unit has no position.',
 	},
 	ETE: {
 		expansion: 'Estimated time en route',
-		text: 'Lorem ipsum dolor sit amet, sed do eiusmod tempor incididunt ut labore.',
+		text: 'The time to a waypoint at your present groundspeed. It shows dashes at a groundspeed of 2 kt or less and when the unit has no position.',
 	},
 	RAIM: {
 		expansion: 'Receiver autonomous integrity monitoring',

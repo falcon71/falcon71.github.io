@@ -3,8 +3,9 @@
  *   "NAV 1", "SET 10", "SET10", "D/T 2"   a numbered page, links to its heading on the group's chapter
  *   "the VOR page"                         a page without number, written with "page"
  *   "the APT pages"                        a page group, links to the group's chapter
+ *   "Super NAV 1", "Super NAV 5"           a full-screen page, links as a whole to its own section of the NAV chapter
  *
- * A page's heading is the one that starts with its name: "NAV 1", or "APT 8: approaches".
+ * A page's heading is the one that starts with its name: "NAV 1", or "APT 8: approaches" or "Super NAV 5: the map ...".
  *
  * Not linked: the page that the current section describes (a heading of this file above it names it), a page
  * already linked in the same section, and anything in headings, links and code. A page name with no chapter yet
@@ -19,6 +20,8 @@ import { leftTree, offKnobTree, rightTree } from '../data/pageTree';
 interface Options {
 	/** The site's base path, e.g. "/kln90b" */
 	base: string;
+	/** The heading anchors of a chapter file (e.g. "nav"), or null if there is none; the chapter sources by default */
+	anchors?: (file: string) => Set<string> | null;
 }
 
 interface MdNode {
@@ -42,8 +45,15 @@ const groupNames = [...new Set(groups.map((g) => g.name))];
 const numbered = [...new Set(groups.filter((g) => g.pages.length > 1).map((g) => g.name))];
 const single = groups.filter((g) => g.pages.length === 1).map((g) => g.name);
 const alt = (names: string[]) => names.map((n) => n.replace('/', '\\/')).join('|');
+// Full-screen pages: not in the page tree, because no knob reaches them; they are NAV pages shown on the whole screen.
+// The scan runs left to right, so "Super" starts the match before its "NAV 1" could: the whole name is one link. The
+// order of the alternatives does not matter. A line break may stand between the words, as in any wrapped text. Names
+// are case-sensitive, as all page names are; the numbered branch skips a NAV page after "super" in any case, so that
+// "super NAV 5" is plain text and not a link to NAV 5.
+const fullScreen = new Map([['Super NAV 1', 'NAV'], ['Super NAV 5', 'NAV']]);
+const fullName = (written: string) => written.replace(/\s+/g, ' ');
 const PATTERN = new RegExp(
-	`(?<![\\w/])(?:(${alt(numbered)}) ?(\\d{1,2})(?![\\w/])|(${alt(single)}) page(?!s)\\b|(${alt(groupNames)}) pages\\b)`,
+	`(?<![\\w/])(?:(${alt([...fullScreen.keys()].map((n) => n.replace(' ', '\\s+')))})(?![\\w/])|(?<![Ss]uper\\s+)(${alt(numbered)}) ?(\\d{1,2})(?![\\w/])|(${alt(single)}) page(?!s)\\b|(${alt(groupNames)}) pages\\b)`,
 	'g',
 );
 
@@ -83,11 +93,15 @@ interface Target {
 	url: string;
 }
 
-function resolve(match: RegExpExecArray, base: string): Target | null {
-	const [, numGroup, number, singleName, groupName] = match;
+function resolve(match: RegExpExecArray, base: string, anchorsOf: (file: string) => Set<string> | null): Target | null {
+	const [, fullWritten, numGroup, number, singleName, groupName] = match;
 	let group: string;
 	let anchor: string | undefined;
-	if (numGroup) {
+	if (fullWritten) {
+		const name = fullName(fullWritten);
+		group = fullScreen.get(name)!;
+		anchor = slug(name);
+	} else if (numGroup) {
 		const name = normalize(`${numGroup} ${number}`);
 		if (!pageGroup.has(name)) return null;
 		group = pageGroup.get(name)!;
@@ -99,7 +113,7 @@ function resolve(match: RegExpExecArray, base: string): Target | null {
 		group = groupName;
 	}
 	const file = groupFile(group);
-	const anchors = chapterAnchors(file);
+	const anchors = anchorsOf(file);
 	if (!anchors) {
 		warnOnce(`no chapter pages/${file} for "${match[0]}"`);
 		return null;
@@ -131,11 +145,11 @@ export default function remarkPageLinks(options: Options) {
 			let last = 0;
 			let changed = false;
 			for (const m of value.matchAll(PATTERN)) {
-				const target = resolve(m as RegExpExecArray, options.base);
+				const target = resolve(m as RegExpExecArray, options.base, options.anchors ?? chapterAnchors);
 				if (!target) continue;
 				const describedHere = target.doc === doc && (!target.anchor || headingChain.includes(target.anchor));
 				// The section describing the page may be in another file too, e.g. a heading "NAV 1" on an Operation page
-				const named = slug(normalize(m[0].replace(/ pages?$/, '')));
+				const named = slug(normalize(fullName(m[0]).replace(/ pages?$/, '')));
 				if (headingChain.some((a) => a && headingOf(a, named))) continue;
 				if (describedHere || linked.has(target.url)) continue;
 				linked.add(target.url);

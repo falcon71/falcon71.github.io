@@ -1,0 +1,28 @@
+<Field id="title" title="VNAV state">
+	`VNV INACTV` while VNAV is not running, `VNV ARMED` while the descent or climb is still ahead, then `VNV IN` and the time as minutes and seconds, and once VNAV is active `VNV` and the advisory altitude with `ft`. [VNAV](/kln90b/operation/vnav/) explains how to fly it.
+</Field>
+
+<Field id="ind" title="Indicated altitude">
+	The indicated altitude from the altitude input of the aircraft, with the baro setting applied, rounded to 100 ft. It shows five digits and `00000` below 0 ft, and you cannot change it.
+</Field>
+
+<Field id="sel" title="Selected altitude">
+	The altitude to climb or descend to, in steps of 100 ft from 0 to 99,900 ft. The cursor stops on the ten-thousands, thousands and hundreds digits, and a digit takes effect at once. Changing it stops VNAV. The altitude alert reads the selected altitude too ([Airspace and altitude alerting](/kln90b/operation/alerts/)).
+</Field>
+
+<Field id="wpt" title="VNAV waypoint">
+	The waypoint the descent or climb ends at. It is the active waypoint until you enter another one. In leg mode you can enter the active waypoint or a later waypoint of FPL 0; in OBS mode and on a direct-to to a waypoint outside FPL 0 only the active waypoint. Any other waypoint gives the message `INVALID VNV`, and the old waypoint stays. A different waypoint stops VNAV.
+</Field>
+
+<Field id="dist" title="Offset">
+	The distance before the VNAV waypoint where the descent or climb should end, in NM from 0 to 99. The cursor stops on the tens and units digits. Changing it stops VNAV.
+</Field>
+
+<Field id="angle" title="Angle">
+	<p>The angle of the descent or climb: negative for a descent, in tenths of a degree up to 9.9°. Without an entry it shows the angle that takes you from the altitude above to the selected altitude at the VNAV waypoint, and `0.0` where that angle is 10° or more or there is no active waypoint. {/* kln90b#501: describes the current behavior; the fix makes the field show dashes for an angle of 10° or more */} A digit you enter sets the angle and starts VNAV at it.</p>
+	<p>Moving the cursor onto the angle starts VNAV at the angle shown, unless VNAV is already armed or active or the angle is `0.0`. [VNAV](/kln90b/operation/vnav/) explains the rest.</p>
+</Field>
+
+<Field id="page" title="Page identification">
+	The page identification of the side that shows the page: `NAV 4`. NAV 4 is the same page on the left and on the right side.
+</Field>

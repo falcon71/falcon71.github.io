@@ -8,7 +8,7 @@ import {canvasToAscii} from '../../../vendor/kln90b/test/harness/render/canvas';
 import {mapBlocks} from './mapBlocks.ts';
 import {serializeScreenFile, type CellAttr, type Show} from '../../src/lib/screenFile.ts';
 import {explanationMismatch, fieldIdsOf} from '../../src/lib/explanations.ts';
-import {captureScreen, type CapturedScreen} from './capture.ts';
+import {captureScreen, isCovered, type CapturedScreen} from './capture.ts';
 import {extendToCursor, locateFields, locateMapFields, type FieldDef, type MapSide} from './fields.ts';
 import {checkCoverage, recordMapElements, type MapElement} from './mapElements.ts';
 import {mapToSvg} from './mapSvg.ts';
@@ -62,7 +62,7 @@ function mapsOf(capture: CapturedScreen, show: Show): Map<MapSide, ShownMap> {
 			const rows = blocks.replace(/\n$/, '').split('\n');
 			const elements = capture.elements[side] ?? [];
 			try {
-				checkCoverage(blocks, elements);
+				checkCoverage(blocks, elements, side === 'F' ? (x, y) => isCovered(capture.covered, x, y) : undefined);
 			} catch (e) {
 				throw new Error(`map ${side}: ${(e as Error).message}`);
 			}

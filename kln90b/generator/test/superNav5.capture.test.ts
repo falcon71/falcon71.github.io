@@ -40,12 +40,12 @@ const FIELDS: FieldDef[] = [
 	{id: 'map', find: {map: 'F', draw: /./, many: true}},
 ];
 
-function superNav5(answer: boolean, keepMessages = false, then?: (u: HeadlessUnit) => Promise<void>): ScreenDescription {
+function superNav5(answer: boolean, keepMessages = false, then?: (u: HeadlessUnit) => Promise<void>, from = POSITION): ScreenDescription {
 	return {
 		title: 'Super NAV 5', show: 'both',
-		boot: {position: POSITION, storage: savedFlightplan(0, [facility('KPDX'), facility('KSEA')])},
+		boot: {position: from, storage: savedFlightplan(0, [facility('KPDX'), facility('KSEA')])},
 		steps: async u => {
-			await moveAircraft(u, POSITION, {groundspeedKt: 120, trackTrue: 0});
+			await moveAircraft(u, from, {groundspeedKt: 120, trackTrue: 0});
 			await u.panel.directTo('KSEA');
 			if (answer) await adjustCourseIndicator(u);
 			await showSuperNav5(u);
@@ -93,15 +93,89 @@ describe('Super NAV 5', () => {
 		expect(fs.existsSync(path.join(dir, 'screen.txt'))).toBe(false);
 	});
 
-	// One unit per test: pulling the right inner knob shows the direct-to window, the right cursor opens the menu
-	const REFUSED = /^screen super-nav-5-smoke: Super NAV 5 with the right menu or the direct-to window is not supported yet$/;
+	// Pulling the right inner knob shows the direct-to window, the right cursor opens the menu; one unit per test.
+	// The map at 40 NM is 1.2 pixels to the NM with the aircraft at 74,45; the menu covers the pixels from x 76 to the right
+	// edge and from y 0 to 52, the window those from x 94 and from y 78
+	const drawsOf = (dir: string) => fs.readFileSync(path.join(dir, 'map-F.svg'), 'utf8').match(/(?<=data-draw=")[^"]*/g);
+	const readScreen = (dir: string) => parseScreenFile(fs.readFileSync(path.join(dir, 'screen.txt'), 'utf8'));
+	const tail = (rows: string[], from: number, to: number) => rows.slice(from, to).map(r => Array.from(r).slice(15).join(''));
 
-	it('refuses Super NAV 5 with the direct-to window', async () => {
-		await expect(generateScreen(screenDir(FIELDS), superNav5(true, false, u => u.panel.scan()))).rejects.toThrow(REFUSED);
+	const MENU_FIELDS: FieldDef[] = [
+		...FIELDS.filter(f => f.id !== 'map'),
+		{id: 'vor', find: {re: /VOR:\S+/, area: 'F', row: 0}},
+		{id: 'ndb', find: {re: /NDB:\S+/, area: 'F', row: 1}},
+		{id: 'apt', find: {re: /APT:\S+/, area: 'F', row: 2}},
+		{id: 'orientation', find: {re: /\S+$/, area: 'F', row: 3}},
+	];
+	// The range is the last number before the window
+	const WINDOW_FIELDS: FieldDef[] = [
+		...FIELDS.filter(f => f.id !== 'map' && f.id !== 'range'),
+		{id: 'range', find: {re: /(?<=° )\d+/, area: 'F', row: 6}},
+		{id: 'window', find: {re: /.{6}$/, area: 'F', row: 6}},
+	];
+
+	it('writes the right menu in rows 0-3 from column 15, with the cursor, and keeps an element it covers in part', async () => {
+		const fields: FieldDef[] = [...MENU_FIELDS, {id: 'map', find: {map: 'F', draw: /./, many: true}}];
+		const dir = screenDir(fields);
+		await generateScreen(dir, {...superNav5(true, false, u => u.panel.cursor('R')), fields});
+		const file = readScreen(dir);
+		expect(tail(file.text, 0, 4)).toEqual(['ÜVOR:OFF', 'ÝNDB:OFF', 'ŸAPT:OFF', ' 000° N^']);
+		// The cursor is on the VOR entry only; the rest of the screen is as without the menu
+		expect(tail(file.mask.map(r => r.join('')), 0, 4)).toEqual(['.....III', '........', '........', '........']);
+		expect(file.text[5]).toBe('Ó345°                  ');
+		expect(file.fields.get('vor')).toEqual([{row: 0, from: 16, to: 23}]);
+		expect(file.fields.get('ndb')).toEqual([{row: 1, from: 16, to: 23}]);
+		expect(file.fields.get('orientation')).toEqual([{row: 3, from: 21, to: 23}]);
+		// The arrow of the Direct To reaches under the menu, where only a few pixels of it lie: it is still on the page
+		expect(drawsOf(dir)).toEqual(['arrow 47.1172,-122.3118 KSEA', 'icon @ KSEA', 'label KSEA KSEA', 'icon $ 47.1172,-122.3118']);
 	});
 
-	it('refuses Super NAV 5 with the right menu', async () => {
-		await expect(generateScreen(screenDir(FIELDS), superNav5(true, false, u => u.panel.cursor('R')))).rejects.toThrow(REFUSED);
+	it('leaves out the elements the menu hides entirely, so that no field has to explain them', async () => {
+		const fields: FieldDef[] = [...MENU_FIELDS, {id: 'aircraft', find: {map: 'F', draw: /^icon \$/}}];
+		const dir = screenDir(fields);
+		// KSEA lies 30 NM east of the aircraft, under the menu: its icon, its label and the Direct To arrow are all under it
+		await generateScreen(dir, {...superNav5(true, false, u => u.panel.cursor('R'), pointFrom(KSEA, 270, 30)), fields});
+		expect(drawsOf(dir)).toEqual(['icon $ 47.4475,-123.0498']);
+	});
+
+	it('writes the direct-to window in row 6 from column 17 as inverse cells, and leaves out what it hides', async () => {
+		const fields: FieldDef[] = [
+			...WINDOW_FIELDS,
+			{id: 'arrow', find: {map: 'F', draw: /^arrow /}},
+			{id: 'label', find: {map: 'F', draw: /^label /}},
+			{id: 'aircraft', find: {map: 'F', draw: /^icon \$/}},
+		];
+		const dir = screenDir(fields);
+		// KSEA lies at the lower right of the map: its icon is under the window, its label just above it, so it stays
+		await generateScreen(dir, {...superNav5(true, false, u => u.panel.scan(), pointFrom(KSEA, 315, 44)), fields});
+		const file = readScreen(dir);
+		expect(file.text[6]).toBe('Ö345° 40         KSEA  ');
+		expect(file.mask[6].join('')).toBe('.................IIIIII');
+		expect(file.fields.get('window')).toEqual([{row: 6, from: 17, to: 23}]);
+		expect(file.fields.get('range')).toEqual([{row: 6, from: 6, to: 8}]);
+		// No menu
+		expect(file.text.slice(0, 4).every(row => row.slice(6).trim() === '')).toBe(true);
+		expect(drawsOf(dir)).toEqual(['arrow 47.9649,-123.0848 KSEA', 'label KSEA KSEA', 'icon $ 47.9649,-123.0848']);
+	});
+
+	it('writes an empty direct-to window as six inverse blanks', async () => {
+		const dir = screenDir([]);
+		fs.writeFileSync(path.join(dir, 'fields.mdx'), ['window', 'aircraft'].map(id => `<Field id="${id}" title="${id}">x</Field>`).join('\n\n'));
+		await generateScreen(dir, {
+			title: 'Super NAV 5', show: 'both', boot: {position: POSITION},
+			steps: async u => {
+				await showSuperNav5(u);
+				await u.panel.scan();
+			},
+			fields: [
+				{id: 'window', find: {re: /.{6}$/, area: 'F', row: 6}},
+				{id: 'aircraft', find: {map: 'F', draw: /^icon \$/}},
+			],
+		});
+		const file = readScreen(dir);
+		expect(file.text[6].slice(17)).toBe('      ');
+		expect(file.mask[6].join('')).toBe('.................IIIIII');
+		expect(file.fields.get('window')).toEqual([{row: 6, from: 17, to: 23}]);
 	});
 
 	it('shows the flashing msg over the map in row 5 from column 6 with keepMessages', async () => {

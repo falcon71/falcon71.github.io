@@ -1,0 +1,23 @@
+<Field id="cdi" title="D-bar">
+	Inverse `F L A G` replaces the middle of the D-bar when the unit has no cross-track error, as it has without an active waypoint. The D-bar is a scale of five dots on each side of the center, and its outer dot is the [CDI scale factor](/kln90b/operation/modes-of-operation/#the-cdi-scale-factor).
+</Field>
+
+<Field id="dis" title="Distance to the active waypoint">
+	<Term t="DIS">`DIS`</Term> is the direct distance to the active waypoint in NM, never the distance along the route or the arc. It shows one decimal below 100 NM and whole NM from 100 NM. It shows `--.-` without a position or an active waypoint, and in approach active mode when the unit has lost its integrity.
+</Field>
+
+<Field id="gs" title="Groundspeed">
+	<Term t="GS">Your groundspeed</Term> in kt, from the GPS, in whole knots from 0 to 999. It shows dashes without a position.
+</Field>
+
+<Field id="ete" title="Estimated time en route">
+	The <Term t="ETE">time to the active waypoint</Term> at your present groundspeed. From one hour it shows hours and minutes (`1:05`); below one hour the hours stay blank and `:22` is 22 minutes. It shows `--:--` at a groundspeed of 2 kt or less, without a position or an active waypoint, in approach active mode when the unit has lost its integrity, and from 100 hours.
+</Field>
+
+<Field id="brg" title="Bearing to the active waypoint">
+	<Term t="BRG">`BRG`</Term> is the magnetic bearing from your position to the active waypoint, in whole degrees. It shows `---°` without a position or an active waypoint, in approach active mode when the unit has lost its integrity, and while the aircraft is exactly on the waypoint. In [OBS mode](/kln90b/operation/modes-of-operation/#obs-mode) it is the course to the waypoint as measured at the waypoint, with the magnetic variation of the waypoint, so that it equals the selected course while you are on the course line.
+</Field>
+
+<Field id="page" title="Page identification">
+	The page identification of the side that shows the page: `NAV 1`. NAV 1 is the same page on the left and on the right side; with NAV 1 on both sides the unit shows Super NAV 1 on the whole screen.
+</Field>

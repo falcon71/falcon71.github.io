@@ -25,6 +25,9 @@ const CROPPED_STATUS = 5;      // the page name of the shown side: columns 0-4 o
 // map everywhere else
 const SNAV5_COLUMN = 6;
 const SNAV5_OVERLAY_ROW = 5;
+// Its right menu (rows 0-3, the last 8 columns) and direct-to window (row 6, the last 6 columns), both opaque
+const SNAV5_MENU = {row: 0, column: 15, rows: 4};
+const SNAV5_WINDOW = {row: 6, column: 17};
 
 const MARKUP = /\{([a-z0-9-]*)([!~]*):([^}]*)\}/g;
 
@@ -111,11 +114,36 @@ function segmentsOf(cells: Cell[]): Segment[] {
 
 const blank = (): Cell => ({ch: ' ', inverse: false, flash: false});
 
-/** Whether a cell of Super NAV 5 is drawn as text: in the left column, or in the rows of the msg indicator and range. */
-const snav5Drawn = (row: number, col: number) => col < SNAV5_COLUMN || row >= SNAV5_OVERLAY_ROW;
+const inMenu = (row: number, col: number) => row >= SNAV5_MENU.row && row < SNAV5_MENU.row + SNAV5_MENU.rows && col >= SNAV5_MENU.column;
+const inWindow = (row: number, col: number) => row === SNAV5_WINDOW.row && col >= SNAV5_WINDOW.column;
+
+/** Whether a cell of the capture is not a normal blank. */
+const isUsed = (c: ScreenCapture, row: number, col: number) => Array.from(c.text[row])[col] !== ' ' || c.mask[row][col] !== '.';
 
 /**
- * Checks that the cells of Super NAV 5 above the message indicator and the range, right of the left column, are blank,
+ * Whether Super NAV 5 shows its right menu: its labels fill the rectangle, which no other part of the page uses. The
+ * menu is opaque and takes the whole rectangle, blank cells included.
+ */
+export function snav5MenuOpen(c: ScreenCapture): boolean {
+	for (let row = SNAV5_MENU.row; row < SNAV5_MENU.row + SNAV5_MENU.rows; row++) {
+		for (let col = SNAV5_MENU.column; col < COLUMNS; col++) if (isUsed(c, row, col)) return true;
+	}
+	return false;
+}
+
+/** Whether Super NAV 5 shows its direct-to window: inverse even when empty, so any cell of it that is not a normal blank. */
+export function snav5WindowOpen(c: ScreenCapture): boolean {
+	for (let col = SNAV5_WINDOW.column; col < COLUMNS; col++) if (isUsed(c, SNAV5_WINDOW.row, col)) return true;
+	return false;
+}
+
+/** Whether a cell of Super NAV 5 is drawn as text: in the left column, in the rows of the msg indicator and range, or in the open menu or window. */
+const snav5Drawn = (c: ScreenCapture, row: number, col: number) =>
+	col < SNAV5_COLUMN || row >= SNAV5_OVERLAY_ROW || (inMenu(row, col) && snav5MenuOpen(c));
+
+/**
+ * Checks that the cells of Super NAV 5 above the message indicator and the range, right of the left column, are blank
+ * (except the rectangle of an open menu),
  * and that every documented field has a cell elsewhere: the map is drawn there, not text, so a field there alone would
  * have no element to point at or link to.
  * @param where the start of the messages
@@ -125,13 +153,14 @@ function checkMapCells(c: ScreenCapture, documented: Set<string>, where: string)
 	for (let row = 0; row < SNAV5_OVERLAY_ROW; row++) {
 		const chars = Array.from(c.text[row]);
 		for (let col = SNAV5_COLUMN; col < COLUMNS; col++) {
+			if (inMenu(row, col)) continue;
 			if (chars[col] !== ' ' || c.mask[row][col] !== '.') {
 				throw new Error(`${where}row ${row} column ${col} lies over the map but holds "${chars[col]}" with the mask "${c.mask[row][col]}"`);
 			}
 		}
 	}
 	for (const [id, parts] of c.fields) {
-		if (documented.has(id) && !parts.some(p => snav5Drawn(p.row, p.from))) {
+		if (documented.has(id) && !parts.some(p => snav5Drawn(c, p.row, p.from))) {
 			throw new Error(`${where}the field ${id} lies only over the map above the message indicator and the range, so the site draws it nowhere`);
 		}
 	}
@@ -186,13 +215,18 @@ export function blocksFromCapture(c: ScreenCapture, documented: Set<string>, scr
 
 	if (c.layout === 'super-nav-5') {
 		checkMapCells(c, documented, `${screen ? `screen ${screen}: ` : ''}Super NAV 5: `);
-		return {
-			crop,
-			blocks: [
-				{cls: 'kln-snav5-left', rows: rowsOf(0, STATUS_ROW, 0, SNAV5_COLUMN)},
-				{cls: 'kln-snav5-overlay', rows: rowsOf(SNAV5_OVERLAY_ROW, STATUS_ROW, SNAV5_COLUMN, COLUMNS)},
-			],
-		};
+		const scan = snav5WindowOpen(c);
+		// The window is drawn on its own, 6 px left of where the overlay's cells would be, so the overlay leaves its cells out
+		const overlayRows = rowsOf(SNAV5_OVERLAY_ROW, STATUS_ROW, SNAV5_COLUMN, scan ? SNAV5_WINDOW.column : COLUMNS);
+		const blocks = [
+			{cls: 'kln-snav5-left', rows: rowsOf(0, STATUS_ROW, 0, SNAV5_COLUMN)},
+			{cls: 'kln-snav5-overlay', rows: overlayRows},
+		];
+		if (snav5MenuOpen(c)) {
+			blocks.push({cls: 'kln-snav5-menu', rows: rowsOf(SNAV5_MENU.row, SNAV5_MENU.row + SNAV5_MENU.rows - 1, SNAV5_MENU.column, COLUMNS)});
+		}
+		if (scan) blocks.push({cls: 'kln-snav5-window', rows: rowsOf(SNAV5_WINDOW.row, SNAV5_WINDOW.row, SNAV5_WINDOW.column, COLUMNS)});
+		return {crop, blocks};
 	}
 	if (c.layout === 'full') {
 		const last = c.status ? STATUS_ROW - 1 : STATUS_ROW;

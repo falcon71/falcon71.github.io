@@ -124,7 +124,7 @@ that writes the owner records the anchors in this table, and the final pass shar
 | The nearest lists: the nearest airport criteria (SET 3), radius, count, renewal, how they are reached, the MSG and ENT shortcut | Nearest: `#the-nearest-lists`, `#showing-a-nearest-list`, `#finding-the-nearest-airport-quickly`, `#no-airport-in-the-nearest-list`, `#setting-the-nearest-airport-criteria`, `#flying-to-a-nearest-waypoint` | waypoint chapters: the nearest variant of their page; SET chapter: SET 3 as a page and the link; a user-defined airport (APT 3): one sentence and the link |
 | Direct-to: the Direct To page, every way to start one, the default waypoint, leaving the page, recentering, canceling, direct-to in OBS mode and its course message | Direct-to: `#flying-direct-to-a-waypoint`, `#the-default-waypoint`, `#leaving-the-direct-to-page`, `#flying-direct-to-a-waypoint-of-the-flight-plan`, `#recentering-the-d-bar`, `#canceling-a-direct-to`, `#flying-a-direct-to-in-obs-mode` (`#crs-nnn-in-the-status-line`) | Flight plans: a direct-to to a waypoint of FPL 0, in one paragraph with the link; Controls and display: one sentence on leaving the page and the link |
 | The active waypoint and the active leg | Modes of operation, `#the-active-waypoint` (`#no-active-waypoint`) | every page that names it links at its first use |
-| Leg and OBS mode (the course modes), selecting them, the GPS CRS switch, the selected course and where it is set, the course messages, changing between the modes, the mode annunciations, the CDI scale factor | Modes of operation: `#leg-mode`, `#obs-mode` (`#selecting-leg-or-obs-mode`, `#the-selected-course`), `#the-course-messages` (`#adj-nav-ind-crs-to-nnn`, `#adj-nav-ind-crs`, `#obs-wpt--200nm`), `#changing-between-the-modes`, `#the-mode-annunciations`, `#the-cdi-scale` | MOD chapter: the pages; NAV chapter: the fields; Non-precision approaches: arming and activation, linking `#the-cdi-scale` for the factors |
+| Leg and OBS mode (the course modes), selecting them, the GPS CRS switch, the selected course and where it is set, the course messages, changing between the modes, the mode annunciations, the CDI scale factor | Modes of operation: `#leg-mode`, `#obs-mode` (`#selecting-leg-or-obs-mode`, `#the-selected-course`), `#the-course-messages` (`#adj-nav-ind-crs-to-nnn`, `#adj-nav-ind-crs`, `#obs-wpt--200nm`), `#changing-between-the-modes`, `#the-mode-annunciations`, `#the-cdi-scale-factor` | MOD chapter: the pages; NAV chapter: the fields; Non-precision approaches: arming and activation, linking `#the-cdi-scale-factor` for the factors |
 | Magnetic variation: where the unit has none, the entered variation, `MAGNETIC VAR INVALID` | Modes of operation, `#magnetic-variation` (`#flying-without-a-magnetic-variation`, `#magnetic-var-invalid`) | SET chapter (SET 2): the field |
 | Waypoint alerting, the WPT annunciator | Sequencing and turn anticipation, `#waypoint-alerting` (`#the-wpt-annunciator`) | every page that names it links at its first use |
 | Waypoint sequencing, turn anticipation (SET 6), fly-over waypoints, when the unit does not sequence | Sequencing and turn anticipation: `#waypoint-sequencing` (`#when-the-unit-does-not-sequence`), `#turn-anticipation` (`#where-turn-anticipation-begins`, `#turning-off-turn-anticipation`), `#fly-over-waypoints` | SET chapter: SET 6 as a page; FAQ: the question and the link; Flight plans: the waypoint type identification page |
@@ -137,7 +137,7 @@ that writes the owner records the anchors in this table, and the final pass shar
 | VNAV | VNAV | NAV chapter: the fields of NAV 4; CAL chapter: CAL 4 as a page |
 | The ALT page, the barometric setting, the selected altitude, altitude alerting, the height above airport alert | Airspace and altitude alerting | NAV chapter: the altitude fields of NAV 4; SET chapter: SET 5, SET 7, SET 9 as pages |
 | The airspace alert (SET 8), its messages | Airspace and altitude alerting | APT 1, OTH 2, TRI 2, TRI 4, TRI 6 show airspaces and link |
-| Minimum safe altitudes (`MSA`, `ESA`) | NAV chapter (NAV 3) | TRI chapter links |
+| Minimum safe altitudes (`MSA`, `ESA`) | NAV chapter, `/kln90b/pages/nav/#minimum-safe-altitudes` | TRI chapter links |
 | Trip planning; the calculators; times, time zones and the flight timer as tasks | Trip planning and calculators | TRI, CAL, D/T chapters: the pages; SET chapter: SET 4 as a page |
 | Fuel management and air data | Fuel and air data | OTH chapter: the pages; TRI chapter: its own fuel fields |
 | The MSG page, how messages arrive and are read, the annunciators | Messages | others link |
@@ -178,7 +178,7 @@ anchors and page links above. After them the order follows "owners before the pa
 | 6 | waypoint-pages | VOR, NDB, INT, SUP and ACT chapters; the APT chapter cut back to its owner | done (2026-11-17) |
 | 7 | nearest-direct-to | Nearest; Direct-to | done (2026-11-18) |
 | 8 | navigation | Modes of operation; Sequencing and turn anticipation; MOD chapter | done (2026-11-18) |
-| 9 | nav-pages | NAV chapter with Super NAV 1 and Super NAV 5 | not started |
+| 9 | nav-pages | NAV chapter with Super NAV 1 and Super NAV 5 | done (2026-11-18) |
 | 10 | flight-plans | Flight plans; FPL chapter | not started |
 | 11 | flight-plan-pages | D/T, REF and CTR chapters | not started |
 | 12 | sid-star | SID and STAR procedures | not started |
@@ -220,6 +220,10 @@ it is written when those owners exist. A package that proves too large in its re
   GPS CRS switch, GPS APR switch, CDI scale factor and the TO/FROM indicator, and corrected the earlier pages the
   seam check found. The final pass searches for the old forms once more ("navigation mode", "OBS course", "course
   indicator", "GPS APR button").
+- The package nav-pages (2026-11-18) brought the official terms cross-track error, actual track, minimum en route
+  safe altitude, range scale, map orientation, pop-up menu and the VOR, NDB and APT selections; its seam check
+  replaced the old forms on the earlier pages and screens. The final pass searches once more ("cross-track
+  distance", "track up" without "actual", "en route safe altitude" without "minimum").
 - Every planned anchor of the topic ownership table exists; page links that a later package could sharpen to a
   section are sharpened.
 - The first Operation pages (sta, failures) have `sidebar.order` numbers that later Operation pages must fit
@@ -227,8 +231,8 @@ it is written when those owners exist. A package that proves too large in its re
 - The pages of the packages sta and failures were written before Controls and display, Power-on and the message
   lists existed; they are checked against those pages (terms, names of controls, links).
 
-- **Placeholder field explanations.** `display/screen-layout`, `display/cursor-example`, `pages/nav/home-nav-1`, `pages/set/set-10`, `pages/nav/nav-1`,
-  `pages/nav/nav-5-ksea`, `pages/oth/oth-2-zse` and the tutorial screens still have filler text in their field explanations (found by
+- **Placeholder field explanations.** `display/screen-layout`, `display/cursor-example`, `pages/set/set-10`,
+  `pages/oth/oth-2-zse` and the tutorial screens still have filler text in their field explanations (found by
   the writer of Controls and display, 2026-11-17). The packages that show them fill them in; the final pass removes
   the screens no page shows.
 - **Left over from the package power-on (2026-11-17):** the glossary entries `OBS IN` and `OUT` are used only by the Self Test screens

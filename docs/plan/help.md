@@ -44,6 +44,13 @@ Candidates for the FAQ and Known limitations, collected by earlier packages; eve
   sequences. Otherwise the waypoint is the last of FPL 0, a direct-to waypoint outside FPL 0 or the missed approach
   point, or the navigation is flagged. Link `/kln90b/operation/sequencing/#when-the-unit-does-not-sequence`.
 
+### From the package nav-pages (2026-11-18)
+
+- Known limitations: the minimum safe altitudes (`MSA`, `ESA` on NAV 3) come from terrain alone; obstacles are not
+  in the simulator's data. The NAV chapter says so (`/kln90b/pages/nav/#minimum-safe-altitudes`).
+- FAQ candidate: "Why is my map blank?" Track up below 2 kt blanks NAV 5 and Super NAV 5
+  (`/kln90b/pages/nav/#the-map-is-blank-in-actual-track-up`).
+
 ## Changes to earlier pages
 
 None planned.

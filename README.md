@@ -101,8 +101,11 @@ written by hand. The knob demo of the quickstart is not a `<KlnScreen>` at all.
 
 Page names in the text ("NAV 1", "SET10", "the VOR page", "the APT pages") become links to the page reference
 when the site is built (`kln90b/src/plugins/remarkPageLinks.ts`). Not linked: the page the current section
-describes, a page already linked since the last heading, and anything in headings, links and code. A name whose
-chapter or heading does not exist yet stays plain text, and the build prints a `[page links]` warning.
+describes, a page already linked since the last heading, and anything in headings, links and code. The full-screen
+pages "Super NAV 1" and "Super NAV 5" are one link each, the whole name, to their own sections of the NAV chapter
+(a name written across a line break counts; "super NAV 5" in lower case is no page name and stays plain text). A name
+whose chapter does not exist yet stays plain text; a name whose heading does not exist yet links the chapter. Either
+way the build prints a `[page links]` warning.
 
 ## License
 

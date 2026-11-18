@@ -1,0 +1,24 @@
+<Field id="title" title="Title">
+	The title of the page. The rows below give the position of the aircraft as a radial and a distance from a VOR and as latitude and longitude.
+</Field>
+
+<Field id="vor" title="Nearby VOR and radial">
+	<p>The nearby VOR that the position is related to and the magnetic radial from that VOR to the aircraft, in whole degrees (`fr` is from). The radial is measured at the VOR with its published magnetic variation.</p>
+	<p>The nearby VOR is the nearest low or high altitude VOR, which the unit looks for again while the page is shown. The VOR of a DME arc takes its place while the active leg is an arc, or while an arc lies close ahead on the route. The field shows `---` and `---°` without a position and when no VOR is in range.</p>
+</Field>
+
+<Field id="dist" title="Distance to the nearby VOR">
+	The direct distance from the aircraft to the nearby VOR, in NM with tenths. It shows `----.-` where the VOR shows dashes.
+</Field>
+
+<Field id="lat" title="Latitude">
+	The latitude of the present position as hemisphere, degrees and minutes to hundredths, such as `N 45°35.32'`. It shows dashes without a position, never the last position.
+</Field>
+
+<Field id="lon" title="Longitude">
+	The longitude of the present position as hemisphere, degrees and minutes to hundredths, such as `W122°35.81'`. It shows dashes without a position, never the last position.
+</Field>
+
+<Field id="page" title="Page identification">
+	The page identification of the side that shows the page: `NAV 2`. NAV 2 is the same page on the left and on the right side.
+</Field>

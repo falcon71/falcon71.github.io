@@ -143,7 +143,7 @@ manual page cited in the code to the page of the PDF and lists topics and facts.
 ## 5. Bugs and errors
 
 - **Who files:** a writer or a reviewer that finds a bug reports it to the coordinator with everything below; the
-  coordinator checks for duplicates and files it.
+  coordinator checks for duplicates, shows the maintainer a summary, and files it once the maintainer approves.
 - **A bug in the simulation** (in the code, or where the code and the real unit disagree) goes to the kln90b issues,
   https://github.com/falcon71/kln90b/issues. Search open and closed issues first, with several wordings; a closed issue
   may be a partial fix. A new issue gets the `bug` label and states what is wrong, a concrete reproduction (input,
@@ -222,6 +222,10 @@ The model packs several facts into every paragraph and wastes no words. So does 
 - **Only details that change what the pilot does or expects.** That one timer counts from the power-on and another
   from a later moment, and how the two overlap, is true in the code and of no use in the cockpit; leave it out
   (maintainer, 2026-11-17).
+- **A state that only a failure brings is no edge case of the feature.** A heading input that arrives or is lost
+  while the unit runs, an altitude input that fails mid-flight: these happen only when something fails, and the
+  page of the feature does not walk through them. It says what the feature needs (in its Availability box, where
+  it depends on the installation); Simulated failures says what a failure does (maintainer, 2026-11-18).
 - **Every exception.** Someone studying a chapter wants the edge cases: what happens with no GPS fix, with an empty flight plan,
   in OBS mode, when the field is dashed, when the list is full, when a value is out of range. Put each right after the
   rule it qualifies (section 11).
@@ -559,6 +563,15 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | the beginning of turn anticipation (where the unit starts guiding the turn) | turn start |
 | abeam the waypoint; fly-over waypoint; the WPT annunciator (one of the remote annunciators) | |
 | the waypoint type identification page (`TYPE WPT`, `1 EN ROUTE?`, `2 SID/STAR?`) | the `TYPE WPT` question |
+| cross-track error (`XTK`) | cross-track distance |
+| actual track (`TK`) | track over the ground, your track |
+| minimum safe altitude (`MSA`), minimum en route safe altitude (`ESA`) | en route safe altitude |
+| offset (of the VNAV point, NAV 4) | offset distance |
+| the nearby VOR (of NAV 2) | the reference VOR (that is the INT page's) |
+| range scale (of NAV 5 and Super NAV 5); the `AUTO` range scale | range, map scale, auto range |
+| map orientation; North up, desired track up, actual track up, heading up | the orientation, track up |
+| the pop-up menu (of Super NAV 5); the VOR, NDB and APT selections (its entries) | the menu, the layers |
+| the left side of Super NAV 5 | the left column |
 
 ### Spelling and style
 
@@ -612,6 +625,10 @@ general; the screen shows one concrete case.
   difference by looking; this holds on the optional pages too. A state that the steps of a screen cannot reach by
   operating the unit is built in the screen's description, by setting up the unit's own objects the way the kln90b
   tests do, before it is given up as not stageable (maintainer, 2026-11-16).
+- **A screen shows its case unmistakably.** Stage it so that it cannot be taken for another state: a selected
+  course in OBS mode clearly off the line between the places on the map (about 45°), not one that looks like a
+  leg between them; and leave out what the screen does not teach, so that the map stays uncluttered (maintainer,
+  2026-11-18).
 - **Flashing.** The site draws flashing text as a static dashed box and explains it under the screen. Say in the text
   what flashes and when.
 

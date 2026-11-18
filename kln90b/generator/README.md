@@ -76,8 +76,31 @@ is lowercase letters, digits and hyphens. A screen folder holds no other screen.
 layout `super-nav-5`, needs `show: 'both'` and has no status line. Its text is the area `F` with all seven rows: the left
 column in columns 0-5, and the message indicator (`msg` or blanks) and the range of the map in rows 5 and 6 from column
 6, over the map. The unit draws those two rows 6 unit pixels right of column 6 (`.super-nav5-mgs-range` in
-`KLN90B.scss`), and so must the site. All other cells are blank: they are the map, which is the map side `F`. Super
-NAV 5 with the right menu or the direct-to window open is not supported yet and fails.
+`KLN90B.scss`), and so must the site. All other cells are blank: they are the map, which is the map side `F`, except
+for the two parts the pilot opens:
+
+- **The right menu** (VOR, NDB, APT and the orientation), which the right CRSR opens: `await u.panel.cursor('R')` after
+  `showSuperNav5(u)`; `u.panel.inner('R', n)` and `outer('R', n)` move its cursor and change its entries. It is 8
+  characters wide in rows 0-3 from column 15 (`ÜVOR:OFF`), opaque, with a border line left of it and below it. Its
+  cursor is the inverse run in its row, a field like any other (`{re: /VOR:\S+/, area: 'F', row: 0}`).
+- **The direct-to window**, which shows while the right inner knob is pulled out: `await u.panel.scan()`;
+  it starts on the active waypoint, and `u.panel.inner('R', 1)` or `-1` steps through the waypoints of FPL 0 (a second
+  `scan()` pushes the knob in and closes the window). It is 6 characters wide in row 6 from column 17,
+  inverse, empty (six inverse blanks) while there is no waypoint (`{re: /.{6}$/, area: 'F', row: 6}` finds it). The
+  open menu takes its place, and pulling the knob closes the menu.
+
+Both are text in the KLN font like the rest, with inverse and flashing as elsewhere; the site draws each as a block of
+its own (`kln-snav5-menu`, `kln-snav5-window`), and the map is under them. The site knows a part is open from its
+cells: the menu when any cell of its rectangle is not a normal blank, the window when any cell of its row from column 17
+is not (the window is inverse even when empty). Text anywhere else over the map still fails.
+
+**Map elements under the menu or the window.** The unit draws them on the canvas, but the opaque menu and window hide
+them. A screen needs a field for every element the pilot can see and for none that it cannot, so the capture drops an
+element whose map pixels all lie under the menu (map pixels x 76 and right, y 0 to 52, the border line included) or the
+window (x 94 and right, y 78 and below). An element that is only partly covered stays, with all its pixels, and needs a
+field: the pilot sees the rest of it, and the opaque block on the site hides the part under it. Pixels under the menu or
+window are not compared with the map in the coverage check, which is why dropped elements do not fail it. The rectangles
+are in `coverOf` in `lib/capture.ts`.
 
 ### Map fields
 

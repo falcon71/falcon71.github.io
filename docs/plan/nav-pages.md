@@ -1,82 +1,47 @@
 # Package: nav-pages (the NAV chapter)
 
-One large chapter of the page reference. Pointers come from the planning survey of the code (paths relative to
-`vendor/kln90b/kln90b/`); they are not checked facts. Screens are planned by the session after its research. If the
-research shows the chapter is too large for one session, NAV 5 and Super NAV 5 (the map) become a package of their
-own within the same chapter file.
+Done 2026-11-18. One chapter of the page reference, `pages/nav.mdx`, for both sides (style guide, section 17).
+Researched and written in two halves (NAV 1 to NAV 4 with Super NAV 1; NAV 5 and Super NAV 5), one writer each, one
+after the other on the same file. The maintainer decided (2026-11-18) to extend the generator in this package, so that
+Super NAV 5 is shown with its pop-up menu and with its window (`kln90b/generator/README.md`, "Super NAV 5"). The
+page-link plugin now links Super NAV 1 and Super NAV 5 as whole names (`README.md`, "Page links").
 
-## Pages
+## Sections as written (`/kln90b/pages/nav/`)
 
-### NAV pages (`pages/nav.mdx`)
+- Summary; `#the-nav-pages-on-both-sides`: the same pages on both sides, NAV 4's entries act on its side, the
+  cursor fields of NAV 3 and NAV 5, the ALT button showing NAV 4 on the right (link to Airspace and altitude
+  alerting), the page pairs of the full-screen pages (link to Controls and display).
+- `#nav-1-the-navigation-situation`, with `#nav-1-after-a-direct-to`, `#nav-1-in-obs-mode` (blank before the
+  arrow), `#nav-1-without-an-active-waypoint`, `#nav-1-without-a-position`, `#nav-1-in-the-approach-modes` (what NAV 1
+  shows; `F L A G` and dashes when integrity is lost in approach active mode; links Non-precision approaches).
+- `#super-nav-1-nav-1-on-the-whole-screen`.
+- `#nav-2-the-present-position`: the nearby VOR (NAV 2's own search, not the nearest list) and the VOR of a DME arc.
+- `#nav-3-tracks-and-minimum-safe-altitudes`, with `#nav-3-in-obs-mode`, `#nav-3-without-an-active-waypoint`,
+  `#nav-3-without-a-position` (`ESA` keeps a value; bug pending, see below), `#minimum-safe-altitudes` (owns `MSA`
+  and `ESA`: terrain grid with the clearance included, no obstacles).
+- `#nav-4-altitude-and-vnav`, with `#nav-4-without-an-altitude-input` (Availability box).
+- `#nav-5-the-map`, with `#what-nav-5-draws`, `#the-range-scale`, `#the-map-orientation` (Availability box for heading
+  up), `#the-map-is-blank-in-actual-track-up` (the Good to know box),
+  `#the-plus-of-a-waypoint-page`.
+- `#super-nav-5-the-map-on-the-whole-screen`, with `#what-super-nav-5-draws`, `#the-left-side-of-super-nav-5`,
+  `#the-range-scale-and-auto`, `#the-pop-up-menu`, `#the-vor-ndb-and-apt-selections`, `#runway-diagrams`,
+  `#decluttering`, `#the-window`.
+- `#where-to-go-next`.
 
-One chapter for both sides (style guide, section 17). Sections in page order:
+## Screens not staged
 
-1. The NAV pages as a type: they exist on both sides; what differs between the sides; the full-screen pages.
-2. NAV 1: the navigation situation. Variants by mode; no active waypoint; no position.
-3. Super NAV 1.
-4. NAV 2: the present position.
-5. NAV 3: the tracks and the minimum safe altitudes (`MSA`, `ESA`; this section owns them). Variant in OBS mode.
-6. NAV 4: altitude and VNAV. The fields only; the tasks are VNAV's and Airspace and altitude alerting's (planned).
-7. NAV 5: the map. Orientation (heading up with the Availability box), range, what it draws.
-8. Super NAV 5: the full-screen map, its fields on the left, its menu, the scan on the map, decluttering.
-9. Links to the Operation pages that use the pages.
+- MSA and ESA outside the terrain grid (no such place in the FAA extract).
+- NAV 4 with `VNV ARMED`, `VNV IN` and an advisory altitude: the field explanations name the states and link VNAV;
+  the package vnav-alerts shows them.
+- NAV 2 with the VOR of a DME arc, and the window of Super NAV 5 with `MOVE ?` on a DME arc waypoint: DME arcs were
+  not staged; the package approaches can.
 
-## Topics this package owns
+## Issues
 
-The pages and their fields; minimum safe altitudes. Links instead of explanations: the active waypoint, the modes
-and the CDI scale (Modes of operation); alerting and sequencing (Sequencing); direct-to from the map (Direct-to);
-which page pair brings up a full-screen page (Controls and display).
-
-## Where to look
-
-`pages/left/Nav1Page.tsx` to `Nav5Page.tsx`, `SuperNav1Page.tsx`, `SuperNav5Page.tsx`, `controls/Canvas.tsx`,
-`controls/selects/MapOrientationSelector.tsx`, `services/MSA.ts`, `pages/MainPage.tsx` (the full-screen pages).
-
-## Notes from other packages
-
-- The screens `pages/nav/nav-1-apt-1-ksea` (Quickstart) and `pages/nav/home-nav-1` (home page) exist; reuse or replace, one screen, one
-  id.
-- The word list has D-bar, groundspeed, Enroute-Leg mode.
-- From the planning survey: the wiki's Known limitations names a missing outline of text on NAV 5; that belongs to
-  Known limitations, not to this chapter.
-
-### From the package controls (2026-11-17)
-
-- **Super NAV 5:** with its right menu open, pulling the right inner knob closes the menu and shows the scan window.
-  Controls and display says only that Super NAV 5 uses the pulled knob for its scan window; the NAV chapter owns the
-  rest. The generator cannot stage the scan window or the menu (`kln90b/generator/README.md`, "Super NAV 5").
-- Controls and display says which page pair brings up Super NAV 1 and Super NAV 5, and that the right knobs keep
-  working on the hidden right side while a full-screen page is shown.
-
-### From the package nearest-direct-to (2026-11-18)
-
-- NAV 1 shows the Direct To symbol (official term, written in words in prose) in place of the from waypoint after a
-  direct-to; the field explanations of `direct-to/nav-1` and `direct-to/obs-crs-message` describe NAV 1 briefly; keep
-  the NAV chapter's NAV 1 screens consistent with them.
-- Bug candidate for NAV 1 in OBS mode: the code always shows the from waypoint or the Direct To symbol before the
-  active arrow (`pages/left/Nav1Page.tsx:44-48`, `:79-82`), while the real unit shows only the arrow and the active
-  waypoint in OBS mode (reviewer of Direct-to). Filed as kln90b#495; describe the current behavior with the
-  `kln90b#495` comment.
-- Super NAV 5 draws the three nearest lists, filtered for airports by the nearest airport criteria of SET 3
-  (`SuperNav5Page.tsx:341`); Nearest mentions it in one clause and owns the criteria
-  (`/kln90b/operation/nearest/#setting-the-nearest-airport-criteria`).
-- The window of Super NAV 5 (official term) is a source of the Direct To page's default waypoint; Direct-to,
-  `#the-default-waypoint`, owns that. After a direct-to from Super NAV 5 the screen ends on NAV 5 and NAV 1; the
-  reviewer found this consistent with the unit's general rule; not filed.
-- NAV 2's nearest VOR is its own search (low or high VORs within 200 NM), not the nearest VOR list.
-
-### From the package navigation (2026-11-18)
-
-- DTK on NAV 3 and on Super NAV 5 flashes while the external indicator the unit reads is more than 10° off the desired
-  track (`controls/selects/ObsDtkElement.tsx`); Modes of operation owns it (`#the-selected-course`), the field
-  explanations say it and link.
-- Super NAV 5 shows the mode on its left side in a short form; Modes of operation says so in one sentence
-  (`#the-mode-annunciations`). The NAV chapter explains the field.
-- In OBS mode NAV 3 shows `OBS:nnn°` in place of `DTK`; the CDI scale factor, the TO/FROM indicator and the D-bar link
-  `/kln90b/operation/modes-of-operation/#the-cdi-scale` and `#leg-mode`. The screens `navigation/leg` and
-  `navigation/obs` show NAV 1 in both modes.
-- `pages/nav/nav-1-apt-1-ksea/fields.mdx` no longer gives the scale factors; it links Modes of operation.
-
-## Changes to earlier pages
-
-None planned.
+- Filed: kln90b#498 (the map orientation field after a heading input arrives; its paragraph was cut at the
+  maintainer's request, 2026-11-18), kln90b#499 (the star without an identifier, `#what-super-nav-5-draws`),
+  kln90b#500 (the hidden cursor stop on the selected course of Super NAV 5, `#the-left-side-of-super-nav-5`),
+  kln90b#501 (NAV 4 `ANGLE` `0.0` for 10° or more, in the `angle` fields of `nav-4` and `nav-4-no-altitude`),
+  kln90b#502 (`ESA` without a position, `#nav-3-without-a-position` and the `esa` fields).
+- kln90b#495 did not reproduce at the pin; a comment says so, and the maintainer checks it. The NAV chapter
+  describes the blank before the arrow in OBS mode and has no `kln90b#495` comment.

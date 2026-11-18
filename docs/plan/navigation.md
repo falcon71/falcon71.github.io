@@ -22,7 +22,7 @@ name is the one pilots search for; it sets no rule for other titles. The text ca
 6. `#changing-between-the-modes`: leg to OBS, OBS to leg on the TO and the FROM side.
 7. `#the-mode-annunciations`: the five annunciations with their official mode names and status line excerpts;
    arming and activation in one sentence each with the link to Non-precision approaches.
-8. `#the-cdi-scale` (explicit anchor; the heading is "The CDI scale factor", `#the-cdi-scale-factor`): the factors,
+8. `#the-cdi-scale-factor` (explicit anchor; the heading is "The CDI scale factor", `#the-cdi-scale-factor`): the factors,
    MOD 1, the automatic changes; drawing `CdiScale.astro`.
 9. `#magnetic-variation`: `#flying-without-a-magnetic-variation` (the primary coverage area, SET 2),
    `#magnetic-var-invalid`.

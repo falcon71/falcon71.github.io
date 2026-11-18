@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 148 91" width="148" height="91" shape-rendering="crispEdges" fill="currentColor">
+<g data-field="active-leg" data-draw="arrow KPAE KSEA" data-box="69 2 7 76">
+<path d="M75 2h1v1h-1z"/>
+<path d="M75 3h1v1h-1z"/>
+<path d="M75 4h1v1h-1z"/>
+<path d="M75 5h1v1h-1z"/>
+<path d="M75 6h1v1h-1z"/>
+<path d="M75 7h1v1h-1z"/>
+<path d="M75 8h1v1h-1z"/>
+<path d="M75 9h1v1h-1z"/>
+<path d="M75 10h1v1h-1z"/>
+<path d="M75 11h1v1h-1z"/>
+<path d="M75 12h1v1h-1z"/>
+<path d="M75 13h1v1h-1z"/>
+<path d="M75 14h1v1h-1z"/>
+<path d="M75 15h1v1h-1z"/>
+<path d="M75 16h1v1h-1z"/>
+<path d="M75 17h1v1h-1z"/>
+<path d="M75 18h1v1h-1z"/>
+<path d="M75 19h1v1h-1z"/>
+<path d="M75 20h1v1h-1z"/>
+<path d="M75 21h1v1h-1z"/>
+<path d="M74 22h1v1h-1z"/>
+<path d="M74 23h1v1h-1z"/>
+<path d="M74 24h1v1h-1z"/>
+<path d="M74 25h1v1h-1z"/>
+<path d="M74 26h1v1h-1z"/>
+<path d="M74 27h1v1h-1z"/>
+<path d="M74 28h1v1h-1z"/>
+<path d="M74 29h1v1h-1z"/>
+<path d="M74 30h1v1h-1z"/>
+<path d="M74 31h1v1h-1z"/>
+<path d="M74 32h1v1h-1z"/>
+<path d="M74 33h1v1h-1z"/>
+<path d="M74 34h1v1h-1z"/>
+<path d="M74 35h1v1h-1z"/>
+<path d="M74 36h1v1h-1z"/>
+<path d="M74 37h1v1h-1z"/>
+<path d="M74 38h1v1h-1z"/>
+<path d="M74 39h1v1h-1z"/>
+<path d="M74 40h1v1h-1z"/>
+<path d="M74 41h1v1h-1z"/>
+<path d="M74 42h1v1h-1z"/>
+<path d="M74 43h1v1h-1z"/>
+<path d="M74 44h1v1h-1z"/>
+<path d="M74 45h1v1h-1z"/>
+<path d="M74 46h1v1h-1z"/>
+<path d="M74 47h1v1h-1z"/>
+<path d="M74 48h1v1h-1z"/>
+<path d="M74 49h1v1h-1z"/>
+<path d="M73 50h1v1h-1z"/>
+<path d="M73 51h1v1h-1z"/>
+<path d="M73 52h1v1h-1z"/>
+<path d="M73 53h1v1h-1z"/>
+<path d="M73 54h1v1h-1z"/>
+<path d="M73 55h1v1h-1z"/>
+<path d="M73 56h1v1h-1z"/>
+<path d="M73 57h1v1h-1z"/>
+<path d="M73 58h1v1h-1z"/>
+<path d="M73 59h1v1h-1z"/>
+<path d="M73 60h1v1h-1z"/>
+<path d="M73 61h1v1h-1z"/>
+<path d="M73 62h1v1h-1z"/>
+<path d="M73 63h1v1h-1z"/>
+<path d="M73 64h1v1h-1z"/>
+<path d="M73 65h1v1h-1z"/>
+<path d="M73 66h1v1h-1z"/>
+<path d="M73 67h1v1h-1z"/>
+<path d="M72 68h1v1h-1z"/>
+<path d="M72 69h1v1h-1z"/>
+<path d="M72 70h1v1h-1z"/>
+<path d="M72 71h1v1h-1z"/>
+<path d="M72 72h1v1h-1z"/>
+<path d="M69 73h1v1h-1zM72 73h1v1h-1z"/>
+<path d="M70 74h1v1h-1zM72 74h1v1h-1z"/>
+<path d="M70 75h1v1h-1zM72 75h1v1h-1zM75 75h1v1h-1z"/>
+<path d="M71 76h4v1h-4z"/>
+<path d="M72 77h1v1h-1z"/>
+</g>
+<g data-field="waypoints" data-draw="label KPAE KPAE" data-box="51 1 23 7">
+<path d="M51 1h1v1h-1zM55 1h1v1h-1zM57 1h4v1h-4zM64 1h3v1h-3zM69 1h5v1h-5z"/>
+<path d="M51 2h1v1h-1zM54 2h1v1h-1zM57 2h1v1h-1zM61 2h1v1h-1zM63 2h1v1h-1zM67 2h1v1h-1zM69 2h1v1h-1z"/>
+<path d="M51 3h1v1h-1zM53 3h1v1h-1zM57 3h1v1h-1zM61 3h1v1h-1zM63 3h1v1h-1zM67 3h1v1h-1zM69 3h1v1h-1z"/>
+<path d="M51 4h2v1h-2zM57 4h4v1h-4zM63 4h5v1h-5zM69 4h4v1h-4z"/>
+<path d="M51 5h1v1h-1zM53 5h1v1h-1zM57 5h1v1h-1zM63 5h1v1h-1zM67 5h1v1h-1zM69 5h1v1h-1z"/>
+<path d="M51 6h1v1h-1zM54 6h1v1h-1zM57 6h1v1h-1zM63 6h1v1h-1zM67 6h1v1h-1zM69 6h1v1h-1z"/>
+<path d="M51 7h1v1h-1zM55 7h1v1h-1zM57 7h1v1h-1zM63 7h1v1h-1zM67 7h1v1h-1zM69 7h5v1h-5z"/>
+</g>
+<g data-field="waypoints" data-draw="icon @ KSEA" data-box="71 80 3 3">
+<path d="M71 80h3v1h-3z"/>
+<path d="M71 81h3v1h-3z"/>
+<path d="M71 82h3v1h-3z"/>
+</g>
+<g data-field="waypoints" data-draw="label KSEA KSEA" data-box="47 78 23 7">
+<path d="M47 78h1v1h-1zM51 78h1v1h-1zM54 78h3v1h-3zM59 78h5v1h-5zM66 78h3v1h-3z"/>
+<path d="M47 79h1v1h-1zM50 79h1v1h-1zM53 79h1v1h-1zM57 79h1v1h-1zM59 79h1v1h-1zM65 79h1v1h-1zM69 79h1v1h-1z"/>
+<path d="M47 80h1v1h-1zM49 80h1v1h-1zM53 80h1v1h-1zM59 80h1v1h-1zM65 80h1v1h-1zM69 80h1v1h-1z"/>
+<path d="M47 81h2v1h-2zM54 81h3v1h-3zM59 81h4v1h-4zM65 81h5v1h-5z"/>
+<path d="M47 82h1v1h-1zM49 82h1v1h-1zM57 82h1v1h-1zM59 82h1v1h-1zM65 82h1v1h-1zM69 82h1v1h-1z"/>
+<path d="M47 83h1v1h-1zM50 83h1v1h-1zM53 83h1v1h-1zM57 83h1v1h-1zM59 83h1v1h-1zM65 83h1v1h-1zM69 83h1v1h-1z"/>
+<path d="M47 84h1v1h-1zM51 84h1v1h-1zM54 84h3v1h-3zM59 84h5v1h-5zM65 84h1v1h-1zM69 84h1v1h-1z"/>
+</g>
+<g data-field="aircraft" data-draw="icon $ 47.6493,-122.2985" data-box="72 44 5 3">
+<path d="M73 44h1v1h-1zM75 44h1v1h-1z"/>
+<path d="M72 45h2v1h-2zM75 45h2v1h-2z"/>
+<path d="M73 46h1v1h-1zM75 46h1v1h-1z"/>
+</g>
+</svg>
