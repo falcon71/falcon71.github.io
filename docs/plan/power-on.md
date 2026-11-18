@@ -50,7 +50,7 @@ All planned states were staged: `turn-on-page`, `turn-on-page-cursor`, `self-tes
 
 The power-on sequence and its pages, the task of initializing position and time, what the unit keeps while off.
 Links instead of explanations: the receiver states and acquisition (GPS reception and RAIM), the database
-(Waypoints and the database), OBS mode (Navigation modes), SET 1 and SET 2 as pages (SET chapter).
+(Waypoints and the database), OBS mode (Modes of operation), SET 1 and SET 2 as pages (SET chapter).
 
 ## Where to look
 

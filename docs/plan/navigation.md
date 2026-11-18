@@ -1,83 +1,99 @@
-# Package: navigation (Navigation modes; Sequencing and turn anticipation; the MOD chapter)
+# Package: navigation (Modes of operation; Sequencing and turn anticipation; the MOD chapter)
 
-The intricate core of en route navigation; the Operation pages run on Opus (`docs/coordinator-prompt.md`,
-"Models"). Pointers come from the planning survey of the code (paths relative to `vendor/kln90b/kln90b/`); they are
-not checked facts. Screens and drawings are planned by the session after its research. If the research shows the
-package is too large for one session, Sequencing and turn anticipation becomes a package of its own.
+The core of en route navigation. Written in the package session of 2026-11-18; the sections below are what was
+written, with their anchors. Pointers are paths relative to `vendor/kln90b/kln90b/`.
 
 ## Pages
 
-### Navigation modes (`operation/navigation-modes.mdx`)
+### Modes of operation (`operation/modes-of-operation.mdx`, `sidebar.order` 6)
+
+Renamed from "Navigation modes" with a new slug by a one-off decision of the maintainer (2026-11-18), because the
+name is the one pilots search for; it sets no rule for other titles. The text calls leg and OBS mode "course modes"
+(word list).
 
 1. Summary.
-2. `#the-active-waypoint` (planned): the active waypoint and the active leg, how the pages mark them.
-3. Leg mode: what the unit does in it.
-4. OBS mode: what changes; selecting leg and OBS on the MOD pages or with the aircraft's switch (Availability box);
-   the selected course (official term; not "OBS course") and where it is set; the messages that ask for a course on the indicator.
-5. Changing between the modes in flight: what the unit keeps.
-6. The mode annunciations of the status line.
-7. The CDI scale: the scale of each mode, changing it, a drawing (style guide, section 16).
-8. Magnetic variation: where the unit has none, entering one.
-9. Links on (Non-precision approaches for the approach modes).
+2. `#the-active-waypoint`: the active waypoint and the active leg, how the pages mark them; `#no-active-waypoint`.
+3. `#leg-mode`.
+4. `#obs-mode`: `#selecting-leg-or-obs-mode` (MOD pages; `#with-the-gps-crs-switch-of-the-aircraft` with the
+   Availability box; `#no-actv-wpt-in-the-status-line`); `#the-selected-course` (the three installations, the
+   variation of the selected course, the DTK that flashes while the external indicator is more than 10° off).
+5. `#the-course-messages`: `#adj-nav-ind-crs-to-nnn`, `#adj-nav-ind-crs` (the unit turns the indicator itself),
+   `#obs-wpt--200nm`.
+6. `#changing-between-the-modes`: leg to OBS, OBS to leg on the TO and the FROM side.
+7. `#the-mode-annunciations`: the five annunciations with their official mode names and status line excerpts;
+   arming and activation in one sentence each with the link to Non-precision approaches.
+8. `#the-cdi-scale` (explicit anchor; the heading is "The CDI scale factor", `#the-cdi-scale-factor`): the factors,
+   MOD 1, the automatic changes; drawing `CdiScale.astro`.
+9. `#magnetic-variation`: `#flying-without-a-magnetic-variation` (the primary coverage area, SET 2),
+   `#magnetic-var-invalid`.
+10. Where to go next.
 
-### Sequencing and turn anticipation (`operation/sequencing.mdx`)
+### Sequencing and turn anticipation (`operation/sequencing.mdx`, `sidebar.order` 7)
 
 1. Summary.
-2. `#waypoint-alerting` (planned): when and how the unit announces the next waypoint.
-3. Waypoint sequencing: when the unit makes the next leg active, and when it does not.
-4. Turn anticipation: the geometry (a drawing), the limits, turning it off on SET 6.
-5. Fly-over waypoints.
-6. Links on.
+2. `#waypoint-alerting`: the alert times (about 20, 15 and 36 seconds; the list is the one place they stand), what
+   flashes and what goes steady in the transition (the active arrows keep flashing: correct, maintainer 2026-11-18);
+   `#the-wpt-annunciator` with the Availability box.
+3. `#waypoint-sequencing`: the midpoint of the transition, abeam the waypoint, more than 4 NM off the leg;
+   `#when-the-unit-does-not-sequence` (for the FAQ); the ACT page keeps the passed waypoint (kln90b#491).
+4. `#turn-anticipation`: `#where-turn-anticipation-begins` (a table by groundspeed and course change, drawing
+   `TurnAnticipation.astro`), `#far-off-the-leg` (without the simulation's numbers), `#turning-off-turn-anticipation`
+   (SET 6 with a procedure).
+5. `#fly-over-waypoints`: no page marks them; the waypoint type identification page belongs to Flight plans.
+6. Where to go next.
 
-### MOD pages (`pages/mod.mdx`)
+### MOD pages (`pages/mod.mdx`, `sidebar.order` 2)
 
-MOD 1 and MOD 2: the pages, their variants with the aircraft's switch, the fields.
+`#the-mod-pages-one-page-for-each-course-mode` (with `#with-the-gps-crs-switch-of-the-aircraft`), `#mod-1-leg-mode`,
+`#mod-2-obs-mode`.
+
+## Screens
+
+All planned states were staged, `APR-LEG` included (a direct-to JALON on the RNAV 34L of KSEA, 1.5 NM before it):
+`navigation/*` (leg, obs, obs-to-leg, no-actv-wpt, arm-leg, arm-obs, apr-leg, the course messages, `MAGNETIC VAR
+INVALID`, SET 2 without a variation at a position north of 74°N), `pages/mod/*`, `sequencing/alert`,
+`sequencing/turn`, `sequencing/super-nav-5-turn`, `pages/set/set-6`, `pages/set/set-6-cursor` (staging shared in
+`screens/sequencing/olm-turn.ts`).
+
+Not staged: Super NAV 5 during the alert. Its identifier flashes by disappearing, and the capture showed it steady;
+the page describes it in words. The WPT annunciator is outside the screen. No FPL 0 screen in OBS mode, because the
+text does not describe it.
 
 ## Topics this package owns
 
 See the index: the active waypoint, the modes, the selected course, the mode annunciations, the CDI scale, magnetic
 variation; waypoint alerting, sequencing, turn anticipation, fly-over waypoints.
 
-## Where to look
+## Bugs (2026-11-18)
 
-`services/ModeController.ts`, `data/navdata/NavCalculator.ts`, `ObsGeometry.ts`, `SequencingGeometry.ts`,
-`WaypointAlert.ts`, `data/flightplan/ActiveWaypoint.ts`, `services/FlyOverWaypoints.ts`,
-`data/navdata/KLNMagvar.ts`, `pages/left/Mod1Page.tsx`, `Mod2Page.tsx`, `Set6Page.tsx`, `pages/ObsWarningPage.tsx`, `pages/left/DirectToPage.tsx` (the direct-to in OBS mode);
-tests `test/render/services/ModeController*.test.ts` and in `test/flight/flights/`: `turnLead`,
-`waypointAlertTurn`, `largeTurn`, `bisectorSequencing`, `offCourseSequencing`, `hsiToFromFlags`.
-
-## Notes from other packages
-
-- From the package getting-started: the glossary entries `enr:`, `arm-leg`, `arm:` and `apr-leg` were written
-  before the rule on official terms; the reviewer of Navigation modes checks the names of all modes and the
-  coordinator corrects the glossary. The word list has Enroute-Leg mode, leg mode, OBS mode, D-bar.
-- The glossary's placeholder entry `Turn anticipation` goes when this package replaces the placeholder page (style
-  guide, section 14: operating concepts are no glossary terms).
-- The FAQ entry "Why does the unit not sequence to the next waypoint?" links to Sequencing; note the anchor in
-  `docs/plan/help.md`.
-- From the package waypoint-pages (2026-11-17): the ACT chapter, the APT chapter and the VOR, NDB, INT and SUP
-  chapters link `/kln90b/operation/navigation-modes/#the-active-waypoint` and
-  `/kln90b/operation/sequencing/#waypoint-alerting`; both anchors must exist. The ACT page keeps the passed
-  waypoint after the unit sequences (kln90b#491); the ACT chapter describes it, and Sequencing may name it in one
-  sentence with the link to `/kln90b/pages/act/`. The research noted that the active arrow does not go steady
-  during the turn, unlike the WPT annunciator and Super NAV 5; check this when writing waypoint alerting.
-
-### From the package nearest-direct-to (2026-11-18)
-
-- Direct-to links `/kln90b/operation/navigation-modes/#obs-mode` (planned) and `#the-active-waypoint` (planned); create both.
-- The official term for the course set in OBS mode is "selected course" (word list); not "OBS course".
-- Direct-to, "Flying a direct-to in OBS mode", owns `DIRECT TO:` and `ACTIVATE:` in OBS mode and the course message
-  `CRS nnn°` in the status line (section of its own with the Availability box). Navigation modes says what the unit does
-  with the selected course in each installation (it sets it, reads it from an indicator it can or cannot turn, or has
-  no indicator input) and links Direct-to for the direct-to case; the reviewer found that the magnetic variation of
-  the selected course belongs here.
-- Sequencing: the waypoint alert before a direct-to waypoint (also one outside the flight plan) is Sequencing's; the
-  Direct-to page links `#waypoint-alerting` (planned). Writer's note from the code: the alert comes earlier before a
-  turn onto a following leg than before a plain direct-to waypoint; check the numbers in the code.
-- A direct-to to a waypoint of FPL 0 resumes sequencing after that waypoint; one outside FPL 0 is not sequenced.
-  Direct-to says it; Sequencing links there.
+- An approach loaded through the EFB route in an installation without APT 8 is armed within 30 NM: part of the open
+  kln90b#479, not filed again.
+- kln90b#496 (filed 2026-11-18): canceling a direct-to in OBS mode (`pages/left/DirectToPage.tsx:104`) keeps OBS mode
+  and the selected course but measures the deviation from the plan leg nearest the aircraft; comment in Direct-to,
+  `#canceling-a-direct-to`.
+- Approved by the maintainer, not yet filed (the session's tool permissions refused it twice; the maintainer
+  files it or allows `mcp__github__issue_write`): OBS to leg mode on the FROM
+  side with an active waypoint outside FPL 0 keeps a direct-to to the passed waypoint instead of the nearest leg of
+  FPL 0 (`services/ModeController.ts:130-143`; kln90b#155 fixed the case of a waypoint in FPL 0). Its comment goes on
+  Modes of operation, `#changing-between-the-modes`, the bullet "Behind you (FROM), with a waypoint outside FPL 0".
+- Not filed: the variation of the selected course at an approach waypoint (the code uses the model's variation,
+  the real unit the published one; low confidence, the simulator's data may carry none). With the LEG/OBS switch
+  and no active waypoint the code enters OBS mode anyway; the real unit's behavior is not documented.
+- Not a bug: the active arrows keep flashing during the transition while the WPT annunciator and Super NAV 5 go
+  steady (maintainer, 2026-11-18). DTK does flash while the external indicator is more than 10° off
+  (`controls/selects/ObsDtkElement.tsx`).
 
 ## Changes to earlier pages
 
-The seam check verifies that `#the-active-waypoint` and `#waypoint-alerting` exist, since earlier pages and field
-explanations link to them.
+Made by this package, through its reviewer and seam check:
+
+- Direct-to, "What the unit does": `ADJ NAV IND CRS TO nnn°` after a direct-to comes only where the unit reads the
+  external indicator, after it stays off the new desired track; the paragraph links `#adj-nav-ind-crs-to-nnn`.
+- The official terms of this package on earlier pages: external indicator (Direct-to, Sequencing, the Self Test
+  screens), course mode (Controls and display and the mode annunciation fields of older screens), selected course
+  (Controls and display, Power-on, Simulated failures), GPS CRS switch (Power-on, the OBS warning page screen), the
+  TO/FROM indicator (Power-on, the Self Test screen).
+- The CDI scale factors are said once, on Modes of operation: Power-on and the field explanations of
+  `pages/nav/nav-1-apt-1-ksea` link there instead.
+- The placeholder drawing `CourseDeviation.astro` and the glossary's placeholder entry `Turn anticipation` are gone;
+  the glossary expansions of the five mode annunciations carry the official mode names.

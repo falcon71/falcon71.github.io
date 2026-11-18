@@ -400,6 +400,10 @@ names for one thing takes them for two things.
   code suggests.
 - **The reviewer checks every term against the real manuals** and reports each difference as a finding: the draft's
   term and the official term, nothing else. A term is a name of a few words; no sentence around it comes along.
+- **Titles are not terms.** The titles of pages and sections and the order of the manual are its own (section 4);
+  the reviewer does not check them against the real manuals, so that the manual never copies their structure.
+- **Slugs may change while the manual is being built.** A renamed page gets the matching slug, and every link to it
+  is changed in the same commit. Once the manual is published as complete, slugs stay.
 - The coordinator adds the official term to the word list below, so that every later writer uses it without a
   reviewer having to find it again.
 
@@ -482,7 +486,8 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | groundspeed | ground speed |
 | button (the buttons of the unit) | key |
 | page type (the APT pages are a page type) | page group, group |
-| Enroute-Leg mode (the unit shows `ENR-LEG`) | en route leg mode |
+| the modes by their official names: Enroute-Leg mode (`ENR-LEG`), Enroute-OBS mode (`ENR:` and the selected course), Approach Arm-Leg mode (`ARM-LEG`), Approach Arm-OBS mode (`ARM:` and the selected course), Approach Active-Leg mode (`APR-LEG`) | en route leg mode, en route in OBS mode |
+| course mode (leg mode or OBS mode, as a kind) | navigation mode |
 | NAV ready (the unit is NAV ready once it has a position good enough to navigate) | has found its position |
 | D-bar (the course deviation bar of NAV 1 and the Self Test page) | CDI bar, deviation bar |
 | leg mode, OBS mode | LEG mode |
@@ -530,7 +535,7 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | RAIM prediction; the bar graph of STA 5, a bar above the line, a bar below the line | high bar, low bar |
 | ETA (the field of STA 5 and wherever the unit shows `ETA`) | arrival time |
 | approach arm mode, approach active mode | approach armed, armed mode, active mode |
-| the GPS APR button | |
+| the GPS APR switch, the GPS CRS switch (the aircraft's switches with their annunciators; the unit's screen text says `BUTTON` and is quoted as it is) | the GPS APR button, the GPS CRS button |
 | total operational time (STA 4) | total operating time |
 | software revision status (STA 3) | software version |
 | remote annunciators (the annunciators outside the unit that it drives) | annunciator lamps, external annunciators |
@@ -543,9 +548,17 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | the window of Super NAV 5 (the waypoint the left side scans through) | the scan window, the waypoint window |
 | the `DIRECT TO` annunciation, the `ACTIVATE` annunciation (the top line of the Direct To page) | the heading, the page title |
 | selected course (the course set in OBS mode) | OBS course, OBS value |
+| CDI scale factor (the full-scale deflection of the D-bar, set on MOD 1) | CDI scale |
+| the TO/FROM indicator (the mark in the D-bar and of the external indicator) | the to/from flag |
+| the external indicator (the CDI or HSI of the aircraft that the unit drives); the KLN 90B is the displayed navigation source | course indicator; switched to the GPS |
+| primary coverage area (where the unit has a magnetic variation, from 74°N to 60°S) | |
 | activate a waypoint (what `ACTIVATE` does in OBS mode) | |
 | nearest airport criteria (the settings of SET 3) | nearest airport settings |
 | the fail question, the repair question (FLR 3, FLR 2) | |
+| transition (the curved path the unit guides through a turn at a waypoint); the midpoint of the transition (where the unit makes the next leg active) | curved path, bisector |
+| the beginning of turn anticipation (where the unit starts guiding the turn) | turn start |
+| abeam the waypoint; fly-over waypoint; the WPT annunciator (one of the remote annunciators) | |
+| the waypoint type identification page (`TYPE WPT`, `1 EN ROUTE?`, `2 SID/STAR?`) | the `TYPE WPT` question |
 
 ### Spelling and style
 
@@ -585,6 +598,10 @@ general; the screen shows one concrete case.
 - **A step that carries data from one side to the other gets a screen** that shows both halves: where the data
   comes from and where it goes, such as the identifier of the right page taken into a field of the left page. The
   pilot learns such a step by seeing it (maintainer, 2026-11-17).
+- **Show only the page the text is about.** A screen of both halves, or an excerpt of both halves, where the text
+  is about one page shows the other page's data as well, and where the other page repeats the same data (the top
+  line of NAV 1 and of NAV 3), the pilot sees it twice and wonders why. Show the one half, and let the other page
+  have its own screen where the text describes it (maintainer, 2026-11-18).
 - **Show an excerpt** when only one line or a few lines of a page matter: the shared top line of a page type, a
   question the unit asks, a prompt in the status line. A page shows the rows of a generated screen with `rows`
   (README, "Writing a screen"); the fields on those rows keep their explanations. Where the text describes a line in
@@ -687,7 +704,7 @@ The sidebar has these chapters and pages. Operation explains tasks ("how do I…
 | --- | --- |
 | Getting started | Table of contents (home page) · Installation · Quickstart · Tutorial flight 1 · Tutorial flight 2 |
 | The unit | Controls and display (knobs, buttons, the two halves, status line, cursor and data entry, scan, page tree) · Keyboard mode · Power-on and initialization |
-| Operation | Waypoints and the database · User waypoints · Nearest · Direct-to · Flight plans · Navigation modes (leg and OBS) · Sequencing and turn anticipation · SID and STAR procedures · Non-precision approaches · VNAV · GPS reception and RAIM · Inside the GPS simulation (optional) · Messages · Airspace and altitude alerting · Trip planning and calculators · Fuel and air data · Simulated failures |
+| Operation | Waypoints and the database · User waypoints · Nearest · Direct-to · Flight plans · Modes of operation (leg and OBS) · Sequencing and turn anticipation · SID and STAR procedures · Non-precision approaches · VNAV · GPS reception and RAIM · Inside the GPS simulation (optional) · Messages · Airspace and altitude alerting · Trip planning and calculators · Fuel and air data · Simulated failures |
 | Page reference | One chapter per page type in page tree order. Left: TRI, MOD, FPL, NAV, CAL, STA, SET, FLR, OTH. Right: CTR, REF, ACT, D/T, NAV, APT, VOR, NDB, INT, SUP. Each page with its screen. |
 | Reference lists | Message page messages · Status line messages · Glossary |
 | Help | External hardware · FAQ and troubleshooting · Known limitations · Contact |

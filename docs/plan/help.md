@@ -37,6 +37,13 @@ Candidates for the FAQ and Known limitations, collected by earlier packages; eve
   the workaround of an earlier date in the simulator (wiki, FAQ, "The AIRAC is out of date"). Name no company
   (style guide, section 3) beyond what a pilot needs to find the update.
 
+### From the package navigation (2026-11-18)
+
+- The FAQ entry "Why does the unit not sequence to the next waypoint?" answers in its first sentence: most often the
+  unit is in OBS mode (the mode annunciation shows a colon and a course, such as `ENR:351`), where it never
+  sequences. Otherwise the waypoint is the last of FPL 0, a direct-to waypoint outside FPL 0 or the missed approach
+  point, or the navigation is flagged. Link `/kln90b/operation/sequencing/#when-the-unit-does-not-sequence`.
+
 ## Changes to earlier pages
 
 None planned.

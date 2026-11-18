@@ -24,7 +24,7 @@ One chapter for both sides (style guide, section 17). Sections in page order:
 ## Topics this package owns
 
 The pages and their fields; minimum safe altitudes. Links instead of explanations: the active waypoint, the modes
-and the CDI scale (Navigation modes); alerting and sequencing (Sequencing); direct-to from the map (Direct-to);
+and the CDI scale (Modes of operation); alerting and sequencing (Sequencing); direct-to from the map (Direct-to);
 which page pair brings up a full-screen page (Controls and display).
 
 ## Where to look
@@ -64,6 +64,18 @@ which page pair brings up a full-screen page (Controls and display).
   `#the-default-waypoint`, owns that. After a direct-to from Super NAV 5 the screen ends on NAV 5 and NAV 1; the
   reviewer found this consistent with the unit's general rule; not filed.
 - NAV 2's nearest VOR is its own search (low or high VORs within 200 NM), not the nearest VOR list.
+
+### From the package navigation (2026-11-18)
+
+- DTK on NAV 3 and on Super NAV 5 flashes while the external indicator the unit reads is more than 10° off the desired
+  track (`controls/selects/ObsDtkElement.tsx`); Modes of operation owns it (`#the-selected-course`), the field
+  explanations say it and link.
+- Super NAV 5 shows the mode on its left side in a short form; Modes of operation says so in one sentence
+  (`#the-mode-annunciations`). The NAV chapter explains the field.
+- In OBS mode NAV 3 shows `OBS:nnn°` in place of `DTK`; the CDI scale factor, the TO/FROM indicator and the D-bar link
+  `/kln90b/operation/modes-of-operation/#the-cdi-scale` and `#leg-mode`. The screens `navigation/leg` and
+  `navigation/obs` show NAV 1 in both modes.
+- `pages/nav/nav-1-apt-1-ksea/fields.mdx` no longer gives the scale factors; it links Modes of operation.
 
 ## Changes to earlier pages
 

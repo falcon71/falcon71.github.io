@@ -14,7 +14,7 @@ and the link to the page that owns the function.
 | Page | What it is for | Owner of the function |
 | --- | --- | --- |
 | SET 1 | the initial position | Power-on and initialization |
-| SET 2 | date, time and time zone; the magnetic variation field | Power-on and initialization; Navigation modes |
+| SET 2 | date, time and time zone; the magnetic variation field | Power-on and initialization; Modes of operation |
 | SET 3 | the criteria for nearest airports | Nearest |
 | SET 4 | when the flight timer runs | Trip planning and calculators (planned) |
 | SET 5 | the height above airport alert (Availability box) | Airspace and altitude alerting |
@@ -77,6 +77,15 @@ Only the pages and their fields.
   (`/kln90b/operation/nearest/#setting-the-nearest-airport-criteria`); the SET chapter explains the page and links.
   The screen `pages/set/set-3` (no cursor, defaults) exists and its field explanations match those of
   `nearest/msg-ent`; `pages/set/set-3-cursor` exists too.
+
+### From the package navigation (2026-11-18)
+
+- SET 6 is shown on Sequencing, `#turning-off-turn-anticipation`, with the screens `pages/set/set-6` and
+  `pages/set/set-6-cursor`; the SET chapter reuses them under a heading "SET 6: …" (the page link of Sequencing warns
+  until that heading exists) and links there.
+- SET 2: Modes of operation, `#flying-without-a-magnetic-variation`, shows `navigation/set-2-magvar` (SET 2 north of
+  74°N, the `MAG V` line for entering a variation), whose field explanations cover the whole page. The SET chapter's
+  SET 2 screens and these must agree, or the chapter reuses this one.
 
 ## Changes to earlier pages
 

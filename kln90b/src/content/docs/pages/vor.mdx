@@ -16,7 +16,7 @@ The VOR page belongs to the right side and has a single page. The top line shows
 
 <KlnScreen screen="pages/vor/vor-pae" />
 
-On a VOR of the database you can change only the identifier; on a nearest VOR the cursor can also rest on the rank (see below). The name, the class, the frequency, the published magnetic variation and the position are read-only. A `›` in the first column marks the VOR as the [active waypoint](/kln90b/operation/navigation-modes/#the-active-waypoint); it flashes during [waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting). When the active waypoint is a VOR, the [ACT pages](/kln90b/pages/act/) show this page for it.
+On a VOR of the database you can change only the identifier; on a nearest VOR the cursor can also rest on the rank (see below). The name, the class, the frequency, the published magnetic variation and the position are read-only. A `›` in the first column marks the VOR as the [active waypoint](/kln90b/operation/modes-of-operation/#the-active-waypoint); it flashes during [waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting). When the active waypoint is a VOR, the [ACT pages](/kln90b/pages/act/) show this page for it.
 
 The identifier you type finds VOR, VOR/DME and VORTAC stations, DME-only stations and your own user-defined VORs. The scan does not make that distinction: it steps through every station of the complete list, so it also stops on any localizer, VOT or TACAN-only station that the navigation data lists. Such a station shows no `D`, and an identifier of more than three characters, a localizer's, is cut to three. {/* kln90b#489: describes the current behavior; the fix makes the scan skip localizers and VOTs, as typed entry does */}
 

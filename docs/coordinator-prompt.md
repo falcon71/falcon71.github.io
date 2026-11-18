@@ -159,7 +159,7 @@ Choose by the task:
   links, anchors, `<Term>` use or word forms against the lists.
 - **Sonnet** for most research and writing: the survey, the fact sheets, the page reference chapters, the simpler
   Operation pages, the lists and the Help pages.
-- **Opus** where the behavior is intricate or a mistake is costly: the reviews, the pages about navigation modes,
+- **Opus** where the behavior is intricate or a mistake is costly: the reviews, the pages about the modes of operation,
   sequencing and turn anticipation, approaches, VNAV and the tutorials, and the reading part of the final pass.
 
 A reviewer runs on a model at least as strong as the writer it reviews. Writers of the same kind of page run on the
