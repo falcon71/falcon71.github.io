@@ -51,6 +51,21 @@ with that condition.
   (`pages/MainPage.tsx`, `popRightPage`, `parentRemoved`; `pushLeftPage(altPage, null)`). Controls and display says
   this in general under the pages that no knob reaches; this page owns when the ALT page's cursor stays off.
 
+### From the package nav-pages (2026-11-18)
+
+- NAV 4 (`/kln90b/pages/nav/#nav-4-altitude-and-vnav`) explains its fields only and links VNAV and this page. Its field
+  explanations name the VNAV states (`V OFF`, `V ARM`, `VNV ARMED`, `VNV IN`, the advisory altitude) and the
+  angle that starts nothing while VNAV is armed or active; once VNAV owns the 10 minutes and the 100 ft steps, the NAV
+  chapter (NAV 4 and field 1 of Super NAV 5) keeps only the reference and the link. Stage NAV 4 with `VNV ARMED`,
+  `VNV IN` and an advisory altitude here; the NAV chapter could not.
+- NAV 4 `ANGLE` shows `0.0` for a computed angle of 10° or more (`services/Vnav.ts`, `getAngle`), and the cursor on
+  it then starts nothing; the maintainer was asked whether it is a bug (nav-pages report).
+- The <kbd>ALT</kbd> button shows NAV 4 on the right side; the NAV chapter says so in one sentence and links
+  `/kln90b/operation/alerts/`.
+- NAV 4's labels and editability (`IND`/`SEL` or `FR`/`TO`) are set when the page is selected
+  (`pages/left/Nav4Page.tsx:47,49,62`) and do not follow an altitude input that fails or returns while it is shown; a
+  low-impact inconsistency, not filed.
+
 ## Changes to earlier pages
 
 The NAV chapter's NAV 4 section links to these pages; the seam check sharpens those links.

@@ -1,0 +1,52 @@
+<Field id="orientation" title="Map orientation">
+	The map orientation: which direction points to the top of the map. `N^` means north up; the unit draws the `^` as an arrow that points up. Desired track up (`DTK^`), actual track up (`TK^`) and heading up (`HDG^`) show the direction that is up instead, as a magnetic course in whole degrees. With the cursor on the field, the inner knob chooses between `N^`, `DTK^`, `TK^` and, where the unit has a heading, `HDG^`, and the map follows at once. [The map orientation](/kln90b/pages/nav/#the-map-orientation) explains the choices.
+</Field>
+
+<Field id="range" title="Range scale">
+	The range scale in NM: the distance from the aircraft to the top of the map. With the cursor on the field, the inner knob steps through the range scales from 1 NM to 1,000 NM, wraps around, and the map follows at once. [The range scale](/kln90b/pages/nav/#the-range-scale) lists them.
+</Field>
+
+<Field id="plus" title="Waypoint of the right page">
+	The plus marks the waypoint that the waypoint page on the right side shows, while the waypoint lies on the map. NAV 5 on the left side draws it for the APT, VOR, NDB, INT and SUP pages and the ACT pages ([The plus of a waypoint page](/kln90b/pages/nav/#the-plus-of-a-waypoint-page)).
+</Field>
+
+<Field id="aircraft" title="Aircraft">
+	The aircraft: a diamond in north up and desired track up, an aircraft symbol in actual track up and heading up. In north up it is in the middle of the map, in the other map orientations three quarters of the way down.
+</Field>
+
+<Field id="ident" title="VOR identifier">
+	<p>The identifier of the VOR. A `›` in front of it means that the VOR is the [active waypoint](/kln90b/operation/modes-of-operation/#the-active-waypoint). [Entering an identifier](/kln90b/operation/waypoints/#entering-an-identifier) explains how the page looks up a VOR.</p>
+	<p>The identifier is the only field that you can change on a VOR of the database. If you enter an identifier that no VOR has, the page shows no waypoint and empty fields, so that you can define a user-defined VOR ([A user-defined VOR](/kln90b/pages/vor/#a-user-defined-vor)).</p>
+</Field>
+
+<Field id="dme" title="DME of the station">
+	`D` means that the station has distance measuring equipment: a VOR/DME, a VORTAC or a DME without a VOR. A station without DME shows a blank. A user-defined VOR never shows `D`, because the unit does not know whether it has DME.
+</Field>
+
+<Field id="name" title="Station name">
+	The name of the station, cut to 11 characters. A user-defined VOR has no name, and the row stays blank.
+</Field>
+
+<Field id="class" title="Class of the station">
+	The class of the station: `T` for a terminal VOR, `L` for a low altitude VOR and `H` for a high altitude VOR. A station of another class, and every user-defined VOR, shows `U` for undefined.
+</Field>
+
+<Field id="freq" title="Frequency">
+	The frequency of the station in MHz with two decimals. It cannot be changed on a VOR of the database. A user-defined VOR shows dashes until you have entered a frequency.
+</Field>
+
+<Field id="magvar" title="Published magnetic variation">
+	The magnetic variation that the station carries, in whole degrees and followed by `E` or `W`. It can differ from the variation that the unit uses at the position of the aircraft. It cannot be changed on a VOR of the database.
+</Field>
+
+<Field id="pos" title="Position of the station">
+	The position of the station: latitude above, longitude below, as `N 47°55.19'` and `W122°16.67'` (degrees, minutes and hundredths of a minute). It cannot be changed on a VOR of the database.
+</Field>
+
+<Field id="page-left" title="Page identification of the left side">
+	The page identification of the left side: `NAV 5`.
+</Field>
+
+<Field id="page-right" title="Page identification of the right side">
+	The page identification of the right side: `VOR`.
+</Field>

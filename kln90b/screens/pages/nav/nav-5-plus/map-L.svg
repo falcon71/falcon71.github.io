@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 99 78" width="99" height="78" shape-rendering="crispEdges" fill="currentColor">
+<g data-field="plus" data-draw="icon + PAE" data-box="49 5 3 3">
+<path d="M50 5h1v1h-1z"/>
+<path d="M49 6h3v1h-3z"/>
+<path d="M50 7h1v1h-1z"/>
+</g>
+<g data-field="aircraft" data-draw="icon $ 47.3667,-122.3118" data-box="47 37 5 5">
+<path d="M49 37h1v1h-1z"/>
+<path d="M48 38h3v1h-3z"/>
+<path d="M47 39h5v1h-5z"/>
+<path d="M48 40h3v1h-3z"/>
+<path d="M49 41h1v1h-1z"/>
+</g>
+</svg>

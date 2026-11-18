@@ -559,6 +559,15 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | the beginning of turn anticipation (where the unit starts guiding the turn) | turn start |
 | abeam the waypoint; fly-over waypoint; the WPT annunciator (one of the remote annunciators) | |
 | the waypoint type identification page (`TYPE WPT`, `1 EN ROUTE?`, `2 SID/STAR?`) | the `TYPE WPT` question |
+| cross-track error (`XTK`) | cross-track distance |
+| actual track (`TK`) | track over the ground, your track |
+| minimum safe altitude (`MSA`), minimum en route safe altitude (`ESA`) | en route safe altitude |
+| offset (of the VNAV point, NAV 4) | offset distance |
+| the nearby VOR (of NAV 2) | the reference VOR (that is the INT page's) |
+| range scale (of NAV 5 and Super NAV 5); the `AUTO` range scale | range, map scale, auto range |
+| map orientation; North up, desired track up, actual track up, heading up | the orientation, track up |
+| the pop-up menu (of Super NAV 5); the VOR, NDB and APT selections (its entries) | the menu, the layers |
+| the left side of Super NAV 5 | the left column |
 
 ### Spelling and style
 

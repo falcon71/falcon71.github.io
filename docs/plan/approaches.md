@@ -89,7 +89,7 @@ this out, because this page owns what RAIM decides in an approach. Pointers from
   Active-Leg) and gives arming and activation one sentence each with the link to this page; its screens
   `navigation/arm-leg`, `arm-obs` and `apr-leg` (a direct-to JALON on the RNAV 34L of KSEA, 1.5 NM before it; arming
   raises `PRESS ALT TO SET BARO`, answered with ALT) may be reused. The CDI scale factors and their automatic
-  changes are owned by Modes of operation, `#the-cdi-scale`; this page links there.
+  changes are owned by Modes of operation, `#the-cdi-scale-factor`; this page links there.
 - Research facts (`services/ModeController.ts`): the unit arms within 30 NM of the airport of the approach in FPL 0,
   or at any distance with the GPS APR switch (`NO APPROACH` without one); the GPS APR switch in arm mode disarms until
   the next press or a change of approach; the approach becomes active from Approach Arm-Leg mode only, with the FAF
@@ -102,6 +102,21 @@ this out, because this page owns what RAIM decides in an approach. Pointers from
   say it here and cut APT to the event and the link.
 - An approach loaded through the EFB route in an installation without APT 8 is armed within 30 NM (part of the open
   kln90b#479).
+
+### From the package nav-pages (2026-11-18)
+
+- NAV 1 in approach active mode: when the unit loses its integrity, the page goes to `F L A G` and `DIS`, `ETE`,
+  `BRG`, `DTK` and `FLY` show dashes; the NAV chapter says so and links `/kln90b/operation/approaches/`.
+- NAV 2 shows the VOR of a DME arc in place of the nearby VOR while an arc is active or ahead
+  (`pages/left/Nav2Page.tsx`); Super NAV 5 draws the part of an arc before the point where you join it dashed, shows
+  `ARC` in its field 3 and overrides field 2 on an arc. The NAV chapter states these; this package owns DME arcs and
+  links back (`/kln90b/pages/nav/#nav-2-the-present-position`, `#the-left-side-of-super-nav-5`).
+- Stage what the NAV chapter could not: NAV 2 on a DME arc, and the window of Super NAV 5 with `MOVE ?` after CLR on
+  a DME arc waypoint (`SuperNav5DirectToSelector.tsx:86-109`); the NAV chapter's `#the-window` describes `MOVE ?` in
+  one short paragraph that links here.
+- With the `AUTO` range scale, Super NAV 5 draws the runway diagrams only at a range scale of 2 NM or less
+  (`SuperNav5Page.tsx:299`, `:344`). The reviewer of nav-pages left open how close to the airport the diagram
+  should appear with `AUTO`; the reviewer of this package checks it against the approach behavior.
 
 ## Changes to earlier pages
 

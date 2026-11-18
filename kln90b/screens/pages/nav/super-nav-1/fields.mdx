@@ -1,0 +1,48 @@
+<Field id="from" title="From waypoint">
+	The waypoint at the start of the active leg. After a [direct-to](/kln90b/operation/direct-to/) the Direct To symbol stands in its place, drawn as a small D right in front of the arrow; the leg then starts where you made the direct-to. The field is blank when the leg has no from waypoint.
+</Field>
+
+<Field id="arrow" title="Active waypoint arrow">
+	The `›` marks the waypoint after it as the [active waypoint](/kln90b/operation/modes-of-operation/#the-active-waypoint). It flashes during [waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting) and is blank when there is no active waypoint.
+</Field>
+
+<Field id="to" title="Active waypoint">
+	The active waypoint, followed by the suffix of an approach waypoint: `-i` for an initial approach fix, `-f` for the final approach fix, `-m` for the missed approach point and `-h` for the missed approach holding point. NAV 1 shows the waypoint without the suffix. The field is blank when there is no active waypoint.
+</Field>
+
+<Field id="cdi" title="D-bar">
+	<p>The D-bar shows how far the aircraft is from the active leg, on a longer scale than NAV 1, with five dots on each side of the center and the dots further apart. The outer dot is full deflection, the [CDI scale factor](/kln90b/operation/modes-of-operation/#the-cdi-scale-factor); each dot is a fifth of it. The bar stands on the side you must fly to, so a bar left of the center means that the leg lies to your left.</p>
+	<p>The center of the scale is the TO/FROM indicator: it shows whether the active waypoint lies ahead (TO) or behind you (FROM). An inverse `F L A G` replaces the middle of the scale when the unit has no cross-track error: without a position, without an active waypoint, or in approach active mode when the unit has lost its integrity.</p>
+</Field>
+
+<Field id="dis" title="Distance to the active waypoint">
+	<Term t="DIS">`DIS`</Term> is the direct distance to the active waypoint in NM, never the distance along the route or the arc. It shows one decimal below 100 NM and whole NM from 100 NM. It shows `--.-` without a position or an active waypoint, and in approach active mode when the unit has lost its integrity.
+</Field>
+
+<Field id="gs" title="Groundspeed">
+	<Term t="GS">Your groundspeed</Term> in kt, from the GPS, in whole knots from 0 to 999. It shows dashes without a position.
+</Field>
+
+<Field id="ete" title="Estimated time en route">
+	The <Term t="ETE">time to the active waypoint</Term> at your present groundspeed. From one hour it shows hours and minutes (`1:05`); below one hour the hours stay blank and `:22` is 22 minutes. It shows `--:--` at a groundspeed of 2 kt or less, without a position or an active waypoint, in approach active mode when the unit has lost its integrity, and from 100 hours.
+</Field>
+
+<Field id="brg" title="Bearing to the active waypoint">
+	<Term t="BRG">`BRG`</Term> is the magnetic bearing from your position to the active waypoint, in whole degrees. It shows `---°` without a position or an active waypoint, in approach active mode when the unit has lost its integrity, and while the aircraft is exactly on the waypoint. In [OBS mode](/kln90b/operation/modes-of-operation/#obs-mode) it is the course to the waypoint as measured at the waypoint, with the magnetic variation of the waypoint, so that it equals the selected course while you are on the course line.
+</Field>
+
+<Field id="lpage" title="Page identification of the left side">
+	The page identification on the left side, `NAV 1`. Super NAV 1 shows while both sides show NAV 1, so both page identifications read `NAV 1`.
+</Field>
+
+<Field id="mode" title="Mode annunciation">
+	The mode annunciation, which shows the mode of the unit. <Term t="ENR-LEG">`ENR-LEG`</Term> is Enroute-Leg mode: en route navigation along a leg, from one waypoint to the next. In [OBS mode](/kln90b/operation/modes-of-operation/#obs-mode) the field shows <Term t="ENR:">`ENR:`</Term> and the course you selected, and for approaches <Term t="ARM-LEG">`ARM-LEG`</Term>, <Term t="ARM:">`ARM:`</Term> or <Term t="APR-LEG">`APR-LEG`</Term> ([The mode annunciations](/kln90b/operation/modes-of-operation/#the-mode-annunciations)). While the unit shows a short message, such as `NO SUCH WPT`, it replaces this field and the next one ([The status line](/kln90b/unit/controls-and-display/#the-status-line)).
+</Field>
+
+<Field id="prompt" title="Message and enter prompt">
+	The three cells after the mode annunciation are blank while the unit holds no message and nothing waits for <kbd>ENT</kbd>. <Term t="MSG">`MSG`</Term> in inverse video means that the unit holds a message; it flashes while you have not read all of them. A flashing <Term t="ENT">`ENT`</Term> means that <kbd>ENT</kbd> accepts what you have entered.
+</Field>
+
+<Field id="rpage" title="Page identification of the right side">
+	The page identification on the right side, `NAV 1`. Super NAV 1 shows while both sides show NAV 1, so both page identifications read `NAV 1`.
+</Field>

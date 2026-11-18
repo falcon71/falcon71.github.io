@@ -1,0 +1,29 @@
+<Field id="to" title="Active waypoint">
+	The `›` and the active waypoint after it. In OBS mode the waypoint stays the active waypoint when you pass it, and the place in front of the arrow stays blank, because the leg of OBS mode starts at no waypoint.
+</Field>
+
+<Field id="obs" title="Selected course">
+	<p>In OBS mode `OBS` and the [selected course](/kln90b/operation/modes-of-operation/#the-selected-course) take the place of <Term t="DTK">`DTK`</Term>, in whole degrees magnetic. With a colon (`OBS:`), you set the course on the unit: with the cursor on it, each step of the inner knob turns it by 1°, and the course takes effect at once without <kbd>ENT</kbd>. Without a colon the unit takes the course from the external indicator, and the cursor skips the field.</p>
+	<p>The number flashes while the external indicator is set too far off the course ([The selected course](/kln90b/operation/modes-of-operation/#the-selected-course)).</p>
+</Field>
+
+<Field id="tk" title="Actual track">
+	`TK` is your actual track over the ground, magnetic, in whole degrees. It shows `---°` without a position and at a groundspeed below 2 kt. In [OBS mode](/kln90b/operation/modes-of-operation/#obs-mode) the unit uses the magnetic variation of the active waypoint, so that the track compares with the selected course.
+</Field>
+
+<Field id="fly" title="Direction to fly and cross-track error">
+	<p>The direction to fly to get back on the course, `L` or `R`, and the <Term t="XTK">cross-track error</Term>. `L0.00` is exactly on course. The distance shows hundredths of a NM below 1 NM, tenths from 1 NM and whole NM from 10 NM. During an anticipated turn it refers to the curved path of the [transition](/kln90b/operation/sequencing/#turn-anticipation).</p>
+	<p>The field shows `FLY - -.-nm` while the unit has no cross-track error: without a position, without an active waypoint, or in approach active mode when the unit has lost its integrity.</p>
+</Field>
+
+<Field id="msa" title="Minimum safe altitude">
+	The minimum safe altitude of the one-degree sector the aircraft is in, in whole hundreds of feet, with a clearance above the terrain of the sector. It shows `-----` without a position and outside the data of the unit. [Minimum safe altitudes](/kln90b/pages/nav/#minimum-safe-altitudes) explains the sectors.
+</Field>
+
+<Field id="esa" title="Minimum en route safe altitude">
+	The minimum en route safe altitude: the highest minimum safe altitude of every sector between the aircraft and the active waypoint and, with an active waypoint of FPL 0 in leg mode, along the rest of FPL 0 to the destination or the missed approach point. In OBS mode it covers only the way to the active waypoint. It is never lower than `MSA`. It shows `-----` without an active waypoint and when a sector lies outside the data of the unit. Without a position it still shows a value, worked out from the last position the unit knew. [Minimum safe altitudes](/kln90b/pages/nav/#minimum-safe-altitudes) explains the sectors.
+</Field>
+
+<Field id="crsr" title="Cursor annunciation">
+	<Term t="CRSR">`CRSR`</Term> replaces the page identification while the cursor of the side is on. Pressing the <kbd>CRSR</kbd> button of that side turns it off again.
+</Field>

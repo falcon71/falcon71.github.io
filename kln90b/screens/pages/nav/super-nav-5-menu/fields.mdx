@@ -1,0 +1,60 @@
+<Field id="distance" title="Distance to the active waypoint">
+	The direct distance to the active waypoint in NM, never the distance along the route. It shows one decimal below 100 NM and whole NM from 100 NM, and dashes without a position or an active waypoint.
+</Field>
+
+<Field id="ident" title="Active waypoint">
+	The identifier of the active waypoint, blank when there is none. A waypoint of an approach carries its suffix after the identifier: `-i` for the <Term t="IAF" />, `-f` for the <Term t="FAF" />, `-m` for the <Term t="MAP" /> and `-h` for the <Term t="MAHP" />. The identifier flashes during [waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting) before a turn and is steady from the beginning of [turn anticipation](/kln90b/operation/sequencing/#turn-anticipation).
+</Field>
+
+<Field id="mode" title="Mode annunciation">
+	The mode of the unit, which Super NAV 5 shows here because it has no status line: <Term t="ENR-LEG">`ENR-LEG`</Term>, <Term t="ARM-LEG">`ARM-LEG`</Term> or <Term t="APR-LEG">`APR-LEG`</Term>. In OBS mode `ENR` or `ARM` is followed by the selected course in three digits, without the colon of the status line. [The mode annunciations](/kln90b/operation/modes-of-operation/#the-mode-annunciations) explain the modes.
+</Field>
+
+<Field id="groundspeed" title="Groundspeed">
+	Your <Term t="GS">groundspeed</Term> in kt, in whole knots. It shows dashes without a position.
+</Field>
+
+<Field id="ete" title="Field 1: estimated time en route">
+	Field 1 of the left side of Super NAV 5, here showing the <Term t="ETE">time to the active waypoint</Term> at your present groundspeed, as hours and minutes. It shows `-:--` while the unit does not know the time and from 10 hours. With the left cursor on the field, the inner knob changes it to <Term t="XTK" /> or `VNAV` ([The left side of Super NAV 5](/kln90b/pages/nav/#the-left-side-of-super-nav-5)).
+</Field>
+
+<Field id="dtk" title="Field 2: desired track">
+	<p>Field 2 of the left side of Super NAV 5, here showing the <Term t="DTK">desired track</Term> as a magnetic course in whole degrees, and `---°` while the unit does not know it. In OBS mode `OBS` takes the place of `DTK`, and the number is the selected course; with a colon after `OBS` you set the course on the unit.</p>
+	<p>The number flashes while an external course indicator that the unit reads is more than 10° off it ([The selected course](/kln90b/operation/modes-of-operation/#the-selected-course)). With the left cursor on the field, the inner knob changes it to <Term t="BRG" /> or `RAD`; while the active leg is a DME arc, the field shows `DTK` whatever you chose ([The left side of Super NAV 5](/kln90b/pages/nav/#the-left-side-of-super-nav-5)).</p>
+</Field>
+
+<Field id="track" title="Field 3: track">
+	Field 3 of the left side of Super NAV 5, here showing your actual track over the ground as a magnetic course in whole degrees. It shows `---°` below a groundspeed of 2 kt and without a position. With the left cursor on the field, the inner knob changes it to <Term t="BRG" /> or `RAD`; while the aircraft is on a DME arc, or an arc lies ahead on the route, the field shows `ARC` and the radial of the aircraft from the VOR of the arc whatever you chose ([The left side of Super NAV 5](/kln90b/pages/nav/#the-left-side-of-super-nav-5)).
+</Field>
+
+<Field id="range" title="Range scale">
+	The range scale in NM: the distance from the aircraft to the top of the map. It stands over the map, below the message prompt, and the left cursor comes on at this field. With `AUTO` chosen, it shows the range scale in use ([The range scale and AUTO](/kln90b/pages/nav/#the-range-scale-and-auto)).
+</Field>
+
+<Field id="vor" title="VOR selection">
+	Which VORs the map draws, with the symbol of a VOR in front: `OFF` for none, `H` for high altitude VORs, `LH` for high and low altitude VORs and `TLH` for every VOR of the nearest list, those of the undefined class included. The right inner knob changes the entry at once, and the unit keeps it while it is off ([The VOR, NDB and APT selections](/kln90b/pages/nav/#the-vor-ndb-and-apt-selections)).
+</Field>
+
+<Field id="ndb" title="NDB selection">
+	Whether the map draws the nearest NDBs, `OFF` or `ON`, with the symbol of an NDB in front. The right inner knob changes the entry at once, and the unit keeps it while it is off ([The VOR, NDB and APT selections](/kln90b/pages/nav/#the-vor-ndb-and-apt-selections)).
+</Field>
+
+<Field id="apt" title="APT selection">
+	Whether the map draws the nearest airports, `OFF` or `ON`, with the symbol of an airport in front. The right inner knob changes the entry at once, and the unit keeps it while it is off ([The VOR, NDB and APT selections](/kln90b/pages/nav/#the-vor-ndb-and-apt-selections)).
+</Field>
+
+<Field id="orientation" title="Map orientation of Super NAV 5">
+	The map orientation of Super NAV 5: the direction that is up as a magnetic course in whole degrees, then the choice. North up shows `000°` and `N^`. The other choices are desired track up, actual track up and, where the unit has a heading, heading up, written `DTK^`, `TK^` and `HDG^` as on NAV 5. The unit draws the `^` as an arrow that points up. Dashes show where the unit does not know the direction. NAV 5 keeps a map orientation of its own ([The map orientation](/kln90b/pages/nav/#the-map-orientation)).
+</Field>
+
+<Field id="active-leg" title="Active leg">
+	The active leg of FPL 0: a line with an arrow that points to the active waypoint. [What Super NAV 5 draws](/kln90b/pages/nav/#what-super-nav-5-draws) says when the unit draws the legs.
+</Field>
+
+<Field id="waypoints" title="Waypoints of the flight plan">
+	The waypoints of FPL 0 that lie on the map, each as a small square followed by its identifier. A waypoint that FPL 0 holds twice in a row is drawn once.
+</Field>
+
+<Field id="aircraft" title="Aircraft">
+	The aircraft: a diamond in north up and desired track up, an aircraft symbol in actual track up and heading up. In north up it is in the middle of the map, in the other map orientations three quarters of the way down.
+</Field>

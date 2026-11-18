@@ -22,7 +22,7 @@ Where the active leg starts depends on how the waypoint became active:
 - **A direct-to** starts where the aircraft was when you made it. It can go to any waypoint, in FPL 0 or not ([Direct-to](/kln90b/operation/direct-to/)).
 - **In OBS mode** the leg is the selected course through the active waypoint, and it starts at no waypoint ([OBS mode](#obs-mode)).
 
-The top line of NAV 1 and NAV 3 shows the active leg: the waypoint it starts at, the arrow `›` and the active waypoint. After a direct-to the Direct To symbol takes the place of the first waypoint, and in OBS mode that place is blank.
+NAV 1 and NAV 3 show the active leg on their top line, from the waypoint it starts at to the active waypoint. After a direct-to the Direct To symbol takes the place of the first waypoint, and in OBS mode that place is blank.
 
 <KlnScreen screen="navigation/nav-1-leg" rows="1" />
 
@@ -30,7 +30,7 @@ The waypoint pages (APT, VOR, NDB, INT and SUP) show the `›` before the identi
 
 ### No active waypoint
 
-There is no active waypoint while FPL 0 is empty or holds a single waypoint and no direct-to is active. NAV 1 then shows `F L A G` across the D-bar and dashes for the distance, the time and the bearing; the groundspeed still shows. The unit stays in leg mode, and MOD 2 cannot change it to OBS mode ([`NO ACTV WPT` in the status line](#no-actv-wpt-in-the-status-line)).
+There is no active waypoint while FPL 0 is empty or holds a single waypoint and no direct-to is active. NAV 1 then shows `F L A G` and dashes ([NAV 1 without an active waypoint](/kln90b/pages/nav/#nav-1-without-an-active-waypoint)). The unit stays in leg mode, and MOD 2 cannot change it to OBS mode ([`NO ACTV WPT` in the status line](#no-actv-wpt-in-the-status-line)).
 
 ## Leg mode
 
@@ -51,8 +51,8 @@ In OBS mode the unit flies a course that you select through the active waypoint,
 In OBS mode:
 
 - NAV 3 shows `OBS` and the [selected course](#the-selected-course) in place of `DTK`, and the mode annunciation shows <Term t="ENR:">`ENR:`</Term> with the course, such as `ENR:354`: Enroute-OBS mode.
-- NAV 1 leaves blank the place of the waypoint the leg starts at. Its bearing and the track on NAV 3 are measured with the magnetic variation of the active waypoint, so that you can compare them with the selected course ([The selected course](#the-selected-course)).
-- The en route safe altitude, `ESA` on NAV 3, covers the way to the active waypoint only, not the rest of FPL 0.
+- NAV 1 leaves blank the place of the waypoint the leg starts at ([NAV 1 in OBS mode](/kln90b/pages/nav/#nav-1-in-obs-mode)). The actual track on NAV 3 is measured with the magnetic variation of the active waypoint, so that you can compare it with the selected course ([The selected course](#the-selected-course)).
+- The minimum en route safe altitude, `ESA` on NAV 3, covers the way to the active waypoint only ([Minimum safe altitudes](/kln90b/pages/nav/#minimum-safe-altitudes)).
 - NAV 5 and Super NAV 5 draw the course line through the active waypoint instead of the legs of FPL 0.
 - [Waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting) still tells you that you are about to reach the active waypoint.
 - An approach in approach arm mode never becomes active, and a change to OBS mode in approach active mode returns the unit to approach arm mode ([The mode annunciations](#the-mode-annunciations)).
@@ -191,13 +191,13 @@ The mode annunciation, in the middle part of the status line, shows the mode of 
 
 The unit arms the approach in FPL 0 by itself near the airport, or when you press the GPS APR switch, and it activates it near the FAF; [Non-precision approaches](/kln90b/operation/approaches/) explains both. The change between leg and OBS mode carries the approach mode with it: `ARM-LEG` becomes `ARM:` and back, and OBS mode in approach active mode returns to `ARM:`.
 
-Super NAV 5, which has no status line, shows the mode in a short form on its left side. [The status line](/kln90b/unit/controls-and-display/#the-status-line) says when the mode annunciation is blank or covered.
+Super NAV 5, which has no status line, shows the mode on [its left side](/kln90b/pages/nav/#the-left-side-of-super-nav-5) in the same words, without the colon in OBS mode (`ENR090`). [The status line](/kln90b/unit/controls-and-display/#the-status-line) says when the mode annunciation is blank or covered.
 
 <span id="the-cdi-scale"></span>
 
 ## The CDI scale factor
 
-The CDI scale factor is the cross-track distance at which the D-bar and the external indicator reach full scale: ±5.00 NM, ±1.00 NM or ±0.30 NM. Every power-on starts at ±5.00 NM. Each of the five dots on either side of the D-bar is a fifth of it, so a dot is 1 NM, 0.2 NM or 0.06 NM.
+The CDI scale factor is the cross-track error at which the D-bar and the external indicator reach full scale: ±5.00 NM, ±1.00 NM or ±0.30 NM. Every power-on starts at ±5.00 NM. Each of the five dots on either side of the D-bar is a fifth of it, so a dot is 1 NM, 0.2 NM or 0.06 NM.
 
 <CdiScale caption="The same 0.6 NM off course at each CDI scale factor, with the mode that selects it by itself: the D-bar moves 0.6 dot at ±5.00 NM, 3 dots at ±1.00 NM, and to the end of the scale at ±0.30 NM." />
 

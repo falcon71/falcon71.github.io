@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 148 91" width="148" height="91" shape-rendering="crispEdges" fill="currentColor">
+<g data-field="active-leg" data-draw="arrow KPAE KSEA" data-box="70 31 7 25">
+<path d="M74 31h1v1h-1z"/>
+<path d="M74 32h1v1h-1z"/>
+<path d="M74 33h1v1h-1z"/>
+<path d="M74 34h1v1h-1z"/>
+<path d="M74 35h1v1h-1z"/>
+<path d="M74 36h1v1h-1z"/>
+<path d="M74 37h1v1h-1z"/>
+<path d="M74 38h1v1h-1z"/>
+<path d="M74 39h1v1h-1z"/>
+<path d="M74 40h1v1h-1z"/>
+<path d="M74 41h1v1h-1z"/>
+<path d="M74 42h1v1h-1z"/>
+<path d="M74 43h1v1h-1z"/>
+<path d="M74 44h1v1h-1z"/>
+<path d="M74 45h1v1h-1z"/>
+<path d="M74 46h1v1h-1z"/>
+<path d="M74 47h1v1h-1z"/>
+<path d="M74 48h1v1h-1z"/>
+<path d="M74 49h1v1h-1z"/>
+<path d="M73 50h1v1h-1z"/>
+<path d="M70 51h1v1h-1zM73 51h1v1h-1z"/>
+<path d="M71 52h1v1h-1zM73 52h1v1h-1z"/>
+<path d="M71 53h1v1h-1zM73 53h1v1h-1zM76 53h1v1h-1z"/>
+<path d="M72 54h4v1h-4z"/>
+<path d="M73 55h1v1h-1z"/>
+</g>
+<g data-field="waypoints" data-draw="icon @ KPAE" data-box="74 26 3 3">
+<path d="M74 26h3v1h-3z"/>
+<path d="M74 27h3v1h-3z"/>
+<path d="M74 28h3v1h-3z"/>
+</g>
+<g data-field="waypoints" data-draw="label KPAE KPAE" data-box="50 18 23 7">
+<path d="M50 18h1v1h-1zM54 18h1v1h-1zM56 18h4v1h-4zM63 18h3v1h-3zM68 18h5v1h-5z"/>
+<path d="M50 19h1v1h-1zM53 19h1v1h-1zM56 19h1v1h-1zM60 19h1v1h-1zM62 19h1v1h-1zM66 19h1v1h-1zM68 19h1v1h-1z"/>
+<path d="M50 20h1v1h-1zM52 20h1v1h-1zM56 20h1v1h-1zM60 20h1v1h-1zM62 20h1v1h-1zM66 20h1v1h-1zM68 20h1v1h-1z"/>
+<path d="M50 21h2v1h-2zM56 21h4v1h-4zM62 21h5v1h-5zM68 21h4v1h-4z"/>
+<path d="M50 22h1v1h-1zM52 22h1v1h-1zM56 22h1v1h-1zM62 22h1v1h-1zM66 22h1v1h-1zM68 22h1v1h-1z"/>
+<path d="M50 23h1v1h-1zM53 23h1v1h-1zM56 23h1v1h-1zM62 23h1v1h-1zM66 23h1v1h-1zM68 23h1v1h-1z"/>
+<path d="M50 24h1v1h-1zM54 24h1v1h-1zM56 24h1v1h-1zM62 24h1v1h-1zM66 24h1v1h-1zM68 24h5v1h-5z"/>
+</g>
+<g data-field="waypoints" data-draw="icon @ KSEA" data-box="72 58 3 3">
+<path d="M72 58h3v1h-3z"/>
+<path d="M72 59h3v1h-3z"/>
+<path d="M72 60h3v1h-3z"/>
+</g>
+<g data-field="waypoints" data-draw="label KSEA KSEA" data-box="48 56 23 7">
+<path d="M48 56h1v1h-1zM52 56h1v1h-1zM55 56h3v1h-3zM60 56h5v1h-5zM67 56h3v1h-3z"/>
+<path d="M48 57h1v1h-1zM51 57h1v1h-1zM54 57h1v1h-1zM58 57h1v1h-1zM60 57h1v1h-1zM66 57h1v1h-1zM70 57h1v1h-1z"/>
+<path d="M48 58h1v1h-1zM50 58h1v1h-1zM54 58h1v1h-1zM60 58h1v1h-1zM66 58h1v1h-1zM70 58h1v1h-1z"/>
+<path d="M48 59h2v1h-2zM55 59h3v1h-3zM60 59h4v1h-4zM66 59h5v1h-5z"/>
+<path d="M48 60h1v1h-1zM50 60h1v1h-1zM58 60h1v1h-1zM60 60h1v1h-1zM66 60h1v1h-1zM70 60h1v1h-1z"/>
+<path d="M48 61h1v1h-1zM51 61h1v1h-1zM54 61h1v1h-1zM58 61h1v1h-1zM60 61h1v1h-1zM66 61h1v1h-1zM70 61h1v1h-1z"/>
+<path d="M48 62h1v1h-1zM52 62h1v1h-1zM55 62h3v1h-3zM60 62h5v1h-5zM66 62h1v1h-1zM70 62h1v1h-1z"/>
+</g>
+<g data-field="aircraft" data-draw="icon $ 47.6493,-122.2985" data-box="72 44 5 3">
+<path d="M73 44h1v1h-1zM75 44h1v1h-1z"/>
+<path d="M72 45h2v1h-2zM75 45h2v1h-2z"/>
+<path d="M73 46h1v1h-1zM75 46h1v1h-1z"/>
+</g>
+</svg>
