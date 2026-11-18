@@ -159,7 +159,7 @@ The change of course mode itself raises no course message. The one exception is 
 
 - **Ahead of you (TO):** the unit flies to the active waypoint along the selected course as a direct-to. The desired track is the selected course, the D-bar keeps its deviation, and NAV 1 shows the Direct To symbol in place of the waypoint the leg starts at. When the waypoint is in FPL 0, the unit goes on along FPL 0 after it.
 - **Behind you (FROM), with the waypoint in FPL 0:** the unit makes the leg of FPL 0 closest to the aircraft the active leg, with its own desired track, and the D-bar shows the deviation from that leg.
-- **Behind you (FROM), with a waypoint outside FPL 0:** the unit makes a direct-to to that waypoint along the selected course, which now lies behind you. NAV 1 shows the Direct To symbol and FROM, and the unit stays on it.
+- **Behind you (FROM), with a waypoint outside FPL 0:** the unit makes a direct-to to that waypoint along the selected course, which now lies behind you. NAV 1 shows the Direct To symbol and FROM, and the unit stays on it. {/* kln90b#497: describes the current behavior; the fix makes the leg of FPL 0 closest to the aircraft the active leg, as with a waypoint in FPL 0 */}
 
 <KlnScreen screen="navigation/obs-to-leg" />
 
