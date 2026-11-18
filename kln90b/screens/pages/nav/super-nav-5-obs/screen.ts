@@ -14,6 +14,12 @@ defineScreen(import.meta.url, {
 		await u.panel.selectPage('L', 'NAV 1');
 		await u.panel.obsMode();
 		await adjustCourseIndicator(u);
+		// The selected course is set on NAV 3 with the cursor: 47 steps of the inner knob turn it about 45° to the right of the
+		// line between KPAE and KSEA
+		await u.panel.selectPage('L', 'NAV 3');
+		await u.panel.cursor('L');
+		await u.panel.inner('L', 47);
+		await u.panel.cursor('L');
 		await showSuperNav5(u);
 	},
 	fields: [

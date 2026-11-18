@@ -165,12 +165,16 @@ In north up the aircraft is in the middle of the map, so the map reaches as far 
 
 ### The map orientation
 
+<Callout kind="availability">
+Heading up is available only if the unit is installed so that it receives the heading of the aircraft. Not every aircraft has such an installation, and where it has none, the unit does not offer `HDG^`.
+</Callout>
+
 The map orientation says which direction points to the top of the map. With the cursor on the field, the inner knob chooses between these, and the map follows at once. The unit draws the `^` as an arrow that points up.
 
 - `N^`: north up. North is up, and the aircraft is a diamond in the middle of the map.
 - `DTK^`: desired track up, in OBS mode the selected course. The aircraft is a diamond.
 - `TK^`: actual track up. Your actual track is up, and the aircraft is an aircraft symbol.
-- `HDG^`: heading up. Your heading is up, and the aircraft is an aircraft symbol ([Heading up](#heading-up)).
+- `HDG^`: heading up. Your heading is up, and the aircraft is an aircraft symbol.
 
 <KlnScreen screen="pages/nav/nav-5-cursor" />
 
@@ -179,14 +183,6 @@ With the cursor off, the field shows `N^` for north up and otherwise the directi
 In the example the aircraft flies the first leg of a route in actual track up. The active leg runs up the map, and the waypoints show their numbers.
 
 <KlnScreen screen="pages/nav/nav-5-tk-up" />
-
-### Heading up
-
-<Callout kind="availability">
-Heading up is available only if the unit is installed so that it receives the heading of the aircraft. Not every aircraft has such an installation.
-</Callout>
-
-Without a heading the map orientation has three choices, `N^`, `DTK^` and `TK^`, and a map set to heading up is drawn north up, with the diamond, while the field shows `N^`. The unit keeps your choice, and the map turns heading up again as soon as a heading arrives. A heading that arrives while NAV 5 is shown turns the map at once, but the field keeps showing `N^`, without `HDG^` among its choices, until you select NAV 5 again. {/* kln90b#498: describes the current behavior; the fix makes the field show the map orientation in use and its choices at once */}
 
 ### The map is blank in actual track up
 
@@ -221,7 +217,7 @@ The message prompt <Term t="MSG">`MSG`</Term> stands over the map above the rang
 The legs of FPL 0, the course line of OBS mode, the direct-to arrow and the aircraft follow the rules of [What NAV 5 draws](#what-nav-5-draws), and the map orientations work as on NAV 5 ([The map orientation](#the-map-orientation)). Three things differ:
 
 - Every waypoint of FPL 0 on the map carries a small square and its identifier, not a number, also while the map is decluttered.
-- An active waypoint that FPL 0 does not hold, after a direct-to or in OBS mode, carries a star without an identifier; the left side of Super NAV 5 names the waypoint.
+- An active waypoint that FPL 0 does not hold, after a direct-to or in OBS mode, carries a star without an identifier; the left side of Super NAV 5 names the waypoint. {/* kln90b#499: describes the current behavior; the fix makes the map write the identifier next to the star */}
 - The VOR, NDB and APT selections of the pop-up menu add the nearest VORs, NDBs and airports ([The VOR, NDB and APT selections](#the-vor-ndb-and-apt-selections)).
 
 The map is blank without a position, and in actual track up below a groundspeed of 2 kt ([The map is blank in actual track up](#the-map-is-blank-in-actual-track-up)); the left side stays.
@@ -240,7 +236,9 @@ The three fields offer these choices, and the unit starts with `ETE`, `DTK` and 
 
 While the active leg is a DME arc, field 2 shows `DTK` whatever you chose. While the aircraft is on an arc, or an arc lies ahead on the route, field 3 shows `ARC` and the radial of the aircraft from the VOR of the arc, whatever you chose.
 
-In OBS mode field 2 shows `OBS` and the selected course in place of `DTK`, and the mode shows `ENR` or `ARM` with the course. With a colon after `OBS` you set the course on the unit: the cursor has one more stop in the row of field 2, between field 3 and field 2, and each step of the inner knob changes the course by 1° ([The selected course](/kln90b/operation/modes-of-operation/#the-selected-course)). If field 2 shows `BRG` or `RAD` then, the course is not on the screen, yet the cursor still stops once between field 3 and field 2, and the inner knob changes the selected course there; you see it only in the mode, which shows the new course.
+In OBS mode field 2 shows `OBS` and the selected course in place of `DTK`, and the mode shows `ENR` or `ARM` with the course. With a colon after `OBS` you set the course on the unit: the cursor has one more stop in the row of field 2, between field 3 and field 2, and each step of the inner knob changes the course by 1° ([The selected course](/kln90b/operation/modes-of-operation/#the-selected-course)). If field 2 shows `BRG` or `RAD` then, the course is not on the screen, yet the cursor still stops once between field 3 and field 2, and the inner knob changes the selected course there; you see it only in the mode, which shows the new course. {/* kln90b#500: describes the current behavior; the fix makes the cursor skip the hidden course */}
+
+In the example the selected course is about 45° off the line between the two waypoints of FPL 0: the course line runs through the active waypoint along the selected course, independent of the route.
 
 <KlnScreen screen="pages/nav/super-nav-5-obs" />
 

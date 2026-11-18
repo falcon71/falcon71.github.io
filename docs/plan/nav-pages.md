@@ -20,8 +20,8 @@ page-link plugin now links Super NAV 1 and Super NAV 5 as whole names (`README.m
   `#nav-3-without-a-position` (`ESA` keeps a value; bug pending, see below), `#minimum-safe-altitudes` (owns `MSA`
   and `ESA`: terrain grid with the clearance included, no obstacles).
 - `#nav-4-altitude-and-vnav`, with `#nav-4-without-an-altitude-input` (Availability box).
-- `#nav-5-the-map`, with `#what-nav-5-draws`, `#the-range-scale`, `#the-map-orientation`, `#heading-up`
-  (Availability box; `kln90b#498`), `#the-map-is-blank-in-actual-track-up` (the Good to know box),
+- `#nav-5-the-map`, with `#what-nav-5-draws`, `#the-range-scale`, `#the-map-orientation` (Availability box for heading
+  up), `#the-map-is-blank-in-actual-track-up` (the Good to know box),
   `#the-plus-of-a-waypoint-page`.
 - `#super-nav-5-the-map-on-the-whole-screen`, with `#what-super-nav-5-draws`, `#the-left-side-of-super-nav-5`,
   `#the-range-scale-and-auto`, `#the-pop-up-menu`, `#the-vor-ndb-and-apt-selections`, `#runway-diagrams`,
@@ -35,16 +35,14 @@ page-link plugin now links Super NAV 1 and Super NAV 5 as whole names (`README.m
   the package vnav-alerts shows them.
 - NAV 2 with the VOR of a DME arc, and the window of Super NAV 5 with `MOVE ?` on a DME arc waypoint: DME arcs were
   not staged; the package approaches can.
-- Heading up on NAV 5 (needs a heading input in the staged panel).
 
-## Open with the maintainer (from this session's report)
+## Issues
 
-- Three kln90b issues are written but not filed (the permission check refused them): the star without an
-  identifier on Super NAV 5 (`what-super-nav-5-draws`), the hidden cursor stop on the selected course of Super NAV 5
-  in OBS mode (`the-left-side-of-super-nav-5`), `ESA` without a position (`nav-3-without-a-position` and the `esa`
-  fields). Once filed, the paragraphs get their `kln90b#` comments.
-- kln90b#495 did not reproduce at the pin: the unit leaves the place before the arrow blank in OBS mode on every way
-  into it (`ModeController.setObsTrue` builds the OBS leg from an unnamed point). The NAV chapter describes the blank
-  and has no `kln90b#495` comment.
-- NAV 4 `ANGLE` shows `0.0` for a computed angle of 10° or more (`services/Vnav.ts`, `getAngle`); the field dashes an
-  angle that does not fit elsewhere. Whether that is a bug is the maintainer's call; the page describes `0.0`.
+- Filed: kln90b#498 (the map orientation field after a heading input arrives; its paragraph was cut at the
+  maintainer's request, 2026-11-18), kln90b#499 (the star without an identifier, `#what-super-nav-5-draws`),
+  kln90b#500 (the hidden cursor stop on the selected course of Super NAV 5, `#the-left-side-of-super-nav-5`),
+  kln90b#501 (NAV 4 `ANGLE` `0.0` for 10° or more, in the `angle` fields of `nav-4` and `nav-4-no-altitude`).
+- kln90b#495 did not reproduce at the pin; a comment says so, and the maintainer checks it. The NAV chapter
+  describes the blank before the arrow in OBS mode and has no `kln90b#495` comment.
+- Not filed yet: `ESA` on NAV 3 keeps a value without a position (`pages/left/Nav3Page.tsx:115-129`;
+  `#nav-3-without-a-position` and the `esa` fields describe it), waiting for the maintainer's approval.
