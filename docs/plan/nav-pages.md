@@ -41,8 +41,7 @@ page-link plugin now links Super NAV 1 and Super NAV 5 as whole names (`README.m
 - Filed: kln90b#498 (the map orientation field after a heading input arrives; its paragraph was cut at the
   maintainer's request, 2026-11-18), kln90b#499 (the star without an identifier, `#what-super-nav-5-draws`),
   kln90b#500 (the hidden cursor stop on the selected course of Super NAV 5, `#the-left-side-of-super-nav-5`),
-  kln90b#501 (NAV 4 `ANGLE` `0.0` for 10° or more, in the `angle` fields of `nav-4` and `nav-4-no-altitude`).
+  kln90b#501 (NAV 4 `ANGLE` `0.0` for 10° or more, in the `angle` fields of `nav-4` and `nav-4-no-altitude`),
+  kln90b#502 (`ESA` without a position, `#nav-3-without-a-position` and the `esa` fields).
 - kln90b#495 did not reproduce at the pin; a comment says so, and the maintainer checks it. The NAV chapter
   describes the blank before the arrow in OBS mode and has no `kln90b#495` comment.
-- Not filed yet: `ESA` on NAV 3 keeps a value without a position (`pages/left/Nav3Page.tsx:115-129`;
-  `#nav-3-without-a-position` and the `esa` fields describe it), waiting for the maintainer's approval.
