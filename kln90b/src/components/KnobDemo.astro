@@ -105,14 +105,20 @@ const HALVES = [
 							<g transform={`translate(${face.knob.x} ${face.knob.y})`}>
 								<circle r={OUTER} fill={`url(#${id('flange')})`} />
 								<circle r="45" fill="#070708" />
-								<circle data-grip="outer" r="43" fill={`url(#${id('knob')})`} stroke="#2e3034" stroke-width="5" stroke-dasharray="1.8 2.2" />
+								{/* The shading stays put and only the grip turns, so the light keeps coming from the upper left */}
+								<circle r="43" fill={`url(#${id('knob')})`} />
+								<circle data-grip="outer" r="43" fill="none" stroke="#2e3034" stroke-width="5" stroke-dasharray="1.8 2.2" />
 								<circle r={INNER} fill="#050505" />
-								<circle data-grip="inner" r="27" fill={`url(#${id('knob')})`} stroke="#33363a" stroke-width="4" stroke-dasharray="1.5 1.9" />
+								<circle r="27" fill={`url(#${id('knob')})`} />
+								<circle data-grip="inner" r="27" fill="none" stroke="#33363a" stroke-width="4" stroke-dasharray="1.5 1.9" />
 								<circle r="21" fill={`url(#${id('knob')})`} stroke="#45484c" stroke-width="1" />
+								{/* PULL SCAN is printed on the inner knob and turns with it */}
 								{scan && (
-									<g class="kln-knob-scan" transform="rotate(58)" aria-hidden="true">
-										<text y="-2">PULL</text>
-										<text y="9">SCAN</text>
+									<g data-grip="inner" aria-hidden="true">
+										<g class="kln-knob-scan" transform="rotate(58)">
+											<text y="-2">PULL</text>
+											<text y="9">SCAN</text>
+										</g>
 									</g>
 								)}
 								{HALVES.map((h) => (
@@ -198,9 +204,8 @@ const HALVES = [
 		text-anchor: middle;
 		fill: #cfcfcf;
 	}
+	/* The grips sit in a group translated to the knob center, so the default origin (0, 0) is the center of the knob */
 	[data-grip] {
-		transform-box: fill-box;
-		transform-origin: center;
 		transition: transform 0.12s ease-out;
 	}
 	.kln-knob-hit {
@@ -332,8 +337,8 @@ const HALVES = [
 			const status = demo.querySelector<HTMLElement>(`[data-status="${key}"]`)!;
 			const labels = side.querySelectorAll<SVGTextElement>('[data-label]');
 			const grips = {
-				outer: side.querySelector<SVGElement>('[data-grip="outer"]')!,
-				inner: side.querySelector<SVGElement>('[data-grip="inner"]')!,
+				outer: side.querySelectorAll<SVGElement>('[data-grip="outer"]'),
+				inner: side.querySelectorAll<SVGElement>('[data-grip="inner"]'),
 			};
 			const list = side.querySelector<HTMLElement>('.kln-tree')!;
 			const live = side.querySelector<HTMLElement>('[data-live]')!;
@@ -364,7 +369,7 @@ const HALVES = [
 				const dir = Number(hit.getAttribute('data-dir')) as 1 | -1;
 				state = turn(state, tree, knob, dir);
 				angle[knob] += dir * GRIP_STEP;
-				grips[knob].style.transform = `rotate(${angle[knob]}deg)`;
+				for (const grip of grips[knob]) grip.style.transform = `rotate(${angle[knob]}deg)`;
 				render();
 			};
 
