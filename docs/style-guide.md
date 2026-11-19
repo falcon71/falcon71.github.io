@@ -71,7 +71,9 @@ GitHub wiki of the kln90b project.
 - **No trademarks of manufacturers.** Never name an aircraft or avionics maker or its products, in the text, on a
   screen or in a drawing: no Cessna, no Skyhawk, no Bendix/King. The unit is the KLN 90B and nothing more. A
   company name that the unit itself shows and whose company no longer exists (AlliedSignal on the Turn-On page)
-  may stay; text the pilot writes into the unit on a screen uses neutral words (maintainer, 2026-11-17). Microsoft
+  may stay; text the pilot writes into the unit on a screen uses neutral words (maintainer, 2026-11-17). The name of
+  a real place that contains a company name, as the database gives it (Boeing Field, `BOEING FLDK` on the APT
+  pages), is a place name and stays (maintainer, 2026-11-19). Microsoft
   Flight Simulator is named, because the manual is for it.
 - **Features that exist only in the simulation** (the SET 10 page, the FLR pages and the failures they set, keyboard
   mode) are marked with the Simulator only box (section 11).

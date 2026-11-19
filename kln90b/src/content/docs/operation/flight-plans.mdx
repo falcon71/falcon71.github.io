@@ -22,7 +22,7 @@ The unit keeps all flight plans while it is off. The procedures in FPL 0 are the
 
 ## Creating a flight plan
 
-You create a flight plan by entering its waypoints in order on an FPL page. A numbered flight plan must be empty, or you add to what it holds ([Adding a waypoint](#adding-a-waypoint)). FPL 0 is built the same way. An empty numbered flight plan shows `LOAD FPL 0?` on its top line.
+You create a flight plan by entering its waypoints in order on an FPL page. Choose a numbered flight plan that is empty. In one that already holds waypoints, the unit adds what you enter to the end of it ([Adding a waypoint](#adding-a-waypoint)). FPL 0 is built the same way. An empty numbered flight plan shows `LOAD FPL 0?` on its top line.
 
 To create a flight plan:
 
@@ -89,7 +89,7 @@ To take the waypoint of the right page into a flight plan:
 4. Press <kbd>ENT</kbd> again to approve it.
 5. Press the left <kbd>CRSR</kbd> to turn the cursor off.
 
-On the blank waypoint position at the end, the first <kbd>ENT</kbd> takes the waypoint directly. **Note:** After the approval the cursor stands on the waypoint that the new one went in front of, so a further <kbd>ENT</kbd> inserts the same waypoint again. Turn the cursor off, or move it on with the outer knob. When the right page is no waypoint page, <kbd>ENT</kbd> on a waypoint opens an empty row in front of it, and <kbd>CLR</kbd> closes the row again.
+On the blank waypoint position at the end, the first <kbd>ENT</kbd> takes the waypoint directly. **Note:** After the approval the cursor stands on the waypoint that the new one went in front of, so a further <kbd>ENT</kbd> inserts the same waypoint again. Turn the cursor off, or move it on with the outer knob. When the right page is no waypoint page, <kbd>ENT</kbd> on a waypoint opens an empty row in front of it, and <kbd>CLR</kbd> closes the row again. {/* kln90b#504: describes the current behavior; the fix makes ENT do nothing when the right page is no waypoint page */}
 
 ## Deleting a waypoint
 
@@ -166,7 +166,7 @@ The unit does not start at the first waypoint. It makes the leg of the new FPL 0
 
 <KlnScreen screen="flight-plans/after-use" />
 
-If a [direct-to](/kln90b/operation/direct-to/) is active when you activate a plan, the direct-to stays active and goes on to its waypoint. FPL 0 then usually shows no active leg symbol and no arrow, even when the plan holds the waypoint.
+If a [direct-to](/kln90b/operation/direct-to/) is active when you activate a plan, the direct-to stays active and goes on to its waypoint. FPL 0 then usually shows no active leg symbol and no arrow, even when the plan holds the waypoint. {/* kln90b#503: describes the current behavior; the fix finds the direct-to waypoint in the new FPL 0, shows the arrow at it and goes on along the plan after it */}
 
 ### Activating a flight plan inverted
 
