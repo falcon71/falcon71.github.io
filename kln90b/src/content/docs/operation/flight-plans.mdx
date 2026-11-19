@@ -216,7 +216,7 @@ To delete a flight plan:
 
 3. Press <kbd>ENT</kbd>. The unit deletes every waypoint of the plan and turns the cursor off. An empty numbered flight plan shows `LOAD FPL 0?` again.
 
-Press <kbd>CLR</kbd> again to withdraw the question, which also turns the cursor off. Withdraw it with <kbd>CLR</kbd> and not with a knob: after a turn of the outer knob the cursor is on a waypoint, but `DELETE FPL?` stays on the top line, although <kbd>ENT</kbd> no longer deletes the plan.
+Press <kbd>CLR</kbd> again to withdraw the question, which also turns the cursor off. Withdraw it with <kbd>CLR</kbd> and not with a knob: after a turn of the outer knob the cursor is on a waypoint, but `DELETE FPL?` stays on the top line, although <kbd>ENT</kbd> no longer deletes the plan. {/* kln90b#505: describes the current behavior; the fix withdraws the question when the cursor leaves it, so this advice can go */}
 
 Deleting FPL 0 empties the active plan, and nothing is active afterward. A direct-to that is active stays.
 
