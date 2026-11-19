@@ -17,6 +17,7 @@
 import '../styles/kln-screen.css';
 import { blocksFromCapture, screenHtml } from '../lib/screenHtml';
 import { loadCapture } from '../lib/screens';
+import { type FaceplateSide, labelPosition, leftFaceplate, rightFaceplate } from '../data/faceplate';
 
 interface Props {
 	screen: string;
@@ -56,10 +57,11 @@ const MARKERS = [
 	{ x: 777, y: 200, tx: 777, ty: 200 },
 	{ x: 819, y: 217, tx: 819, ty: 217 },
 ];
-const leftLabels = ['NAV', 'FPL', 'MODE', 'TRIP'];
-const leftLabels2 = ['CALC', 'STAT', 'SETUP', 'OTHER'];
-const rightLabels = ['NAV', 'D/T', 'ACTV', 'REF', 'CTR'];
-const rightLabels2 = ['APT', 'VOR', 'NDB', 'INT', 'SUPL'];
+/** A side's faceplate labels, the left column top to bottom, then the right column */
+const placed = (side: FaceplateSide) =>
+	[...side.labels]
+		.sort((a, b) => a.column - b.column || a.row - b.row)
+		.map((label) => ({text: label.text, ...labelPosition(side, label)}));
 ---
 
 <div class="kln-unit" role="img" aria-label={label} data-pagefind-ignore>
@@ -104,8 +106,7 @@ const rightLabels2 = ['APT', 'VOR', 'NDB', 'INT', 'SUPL'];
 				<rect x="-30" y="-16" width="60" height="32" rx="4" fill="url(#kln-unit-key)" />
 				<text y="7" class="kln-unit-key">CRSR</text>
 			</g>
-			{leftLabels.map((t, i) => <text x="42" y={196 + i * 20} class="kln-unit-mid">{t}</text>)}
-			{leftLabels2.map((t, i) => <text x="190" y={196 + i * 20} class="kln-unit-mid">{t}</text>)}
+			{placed(leftFaceplate).map(({ text, x, y }) => <text x={x} y={y} class="kln-unit-mid">{text}</text>)}
 
 			<!-- Right side -->
 			<text x="862" y="42" class="kln-unit-mid kln-unit-big">GPS</text>
@@ -130,8 +131,7 @@ const rightLabels2 = ['APT', 'VOR', 'NDB', 'INT', 'SUPL'];
 				<rect x="-30" y="-16" width="60" height="32" rx="4" fill="url(#kln-unit-key)" />
 				<text y="7" class="kln-unit-key">CRSR</text>
 			</g>
-			{rightLabels.map((t, i) => <text x="724" y={190 + i * 20} class="kln-unit-mid">{t}</text>)}
-			{rightLabels2.map((t, i) => <text x="880" y={190 + i * 20} class="kln-unit-mid">{t}</text>)}
+			{placed(rightFaceplate).map(({ text, x, y }) => <text x={x} y={y} class="kln-unit-mid">{text}</text>)}
 		</g>
 
 		<!-- Knobs: on each side a large outer knob on a light flange, and a smaller inner knob; the right one pulls for scan -->

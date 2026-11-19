@@ -1,18 +1,57 @@
 ---
 /**
- * Interactive demo of page selection: the outer knob picks the page group, the inner knob the page in the group.
- * Each group remembers its last page, as on the unit. Pages with more than one screen (e.g. ACT) are not modelled.
+ * Interactive demo of page selection, drawn as the knobs of the front panel with their faceplate labels. A click on the
+ * left half of a knob turns it one step counterclockwise, on the right half one step clockwise; the inner knob is the
+ * disc inside the outer one. The label of the selected page type lights up, and below each knob the page types form a
+ * tree that opens only the selected one. Each page type remembers its last page, as on the unit; the pages behind a
+ * `+` are not modelled.
+ *
+ * The knobs are drawn like those of `KlnUnit.astro`, in its 912 x 290 coordinates, each side cropped by its viewBox.
  */
 import '../styles/kln-screen.css';
-import { leftTree, rightTree } from '../data/pageTree';
+import { type FaceplateSide, labelPosition, leftFaceplate, rightFaceplate } from '../data/faceplate';
 
-const sides = [
-	{ key: 'left', label: 'Left knobs', tree: leftTree, start: 3 },
-	{ key: 'right', label: 'Right knobs', tree: rightTree, start: 5 },
+/** The crop of the panel around one side's knobs and labels: x, y, width, height */
+const CROP = { y: 162, width: 208, height: 126 };
+const OUTER = 53;
+const INNER = 29;
+
+interface Side {
+	key: 'left' | 'right';
+	label: string;
+	face: FaceplateSide;
+	cropX: number;
+	scan: boolean;
+}
+
+const sides: Side[] = [
+	{ key: 'left', label: 'Left', face: leftFaceplate, cropX: 10, scan: false },
+	{ key: 'right', label: 'Right', face: rightFaceplate, cropX: 694, scan: true },
+];
+
+/** The halves of a disc (r1 = 0) or a ring around the knob center, as paths relative to the center */
+const half = (r2: number, r1: number, cw: boolean) => {
+	const sweep = cw ? 1 : 0;
+	const outer = `M0 ${-r2}A${r2} ${r2} 0 0 ${sweep} 0 ${r2}`;
+	return r1 === 0 ? `${outer}Z` : `${outer}L0 ${r1}A${r1} ${r1} 0 0 ${1 - sweep} 0 ${-r1}Z`;
+};
+
+/** A curved arrow along one half at radius r, from upper to lower, as a knob turns there */
+const arrow = (r: number, cw: boolean) => {
+	const x = (cw ? 1 : -1) * 0.643 * r;
+	const y = 0.766 * r;
+	return `M${x.toFixed(1)} ${(-y).toFixed(1)}A${r} ${r} 0 0 ${cw ? 1 : 0} ${x.toFixed(1)} ${y.toFixed(1)}`;
+};
+
+const HALVES = [
+	{ knob: 'outer', dir: -1, d: half(OUTER, INNER, false), arrow: arrow(37, false), name: 'outer knob, counterclockwise' },
+	{ knob: 'outer', dir: 1, d: half(OUTER, INNER, true), arrow: arrow(37, true), name: 'outer knob, clockwise' },
+	{ knob: 'inner', dir: -1, d: half(INNER, 0, false), arrow: arrow(14, false), name: 'inner knob, counterclockwise' },
+	{ knob: 'inner', dir: 1, d: half(INNER, 0, true), arrow: arrow(14, true), name: 'inner knob, clockwise' },
 ];
 ---
 
-<div class="kln-knobdemo not-content" data-left={JSON.stringify(leftTree)} data-right={JSON.stringify(rightTree)}>
+<div class="kln-knobdemo not-content">
 	<figure class="kln-figure">
 		<div class="kln-bezel">
 			<div class="kln-screen" aria-hidden="true">
@@ -23,25 +62,86 @@ const sides = [
 
 	<div class="kln-knob-grid">
 		{
-			sides.map((side) => (
-				<section class="kln-knob-side" data-side={side.key} data-start={side.start}>
-					<h3>{side.label}</h3>
-					<div class="kln-knob-buttons">
-						<span class="kln-knob-label">Outer knob</span>
-						<button type="button" data-knob="outer" data-dir="-1" aria-label={`${side.label}: outer knob counterclockwise`}>⟲</button>
-						<button type="button" data-knob="outer" data-dir="1" aria-label={`${side.label}: outer knob clockwise`}>⟳</button>
-						<span class="kln-knob-label">Inner knob</span>
-						<button type="button" data-knob="inner" data-dir="-1" aria-label={`${side.label}: inner knob counterclockwise`}>⟲</button>
-						<button type="button" data-knob="inner" data-dir="1" aria-label={`${side.label}: inner knob clockwise`}>⟳</button>
-					</div>
-					<ol class="kln-groups" aria-label="Page types">
-						{side.tree.map((g, i) => (
-							<li data-group={i}>{g.name}</li>
-						))}
-					</ol>
-					<ol class="kln-pages" aria-label="Pages of this type" aria-live="polite" />
-				</section>
-			))
+			sides.map(({ key, label, face, cropX, scan }) => {
+				const id = (name: string) => `kln-knobdemo-${key}-${name}`;
+				return (
+					<section class="kln-knob-side" data-side={key}>
+						<h3>{label} knobs</h3>
+						<svg
+							class="kln-knob-svg"
+							viewBox={`${cropX} ${CROP.y} ${CROP.width} ${CROP.height}`}
+							role="group"
+							aria-label={`${label} knobs`}
+						>
+							<defs>
+								<linearGradient id={id('face')} x1="0" y1="0" x2="0" y2="1">
+									<stop offset="0" stop-color="#2c2e31" />
+									<stop offset="1" stop-color="#1e2022" />
+								</linearGradient>
+								<linearGradient id={id('flange')} x1="0.2" y1="0" x2="0.8" y2="1">
+									<stop offset="0" stop-color="#ece7dc" />
+									<stop offset="0.55" stop-color="#b9b4aa" />
+									<stop offset="1" stop-color="#6f6b65" />
+								</linearGradient>
+								<radialGradient id={id('knob')} cx="0.4" cy="0.35" r="0.75">
+									<stop offset="0" stop-color="#3b3d40" />
+									<stop offset="0.7" stop-color="#101112" />
+									<stop offset="1" stop-color="#050505" />
+								</radialGradient>
+								<marker id={id('head')} viewBox="0 0 4 4" refX="2" refY="2" markerWidth="3" markerHeight="3" orient="auto">
+									<path d="M0 0L4 2L0 4Z" fill="#ffc233" />
+								</marker>
+							</defs>
+
+							<rect x={cropX} y={CROP.y} width={CROP.width} height={CROP.height} rx="8" fill={`url(#${id('face')})`} />
+
+							<g class="kln-knob-labels" aria-hidden="true">
+								{face.labels.map((l, i) => {
+									const { x, y } = labelPosition(face, l);
+									return <text x={x} y={y} data-label={i}>{l.text}</text>;
+								})}
+							</g>
+
+							<g transform={`translate(${face.knob.x} ${face.knob.y})`}>
+								<circle r={OUTER} fill={`url(#${id('flange')})`} />
+								<circle r="45" fill="#070708" />
+								{/* The shading stays put and only the grip turns, so the light keeps coming from the upper left */}
+								<circle r="43" fill={`url(#${id('knob')})`} />
+								<circle data-grip="outer" r="43" fill="none" stroke="#2e3034" stroke-width="5" stroke-dasharray="1.8 2.2" />
+								<circle r={INNER} fill="#050505" />
+								<circle r="27" fill={`url(#${id('knob')})`} />
+								<circle data-grip="inner" r="27" fill="none" stroke="#33363a" stroke-width="4" stroke-dasharray="1.5 1.9" />
+								<circle r="21" fill={`url(#${id('knob')})`} stroke="#45484c" stroke-width="1" />
+								{/* PULL SCAN is printed on the inner knob and turns with it */}
+								{scan && (
+									<g data-grip="inner" aria-hidden="true">
+										<g class="kln-knob-scan" transform="rotate(58)">
+											<text y="-2">PULL</text>
+											<text y="9">SCAN</text>
+										</g>
+									</g>
+								)}
+								{HALVES.map((h) => (
+									<g class="kln-knob-half">
+										<path
+											class="kln-knob-hit"
+											d={h.d}
+											role="button"
+											tabindex="0"
+											aria-label={`${label} ${h.name}`}
+											data-knob={h.knob}
+											data-dir={h.dir}
+										/>
+										<path class="kln-knob-arrow" d={h.arrow} marker-end={`url(#${id('head')})`} aria-hidden="true" />
+									</g>
+								))}
+							</g>
+						</svg>
+						<ul class="kln-tree" aria-label={`${label} page types`} />
+						<p class="sr-only" aria-live="polite" data-live />
+					</section>
+				);
+			})
 		}
 	</div>
 	<p class="kln-knob-note">Dashed pages exist only in some installations.</p>
@@ -64,9 +164,10 @@ const sides = [
 	}
 	.kln-knob-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
 		gap: 1.5rem;
-		max-width: 36rem;
+		align-items: start;
+		max-width: 40rem;
 	}
 	.kln-knob-side h3 {
 		margin: 0 0 0.5rem;
@@ -75,58 +176,128 @@ const sides = [
 		font-size: var(--sl-text-lg);
 		color: var(--sl-color-white);
 	}
-	.kln-knob-buttons {
-		display: grid;
-		grid-template-columns: auto 2.75rem 2.75rem;
-		gap: 0.4rem 0.5rem;
-		align-items: center;
-		margin-bottom: 0.75rem;
+	.kln-knob-svg {
+		display: block;
+		width: 100%;
+		height: auto;
+		user-select: none;
+		-webkit-user-select: none;
+		touch-action: manipulation;
 	}
-	.kln-knob-label {
-		font-size: var(--sl-text-sm);
-		color: var(--sl-color-gray-2);
+	.kln-knob-labels text {
+		font-family: var(--kln-font-heading);
+		font-weight: 600;
+		font-size: 17px;
+		letter-spacing: 0.02em;
+		text-anchor: middle;
+		fill: #ececec;
+		transition: fill 0.15s;
 	}
-	.kln-knob-buttons button {
-		height: 2.25rem;
-		border: 1px solid var(--sl-color-gray-4);
-		border-radius: 50%;
-		background: var(--sl-color-gray-6);
-		color: var(--sl-color-white);
-		font-size: 1.1rem;
+	/* The amber of the numbered markers of the front panel drawing */
+	.kln-knob-labels text.is-current {
+		fill: #ffc233;
+	}
+	.kln-knob-scan text {
+		font-family: var(--kln-font-heading);
+		font-weight: 600;
+		font-size: 10px;
+		text-anchor: middle;
+		fill: #cfcfcf;
+	}
+	/* The grips sit in a group translated to the knob center, so the default origin (0, 0) is the center of the knob */
+	[data-grip] {
+		transition: transform 0.12s ease-out;
+	}
+	.kln-knob-hit {
+		fill: transparent;
 		cursor: pointer;
+		outline: none;
 	}
-	.kln-knob-buttons button:hover {
-		border-color: var(--kln-affordance);
+	.kln-knob-hit:focus-visible {
+		stroke: #ffc233;
+		stroke-width: 2;
 	}
-	.kln-groups,
-	.kln-pages {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.25rem;
-		margin: 0.4rem 0 0 !important;
+	.kln-knob-arrow {
+		fill: none;
+		stroke: #ffc233;
+		stroke-width: 2.2;
+		stroke-linecap: round;
+		opacity: 0;
+		pointer-events: none;
+		transition: opacity 0.12s;
+	}
+	.kln-knob-hit:hover + .kln-knob-arrow,
+	.kln-knob-hit:focus-visible + .kln-knob-arrow {
+		opacity: 0.85;
+	}
+
+	/* The page tree: page types flush left, the pages of the selected one as leaves joined by lines */
+	.kln-tree,
+	.kln-tree :global(ul) {
+		margin: 0 !important;
 		padding: 0;
 		list-style: none;
 		font-family: var(--kln-font-heading);
 		font-size: var(--sl-text-sm);
+		line-height: 1.6;
 	}
-	.kln-groups :global(li),
-	.kln-pages :global(li) {
+	.kln-tree {
+		margin-top: 0.75rem !important;
+	}
+	.kln-tree :global(li) {
 		margin: 0 !important;
-		padding: 0.05rem 0.4rem;
-		border: 1px solid var(--sl-color-gray-5);
-		border-radius: 3px;
 		color: var(--sl-color-gray-3);
+	}
+	.kln-tree :global(.kln-tree-name) {
+		display: inline-block;
+		padding: 0 0.35rem;
+		border: 1px solid transparent;
+		border-radius: 3px;
 		white-space: pre;
 	}
-	.kln-groups :global(li.is-current),
-	.kln-pages :global(li.is-current) {
-		border-color: var(--kln-affordance);
-		background: var(--kln-affordance-bg);
+	.kln-tree :global(li.is-current > .kln-tree-name) {
 		color: var(--sl-color-white);
 		font-weight: 600;
 	}
-	.kln-pages :global(li.is-optional) {
+	.kln-tree :global(.kln-tree-pages) {
+		margin-left: 0.75rem !important;
+	}
+	.kln-tree :global(.kln-tree-pages li) {
+		position: relative;
+		padding-left: 1rem;
+	}
+	/* The vertical line along the leaves, and the tick to each leaf; the last leaf ends the line */
+	.kln-tree :global(.kln-tree-pages li)::before,
+	.kln-tree :global(.kln-tree-pages li)::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		border-color: var(--sl-color-gray-4);
+	}
+	.kln-tree :global(.kln-tree-pages li)::before {
+		top: 0;
+		bottom: 0;
+		border-left: 1px solid;
+	}
+	.kln-tree :global(.kln-tree-pages li:last-child)::before {
+		bottom: auto;
+		height: 0.8em;
+	}
+	.kln-tree :global(.kln-tree-pages li)::after {
+		top: 0.8em;
+		width: 0.75rem;
+		border-top: 1px solid;
+	}
+	.kln-tree :global(.kln-tree-pages li.is-current > .kln-tree-name) {
+		border-color: var(--kln-affordance);
+		background: var(--kln-affordance-bg);
+	}
+	.kln-tree :global(.kln-tree-pages li.is-optional > .kln-tree-name) {
+		border-color: var(--sl-color-gray-4);
 		border-style: dashed;
+	}
+	.kln-tree :global(.kln-tree-pages li.is-optional.is-current > .kln-tree-name) {
+		border-color: var(--kln-affordance);
 	}
 	.kln-knob-note {
 		margin-top: 0.75rem;
@@ -136,49 +307,85 @@ const sides = [
 </style>
 
 <script>
-	interface PageGroup {
-		name: string;
-		pages: string[];
-		optional?: string[];
-	}
+	import { leftTree, rightTree } from '../data/pageTree';
+	import { initialState, statusName, treeView, turn, type Knob } from '../lib/knobDemo';
+
+	/** Degrees a knob's grip turns per step, so that a click is seen to turn the knob */
+	const GRIP_STEP = 12;
+
+	const SIDES = {
+		left: { tree: leftTree, start: 3 },
+		right: { tree: rightTree, start: 5 },
+	};
+
+	const item = (name: string, classes: Record<string, boolean>) => {
+		const li = document.createElement('li');
+		for (const [c, on] of Object.entries(classes)) li.classList.toggle(c, on);
+		const span = document.createElement('span');
+		span.className = 'kln-tree-name';
+		span.textContent = name;
+		li.append(span);
+		return li;
+	};
 
 	for (const demo of document.querySelectorAll<HTMLElement>('.kln-knobdemo')) {
 		for (const side of demo.querySelectorAll<HTMLElement>('.kln-knob-side')) {
-			const key = side.dataset.side as 'left' | 'right';
-			const tree: PageGroup[] = JSON.parse(demo.dataset[key]!);
-			let group = Number(side.dataset.start);
-			const subIndex = tree.map(() => 0);
-			const statusName = demo.querySelector<HTMLElement>(`[data-status="${key}"]`)!;
-			const groupItems = side.querySelectorAll<HTMLElement>('.kln-groups li');
-			const pageList = side.querySelector<HTMLElement>('.kln-pages')!;
+			const key = side.dataset.side as keyof typeof SIDES;
+			const { tree, start } = SIDES[key];
+			let state = initialState(tree, start);
+			const angle = { outer: 0, inner: 0 };
+			const status = demo.querySelector<HTMLElement>(`[data-status="${key}"]`)!;
+			const labels = side.querySelectorAll<SVGTextElement>('[data-label]');
+			const grips = {
+				outer: side.querySelectorAll<SVGElement>('[data-grip="outer"]'),
+				inner: side.querySelectorAll<SVGElement>('[data-grip="inner"]'),
+			};
+			const list = side.querySelector<HTMLElement>('.kln-tree')!;
+			const live = side.querySelector<HTMLElement>('[data-live]')!;
 
 			const render = () => {
-				const g = tree[group];
-				statusName.textContent = g.pages[subIndex[group]];
-				groupItems.forEach((li, i) => li.classList.toggle('is-current', i === group));
-				pageList.replaceChildren(
-					...g.pages.map((p, i) => {
-						const li = document.createElement('li');
-						li.textContent = p;
-						li.classList.toggle('is-current', i === subIndex[group]);
-						li.classList.toggle('is-optional', g.optional?.includes(p) ?? false);
+				const name = statusName(state, tree);
+				status.textContent = name;
+				live.textContent = name.trimEnd();
+				labels.forEach((label, i) => label.classList.toggle('is-current', i === state.type));
+				list.replaceChildren(
+					...treeView(state, tree).map((type) => {
+						const li = item(type.name, { 'is-current': type.current });
+						if (type.pages.length > 0) {
+							const pages = document.createElement('ul');
+							pages.className = 'kln-tree-pages';
+							pages.append(
+								...type.pages.map((p) => item(p.name, { 'is-current': p.current, 'is-optional': p.optional })),
+							);
+							li.append(pages);
+						}
 						return li;
 					}),
 				);
 			};
 
-			side.addEventListener('click', (e) => {
-				const button = (e.target as HTMLElement).closest<HTMLButtonElement>('button[data-knob]');
-				if (!button) return;
-				const dir = Number(button.dataset.dir);
-				if (button.dataset.knob === 'outer') {
-					group = (group + dir + tree.length) % tree.length;
-				} else {
-					const n = tree[group].pages.length;
-					subIndex[group] = (subIndex[group] + dir + n) % n;
-				}
+			const act = (hit: Element) => {
+				const knob = hit.getAttribute('data-knob') as Knob;
+				const dir = Number(hit.getAttribute('data-dir')) as 1 | -1;
+				state = turn(state, tree, knob, dir);
+				angle[knob] += dir * GRIP_STEP;
+				for (const grip of grips[knob]) grip.style.transform = `rotate(${angle[knob]}deg)`;
 				render();
-			});
+			};
+
+			for (const hit of side.querySelectorAll('.kln-knob-hit')) {
+				hit.addEventListener('click', () => act(hit));
+				// A fast double click turns twice and must not select text around the drawing
+				hit.addEventListener('mousedown', (e) => {
+					if ((e as MouseEvent).detail > 1) e.preventDefault();
+				});
+				hit.addEventListener('keydown', (e) => {
+					const k = (e as KeyboardEvent).key;
+					if (k !== 'Enter' && k !== ' ') return;
+					e.preventDefault();
+					act(hit);
+				});
+			}
 			render();
 		}
 	}
