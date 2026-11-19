@@ -149,7 +149,9 @@ manual page cited in the code to the page of the PDF and lists topics and facts.
 - **A bug in the simulation** (in the code, or where the code and the real unit disagree) goes to the kln90b issues,
   https://github.com/falcon71/kln90b/issues. Search open and closed issues first, with several wordings; a closed issue
   may be a partial fix. A new issue gets the `bug` label and states what is wrong, a concrete reproduction (input,
-  observed and expected values), the file and line, the impact on the pilot and a suggested fix. If it continues a
+  observed and expected values), the file and line, the impact on the pilot and a suggested fix. It never mentions
+  this manual or how the bug was found ("found while writing the docs"), because the kln90b project must not learn
+  about the manual (coordinator, 2026-11-19, after three issues said so). If it continues a
   closed issue, it references that issue. A reviewer may cite a manual page number in a kln90b issue, never the
   manual's text; a writer has no manual to cite.
 - **Never change kln90b.** Nothing in `vendor/kln90b` is edited, and no fix or test is added there for the
