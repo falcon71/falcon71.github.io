@@ -52,6 +52,11 @@ describe('treeView', () => {
 		for (const t of view.filter((t) => !t.current)) expect(t.pages).toEqual([]);
 	});
 
+	it('highlights the page the inner knob selected', () => {
+		const nav = treeView(left(['inner', 1], ['inner', 1]), leftTree)[3];
+		expect(nav.pages.map((p) => p.current)).toEqual([false, false, true, false, false]);
+	});
+
 	it('lists all 26 FPL pages', () => {
 		const pages = treeView(left(['outer', -1]), leftTree)[2].pages.map((p) => p.name);
 		expect(pages).toHaveLength(26);

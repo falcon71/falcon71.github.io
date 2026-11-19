@@ -16,6 +16,18 @@ describe('the faceplate labels', () => {
 		expect(rightFaceplate.labels.length).toBe(rightTree.length);
 	});
 
+	it('runs the left labels up the left column and down the right one', () => {
+		expect(leftFaceplate.labels.map(({column, row}) => [column, row])).toEqual([
+			[0, 3], [0, 2], [0, 1], [0, 0], [1, 0], [1, 1], [1, 2], [1, 3],
+		]);
+	});
+
+	it('runs the right labels up the left column and down the right one', () => {
+		expect(rightFaceplate.labels.map(({column, row}) => [column, row])).toEqual([
+			[0, 4], [0, 3], [0, 2], [0, 1], [0, 0], [1, 0], [1, 1], [1, 2], [1, 3], [1, 4],
+		]);
+	});
+
 	it('places the left labels up the left column and down the right one', () => {
 		expect(labelPosition(leftFaceplate, leftFaceplate.labels[0])).toEqual({x: 42, y: 256});
 		expect(labelPosition(leftFaceplate, leftFaceplate.labels[3])).toEqual({x: 42, y: 196});
