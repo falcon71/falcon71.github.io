@@ -180,7 +180,7 @@ anchors and page links above. After them the order follows "owners before the pa
 | 7 | nearest-direct-to | Nearest; Direct-to | done (2026-11-18) |
 | 8 | navigation | Modes of operation; Sequencing and turn anticipation; MOD chapter | done (2026-11-18) |
 | 9 | nav-pages | NAV chapter with Super NAV 1 and Super NAV 5 | done (2026-11-18) |
-| 10 | flight-plans | Flight plans; FPL chapter | in review (2026-11-19) |
+| 10 | flight-plans | Flight plans; FPL chapter | done (2026-11-19) |
 | 11 | flight-plan-pages | D/T, REF and CTR chapters | not started |
 | 12 | sid-star | SID and STAR procedures | not started |
 | 13 | approaches | Non-precision approaches | not started |
