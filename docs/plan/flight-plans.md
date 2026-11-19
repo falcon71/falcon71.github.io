@@ -1,94 +1,53 @@
 # Package: flight-plans (Flight plans; the FPL chapter)
 
-The topic with the most edge cases. Pointers come from the planning survey of the code (paths relative to
-`vendor/kln90b/kln90b/`); they are not checked facts. Screens are planned by the session after its research. If the
-research shows the package is too large for one session, the FPL chapter becomes a package of its own, worked right
-after the Operation page.
+Done 2026-11-19. The research found the package large; it stayed one session with two writers in parallel, one per
+page, owning different files and screens. The sections below are as written.
 
 ## Pages
 
-### Flight plans (`operation/flight-plans.mdx`)
+### Flight plans (`operation/flight-plans.mdx`, `sidebar.order` 5)
 
-1. Summary.
-2. The flight plans of the unit: FPL 0 and the stored ones, the limits, what is stored while the unit is off.
-3. Creating a flight plan.
-4. Adding, replacing and deleting waypoints; the waypoint type page; a full flight plan and the make-room page.
-5. Activating a flight plan, also inverted.
-6. Storing FPL 0 as a numbered flight plan; deleting a flight plan.
-7. Flying the active flight plan: what FPL 0 marks, a direct-to to one of its waypoints (one paragraph, link),
-   editing the active flight plan in flight.
-8. Procedures in the flight plan: one paragraph and the link to SID and STAR procedures.
-9. Reference waypoints and center waypoints: the tasks (the REF and CTR chapters have the pages).
-10. A route from the EFB, and sending FPL 0 to the EFB.
-11. Links on.
+The Operation page owns every task with flight plans. Screens under `flight-plans/`; the questions of the numbered
+flight plans are shown with the FPL chapter's screens (`pages/fpl/fpl-1-use-question`, `-invert-question`,
+`-load-question`, `-delete-question`).
 
-### FPL pages (`pages/fpl.mdx`)
+- `#the-flight-plans-of-the-unit`: FPL 0 and FPL 1 to FPL 25, the limits, what is kept while the unit is off.
+- `#creating-a-flight-plan`.
+- `#adding-a-waypoint`, with `#adding-at-the-end`, `#inserting-in-front-of-a-waypoint`,
+  `#taking-the-waypoint-of-the-right-page-into-a-flight-plan`.
+- `#deleting-a-waypoint`.
+- `#a-full-flight-plan`, with `#fpl-full` and `#the-question-to-make-room-in-fpl-0`.
+- `#the-waypoint-type-identification-page` (screen `flight-plans/type-page`).
+- `#activating-a-flight-plan`, with `#activating-a-flight-plan-inverted`.
+- `#storing-fpl-0`.
+- `#deleting-a-flight-plan`, with `#delete-fpl` (the Good to know box on the trap of CLR with the cursor off).
+- `#flying-the-active-flight-plan`; `#editing-the-active-flight-plan`.
+- `#procedures-in-the-flight-plan`: one paragraph and the link to SID and STAR procedures.
+- `#reference-waypoints`, `#center-waypoints`: the tasks.
+- `#loading-a-route-from-the-efb` and `#sending-fpl-0-to-the-efb`, each with a Simulator only box.
+- `#where-to-go-next`.
 
-FPL 0 and FPL 1 to FPL 25: the page, the variants (empty, filled, the cursor on, the active flight plan with its
-marks, procedure headers, the questions of the top line) and the fields.
+### FPL pages (`pages/fpl.mdx`, `sidebar.order` 3)
 
-## Topics this package owns
+- `#the-fpl-pages-waypoints-in-a-list`.
+- `#fpl-0-the-active-flight-plan`, with `#the-active-leg-symbol`, `#procedure-headers`,
+  `#fpl-0-during-a-direct-to-and-in-obs-mode`, `#an-empty-fpl-0`.
+- `#fpl-1-to-fpl-25-numbered-flight-plans`, with `#use-invrt`, `#an-empty-numbered-flight-plan`.
+- `#the-cursor-on-an-fpl-page`, `#the-delete-questions`.
 
-See the index: flight plans, the EFB route exchange, reference and center waypoints as tasks.
+## Screens that could not be staged as planned
 
-## Where to look
-
-`controls/FlightplanList.tsx`, `controls/FlightplanListItem.tsx`, `pages/left/FplPage.tsx`, `MakeRoomPage.tsx`,
-`FplInsertMakeRoomPage.tsx`, `WaypointTypePage.tsx`, `data/flightplan/Flightplan.ts`, `ActiveWaypoint.ts`,
-`services/FlightplanUtils.ts`, `services/Flightplanloader.ts`, `services/KlnEfbLoader.ts`, `KlnEfbSaver.ts`,
-`EfbRouteFit.ts`, `settings/UserFlightplanPersistor.ts`; tests `test/flight/flights/nextLegEdit.test.ts`,
-`skippedLeg.test.ts`, `test/unit/services/FlightplanUtils.test.ts`, `test/render/pages/left/`,
-`test/render/services/KlnEfbLoader.test.ts`, `KlnEfbSaver.test.ts`; the wiki FAQ on loading a flight plan, whose
-part about version 1.x does not apply.
-
-## Notes from other packages
-
-- From the package apt, filed as kln90b#479: a route from the EFB loads an approach into a unit not installed for
-  approaches; `CHANGE APR?` then throws. Confirmed against the real manual by the dry run's reviewer; unfiled
-  (`docs/plan/apt.md`). The researcher of this package reproduces it; the coordinator files it with the
-  maintainer's word.
-- The style guide (section 17, "Tutorial flights") has the EFB steps as the maintainer described them; Tutorial
-  flight 2 uses them and links here.
-- The word list has procedure header, approach header, suffix, DME arc waypoint.
-
-### From the package controls (2026-11-17)
-
-- **The leg marks of an FPL page** (as read by the writer of Controls and display in `controls/FlightplanArrow.tsx`;
-  check them): one mark at the from-waypoint, one at the active waypoint, another for a direct-to, another for a
-  waypoint inside a procedure; they vanish while an entry is open. The FPL chapter owns them; the field explanations
-  of `display/status-line-crsr-both-sides` and `pages/fpl/fpl-0-delete-question` name only the marks of the active leg.
-- **CLR with the cursor off on an FPL page** asks `DELETE FPL?`, even when the CLR was meant for a field on the right
-  side (fact sheet of the package controls). Controls and display does not describe it; say it here if it surprises.
-  The screen `pages/fpl/fpl-0-delete-question` shows the delete question of a waypoint in the list.
-- Keyboard mode: typing into a filled waypoint of a flight plan inserts a new waypoint in front of it, and the key
-  starts the new entry (`FlightplanListItem.tsx:468`); Keyboard mode links to Flight plans for `INVALID ADD` on an
-  approach waypoint and the make-room question when the plan is full.
-
-### From the package waypoints (2026-11-17)
-
-- On an FPL page, ENT on a closed row that holds a waypoint first opens a new row, and the next ENT takes the right
-  page's waypoint (`FlightplanListItem.tsx:216-224`, not verified by a run). Waypoints and the database
-  (`#taking-the-waypoint-of-the-right-page`) links here for it.
-- An unknown identifier on an FPL page brings up the offer to create a supplemental user waypoint (User waypoints,
-  `#creating-a-user-waypoint`); link, do not explain.
-- User waypoints gives one clause each for the reference and center waypoints and the waypoints of a route from the
-  EFB, and links here for how they are made and named. The EFB import reports `WAYPOINT … DELETED` when the user
-  database is full; User waypoints says so in `#usr-db-full`. The Simulator only box of the EFB import is this
-  page's.
-
-### From the package navigation (2026-11-18)
-
-- The waypoint type identification page (official term; `TYPE WPT`, `1 EN ROUTE?`, `2 SID/STAR?`;
-  `pages/left/WaypointTypePage.tsx`, rule in `services/FlyOverWaypoints.ts`): after the pilot approves a terminal
-  intersection or NDB that some SID or STAR of its airport flies over, the unit asks how to insert it. `SID/STAR`
-  inserts it as a fly-over waypoint (no turn anticipation at it), `EN ROUTE` as a normal one, CLR cancels the entry;
-  the answer is stored with the flight plan and kept through an EFB route load. Sequencing,
-  `#fly-over-waypoints`, says what the answer does and links Flight plans for the page. A screen needs a terminal fix
-  of the CIFP extract.
-- Sequencing and Modes of operation link `/kln90b/operation/flight-plans/` without an anchor; sharpen in the final pass.
-- In OBS mode FPL 0 shows the Direct To symbol at the active waypoint (not described by Modes of operation); after OBS to
-  leg mode on the TO side the leg is flown as a direct-to. The FPL chapter describes what FPL 0 shows.
+- `pages/fpl/fpl-0-no-fix` (FPL 0 while the unit is not NAV ready) is staged by a receiver reset, because the
+  generator settles every boot until the first fix; the screen looks the same as before the first fix after
+  power-on.
+- `flight-plans/type-page` builds its terminal waypoint (NNUTT of KPDX) in its steps through `u.navdata`, because
+  the generator resolves every terminal fix that NASR also files to the NASR fix without its airport (site notes in
+  the index).
+- No screen for the EFB route load, the `WAYPOINT … DELETED` MSG page or sending FPL 0 to the EFB: the generator has
+  no EFB.
+- `USE?` during a direct-to: not staged; the page describes it from the code.
 
 ## Changes to earlier pages
 
-None planned.
+From the seam check (2026-11-19): links to `/kln90b/operation/flight-plans/` and `/kln90b/pages/fpl/` on earlier
+pages sharpened to the anchors above; old word forms replaced (see the index, "For the final pass").

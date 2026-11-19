@@ -118,6 +118,14 @@ this out, because this page owns what RAIM decides in an approach. Pointers from
   (`SuperNav5Page.tsx:299`, `:344`). The reviewer of nav-pages left open how close to the airport the diagram
   should appear with `AUTO`; the reviewer of this package checks it against the approach behavior.
 
+### From the package flight-plans (2026-11-19)
+
+- `MOVE ?` on a DME arc waypoint is listed among the delete-type questions of the FPL chapter
+  (`#the-delete-questions`) with a link here; this page explains it.
+- kln90b#479 (open): a route from the EFB loads an approach into a unit not installed for approaches; `CHANGE APR?`
+  on its header then brings up an error page, `DELETE APR?` removes it. Flight plans (`#loading-a-route-from-the-efb`)
+  describes it with the hidden comment; nothing needed here but the Availability box of approaches.
+
 ## Changes to earlier pages
 
 APT 8's "Questions before the load and where the approach goes" is compared with this page and cut back where this

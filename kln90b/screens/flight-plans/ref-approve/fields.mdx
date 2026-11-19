@@ -1,0 +1,59 @@
+<Field id="use" title="Questions to activate the plan">
+	`USE? INVRT?` stands on the top line of a flight plan that holds waypoints.
+</Field>
+
+<Field id="before" title="Waypoint before the new waypoint">
+	A waypoint of the plan that stays where it is.
+</Field>
+
+<Field id="entry" title="Reference waypoint waiting for approval">
+	The new waypoint that the unit made from the reference waypoint. Its identifier is the first four characters of the identifier of the reference waypoint and a letter. The row flashes until <kbd>ENT</kbd> approves the waypoint.
+</Field>
+
+<Field id="after" title="Waypoint behind the new waypoint">
+	The waypoint at the end of the leg that the new waypoint lies on.
+</Field>
+
+<Field id="blank" title="Blank waypoint position">
+	The blank waypoint position after the last waypoint, where a waypoint is added at the end.
+</Field>
+
+<Field id="ident" title="Identifier of the new waypoint">
+	The identifier of the new waypoint, on the SUP page that the unit shows for approval.
+</Field>
+
+<Field id="ref" title="Reference waypoint">
+	The identifier of the reference waypoint that the new waypoint was made from.
+</Field>
+
+<Field id="rad" title="Radial from the reference waypoint">
+	The radial from the reference waypoint to the new waypoint, in degrees magnetic. It is converted with the published magnetic variation when the reference waypoint is a VOR, and otherwise with the variation at the reference waypoint.
+</Field>
+
+<Field id="dis" title="Distance from the reference waypoint">
+	The distance from the reference waypoint to the new waypoint, in NM.
+</Field>
+
+<Field id="lat" title="Latitude of the new waypoint">
+	The latitude of the new waypoint in degrees, minutes and hundredths of a minute.
+</Field>
+
+<Field id="lon" title="Longitude of the new waypoint">
+	The longitude of the new waypoint in degrees, minutes and hundredths of a minute.
+</Field>
+
+<Field id="crsr" title="CRSR annunciation">
+	<Term t="CRSR">`CRSR`</Term> replaces the page identification while the left cursor is on.
+</Field>
+
+<Field id="mode" title="Mode annunciation">
+	The mode annunciation, which shows the mode of the unit. `ENR-LEG` is Enroute-Leg mode.
+</Field>
+
+<Field id="ent" title="Enter prompt">
+	<Term t="ENT">`ENT`</Term> flashes while the unit waits for <kbd>ENT</kbd> to approve what it shows, such as a waypoint page shown for approval.
+</Field>
+
+<Field id="page" title="Page identification">
+	The page identification on the right side. SUP is the page of a supplemental waypoint.
+</Field>

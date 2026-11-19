@@ -128,9 +128,10 @@ that writes the owner records the anchors in this table, and the final pass shar
 | Magnetic variation: where the unit has none, the entered variation, `MAGNETIC VAR INVALID` | Modes of operation, `#magnetic-variation` (`#flying-without-a-magnetic-variation`, `#magnetic-var-invalid`) | SET chapter (SET 2): the field |
 | Waypoint alerting, the WPT annunciator | Sequencing and turn anticipation, `#waypoint-alerting` (`#the-wpt-annunciator`) | every page that names it links at its first use |
 | Waypoint sequencing, turn anticipation (SET 6), fly-over waypoints, when the unit does not sequence | Sequencing and turn anticipation: `#waypoint-sequencing` (`#when-the-unit-does-not-sequence`), `#turn-anticipation` (`#where-turn-anticipation-begins`, `#turning-off-turn-anticipation`), `#fly-over-waypoints` | SET chapter: SET 6 as a page; FAQ: the question and the link; Flight plans: the waypoint type identification page |
-| Flight plans: FPL 0 and the stored ones, creating, editing, the limits, activating and inverting, storing FPL 0, deleting, flying the active flight plan | Flight plans | FPL chapter: the page, its variants and fields |
-| A route from the EFB and FPL 0 sent to the EFB | Flight plans | Tutorial flight 2: the steps (style guide, section 17); FAQ: the question and the link |
-| Reference waypoints and center waypoints as tasks | Flight plans | REF and CTR chapters: the pages, their states and fields |
+| Flight plans: FPL 0 and the numbered ones, creating, editing, the limits, a full flight plan and the make-room question for a waypoint, the waypoint type identification page, activating and inverting, storing FPL 0, deleting (`DELETE FPL?`), flying and editing the active flight plan | Flight plans: `#the-flight-plans-of-the-unit`, `#creating-a-flight-plan`, `#adding-a-waypoint` (`#taking-the-waypoint-of-the-right-page-into-a-flight-plan`), `#deleting-a-waypoint`, `#a-full-flight-plan` (`#fpl-full`, `#the-question-to-make-room-in-fpl-0`), `#the-waypoint-type-identification-page`, `#activating-a-flight-plan` (`#activating-a-flight-plan-inverted`), `#storing-fpl-0`, `#deleting-a-flight-plan` (`#delete-fpl`), `#flying-the-active-flight-plan`, `#editing-the-active-flight-plan` | FPL chapter: the page, its variants and fields, one sentence and the link per task |
+| The FPL page: the active leg symbol, the arrow in OBS mode and during a direct-to, the fence, the questions of the top line as page states | FPL chapter: `#fpl-0-the-active-flight-plan` (`#the-active-leg-symbol`, `#procedure-headers`, `#fpl-0-during-a-direct-to-and-in-obs-mode`), `#fpl-1-to-fpl-25-numbered-flight-plans` (`#use-invrt`), `#the-delete-questions` | Flight plans and Direct-to: link `#the-active-leg-symbol` instead of describing the marks |
+| A route from the EFB and FPL 0 sent to the EFB | Flight plans: `#loading-a-route-from-the-efb`, `#sending-fpl-0-to-the-efb` | Tutorial flight 2: the steps (style guide, section 17); FAQ: the question and the link |
+| Reference waypoints and center waypoints as tasks | Flight plans: `#reference-waypoints`, `#center-waypoints` | REF and CTR chapters: the pages, their states and fields |
 | What a loaded procedure does in FPL 0: where it goes, headers and suffixes, `CHANGE` and `DELETE` on a header, editing procedure waypoints, the make-room question | SID and STAR procedures (Non-precision approaches for what differs for an approach) | Flight plans: one paragraph and the link; APT 7 and APT 8: one sentence and the link |
 | The two rules (a transition must be selected; an approach starts only at an IAF) | SID and STAR procedures, Non-precision approaches | stated plainly on APT 7, APT 8 and in the FAQ too (style guide, section 17) |
 | Approach arming and activation, the approach modes, DME arcs, the missed approach, what the unit does not fly | Non-precision approaches | APT 8 links |
@@ -179,7 +180,7 @@ anchors and page links above. After them the order follows "owners before the pa
 | 7 | nearest-direct-to | Nearest; Direct-to | done (2026-11-18) |
 | 8 | navigation | Modes of operation; Sequencing and turn anticipation; MOD chapter | done (2026-11-18) |
 | 9 | nav-pages | NAV chapter with Super NAV 1 and Super NAV 5 | done (2026-11-18) |
-| 10 | flight-plans | Flight plans; FPL chapter | not started |
+| 10 | flight-plans | Flight plans; FPL chapter | done (2026-11-19) |
 | 11 | flight-plan-pages | D/T, REF and CTR chapters | not started |
 | 12 | sid-star | SID and STAR procedures | not started |
 | 13 | approaches | Non-precision approaches | not started |
@@ -239,6 +240,10 @@ it is written when those owners exist. A package that proves too large in its re
   and go into their field explanations (section 14); `OUT`'s expansion "OBS output" should match the field name
   `OBS OUT`. Simulated failures, `#the-battery`, says the Self Test page shows `TEST FAIL` after a memory loss:
   check which receiver code causes it.
+- The package flight-plans (2026-11-19) brought the official terms numbered flight plan, active leg symbol, blank
+  waypoint position and fence, and the rule that a symbol of the unit's font is named in words (style guide,
+  section 12). The final pass searches once more ("stored flight plan", "stored plan", "leg mark", code points such
+  as `Á` or `›` in prose).
 - The FLR chapter ("Leaving the FLR pages") repeats some general rules of pages opened over the page tree that
   Controls and display now owns (`#pages-that-no-knob-reaches`); the final pass cuts them to the FLR specifics and
   the link.
@@ -269,5 +274,12 @@ Not manual text; for the maintainer or a session that works on the site.
   for free text, would catch this.
 - The fallback text of the home page's download buttons (`Downloads.astro`) names the zip `falcon71-kln90b`; the
   file is named `falcon71-kln90b-` and the version, ending in `.zip` (`releases.ts`). A wording mismatch only.
+- The generator (`kln90b/generator/lib/navdata.ts`, `icaoOf`) resolves every terminal fix that NASR also files to
+  the NASR fix and drops the airport, so no terminal waypoint on the screens is one: the waypoint type
+  identification page never comes up by itself, and the ACT pages may show `I` where the simulator shows `T`.
+  `flight-plans/type-page` works around it in its steps; making a CIFP terminal reference a terminal waypoint with
+  its airport would be the clean fix (reviewer of Flight plans, 2026-11-19).
+- The generator cannot boot the unit cold: it settles every boot until the first fix, so a state before NAV ready
+  is staged by a receiver reset (`pages/fpl/fpl-0-no-fix`).
 - The FLR pages are in `kln90b/src/data/pageTree.ts` as `offKnobTree`: the page links read it, the knob demo does
   not, so FLR is no stop of the outer knob there (`docs/plan/failures.md`).

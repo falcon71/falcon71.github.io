@@ -71,7 +71,9 @@ GitHub wiki of the kln90b project.
 - **No trademarks of manufacturers.** Never name an aircraft or avionics maker or its products, in the text, on a
   screen or in a drawing: no Cessna, no Skyhawk, no Bendix/King. The unit is the KLN 90B and nothing more. A
   company name that the unit itself shows and whose company no longer exists (AlliedSignal on the Turn-On page)
-  may stay; text the pilot writes into the unit on a screen uses neutral words (maintainer, 2026-11-17). Microsoft
+  may stay; text the pilot writes into the unit on a screen uses neutral words (maintainer, 2026-11-17). The name of
+  a real place that contains a company name, as the database gives it (Boeing Field, `BOEING FLDK` on the APT
+  pages), is a place name and stays (maintainer, 2026-11-19). Microsoft
   Flight Simulator is named, because the manual is for it.
 - **Features that exist only in the simulation** (the SET 10 page, the FLR pages and the failures they set, keyboard
   mode) are marked with the Simulator only box (section 11).
@@ -147,7 +149,9 @@ manual page cited in the code to the page of the PDF and lists topics and facts.
 - **A bug in the simulation** (in the code, or where the code and the real unit disagree) goes to the kln90b issues,
   https://github.com/falcon71/kln90b/issues. Search open and closed issues first, with several wordings; a closed issue
   may be a partial fix. A new issue gets the `bug` label and states what is wrong, a concrete reproduction (input,
-  observed and expected values), the file and line, the impact on the pilot and a suggested fix. If it continues a
+  observed and expected values), the file and line, the impact on the pilot and a suggested fix. It never mentions
+  this manual or how the bug was found ("found while writing the docs"), because the kln90b project must not learn
+  about the manual (coordinator, 2026-11-19, after three issues said so). If it continues a
   closed issue, it references that issue. A reviewer may cite a manual page number in a kln90b issue, never the
   manual's text; a writer has no manual to cite.
 - **Never change kln90b.** Nothing in `vendor/kln90b` is edited, and no fix or test is added there for the
@@ -451,6 +455,11 @@ names for one thing takes them for two things.
   draws some text in smaller capitals (the units `NM`, `KT`, `FT`, the modes such as `ENR-LEG`, the prompts `ENT`
   and `MSG`, `NR` of the nearest lists). It is capitals to the pilot and is quoted in capitals; the code stores it as
   small letters only to select the smaller glyphs (maintainer, 2026-11-17).
+- **A symbol is named in words, never quoted.** The unit's font draws its symbols (the active leg symbol, the Direct
+  To symbol, the degree sign of a field) on characters that the site's fonts show as accented letters or other
+  glyphs (`Á`, `›`). Name the symbol in words ("the head of the active leg symbol"); the screen shows it. A label
+  that the font draws in smaller letters is quoted in capitals as always (`CHINS5-STAR`) (coordinator, 2026-11-19,
+  after the writers of the package flight-plans quoted the code points).
 - A message is quoted in full. A message page message of several lines is quoted with its lines as the MSG page
   shows them, in a code block; this holds for the message lists and wherever a page explains the message. A
   sentence that only names a message of one line quotes it in code formatting: `ADJ NAV IND CRS TO 271°`.
@@ -572,6 +581,10 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | map orientation; North up, desired track up, actual track up, heading up | the orientation, track up |
 | the pop-up menu (of Super NAV 5); the VOR, NDB and APT selections (its entries) | the menu, the layers |
 | the left side of Super NAV 5 | the left column |
+| numbered flight plan (FPL 1 to FPL 25) | stored flight plan, stored plan |
+| the active leg symbol (the arrow on an FPL page from the from waypoint to the active waypoint, its tail and its head); the arrow (the one mark at the active waypoint in OBS mode or during a direct-to) | the leg marks, the Direct To symbol (on an FPL page) |
+| blank waypoint position (the empty numbered row after the last waypoint of a flight plan) | next position, first position, blank position |
+| fence (the line `*NO WPT SEQ` in FPL 0) | |
 
 ### Spelling and style
 

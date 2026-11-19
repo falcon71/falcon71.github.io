@@ -1,0 +1,55 @@
+<Field id="use" title="Questions to activate the plan">
+	`USE? INVRT?` stands on the top line of a flight plan that holds waypoints.
+</Field>
+
+<Field id="before" title="Waypoints before the new row">
+	Waypoints of the plan that stay where they are.
+</Field>
+
+<Field id="entry" title="Waypoint of the right page waiting for approval">
+	The row that the unit opened in front of the waypoint under the cursor, holding the identifier of the waypoint page on the right side. It flashes while it waits. <kbd>ENT</kbd> puts the waypoint into the plan.
+</Field>
+
+<Field id="after" title="Waypoint behind the new row">
+	The waypoint that the new waypoint will stand in front of. Its number counts up by one when the new waypoint is approved.
+</Field>
+
+<Field id="blank" title="Blank waypoint position">
+	The blank waypoint position after the last waypoint, where a waypoint is added at the end.
+</Field>
+
+<Field id="ident" title="Identifier of the airport shown for approval">
+	The identifier of the airport on the waypoint page shown for approval. The cursor cannot change it here.
+</Field>
+
+<Field id="name" title="Airport name">
+	The name of the airport in two rows of 11 characters. The first word keeps its full form unless it is longer than 8 characters, and what is longer than 22 characters is cut off.
+</Field>
+
+<Field id="class" title="Airspace and type of the airport">
+	The row under the name. On the left it shows `CL B` or `CL C` when the airport lies inside the outline of a class B or class C airspace. At the right end the unit shows `MILTRY` for a military airport and `PRIVAT` for a private one.
+</Field>
+
+<Field id="lat" title="Latitude of the airport">
+	The latitude of the airport in degrees, minutes and hundredths of a minute, such as `N 47°26.99'`.
+</Field>
+
+<Field id="lon" title="Longitude of the airport">
+	The longitude of the airport in degrees, minutes and hundredths of a minute, such as `W122°18.71'`.
+</Field>
+
+<Field id="crsr" title="CRSR annunciation">
+	<Term t="CRSR">`CRSR`</Term> replaces the page identification while the left cursor is on.
+</Field>
+
+<Field id="mode" title="Mode annunciation">
+	The mode annunciation, which shows the mode of the unit. `ENR-LEG` is Enroute-Leg mode.
+</Field>
+
+<Field id="ent" title="Enter prompt">
+	<Term t="ENT">`ENT`</Term> flashes while the unit waits for <kbd>ENT</kbd> to approve what it shows, such as a waypoint page shown for approval.
+</Field>
+
+<Field id="page" title="Page identification">
+	The page identification on the right side. APT 1 is the first of the APT pages, which show an airport.
+</Field>
