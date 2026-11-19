@@ -85,6 +85,10 @@ export const glossary: Record<string, GlossaryEntry> = {
 	ENT: {
 		text: 'The enter prompt. It flashes in the status line when ENT accepts what you have entered or selected.',
 	},
+	EFB: {
+		expansion: 'Electronic flight bag',
+		text: 'The tablet in the cockpit of Microsoft Flight Simulator 2024. Its flight planner app can send a route to the unit and request the active flight plan from it.',
+	},
 	CRSR: {
 		expansion: 'Cursor',
 		text: 'Replaces the page name in the status line while the cursor is on for that side. Pressing the CRSR button of that side turns the cursor off again.',

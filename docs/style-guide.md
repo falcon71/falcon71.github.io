@@ -451,6 +451,11 @@ names for one thing takes them for two things.
   draws some text in smaller capitals (the units `NM`, `KT`, `FT`, the modes such as `ENR-LEG`, the prompts `ENT`
   and `MSG`, `NR` of the nearest lists). It is capitals to the pilot and is quoted in capitals; the code stores it as
   small letters only to select the smaller glyphs (maintainer, 2026-11-17).
+- **A symbol is named in words, never quoted.** The unit's font draws its symbols (the active leg symbol, the Direct
+  To symbol, the degree sign of a field) on characters that the site's fonts show as accented letters or other
+  glyphs (`Á`, `›`). Name the symbol in words ("the head of the active leg symbol"); the screen shows it. A label
+  that the font draws in smaller letters is quoted in capitals as always (`CHINS5-STAR`) (coordinator, 2026-11-19,
+  after the writers of the package flight-plans quoted the code points).
 - A message is quoted in full. A message page message of several lines is quoted with its lines as the MSG page
   shows them, in a code block; this holds for the message lists and wherever a page explains the message. A
   sentence that only names a message of one line quotes it in code formatting: `ADJ NAV IND CRS TO 271°`.
@@ -572,6 +577,10 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | map orientation; North up, desired track up, actual track up, heading up | the orientation, track up |
 | the pop-up menu (of Super NAV 5); the VOR, NDB and APT selections (its entries) | the menu, the layers |
 | the left side of Super NAV 5 | the left column |
+| numbered flight plan (FPL 1 to FPL 25) | stored flight plan, stored plan |
+| the active leg symbol (the arrow on an FPL page from the from waypoint to the active waypoint, its tail and its head); the arrow (the one mark at the active waypoint in OBS mode or during a direct-to) | the leg marks, the Direct To symbol (on an FPL page) |
+| blank waypoint position (the empty numbered row after the last waypoint of a flight plan) | next position, first position, blank position |
+| fence (the line `*NO WPT SEQ` in FPL 0) | |
 
 ### Spelling and style
 

@@ -1,0 +1,55 @@
+<Field id="ident" title="Waypoint waiting for the answer">
+	The identifier of the waypoint that the unit is about to insert into the flight plan. The plan does not hold it until you answer.
+</Field>
+
+<Field id="title" title="Waypoint type question">
+	`TYPE WPT` asks how the waypoint is used in the flight plan. The two answers below it say what the unit does with it.
+</Field>
+
+<Field id="en-route" title="Answer: en route">
+	`1 EN ROUTE?` inserts the waypoint as a normal en route waypoint. The cursor stands on it when the page appears, and it flashes in inverse video. <kbd>ENT</kbd> gives this answer.
+</Field>
+
+<Field id="sid-star" title="Answer: SID or STAR">
+	`2 SID/STAR?` inserts the waypoint as a fly-over waypoint, at which the unit gives no turn anticipation. The left outer knob moves the cursor to it, and <kbd>ENT</kbd> gives this answer. <kbd>CLR</kbd> cancels the entry.
+</Field>
+
+<Field id="right-ident" title="Identifier of the intersection shown for approval">
+	The identifier of the intersection on the waypoint page that stays on the right side while the question is shown.
+</Field>
+
+<Field id="ref" title="Reference waypoint">
+	The waypoint that the radial and the distance are measured from. The unit looks for the nearest VOR, and the field shows underscores until it has found one.
+</Field>
+
+<Field id="rad" title="Radial from the reference waypoint">
+	The magnetic course from the reference waypoint to the intersection. It shows underscores until the unit has found the reference waypoint.
+</Field>
+
+<Field id="dis" title="Distance from the reference waypoint">
+	The distance from the reference waypoint to the intersection in NM. It shows underscores until the unit has found the reference waypoint.
+</Field>
+
+<Field id="lat" title="Latitude of the intersection">
+	The latitude of the intersection in degrees and minutes to hundredths.
+</Field>
+
+<Field id="lon" title="Longitude of the intersection">
+	The longitude of the intersection in degrees and minutes to hundredths.
+</Field>
+
+<Field id="crsr" title="CRSR annunciation">
+	<Term t="CRSR">`CRSR`</Term> replaces the page identification while the left cursor is on.
+</Field>
+
+<Field id="mode" title="Mode annunciation">
+	The mode annunciation, which shows the mode of the unit. `ENR-LEG` is Enroute-Leg mode.
+</Field>
+
+<Field id="ent" title="Enter prompt">
+	<Term t="ENT">`ENT`</Term> flashes while the unit waits for <kbd>ENT</kbd> to approve what it shows, such as a waypoint page shown for approval.
+</Field>
+
+<Field id="page" title="Page identification">
+	The page identification on the right side. INT is the page of an intersection.
+</Field>

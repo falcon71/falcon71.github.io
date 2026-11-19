@@ -45,6 +45,19 @@ reviewer checks that state against the real manuals; if they show it differently
   the legs after it; REF and CTR show `DISPLAY DESIRED FPL ON LEFT PAGE` without an FPL page on the left. These are
   the chapters' own variants.
 
+### From the package flight-plans (2026-11-19)
+
+- Flight plans owns the tasks: `#reference-waypoints` and `#center-waypoints`. The REF and CTR chapters give the
+  pages, their states and fields, and link there.
+- Found by the review of Flight plans in the code: CTR 1 has no cursor; ENT on it computes and inserts the center
+  waypoint. On the REF page, `DISPLAY DESIRED FPL ON LEFT PAGE` appears only when no FPL page is on the left; with
+  fewer than two waypoints in the plan, the approval answers `INVALID REF`. The radial of a reference waypoint is
+  stored true and shown magnetic, converted with the VOR's published magnetic variation, or the variation at the
+  reference waypoint for other waypoint types. The result of CTR is void when the pilot leaves the FPL page. Check
+  each in the code.
+- Screens of the package: `flight-plans/ref-approve`, `flight-plans/ctr-computed`, `flight-plans/ctr-complete` show
+  the steps; the chapters need their own page screens.
+
 ## Changes to earlier pages
 
 None planned.

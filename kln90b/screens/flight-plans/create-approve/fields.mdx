@@ -1,0 +1,43 @@
+<Field id="load" title="Question to copy FPL 0">
+	`LOAD FPL 0?` stands on the top line of an empty flight plan. It gives way to `USE? INVRT?` when the plan holds its first waypoint.
+</Field>
+
+<Field id="entry" title="Waypoint waiting for approval">
+	The number of the position and the identifier that waits for approval. It flashes while the waypoint page is on the right side. <kbd>ENT</kbd> puts the waypoint into the plan, which does not hold it before.
+</Field>
+
+<Field id="ident" title="Identifier of the airport shown for approval">
+	The identifier of the airport on the waypoint page shown for approval. The cursor cannot change it here.
+</Field>
+
+<Field id="name" title="Airport name">
+	The name of the airport in two rows of 11 characters. The first word keeps its full form unless it is longer than 8 characters, and what is longer than 22 characters is cut off.
+</Field>
+
+<Field id="class" title="Airspace and type of the airport">
+	The row under the name. On the left it shows `CL B` or `CL C` when the airport lies inside the outline of a class B or class C airspace. At the right end the unit shows `MILTRY` for a military airport and `PRIVAT` for a private one.
+</Field>
+
+<Field id="lat" title="Latitude of the airport">
+	The latitude of the airport in degrees, minutes and hundredths of a minute, such as `N 47°26.99'`.
+</Field>
+
+<Field id="lon" title="Longitude of the airport">
+	The longitude of the airport in degrees, minutes and hundredths of a minute, such as `W122°18.71'`.
+</Field>
+
+<Field id="crsr" title="CRSR annunciation">
+	<Term t="CRSR">`CRSR`</Term> replaces the page identification while the left cursor is on.
+</Field>
+
+<Field id="mode" title="Mode annunciation">
+	The mode annunciation, which shows the mode of the unit. `ENR-LEG` is Enroute-Leg mode.
+</Field>
+
+<Field id="ent" title="Enter prompt">
+	<Term t="ENT">`ENT`</Term> flashes while the unit waits for <kbd>ENT</kbd> to approve what it shows, such as a waypoint page shown for approval.
+</Field>
+
+<Field id="page" title="Page identification">
+	The page identification on the right side. APT 1 is the first of the APT pages, which show an airport.
+</Field>

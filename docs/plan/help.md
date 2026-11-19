@@ -51,6 +51,14 @@ Candidates for the FAQ and Known limitations, collected by earlier packages; eve
 - FAQ candidate: "Why is my map blank?" Track up below 2 kt blanks NAV 5 and Super NAV 5
   (`/kln90b/pages/nav/#the-map-is-blank-in-actual-track-up`).
 
+### From the package flight-plans (2026-11-19)
+
+- FAQ candidates, each linking to Flight plans: "Why did my flight plan disappear?" (CLR with the cursor off on an
+  FPL page asks `DELETE FPL?`, and ENT then deletes it, even when the CLR was meant for the right side: `#delete-fpl`);
+  "How do I load a flight plan from the simulator?" (`#loading-a-route-from-the-efb`); "Why are my SID, STAR and
+  approach gone after the flight?" (procedures are not kept with a flight plan: Power-on,
+  `#what-the-unit-keeps-while-it-is-off`); "How do I enter an airway?" (waypoint by waypoint, `#adding-a-waypoint`).
+
 ## Changes to earlier pages
 
 None planned.

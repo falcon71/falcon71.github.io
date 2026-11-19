@@ -41,6 +41,24 @@ See the index: what a loaded procedure does in FPL 0, and (with Non-precision ap
   whether it is filed. The page describes the current behavior.
 - The maintainer's findings on the route of Tutorial flight 2 (style guide, section 17) show the rules at work.
 
+### From the package flight-plans (2026-11-19)
+
+- Flight plans (`#procedures-in-the-flight-plan`) gives one paragraph and links here; the FPL chapter
+  (`#procedure-headers`) shows a SID, a STAR and an approach loaded into FPL 0 (screens `pages/fpl/fpl-0-procedures`,
+  `fpl-0-approach`, `fpl-0-approach-end`, helper `loadProcedures` in `screens/pages/fpl/states.ts`) and says in one
+  sentence what a header is. This page owns the rest: the header formats as the unit shows them (the procedure name
+  and the type, such as `CHINS5-STAR`, and the approach header with runway and airport, such as `R32L-KBFI`), the
+  suffixes as a topic, `CHANGE` and `DELETE` on a header (`CHANGE SID?`, `DELETE SID?` and the STAR forms), and
+  `INVALID ADD` and `INVALID DEL` on procedure waypoints. The FPL writer staged the cursor on a header and dropped
+  those screens; `loadProcedures` stages them again.
+- Official term (reviewer, 2026-11-19): the line `*NO WPT SEQ` in FPL 0 is the fence (word list). Sequencing,
+  `#when-the-unit-does-not-sequence`, owns the rule behind it.
+- Staging: after an approach is loaded in an approach-installed unit, a pending `PRESS ALT TO SET BARO` blocks
+  every later step. It clears after pressing ALT, waiting about 2 seconds with the ALT page shown, and pressing ALT
+  again (FPL writer, 2026-11-19).
+- The make-room question when a procedure does not fit is this page's; Flight plans
+  (`#the-question-to-make-room-in-fpl-0`) owns only the question for a single waypoint.
+
 ## Changes to earlier pages
 
 APT 7's "Where the procedure goes in FPL 0" and "What the unit keeps of a procedure" are compared with this page
