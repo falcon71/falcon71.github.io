@@ -57,7 +57,7 @@ In OBS mode:
 - [Waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting) still tells you that you are about to reach the active waypoint.
 - An approach in approach arm mode never becomes active, and a change to OBS mode in approach active mode returns the unit to approach arm mode ([The mode annunciations](#the-mode-annunciations)).
 
-A direct-to in OBS mode keeps OBS mode and sets the course through the new waypoint; [Flying a direct-to in OBS mode](/kln90b/operation/direct-to/#flying-a-direct-to-in-obs-mode) explains its two forms. When an approach asks for OBS mode at a holding pattern or a procedure turn, the unit tells you with `IF REQUIRED SELECT OBS` ([Non-precision approaches](/kln90b/operation/approaches/)).
+A direct-to in OBS mode keeps OBS mode and sets the course through the new waypoint; [Flying a direct-to in OBS mode](/kln90b/operation/direct-to/#flying-a-direct-to-in-obs-mode) explains its two forms. At the fix of a holding pattern or a procedure turn of a SID, a STAR or an approach, the unit tells you with `IF REQUIRED SELECT OBS` that you may need OBS mode ([`IF REQUIRED SELECT OBS`](/kln90b/operation/departures-arrivals/#if-required-select-obs)).
 
 ### Selecting leg or OBS mode
 
@@ -101,7 +101,7 @@ The selected course is the course through the active waypoint that the unit flie
 
 <KlnScreen screen="pages/mod/mod-2-obs-indicator" />
 
-Where the unit chooses the course, it takes the course of the active leg at the active waypoint. The course line is then the leg you were flying, and the D-bar stays where it was.
+Where the unit chooses the course, it takes the course of the active leg at the active waypoint. The course line is then the leg you were flying, and the D-bar stays where it was. On a DME arc it is not: the line runs straight through the end of the arc, and the D-bar jumps ([An arc in OBS mode](/kln90b/operation/dme-arcs/#an-arc-in-obs-mode)).
 
 <Callout kind="info">
 Where the unit reads the external indicator, OBS mode takes the course the indicator shows at that moment. If the indicator is not on the desired track, the D-bar jumps when you change to OBS mode. Set the indicator to the course you want before you press <kbd>ENT</kbd>.

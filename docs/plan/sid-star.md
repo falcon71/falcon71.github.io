@@ -1,65 +1,49 @@
-# Package: sid-star (SID and STAR procedures)
+# Package: sid-star (SID and STAR procedures; DME arcs)
 
-One Operation page; APT 7 of the page reference is written. Pointers come from the planning survey of the code
-(paths relative to `vendor/kln90b/kln90b/`); they are not checked facts. Screens are planned by the session after
-its research; the APT 7 screens (`apt-7-*`) exist and are reused where they fit.
+Done 2026-11-20. Two Operation pages. DME arcs got a page of their own (maintainer, 2026-11-20): the unit handles
+them unlike other navigators, pilots are surprised by them and search for them, and SID and STAR procedures and
+Non-precision approaches both link there.
 
-## Pages
+## Pages as written
 
-### SID and STAR procedures (`operation/departures-arrivals.mdx`)
+### SID and STAR procedures (`operation/departures-arrivals.mdx`, `sidebar.order` 8)
 
-The slug stays, because pages link to it; the title is "SID and STAR procedures". Requirements: style guide,
-section 17 ("SID and STAR procedures and approaches").
+- Summary: the transition rule and the procedure header.
+- `#which-procedures-the-unit-offers`; `#what-the-unit-keeps-of-a-procedure` (legs to no waypoint, holds and
+  procedure turns, restrictions; DME arcs in one sentence and the link).
+- `#loading-a-sid`, `#loading-a-star`: the task and a short procedure; the lists, the skipped steps and the questions
+  stay on APT 7 (`/kln90b/pages/apt/#selecting-a-sid-or-a-star`, `#questions-before-the-load`). The approach rules
+  (transition, IAF) in one sentence and the link.
+- `#a-transition-must-be-selected` with `#redundant-wpts-in-fpl`.
+- `#where-the-procedure-goes-in-fpl-0` (round trip: kln90b#480).
+- `#the-procedure-in-fpl-0`: the procedure header formats.
+- `#the-question-to-make-room-for-a-procedure`.
+- `#changing-a-procedure`, `#deleting-a-procedure`, `#editing-the-waypoints-of-a-procedure`.
+- `#flying-a-sid-or-a-star` with `#if-required-select-obs`.
+- Where to go next.
 
-1. Summary.
-2. What the unit keeps of a procedure, and which procedures it offers.
-3. Loading a SID; loading a STAR: the task from start to end (APT 7 has the page and its lists).
-4. The rule that a transition must be selected, stated plainly, with the duplicates the pilot then deletes.
-5. The procedure in FPL 0: where it goes, the header and the suffixes, the make-room question (shown and explained
-   here).
-6. Changing and deleting a loaded procedure; editing its waypoints; adding a waypoint by hand to a procedure.
-7. Flying it: what the pilot flies by hand; what the unit forgets while it is off (one sentence, link to Power-on).
-8. Links on.
+### DME arcs (`operation/dme-arcs.mdx`, `sidebar.order` 8.5)
 
-## Topics this package owns
+- Summary: the unit flies an arc as a curved leg; its first waypoint is computed once, where you were when you
+  selected the procedure; you move it to join the arc where you are.
+- `#arcs-in-a-procedure`.
+- `#the-dme-arc-waypoint` (drawing `DmeArcEntry`; the Good to know box: select the procedure again near the arc)
+  with `#the-name-of-a-dme-arc-waypoint`.
+- `#moving-the-dme-arc-waypoint` (drawing `DmeArcMove`; Super NAV 5) with `#move--in-fpl-0` (approach arcs only,
+  Availability box, kln90b#509) and `#no-intrcept`.
+- `#flying-the-arc` (the course messages on an arc; the autopilot in an Availability box) with
+  `#distance-time-and-bearing-on-the-arc`, `#nav-2-and-super-nav-5-on-an-arc`, `#leaving-the-arc`.
+- `#an-arc-in-obs-mode` (the selected course depends on the installation).
+- `#the-dme-arc-waypoint-as-a-waypoint` (the SUP page, the user database, editing: kln90b#510, #511, #512).
+- Where to go next.
 
-See the index: what a loaded procedure does in FPL 0, and (with Non-precision approaches) the two rules.
+## Screens
 
-## Where to look
+All staged. `sid-star/`: `change-sid`, `change-sid-apt-7`, `delete-sid`, `duplicates`, `make-room`,
+`redundant-wpts`, `select-obs`, `star-header` (helper `states.ts`). `dme-arcs/`: `gromo4-waypoints`, `fpl-0-arc`,
+`act-arc-waypoint`, `nav-1-arc`, `nav-2-arc`, `nav-2-arc-ahead`, `super-nav-5-arc`, `super-nav-5-move`,
+`fpl-0-moved`, `fpl-0-move-approach`, `no-intrcept`, `nav-3-obs` (helper `states.ts`).
 
-`data/navdata/SidStar.ts`, `pages/right/Apt7Page.tsx`, `pages/left/ProcedureMakeRoomPage.tsx`,
-`controls/FlightplanList.tsx` (the header and its `CHANGE` and `DELETE`), `services/FlightplanUtils.ts`,
-`services/FlyOverWaypoints.ts`; the APT chapter's sections on APT 7, whose terms this page keeps.
-
-## Notes from other packages
-
-- From the package apt: the text about where a procedure goes in FPL 0 and about the make-room question that the
-  review cut from the APT chapter is in the git history (`docs/plan/apt.md`, "Text the review moved out of the
-  chapter").
-- From the package apt, filed as kln90b#480 (the maintainer decides): a STAR or an approach is inserted before the first occurrence of the
-  airport, which puts it at the start of a round trip. Not settled by the real manual; the maintainer decides
-  whether it is filed. The page describes the current behavior.
-- The maintainer's findings on the route of Tutorial flight 2 (style guide, section 17) show the rules at work.
-
-### From the package flight-plans (2026-11-19)
-
-- Flight plans (`#procedures-in-the-flight-plan`) gives one paragraph and links here; the FPL chapter
-  (`#procedure-headers`) shows a SID, a STAR and an approach loaded into FPL 0 (screens `pages/fpl/fpl-0-procedures`,
-  `fpl-0-approach`, `fpl-0-approach-end`, helper `loadProcedures` in `screens/pages/fpl/states.ts`) and says in one
-  sentence what a header is. This page owns the rest: the header formats as the unit shows them (the procedure name
-  and the type, such as `CHINS5-STAR`, and the approach header with runway and airport, such as `R32L-KBFI`), the
-  suffixes as a topic, `CHANGE` and `DELETE` on a header (`CHANGE SID?`, `DELETE SID?` and the STAR forms), and
-  `INVALID ADD` and `INVALID DEL` on procedure waypoints. The FPL writer staged the cursor on a header and dropped
-  those screens; `loadProcedures` stages them again.
-- Official term (reviewer, 2026-11-19): the line `*NO WPT SEQ` in FPL 0 is the fence (word list). Sequencing,
-  `#when-the-unit-does-not-sequence`, owns the rule behind it.
-- Staging: after an approach is loaded in an approach-installed unit, a pending `PRESS ALT TO SET BARO` blocks
-  every later step. It clears after pressing ALT, waiting about 2 seconds with the ALT page shown, and pressing ALT
-  again (FPL writer, 2026-11-19).
-- The make-room question when a procedure does not fit is this page's; Flight plans
-  (`#the-question-to-make-room-in-fpl-0`) owns only the question for a single waypoint.
-
-## Changes to earlier pages
-
-APT 7's "Where the procedure goes in FPL 0" and "What the unit keeps of a procedure" are compared with this page
-and cut back to the sentence and the link where this page now owns the text. The session lists the cuts here first.
+Not staged: the make-room question with more than one waypoint to delete (only `WPT   1` with real data); a STAR with
+a DME arc (the FAA extract has none; STAR arcs are described from the shared code). `REDUNDANT WPTS IN FPL` is a
+one-time message, so its screen shows the plain `MSG` after it is read.

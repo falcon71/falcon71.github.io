@@ -1,0 +1,59 @@
+<Field id="distance" title="Distance to the end of the arc">
+	The direct distance to the active waypoint, the end of the arc, in NM: straight across the arc, not along it.
+</Field>
+
+<Field id="ident" title="Active waypoint">
+	The identifier of the [active waypoint](/kln90b/operation/modes-of-operation/#the-active-waypoint), the end of the arc.
+</Field>
+
+<Field id="mode" title="Mode annunciation">
+	The mode of the unit, which Super NAV 5 shows here because it has no status line: <Term t="ENR-LEG">`ENR-LEG`</Term>.
+</Field>
+
+<Field id="groundspeed" title="Groundspeed">
+	Your <Term t="GS">groundspeed</Term> in kt, in whole knots.
+</Field>
+
+<Field id="ete" title="Field 1: estimated time en route">
+	The <Term t="ETE">time to the end of the arc</Term> at your present groundspeed, worked out from the direct distance.
+</Field>
+
+<Field id="dtk" title="Field 2: desired track">
+	The <Term t="DTK">desired track</Term>: the course of the arc at the point abeam the aircraft, magnetic, in whole degrees. It turns as you fly along the arc. While the active leg is an arc, field 2 shows the desired track whatever you chose.
+</Field>
+
+<Field id="arc-radial" title="Field 3: radial from the reference VOR of the arc">
+	The magnetic radial of the aircraft from the reference VOR of the arc, after the label `ARC`, in whole degrees. Field 3 shows it whatever you chose while the aircraft is on an arc or the DME arc waypoint of an arc lies within 30 NM ahead on FPL 0. Compare it with the radial of the end of the arc to see how much of the arc is left.
+</Field>
+
+<Field id="range" title="Range scale">
+	The range scale in NM: the distance from the aircraft to the top of the map.
+</Field>
+
+<Field id="arc" title="Active arc">
+	The DME arc, the active leg: an arc around its reference VOR from the DME arc waypoint to the end of the arc, with an arrow that points to the end of the arc.
+</Field>
+
+<Field id="arc-skipped" title="Arc before the DME arc waypoint">
+	The part of the arc from its beginning to the DME arc waypoint, dashed: the unit joins the arc after its beginning and does not fly this part.
+</Field>
+
+<Field id="legs" title="Other legs">
+	The straight legs of FPL 0: from the airport to the DME arc waypoint, and from the end of the arc to the last waypoint of the <Term t="SID" />.
+</Field>
+
+<Field id="arc-waypoint" title="DME arc waypoint on the map">
+	The DME arc waypoint where the aircraft joined the arc, a small square with its identifier.
+</Field>
+
+<Field id="end-fix" title="End of the arc on the map">
+	The end of the arc, the active waypoint, a small square with its identifier.
+</Field>
+
+<Field id="waypoints" title="Waypoints of the flight plan">
+	The other waypoints of FPL 0, each as a small square followed by its identifier: the airport and the last waypoint of the <Term t="SID" />.
+</Field>
+
+<Field id="aircraft" title="Aircraft">
+	The aircraft, a diamond in north up, on the arc.
+</Field>

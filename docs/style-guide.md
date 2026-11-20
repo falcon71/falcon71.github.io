@@ -515,7 +515,10 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | the power/brightness knob | the brightness knob, the power button, the power knob |
 | waypoint type (airport, VOR, NDB, intersection, supplemental) | kind of waypoint |
 | procedure header, approach header (the line of FPL 0 that names a loaded procedure) | |
-| DME arc waypoint | arc entry |
+| DME arc waypoint (also the one the unit computes where you join the arc) | arc entry |
+| the beginning of the arc, the end of the arc (of a DME arc as published) | published start fix, end fix |
+| the present radial is within the arc, outside the arc | abeam the arc |
+| the reference VOR of the arc (the VOR a DME arc is flown around; on the SUP page of the DME arc waypoint it is the reference waypoint) | the VOR of the arc, the arc's VOR |
 | several pages with one page name ("there is more than one APT 3 page", shown by the `+`) | subpage |
 | SID, STAR; SIDs, STARs; SID and STAR procedures; a SID procedure, a STAR procedure | departure, arrival (as names of the procedures) |
 | suffix (the letter after a waypoint of a loaded procedure) | mark, marker |
@@ -568,7 +571,8 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | activate a waypoint (what `ACTIVATE` does in OBS mode) | |
 | nearest airport criteria (the settings of SET 3) | nearest airport settings |
 | the fail question, the repair question (FLR 3, FLR 2) | |
-| transition (the curved path the unit guides through a turn at a waypoint); the midpoint of the transition (where the unit makes the next leg active) | curved path, bisector |
+| transition, in a turn (the curved path the unit guides through a turn at a waypoint); the midpoint of the transition (where the unit makes the next leg active). Where the page also speaks of procedures, say "the transition through the turn" | curved path, bisector |
+| transition, of a procedure (the part of a SID, a STAR or an approach that you select on APT 7 or APT 8; `<Term t="Transition">`) | |
 | the beginning of turn anticipation (where the unit starts guiding the turn) | turn start |
 | abeam the waypoint; fly-over waypoint; the WPT annunciator (one of the remote annunciators) | |
 | the waypoint type identification page (`TYPE WPT`, `1 EN ROUTE?`, `2 SID/STAR?`) | the `TYPE WPT` question |
@@ -749,7 +753,7 @@ The sidebar has these chapters and pages. Operation explains tasks ("how do I…
 | --- | --- |
 | Getting started | Table of contents (home page) · Installation · Quickstart · Tutorial flight 1 · Tutorial flight 2 |
 | The unit | Controls and display (knobs, buttons, the two halves, status line, cursor and data entry, scan, page tree) · Keyboard mode · Power-on and initialization |
-| Operation | Waypoints and the database · User waypoints · Nearest · Direct-to · Flight plans · Modes of operation (leg and OBS) · Sequencing and turn anticipation · SID and STAR procedures · Non-precision approaches · VNAV · GPS reception and RAIM · Inside the GPS simulation (optional) · Messages · Airspace and altitude alerting · Trip planning and calculators · Fuel and air data · Simulated failures |
+| Operation | Waypoints and the database · User waypoints · Nearest · Direct-to · Flight plans · Modes of operation (leg and OBS) · Sequencing and turn anticipation · SID and STAR procedures · DME arcs · Non-precision approaches · VNAV · GPS reception and RAIM · Inside the GPS simulation (optional) · Messages · Airspace and altitude alerting · Trip planning and calculators · Fuel and air data · Simulated failures |
 | Page reference | One chapter per page type in page tree order. Left: TRI, MOD, FPL, NAV, CAL, STA, SET, FLR, OTH. Right: CTR, REF, ACT, D/T, NAV, APT, VOR, NDB, INT, SUP. Each page with its screen. |
 | Reference lists | Message page messages · Status line messages · Glossary |
 | Help | External hardware · FAQ and troubleshooting · Known limitations · Contact |

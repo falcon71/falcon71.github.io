@@ -1,0 +1,204 @@
+---
+title: SID and STAR procedures
+description: How to load, change, delete and edit a SID or a STAR in FPL 0 with the KLN 90B, why a transition must be selected, where the procedure goes, and what the unit flies of it.
+sidebar:
+  order: 8
+---
+
+import KlnScreen from '../../../components/KlnScreen.astro';
+import Term from '../../../components/Term.astro';
+
+The KLN 90B loads a <Term t="SID" /> or a <Term t="STAR" /> from APT 7 into FPL 0, where it stands under its procedure header as a series of waypoints that the unit flies like any other legs. It keeps only the legs that end at a waypoint: headings, climbs, holding patterns, procedure turns and altitude restrictions are yours to fly. FPL 0 holds one SID and one STAR at a time, and a procedure with <Term t="Transition">transitions</Term> cannot be loaded without one.
+
+## Which procedures the unit offers
+
+APT 7 lists every SID and STAR of the airport that the unit can fly, and leaves out the rest:
+
+- a procedure with an <Term t="RF leg" /> anywhere, in its common part or in any runway or en route transition;
+- a procedure that needs <Term t="RNP AR" />;
+- a procedure in which no leg ends at a waypoint, such as a SID that is only a climb and a heading.
+
+Within a listed procedure, the runway and transition lists leave out an entry whose legs, together with the rest of the procedure, end at no waypoint.
+
+Before the flight, check that the SID and the STAR you plan to fly are in the lists. If one is missing, enter its waypoints in FPL 0 by hand as en route waypoints ([Adding a waypoint](/kln90b/operation/flight-plans/#adding-a-waypoint)). A waypoint that a SID or a STAR of its airport flies over brings up the [waypoint type identification page](/kln90b/operation/flight-plans/#the-waypoint-type-identification-page) first.
+
+## What the unit keeps of a procedure
+
+The unit flies a procedure as a series of waypoints, so it keeps every leg that ends at a waypoint and drops the others:
+
+- **Legs that end at no waypoint** are dropped: a climb on a heading or a course to an altitude, a heading to intercept a course, vectors. From runway 34C, KSEA's BANGR9 starts at `NESOE`; you fly the climb from the runway by heading.
+- **Holding patterns and procedure turns** are dropped, and their fix stays as a fly-over waypoint, at which the unit anticipates no turn ([Fly-over waypoints](/kln90b/operation/sequencing/#fly-over-waypoints)). As you near it, the unit reminds you to fly the pattern in OBS mode ([`IF REQUIRED SELECT OBS`](#if-required-select-obs)).
+- **A waypoint that the procedure flies to twice in a row,** once on a leg and once on the hold or turn that follows, appears once.
+- **Altitude and speed restrictions** are not loaded. Read them from the chart.
+
+A DME arc stays in the procedure as a curved leg, which starts at a DME arc waypoint that the unit computes in place of the beginning of the arc ([DME arcs](/kln90b/operation/dme-arcs/#arcs-in-a-procedure)).
+
+## Loading a SID
+
+You load the SID on the ground before departure, usually once FPL 0 holds the route. The airport of the SID must be on the APT pages ([Waypoints and the database](/kln90b/operation/waypoints/)).
+
+To load a SID:
+
+1. Turn the right outer knob to the APT pages and the right inner knob to the SIDs of APT 7.
+2. Press the right <kbd>CRSR</kbd>.
+3. Turn the right outer knob until the cursor is on the SID.
+4. Press <kbd>ENT</kbd>.
+5. Select the runway and then the transition when the unit asks for them, with the right outer knob and <kbd>ENT</kbd>. [Selecting a SID or a STAR](/kln90b/pages/apt/#selecting-a-sid-or-a-star) explains the lists.
+6. Check the waypoints of the SID and press <kbd>ENT</kbd> on `LOAD IN FPL`.
+
+   <KlnScreen screen="pages/apt/apt-7-load" />
+
+7. If the unit asks whether to add the airport or to replace the SID in FPL 0, press <kbd>ENT</kbd> to approve ([Questions before the load](/kln90b/pages/apt/#questions-before-the-load)). If FPL 0 is full, the unit asks to make room first ([The question to make room for a procedure](#the-question-to-make-room-for-a-procedure)). The unit loads the SID and shows FPL 0 on the left side, and APT 7 shows its list again with the cursor off.
+
+If you selected the wrong entry, press <kbd>CLR</kbd>: each press goes back one step ([Selecting a SID or a STAR](/kln90b/pages/apt/#selecting-a-sid-or-a-star)).
+
+FPL 0 holds one SID. Loading a SID while FPL 0 holds one, of any airport, asks to replace it; the airport of the old SID stays in FPL 0 as an en route waypoint. A SID of an airport that FPL 0 does not hold brings its airport along, as the first waypoint of FPL 0.
+
+## Loading a STAR
+
+You load the STAR en route, before the descent, once you know the arrival and the transition you will fly. Its airport must be on the APT pages.
+
+To load a STAR:
+
+1. Turn the right outer knob to the APT pages and the right inner knob to the STARs of APT 7, the last APT 7 page of an airport that has SIDs too.
+2. Press the right <kbd>CRSR</kbd>.
+3. Turn the right outer knob until the cursor is on the STAR.
+4. Press <kbd>ENT</kbd>.
+5. Select the transition and then the runway when the unit asks for them.
+6. Check the waypoints of the STAR and press <kbd>ENT</kbd> on `LOAD IN FPL`.
+7. Approve the question if the unit asks one. The unit loads the STAR and shows FPL 0 on the left side.
+
+<kbd>CLR</kbd> goes back one step at a time, as for a SID.
+
+<KlnScreen screen="sid-star/star-header" />
+
+FPL 0 holds one STAR, as it holds one SID: a second STAR replaces the first after the question, whatever its airport. A STAR of an airport that FPL 0 does not hold brings its airport along, as the last waypoint of FPL 0. The approach is loaded the same way on APT 8, before or after the STAR; the order in FPL 0 comes out the same. The approach needs its transition too, and it starts only at an <Term t="IAF" />: you select one of its initial approach fixes, and an intermediate fix cannot be the start ([Non-precision approaches](/kln90b/operation/approaches/)).
+
+## A transition must be selected
+
+**A transition must be selected whenever the procedure has one.** A SID or a STAR with two or more transitions offers no entry without one, so you cannot load only the part that all transitions share. A procedure with one transition gets it without a question.
+
+The transition often starts at a waypoint that is already in FPL 0, or runs over several of them, because you entered the route up to the fix where the STAR begins, or beyond it. The unit then holds those waypoints twice: once as en route waypoints, with a colon after the number, and once in the procedure, with a period. It keeps both copies. Delete the ones you do not need, as you delete any waypoint ([Deleting a waypoint](/kln90b/operation/flight-plans/#deleting-a-waypoint)): usually the en route copies, so that the procedure stays complete. CHINS5 with the transition YKM, loaded into a route that already runs over `YKM` and `CHINS`, holds both a second time:
+
+<KlnScreen screen="sid-star/duplicates" />
+
+Two copies in a row form a leg of no length, at which the unit flies over the waypoint instead of anticipating the turn. Copies in different places make the unit fly to the waypoint twice. Look for both in FPL 0 after every load, because only some of them raise a message (next section).
+
+### `REDUNDANT WPTS IN FPL`
+
+When a SID, a STAR or an approach that you load contains a waypoint that FPL 0 already holds as an en route waypoint, the unit raises this message:
+
+```
+REDUNDANT WPTS IN FPL
+ EDIT ENROUTE WPTS
+ AS NECESSARY
+```
+
+<KlnScreen screen="sid-star/redundant-wpts" />
+
+It compares every en route waypoint of FPL 0 with every waypoint of the procedure, wherever they stand, and the airports count as en route waypoints. Read FPL 0 and delete the copies you do not need ([A transition must be selected](#a-transition-must-be-selected)). The message comes once, for the load.
+
+Copies between two procedures raise no message: a STAR and an approach that share a fix, or a SID and a STAR. The waypoints of an approach cannot be deleted, so delete such a copy from the STAR.
+
+## Where the procedure goes in FPL 0
+
+The unit puts a SID right after its airport in FPL 0, and a STAR right in front of its airport. When an approach to that airport already stands in front of the airport, the STAR goes in front of the approach, so that FPL 0 reads STAR, approach, airport. An airport that the unit adds with the procedure goes to the start of FPL 0 for a SID and to the end for a STAR.
+
+When the airport stands in FPL 0 more than once, as on a round trip, the unit uses its first occurrence for every procedure. That suits a SID, but a STAR or an approach for the airport goes in front of the first occurrence, at the start of the flight, not in front of the destination. On a round trip, delete the departure airport from the start of FPL 0 once you no longer need it, and then load the STAR. {/* kln90b#480: describes the current behavior; the fix makes the unit insert it before the last occurrence of the airport */}
+
+The unit does not check where the airport stands: a SID goes after its airport even when the airport is the destination.
+
+## The procedure in FPL 0
+
+A loaded procedure stands in FPL 0 as a header and its waypoints. The header names the procedure: `BANGR9-SID` for a SID, `CHINS5-STAR` for a STAR. It counts as no waypoint and has no number; the waypoints of the procedure are numbered with the rest of FPL 0 and carry a period after the number ([Procedure headers](/kln90b/pages/fpl/#procedure-headers)). An approach has a header of its own form ([Non-precision approaches](/kln90b/operation/approaches/)).
+
+<KlnScreen screen="pages/fpl/fpl-0-procedures" />
+
+The waypoints of a procedure count only against the limit of legs that FPL 0 holds in all, not against the waypoints you enter ([The flight plans of the unit](/kln90b/operation/flight-plans/#the-flight-plans-of-the-unit)). Procedures live in FPL 0 only: a numbered flight plan holds none ([Procedures in the flight plan](/kln90b/operation/flight-plans/#procedures-in-the-flight-plan)).
+
+## The question to make room for a procedure
+
+When a procedure does not fit into FPL 0, the unit asks on the left side before it deletes waypoints from the start of FPL 0 to make room. It asks right after `LOAD IN FPL`, or after you approve the question to add the airport or to replace the procedure.
+
+<KlnScreen screen="sid-star/make-room" />
+
+The unit counts the room before it changes anything: the procedure of the same kind that the load replaces frees its waypoints, and an airport that the load adds needs a place among the waypoints you enter. Each deletion takes the first waypoint of FPL 0; an airport takes the waypoints of its SID behind it along in the same deletion. The question counts the deletions from `WPT   1`, so the number does not name a row of FPL 0.
+
+- **<kbd>ENT</kbd>** answers the question. When the load needs more than one deletion, the question comes again with the next number. Nothing is deleted until you press <kbd>ENT</kbd> on the last one; then the unit deletes the waypoints and loads the procedure.
+- **<kbd>CLR</kbd> or the left <kbd>CRSR</kbd>** cancels the load. FPL 0 stays as it was, and APT 7 stays at the step you were on. The knobs do nothing while the question is shown.
+
+The unit asks nothing and shows `FPL FULL` in the status line when it cannot make the room: when a deletion would reach the leg you fly (the from waypoint, or during a direct-to the waypoint you fly to), when it would delete the airport of the procedure itself, or when the active leg belongs to the procedure that the load replaces. FPL 0 stays as it was; delete waypoints yourself and load again. Adding a single waypoint to a full FPL 0 asks a question of its own, which deletes one waypoint for each <kbd>ENT</kbd> ([The question to make room in FPL 0](/kln90b/operation/flight-plans/#the-question-to-make-room-in-fpl-0)).
+
+## Changing a procedure
+
+You change a procedure when the runway, the transition or the procedure itself changes, on the ground or in flight. The header of the procedure in FPL 0 takes you to its APT 7 page.
+
+To change a SID or a STAR:
+
+1. Turn the left outer knob to the FPL pages and the left inner knob to FPL 0.
+2. Press the left <kbd>CRSR</kbd> and turn the left outer knob until the cursor is on the header. The header reads `CHANGE SID?` or `CHANGE STAR?` and flashes.
+
+   <KlnScreen screen="sid-star/change-sid" />
+
+3. Press <kbd>ENT</kbd>. The left cursor goes off, and the right side shows APT 7 of the airport of the procedure, at its SIDs or its STARs, with the cursor off. The APT pages now show that airport.
+
+   <KlnScreen screen="sid-star/change-sid-apt-7" />
+
+4. Press the right <kbd>CRSR</kbd> and select the procedure, its runway and its transition as when you loaded it ([Loading a SID](#loading-a-sid)).
+5. Press <kbd>ENT</kbd> on `LOAD IN FPL`, and <kbd>ENT</kbd> again to approve the question to replace the procedure. The new procedure takes the place of the old one.
+
+Until you approve the replacement, the old procedure stays in FPL 0; turn the right cursor off to keep it. When the active leg belongs to the procedure you replace, the unit makes the leg of FPL 0 closest to the aircraft the active leg. On an approach header the question reads `CHANGE APR?` and opens APT 8 ([Non-precision approaches](/kln90b/operation/approaches/)).
+
+## Deleting a procedure
+
+You delete a procedure when you no longer fly it, for example when ATC gives you vectors instead of the STAR.
+
+To delete a SID or a STAR:
+
+1. Turn the left outer knob to the FPL pages and the left inner knob to FPL 0.
+2. Press the left <kbd>CRSR</kbd> and turn the left outer knob until the cursor is on the header.
+3. Press <kbd>CLR</kbd>. The header reads `DELETE SID?` or `DELETE STAR?` and flashes.
+
+   <KlnScreen screen="sid-star/delete-sid" />
+
+4. Press <kbd>ENT</kbd>. The unit deletes every waypoint of the procedure and its header. If you want to keep the procedure, press <kbd>CLR</kbd> again instead, or move the cursor off the header.
+5. Press the left <kbd>CRSR</kbd> to turn the cursor off.
+
+The airport of the procedure stays in FPL 0, because it is an en route waypoint. When the active leg belongs to the procedure you delete, the unit makes the leg of FPL 0 closest to the aircraft the active leg. `DELETE APR?` deletes an approach the same way.
+
+## Editing the waypoints of a procedure
+
+The waypoints of a SID or a STAR can be inserted and deleted one by one, like en route waypoints, so that you can fit the procedure to a clearance. Where a new waypoint goes decides what it belongs to:
+
+- **In front of a waypoint of the procedure,** the new waypoint becomes part of the procedure: it gets a period after its number, and it goes with the procedure when you replace or delete it.
+- **In front of the header,** with the cursor on `CHANGE SID?` or `CHANGE STAR?` and a step of the left inner knob, the new waypoint is an en route waypoint in front of the procedure.
+- **After the last waypoint of the procedure,** the new waypoint is always an en route waypoint, because you insert it in front of the row that follows, an en route waypoint, another header or the blank waypoint position. A procedure cannot be extended at its end; you extend it by inserting in front of its waypoints.
+
+<kbd>CLR</kbd> on a waypoint of a SID or a STAR asks `DEL` and the identifier, as on any waypoint, and <kbd>ENT</kbd> deletes it. When you delete the last waypoint of a procedure, its header goes too. Deleting the airport of a procedure deletes only the airport; the procedure stays. [Adding a waypoint](/kln90b/operation/flight-plans/#adding-a-waypoint) and [Deleting a waypoint](/kln90b/operation/flight-plans/#deleting-a-waypoint) give the steps.
+
+The waypoints of an approach cannot be edited: the unit answers `INVALID ADD` and `INVALID DEL` ([Non-precision approaches](/kln90b/operation/approaches/)). The waypoints of a DME arc in a SID or a STAR are covered in [DME arcs](/kln90b/operation/dme-arcs/).
+
+## Flying a SID or a STAR
+
+The unit flies the waypoints of a SID or a STAR as legs of FPL 0, like any others. It sequences from waypoint to waypoint with turn anticipation ([Waypoint sequencing](/kln90b/operation/sequencing/#waypoint-sequencing)), and from the last waypoint of the procedure on to the next row of FPL 0, the airport or an en route waypoint, without a stop or a message.
+
+What the unit dropped of the procedure you fly yourself: the climb from the runway and the headings of a SID, the vectors of a STAR, the holding patterns and procedure turns, and the altitude and speed restrictions. On a SID that starts with a heading, fly the heading, and fly direct to the first waypoint when you are cleared to it ([Direct-to](/kln90b/operation/direct-to/)). Where the SID has you intercept a published course to the first waypoint, [OBS mode](/kln90b/operation/modes-of-operation/#obs-mode) does it: with the first waypoint as the active waypoint, set the published course as the selected course.
+
+When the procedure goes in between the from waypoint and the active waypoint, as a SID loaded on the ground with the route already in FPL 0 does, the unit makes the leg of FPL 0 closest to the aircraft the active leg. A procedure loaded farther ahead, such as a STAR loaded en route, leaves the active leg as it is ([Editing the active flight plan](/kln90b/operation/flight-plans/#editing-the-active-flight-plan)).
+
+The unit keeps the procedures in FPL 0 over a short power-off only; [What the unit keeps while it is off](/kln90b/unit/power-on/#what-the-unit-keeps-while-it-is-off) gives the time.
+
+### `IF REQUIRED SELECT OBS`
+
+The unit raises `IF REQUIRED SELECT OBS` when the active waypoint is the fix of a holding pattern or a procedure turn of a SID, a STAR or an approach, the waypoint is 4 NM away or less, and the unit is not in OBS mode. Leg mode, approach arm mode and approach active mode all raise it. The unit does not fly the pattern itself, so it reminds you to fly it in OBS mode, on a selected course through the fix.
+
+<KlnScreen screen="sid-star/select-obs" />
+
+If you must fly the pattern, change to OBS mode ([Selecting leg or OBS mode](/kln90b/operation/modes-of-operation/#selecting-leg-or-obs-mode)). The message goes when the unit is in OBS mode, when the waypoint is no longer the active waypoint, or when you are more than 4 NM from it again. In OBS mode the unit does not sequence; when you leave the pattern, change back to leg mode, and the unit goes on along FPL 0 ([Changing between the modes](/kln90b/operation/modes-of-operation/#changing-between-the-modes)). If the clearance has no hold, ignore the message and fly on: the unit flies over the fix and sequences to the next waypoint. A direct-to to the fix raises the message as well.
+
+## Where to go next
+
+- [DME arcs](/kln90b/operation/dme-arcs/) explains the arcs of a SID, a STAR or an approach.
+- [Non-precision approaches](/kln90b/operation/approaches/) loads and flies the approach after the STAR.
+- [Flight plans](/kln90b/operation/flight-plans/) explains how you build and edit FPL 0.
+- [Selecting a SID or a STAR](/kln90b/pages/apt/#selecting-a-sid-or-a-star) on APT 7 describes the lists and the questions.

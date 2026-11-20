@@ -130,3 +130,14 @@ this out, because this page owns what RAIM decides in an approach. Pointers from
 
 APT 8's "Questions before the load and where the approach goes" is compared with this page and cut back where this
 page now owns the text. The pages of the package sta get their link to this page sharpened to its RAIM section.
+
+### From the package sid-star (2026-11-20)
+
+- DME arcs have their own Operation page, `operation/dme-arcs` (maintainer, 2026-11-20). It owns every arc,
+  approach arcs included: the DME arc waypoint, its name, `MOVE ?` in FPL 0 (approach arcs only) and on Super NAV 5,
+  `NO INTRCEPT`, flying the arc. Non-precision approaches says what an arc means in an approach (the IAF on the arc,
+  arming) in a sentence or two and links there.
+- SID and STAR procedures owns `IF REQUIRED SELECT OBS` (`#if-required-select-obs`) and the holds and procedure
+  turns the unit drops; this page says what differs in an approach and links.
+- The suffixes of approach waypoints and `INVALID ADD` and `INVALID DEL` are approach topics (the code marks
+  approach rows only and protects only them); this page owns them.

@@ -1,0 +1,189 @@
+---
+title: DME arcs
+description: How the KLN 90B flies the DME arc of a SID, a STAR or an approach, where it puts the DME arc waypoint, how you move that waypoint to join the arc where you are, and why DIS and BRG point straight to the end of the arc.
+sidebar:
+  order: 8.5
+---
+
+import KlnScreen from '../../../components/KlnScreen.astro';
+import Callout from '../../../components/Callout.astro';
+import Term from '../../../components/Term.astro';
+import DmeArcEntry from '../../../components/drawings/DmeArcEntry.astro';
+import DmeArcMove from '../../../components/drawings/DmeArcMove.astro';
+
+The KLN 90B flies the DME arc of a <Term t="SID" />, a <Term t="STAR" /> or an approach as a curved leg around its reference VOR. The arc starts at a DME arc waypoint that the unit computes once, from where the aircraft is when you select the procedure, and nothing moves it later: to join the arc where your actual track crosses it, you move the waypoint yourself with `MOVE ?` on Super NAV 5. On the arc the D-bar follows the curve, but the distance, the time and the bearing are measured straight to the end of the arc.
+
+## Arcs in a procedure
+
+Every leg that a SID, a STAR or an approach of the database flies as a DME arc to a fix around a VOR stays an arc in FPL 0. In the flight plan the arc is two waypoints: the DME arc waypoint where the unit starts it, and the end of the arc. The leg between them is the arc. The leg to the DME arc waypoint and the leg after the end of the arc are straight legs.
+
+The beginning of the arc, the fix in front of it in the procedure, is not loaded. The DME arc waypoint takes its place, and in an approach it also takes its suffix, such as the `-I` of the <Term t="IAF" />. GROMO4 of Yakima with the transition PAPPS reaches GROMO, on the 250 radial of the VOR YKM. From there it flies a 9 NM arc around YKM to OHKAR on its 087 radial. APT 7 shows GROMO4 without GROMO, and with the DME arc waypoint `D247I` in front of OHKAR:
+
+<KlnScreen screen="dme-arcs/gromo4-waypoints" />
+
+Two arcs in a row around the same VOR at the same radius are one arc, from the beginning of the first to the end of the last, and the fixes between them are left out. An arc that follows an arc of another radius keeps the end of the first arc. The unit puts the DME arc waypoint of the second at its beginning, and a straight leg joins the two. Which procedures the unit offers at all, and what else it drops of them, is in [What the unit keeps of a procedure](/kln90b/operation/departures-arrivals/#what-the-unit-keeps-of-a-procedure).
+
+In FPL 0 the arc of GROMO4 reads like this after the load, with the leg from the airport to the DME arc waypoint active:
+
+<KlnScreen screen="dme-arcs/fpl-0-arc" />
+
+## The DME arc waypoint
+
+The unit computes the DME arc waypoint when the waypoints of the procedure appear on APT 7 or APT 8, the last step of the selection ([Loading a SID](/kln90b/operation/departures-arrivals/#loading-a-sid), [Loading a STAR](/kln90b/operation/departures-arrivals/#loading-a-star), [Non-precision approaches](/kln90b/operation/approaches/)). It uses the position of the aircraft at that moment:
+
+- **The aircraft's radial is within the arc,** between the first and the last radial of the arc. The DME arc waypoint is the point of the arc on the aircraft's radial, the point of the arc nearest the aircraft. How far the aircraft is from the VOR does not matter.
+- **The aircraft's radial is outside the arc.** The DME arc waypoint is the beginning of the arc, on its first radial at its radius.
+
+The DME arc waypoint of an arc that follows an arc of another radius is always at the beginning of the arc.
+
+<DmeArcEntry caption="Where the unit puts the DME arc waypoint of an arc around the reference VOR ABC, flown from its 250 radial to its 130 radial as the arrowhead shows. Left: the aircraft's radial, 200, is within the arc (the shaded sector), so the waypoint is the point of the arc on that radial, D200J, even though the aircraft is inside the circle; the unit does not fly the dashed part of the arc. Right: the aircraft's radial is outside the arc, so the waypoint is the beginning of the arc, D250J. Either way the fix ARCBG at the beginning of the arc is dropped." />
+
+The unit does not compute the waypoint again while you fly, nor when you press <kbd>ENT</kbd> on `LOAD IN FPL`. Every new selection computes it anew, from where the aircraft is then: stepping back with <kbd>CLR</kbd> and selecting the last step again, or selecting the procedure again and loading it over the old one ([Changing a procedure](/kln90b/operation/departures-arrivals/#changing-a-procedure)). A route sent from the <Term t="EFB" /> computes it when the unit loads the route ([Loading a route from the EFB](/kln90b/operation/flight-plans/#loading-a-route-from-the-efb)).
+
+<Callout kind="info">
+A procedure selected on the ground or far from the arc keeps a DME arc waypoint that fits where the aircraft was at the selection, not the way you will fly to the arc. Yakima airport lies on the 247 radial of YKM, within the arc of GROMO4, so GROMO4 selected before takeoff starts its arc at `D247I`, whatever heading you are given after takeoff. Select the procedure again when you are near the arc, or move the waypoint ([Moving the DME arc waypoint](#moving-the-dme-arc-waypoint)).
+</Callout>
+
+### The name of a DME arc waypoint
+
+The name of a DME arc waypoint says where it lies on the arc:
+
+- **Up to 26 NM:** `D`, the magnetic radial of the waypoint from the reference VOR of the arc in three digits, and a letter for the radius of the arc in whole NM, `A` for 1 NM to `Z` for 26 NM. `D247I` lies on the 247 radial of an arc of 9 NM.
+- **Over 26 NM:** the first two letters of the VOR's identifier and the radial in three digits.
+
+The letter is the radius of the arc, never your distance from the VOR. The radial is measured with the published magnetic variation of the VOR, so it reads like the radial on the chart.
+
+## Moving the DME arc waypoint
+
+You move the DME arc waypoint to join the arc where your actual track crosses it. You need this when you fly a heading to the arc, on a vector or after a departure that the unit does not fly, and the DME arc waypoint that the unit computed lies elsewhere.
+
+`MOVE ?` takes your actual track and extends it ahead as a straight line. It moves the DME arc waypoint to the point where that line meets the arc between its first and last radial, the nearest such point ahead of the aircraft. The waypoint gets the name of its new radial, and the unit works out the leg to it and the turn onto the arc anew.
+
+<DmeArcMove caption="MOVE ? with the aircraft on an actual track of 080° that crosses the arc from outside. The actual track is extended until it meets the arc between its radials, and the DME arc waypoint moves from D250J, the beginning of the arc, to that point, D216J, named for its radial. The unit does not fly the dashed part of the arc." />
+
+The move takes the actual track at the moment you press <kbd>ENT</kbd>, so fly the heading to the arc first and let `TK` settle. Without an actual track the unit cannot move the waypoint ([`NO INTRCEPT`](#no-intrcept)).
+
+`MOVE ?` on Super NAV 5 works for the arc of every procedure. To join the arc where you are:
+
+1. Fly a heading that crosses the arc between its first and last radial.
+2. Select NAV 5 on the left side and on the right side. The unit shows Super NAV 5.
+3. Pull the right inner knob. The window at the bottom right shows the active waypoint ([The window](/kln90b/pages/nav/#the-window)).
+4. Turn the right inner knob to the DME arc waypoint.
+5. Press <kbd>CLR</kbd>. The window shows `MOVE ?`. If you selected the wrong waypoint, press <kbd>CLR</kbd> again or turn the right inner knob.
+
+   <KlnScreen screen="dme-arcs/super-nav-5-move" />
+
+6. Press <kbd>ENT</kbd>. The DME arc waypoint moves to where your actual track meets the arc, and the window shows its new name.
+7. Push the right inner knob in to close the window.
+
+In the example the aircraft flies south-west after takeoff from Yakima, and its actual track meets the arc on the 215 radial: `D247I` becomes `D215I`.
+
+<KlnScreen screen="dme-arcs/fpl-0-moved" />
+
+The leg to the moved waypoint still starts at the waypoint in front of it, so the D-bar shows how far you are from that leg, not from your actual track. To have the D-bar lead you along your actual track to the arc, fly direct to the moved waypoint ([Direct-to](/kln90b/operation/direct-to/)); the unit goes on along the arc from there. A move while you are already on the arc changes the waypoint, not the arc you fly.
+
+### `MOVE ?` in FPL 0
+
+<Callout kind="availability">
+Approaches, and with them `MOVE ?` in FPL 0, are available only if the unit is installed for non-precision approaches. Not every aircraft has such an installation.
+</Callout>
+
+You can also move the DME arc waypoint of an approach in FPL 0, where you see the approach together with the rest of the flight plan.
+
+To move the DME arc waypoint of an approach in FPL 0:
+
+1. Turn the left outer knob to the FPL pages and the left inner knob to FPL 0.
+2. Press the left <kbd>CRSR</kbd>.
+3. Turn the left outer knob until the cursor is on the DME arc waypoint.
+4. Press <kbd>CLR</kbd>. The row shows `MOVE` and a question mark. If it is the wrong row, press <kbd>CLR</kbd> again.
+
+   <KlnScreen screen="dme-arcs/fpl-0-move-approach" />
+
+5. Press <kbd>ENT</kbd>. The DME arc waypoint moves to where your actual track meets the arc, and the row shows its new name.
+6. Press the left <kbd>CRSR</kbd> to turn the cursor off.
+
+**Note:** FPL 0 offers `MOVE ?` for an approach only. On the DME arc waypoint of a SID or a STAR, <kbd>CLR</kbd> asks `DEL` and the identifier, as on any waypoint, and <kbd>ENT</kbd> deletes the waypoint, and the arc with it ([The DME arc waypoint as a waypoint](#the-dme-arc-waypoint-as-a-waypoint)). Move the waypoint of a SID or a STAR on Super NAV 5. {/* kln90b#509: describes the current behavior; the fix makes FPL 0 offer MOVE ? for the arcs of SIDs and STARs too */}
+
+### `NO INTRCEPT`
+
+`NO INTRCEPT` means that the unit found no point to move the DME arc waypoint to. Either your actual track, extended ahead, does not meet the arc between its first and last radial, or the unit has no actual track because the groundspeed is below 2 kt. The DME arc waypoint stays where it was. Turn to a heading that crosses the arc within its radials, let `TK` settle, and select `MOVE ?` again.
+
+<KlnScreen screen="dme-arcs/no-intrcept" />
+
+The message replaces the middle part of the status line for a few seconds ([The status line](/kln90b/unit/controls-and-display/#the-status-line)). Super NAV 5 has no status line, so there the message prompt <Term t="MSG">`MSG`</Term> flashes over the map instead, and the message page shows `NO INTRCEPT` ([Messages](/kln90b/operation/messages/)).
+
+## Flying the arc
+
+You fly to the DME arc waypoint on a straight leg like any other. The unit alerts you before it and anticipates the turn onto the arc, as at any waypoint with a turn, and then makes the arc the active leg ([Sequencing and turn anticipation](/kln90b/operation/sequencing/)).
+
+On the arc the unit guides you along the curve. The D-bar and the <Term t="XTK">cross-track error</Term> show how far you are from the arc. The <Term t="DTK" /> is the course of the arc at the point abeam the aircraft, so it turns steadily as you fly around the VOR. Keep the D-bar centered as on any leg. At the end of the arc the unit sequences to the next leg with turn anticipation, worked out from the course of the arc there.
+
+Because the desired track turns all the time, keep turning the course on the external indicator to it as you fly around the arc, unless the unit turns the indicator itself. Where the unit reads the indicator, `ADJ NAV IND CRS TO nnn°` comes back again and again on the arc as the desired track moves away from the indicator ([`ADJ NAV IND CRS TO nnn°`](/kln90b/operation/modes-of-operation/#adj-nav-ind-crs-to-nnn)).
+
+<Callout kind="availability">
+An autopilot that follows the unit gets the course of the arc from it, not the bearing to the end of the arc. Whether the autopilot flies the arc depends on how the unit is installed in the aircraft.
+</Callout>
+
+### Distance, time and bearing on the arc
+
+On an arc, `DIS`, <Term t="ETE">`ETE`</Term> and <Term t="BRG">`BRG`</Term> are measured straight to the end of the arc, not along it. The distance is shorter than the way you still fly, and the time is too short. The bearing differs from the desired track by up to half the angle of the arc ahead; with more than 180° of arc ahead, the TO/FROM indicator even shows FROM. This holds on NAV 1, Super NAV 1, Super NAV 5 and the D/T pages, and for the distance to the destination too. Fly the arc by the D-bar and the desired track, never by the bearing.
+
+In the example the aircraft is on the 200 radial of the 9 NM arc of GROMO4, with 113° of arc and about 18 NM still to fly to OHKAR. NAV 1 shows the straight distance of 15.0 NM and a bearing of 060°, while the desired track is 117°:
+
+<KlnScreen screen="dme-arcs/nav-1-arc" />
+
+### NAV 2 and Super NAV 5 on an arc
+
+NAV 2 shows the reference VOR of the arc in place of the nearby VOR, with your radial and distance from it. It does so while the active leg is an arc, and while the DME arc waypoint lies within 30 NM ahead, counted along the legs of FPL 0. On the arc the distance is the radius of the arc, so you can fly the arc by it as by a DME. This needs an active leg of FPL 0.
+
+<KlnScreen screen="dme-arcs/nav-2-arc" />
+
+The reference VOR of the arc ahead appears even where another VOR is nearer. On the way from Ellensburg to the VOR/DME 27 approach of Yakima, 10 NM south of ELN, NAV 2 shows YKM, 17.3 NM away:
+
+<KlnScreen screen="dme-arcs/nav-2-arc-ahead" />
+
+On Super NAV 5 field 2 shows the desired track while the active leg is an arc. Field 3 shows your radial from the reference VOR of the arc after the label `ARC` in the same cases as NAV 2. Both do so whatever you chose for them ([The left side of Super NAV 5](/kln90b/pages/nav/#the-left-side-of-super-nav-5)). The map draws the arc as an arc. Where the DME arc waypoint lies after the beginning of the arc, the part of the arc before it is dashed.
+
+<KlnScreen screen="dme-arcs/super-nav-5-arc" />
+
+### Leaving the arc
+
+A direct-to replaces the arc with a straight line, also a direct-to to the end of the arc: the unit then flies straight across to it, as the bearing shows. To get the arc back, cancel the direct-to ([Canceling a direct-to](/kln90b/operation/direct-to/#canceling-a-direct-to)). The unit then makes the leg of FPL 0 closest to the aircraft the active leg. It measures your distance from an arc leg to the arc itself, so near the arc the closest leg is the arc again.
+
+## An arc in OBS mode
+
+OBS mode has no arcs. In OBS mode the unit flies the selected course as a straight line through the active waypoint, the end of the arc, and the D-bar shows how far you are from that line ([OBS mode](/kln90b/operation/modes-of-operation/#obs-mode)). Where the selected course comes from depends on the installation ([The selected course](/kln90b/operation/modes-of-operation/#the-selected-course)): the course on the external indicator, which is normally the desired track where you are, or, where the unit chooses it, the course of the arc at its end. Either line through the end of the arc runs far from the part of the arc you are on. The D-bar therefore jumps the moment you change to OBS mode, often to full deflection.
+
+In the example the unit reads the indicator, which was set to the desired track of 117°, and the line of that course through OHKAR lies 13 NM to the left:
+
+<KlnScreen screen="dme-arcs/nav-3-obs" />
+
+NAV 2 and Super NAV 5 no longer show the reference VOR of the arc, and the map draws the course line instead of the arc. Back in leg mode with the end of the arc ahead, the unit flies to it as a direct-to along the selected course, not along the arc ([Changing between the modes](/kln90b/operation/modes-of-operation/#changing-between-the-modes)); cancel the direct-to to get the arc back, as above. Where a holding pattern follows the arc, `IF REQUIRED SELECT OBS` asks for OBS mode at its fix after the arc ([`IF REQUIRED SELECT OBS`](/kln90b/operation/departures-arrivals/#if-required-select-obs)).
+
+## The DME arc waypoint as a waypoint
+
+The DME arc waypoint is a supplemental waypoint that the unit creates by itself ([Waypoints the unit creates by itself](/kln90b/operation/user-waypoints/#waypoints-the-unit-creates-by-itself)). As the active waypoint it shows on the SUP page as its ACT page, with the reference VOR of the arc as the reference, the radial and the radius of the arc:
+
+<KlnScreen screen="dme-arcs/act-arc-waypoint" />
+
+The unit adds the DME arc waypoint to the user database as soon as it computes it, when the waypoints of the procedure appear, before `LOAD IN FPL`. OTH 3 lists it with the type `S`. The unit deletes it at a power-off or power-on once no flight plan uses it, so a waypoint of a selection that you stepped back from or never loaded stays on OTH 3 until then. Two exceptions:
+
+- **The user database is full:** the unit does not add the waypoint and shows no message. The arc works all the same, and OTH 3 does not list the waypoint. {/* kln90b#512: describes the current behavior; the fix stores a moved waypoint, and a full database raises its message */}
+- **A moved waypoint** is not added to the user database at all, and OTH 3 does not list it. The waypoint it replaced stays on OTH 3 until the unit deletes it as unused. {/* kln90b#512: describes the current behavior; the fix stores a moved waypoint, and a full database raises its message */}
+
+The waypoints of an arc in an approach cannot be edited in FPL 0 ([Non-precision approaches](/kln90b/operation/approaches/)). Those of a SID or a STAR can, like the other waypoints of the procedure ([Editing the waypoints of a procedure](/kln90b/operation/departures-arrivals/#editing-the-waypoints-of-a-procedure)), but the arc does not follow the edit:
+
+- **Deleting the DME arc waypoint** deletes the arc. The leg from the waypoint before it to the end of the arc is a straight leg.
+- **Deleting the waypoint at the end of the arc** leaves the arc in place: the unit flies the leg from the DME arc waypoint to the next waypoint around the reference VOR, at the radius of the arc, wherever that waypoint lies. {/* kln90b#511: describes the current behavior; the fix makes the leg after the edit a straight leg */}
+- **A waypoint inserted in front of the waypoint at the end of the arc** is reached along the arc. The leg from it to the waypoint at the end of the arc is a straight leg. {/* kln90b#511: describes the current behavior; the fix makes the leg after the edit a straight leg */}
+
+The SUP page lets you change the radial, the distance and the position of a DME arc waypoint as of any user waypoint, and the waypoint in FPL 0 moves with it. The arc does not move, and the name stays. A new radial within the arc at the same distance keeps the waypoint on the arc, and the unit joins the arc there. A new distance, latitude or longitude takes the waypoint off the arc. Once it is the active waypoint and the aircraft moves, with turn anticipation on, the unit shows an error window that asks you to report the error. The window comes back every second after you close it, and the unit does not sequence the waypoint when you pass it. {/* kln90b#510: describes the current behavior; the fix shows no error and keeps the edited waypoint usable */}
+
+Leave the waypoints of an arc as they are: move the DME arc waypoint with `MOVE ?` instead of deleting or editing it.
+
+## Where to go next
+
+- [SID and STAR procedures](/kln90b/operation/departures-arrivals/) loads the procedure that holds the arc.
+- [Non-precision approaches](/kln90b/operation/approaches/) loads and flies an approach with an arc.
+- [Sequencing and turn anticipation](/kln90b/operation/sequencing/) explains the turn onto and off the arc.
+- [NAV pages](/kln90b/pages/nav/) explains the fields of NAV 2 and Super NAV 5.
