@@ -21,6 +21,6 @@ mask
 |.IIII.............IIII.|
 field title 0 1 9
 field baro 2 0 11
-field alert 3 0 9
+field alert 3 0 11
 field warn 4 0 11
 field page 6 0 5

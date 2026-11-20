@@ -1,6 +1,6 @@
 ---
 title: Airspace and altitude alerting
-description: How the ALT page sets the baro setting and the altitude alert, what the altitude alert tones mean, when the height above airport alert sounds, and what AIRSPACE ALERT and INSIDE SPC USE AIRSPACE tell you.
+description: How the ALT page sets the altimeter baro setting and the altitude alert, what the aural alarm tones mean, when the height above airport alert sounds, and what AIRSPACE ALERT and INSIDE SPC USE AIRSPACE tell you.
 sidebar:
   order: 14
 ---
@@ -9,9 +9,7 @@ import KlnScreen from '../../../components/KlnScreen.astro';
 import Callout from '../../../components/Callout.astro';
 import AirspaceAlert from '../../../components/drawings/AirspaceAlert.astro';
 
-The KLN 90B watches your altitude and the airspace around you. It sounds tones when you approach, reach or leave the selected altitude, and when you are low near the airport you fly to, and it posts a message on the MSG page when you are about to enter special use airspace or are inside it. You set the baro setting and the altitude alert on the ALT page, which the <kbd>ALT</kbd> button opens.
-
-The tones depend on the installation of the unit and need an audio output of the aircraft. The airspace alert is a message only and works wherever the unit runs.
+The KLN 90B watches your altitude and the airspace around you. It sounds tones when you approach, reach or leave the selected altitude, and when you are low near the airport you fly to, and it posts a message on the MSG page when you are about to enter special use airspace or are inside it; the airspace alert needs no installation. You set the altimeter baro setting and the altitude alert on the ALT page, which the <kbd>ALT</kbd> button opens.
 
 ## The ALT page
 
@@ -19,11 +17,11 @@ The <kbd>ALT</kbd> button opens the ALT page on the left side and NAV 4 on the r
 
 <KlnScreen screen="alerts/alt-page" />
 
-The page has three entries: the baro setting, the altitude alert and, while the alert is on, the deviation limit. The left outer knob moves the cursor through them, with three stops in the baro setting, and the left inner knob changes the entry under it. Every step takes effect at once, and <kbd>ENT</kbd> is not needed. The unit keeps all three across a power-off; the selected altitude it forgets at every power-on.
+The page has three entries: the baro setting, the altitude alert and, while the alert is on, the warn altitude. The left outer knob moves the cursor through them, with three stops in the baro setting, and the left inner knob changes the entry under it; the entries are fields that [the knob changes directly](/kln90b/unit/controls-and-display/#fields-the-knob-changes-directly). The unit keeps all three across a power-off; the selected altitude it forgets at every power-on.
 
 <KlnScreen screen="alerts/alt-page-off" />
 
-With the alert off, the page shows only the title, the baro setting and the alert. In an installation without altitude alerting the alert always shows `OFF` and cannot be changed ([Altitude alerting](#altitude-alerting)). Where an air data system supplies the baro setting as well, no entry of the page can be changed, and the left cursor stays off.
+With the alert off, the page shows only the title, the baro setting and the alert. In an installation without altitude alerting the alert always shows `OFF` and cannot be changed ([Altitude alerting](#altitude-alerting)). The left cursor stays off when two things hold: the installation has no altitude alerting, and an air data system supplies the baro setting. Nothing on the page can be changed then.
 
 To set the baro setting to 30.12 inches:
 
@@ -37,9 +35,9 @@ To close the ALT page, press <kbd>ALT</kbd> again. A step of a left knob with th
 
 ## The baro setting
 
-The baro setting is the altimeter setting that the unit applies to the pressure altitude it receives from the altitude input, to get the indicated altitude. The unit starts with 29.92 inches of mercury.
+The baro setting is the setting that the unit applies to the pressure altitude it receives from the altitude input, to get the indicated altitude. The unit starts with 29.92 inches of mercury.
 
-SET 7 chooses the unit of the setting: inches, which shows as `29.92"`, or millibars, which shows as `1013MB`. In inches the first two digits go from 00 to 30. In millibars the setting goes from 700 to 1099, and a three-digit number shows with a blank in front.
+SET 7 chooses the unit of the setting: inches, which shows as `29.92"`, or millibars, which shows as `1013MB`.
 
 <KlnScreen screen="alerts/alt-page-millibars" />
 
@@ -47,26 +45,26 @@ The unit uses the indicated altitude everywhere it needs your altitude: on NAV 4
 
 The setting you make here does not reach the altimeter of the aircraft. Set the altimeter yourself, and set the same value here. Where an air data system supplies the baro setting, the unit follows the setting of the aircraft's altimeter and you cannot change it on the page.
 
-Before an approach the unit asks you to look at the setting: `PRESS ALT TO SET BARO` ([`PRESS ALT TO SET BARO`](/kln90b/operation/approaches/#press-alt-to-set-baro) in Non-precision approaches).
+Before an approach the unit asks you to check the setting with [`PRESS ALT TO SET BARO`](/kln90b/operation/approaches/#press-alt-to-set-baro).
 
 ## Altitude alerting
 
 <Callout kind="availability">
-Altitude alerting depends on how the unit is installed in the aircraft. Its tones also need an audio output of the aircraft: without one, the unit raises them and you hear nothing. Without altitude alerting, `ALERT` on the ALT page shows `OFF` and cannot be changed, and SET 5 and SET 9 show `FEATURE DISABLED`.
+Altitude alerting depends on how the unit is installed in the aircraft. Its tones also need an audio output of the aircraft: without one, you hear no tones. Whether the volume setting of SET 9 changes their loudness depends on the installation too. Without altitude alerting, `ALERT` on the ALT page shows `OFF` and cannot be changed, and SET 5 and SET 9 show `FEATURE DISABLED`.
 </Callout>
 
-Altitude alerting sounds tones when you come near the selected altitude, when you reach it and when you leave it. It needs three things: an altitude input, the alert switched on on the ALT page, and a selected altitude on NAV 4. The selected altitude is the one you enter as `SEL` on NAV 4; where the unit has no altitude input, NAV 4 asks for `TO` instead and nothing alerts ([NAV 4 without an altitude input](/kln90b/pages/nav/#nav-4-without-an-altitude-input)).
+Altitude alerting sounds the aural alarm: tones when you come near the selected altitude, when you reach it and when you leave it. It needs three things: an altitude input, the alert switched on on the ALT page, and a selected altitude on NAV 4. The selected altitude is the one you enter as `SEL` on NAV 4; where the unit has no altitude input, NAV 4 asks for `TO` instead and nothing alerts ([NAV 4 without an altitude input](/kln90b/pages/nav/#nav-4-without-an-altitude-input)).
 
 To turn altitude alerting on and set the selected altitude:
 
 1. Press <kbd>ALT</kbd>. The ALT page appears on the left and NAV 4 on the right, each with its cursor on.
-2. Turn the left outer knob until the cursor is on the alert, and turn the left inner knob to `ON`. The `WARN` line appears below it.
-3. Enter the selected altitude on NAV 4 with the right knobs ([NAV 4: altitude and VNAV](/kln90b/pages/nav/#nav-4-altitude-and-vnav)).
+2. Turn the left outer knob until the cursor is on the alert, and turn the left inner knob to `ON`. The warn altitude appears below it.
+3. Enter the selected altitude on NAV 4 with the right knobs ([NAV 4: altitude and VNAV](/kln90b/pages/nav/#nav-4-altitude-and-vnav)). Each step on a digit takes effect at once and starts the alert over, so a step that brings the selected altitude within 1,000 ft of your altitude sounds the three tones, and the next such step sounds them again.
 4. Press <kbd>ALT</kbd> to close both pages.
 
-Enter the selected altitude before you turn the alert on if you can. The selected altitude is 0 after every power-on, and the unit treats 0 like any other altitude: with the alert on and the aircraft within 1,000 ft of 0 ft, the three tones of an approach sound once, or the two of reaching 0 ft when the indicated altitude is 0.
+The selected altitude is 0 after every power-on, and the unit treats 0 like any other altitude, while the alert stays on or off as you left it. With the alert left on, a power-on within 1,000 ft of 0 ft, at a field below about 1,000 ft, sounds the three tones of an approach once, or the two of reaching 0 ft when the indicated altitude is 0, before you can enter anything. To avoid it, turn the alert off before you turn the unit off at such a field.
 
-### The alert tones
+### The aural alarm
 
 The unit compares the indicated altitude, rounded to the nearest 100 ft, with the selected altitude, so 4,960 ft counts as 5,000 ft. It sounds one of these:
 
@@ -74,52 +72,55 @@ The unit compares the indicated altitude, rounded to the nearest 100 ft, with th
 | --- | --- |
 | Three short tones | You come within 1,000 ft of the selected altitude from farther away. |
 | Two short tones | You reach the selected altitude. |
-| Four short tones | You are more than the `WARN` value from the selected altitude after you have reached it. |
-
-The deviation limit `WARN` goes from 200 to 900 ft in steps of 100 ft and starts at 300 ft. The unit rounds your altitude to 100 ft, so with the 300 ft the four tones sound at 400 ft off.
+| Four short tones | You are more than the warn altitude from the selected altitude after you have reached it. |
 
 <Callout kind="info">
-The altitude alert has no sign on the screen: no message, no change on the ALT page or on NAV 4. If you hear nothing, the cause may be the installation or the audio output of the aircraft, and the screen will not tell you.
+The aural alarm has no sign on the screen: no message, no change on the ALT page or on NAV 4. You cannot tell from the screen whether the alert is armed or has sounded, so listen for it the first time you use it.
 </Callout>
 
-The four tones follow only after you have reached the selected altitude. If you climb to 4,800 ft with 5,000 ft selected and turn back, you hear the three tones and no more. After a deviation, the unit counts you as approaching again: you hear the two tones when you return to the selected altitude, and the three tones again once you have left the 1,000 ft around it and come back. Entering a new selected altitude starts over, and the old one gives no deviation tones.
+Because of the rounding, the three tones come when you are within about 1,050 ft of the selected altitude, and with a warn altitude of 300 ft the four tones come from about 350 ft off, which the unit counts as 400 ft.
 
-A switched-off alert does not follow your flight. When you turn the alert on while you are within 1,000 ft of the selected altitude, the three tones sound at once. The unit also keeps how far the alert had come while the alert was off: if you reached the selected altitude, turned the alert off, flew more than the `WARN` value away and turned it on again, the four tones sound at once.
+### The altitude deviation alert
 
-SET 9 holds the volume of the tones, from 00 to 99, 99 to start with. The unit passes the value on to the sound of the aircraft. Whether you hear a change depends on whether the aircraft's sound uses the value; the tones keep their loudness otherwise.
+The four tones of the altitude deviation alert follow only after you have reached the selected altitude. If you climb to 4,800 ft with 5,000 ft selected and turn back, you hear the three tones and no more. After a deviation, the unit counts you as approaching again: you hear the two tones when you return to the selected altitude, and the three tones again once you have left the 1,000 ft around it and come back. Entering a new selected altitude starts over, and the old one gives no deviation tones.
+
+A switched-off alert does not follow your flight. When you turn the alert on while you are within 1,000 ft of the selected altitude, the three tones sound at once. The unit also keeps how far the alert had come while the alert was off: if you reached the selected altitude, turned the alert off, flew more than the warn altitude away and turned it on again, the four tones sound at once.
+
+SET 9 holds the volume of the tones, from 00 to 99, 99 to start with.
 
 ## The height above airport alert
 
 <Callout kind="availability">
-The height above airport alert depends on the installation like altitude alerting, and its tones also need an audio output of the aircraft. Without it, SET 5 shows `FEATURE DISABLED`.
+The height above airport alert comes with altitude alerting: an installation with one has the other. Its tones also need an audio output of the aircraft. Without it, SET 5 shows `FEATURE DISABLED`.
 </Callout>
 
-The height above airport alert warns you with a pattern of three tones, short, long, short, when you are close to the airport you fly to and low. It sounds when you are within 5 NM of the active waypoint, the active waypoint is an airport, and your indicated altitude is at or below the elevation of the airport plus the height you set on SET 5. It needs an altitude input and a position the unit can navigate with, and it does not depend on the alert of the ALT page.
+The height above airport alert warns you with a pattern of three tones, short, long, short, when you are close to the airport you fly to and low. It sounds when you are within 5 NM of the active waypoint, the active waypoint is an airport, and your indicated altitude is at or below the elevation of the airport plus the offset height you set on SET 5. It needs an altitude input and a position the unit can navigate with, and it does not depend on the alert of the ALT page.
 
-SET 5 shows `HT ABOVE APT ALERT` with `OFF` or `ON`. The alert is off to start with. With `ON` the page shows `APT ELEV` and the height above the elevation of the airport, from 800 to 2,000 ft in steps of 100 ft, 800 ft to start with.
+SET 5 turns the alert on, and it is off to start with. It also sets the offset height, from 800 to 2,000 ft in steps of 100 ft, 800 ft to start with.
 
 To turn the alert on:
 
 1. Turn the left outer knob to the SET pages and the left inner knob to SET 5.
-2. Press the left <kbd>CRSR</kbd> and turn the left inner knob to `ON`. The height appears below it.
-3. Turn the left outer knob to the height and the left inner knob to the value you want.
-4. Press the left <kbd>CRSR</kbd> to turn the cursor off.
+2. Press the left <kbd>CRSR</kbd>.
+3. Turn the left inner knob to `ON`. The offset height appears below it.
+4. Turn the left outer knob to the offset height and the left inner knob to the value you want.
+5. Press the left <kbd>CRSR</kbd> to turn the cursor off.
 
-The airport is the active waypoint, not the nearest airport: it is the airport of a direct-to, or the waypoint that the active leg of the flight plan flies to. The pattern sounds once per airport while you stay below the height inside the 5 NM. It sounds again when you leave and come back, and when the active waypoint changes to another airport.
+The airport is the active waypoint, not the nearest airport: it is the airport of a direct-to, or the waypoint that the active leg of the flight plan flies to. The pattern sounds once per airport while you stay below the offset height inside the 5 NM. It sounds again when you leave and come back, and when the active waypoint changes to another airport.
 
 The unit does not ask whether you are descending. When an airport becomes the active waypoint while you are already low and close, the pattern sounds at once: a direct-to to the airport you are standing on, for example.
 
 ## The airspace alert
 
-The airspace alert posts a message on the MSG page when the track of your next 10 minutes meets an area of special use airspace, or an area is within 2 NM, and another when you are inside an area. It gives no tone and needs no installation. SET 8 turns it on and off, and it is on to start with.
+The special use airspace alert posts a message on the MSG page when the track of your next 10 minutes meets an area of special use airspace, or an area is within 2 NM, and another when you are inside an area. It gives no tone and needs no installation. SET 8, which names it the airspace alert, turns it on and off, and the rest of this page calls it that. It is on to start with.
 
 The unit watches Class B and Class C airspace and the alert, danger, MOA, prohibited, restricted, training and warning areas. It does not watch Class D or other controlled airspace.
 
-<AirspaceAlert caption="Above, an area seen from above with the margin of 2 NM around it. The unit looks along your track for the next 10 minutes at your groundspeed: the aircraft on the right meets the area and the one beside it passes within 2 NM, so both raise the alert, and the aircraft on the left passes clear. Below, the same area seen from the side: the buffer of SET 8 widens it above the ceiling and below the floor, and an aircraft in the buffer counts as in the area." />
+<AirspaceAlert caption="Above, an area seen from above with the margin of 2 NM around it. The unit looks along your track for the next 10 minutes at your groundspeed: the aircraft on the right meets the area and the one beside it passes within 2 NM, so both raise the alert, and the aircraft on the left passes clear. Below, the same area seen from the side: the vertical buffer of SET 8 widens it above the ceiling and below the floor, and an aircraft over the area within the buffer is inside it for the unit and gets INSIDE SPC USE AIRSPACE, while one outside the buffer gets nothing." />
 
 The unit looks ahead along a straight line: your present track at your present groundspeed for 10 minutes. A turn in the flight plan does not count, and nothing alerts while the unit has no position it can navigate with. It checks the areas near you every few seconds, so a message can come a little after the line has met an area.
 
-The altitude matters too. An area counts when your indicated altitude lies between its floor minus the buffer and its ceiling plus the buffer. SET 8 holds the buffer, `VERT BUFFER ±` and a number of feet from 0 to 99,900 in steps of 100 ft, 500 ft to start with; it shows only while the alert is enabled. Without an altitude input every altitude counts as inside, so the alert speaks for every area ahead. A limit above ground level counts as the ground, for a floor, and as unlimited, for a ceiling. For Class B and Class C the unit looks only at the outer lateral limit and the ceiling: a shelf of the airspace alerts at any altitude below the ceiling plus the buffer.
+The altitude matters too. An area counts when your indicated altitude lies between its floor minus the buffer and its ceiling plus the buffer. SET 8 holds the vertical buffer, from 0 to 99,900 ft in steps of 100 ft, 500 ft to start with. Without an altitude input every altitude counts as inside, so the alert speaks for every area ahead. A limit above ground level counts as the ground, for a floor, and as unlimited, for a ceiling. For Class B and Class C the unit looks only at the outer lateral limit and the ceiling: a shelf of the airspace alerts at any altitude below the ceiling plus the buffer.
 
 The airspace alert is silent in the approach modes: in Approach Arm-Leg mode, Approach Arm-OBS mode and Approach Active-Leg mode the unit posts no message and takes back the messages it holds. When the unit returns to an en route mode, the next check posts them again if they still apply.
 
@@ -128,8 +129,9 @@ The alert does not ask whether you are airborne. An aircraft parked inside an ar
 To turn the airspace alert off:
 
 1. Turn the left outer knob to the SET pages and the left inner knob to SET 8.
-2. Press the left <kbd>CRSR</kbd> and turn the left inner knob to `DISABLE`. The buffer disappears.
-3. Press the left <kbd>CRSR</kbd> to turn the cursor off.
+2. Press the left <kbd>CRSR</kbd>.
+3. Turn the left inner knob to `DISABLE`.
+4. Press the left <kbd>CRSR</kbd> to turn the cursor off.
 
 The unit keeps the setting across a power-off. With `DISABLE` the unit also takes back the messages it holds.
 
@@ -151,7 +153,7 @@ Check your track and your altitude against the area. Reading the message does no
 
 ### `INSIDE SPC USE AIRSPACE`
 
-You are inside an area of special use airspace, laterally and, within the buffer, vertically. The message has the same three lines as the alert, and the first line fits on one line of the MSG page.
+You are inside an area of special use airspace, laterally and, within the buffer, vertically. The message has the same three lines as the alert.
 
 ```
 INSIDE SPC USE AIRSPACE
@@ -161,7 +163,7 @@ INSIDE SPC USE AIRSPACE
 
 <KlnScreen screen="alerts/inside-spc-use-airspace" />
 
-The message stays while you are inside, and reading it does not remove it. It goes when you leave the area. When you leave it, and an area is within 2 NM, the unit raises `AIRSPACE ALERT:` for it again. After a power-on inside an area the unit raises the message anew.
+The message stays while you are inside, and reading it does not remove it. It goes when you leave the area. When you leave it sideways, you are within 2 NM of it, so `AIRSPACE ALERT:` for the same area follows until you are 2 NM away; leaving it by climbing or descending out of the buffer ends both messages. After a power-on inside an area the unit raises the message anew.
 
 ## Where to go next
 
