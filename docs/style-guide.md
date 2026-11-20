@@ -749,7 +749,7 @@ The sidebar has these chapters and pages. Operation explains tasks ("how do I…
 | --- | --- |
 | Getting started | Table of contents (home page) · Installation · Quickstart · Tutorial flight 1 · Tutorial flight 2 |
 | The unit | Controls and display (knobs, buttons, the two halves, status line, cursor and data entry, scan, page tree) · Keyboard mode · Power-on and initialization |
-| Operation | Waypoints and the database · User waypoints · Nearest · Direct-to · Flight plans · Modes of operation (leg and OBS) · Sequencing and turn anticipation · SID and STAR procedures · Non-precision approaches · VNAV · GPS reception and RAIM · Inside the GPS simulation (optional) · Messages · Airspace and altitude alerting · Trip planning and calculators · Fuel and air data · Simulated failures |
+| Operation | Waypoints and the database · User waypoints · Nearest · Direct-to · Flight plans · Modes of operation (leg and OBS) · Sequencing and turn anticipation · SID and STAR procedures · DME arcs · Non-precision approaches · VNAV · GPS reception and RAIM · Inside the GPS simulation (optional) · Messages · Airspace and altitude alerting · Trip planning and calculators · Fuel and air data · Simulated failures |
 | Page reference | One chapter per page type in page tree order. Left: TRI, MOD, FPL, NAV, CAL, STA, SET, FLR, OTH. Right: CTR, REF, ACT, D/T, NAV, APT, VOR, NDB, INT, SUP. Each page with its screen. |
 | Reference lists | Message page messages · Status line messages · Glossary |
 | Help | External hardware · FAQ and troubleshooting · Known limitations · Contact |
