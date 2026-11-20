@@ -10,7 +10,7 @@ import Callout from '../../../components/Callout.astro';
 import Term from '../../../components/Term.astro';
 import AirspaceAlert from '../../../components/drawings/AirspaceAlert.astro';
 
-The KLN 90B watches your altitude and the airspace around you. It sounds tones when you approach, reach or leave the selected altitude, and when you are low near the airport you fly to, and it posts the special use airspace alert, a message on the <Term t="MSG">MSG</Term> page, when you are about to enter special use airspace or are inside it; the airspace alert needs no installation. You set the altimeter <Term t="BARO">baro setting</Term> and the altitude alert on the ALT page, which the <kbd>ALT</kbd> button opens.
+The KLN 90B watches your altitude and the airspace around you. It sounds tones when you approach, reach or leave the selected altitude, and when you are low near the airport you fly to, and it posts the special use airspace alert, a message on the MSG page, when you are about to enter special use airspace or are inside it; the airspace alert needs no installation. You set the altimeter <Term t="BARO">baro setting</Term> and the altitude alert on the ALT page, which the <kbd>ALT</kbd> button opens.
 
 ## The ALT page
 
@@ -119,7 +119,7 @@ The unit watches Class B and Class C airspace and the alert, danger, MOA, prohib
 
 <AirspaceAlert caption="Above, an area seen from above with the margin of 2 NM around it. The unit looks along your track for the next 10 minutes at your groundspeed: the aircraft on the right meets the area and the one beside it passes within 2 NM, so both raise the alert, and the aircraft on the left passes clear. Below, the same area seen from the side: the vertical buffer of SET 8 widens it above the ceiling and below the floor, and an aircraft over the area within the buffer is inside it for the unit and gets INSIDE SPC USE AIRSPACE, while one outside the buffer gets nothing." />
 
-The unit looks ahead along a straight line: your present track at your present groundspeed, for the time the alert looks ahead. A turn in the flight plan does not count, and nothing alerts while the unit has no position it can navigate with. It checks the areas near you every few seconds, so a message can come a little after the line has met an area.
+The unit looks ahead along a straight line: your present track at your present groundspeed, to where the aircraft would be in 10 minutes. A turn in the flight plan does not count, and nothing alerts while the unit has no position it can navigate with. It checks the areas near you every few seconds, so a message can come a little after the line has met an area.
 
 The altitude matters too. An area counts when your indicated altitude lies between its floor minus the buffer and its ceiling plus the buffer. SET 8 holds the vertical buffer, from 0 to 99,900 ft in steps of 100 ft, 500 ft to start with. Without an altitude input every altitude counts as inside, so the alert speaks for every area ahead. A limit above ground level counts as the ground, for a floor, and as unlimited, for a ceiling. For Class B and Class C the unit looks only at the outer lateral limit and the ceiling: a shelf of the airspace alerts at any altitude below the ceiling plus the buffer.
 

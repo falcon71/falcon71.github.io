@@ -142,9 +142,9 @@ that writes the owner records the anchors in this table, and the final pass shar
 | Which approaches the unit offers (ILS deliberately absent), loading an approach, approach arming and activation, the CDI scale along an approach, RAIM in an approach, the suffixes of approach waypoints, `INVALID ADD` and `INVALID DEL`, the missed approach, changing and deleting an approach | Non-precision approaches: `#which-approaches-the-unit-offers`, `#loading-an-approach` (`#an-approach-starts-only-at-an-iaf`, `#replacing-an-approach`), `#the-approach-in-fpl-0` (`#invalid-add-and-invalid-del`), `#arming-the-approach` (`#press-alt-to-set-baro`, `#arm-gps-approach`), `#activating-the-approach`, `#the-cdi-scale-along-the-approach`, `#raim-in-an-approach` (`#raim-not-available-apr-mode-inhibited`, `#press-gps-apr-for-nav`), `#flying-the-approach` (`#vectors-to-final`), `#the-missed-approach`, `#changing-or-deleting-an-approach` | APT 8: the page, the two rules plainly, and links; GPS reception and RAIM: the messages and the link; FAQ: the ILS question and the link |
 | DME arcs: which legs become arcs, the DME arc waypoint (computation, name), moving it (`MOVE ?`, `NO INTRCEPT`), flying the arc, OBS mode on an arc | DME arcs: `#arcs-in-a-procedure`, `#the-dme-arc-waypoint` (`#the-name-of-a-dme-arc-waypoint`), `#moving-the-dme-arc-waypoint` (`#move--in-fpl-0`, `#no-intrcept`), `#flying-the-arc` (`#distance-time-and-bearing-on-the-arc`, `#nav-2-and-super-nav-5-on-an-arc`, `#leaving-the-arc`), `#the-dme-arc-waypoint-as-a-waypoint`, `#an-arc-in-obs-mode` | SID and STAR procedures, Non-precision approaches, APT 7 and APT 8: one sentence and the link; NAV chapter: its fields; FPL chapter: `MOVE ?` as a row state and the link |
 | Holding patterns and procedure turns the unit drops, `IF REQUIRED SELECT OBS` | SID and STAR procedures, `#if-required-select-obs` | Non-precision approaches: what differs, and the link |
-| VNAV | VNAV | NAV chapter: the fields of NAV 4; CAL chapter: CAL 4 as a page |
-| The ALT page, the barometric setting, the selected altitude, altitude alerting, the height above airport alert | Airspace and altitude alerting | NAV chapter: the altitude fields of NAV 4; SET chapter: SET 5, SET 7, SET 9 as pages |
-| The airspace alert (SET 8), its messages | Airspace and altitude alerting | APT 1, OTH 2, TRI 2, TRI 4, TRI 6 show airspaces and link |
+| VNAV: setting it up, starting it, the states and the countdown, `VNV ALERT`, the angle, which waypoint, `INVALID VNV`, what ends it (the NAV flag included) | VNAV: `#what-vnav-does`, `#setting-up-a-descent-or-a-climb` (`#vnav-without-an-altitude-input`), `#starting-vnav`, `#flying-the-vertical-path` (`#vnv-alert`), `#the-angle`, `#which-waypoint-vnav-can-use` (`#invalid-vnv`), `#when-vnav-ends` | NAV chapter: the fields of NAV 4 and field 1 of Super NAV 5, with the links; CAL chapter: CAL 4 as a page |
+| The ALT page, the baro setting, the selected altitude as the alert's input, altitude alerting and its aural alarm, the height above airport alert | Airspace and altitude alerting: `#the-alt-page`, `#the-baro-setting`, `#altitude-alerting` (`#the-aural-alarm`, `#the-altitude-deviation-alert`), `#the-height-above-airport-alert` | NAV chapter: the altitude fields of NAV 4; SET chapter: SET 5, SET 7, SET 9 as pages and the link; Power-on: the approval beeps need altitude alerting, one sentence and the link |
+| The airspace alert (SET 8), its messages | Airspace and altitude alerting: `#the-airspace-alert` (`#airspace-alert`, `#inside-spc-use-airspace`) | APT 1, OTH 2, TRI 2, TRI 4, TRI 6 show airspaces and link; SET chapter: SET 8 as a page |
 | Minimum safe altitudes (`MSA`, `ESA`) | NAV chapter, `/kln90b/pages/nav/#minimum-safe-altitudes` | TRI chapter links |
 | Trip planning; the calculators; times, time zones and the flight timer as tasks | Trip planning and calculators | TRI, CAL, D/T chapters: the pages; SET chapter: SET 4 as a page |
 | Fuel management and air data | Fuel and air data | OTH chapter: the pages; TRI chapter: its own fuel fields |
@@ -191,7 +191,7 @@ anchors and page links above. After them the order follows "owners before the pa
 | 11 | flight-plan-pages | D/T, REF and CTR chapters | done (2026-11-20) |
 | 12 | sid-star | SID and STAR procedures; DME arcs | done (2026-11-20) |
 | 13 | approaches | Non-precision approaches | done (2026-11-20) |
-| 14 | vnav-alerts | VNAV; Airspace and altitude alerting | not started |
+| 14 | vnav-alerts | VNAV; Airspace and altitude alerting | in review (2026-11-20) |
 | 15 | set | SET chapter | not started |
 | 16 | trip-planning | Trip planning and calculators; TRI and CAL chapters | not started |
 | 17 | fuel-air-data | Fuel and air data; OTH chapter | not started |
@@ -276,6 +276,13 @@ it is written when those owners exist. A package that proves too large in its re
   "the airport" of a procedure in FPL 0; not adopted (the row of FPL 0 is the airport itself), for the maintainer.
 - The screen `navigation/msg-adj-nav-ind-crs` explains a flashing `MSG` as "in inverse video", and the field `sid`
   of `pages/fpl/fpl-0-procedures` lacks the `<Term>` at its first SID (reviewer of SID and STAR procedures).
+
+- The package vnav-alerts (2026-11-20) brought the official terms vertical path, descent point, inactive (VNAV),
+  altimeter baro setting, warn altitude, aural alarm, altitude deviation alert, special use airspace alert and offset
+  height. The final pass searches once more ("deviation limit", "alert tones", "start of the path", "altimeter
+  setting" for the unit's own).
+- `operation/alerts.mdx` says the 10 minutes of the airspace alert in more than one place (seam check, 2026-11-20);
+  the final pass cuts it to its owner sentence.
 
 ## Site and generator notes
 
