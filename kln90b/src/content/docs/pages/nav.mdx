@@ -15,7 +15,7 @@ The NAV pages of the KLN 90B show where you are and where the unit takes you. NA
 
 The NAV pages stand between FPL and CAL on the left side and between D/T and APT on the right side, and a NAV page is the same page on either side: the same fields, the same data. [Selecting a page](/kln90b/unit/controls-and-display/#selecting-a-page) explains how you reach them. Each side has its own cursor. NAV 1 and NAV 2 have no field for it, NAV 3 has one in OBS mode, NAV 4 has several and NAV 5 has two.
 
-The <kbd>ALT</kbd> button shows NAV 4 on the right side beside the ALT page, with the cursor on ([Airspace and altitude alerting](/kln90b/operation/alerts/)). NAV 5 on the left side also marks the waypoint of a waypoint page that the right side shows.
+The <kbd>ALT</kbd> button shows NAV 4 on the right side beside the ALT page, with the cursor on ([The ALT page](/kln90b/operation/alerts/#the-alt-page)). NAV 5 on the left side also marks the waypoint of a waypoint page that the right side shows.
 
 When both sides show NAV 1, the unit shows Super NAV 1 on the whole screen, and when both show NAV 5, Super NAV 5. [Pages that use the whole screen](/kln90b/unit/controls-and-display/#pages-that-use-the-whole-screen) says what brings them up and how you leave them.
 
@@ -121,11 +121,11 @@ In the example the aircraft is 10 NM out of Seattle-Tacoma toward Yakima. `MSA` 
 
 ## NAV 4: altitude and VNAV
 
-NAV 4 shows your altitude and holds the entries of VNAV: the selected altitude, the waypoint, the offset and the angle of the descent or climb. [VNAV](/kln90b/operation/vnav/) explains how you fly a vertical profile with them, and [Airspace and altitude alerting](/kln90b/operation/alerts/) how the selected altitude sets the altitude alert.
+NAV 4 shows your altitude and holds the entries of VNAV: the selected altitude, the waypoint, the offset and the angle of the descent or climb. [Setting up a descent or a climb](/kln90b/operation/vnav/#setting-up-a-descent-or-a-climb) explains how you fly a vertical profile with them, and [Altitude alerting](/kln90b/operation/alerts/#altitude-alerting) how the selected altitude sets the altitude alert.
 
 <KlnScreen screen="pages/nav/nav-4" />
 
-The unit forgets the entries of NAV 4 at every power-on ([Power-on and initialization](/kln90b/unit/power-on/)). Take care with the angle: when the cursor arrives on it, VNAV starts at the angle shown, unless VNAV is already armed or active or the angle is `0.0`. You enter the VNAV waypoint like any waypoint identifier ([Waypoints and the database](/kln90b/operation/waypoints/)).
+The unit forgets the entries of NAV 4 at every power-on ([Power-on and initialization](/kln90b/unit/power-on/)). The cursor arriving on the angle starts VNAV ([Starting VNAV](/kln90b/operation/vnav/#starting-vnav)). You enter the VNAV waypoint like any waypoint identifier ([Waypoints and the database](/kln90b/operation/waypoints/)); [Which waypoint VNAV can use](/kln90b/operation/vnav/#which-waypoint-vnav-can-use) says which ones it takes.
 
 ### NAV 4 without an altitude input
 
@@ -228,7 +228,7 @@ The left side holds the distance to the active waypoint, its identifier, the mod
 
 The three fields offer these choices, and the unit starts with `ETE`, `DTK` and `TK`:
 
-- **Field 1:** <Term t="ETE">`ETE`</Term>, the time to the active waypoint; <Term t="XTK">`XTK`</Term>, the cross-track error; `VNAV`, the state of VNAV, which shows `V OFF` while VNAV is off ([VNAV](/kln90b/operation/vnav/) explains the other states).
+- **Field 1:** <Term t="ETE">`ETE`</Term>, the time to the active waypoint; <Term t="XTK">`XTK`</Term>, the cross-track error; `VNAV`, the state of VNAV, which shows `V OFF` while VNAV is inactive ([Flying the vertical path](/kln90b/operation/vnav/#flying-the-vertical-path) explains the other states).
 - **Field 2:** `DTK`, the desired track; <Term t="BRG">`BRG`</Term>, the bearing to the active waypoint; `RAD`, the radial from the active waypoint.
 - **Field 3:** `TK`, the actual track; `BRG`; `RAD`.
 
@@ -301,4 +301,4 @@ While the window shows the DME arc waypoint, where a DME arc begins, <kbd>CLR</k
 - [Sequencing and turn anticipation](/kln90b/operation/sequencing/): waypoint alerting and the transitions that the D-bar and `FLY` follow.
 - [Direct-to](/kln90b/operation/direct-to/): the Direct To symbol and the default waypoint.
 - [GPS reception and RAIM](/kln90b/operation/gps-receiver/): why the unit has no position and what the altitude input does.
-- [VNAV](/kln90b/operation/vnav/) and [Airspace and altitude alerting](/kln90b/operation/alerts/): the entries of NAV 4 at work.
+- [Setting up a descent or a climb](/kln90b/operation/vnav/#setting-up-a-descent-or-a-climb) and [Altitude alerting](/kln90b/operation/alerts/#altitude-alerting): the entries of NAV 4 at work.

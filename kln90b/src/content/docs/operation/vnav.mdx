@@ -8,6 +8,7 @@ sidebar:
 import KlnScreen from '../../../components/KlnScreen.astro';
 import Callout from '../../../components/Callout.astro';
 import VnavPath from '../../../components/drawings/VnavPath.astro';
+import Term from '../../../components/Term.astro';
 
 VNAV, the vertical navigation of the KLN 90B, plans a straight descent or climb to the selected altitude at a waypoint, or a set distance before it, and shows you the altitude the vertical path has where you are. It is advisory: you fly the path yourself, and the unit drives nothing. You set it up on NAV 4, and it starts as soon as the cursor reaches the angle.
 
@@ -15,11 +16,11 @@ VNAV, the vertical navigation of the KLN 90B, plans a straight descent or climb 
 
 VNAV lays a vertical path at a fixed angle that ends at the selected altitude at the offset point, the point the offset lies before the VNAV waypoint. From your altitude it works out the descent point, where the path begins, counts down the time to it, and from there shows the advisory altitude: the altitude of the path at your present position. Keep the aircraft at the advisory altitude, and you arrive at the selected altitude at the offset point.
 
-<VnavPath caption="The descent of the screens on this page, seen from the side and not to scale in height: from 7,500 ft at 3.0° to the selected altitude of 3,000 ft at the offset point 5 NM before KSEA, at 123 kt. The descent point lies 19.1 NM from KSEA. NAV 4 shows VNV ARMED until 10 minutes before it, then counts down, then shows the advisory altitude falling to 3,000 ft at the offset point, where VNAV becomes inactive." />
+<VnavPath caption="The descent of the screens on this page, seen from the side and not to scale in height: from 7,500 ft at 3.0° to the selected altitude of 3,000 ft at the offset point 5 NM before KSEA, at 123 kt. The descent point lies 19.1 NM from KSEA. NAV 4 shows VNV ARMED, then counts down to the descent point, then shows the advisory altitude falling to 3,000 ft at the offset point, where VNAV becomes inactive." />
 
 The same works for a climb, with a selected altitude above you: the angle is then positive, and the advisory altitude rises toward the selected altitude from where the climb starts. When the VNAV waypoint lies beyond the active waypoint, the path is laid along the legs of FPL 0.
 
-The unit takes your altitude from the altitude input with its own baro setting applied, so keep that setting the same as your altimeter's ([The baro setting](/kln90b/operation/alerts/#the-baro-setting)). A different setting moves the descent point and changes the angle NAV 4 shows, and the advisory altitude no longer matches your altimeter. Once the path has begun, the unit no longer looks at your altitude and gives no warning when you leave the path; compare the advisory altitude with your altimeter.
+The unit takes your altitude from the altitude input with its own <Term t="BARO">altimeter baro setting</Term> applied, so keep the baro setting the same as your altimeter's ([The baro setting](/kln90b/operation/alerts/#the-baro-setting)). A different setting moves the descent point and changes the angle NAV 4 shows, and the advisory altitude no longer matches your altimeter. Once the path has begun, the unit no longer looks at your altitude and gives no warning when you leave the path; compare the advisory altitude with your altimeter.
 
 ## Setting up a descent or a climb
 
@@ -94,7 +95,7 @@ Apart from `VNV ALERT` before the descent point, the start and the end of the pa
 
 <KlnScreen screen="vnav/vnv-alert" />
 
-The unit gives the message only while neither side shows NAV 4, because NAV 4 shows the countdown itself; Super NAV 5 does not count, so the message comes and stays while you watch the countdown there. The message goes as soon as a side shows NAV 4, and when VNAV becomes active or inactive. Once NAV 4 has been in view in those last 90 seconds, the message does not come, even when you turn to another page before the descent point. It also does not come when you arm VNAV less than 90 seconds before the descent point, which you do on NAV 4.
+The unit gives the message only while neither side shows NAV 4, because NAV 4 shows the countdown itself; Super NAV 5 does not count, so the message comes and stays while you watch the countdown there. The message goes as soon as a side shows NAV 4, and when VNAV becomes active or inactive. Once NAV 4 has been in view while the message was due, the message does not come, even when you turn to another page before the descent point. It also does not come when you arm VNAV that close to the descent point, which you do on NAV 4.
 
 ## The angle
 
