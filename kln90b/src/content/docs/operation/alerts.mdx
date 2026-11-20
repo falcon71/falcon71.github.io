@@ -18,6 +18,8 @@ The <kbd>ALT</kbd> button opens the ALT page on the left side and NAV 4 on the r
 
 <KlnScreen screen="alerts/alt-page" />
 
+The arrow after `ON` on the line of the alert points at the selected altitude on NAV 4, which is the altitude the alert uses; here it is 9,000 ft, with the right cursor on its thousands digit.
+
 The page has three entries: the baro setting, the altitude alert and, while the alert is on, the warn altitude. The left outer knob moves the cursor through them, with three stops in the baro setting, and the left inner knob changes the entry under it; the entries are fields that [the knob changes directly](/kln90b/unit/controls-and-display/#fields-the-knob-changes-directly). The unit keeps all three across a power-off; the selected altitude it forgets at every power-on.
 
 <KlnScreen screen="alerts/alt-page-off" />
@@ -60,10 +62,10 @@ To turn altitude alerting on and set the selected altitude:
 
 1. Press <kbd>ALT</kbd>. The ALT page appears on the left and NAV 4 on the right, each with its cursor on.
 2. Turn the left outer knob until the cursor is on the alert, and turn the left inner knob to `ON`. The warn altitude appears below it.
-3. Enter the selected altitude on NAV 4 with the right knobs ([NAV 4: altitude and VNAV](/kln90b/pages/nav/#nav-4-altitude-and-vnav)). Each step on a digit takes effect at once and starts the alert over, so a step that brings the selected altitude within 1,000 ft of your altitude sounds the three tones, and the next such step sounds them again.
+3. Enter the selected altitude on NAV 4 with the right knobs ([NAV 4: altitude and VNAV](/kln90b/pages/nav/#nav-4-altitude-and-vnav)). Each step on a digit takes effect at once and starts the alert over, so a step that brings the selected altitude within 1,000 ft of your altitude sounds the three tones, and the next such step sounds them again. {/* kln90b#520: describes the current behavior; the fix starts the alert over only once the entry is complete */}
 4. Press <kbd>ALT</kbd> to close both pages.
 
-The selected altitude is 0 after every power-on, and the unit treats 0 like any other altitude, while the alert stays on or off as you left it. With the alert left on, a power-on near 0 ft, at a field below about 1,000 ft, sounds the three tones of an approach once, or the two of reaching 0 ft when the indicated altitude is 0, before you can enter anything. To avoid it, turn the alert off before you turn the unit off at such a field.
+The selected altitude is 0 after every power-on, and the unit treats 0 like any other altitude, while the alert stays on or off as you left it. With the alert left on, a power-on near 0 ft, at a field below about 1,000 ft, sounds the three tones of an approach once, or the two of reaching 0 ft when the indicated altitude is 0, before you can enter anything. To avoid it, turn the alert off before you turn the unit off at such a field. {/* kln90b#518: describes the current behavior; the fix treats a selected altitude of 0 as none */}
 
 ### The aural alarm
 
@@ -85,7 +87,7 @@ Because of the rounding, the three tones come when you are within about 1,050 ft
 
 The four tones of the altitude deviation alert follow only after you have reached the selected altitude. If you climb to 4,800 ft with 5,000 ft selected and turn back, you hear the three tones and no more. After a deviation, the unit counts you as approaching again: you hear the two tones when you return to the selected altitude, and the three tones again once you have left the 1,000 ft around it and come back. Entering a new selected altitude starts over, and the old one gives no deviation tones.
 
-A switched-off alert does not follow your flight. When you turn the alert on while you are within 1,000 ft of the selected altitude, the three tones sound at once. The unit also keeps how far the alert had come while the alert was off: if you reached the selected altitude, turned the alert off, flew more than the warn altitude away and turned it on again, the four tones sound at once.
+A switched-off alert does not follow your flight. When you turn the alert on while you are within 1,000 ft of the selected altitude, the three tones sound at once. The unit also keeps how far the alert had come while the alert was off: if you reached the selected altitude, turned the alert off, flew more than the warn altitude away and turned it on again, the four tones sound at once. {/* kln90b#519: describes the current behavior; the fix starts the alert fresh when you turn it on */}
 
 SET 9 holds the volume of the tones, from 00 to 99, 99 to start with.
 

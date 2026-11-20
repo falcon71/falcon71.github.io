@@ -40,7 +40,7 @@ To plan a descent or a climb:
 [When VNAV ends](#when-vnav-ends) says how you stop VNAV. The <kbd>ALT</kbd> button also shows NAV 4, on the right side and with the cursor on, and the selected altitude is the altitude the altitude alert watches ([Altitude alerting](/kln90b/operation/alerts/#altitude-alerting)). The unit forgets every entry of NAV 4 at power-on.
 
 <Callout kind="info">
-Plan an offset of at least 1 NM when the VNAV waypoint is one the unit does not sequence past, such as the last waypoint of FPL 0 or the waypoint of a direct-to that FPL 0 does not hold. With an offset of `00` VNAV does not end there by itself ([When VNAV ends](#when-vnav-ends)).
+Plan an offset of at least 1 NM when the VNAV waypoint is one the unit does not sequence past, such as the last waypoint of FPL 0 or the waypoint of a direct-to that FPL 0 does not hold. With an offset of `00` VNAV does not end there by itself ([When VNAV ends](#when-vnav-ends)). {/* kln90b#516: describes the current behavior; the fix ends VNAV at the waypoint, and this box may go */}
 </Callout>
 
 ### VNAV without an altitude input
@@ -95,13 +95,13 @@ Apart from `VNV ALERT` before the descent point, the start and the end of the pa
 
 <KlnScreen screen="vnav/vnv-alert" />
 
-The unit gives the message only while neither side shows NAV 4, because NAV 4 shows the countdown itself; Super NAV 5 does not count, so the message comes and stays while you watch the countdown there. The message goes as soon as a side shows NAV 4, and when VNAV becomes active or inactive. Once NAV 4 has been in view while the message was due, the message does not come, even when you turn to another page before the descent point. It also does not come when you arm VNAV that close to the descent point, which you do on NAV 4.
+The unit gives the message only while neither side shows NAV 4, because NAV 4 shows the countdown itself; Super NAV 5 does not count, so the message comes and stays while you watch the countdown there. The message goes as soon as a side shows NAV 4, and when VNAV becomes active or inactive. Once NAV 4 has been in view while the message was due, the message does not come, even when you turn to another page before the descent point. It also does not come when you arm VNAV that close to the descent point, which you do on NAV 4. {/* kln90b#517: describes the current behavior; the fix holds the message back only while NAV 4 is shown */}
 
 ## The angle
 
 The angle is the slope of the vertical path in degrees, in tenths from 0.1° to 9.9°: negative for a descent, positive for a climb. You set only the digits; the sign comes from the angle the field shows, so a descent stays a descent when you change the number.
 
-Before VNAV starts, the field shows the angle that takes you from your altitude to the selected altitude at the offset point. For a path of 10° or more it shows `0.0`, and the cursor on it then starts nothing. {/* kln90b#501: describes the current behavior; the fix makes the field show dashes for an angle of 10° or more */} An angle that shows `0.0` has no sign either, so an angle you enter there is a climb, even when the selected altitude is below you: NAV 4 shows VNAV armed, and the path never begins. Move the end of the path farther away, with a smaller offset or a later waypoint, until the field shows a negative angle, and enter your angle then.
+Before VNAV starts, the field shows the angle that takes you from your altitude to the selected altitude at the offset point. For a path of 10° or more it shows `0.0`, and the cursor on it then starts nothing. {/* kln90b#501: describes the current behavior; the fix makes the field show dashes for an angle of 10° or more */} An angle that shows `0.0` has no sign either, so an angle you enter there is a climb, even when the selected altitude is below you: NAV 4 shows VNAV armed, and the path never begins. Move the end of the path farther away, with a smaller offset or a later waypoint, until the field shows a negative angle, and enter your angle then. {/* kln90b#515: describes the current behavior; the fix gives a typed angle the sign of the geometry */}
 
 CAL 4 works out the angle for a groundspeed and a vertical speed, or the vertical speed an angle needs at a groundspeed. It passes nothing to NAV 4: enter the angle there yourself.
 
@@ -123,7 +123,7 @@ Entering the waypoint that is already the VNAV waypoint changes nothing. A diffe
 
 VNAV ends at the offset point, where the advisory altitude reaches the selected altitude. NAV 4 shows `VNV INACTV`, and it clears the plan for the next one: the waypoint goes back to the active waypoint, the offset to `00` and the angle to the angle for where you are; the selected altitude stays, and without an altitude input `FR` takes the selected altitude. If the cursor is on the angle at that moment, VNAV stays inactive; move the cursor away and back to start it again.
 
-With an offset of `00` the vertical path can end only when the VNAV waypoint stops being one VNAV can use, because the distance to the waypoint never goes below zero. At a waypoint the unit sequences past, that happens as you pass it. At a waypoint it does not sequence past ([When the unit does not sequence](/kln90b/operation/sequencing/#when-the-unit-does-not-sequence)), such as the last waypoint of FPL 0, the waypoint of a direct-to that FPL 0 does not hold, the active waypoint in OBS mode or the missed approach point, VNAV stays active after you pass it, and the advisory altitude rises again as you fly away. End it there by changing the offset or the selected altitude.
+With an offset of `00` the vertical path can end only when the VNAV waypoint stops being one VNAV can use, because the distance to the waypoint never goes below zero. At a waypoint the unit sequences past, that happens as you pass it. At a waypoint it does not sequence past ([When the unit does not sequence](/kln90b/operation/sequencing/#when-the-unit-does-not-sequence)), such as the last waypoint of FPL 0, the waypoint of a direct-to that FPL 0 does not hold, the active waypoint in OBS mode or the missed approach point, VNAV stays active after you pass it, and the advisory altitude rises again as you fly away. End it there by changing the offset or the selected altitude. {/* kln90b#516: describes the current behavior; the fix ends VNAV at the waypoint */}
 
 VNAV also ends, and NAV 4 clears the plan in the same way, when the VNAV waypoint is no longer one it can use:
 
@@ -132,7 +132,7 @@ VNAV also ends, and NAV 4 clears the plan in the same way, when the VNAV waypoin
 - you change to OBS mode while the VNAV waypoint lies after the active waypoint;
 - you delete the VNAV waypoint from FPL 0.
 
-Whenever the unit flags its navigation, because it has lost its position ([Losing the position in flight](/kln90b/operation/gps-receiver/#losing-the-position-in-flight)) or has lost its integrity in approach active mode, VNAV becomes inactive at once and NAV 4 clears the plan in the same way. VNAV does not start again when the navigation returns; plan it anew.
+Whenever the unit flags its navigation, because it has lost its position ([Losing the position in flight](/kln90b/operation/gps-receiver/#losing-the-position-in-flight)) or has lost its integrity in approach active mode, VNAV becomes inactive at once and NAV 4 clears the plan in the same way. VNAV does not start again when the navigation returns; plan it anew. {/* kln90b#514: describes the current behavior; the fix suspends VNAV while the navigation is flagged and keeps its entries */}
 
 To stop VNAV yourself, change the selected altitude, `FR` or the offset, or enter a different waypoint. VNAV becomes inactive and keeps the other entries: the field shows the angle for where you are again, and the cursor on it starts VNAV anew.
 

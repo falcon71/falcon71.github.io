@@ -283,6 +283,9 @@ it is written when those owners exist. A package that proves too large in its re
   setting" for the unit's own).
 - `operation/alerts.mdx` says the 10 minutes of the airspace alert in more than one place (seam check, 2026-11-20);
   the final pass cuts it to its owner sentence.
+- **Rule of 2026-11-20 (maintainer, on the package vnav-alerts):** a page that works with a field of the other side
+  shows both halves (style guide, section 13; the ALT page with NAV 4). The final pass looks for other half screens
+  of such pages.
 
 ## Site and generator notes
 

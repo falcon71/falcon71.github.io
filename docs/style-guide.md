@@ -644,6 +644,10 @@ general; the screen shows one concrete case.
 - **A step that carries data from one side to the other gets a screen** that shows both halves: where the data
   comes from and where it goes, such as the identifier of the right page taken into a field of the left page. The
   pilot learns such a step by seeing it (maintainer, 2026-11-17).
+- **A page that works with a field of the other side shows both halves.** Where a page points to a value on the
+  other half and uses it (the arrow after `ON` on the ALT page points to the selected altitude of NAV 4, which the
+  altitude alert uses), its screen shows both halves, so that the pilot sees what the page works with. The rule
+  below, to show only the page the text is about, gives way to this one (maintainer, 2026-11-20).
 - **Show only the page the text is about.** A screen of both halves, or an excerpt of both halves, where the text
   is about one page shows the other page's data as well, and where the other page repeats the same data (the top
   line of NAV 1 and of NAV 3), the pilot sees it twice and wonders why. Show the one half, and let the other page

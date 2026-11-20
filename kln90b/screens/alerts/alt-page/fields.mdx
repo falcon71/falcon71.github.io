@@ -18,3 +18,31 @@
 <Field id="page" title="CRSR annunciation">
 	<Term t="CRSR">`CRSR`</Term> replaces the page identification `ALT` while the left cursor is on.
 </Field>
+
+<Field id="vnav" title="VNAV state">
+	The state of VNAV, in the top line of NAV 4: `VNV INACTV` while VNAV is inactive. [Flying the vertical path](/kln90b/operation/vnav/#flying-the-vertical-path) says what each state means.
+</Field>
+
+<Field id="ind" title="Indicated altitude">
+	The indicated altitude from the altitude input of the aircraft, with the baro setting applied, rounded to 100 ft. It shows five digits and `00000` below 0 ft, and you cannot change it.
+</Field>
+
+<Field id="sel" title="Selected altitude">
+	The altitude to climb or descend to, in steps of 100 ft from 0 to 99,900 ft. The cursor stops on the ten-thousands, thousands and hundreds digits, and a digit takes effect at once. Changing it stops VNAV. The altitude alert uses the selected altitude, and the arrow after `ON` on the ALT page points at it.
+</Field>
+
+<Field id="dist" title="Offset">
+	The distance before the VNAV waypoint where the descent or climb should end, in NM from 0 to 99. It shows `:-00nm` without a VNAV waypoint. Changing it stops VNAV.
+</Field>
+
+<Field id="angle" title="Angle">
+	The angle of the vertical path, negative for a descent, in tenths of a degree up to 9.9°. Without an active waypoint it shows `0.0`. [The angle](/kln90b/operation/vnav/#the-angle) says the rest.
+</Field>
+
+<Field id="mode" title="Mode annunciation">
+	<Term t="ENR-LEG">`ENR-LEG`</Term>: Enroute-Leg mode. See [The mode annunciations](/kln90b/operation/modes-of-operation/#the-mode-annunciations).
+</Field>
+
+<Field id="rpage" title="CRSR annunciation">
+	<Term t="CRSR">`CRSR`</Term> replaces the page identification `NAV 4` while the right cursor is on.
+</Field>

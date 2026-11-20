@@ -30,7 +30,7 @@ the vertical buffer, silent in the approach modes, SET 8) with `#airspace-alert`
 ## Screens
 
 `vnav/nav-4-armed`, `vnav/nav-4-countdown`, `vnav/nav-4-active`, `vnav/super-nav-5-field-1`, `vnav/vnv-alert`,
-`vnav/invalid-vnv` (shared state in `vnav/vnav-state.ts`); `alerts/alt-page`, `alerts/alt-page-off`,
+`vnav/invalid-vnv` (shared state in `vnav/vnav-state.ts`); `alerts/alt-page` (both halves, the arrow pointing to the selected altitude on NAV 4; maintainer, 2026-11-20), `alerts/alt-page-off`,
 `alerts/alt-page-millibars`, `alerts/airspace-alert`, `alerts/inside-spc-use-airspace` (shared state in
 `alerts/states.ts`).
 
@@ -49,6 +49,10 @@ per shelf; the message screens are staged where one shelf applies.
 ## Notes from other packages
 
 All used by this package (2026-11-20).
+
+## Issues filed
+
+kln90b#514 to kln90b#520 (2026-11-20), each with its comment on the paragraph that describes it.
 
 ## Changes to earlier pages
 
