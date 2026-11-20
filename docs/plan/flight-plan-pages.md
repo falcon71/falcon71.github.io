@@ -1,6 +1,6 @@
 # Package: flight-plan-pages (the D/T, REF and CTR chapters)
 
-Written 2026-11-20 by two writers in parallel (D/T; REF and CTR), each reviewed in two rounds. The sections below
+Done 2026-11-20. Written by two writers in parallel (D/T; REF and CTR), each reviewed in two rounds. The sections below
 are as written.
 
 ## Topics this package owns
