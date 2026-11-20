@@ -5,25 +5,56 @@ Two Operation pages around altitude. Pointers come from the planning survey of t
 
 ## Pages
 
-### VNAV (`operation/vnav.mdx`), Opus
+Settled by the package session (2026-11-20) after its research. Anchors in parentheses.
 
-1. Summary: advisory only.
-2. Setting up a descent or a climb to a waypoint on NAV 4.
-3. What the unit shows before and during the vertical path; the message that announces it.
-4. VNAV along the flight plan and after a direct-to; what ends it or resets its values.
-5. The angle and the vertical speed: CAL 4 as the calculator (link).
-6. Links on.
+### VNAV (`operation/vnav.mdx`, `sidebar.order` 10), Opus
 
-### Airspace and altitude alerting (`operation/alerts.mdx`)
+1. Summary: VNAV gives an advisory altitude along a straight descent or climb path to a selected altitude at a
+   waypoint (or an offset before it); it flies nothing.
+2. What VNAV does (`#what-vnav-does`): the path, the offset point where it ends, the advisory altitude, climbs as
+   well as descents. Drawing `VnavPath.astro`: the path from where it starts to the selected altitude at the offset
+   before the waypoint, the angle, the aircraft at its altitude.
+3. Setting up a descent or a climb (`#setting-up-a-descent-or-a-climb`): the procedure on NAV 4 (selected altitude,
+   waypoint, offset, angle); with no altitude input, the `FR` altitude entered by hand
+   (`#vnav-without-an-altitude-input`).
+4. Starting VNAV (`#starting-vnav`): the cursor arriving on the angle starts VNAV at the shown angle, a typed angle
+   arms it; armed and active.
+5. Flying the vertical path (`#flying-the-vertical-path`): the states on NAV 4 and in field 1 of Super NAV 5, the
+   countdown in the last 10 minutes, the advisory altitude; `VNV ALERT` in its own section (`#vnv-alert`).
+6. The angle (`#the-angle`): range, how the unit computes it, `0.0` for 10° or more (kln90b#501, comment already in
+   the NAV 4 fields), the required vertical speed; CAL 4 as the calculator, one sentence and the link.
+7. Which waypoint VNAV can use (`#which-waypoint-vnav-can-use`), with `INVALID VNV` (`#invalid-vnv`).
+8. When VNAV ends (`#when-vnav-ends`): at the offset point; a sequence past the waypoint, a direct-to elsewhere, OBS
+   mode, a deleted waypoint; a changed entry disarms; a power cycle clears everything.
+9. Links on.
+
+### Airspace and altitude alerting (`operation/alerts.mdx`, `sidebar.order` 14), Sonnet
 
 1. Summary.
-2. The ALT page (shown and explained here): the barometric setting, where it comes from, the units (SET 7).
-3. Altitude alerting (Availability box): the selected altitude, the stages of the alert and their tones, the volume
-   (SET 9).
-4. The height above airport alert (Availability box; SET 5).
-5. The airspace alert: when the unit warns, the vertical buffer, turning it off (SET 8), the messages, when it is
-   silent.
-6. Links on.
+2. The ALT page (`#the-alt-page`), shown and explained here: the <kbd>ALT</kbd> button opens it with NAV 4 on the
+   right, how both close, the cursor (off when nothing can be changed), the page without altitude alerting.
+3. The baro setting (`#the-baro-setting`): the units (SET 7), range, kept while off, read-only where the aircraft
+   supplies it, not the aircraft's altimeter, what uses it; `PRESS ALT TO SET BARO`: one sentence and the link to
+   Non-precision approaches (`#press-alt-to-set-baro`).
+4. Altitude alerting (`#altitude-alerting`, Availability box): the selected altitude (NAV 4), ALERT and WARN on the
+   ALT page, the stages and their tones (`#the-alert-tones`), the volume (SET 9), tones only and no sign on the screen
+   (the one Good to know box, if the writer needs one).
+5. The height above airport alert (`#the-height-above-airport-alert`, Availability box; SET 5).
+6. The airspace alert (`#the-airspace-alert`): which airspaces, the 10 minutes ahead and the 2 NM, the vertical
+   buffer, silent in the approach modes, without an altitude input, turning it off (SET 8). Drawing
+   `AirspaceAlert.astro`: the track ahead, the 2 NM, the buffer above and below an area. The messages each in a
+   section of their own: `#airspace-alert` and `#inside-spc-use-airspace`.
+7. Links on.
+
+## Screens
+
+Planned (ids below `kln90b/screens/`):
+
+- VNAV: `vnav/nav-4-armed` (`VNV ARMED`), `vnav/nav-4-countdown` (`VNV IN` and the time), `vnav/nav-4-active` (the
+  advisory altitude); `vnav/super-nav-5-field-1` if field 1 is staged with VNAV (optional); `vnav/vnv-alert` (the
+  message on the MSG page) if stageable; `vnav/invalid-vnv` (status line, both halves).
+- Alerts: `alerts/alt-page` (with altitude alerting), `alerts/alt-page-no-alerting`; `alerts/airspace-alert` and
+  `alerts/inside-spc-use-airspace` (the MSG page, near a Class B or C area of the extract) if stageable.
 
 ## Topics this package owns
 
@@ -68,4 +99,10 @@ with that condition.
 
 ## Changes to earlier pages
 
-The NAV chapter's NAV 4 section links to these pages; the seam check sharpens those links.
+- The NAV chapter's NAV 4 section, field 1 of Super NAV 5 and the NAV 4 field explanations: the 10 minutes and the
+  advisory altitude's details go to VNAV; they keep the reference and the link. The seam check sharpens the links to
+  sections.
+- Power-on and initialization: the five beeps of the approval sound only where the unit is installed with altitude
+  alerting as well as given a sound output (`services/AudioGenerator.ts:46-48`, `pages/right/SelfTestRightPage.tsx:149`;
+  researcher of alerts, 2026-11-20). Say it in pilot terms, linking `#altitude-alerting`.
+- GPS reception and RAIM links the baro setting to the page; the seam check sharpens it to `#the-baro-setting`.
