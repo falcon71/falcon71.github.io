@@ -1,0 +1,73 @@
+---
+/**
+ * Synthetic drawing: what MOVE ? does with the DME arc waypoint. A generic VOR ABC with an invented arc of 10 NM,
+ * counterclockwise from its 250 radial to its 130 radial (the end fix ARCEN), as in DmeArcEntry. The DME arc
+ * waypoint was computed at the published start, D250J. The aircraft, outside the arc, flies a track of 080° that meets
+ * the arc between its radials; the track is extended until it meets the arc, and the waypoint moves there. Its new name follows from
+ * the radial of that point. The part of the arc before the new waypoint is dashed, as the maps draw it. North is up.
+ * Not to scale.
+ * Drawings use currentColor and the theme variables only, so they work in light and dark mode.
+ */
+import GpsFigure from './GpsFigure.astro';
+
+interface Props {
+	caption: string;
+}
+const { caption } = Astro.props;
+
+const R = 115;
+const BEGIN = 250;
+const END = 130;
+const TRACK = 80;
+const vor = { x: 300, y: 95 };
+const rad = (deg: number) => (deg * Math.PI) / 180;
+const at = (deg: number, r: number) => ({
+	x: +(vor.x + r * Math.sin(rad(deg))).toFixed(1),
+	y: +(vor.y - r * Math.cos(rad(deg))).toFixed(1),
+});
+const arc = (from: number, to: number) => {
+	const a = at(from, R);
+	const b = at(to, R);
+	return `M${a.x},${a.y} A${R},${R} 0 ${from - to > 180 ? 1 : 0} 0 ${b.x},${b.y}`;
+};
+
+// The aircraft outside the arc, and where its track meets the circle ahead (the nearer of the two points)
+const plane = at(235, 190);
+const d = { x: Math.sin(rad(TRACK)), y: -Math.cos(rad(TRACK)) };
+const pc = { x: plane.x - vor.x, y: plane.y - vor.y };
+const b = 2 * (pc.x * d.x + pc.y * d.y);
+const c = pc.x * pc.x + pc.y * pc.y - R * R;
+const t = (-b - Math.sqrt(b * b - 4 * c)) / 2;
+const meet = { x: +(plane.x + t * d.x).toFixed(1), y: +(plane.y + t * d.y).toFixed(1) };
+const meetRadial = Math.round(((Math.atan2(meet.x - vor.x, -(meet.y - vor.y)) * 180) / Math.PI + 360) % 360);
+// The part of the track the aircraft flies at once, with an arrowhead, and its extension
+const lead = { x: +(plane.x + 0.4 * t * d.x).toFixed(1), y: +(plane.y + 0.4 * t * d.y).toFixed(1) };
+const head = (p: { x: number; y: number }) => {
+	const n = { x: -d.y, y: d.x };
+	return `${p.x + d.x * 12},${p.y + d.y * 12} ${p.x + n.x * 7},${p.y + n.y * 7} ${p.x - n.x * 7},${p.y - n.y * 7}`;
+};
+const diamond = (p: { x: number; y: number }) => `${p.x},${p.y - 9} ${p.x + 9},${p.y} ${p.x},${p.y + 9} ${p.x - 9},${p.y}`;
+const old = at(BEGIN, R);
+const end = at(END, R);
+---
+
+<GpsFigure caption={caption} viewBox="20 60 520 200" id="dme-arc-move">
+	<path d={arc(BEGIN, meetRadial)} class="dash" />
+	<path d={arc(meetRadial, END)} class="accent" />
+	<line x1={plane.x} y1={plane.y} x2={lead.x} y2={lead.y} class="line" />
+	<polygon points={head(lead)} class="arrowhead" />
+	<line x1={lead.x + d.x * 12} y1={lead.y + d.y * 12} x2={meet.x} y2={meet.y} class="dash" />
+	<circle cx={vor.x} cy={vor.y} r="8" class="ring" />
+	<text x={vor.x} y={vor.y - 16} text-anchor="middle" class="t small">ABC</text>
+	<circle cx={end.x} cy={end.y} r="6" class="dot-plain" />
+	<text x={end.x + 12} y={end.y + 22} class="t small">ARCEN</text>
+	<circle cx={old.x} cy={old.y} r="7" class="ring" />
+	<text x={old.x - 14} y={old.y - 4} text-anchor="end" class="t small">D250J</text>
+	<text x={old.x - 14} y={old.y + 18} text-anchor="end" class="t small">before</text>
+	<circle cx={meet.x} cy={meet.y} r="7" class="dot" />
+	<text x={meet.x + 10} y={meet.y + 38} class="t t-accent ko">{`D${meetRadial}J`}</text>
+	<text x={meet.x + 10} y={meet.y + 60} class="t small ko">after MOVE ?</text>
+	<polygon points={diamond(plane)} class="solid" />
+	<text x={plane.x - 16} y={plane.y - 4} text-anchor="end" class="t small ko">aircraft,</text>
+	<text x={plane.x - 16} y={plane.y + 18} text-anchor="end" class="t small ko">{`track ${String(TRACK).padStart(3, '0')}°`}</text>
+</GpsFigure>

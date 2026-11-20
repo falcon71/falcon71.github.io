@@ -1,0 +1,59 @@
+<Field id="distance" title="Distance to the active waypoint">
+	The direct distance to the active waypoint in NM, here the DME arc waypoint.
+</Field>
+
+<Field id="ident" title="Active waypoint">
+	The identifier of the [active waypoint](/kln90b/operation/modes-of-operation/#the-active-waypoint), here the DME arc waypoint, which the leg from the airport leads to.
+</Field>
+
+<Field id="mode" title="Mode annunciation">
+	The mode of the unit, which Super NAV 5 shows here because it has no status line: <Term t="ENR-LEG">`ENR-LEG`</Term>.
+</Field>
+
+<Field id="groundspeed" title="Groundspeed">
+	Your <Term t="GS">groundspeed</Term> in kt, in whole knots.
+</Field>
+
+<Field id="ete" title="Field 1: estimated time en route">
+	The <Term t="ETE">time to the active waypoint</Term> at your present groundspeed, as hours and minutes.
+</Field>
+
+<Field id="dtk" title="Field 2: desired track">
+	The <Term t="DTK">desired track</Term> of the active leg, magnetic, in whole degrees. Here it is the course of the leg from the airport to the DME arc waypoint, not your track.
+</Field>
+
+<Field id="arc-radial" title="Field 3: radial from the VOR of the arc">
+	The magnetic radial of the aircraft from the VOR of the DME arc, after the label `ARC`, in whole degrees. Field 3 shows it in place of the value you chose while the aircraft is on an arc or an arc lies within 30 NM ahead on FPL 0 ([NAV 2 and Super NAV 5 on an arc](/kln90b/operation/dme-arcs/#nav-2-and-super-nav-5-on-an-arc)).
+</Field>
+
+<Field id="range" title="Range scale">
+	The range scale in NM: the distance from the aircraft to the top of the map.
+</Field>
+
+<Field id="move" title="MOVE question in the window">
+	`MOVE ?` in inverse video takes the place of the DME arc waypoint in the [window](/kln90b/pages/nav/#the-window) after <kbd>CLR</kbd>. <kbd>ENT</kbd> moves the waypoint to where your present track meets the arc, or raises `NO INTRCEPT` where it does not. <kbd>CLR</kbd> again or a step of the right inner knob withdraws the question ([Moving the DME arc waypoint](/kln90b/operation/dme-arcs/#moving-the-dme-arc-waypoint)).
+</Field>
+
+<Field id="active-leg" title="Active leg">
+	The active leg, from the airport to the DME arc waypoint: a straight line with an arrow that points to the waypoint.
+</Field>
+
+<Field id="arc" title="DME arc">
+	The DME arc, drawn as an arc around its VOR from the DME arc waypoint to the end fix. Where the DME arc waypoint lies after the published start of the arc, the part before it is dashed.
+</Field>
+
+<Field id="legs" title="Other legs">
+	The leg after the arc, from its end fix to the last waypoint of the SID.
+</Field>
+
+<Field id="arc-waypoint" title="DME arc waypoint on the map">
+	The DME arc waypoint, a small square with its identifier, where the arc starts.
+</Field>
+
+<Field id="waypoints" title="Waypoints of the flight plan">
+	The other waypoints of FPL 0, each as a small square followed by its identifier: the airport, the end fix of the arc and the last waypoint of the SID.
+</Field>
+
+<Field id="aircraft" title="Aircraft">
+	The aircraft, a diamond in north up, on a heading that crosses the arc.
+</Field>

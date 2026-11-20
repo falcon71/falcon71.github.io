@@ -73,7 +73,7 @@ NAV 2 shows where you are, as a radial and a distance from the nearby VOR and as
 
 The nearby VOR is the nearest low or high altitude VOR within 200 NM. NAV 2 makes this search by itself: the VOR need not be the first entry of the [nearest list](/kln90b/operation/nearest/) for VORs, which also holds terminal VORs. The page searches when you select it, so the VOR shows a few seconds after the page opens, and again about every 10 seconds while it is shown. Fly past the middle between two VORs and the page changes to the nearer one. Where no VOR is in range, the VOR, the radial and the distance show dashes, and the position stays.
 
-While the active leg is a DME arc, or while an arc lies close ahead on the route ([Non-precision approaches](/kln90b/operation/approaches/)), the VOR of the arc takes the place of the nearby VOR, so that you can fly the arc by its distance. This needs an active leg of FPL 0; a direct-to outside FPL 0 does not use it.
+While the active leg is a DME arc, or while an arc lies close ahead on the route ([NAV 2 and Super NAV 5 on an arc](/kln90b/operation/dme-arcs/#nav-2-and-super-nav-5-on-an-arc)), the VOR of the arc takes the place of the nearby VOR, so that you can fly the arc by its distance. This needs an active leg of FPL 0; a direct-to outside FPL 0 does not use it.
 
 Without a position the page shows only dashes, never the last position.
 
@@ -234,7 +234,7 @@ The three fields offer these choices, and the unit starts with `ETE`, `DTK` and 
 
 <KlnScreen screen="pages/nav/super-nav-5-fields" />
 
-While the active leg is a DME arc, field 2 shows `DTK` whatever you chose. While the aircraft is on an arc, or an arc lies ahead on the route, field 3 shows `ARC` and the radial of the aircraft from the VOR of the arc, whatever you chose.
+While the active leg is a DME arc, field 2 shows `DTK` whatever you chose. While the aircraft is on an arc, or an arc lies ahead on the route, field 3 shows `ARC` and the radial of the aircraft from the VOR of the arc, whatever you chose ([NAV 2 and Super NAV 5 on an arc](/kln90b/operation/dme-arcs/#nav-2-and-super-nav-5-on-an-arc)).
 
 In OBS mode field 2 shows `OBS` and the selected course in place of `DTK`, and the mode shows `ENR` or `ARM` with the course. With a colon after `OBS` you set the course on the unit: the cursor has one more stop in the row of field 2, between field 3 and field 2, and each step of the inner knob changes the course by 1° ([The selected course](/kln90b/operation/modes-of-operation/#the-selected-course)). If field 2 shows `BRG` or `RAD` then, the course is not on the screen, yet the cursor still stops once between field 3 and field 2, and the inner knob changes the selected course there; you see it only in the mode, which shows the new course. {/* kln90b#500: describes the current behavior; the fix makes the cursor skip the hidden course */}
 
@@ -293,7 +293,7 @@ The pop-up menu and the window share the corner. Pulling the knob while the pop-
 
 The Direct To page offers the waypoint of the window as its default waypoint ([The default waypoint](/kln90b/operation/direct-to/#the-default-waypoint)).
 
-While the window shows the waypoint where a DME arc begins, <kbd>CLR</kbd> does not declutter: it shows `MOVE ?` in the window, and <kbd>ENT</kbd> then moves the start of the arc to where your track meets it ([Non-precision approaches](/kln90b/operation/approaches/)). <kbd>CLR</kbd> again or a step of the knob cancels it.
+While the window shows the DME arc waypoint, where a DME arc begins, <kbd>CLR</kbd> does not declutter: it shows `MOVE ?` in the window, and <kbd>ENT</kbd> then moves the start of the arc to where your track meets it ([Moving the DME arc waypoint](/kln90b/operation/dme-arcs/#moving-the-dme-arc-waypoint)). <kbd>CLR</kbd> again or a step of the knob cancels it.
 
 ## Where to go next
 

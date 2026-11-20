@@ -568,7 +568,8 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | activate a waypoint (what `ACTIVATE` does in OBS mode) | |
 | nearest airport criteria (the settings of SET 3) | nearest airport settings |
 | the fail question, the repair question (FLR 3, FLR 2) | |
-| transition (the curved path the unit guides through a turn at a waypoint); the midpoint of the transition (where the unit makes the next leg active) | curved path, bisector |
+| transition, in a turn (the curved path the unit guides through a turn at a waypoint); the midpoint of the transition (where the unit makes the next leg active). Where the page also speaks of procedures, say "the transition through the turn" | curved path, bisector |
+| transition, of a procedure (the part of a SID, a STAR or an approach that you select on APT 7 or APT 8; `<Term t="Transition">`) | |
 | the beginning of turn anticipation (where the unit starts guiding the turn) | turn start |
 | abeam the waypoint; fly-over waypoint; the WPT annunciator (one of the remote annunciators) | |
 | the waypoint type identification page (`TYPE WPT`, `1 EN ROUTE?`, `2 SID/STAR?`) | the `TYPE WPT` question |

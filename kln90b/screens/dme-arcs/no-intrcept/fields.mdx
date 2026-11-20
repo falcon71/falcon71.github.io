@@ -1,0 +1,43 @@
+<Field id="plan" title="Waypoints of FPL 0">
+	The other rows of FPL 0: the from waypoint with the tail of the active leg symbol, the approach header, the next waypoints of the approach and the destination.
+</Field>
+
+<Field id="arc-waypoint" title="DME arc waypoint under the cursor">
+	The DME arc waypoint of the approach, unchanged, with the head of the active leg symbol and the suffix `-I` of the <Term t="IAF" />, whose place it took. The left cursor stays on it.
+</Field>
+
+<Field id="leg" title="Active leg">
+	The active leg, from the waypoint in front of the approach to the DME arc waypoint, the [active waypoint](/kln90b/operation/modes-of-operation/#the-active-waypoint).
+</Field>
+
+<Field id="dtk" title="Desired track">
+	<Term t="DTK">`DTK`</Term> is the magnetic course of the active leg at the point abeam the aircraft, in whole degrees.
+</Field>
+
+<Field id="tk" title="Actual track">
+	`TK` is your actual track, magnetic, in whole degrees: the track that `MOVE ?` extends to find the arc.
+</Field>
+
+<Field id="fly" title="Direction to fly and cross-track error">
+	The direction to fly, `L` or `R`, and the <Term t="XTK">cross-track error</Term> from the active leg.
+</Field>
+
+<Field id="msa" title="Minimum safe altitude">
+	The minimum safe altitude of the one-degree sector the aircraft is in, in whole hundreds of feet ([Minimum safe altitudes](/kln90b/pages/nav/#minimum-safe-altitudes)).
+</Field>
+
+<Field id="esa" title="Minimum en route safe altitude">
+	The highest minimum safe altitude along the way to the active waypoint and the rest of FPL 0 up to the missed approach point ([Minimum safe altitudes](/kln90b/pages/nav/#minimum-safe-altitudes)).
+</Field>
+
+<Field id="crsr" title="CRSR annunciation">
+	<Term t="CRSR">`CRSR`</Term> replaces the page identification while the left cursor is on.
+</Field>
+
+<Field id="message" title="NO INTRCEPT">
+	`NO INTRCEPT` replaces the middle part of the status line in inverse video for about 5 seconds: your present track does not meet the arc between its first and last radial ahead of the aircraft, or the unit has no track. The DME arc waypoint stays where it was ([`NO INTRCEPT`](/kln90b/operation/dme-arcs/#no-intrcept)).
+</Field>
+
+<Field id="page" title="Page identification">
+	`NAV 3`, the page on the right side.
+</Field>

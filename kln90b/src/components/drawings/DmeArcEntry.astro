@@ -1,0 +1,90 @@
+---
+/**
+ * Synthetic drawing: where the unit puts the DME arc waypoint when a procedure is selected. A generic VOR ABC with an
+ * invented arc of 10 NM, counterclockwise from its 250 radial (the published start fix ARCBG) to its 130 radial (the
+ * end fix ARCEN), drawn twice. Left: the aircraft is on the 200 radial, inside the sector of the arc, and the
+ * waypoint is the point of the arc on that radial, D200J; the part of the arc before it is dashed, as the maps draw
+ * it. Right: the aircraft is on the 300 radial, outside the sector, and the waypoint is the published start, D250J.
+ * North is up; the sector between the two radials is shaded. Not to scale.
+ * Drawings use currentColor and the theme variables only, so they work in light and dark mode.
+ */
+import GpsFigure from './GpsFigure.astro';
+
+interface Props {
+	caption: string;
+}
+const { caption } = Astro.props;
+
+const R = 92;
+const SECTOR = 170;
+const BEGIN = 250;
+const END = 130;
+const rad = (deg: number) => (deg * Math.PI) / 180;
+/** The point on the radial `deg` (compass, north up) at `r` px from the VOR at `c`. */
+const at = (c: { x: number; y: number }, deg: number, r: number) => ({
+	x: +(c.x + r * Math.sin(rad(deg))).toFixed(1),
+	y: +(c.y - r * Math.cos(rad(deg))).toFixed(1),
+});
+/** The arc of radius R from the radial `from` counterclockwise to the radial `to`. */
+const arc = (c: { x: number; y: number }, from: number, to: number) => {
+	const a = at(c, from, R);
+	const b = at(c, to, R);
+	return `M${a.x},${a.y} A${R},${R} 0 ${from - to > 180 ? 1 : 0} 0 ${b.x},${b.y}`;
+};
+const sector = (c: { x: number; y: number }) => {
+	const a = at(c, BEGIN, SECTOR);
+	const b = at(c, END, SECTOR);
+	return `M${c.x},${c.y} L${a.x},${a.y} A${SECTOR},${SECTOR} 0 0 0 ${b.x},${b.y} Z`;
+};
+const diamond = (p: { x: number; y: number }) => `${p.x},${p.y - 9} ${p.x + 9},${p.y} ${p.x},${p.y + 9} ${p.x - 9},${p.y}`;
+
+const left = { x: 140, y: 110 };
+const right = { x: 420, y: 110 };
+const planeL = at(left, 200, 165);
+const entryL = at(left, 200, R);
+const planeR = at(right, 300, 120);
+const entryR = at(right, BEGIN, R);
+---
+
+<GpsFigure caption={caption} viewBox="0 0 560 330" id="dme-arc-entry">
+	<defs>
+		<clipPath id="dme-arc-entry-left"><rect x="0" y="40" width="275" height="290" /></clipPath>
+		<clipPath id="dme-arc-entry-right"><rect x="285" y="40" width="275" height="290" /></clipPath>
+	</defs>
+	<line x1="280" y1="10" x2="280" y2="320" class="grid" />
+	<text x={left.x} y="26" text-anchor="middle" class="t">Aircraft abeam the arc</text>
+	<text x={right.x} y="26" text-anchor="middle" class="t">Aircraft not abeam</text>
+
+	<g clip-path="url(#dme-arc-entry-left)">
+		<path d={sector(left)} class="area" />
+	</g>
+	<line x1={left.x} y1={left.y} x2={planeL.x} y2={planeL.y} class="dash" />
+	<path d={arc(left, BEGIN, 200)} class="dash" />
+	<path d={arc(left, 200, END)} class="accent" />
+	<circle cx={at(left, BEGIN, R).x} cy={at(left, BEGIN, R).y} r="6" class="ring" />
+	<text x={at(left, BEGIN, R).x + 14} y={at(left, BEGIN, R).y - 6} class="t small ko">ARCBG</text>
+	<text x={at(left, BEGIN, R).x + 14} y={at(left, BEGIN, R).y + 16} class="t small ko">dropped</text>
+	<circle cx={at(left, END, R).x} cy={at(left, END, R).y} r="6" class="dot-plain" />
+	<text x={at(left, END, R).x + 12} y={at(left, END, R).y + 22} class="t small">ARCEN</text>
+	<circle cx={left.x} cy={left.y} r="8" class="ring" />
+	<text x={left.x} y={left.y - 16} text-anchor="middle" class="t small">ABC</text>
+	<circle cx={entryL.x} cy={entryL.y} r="7" class="dot" />
+	<text x={entryL.x + 14} y={entryL.y - 6} class="t t-accent ko">D200J</text>
+	<polygon points={diamond(planeL)} class="solid" />
+	<text x={planeL.x + 16} y={planeL.y + 6} class="t small">aircraft</text>
+
+	<g clip-path="url(#dme-arc-entry-right)">
+		<path d={sector(right)} class="area" />
+	</g>
+	<line x1={right.x} y1={right.y} x2={planeR.x} y2={planeR.y} class="dash" />
+	<path d={arc(right, BEGIN, END)} class="accent" />
+	<circle cx={at(right, END, R).x} cy={at(right, END, R).y} r="6" class="dot-plain" />
+	<text x={at(right, END, R).x + 12} y={at(right, END, R).y + 22} class="t small">ARCEN</text>
+	<circle cx={right.x} cy={right.y} r="8" class="ring" />
+	<text x={right.x + 14} y={right.y - 10} class="t small">ABC</text>
+	<circle cx={entryR.x} cy={entryR.y} r="7" class="dot" />
+	<text x={entryR.x + 14} y={entryR.y - 6} class="t t-accent ko">D250J</text>
+	<text x={entryR.x + 14} y={entryR.y + 16} class="t small ko">replaces ARCBG</text>
+	<polygon points={diamond(planeR)} class="solid" />
+	<text x={planeR.x + 16} y={planeR.y + 6} class="t small">aircraft</text>
+</GpsFigure>

@@ -74,6 +74,13 @@ the approach arc).
   procedure" cut to a sentence and the link; the DME arc bullet to a sentence and the link to DME arcs; the claim
   that `IF REQUIRED SELECT OBS` comes in leg mode only, and that an arc start is moved "from FPL 0", corrected by the
   cut; APT 8's sentence that refers to APT 7 for what the unit keeps points to the new owners.
+- Found by the writer of SID and STAR procedures, for the seam check: Modes of operation (OBS mode) says
+  `IF REQUIRED SELECT OBS` comes from an approach and links Non-precision approaches; it comes at the fix of a hold
+  or procedure turn of any procedure and links `departures-arrivals/#if-required-select-obs`. Sequencing (Fly-over
+  waypoints), the bullet on the fix of a hold or procedure turn, links `#what-the-unit-keeps-of-a-procedure`
+  instead. The FPL chapter ("The cursor on an FPL page", "The delete questions") links `#changing-a-procedure` and
+  `#deleting-a-procedure`. Flight plans (`#procedures-in-the-flight-plan`) says "you edit a procedure from its
+  header": only changing and deleting are on the header; single SID and STAR waypoints are edited on their rows.
 - FPL chapter, NAV chapter, User waypoints (writer of DME arcs): the links about DME arcs go to DME arcs instead of
   Non-precision approaches; `MOVE ?` in FPL 0 is for approach arcs only.
 

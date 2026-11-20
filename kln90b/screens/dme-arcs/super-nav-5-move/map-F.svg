@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 148 91" width="148" height="91" shape-rendering="crispEdges" fill="currentColor">
+<g data-field="active-leg" data-draw="arrow KYKM 46.5656,-120.6623" data-box="68 36 5 8">
+<path d="M72 36h1v1h-1z"/>
+<path d="M71 37h1v1h-1z"/>
+<path d="M70 38h1v1h-1z"/>
+<path d="M69 39h1v1h-1z"/>
+<path d="M68 40h3v1h-3z"/>
+<path d="M69 41h1v1h-1z"/>
+<path d="M70 42h1v1h-1z"/>
+<path d="M71 43h1v1h-1z"/>
+</g>
+<g data-field="arc" data-draw="arc 46.5656,-120.6623 46.5236,-120.2377" data-box="64 45 38 16">
+<path d="M64 45h1v1h-1z"/>
+<path d="M64 46h1v1h-1z"/>
+<path d="M65 47h1v1h-1z"/>
+<path d="M65 48h1v1h-1z"/>
+<path d="M66 49h1v1h-1z"/>
+<path d="M66 50h1v1h-1z"/>
+<path d="M67 51h1v1h-1zM101 51h1v1h-1z"/>
+<path d="M68 52h1v1h-1zM101 52h1v1h-1z"/>
+<path d="M68 53h1v1h-1zM100 53h1v1h-1z"/>
+<path d="M69 54h1v1h-1zM99 54h1v1h-1z"/>
+<path d="M70 55h2v1h-2zM98 55h1v1h-1z"/>
+<path d="M72 56h1v1h-1zM97 56h1v1h-1z"/>
+<path d="M73 57h2v1h-2zM96 57h1v1h-1z"/>
+<path d="M75 58h2v1h-2zM94 58h1v1h-1z"/>
+<path d="M77 59h3v1h-3zM91 59h3v1h-3z"/>
+<path d="M80 60h11v1h-11z"/>
+</g>
+<g data-field="legs" data-draw="line OHKAR PAPPS" data-box="108 48 27 9">
+<path d="M108 48h2v1h-2z"/>
+<path d="M110 49h4v1h-4z"/>
+<path d="M114 50h3v1h-3z"/>
+<path d="M117 51h3v1h-3z"/>
+<path d="M120 52h4v1h-4z"/>
+<path d="M124 53h3v1h-3z"/>
+<path d="M127 54h3v1h-3z"/>
+<path d="M130 55h4v1h-4z"/>
+<path d="M134 56h1v1h-1z"/>
+</g>
+<g data-field="waypoints" data-draw="icon @ KYKM" data-box="74 39 3 3">
+<path d="M74 39h3v1h-3z"/>
+<path d="M74 40h3v1h-3z"/>
+<path d="M74 41h3v1h-3z"/>
+</g>
+<g data-field="waypoints" data-draw="label KYKM KYKM" data-box="78 31 23 7">
+<path d="M78 31h1v1h-1zM82 31h1v1h-1zM84 31h1v1h-1zM88 31h1v1h-1zM90 31h1v1h-1zM94 31h1v1h-1zM96 31h1v1h-1zM100 31h1v1h-1z"/>
+<path d="M78 32h1v1h-1zM81 32h1v1h-1zM84 32h1v1h-1zM88 32h1v1h-1zM90 32h1v1h-1zM93 32h1v1h-1zM96 32h2v1h-2zM99 32h2v1h-2z"/>
+<path d="M78 33h1v1h-1zM80 33h1v1h-1zM85 33h1v1h-1zM87 33h1v1h-1zM90 33h1v1h-1zM92 33h1v1h-1zM96 33h1v1h-1zM98 33h1v1h-1zM100 33h1v1h-1z"/>
+<path d="M78 34h2v1h-2zM86 34h1v1h-1zM90 34h2v1h-2zM96 34h1v1h-1zM98 34h1v1h-1zM100 34h1v1h-1z"/>
+<path d="M78 35h1v1h-1zM80 35h1v1h-1zM86 35h1v1h-1zM90 35h1v1h-1zM92 35h1v1h-1zM96 35h1v1h-1zM100 35h1v1h-1z"/>
+<path d="M78 36h1v1h-1zM81 36h1v1h-1zM86 36h1v1h-1zM90 36h1v1h-1zM93 36h1v1h-1zM96 36h1v1h-1zM100 36h1v1h-1z"/>
+<path d="M78 37h1v1h-1zM82 37h1v1h-1zM86 37h1v1h-1zM90 37h1v1h-1zM94 37h1v1h-1zM96 37h1v1h-1zM100 37h1v1h-1z"/>
+</g>
+<g data-field="arc-waypoint" data-draw="icon @ 46.5656,-120.6623" data-box="63 40 3 3">
+<path d="M63 40h3v1h-3z"/>
+<path d="M63 41h3v1h-3z"/>
+<path d="M63 42h3v1h-3z"/>
+</g>
+<g data-field="arc-waypoint" data-draw="label D247I 46.5656,-120.6623" data-box="33 32 29 7">
+<path d="M33 32h3v1h-3zM40 32h3v1h-3zM48 32h1v1h-1zM51 32h5v1h-5zM59 32h3v1h-3z"/>
+<path d="M33 33h1v1h-1zM36 33h1v1h-1zM39 33h1v1h-1zM43 33h1v1h-1zM47 33h2v1h-2zM55 33h1v1h-1zM60 33h1v1h-1z"/>
+<path d="M33 34h1v1h-1zM37 34h1v1h-1zM43 34h1v1h-1zM46 34h1v1h-1zM48 34h1v1h-1zM55 34h1v1h-1zM60 34h1v1h-1z"/>
+<path d="M33 35h1v1h-1zM37 35h1v1h-1zM42 35h1v1h-1zM45 35h1v1h-1zM48 35h1v1h-1zM54 35h1v1h-1zM60 35h1v1h-1z"/>
+<path d="M33 36h1v1h-1zM37 36h1v1h-1zM41 36h1v1h-1zM45 36h5v1h-5zM54 36h1v1h-1zM60 36h1v1h-1z"/>
+<path d="M33 37h1v1h-1zM36 37h1v1h-1zM40 37h1v1h-1zM48 37h1v1h-1zM53 37h1v1h-1zM60 37h1v1h-1z"/>
+<path d="M33 38h3v1h-3zM39 38h5v1h-5zM48 38h1v1h-1zM53 38h1v1h-1zM59 38h3v1h-3z"/>
+</g>
+<g data-field="waypoints" data-draw="icon @ OHKAR" data-box="103 46 3 3">
+<path d="M103 46h3v1h-3z"/>
+<path d="M103 47h3v1h-3z"/>
+<path d="M103 48h3v1h-3z"/>
+</g>
+<g data-field="waypoints" data-draw="label OHKAR OHKAR" data-box="107 38 29 7">
+<path d="M108 38h3v1h-3zM114 38h1v1h-1zM117 38h1v1h-1zM119 38h1v1h-1zM123 38h1v1h-1zM126 38h3v1h-3zM131 38h4v1h-4z"/>
+<path d="M107 39h1v1h-1zM111 39h1v1h-1zM114 39h1v1h-1zM117 39h1v1h-1zM119 39h1v1h-1zM122 39h1v1h-1zM125 39h1v1h-1zM129 39h1v1h-1zM131 39h1v1h-1zM135 39h1v1h-1z"/>
+<path d="M107 40h1v1h-1zM111 40h1v1h-1zM114 40h1v1h-1zM117 40h1v1h-1zM119 40h1v1h-1zM121 40h1v1h-1zM125 40h1v1h-1zM129 40h1v1h-1zM131 40h1v1h-1zM135 40h1v1h-1z"/>
+<path d="M107 41h1v1h-1zM111 41h1v1h-1zM114 41h4v1h-4zM119 41h2v1h-2zM125 41h5v1h-5zM131 41h4v1h-4z"/>
+<path d="M107 42h1v1h-1zM111 42h1v1h-1zM114 42h1v1h-1zM117 42h1v1h-1zM119 42h1v1h-1zM121 42h1v1h-1zM125 42h1v1h-1zM129 42h1v1h-1zM131 42h1v1h-1zM133 42h1v1h-1z"/>
+<path d="M107 43h1v1h-1zM111 43h1v1h-1zM114 43h1v1h-1zM117 43h1v1h-1zM119 43h1v1h-1zM122 43h1v1h-1zM125 43h1v1h-1zM129 43h1v1h-1zM131 43h1v1h-1zM134 43h1v1h-1z"/>
+<path d="M108 44h3v1h-3zM114 44h1v1h-1zM117 44h1v1h-1zM119 44h1v1h-1zM123 44h1v1h-1zM125 44h1v1h-1zM129 44h1v1h-1zM131 44h1v1h-1zM135 44h1v1h-1z"/>
+</g>
+<g data-field="waypoints" data-draw="icon @ PAPPS" data-box="138 57 3 3">
+<path d="M138 57h3v1h-3z"/>
+<path d="M138 58h3v1h-3z"/>
+<path d="M138 59h3v1h-3z"/>
+</g>
+<g data-field="waypoints" data-draw="label PAPPS PAPPS" data-box="108 61 29 7">
+<path d="M108 61h4v1h-4zM115 61h3v1h-3zM120 61h4v1h-4zM126 61h4v1h-4zM133 61h3v1h-3z"/>
+<path d="M108 62h1v1h-1zM112 62h1v1h-1zM114 62h1v1h-1zM118 62h1v1h-1zM120 62h1v1h-1zM124 62h1v1h-1zM126 62h1v1h-1zM130 62h1v1h-1zM132 62h1v1h-1zM136 62h1v1h-1z"/>
+<path d="M108 63h1v1h-1zM112 63h1v1h-1zM114 63h1v1h-1zM118 63h1v1h-1zM120 63h1v1h-1zM124 63h1v1h-1zM126 63h1v1h-1zM130 63h1v1h-1zM132 63h1v1h-1z"/>
+<path d="M108 64h4v1h-4zM114 64h5v1h-5zM120 64h4v1h-4zM126 64h4v1h-4zM133 64h3v1h-3z"/>
+<path d="M108 65h1v1h-1zM114 65h1v1h-1zM118 65h1v1h-1zM120 65h1v1h-1zM126 65h1v1h-1zM136 65h1v1h-1z"/>
+<path d="M108 66h1v1h-1zM114 66h1v1h-1zM118 66h1v1h-1zM120 66h1v1h-1zM126 66h1v1h-1zM132 66h1v1h-1zM136 66h1v1h-1z"/>
+<path d="M108 67h1v1h-1zM114 67h1v1h-1zM118 67h1v1h-1zM120 67h1v1h-1zM126 67h1v1h-1zM133 67h3v1h-3z"/>
+</g>
+<g data-field="aircraft" data-draw="icon $ 46.5350,-120.5542" data-box="72 43 5 5">
+<path d="M74 43h1v1h-1z"/>
+<path d="M73 44h3v1h-3z"/>
+<path d="M72 45h5v1h-5z"/>
+<path d="M73 46h3v1h-3z"/>
+<path d="M74 47h1v1h-1z"/>
+</g>
+</svg>

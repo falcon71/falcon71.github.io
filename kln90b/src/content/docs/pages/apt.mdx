@@ -224,7 +224,7 @@ share. A procedure with one transition gets it without a question.
 
 <Callout kind="info">
 A transition or an approach can put waypoints into FPL 0 twice. Only copies among the en route waypoints raise
-`REDUNDANT WPTS IN FPL EDIT ENROUTE WPTS AS NECESSARY`; copies between a STAR and an approach raise no message.
+[`REDUNDANT WPTS IN FPL`](/kln90b/operation/departures-arrivals/#redundant-wpts-in-fpl); copies between a STAR and an approach raise no message.
 Look for them in FPL 0 yourself and delete them by hand.
 </Callout>
 
@@ -259,35 +259,18 @@ Press <kbd>ENT</kbd> to approve the question, or <kbd>CLR</kbd> to go back to th
 
 ### Where the procedure goes in FPL 0
 
-The unit inserts a SID right after its airport in FPL 0 and a STAR right in front of its airport, before an
-approach that is already in front of the airport. An airport the unit adds goes to the start of FPL 0 for a SID
-and to the end for a STAR. How a loaded procedure appears in FPL 0, how you change or delete it, and what the unit
-does when FPL 0 has no room are explained in [Procedures in the flight plan](/kln90b/operation/flight-plans/#procedures-in-the-flight-plan) and [SID and STAR procedures](/kln90b/operation/departures-arrivals/).
+The unit puts a SID right after its airport in FPL 0 and a STAR right in front of it; an airport it adds goes to the
+start of FPL 0 for a SID and to the end for a STAR. [Where the procedure goes in FPL 0](/kln90b/operation/departures-arrivals/#where-the-procedure-goes-in-fpl-0)
+gives the rules, and [SID and STAR procedures](/kln90b/operation/departures-arrivals/) how you change, delete and edit
+the procedure there.
 
 ### What the unit keeps of a procedure
 
-The unit flies procedures as a series of waypoints, so it keeps what ends at a waypoint and leaves out the rest:
-
-- **Procedures it cannot fly are not listed:** a SID or STAR with an <Term t="RF leg" /> (a fixed-radius turn), one
-  that needs <Term t="RNP AR" />, and one in which no leg ends at a waypoint. Before the flight, check that the
-  SID, STAR and approach you plan to fly are in the lists; if one is missing, enter its waypoints in FPL 0 by
-  hand.
-- **Legs that end at no waypoint** are dropped: headings, climbs on a course to an altitude, vectors. From runway 34C,
-  KSEA's BANGR9 starts at `NESOE`; you fly the climb from the runway by heading.
-- **Holding patterns and procedure turns** are dropped; their waypoint stays. When that waypoint is the active waypoint
-  and you are within 4 NM of it in leg mode, the unit raises the message `IF REQUIRED SELECT OBS`, so that you fly the
-  hold or the turn in OBS mode.
-- **Altitude and speed restrictions** are not loaded; read them from the chart.
-- **DME arcs** stay. The unit replaces the waypoint before the arc with a DME arc waypoint that it computes when you select
-  the procedure: the point of the arc nearest the aircraft, or the published start of the arc when the aircraft is not
-  abeam the arc. The waypoint is named `D`, the radial from the VOR in three digits and a letter for the distance, A for
-  1 NM to Z for 26 NM: `D338M` lies on the 338° radial at 13 NM. Beyond 26 NM the name is the first two letters of the
-  VOR and the radial. A DME arc waypoint computed on the ground or far from the arc therefore lies where the aircraft was then;
-  you can move it to your present track later from FPL 0, as
-  [Non-precision approaches](/kln90b/operation/approaches/) explains.
-
-Flying a SID or a STAR, and editing it in FPL 0, is covered in
-[SID and STAR procedures](/kln90b/operation/departures-arrivals/).
+Of a procedure it loads, the unit keeps the legs that end at a waypoint;
+[What the unit keeps of a procedure](/kln90b/operation/departures-arrivals/#what-the-unit-keeps-of-a-procedure) says
+what you fly yourself. A DME arc becomes a curved leg that starts at a DME arc waypoint the unit computes
+([DME arcs](/kln90b/operation/dme-arcs/)). The lists offer only the procedures the unit can fly: none with an
+<Term t="RF leg" />, none that needs <Term t="RNP AR" />, and none in which no leg ends at a waypoint.
 
 ## APT 8: approaches
 
@@ -379,8 +362,9 @@ The waypoint list gives the fixes that have a role in the approach a suffix, a d
 identifier: `-I` marks the IAF, `-F` the <Term t="FAF" />, `-M` the <Term t="MAP" /> and `-H` the
 <Term t="MAHP" />, the waypoint where the missed approach ends in a holding pattern. A fix that is both IAF and FAF
 appears twice, once with each suffix. What the unit leaves out of an approach (legs without a waypoint, holding patterns
-and procedure turns, altitude restrictions) and how it treats DME arcs is the same as on APT 7 (see
-[What the unit keeps of a procedure](/kln90b/pages/apt/#what-the-unit-keeps-of-a-procedure)).
+and procedure turns, altitude restrictions) is the same as for a SID or a STAR
+([What the unit keeps of a procedure](/kln90b/operation/departures-arrivals/#what-the-unit-keeps-of-a-procedure)), and
+so is its treatment of DME arcs ([DME arcs](/kln90b/operation/dme-arcs/)).
 
 ### Questions before the load and where the approach goes
 

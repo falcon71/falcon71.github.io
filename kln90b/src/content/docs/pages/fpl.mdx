@@ -124,7 +124,7 @@ These questions are page states of their own.
 
 <KlnScreen screen="pages/fpl/fpl-0-delete-question" />
 
-**`MOVE ?`** replaces the row of the first waypoint of a DME arc in FPL 0 when you press <kbd>CLR</kbd> on it, instead of `INVALID DEL`; a second <kbd>CLR</kbd> withdraws it ([Non-precision approaches](/kln90b/operation/approaches/)).
+**`MOVE ?`** replaces the row of the DME arc waypoint of an approach in FPL 0 when you press <kbd>CLR</kbd> on it, instead of `INVALID DEL`; a second <kbd>CLR</kbd> withdraws it. On the DME arc waypoint of a SID or a STAR, <kbd>CLR</kbd> asks `DEL` instead ([Moving the DME arc waypoint](/kln90b/operation/dme-arcs/#moving-the-dme-arc-waypoint)).
 
 **`DELETE FPL?`** asks about the whole flight plan. <kbd>CLR</kbd> with the cursor off turns the cursor on and replaces the top line with the question, which flashes. It works on every FPL page, FPL 0 and a plan with waypoints included. <kbd>ENT</kbd> deletes every waypoint of the plan and turns the cursor off. A numbered flight plan then shows `LOAD FPL 0?`, and an FPL 0 without waypoints has no active leg. <kbd>CLR</kbd> again withdraws the question and turns the cursor off. A <kbd>CLR</kbd> that you meant for a field on the right page can start it; [`DELETE FPL?`](/kln90b/operation/flight-plans/#delete-fpl) explains how.
 
