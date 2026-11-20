@@ -1,0 +1,59 @@
+<Field id="from" title="First waypoint of FPL 0">
+	The first waypoint of FPL 0, here the departure airport, an en route waypoint with a colon after its number. The tail of the [active leg symbol](/kln90b/pages/fpl/#the-active-leg-symbol) in front of it marks it as the waypoint the active leg starts from.
+</Field>
+
+<Field id="header" title="Approach header">
+	The header of the approach in FPL 0: the first letter of the kind of approach, the runway, a dash and the airport. It is no waypoint and has no number. With the cursor on it, it reads `CHANGE APR?`; [Changing or deleting an approach](/kln90b/operation/approaches/#changing-or-deleting-an-approach) explains it. Where the active leg runs across the header, the shaft of the active leg symbol stands in front of it.
+</Field>
+
+<Field id="iaf" title="Initial approach fix">
+	The <Term t="IAF" /> you selected, with the suffix `-I`. The waypoints of an approach have a blank in place of the colon after the number and cannot be changed in FPL 0. The head of the [active leg symbol](/kln90b/pages/fpl/#the-active-leg-symbol) in front of it marks it as the active waypoint.
+</Field>
+
+<Field id="bosto" title="Waypoint of the approach under the cursor">
+	A waypoint of the approach under the left cursor. The cursor can rest on it, but the waypoint cannot be deleted or have a waypoint inserted in front of it: <kbd>CLR</kbd> shows `INVALID DEL`, and a step of the left inner knob or <kbd>ENT</kbd> shows `INVALID ADD`.
+</Field>
+
+<Field id="faf" title="Final approach fix">
+	The <Term t="FAF" /> of the approach, with the suffix `-F`. The approach becomes active near it ([Activating the approach](/kln90b/operation/approaches/#activating-the-approach)).
+</Field>
+
+<Field id="last" title="Last waypoint of FPL 0">
+	The last waypoint of FPL 0, here the destination airport, which follows the approach as an en route waypoint. While the list is longer than the page, the last waypoint stays in the bottom row and the rows between scroll.
+</Field>
+
+<Field id="r-leg" title="Active leg">
+	The waypoint the active leg starts at, an arrow and the [active waypoint](/kln90b/operation/modes-of-operation/#the-active-waypoint). After a direct-to the leg starts at the Direct To symbol. A waypoint of an approach shows without its suffix.
+</Field>
+
+<Field id="r-cdi" title="D-bar">
+	The D-bar shows the cross-track error from the desired track: the bar stands on the side the course lies on, so you fly toward it. Each of the five dots on either side is a fifth of the CDI scale factor, which the approach modes narrow by themselves ([The CDI scale along the approach](/kln90b/operation/approaches/#the-cdi-scale-along-the-approach)). The TO/FROM indicator in the middle shows TO while the active waypoint lies ahead, FROM once it lies behind. `F L A G` in place of the dots means that the unit cannot navigate.
+</Field>
+
+<Field id="r-dis" title="Distance to the active waypoint">
+	The distance to the active waypoint, in NM.
+</Field>
+
+<Field id="r-gs" title="Groundspeed">
+	The groundspeed, in kt.
+</Field>
+
+<Field id="r-ete" title="Estimated time en route">
+	The time to the active waypoint at the present groundspeed, as hours and minutes. Below one hour the hours stay blank.
+</Field>
+
+<Field id="r-brg" title="Bearing to the active waypoint">
+	The magnetic bearing from the aircraft to the active waypoint.
+</Field>
+
+<Field id="crsr" title="CRSR annunciation">
+	<Term t="CRSR">`CRSR`</Term> replaces the page identification while the left cursor is on.
+</Field>
+
+<Field id="message" title="INVALID DEL">
+	`INVALID DEL` replaces the middle part of the status line for a few seconds: the waypoint under the cursor belongs to an approach and cannot be deleted. See [`INVALID ADD` and `INVALID DEL`](/kln90b/operation/approaches/#invalid-add-and-invalid-del).
+</Field>
+
+<Field id="rpage" title="Page identification of the right side">
+	The page identification of the right page, `NAV 1`.
+</Field>

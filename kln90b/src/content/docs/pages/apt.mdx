@@ -344,40 +344,24 @@ To load an approach into FPL 0, the airport must be on the APT pages (see
 <kbd>CLR</kbd> goes back one step at a time, as on APT 7, and puts the cursor on the IAF or the approach you selected
 before.
 
-**An approach starts only at an IAF.** The list after `IAF` offers the transitions of the approach, each beginning at
-an IAF or at a fix before one, and you must select one of them. No entry begins at the intermediate fix or later, so
-you cannot start the approach there. An approach with one transition or none skips the step and shows its waypoints at once.
-Joining an approach in flight is covered in [Non-precision approaches](/kln90b/operation/approaches/).
+**An approach starts only at an IAF:** no entry after `IAF` begins at the intermediate fix or later
+([An approach starts only at an IAF](/kln90b/operation/approaches/#an-approach-starts-only-at-an-iaf),
+[Vectors to final](/kln90b/operation/approaches/#vectors-to-final)). **A transition must be selected whenever the
+approach has one,** because the entries after `IAF` are its transitions; an approach with one transition or none skips
+the step. Each entry is named after the first waypoint of its transition. On a long list after `IAF`, `IAF` stays on
+the top row and the bottom row always shows the last entry.
 
-**The transition rule applies to approaches too.** The waypoints of an approach cannot be deleted, so delete repeated
-copies in the STAR or among the en route waypoints (see the box under
-[Selecting a SID or a STAR](#selecting-a-sid-or-a-star)).
-[Deleting a waypoint](/kln90b/operation/flight-plans/#deleting-a-waypoint) explains deleting waypoints from FPL 0.
-
-An entry is named after the first waypoint of its transition. That is usually the IAF itself; where the transition
-begins earlier, the IAF suffix appears on a later waypoint of the list. At KSEA, RNAV 16C offers `PAE`, and its waypoint
-list starts with `PAE` and gives `ERYKA` the IAF suffix. On a long list after `IAF`, `IAF` stays on the top row and the bottom row always shows the last entry.
-
-The waypoint list gives the fixes that have a role in the approach a suffix, a dash and a letter after the
-identifier: `-I` marks the IAF, `-F` the <Term t="FAF" />, `-M` the <Term t="MAP" /> and `-H` the
-<Term t="MAHP" />, the waypoint where the missed approach ends in a holding pattern. A fix that is both IAF and FAF
-appears twice, once with each suffix. What the unit leaves out of an approach (legs without a waypoint, holding patterns
+The waypoint list marks the fixes that have a role in the approach with a suffix after the identifier, such as `-I`
+for the IAF ([The approach in FPL 0](/kln90b/operation/approaches/#the-approach-in-fpl-0) lists the suffixes). What the unit leaves out of an approach (legs without a waypoint, holding patterns
 and procedure turns, altitude restrictions) is the same as for a SID or a STAR
 ([What the unit keeps of a procedure](/kln90b/operation/departures-arrivals/#what-the-unit-keeps-of-a-procedure)), and
 so is its treatment of DME arcs ([DME arcs](/kln90b/operation/dme-arcs/)).
 
-### Questions before the load and where the approach goes
+### Questions before loading an approach
 
-The questions are those of APT 7. If the airport is not in FPL 0, the unit asks whether to add it, with
-`AND APPR TO` (`APPR` is short for approach). If FPL 0 already holds an approach, any approach, the unit asks
-whether to replace it, with `APPROACH` above `APPROVE?`; FPL 0 holds one approach at a time.
-
-The unit inserts the approach right in front of its airport in FPL 0, after a STAR that is already there. An
-airport the unit adds goes to the end of FPL 0.
-
-With the approach in FPL 0, the unit arms it by itself as you near the airport. Arming and flying the approach are
-covered in [Non-precision approaches](/kln90b/operation/approaches/), and the approach in FPL 0 in
-[Procedures in the flight plan](/kln90b/operation/flight-plans/#procedures-in-the-flight-plan).
+The unit asks on APT 8 before it adds the airport or replaces an approach in FPL 0
+([Loading an approach](/kln90b/operation/approaches/#loading-an-approach),
+[Replacing an approach](/kln90b/operation/approaches/#replacing-an-approach)).
 
 ## Where the APT pages are used
 

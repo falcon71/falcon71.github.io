@@ -596,6 +596,8 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | destination waypoint (the last waypoint of the flight plan) | |
 | the unit flags its navigation; the NAV flag (no position good enough to navigate) | the unit loses its position (for the flag) |
 | reference waypoint: with the REF page, the waypoint the unit creates on the plan (`OLMA`); the waypoint you enter on the REF page is "the waypoint you enter". On the INT and SUP pages, the reference waypoint is the waypoint of their `REF` field. | new waypoint (for the one the REF page creates) |
+| airport reference point (the point of an airport that the 30 NM of arming an approach are measured from); in FPL 0 the row is the airport itself | the airport (as the point a distance is measured from) |
+| the ARM annunciator, the ACTV annunciator (the remote annunciators of the approach modes, at the GPS APR switch) | the arm lamp, the active lamp |
 | center waypoint (the waypoint the CTR pages create at a Center boundary); area control center (ACC or ARTCC) where a page first introduces the concept, then Center (maintainer, 2026-11-20) | air route traffic control center alone, ACC alone |
 
 ### Spelling and style

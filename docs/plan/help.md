@@ -59,6 +59,14 @@ Candidates for the FAQ and Known limitations, collected by earlier packages; eve
   approach gone after the flight?" (procedures are not kept with a flight plan: Power-on,
   `#what-the-unit-keeps-while-it-is-off`); "How do I enter an airway?" (waypoint by waypoint, `#adding-a-waypoint`).
 
+### From the package approaches (2026-11-20)
+
+- **The FAQ entry "Why can I not select an ILS approach?"** (maintainer, 2026-11-20): ILS approaches, and the other
+  precision approaches, are deliberately not in the unit's database. That is the behavior of the real unit and is
+  correct; many pilots expect them because every modern navigator offers them. The FAQ answers this in its first
+  sentence and links to the Good to know box of Non-precision approaches, which says the same where a pilot is likely
+  to look it up first: `/kln90b/operation/approaches/#which-approaches-the-unit-offers`.
+
 ## Changes to earlier pages
 
 None planned.
