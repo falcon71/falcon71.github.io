@@ -344,18 +344,12 @@ To load an approach into FPL 0, the airport must be on the APT pages (see
 <kbd>CLR</kbd> goes back one step at a time, as on APT 7, and puts the cursor on the IAF or the approach you selected
 before.
 
-**An approach starts only at an IAF.** The list after `IAF` offers the transitions of the approach, each beginning at
-an IAF or at a fix before one, and you must select one of them. No entry begins at the intermediate fix or later, so
-you cannot start the approach there. An approach with one transition or none skips the step and shows its waypoints at once.
-To join the final approach on vectors, see [Vectors to final](/kln90b/operation/approaches/#vectors-to-final).
-
-**A transition must be selected whenever the approach has one,** as for a SID or a STAR: the entries after `IAF` are
-the transitions. The waypoints of an approach cannot be deleted, so delete repeated copies in the STAR or among the en
-route waypoints ([Waypoints that FPL 0 holds twice](/kln90b/operation/approaches/#waypoints-that-fpl-0-holds-twice)).
-
-An entry is named after the first waypoint of its transition. That is usually the IAF itself; where the transition
-begins earlier, the IAF suffix appears on a later waypoint of the list. At KSEA, RNAV 16C offers `PAE`, and its waypoint
-list starts with `PAE` and gives `ERYKA` the IAF suffix. On a long list after `IAF`, `IAF` stays on the top row and the bottom row always shows the last entry.
+**An approach starts only at an IAF:** no entry after `IAF` begins at the intermediate fix or later
+([An approach starts only at an IAF](/kln90b/operation/approaches/#an-approach-starts-only-at-an-iaf),
+[Vectors to final](/kln90b/operation/approaches/#vectors-to-final)). **A transition must be selected whenever the
+approach has one,** because the entries after `IAF` are its transitions; an approach with one transition or none skips
+the step. Each entry is named after the first waypoint of its transition. On a long list after `IAF`, `IAF` stays on
+the top row and the bottom row always shows the last entry.
 
 The waypoint list marks the fixes that have a role in the approach with a suffix after the identifier, such as `-I`
 for the IAF ([The approach in FPL 0](/kln90b/operation/approaches/#the-approach-in-fpl-0) lists the suffixes). What the unit leaves out of an approach (legs without a waypoint, holding patterns
@@ -365,12 +359,9 @@ so is its treatment of DME arcs ([DME arcs](/kln90b/operation/dme-arcs/)).
 
 ### Questions before loading an approach
 
-When you press <kbd>ENT</kbd> on `LOAD IN FPL`, the unit asks a question on APT 8 before it loads the approach in two
-cases: whether to add the airport, with `AND APPR TO`, when the airport is not in FPL 0, and whether to replace the
-approach, with `APPROACH` above `APPROVE?`, when FPL 0 already holds one. Press <kbd>ENT</kbd> to approve the question,
-or <kbd>CLR</kbd> to go back to the waypoints with FPL 0 unchanged. [Loading an approach](/kln90b/operation/approaches/#loading-an-approach)
-shows both questions, and [Where the approach goes in FPL 0](/kln90b/operation/approaches/#where-the-approach-goes-in-fpl-0)
-says where the unit puts the approach.
+The unit asks on APT 8 before it adds the airport or replaces an approach in FPL 0
+([Loading an approach](/kln90b/operation/approaches/#loading-an-approach),
+[Replacing an approach](/kln90b/operation/approaches/#replacing-an-approach)).
 
 ## Where the APT pages are used
 

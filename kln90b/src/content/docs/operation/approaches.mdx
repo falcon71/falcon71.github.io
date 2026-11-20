@@ -11,7 +11,7 @@ import DirectToKey from '../../../components/DirectToKey.astro';
 import Term from '../../../components/Term.astro';
 import ApproachCdiScale from '../../../components/drawings/ApproachCdiScale.astro';
 
-The KLN 90B flies the lateral path of a non-precision approach, which you load from APT 8 into FPL 0, starting at an <Term t="IAF" />. Within 30 NM of the airport reference point the unit arms the approach by itself, and just before the <Term t="FAF" /> it makes it active, with the CDI scale factor narrowed to ±0.30 NM and <Term t="RAIM" /> checked for the approach. At the <Term t="MAP" /> it stops sequencing, and a direct-to takes you into the missed approach.
+The KLN 90B flies the lateral path of a non-precision approach, which you load from APT 8 into FPL 0, starting at an <Term t="IAF" />. Within 30 NM of the airport reference point the unit arms the approach by itself, and just before the <Term t="FAF" /> it makes it active, with the CDI scale factor narrowed and <Term t="RAIM" /> checked for the approach. At the <Term t="MAP" /> it stops sequencing, and a direct-to takes you into the missed approach.
 
 <Callout kind="availability">
 Approaches are available only if the unit is installed for non-precision approaches, with a GPS APR switch. Not every aircraft has such an installation. Without it the unit has no APT 8.
@@ -21,7 +21,7 @@ Approaches are available only if the unit is installed for non-precision approac
 
 APT 8 lists the approaches of the airport that the unit can fly:
 
-- RNAV (GPS) approaches that have <Term t="LNAV" /> minima;
+- <Term t="RNAV" /> (GPS) approaches that have <Term t="LNAV" /> minima;
 - GPS approaches;
 - VOR, VOR/DME, NDB and NDB/DME approaches, which the unit flies as overlays along their fixes.
 
@@ -35,7 +35,7 @@ ILS approaches are deliberately not in the unit's database, as on the real KLN 9
 
 APT 2 still names the best kind of approach of the airport, so it can read `ILS` where APT 8 lists none. An airport without an approach the unit can fly shows `NO APPROACH FOR THIS AIRPORT IN DATABASE` on APT 8 ([APT 8: approaches](/kln90b/pages/apt/#apt-8-approaches)). Check before the flight that the approach you plan is in the list.
 
-Within an approach the unit keeps the legs that end at a waypoint and drops the others, as in a SID or a STAR ([What the unit keeps of a procedure](/kln90b/operation/departures-arrivals/#what-the-unit-keeps-of-a-procedure)). The IAF, the FAF, the MAP and the <Term t="MAHP" /> always stay. Altitudes, step-down altitudes included, are not loaded; fly them from the chart.
+Within an approach the unit keeps the legs that end at a waypoint and drops the others, as in a <Term t="SID" /> or a <Term t="STAR" /> ([What the unit keeps of a procedure](/kln90b/operation/departures-arrivals/#what-the-unit-keeps-of-a-procedure)). The IAF, the FAF, the MAP and the <Term t="MAHP" /> always stay. Altitudes, step-down altitudes included, are not loaded; fly them from the chart.
 
 ## Loading an approach
 
@@ -114,7 +114,7 @@ While the MAP lies ahead, the unit takes it as the destination of FPL 0: the D/T
 
 The waypoints of an approach cannot be changed in FPL 0, so that the approach stays as it is published. The cursor can rest on them, but:
 
-- a step of the left inner knob, <kbd>ENT</kbd> or a typed key on an approach waypoint shows `INVALID ADD` in the status line, and nothing is inserted;
+- a step of the left inner knob, <kbd>ENT</kbd> or a typed character on an approach waypoint shows `INVALID ADD` in the status line, and nothing is inserted;
 - <kbd>CLR</kbd> on an approach waypoint shows `INVALID DEL`, and nothing is deleted.
 
 <KlnScreen screen="approaches/invalid-del" rows="4-7" />
@@ -123,9 +123,9 @@ The message replaces the middle part of the status line for a few seconds. To ad
 
 ## Arming the approach
 
-The unit arms the approach in FPL 0 by itself when the aircraft comes within 30 NM of the airport reference point of the airport of the approach, straight-line, whichever leg is active. The mode annunciation changes from `ENR-LEG` to <Term t="ARM-LEG">`ARM-LEG`</Term>, Approach Arm-Leg mode, or in OBS mode from `ENR:` to <Term t="ARM:">`ARM:`</Term>, Approach Arm-OBS mode ([The mode annunciations](/kln90b/operation/modes-of-operation/#the-mode-annunciations)). The ARM annunciator of the GPS APR switch lights, and the CDI scale factor goes down to ±1.00 NM ([The CDI scale along the approach](#the-cdi-scale-along-the-approach)).
+The unit arms the approach in FPL 0 by itself when the aircraft comes within 30 NM of the approach's airport reference point, straight-line, whichever leg is active. The mode annunciation changes from <Term t="ENR-LEG">`ENR-LEG`</Term> to <Term t="ARM-LEG">`ARM-LEG`</Term>, Approach Arm-Leg mode, or in OBS mode from <Term t="ENR:">`ENR:`</Term> to <Term t="ARM:">`ARM:`</Term>, Approach Arm-OBS mode ([The mode annunciations](/kln90b/operation/modes-of-operation/#the-mode-annunciations)). The ARM <Term t="ANNUN">annunciator</Term> of the GPS APR switch lights, and the CDI scale factor narrows ([The CDI scale along the approach](#the-cdi-scale-along-the-approach)).
 
-The GPS APR switch arms the approach at any distance. The CDI scale factor then stays where it is until you come within that distance. Pressed in approach arm mode, the switch disarms the approach: the unit returns to en route with ±5.00 NM and does not arm by itself again until you press the switch once more, load an approach anew or turn the unit off and on.
+The GPS APR switch arms the approach at any distance. The CDI scale factor then stays where it is until you come within that distance. Pressed in approach arm mode, the switch disarms the approach: the unit returns to en route, the scale widens at once, and the unit does not arm by itself again until you press the switch once more, load an approach anew or turn the unit off and on.
 
 Approach arm mode lasts as long as the approach is in FPL 0, wherever you fly. To return to en route, delete the approach ([Changing or deleting an approach](#changing-or-deleting-an-approach)) or press the GPS APR switch.
 
@@ -159,11 +159,11 @@ The unit makes the approach active by itself, from Approach Arm-Leg mode, when a
 - your actual track is within 110° of the final course, from the FAF to the MAP;
 - the unit has a position, and RAIM is good enough for the approach ([RAIM in an approach](#raim-in-an-approach)).
 
-The mode annunciation then shows <Term t="APR-LEG">`APR-LEG`</Term>, Approach Active-Leg mode, the ACTV annunciator of the GPS APR switch lights, and the CDI scale factor goes down to ±0.30 NM at the FAF. A direct-to to the FAF counts like the leg to it. Where the IAF is also the FAF, the IAF copy that stands right before the FAF copy counts as the FAF.
+The mode annunciation then shows <Term t="APR-LEG">`APR-LEG`</Term>, Approach Active-Leg mode, the ACTV annunciator of the GPS APR switch lights, and the CDI scale factor narrows to its approach scale at the FAF ([The CDI scale along the approach](#the-cdi-scale-along-the-approach)). A direct-to to the FAF counts like the leg to it. Where the IAF is also the FAF, the IAF copy that stands right before the FAF copy counts as the FAF.
 
 Approach Arm-OBS mode never becomes active, because an approach is flown along its legs. If you are still in OBS mode near the FAF, change to leg mode ([Selecting leg or OBS mode](/kln90b/operation/modes-of-operation/#selecting-leg-or-obs-mode)).
 
-These return the unit from approach active mode to Approach Arm-Leg mode, or to Approach Arm-OBS mode for OBS mode, with ±1.00 NM:
+These return the unit from approach active mode to Approach Arm-Leg mode, or to Approach Arm-OBS mode for OBS mode, and widen the CDI scale factor to its arm scale at once:
 
 - **A direct-to,** to any waypoint ([Direct-to](/kln90b/operation/direct-to/)). Before the FAF the approach becomes active again by itself once the conditions hold.
 - **The GPS APR switch.** Before the FAF, too, the approach becomes active again at once if the conditions still hold.
@@ -203,7 +203,7 @@ RAIM NOT AVAILABLE
  PREDICT RAIM ON STA 5
 ```
 
-The unit has refused to activate the approach, because RAIM is not available now, has found an error, or is predicted not available at the FAF or the MAP. The unit stays in approach arm mode with ±1.00 NM. Do not fly the final approach on the unit; it still guides you along the legs before it and the missed approach. Predict RAIM on STA 5 to find out when it returns, and fly another approach or wait for it.
+The unit has refused to activate the approach, because RAIM is not available now, has found an error, or is predicted not available at the FAF or the MAP. The unit stays in approach arm mode. Do not fly the final approach on the unit; it still guides you along the legs before it and the missed approach. Predict RAIM on STA 5 to find out when it returns, and fly another approach or wait for it.
 
 <KlnScreen screen="approaches/apr-mode-inhibited" />
 
@@ -215,7 +215,7 @@ The message goes when the approach becomes active, when the unit leaves Approach
 PRESS GPS APR FOR NAV
 ```
 
-The unit has flagged its navigation in approach active mode. Fly the missed approach, and press the GPS APR switch: the unit returns to Approach Arm-Leg mode with ±1.00 NM, the flag goes, and the unit navigates again for the missed approach, if it has a position. A direct-to or a change to OBS mode ends approach active mode as well and clears the flag. The message goes with the flag.
+The unit has flagged its navigation in approach active mode. Fly the missed approach, and press the GPS APR switch: the unit returns to Approach Arm-Leg mode, the flag goes, and the unit navigates again for the missed approach, if it has a position. A direct-to or a change to OBS mode ends approach active mode as well and clears the flag. The message goes with the flag.
 
 <KlnScreen screen="approaches/press-gps-apr" />
 
@@ -227,12 +227,12 @@ To fly the approach:
 
 1. Load the approach with the IAF you are cleared to ([Loading an approach](#loading-an-approach)), and check FPL 0 and the active leg. In the example the unit makes the leg from KSEA to CARRO active.
 2. Check RAIM for the time of arrival on STA 5.
-3. Near the airport the approach arms. Answer `PRESS ALT TO SET BARO` with <kbd>ALT</kbd>. The status line shows `ARM-LEG`, and MOD 1 the scale factor of ±1.00 NM:
+3. Near the airport the approach arms. Answer `PRESS ALT TO SET BARO` with <kbd>ALT</kbd>. The status line shows `ARM-LEG`, and MOD 1 the scale factor of approach arm mode:
 
    <KlnScreen screen="approaches/armed" />
 
 4. Fly the legs over the IAF and the intermediate fix to the FAF. Fly the altitudes from the chart; the unit gives you none.
-5. Just before the FAF the approach becomes active. The status line shows `APR-LEG`, and MOD 1 ±0.30 NM. If the status line still shows `ARM-LEG` at the FAF, the approach is not active: look at the message page for the reason.
+5. Just before the FAF the approach becomes active. The status line shows `APR-LEG`, and MOD 1 the scale factor of approach active mode. If the status line still shows `ARM-LEG` at the FAF, the approach is not active: look at the message page for the reason.
 
    <KlnScreen screen="approaches/active" />
 
@@ -266,7 +266,7 @@ An approach that starts on a DME arc has the DME arc waypoint in place of the fi
 
 ## The missed approach
 
-At the MAP the unit does not sequence on to the missed approach, so that it does not lead you away before you decide to go around. It alerts you before the MAP as before any waypoint ([Waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting)). Past the MAP the MAP stays the active waypoint, the TO/FROM indicator shows FROM, and the D-bar shows how far you are from the final approach course, extended beyond the MAP, with ±0.30 NM while the approach is active.
+At the MAP the unit does not sequence on to the missed approach, so that it does not lead you away before you decide to go around. It alerts you before the MAP as before any waypoint ([Waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting)). Past the MAP the MAP stays the active waypoint, the TO/FROM indicator shows FROM, and the D-bar shows how far you are from the final approach course, extended beyond the MAP, at the approach scale while the approach is active.
 
 <KlnScreen screen="approaches/at-map" />
 
@@ -277,7 +277,7 @@ You start the missed approach with a direct-to. Once you have passed the MAP, th
 To fly the missed approach:
 
 1. Press <DirectToKey />. The Direct To page offers the first waypoint after the MAP, here `CORER`, with its waypoint page on the right side. Before you reach the MAP it offers the MAP itself. If it offers another waypoint, because the right side showed a waypoint page, enter the identifier.
-2. Press <kbd>ENT</kbd>. The unit flies direct to the waypoint and returns to Approach Arm-Leg mode with ±1.00 NM. Answer `PRESS ALT TO SET BARO` with <kbd>ALT</kbd> when you have time.
+2. Press <kbd>ENT</kbd>. The unit flies direct to the waypoint and returns to Approach Arm-Leg mode. Answer `PRESS ALT TO SET BARO` with <kbd>ALT</kbd> when you have time.
 3. Fly the missed approach as the chart says. The unit sequences through the waypoints of the missed approach to the MAHP.
 
 As you near the MAHP, the unit raises `IF REQUIRED SELECT OBS` for the holding pattern, which you fly in OBS mode ([Course reversals and holds in an approach](#course-reversals-and-holds-in-an-approach)). If you fly on in leg mode, the unit sequences from the MAHP to the airport, the next waypoint of FPL 0. A missed approach without a waypoint after the MAP leaves the Direct To page blank; enter the waypoint you are cleared to.
@@ -312,7 +312,7 @@ To delete the approach:
 4. Press <kbd>ENT</kbd>. The unit deletes every waypoint of the approach and its header. To keep the approach, press <kbd>CLR</kbd> again instead.
 5. Press the left <kbd>CRSR</kbd> to turn the cursor off.
 
-The airport stays in FPL 0. Without an approach in FPL 0 the unit returns from approach arm mode or approach active mode to en route, with ±5.00 NM. When the active leg belonged to the approach, the unit makes the leg of FPL 0 closest to the aircraft the active leg.
+The airport stays in FPL 0. Without an approach in FPL 0 the unit returns from approach arm mode or approach active mode to en route, and the scale widens at once ([The CDI scale along the approach](#the-cdi-scale-along-the-approach)). When the active leg belonged to the approach, the unit makes the leg of FPL 0 closest to the aircraft the active leg.
 
 The unit keeps the approach in FPL 0 over a short power-off only ([What the unit keeps while it is off](/kln90b/unit/power-on/#what-the-unit-keeps-while-it-is-off)). Every power-on starts in en route, and the unit arms an approach that is still in FPL 0 again by itself near the airport.
 

@@ -65,7 +65,7 @@ Candidates for the FAQ and Known limitations, collected by earlier packages; eve
   precision approaches, are deliberately not in the unit's database. That is the behavior of the real unit and is
   correct; many pilots expect them because every modern navigator offers them. The FAQ answers this in its first
   sentence and links to the Good to know box of Non-precision approaches, which says the same where a pilot is likely
-  to look it up first (anchor recorded in `docs/plan/approaches.md` once the page is written).
+  to look it up first: `/kln90b/operation/approaches/#which-approaches-the-unit-offers`.
 
 ## Changes to earlier pages
 
