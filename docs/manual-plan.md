@@ -189,7 +189,7 @@ anchors and page links above. After them the order follows "owners before the pa
 | 9 | nav-pages | NAV chapter with Super NAV 1 and Super NAV 5 | done (2026-11-18) |
 | 10 | flight-plans | Flight plans; FPL chapter | done (2026-11-19) |
 | 11 | flight-plan-pages | D/T, REF and CTR chapters | done (2026-11-20) |
-| 12 | sid-star | SID and STAR procedures; DME arcs | in review |
+| 12 | sid-star | SID and STAR procedures; DME arcs | done (2026-11-20) |
 | 13 | approaches | Non-precision approaches | not started |
 | 14 | vnav-alerts | VNAV; Airspace and altitude alerting | not started |
 | 15 | set | SET chapter | not started |
