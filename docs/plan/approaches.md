@@ -8,25 +8,60 @@ after its research.
 
 ### Non-precision approaches (`operation/approaches.mdx`)
 
-Requirements: style guide, section 17 ("SID and STAR procedures and approaches"). The whole page stands under the
-Availability box for an approach-certified installation.
+Requirements: style guide, section 17 ("SID and STAR procedures and approaches"). The page opens with the
+Availability box for an approach-certified installation (APT 8 exists only then). Planned by the package session
+(2026-11-20) from the research; anchors are the headings' slugs.
 
-1. Summary.
-2. What the unit offers and what it does not fly.
-3. Loading an approach: the task (APT 8 has the page); the rule that an approach starts only at an IAF and the rule
-   about the transition, stated plainly.
-4. The approach in FPL 0: the header, the suffixes, what differs from a SID or a STAR (link to SID and STAR
-   procedures for the rest).
-5. The approach modes: arming, activation and its conditions, the CDI scale along the approach (a drawing), the
-   annunciations.
-6. RAIM in an approach: what the unit checks and what it does when the check fails (link to GPS reception and RAIM).
-7. Flying the approach step by step: one worked example with screens at the points where the pilot must recognize
-   the state.
-8. DME arcs.
-9. Course reversals and holds: what the unit shows and what the pilot does in OBS mode.
-10. The missed approach.
-11. Changing or deleting the approach.
-12. Links on.
+1. Summary: the unit flies the lateral path of an RNAV (GPS) or overlay approach, which you load on APT 8; it arms
+   within 30 NM and becomes active just before the FAF.
+2. `## Which approaches the unit offers`: the approaches APT 8 lists and those it drops (ILS, LOC, LOC back course,
+   LDA, SDF; RNAV without LNAV minima, RNP AR, any RF leg). **A Good to know box (maintainer, 2026-11-20):** ILS
+   approaches are deliberately not in the database; that is how the real unit works and is correct, not a missing
+   feature, however much a modern navigator leads a pilot to expect them. APT 2 still lists the airport's ILS
+   frequencies. An airport with only excluded approaches shows `NO APPROACH FOR THIS AIRPORT IN DATABASE` (APT
+   chapter owns the page state; one sentence and the link). Screen: APT 8 of KOLM, where the ILS 17 and LOC 17 are
+   missing from the list.
+3. `## Loading an approach`: the procedure on APT 8, with screens of the IAF selection and the preview. Then
+   `### An approach starts only at an IAF` and the transition rule, both stated plainly (style guide, section 17;
+   SID and STAR procedures owns `#a-transition-must-be-selected` and `REDUNDANT WPTS IN FPL`, linked). Replacing a
+   loaded approach (the question, staged). Where it goes in FPL 0 and the make-room question: one sentence each and
+   the links to SID and STAR procedures.
+4. `## The approach in FPL 0`: the approach header, the suffixes of approach waypoints (which letters, which
+   waypoints), the fence after the MAP. Screen: FPL 0 with the KOLM approach. `### INVALID ADD and INVALID DEL`
+   with an excerpt screen. Editing otherwise: link to SID and STAR procedures.
+5. `## Arming the approach`: within 30 NM of the airport, or with the GPS APR switch at any distance (`NO APPROACH`
+   without one); the switch in arm mode disarms; `PRESS ALT TO SET BARO` on each arming; the ARM annunciator. The
+   arm modes stay armed at any distance once armed (code; open question to the reviewer).
+   `### ARM GPS APPROACH` (disarmed, FAF active, within 3 NM), with a screen.
+6. `## Activating the approach`: the conditions (Approach Arm-Leg mode, FAF active, within 2 NM, MAP ahead, track
+   within 110° of the final course, the RAIM check); Approach Arm-OBS mode never activates; what returns the unit
+   to arm mode (a direct-to, the GPS APR switch). Reuse `navigation/apr-leg` or stage it on KOLM.
+7. `## The CDI scale along the approach`: the sequence over the approach (ramp to 1 within 30 NM over about 30 s,
+   then from the activation point to 0.3 at the FAF, 0.3 to the MAP and after, back to 1 or 5 on leaving) with
+   **a drawing** (style guide, section 16). The factors themselves: Modes of operation, `#the-cdi-scale-factor`.
+8. `## RAIM in an approach`: what the unit checks at activation (now, and predicted at the FAF and the MAP), the
+   retry, the flag in active mode. `### RAIM NOT AVAILABLE APR MODE INHIBITED` and `### PRESS GPS APR FOR NAV`, each
+   with a screen of the message. RAIM itself: GPS reception and RAIM, `#raim`, `#predicting-raim`.
+9. `## Flying the approach`: the worked example KSEA to KOLM RNAV (GPS) RWY 17 via CARRO, with screens where the
+   pilot must recognize the state (armed, active). `### Vectors to final` (direct-to the FAF or the IF in FPL 0).
+   `### Course reversals and holds in an approach` (what differs: Approach Arm-OBS mode never activates, back to
+   leg mode; link `#if-required-select-obs`, which keeps the 4 NM). `### DME arcs in an approach` (the DME arc
+   waypoint carries the IAF mark; nothing changes for arming; link DME arcs).
+10. `## The missed approach`: waypoint alerting at the MAP (fly-over MAP: about 15 s, about 36 s without turn
+    anticipation), no sequencing past it, the D-bar from the MAP, the direct-to whose default is the first missed
+    approach waypoint (screen), arm mode after it, the hold at the MAHP. kln90b#493 with its hidden comment.
+11. `## Changing or deleting an approach`: `CHANGE APR?` and `DELETE APR?` on the header (excerpt screens), the mode
+    afterwards; what power-off does: one sentence and the link to Power-on.
+12. `## Where to go next`.
+
+### Screens
+
+New screens go into `kln90b/screens/approaches/`; the writer names them. Planned: APT 8 of KOLM (list without ILS),
+the IAF selection and preview, the replace question, FPL 0 with the approach, `INVALID ADD` or `INVALID DEL`,
+`ARM GPS APPROACH`, Approach Arm-Leg and Approach Active-Leg on the KOLM approach (or the `navigation/` screens
+reused), `APR MODE INHIBITED`, `PRESS GPS APR FOR NAV`, the unit at the MAP (FROM, fence), the Direct To page with
+the first missed approach waypoint as default, `CHANGE APR?` and `DELETE APR?`. One drawing:
+`ApproachCdiScale` in `kln90b/src/components/drawings/`.
 
 ## Topics this package owns
 
@@ -128,7 +163,8 @@ this out, because this page owns what RAIM decides in an approach. Pointers from
 
 ## Changes to earlier pages
 
-APT 8's "Questions before the load and where the approach goes" is compared with this page and cut back where this
+- APT 8 (`pages/apt.mdx`): its 4 NM for `IF REQUIRED SELECT OBS` goes; SID and STAR procedures owns the number
+  (`#if-required-select-obs`). APT 8's "Questions before the load and where the approach goes" is compared with this page and cut back where this
 page now owns the text. The pages of the package sta get their link to this page sharpened to its RAIM section.
 
 ### From the package sid-star (2026-11-20)

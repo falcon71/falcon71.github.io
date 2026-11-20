@@ -1,0 +1,51 @@
+---
+/**
+ * Synthetic drawing: the CDI scale factor along the approach of the example on Non-precision approaches, RNAV 17 at
+ * KOLM over the IAF CARRO, flown from KSEA. The x axis is the way along the route, not to scale, with the places where
+ * the scale changes: 30 NM from KOLM (the approach arms, and the scale goes from 5 NM to 1 NM gradually), CARRO,
+ * BOSTO, 2 NM before the FAF OPOYU (the approach becomes active, the scale goes down with the distance to OPOYU), OPOYU,
+ * the MAP RW17, and the direct-to CORER of the missed approach (back to arm mode, 1 NM at once). The y axis carries the
+ * three scale factors, spaced evenly rather than to scale. The modes stand above the line.
+ * Drawings use currentColor and the theme variables only, so they work in light and dark mode.
+ */
+import GpsFigure from './GpsFigure.astro';
+
+interface Props {
+	caption: string;
+}
+const { caption } = Astro.props;
+
+const Y5 = 70;
+const Y1 = 160;
+const Y03 = 230;
+const X = {start: 100, arm: 150, armed: 190, carro: 270, bosto: 350, act: 420, faf: 490, map: 560, dct: 600, end: 640};
+const line = `M${X.start},${Y5} H${X.arm} L${X.armed},${Y1} H${X.act} L${X.faf},${Y03} H${X.dct} V${Y1} H${X.end}`;
+const marks = [
+	{x: X.arm, name: '30 NM', role: 'to KOLM'},
+	{x: X.carro, name: 'CARRO', role: 'IAF'},
+	{x: X.bosto, name: 'BOSTO', role: ''},
+	{x: X.act, name: '2 NM', role: 'to OPOYU'},
+	{x: X.faf, name: 'OPOYU', role: 'FAF'},
+	{x: X.map, name: 'RW17', role: 'MAP'},
+];
+---
+
+<GpsFigure caption={caption} viewBox="0 0 650 300" id="approach-cdi-scale">
+	{[Y5, Y1, Y03].map(y => <line x1={X.start} y1={y} x2={X.end} y2={y} class="grid" />)}
+	<text x="0" y={Y5 + 6} class="t small">±5.00</text>
+	<text x="0" y={Y1 + 6} class="t small">±1.00</text>
+	<text x="0" y={Y03 + 6} class="t small">±0.30</text>
+	{marks.map(m => <line x1={m.x} y1="44" x2={m.x} y2={Y03 + 10} class="grid" />)}
+	<text x={(X.start + X.arm) / 2 - 10} y="30" text-anchor="middle" class="t small">ENR-LEG</text>
+	<text x={(X.arm + X.act) / 2} y="30" text-anchor="middle" class="t small t-accent">ARM-LEG</text>
+	<text x={(X.act + X.dct) / 2} y="30" text-anchor="middle" class="t small t-accent">APR-LEG</text>
+	<text x={X.end + 8} y="30" text-anchor="end" class="t small t-accent">ARM-LEG</text>
+	<path d={line} class="accent" />
+	<text x={X.dct - 6} y={Y1 - 12} text-anchor="end" class="t small ko">direct-to CORER</text>
+	{marks.map(m => (
+		<g>
+			<text x={m.x} y="266" text-anchor="middle" class="t small">{m.name}</text>
+			<text x={m.x} y="290" text-anchor="middle" class="t small">{m.role}</text>
+		</g>
+	))}
+</GpsFigure>
