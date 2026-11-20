@@ -102,6 +102,8 @@ that writes the owner records the anchors in this table, and the final pass shar
 | The cursor; the two ways of entering data; ENT and CLR; which side an ENT or CLR acts on | Controls and display, `#entering-data-with-the-cursor` (`#fields-the-knob-changes-directly`, `#entries-that-take-effect-with-ent`, `#questions-in-lists`) | one sentence and the link |
 | The scan with the right inner knob pulled out, as a control | Controls and display, `#scanning` | Waypoints and the database owns what the scan goes through |
 | Right pages that depend on the left page (D/T, REF, CTR with an FPL page on the left) | Controls and display, `#page-pairs` | each of those chapters: one sentence, the link, then its own variants |
+| The D/T pages: the rows beside an FPL page, the other variants, when values show dashes or are blank | D/T chapter: `#dt-1-beside-an-fpl-page`, `#dt-1-beside-any-other-page`, `#the-time-zone`, `#dt-4-flight-times`, `#dashes-and-blank-rows` | Trip planning: the D/T pages in use, with the links; NAV chapter: its own fields |
+| How FPL 0 scrolls with the active leg | FPL chapter, `#the-fpl-pages-waypoints-in-a-list` | D/T chapter: the link |
 | The controls in the simulator (mouse special cases) | Controls and display, `#using-the-controls-in-the-simulator` | Quickstart: the two special cases |
 | Keyboard mode: entering and leaving it, the keys and their gotchas, the hardware toggles | Keyboard mode (`#entering-keyboard-mode`, `#the-keys`, `#leaving-keyboard-mode`) | Quickstart and Controls and display: one sentence and the link |
 | Download, versions, the Community folder, the aircraft that carries the unit | Installation | the home page has the buttons; others link |
@@ -131,7 +133,7 @@ that writes the owner records the anchors in this table, and the final pass shar
 | Flight plans: FPL 0 and the numbered ones, creating, editing, the limits, a full flight plan and the make-room question for a waypoint, the waypoint type identification page, activating and inverting, storing FPL 0, deleting (`DELETE FPL?`), flying and editing the active flight plan | Flight plans: `#the-flight-plans-of-the-unit`, `#creating-a-flight-plan`, `#adding-a-waypoint` (`#taking-the-waypoint-of-the-right-page-into-a-flight-plan`), `#deleting-a-waypoint`, `#a-full-flight-plan` (`#fpl-full`, `#the-question-to-make-room-in-fpl-0`), `#the-waypoint-type-identification-page`, `#activating-a-flight-plan` (`#activating-a-flight-plan-inverted`), `#storing-fpl-0`, `#deleting-a-flight-plan` (`#delete-fpl`), `#flying-the-active-flight-plan`, `#editing-the-active-flight-plan` | FPL chapter: the page, its variants and fields, one sentence and the link per task |
 | The FPL page: the active leg symbol, the arrow in OBS mode and during a direct-to, the fence, the questions of the top line as page states | FPL chapter: `#fpl-0-the-active-flight-plan` (`#the-active-leg-symbol`, `#procedure-headers`, `#fpl-0-during-a-direct-to-and-in-obs-mode`), `#fpl-1-to-fpl-25-numbered-flight-plans` (`#use-invrt`), `#the-delete-questions` | Flight plans and Direct-to: link `#the-active-leg-symbol` instead of describing the marks |
 | A route from the EFB and FPL 0 sent to the EFB | Flight plans: `#loading-a-route-from-the-efb`, `#sending-fpl-0-to-the-efb` | Tutorial flight 2: the steps (style guide, section 17); FAQ: the question and the link |
-| Reference waypoints and center waypoints as tasks | Flight plans: `#reference-waypoints`, `#center-waypoints` | REF and CTR chapters: the pages, their states and fields |
+| Reference waypoints and center waypoints as tasks, the computation, the duplicate on a recompute | Flight plans: `#reference-waypoints`, `#center-waypoints` | REF and CTR chapters: the pages, their states (`#invalid-ref`, `#not-enough-room-in-fpl`, `#no-ctr-waypoints`) and fields |
 | What a loaded procedure does in FPL 0: where it goes, headers and suffixes, `CHANGE` and `DELETE` on a header, editing procedure waypoints, the make-room question | SID and STAR procedures (Non-precision approaches for what differs for an approach) | Flight plans: one paragraph and the link; APT 7 and APT 8: one sentence and the link |
 | The two rules (a transition must be selected; an approach starts only at an IAF) | SID and STAR procedures, Non-precision approaches | stated plainly on APT 7, APT 8 and in the FAQ too (style guide, section 17) |
 | Approach arming and activation, the approach modes, DME arcs, the missed approach, what the unit does not fly | Non-precision approaches | APT 8 links |
@@ -181,7 +183,7 @@ anchors and page links above. After them the order follows "owners before the pa
 | 8 | navigation | Modes of operation; Sequencing and turn anticipation; MOD chapter | done (2026-11-18) |
 | 9 | nav-pages | NAV chapter with Super NAV 1 and Super NAV 5 | done (2026-11-18) |
 | 10 | flight-plans | Flight plans; FPL chapter | done (2026-11-19) |
-| 11 | flight-plan-pages | D/T, REF and CTR chapters | not started |
+| 11 | flight-plan-pages | D/T, REF and CTR chapters | in review (2026-11-20) |
 | 12 | sid-star | SID and STAR procedures | not started |
 | 13 | approaches | Non-precision approaches | not started |
 | 14 | vnav-alerts | VNAV; Airspace and altitude alerting | not started |
@@ -244,6 +246,14 @@ it is written when those owners exist. A package that proves too large in its re
   waypoint position and fence, and the rule that a symbol of the unit's font is named in words (style guide,
   section 12). The final pass searches once more ("stored flight plan", "stored plan", "leg mark", code points such
   as `Á` or `›` in prose).
+- The package flight-plan-pages (2026-11-20) brought the official terms Distance/Time pages, estimated time en
+  route and estimated time of arrival written out, present time, next waypoint, destination waypoint, the NAV flag,
+  and "reference waypoint" for the waypoint the REF page creates (the waypoint typed on the REF page is "the waypoint
+  you enter"). The final pass searches once more ("the time now", "following waypoint", "new waypoint" for a
+  reference waypoint, "loses its position" for the NAV flag).
+- The ETE and ETA threshold of 2 kt is stated on the D/T chapter, GPS reception and RAIM, the ETE glossary entry and
+  the field explanations of the NAV 1 and Super NAV 1 screens; the final pass decides on one owner and lets the others
+  refer to the event (style guide, section 8).
 - The FLR chapter ("Leaving the FLR pages") repeats some general rules of pages opened over the page tree that
   Controls and display now owns (`#pages-that-no-knob-reaches`); the final pass cuts them to the FLR specifics and
   the link.
@@ -281,5 +291,8 @@ Not manual text; for the maintainer or a session that works on the site.
   its airport would be the clean fix (reviewer of Flight plans, 2026-11-19).
 - The generator cannot boot the unit cold: it settles every boot until the first fix, so a state before NAV ready
   is staged by a receiver reset (`pages/fpl/fpl-0-no-fix`).
+- The generator names a Center airspace with `K`, its ARTCC identifier and its FAA name (`KZSE SEATTLE`), because
+  the unit looks up the Center abbreviation of CTR 2 by the first four characters (`kln90b/generator/lib/navdata.ts`,
+  `boundaryOf`; package flight-plan-pages, 2026-11-20).
 - The FLR pages are in `kln90b/src/data/pageTree.ts` as `offKnobTree`: the page links read it, the knob demo does
   not, so FLR is no stop of the outer knob there (`docs/plan/failures.md`).

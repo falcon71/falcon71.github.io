@@ -92,7 +92,11 @@ function boundaryOf(a: Airspace, x: NavdataExtract): BoundaryFacility {
 		frequencyMHz = x.centers.find(c => c.artcc === a.ident)?.frequencies[0];
 		if (frequencyMHz === undefined) throw new Error(`the Center ${a.name} (${a.ident}) has no frequency in the NASR extract`);
 	}
-	return airspace(a.name, type, a.polygon, {
+	// The unit names a Center by the ICAO identifier of its ARTCC, `KZSE ...`: CTR 2 looks the abbreviation up by the first
+	// four characters of the name (`FIRMAP`), and two boundaries of one Center share them. The FAA's name (`SEATTLE`) has
+	// no such key, so a Center takes the identifier in front of it.
+	const name = a.kind === 'center' ? `K${a.ident} ${a.name}` : a.name;
+	return airspace(name, type, a.polygon, {
 		// With no upper limit, the height is not read
 		minFt: a.lowerFt, maxFt: a.upperFt ?? 0, minType: limitType(a.lowerRef), maxType: limitType(a.upperRef),
 		frequencyMHz, frequencyName: a.name,

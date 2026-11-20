@@ -1,0 +1,75 @@
+---
+title: CTR pages
+description: What CTR 1 and CTR 2 do to compute and show center waypoints, what each state of CTR 1 means, and what NOT ENOUGH ROOM IN FPL, DISPLAY DESIRED FPL ON LEFT PAGE and NO CTR WAYPOINTS say.
+sidebar:
+  order: 10
+---
+
+import KlnScreen from '../../../components/KlnScreen.astro';
+
+The CTR pages of the KLN 90B compute the points where the flight plan on the left side crosses from one Center into the next, and insert them into the plan as center waypoints. CTR 1 computes and inserts them; CTR 2 shows each computed waypoint with its position.
+
+## CTR 1: computing center waypoints
+
+Both CTR pages work with the left page, as the other right pages that act on a flight plan do ([Page pairs](/kln90b/unit/controls-and-display/#page-pairs)). Neither has a field: the right <kbd>CRSR</kbd> and <kbd>CLR</kbd> do nothing on them. How the unit computes and names the waypoints is in [Center waypoints](/kln90b/operation/flight-plans/#center-waypoints).
+
+CTR 1 works on the flight plan of the FPL page on the left side, FPL 0 or a numbered flight plan, and takes only <kbd>ENT</kbd>. It goes through the states below in order. The `ENT` prompt shows in the first two.
+
+CTR 1 starts with the question whether to compute. A plan of fewer than two waypoints has no leg to compute, and <kbd>ENT</kbd> does nothing.
+
+<KlnScreen screen="pages/ctr/ctr-1-prompt" />
+
+<kbd>ENT</kbd> starts the computation, and the page keeps its text while the unit works: for a few seconds, longer on a long route, with nothing to show that it is working. Press <kbd>ENT</kbd> once and wait; a second <kbd>ENT</kbd> during that time starts another computation, which replaces the first.
+
+The page then shows how many new waypoints the computation created, and asks whether to insert them. A route that crosses no boundary gives `0 NEW WPTS`.
+
+<KlnScreen screen="flight-plans/ctr-computed" />
+
+<kbd>ENT</kbd> inserts the new waypoints in route order, each in front of the end of the leg it crosses, and the page shows that it is done. With `0 NEW WPTS` it inserts nothing and shows the same text.
+
+<KlnScreen screen="flight-plans/ctr-complete" />
+
+The page keeps this text, and <kbd>ENT</kbd> does nothing more, until you leave the FPL page on the left side. The computed waypoints are void when you edit the plan or leave its FPL page before you insert them; [Center waypoints](/kln90b/operation/flight-plans/#center-waypoints) has the rule, and you compute again. Compute once for a plan: a second computation can create a center waypoint beside one you inserted (see [Center waypoints](/kln90b/operation/flight-plans/#center-waypoints)).
+
+### `DISPLAY DESIRED FPL ON LEFT PAGE`
+
+`DISPLAY DESIRED FPL ON LEFT PAGE` means that the left page is not an FPL page, so that CTR 1 has no plan to compute for. <kbd>ENT</kbd> does nothing.
+
+<KlnScreen screen="pages/ctr/ctr-1-no-fpl" />
+
+Turn the left outer knob to an FPL page, and CTR 1 asks whether to compute. CTR 2 shows its own text for the same situation ([`NO CTR WAYPOINTS`](#no-ctr-waypoints)).
+
+### `NOT ENOUGH ROOM IN FPL`
+
+`NOT ENOUGH ROOM IN FPL` means that the new waypoints do not fit into the plan, so that the unit created none and the plan is as it was. The new waypoints count against the limits of the plan like any waypoint you add ([The flight plans of the unit](/kln90b/operation/flight-plans/#the-flight-plans-of-the-unit)).
+
+<KlnScreen screen="pages/ctr/ctr-1-not-enough-room" />
+
+Unlike an entry you type into FPL 0, the CTR page never deletes the first waypoint to make room. Delete waypoints you can do without; the page then asks again whether to compute, and you compute again.
+
+### A crossing without a waypoint
+
+The unit leaves a crossing out when it cannot make a waypoint for it: no VOR lies within 1,000 NM of the crossing to name it after, no number is free, or the user database is full. The last one shows `USR DB FULL` ([`USR DB FULL`](/kln90b/operation/user-waypoints/#usr-db-full)). The page counts only the waypoints it made, so `NEW WPTS` can be fewer than the crossings of the route, and <kbd>ENT</kbd> inserts only those.
+
+The point where a route that starts outside every Center first enters a Center gets no waypoint.
+
+## CTR 2: the center waypoints one by one
+
+CTR 2 shows the center waypoints that CTR 1 computed, in route order, one page for each waypoint and `CTR+2` in the status line when there are several ([Pages with a plus sign](/kln90b/unit/controls-and-display/#pages-with-a-plus-sign)). It shows them as soon as the computation is done, before you insert them. `new` marks every waypoint that the computation created, and stays after the insertion.
+
+<KlnScreen screen="pages/ctr/ctr-2" />
+
+The Centers appear as the unit abbreviates them: `SEA` for Seattle, `SLC` for Salt Lake City, `ABQ` for Albuquerque, `NY` for New York. A few Centers outside the United States have no abbreviation and show three blanks.
+
+### `NO CTR WAYPOINTS`
+
+`NO CTR WAYPOINTS` stands on CTR 2 whenever there is no computed waypoint to show, and the page is a single page that reads `CTR 2`.
+
+<KlnScreen screen="pages/ctr/ctr-2-none" />
+
+That is the case before CTR 1 has computed anything, with no FPL page on the left side, after the result became void, with `NOT ENOUGH ROOM IN FPL` and after a computation that found no crossing. If the left page changes while CTR 2 is shown, it changes to this text at once. Select CTR 1, make sure an FPL page is on the left side and compute.
+
+## Where the CTR pages are used
+
+- [Flight plans](/kln90b/operation/flight-plans/#center-waypoints): inserting center waypoints and when the result is void.
+- [User waypoints](/kln90b/operation/user-waypoints/#waypoints-the-unit-creates-by-itself): what becomes of the center waypoints.

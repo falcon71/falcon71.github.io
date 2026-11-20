@@ -247,27 +247,27 @@ A SID, a STAR or an approach that you load on APT 7 or APT 8 goes into FPL 0 beh
 
 ## Reference waypoints
 
-A reference waypoint gives you a new waypoint on the plan, where the plan runs closest to a place you name. You enter a VOR, for example, and get the waypoint on your route that lies abeam it, to report a position or to plan a diversion. The REF page does it; the page reference has its fields.
+A reference waypoint is a waypoint that the unit makes on the plan, where the plan runs closest to a waypoint you enter. You enter a VOR, for example, and get the waypoint on your route that lies abeam it, to report a position or to plan a diversion. The REF page does it; the page reference has its fields.
 
-The REF page needs an FPL page on the left side, FPL 0 or a numbered flight plan. It shows `DISPLAY DESIRED FPL ON LEFT PAGE` only when no FPL page is on the left side. With fewer than two waypoints in the plan, the approval of the reference waypoint answers `INVALID REF`.
+The REF page needs an FPL page on the left side, FPL 0 or a numbered flight plan. It shows `DISPLAY DESIRED FPL ON LEFT PAGE` only when no FPL page is on the left side. With fewer than two waypoints in the plan, the approval of the waypoint you enter answers `INVALID REF`.
 
 To create a reference waypoint:
 
 1. Show the plan on the left side, and turn the right outer knob to the REF page.
-2. Press the right <kbd>CRSR</kbd> and enter the identifier of the reference waypoint with the right knobs.
-3. Press <kbd>ENT</kbd>. The right side shows the waypoint page of the reference waypoint for approval.
-4. Press <kbd>ENT</kbd> to approve it. The unit makes a new waypoint and puts it into the plan, in front of the end of the leg it lies on. The right side shows the SUP page of the new waypoint, with the reference waypoint, the radial and the distance from it, and the new row flashes.
+2. Press the right <kbd>CRSR</kbd> and enter the identifier of the waypoint you want a waypoint abeam of with the right knobs.
+3. Press <kbd>ENT</kbd>. The right side shows the waypoint page of the waypoint you entered for approval.
+4. Press <kbd>ENT</kbd> to approve it. The unit makes the reference waypoint and puts it into the plan, in front of the end of the leg it lies on. The right side shows the SUP page of the reference waypoint, with the waypoint you entered, the radial and the distance from it, and the new row flashes.
 
    <KlnScreen screen="flight-plans/ref-approve" />
 
-5. Press <kbd>ENT</kbd> to approve the new waypoint. The right side shows the REF page again.
+5. Press <kbd>ENT</kbd> to approve the reference waypoint. The right side shows the REF page again.
 6. Press the right <kbd>CRSR</kbd> to turn the cursor off.
 
-If you do not want the waypoint, press <kbd>CLR</kbd> while it waits.
+If you do not want the reference waypoint, press <kbd>CLR</kbd> while it waits.
 
-The new waypoint is the point of the plan closest to the reference waypoint, found with a line at right angles to a leg. The line must meet the leg itself and not its extension, the leg with the shortest line wins, and there is no limit to the distance. Legs between two approach waypoints are skipped. `INVALID REF` shows also when no leg has a line at right angles that meets it, and when all 26 letters of the name are taken. If the new waypoint lies between the from waypoint and the active waypoint of FPL 0, it becomes the active waypoint, as for any insertion.
+The reference waypoint is the point of the plan closest to the waypoint you entered, found with a line at right angles to a leg. Every leg of the plan counts, including a leg of FPL 0 that you have already flown. The line must meet the leg itself and not its extension, the leg with the shortest line wins, and there is no limit to the distance. Legs between two approach waypoints are skipped. `INVALID REF` shows also when no leg has a line at right angles that meets it, and when all 26 letters of the name are taken. If the reference waypoint lies between the from waypoint and the active waypoint of FPL 0, it becomes the active waypoint, as for any insertion.
 
-The unit names the waypoint with the first four characters of the reference waypoint's identifier and the first free letter from `A`, such as `OLMA`. It is a supplemental user waypoint, which the unit deletes when no flight plan uses it ([Waypoints the unit creates by itself](/kln90b/operation/user-waypoints/#waypoints-the-unit-creates-by-itself)). `USR DB FULL` shows when the user database has no room ([`USR DB FULL`](/kln90b/operation/user-waypoints/#usr-db-full)).
+The unit names the reference waypoint with the first four characters of the identifier of the waypoint you entered and the first free letter from `A`, such as `OLMA`. It is a supplemental user waypoint, which the unit deletes at power-off and power-on when no flight plan uses it ([Waypoints the unit creates by itself](/kln90b/operation/user-waypoints/#waypoints-the-unit-creates-by-itself)). `USR DB FULL` shows when the user database has no room ([`USR DB FULL`](/kln90b/operation/user-waypoints/#usr-db-full)).
 
 ## Center waypoints
 
@@ -286,7 +286,7 @@ To insert center waypoints:
 
    <KlnScreen screen="flight-plans/ctr-complete" />
 
-The unit names a center waypoint with the identifier of the nearest VOR and a free two-digit number, such as `BKE00`. A waypoint that the plan already holds at that place is not created twice, and legs between two approach waypoints are left out. When the new waypoints do not fit, the page shows `NOT ENOUGH ROOM IN FPL` and creates nothing: unlike an entry you type, the CTR page never deletes the first waypoint of FPL 0. `USR DB FULL` is possible here too. The result is void when you edit the plan or leave the FPL page on the left side after the page computed the waypoints, and you compute again. CTR 2 shows each computed waypoint before you insert it. Like the reference waypoints, center waypoints are supplemental user waypoints that the unit deletes when no plan uses them ([Waypoints the unit creates by itself](/kln90b/operation/user-waypoints/#waypoints-the-unit-creates-by-itself)).
+The unit names a center waypoint with the identifier of the nearest VOR and a free two-digit number, such as `BKE00`. Legs between two approach waypoints are left out. A second computation for a plan that already holds center waypoints does not list the inserted ones, and it can create a center waypoint close to an inserted one, with its two Centers swapped; delete the center waypoints from the plan before you compute again. {/* kln90b#TBD-CTR: describes the current behavior; the fix makes the unit recognize the center waypoints the plan already holds */} When the new waypoints do not fit, the page shows `NOT ENOUGH ROOM IN FPL` and creates nothing ([`NOT ENOUGH ROOM IN FPL`](/kln90b/pages/ctr/#not-enough-room-in-fpl)). `USR DB FULL` is possible here too. The result is void when you edit the plan or leave the FPL page on the left side (another numbered flight plan counts) after the page computed the waypoints and before you insert them, and when you turn the unit off; turning the right page away and back changes nothing. You then compute again. CTR 2 shows each computed waypoint before you insert it. Like the reference waypoints, center waypoints are supplemental user waypoints that the unit deletes at power-off and power-on when no plan uses them ([Waypoints the unit creates by itself](/kln90b/operation/user-waypoints/#waypoints-the-unit-creates-by-itself)).
 
 ## Loading a route from the EFB
 

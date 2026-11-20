@@ -1,0 +1,27 @@
+<Field id="active" title="The active waypoint">
+	The arrow marks the [active waypoint](/kln90b/operation/modes-of-operation/#the-active-waypoint) and flashes during [waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting). The number is the waypoint's place in FPL 0 and is blank for a waypoint outside it. The identifier follows.
+</Field>
+
+<Field id="active-dis" title="Distance to the active waypoint">
+	The <Term t="DIS">distance</Term> in NM from your present position to the active waypoint. It shows dashes while the unit has no active waypoint or no position.
+</Field>
+
+<Field id="active-ete" title="Time to the active waypoint">
+	The <Term t="ETE">estimated time en route</Term> to the active waypoint at your present groundspeed, as hours and minutes. Below one hour the hours stay blank (`:32` is 32 minutes), and a time of 100 hours or more shows dashes. While the unit has no time en route, it shows dashes ([Dashes and blank rows](/kln90b/pages/dt/#dashes-and-blank-rows)).
+</Field>
+
+<Field id="dest" title="The destination waypoint">
+	The number in FPL 0 and the identifier of the destination waypoint, the last waypoint of FPL 0 or, with an approach in FPL 0, its <Term t="MAP">missed approach point</Term>. These three rows are blank while the destination waypoint is the active waypoint, while the active waypoint is a direct-to waypoint outside the flight plan and while the unit has no active waypoint.
+</Field>
+
+<Field id="dest-dis" title="Distance to the destination waypoint">
+	The distance in NM from your present position to the destination waypoint along the flight plan: to the active waypoint and from there along each leg in a straight line.
+</Field>
+
+<Field id="dest-ete" title="Time to the destination waypoint">
+	The estimated time en route to the destination waypoint at your present groundspeed, as hours and minutes. From one hour on it shows the hours (`2:28`).
+</Field>
+
+<Field id="rname" title="Page identification of the right side">
+	The page identification on the right side. Beside a page that is not an FPL page, D/T 1 shows the active waypoint and the destination waypoint; beside an FPL page it lines its rows up with the rows of that page.
+</Field>

@@ -2,44 +2,44 @@
 	`USE? INVRT?` stands on the top line of a flight plan that holds waypoints.
 </Field>
 
-<Field id="before" title="Waypoint before the new waypoint">
+<Field id="before" title="Waypoint before the reference waypoint">
 	A waypoint of the plan that stays where it is.
 </Field>
 
 <Field id="entry" title="Reference waypoint waiting for approval">
-	The new waypoint that the unit made from the reference waypoint. Its identifier is the first four characters of the identifier of the reference waypoint and a letter. The row flashes until <kbd>ENT</kbd> approves the waypoint.
+	The reference waypoint that the unit made on the plan. Its identifier is the first four characters of the identifier of the waypoint you entered and a letter. The row flashes until <kbd>ENT</kbd> approves the waypoint.
 </Field>
 
-<Field id="after" title="Waypoint behind the new waypoint">
-	The waypoint at the end of the leg that the new waypoint lies on.
+<Field id="after" title="Waypoint behind the reference waypoint">
+	The waypoint at the end of the leg that the reference waypoint lies on.
 </Field>
 
 <Field id="blank" title="Blank waypoint position">
 	The blank waypoint position after the last waypoint, where a waypoint is added at the end.
 </Field>
 
-<Field id="ident" title="Identifier of the new waypoint">
-	The identifier of the new waypoint, on the SUP page that the unit shows for approval.
+<Field id="ident" title="Identifier of the reference waypoint">
+	The identifier of the reference waypoint, on the SUP page that the unit shows for approval.
 </Field>
 
-<Field id="ref" title="Reference waypoint">
-	The identifier of the reference waypoint that the new waypoint was made from.
+<Field id="ref" title="Waypoint you entered">
+	The identifier of the waypoint you entered on the REF page, which the reference waypoint was made from.
 </Field>
 
-<Field id="rad" title="Radial from the reference waypoint">
-	The radial from the reference waypoint to the new waypoint, in degrees magnetic. It is converted with the published magnetic variation when the reference waypoint is a VOR, and otherwise with the variation at the reference waypoint.
+<Field id="rad" title="Radial from the waypoint you entered">
+	The radial from the waypoint you entered to the reference waypoint, in degrees magnetic. It is converted with the published magnetic variation when the waypoint you entered is a VOR, and otherwise with the variation at that waypoint.
 </Field>
 
-<Field id="dis" title="Distance from the reference waypoint">
-	The distance from the reference waypoint to the new waypoint, in NM.
+<Field id="dis" title="Distance from the waypoint you entered">
+	The distance from the waypoint you entered to the reference waypoint, in NM.
 </Field>
 
-<Field id="lat" title="Latitude of the new waypoint">
-	The latitude of the new waypoint in degrees, minutes and hundredths of a minute.
+<Field id="lat" title="Latitude of the reference waypoint">
+	The latitude of the reference waypoint in degrees, minutes and hundredths of a minute.
 </Field>
 
-<Field id="lon" title="Longitude of the new waypoint">
-	The longitude of the new waypoint in degrees, minutes and hundredths of a minute.
+<Field id="lon" title="Longitude of the reference waypoint">
+	The longitude of the reference waypoint in degrees, minutes and hundredths of a minute.
 </Field>
 
 <Field id="crsr" title="CRSR annunciation">
