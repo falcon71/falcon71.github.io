@@ -4,7 +4,7 @@ show both
 layout split
 status yes
 text
-|ACTIVE MODE|    d›OPOYU|
+|ACTIVE MODE|BOSTO›OPOYU|
 |           |ηηηηηΟηηηηη|
 |           |DIS   1.5nm|
 |LEG        |GS    100kt|
@@ -22,7 +22,7 @@ mask
 field title 0 0 11
 field leg 3 0 3
 field scale 5 0 11
-field r-leg 0 16 23
+field r-leg 0 12 23
 field r-cdi 1 12 23
 field r-dis 2 12 23
 field r-gs 3 12 23

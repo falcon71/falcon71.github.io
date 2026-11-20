@@ -74,17 +74,25 @@ export function onFinal(nm: number): {lat: number; lon: number} {
 }
 
 /**
- * From BOOT: loads the approach, flies into the 30 NM at which it arms, answers PRESS ALT TO SET BARO, and makes a
- * direct-to to the FAF OPOYU from 4 NM before it on the final course, as after vectors to final. The unit is armed,
- * 4 NM before the FAF.
+ * From armed: flies the legs over CARRO and BOSTO, one step before and after each fix so that the unit sequences, to
+ * 4 NM before the FAF OPOYU on the leg from BOSTO. The unit is armed, 4 NM before the FAF.
  */
 export async function armedOnFinal(u: HeadlessUnit): Promise<void> {
 	await armed(u);
-	const four = onFinal(4);
-	await moveAircraft(u, four, {groundspeedKt: 100, trackTrue: courseDeg(BOSTO, OPOYU)});
-	await u.panel.directTo('OPOYU');
-	await wait(3000);
-	await adjustCourseIndicator(u);
+	const toBosto = courseDeg(CARRO, BOSTO);
+	const final = courseDeg(BOSTO, OPOYU);
+	const steps: [{lat: number; lon: number}, number][] = [
+		[pointFrom(CARRO, (toBosto + 180) % 360, 1), toBosto],
+		[pointFrom(CARRO, toBosto, 1), toBosto],
+		[pointFrom(BOSTO, (toBosto + 180) % 360, 1), toBosto],
+		[pointFrom(BOSTO, final, 1), final],
+		[onFinal(4), final],
+	];
+	for (const [at, track] of steps) {
+		await moveAircraft(u, at, {groundspeedKt: 100, trackTrue: track});
+		await wait(5000);
+		await adjustCourseIndicator(u);
+	}
 }
 
 /**
@@ -100,7 +108,7 @@ export async function armed(u: HeadlessUnit): Promise<void> {
 	await answerAlt(u);
 }
 
-/** From armedOnFinal: on to 1.5 NM before the FAF, where the approach becomes active. */
+/** From armedOnFinal: on along the leg to 1.5 NM before the FAF, where the approach becomes active. */
 export async function activeOnFinal(u: HeadlessUnit): Promise<void> {
 	await armedOnFinal(u);
 	const at = onFinal(1.5);
