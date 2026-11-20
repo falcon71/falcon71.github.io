@@ -1,12 +1,12 @@
 ---
 /**
  * Synthetic drawing: the descent of the VNAV screens (vnav/nav-4-*), seen from the side. The x axis is the distance to
- * KSEA along the leg from KPDX, to scale (11 px per NM); the y axis is the altitude, to its own scale (0.026 px per ft),
+ * KSEA along the leg from KPDX, to scale (12.5 px per NM), from 48 NM before KSEA to 3 NM beyond it; the y axis is the altitude, to its own scale (0.026 px per ft),
  * so that the angle looks far steeper than 3.0°. The aircraft flies at 7,500 ft and 123 kt; VNAV descends at 3.0° to
- * the selected altitude 3,000 ft at the offset point 5 NM before KSEA. The start of the descent is where a 3.0° path
+ * the selected altitude 3,000 ft at the offset point 5 NM before KSEA. The descent point is where a 3.0° vertical path
  * through that point reaches 7,500 ft, 19.1 NM from KSEA; the countdown begins 10 minutes earlier at 123 kt, 39.6 NM
  * from KSEA. The advisory altitude is marked at 12 NM (5,229 ft, shown as 5,200 ft), as on vnav/nav-4-active. The NAV 4
- * titles of each stretch stand above it.
+ * titles of each stretch stand above it, VNV INACTV from the offset point on.
  * Drawings use currentColor and the theme variables only, so they work in light and dark mode.
  */
 import GpsFigure from './GpsFigure.astro';
@@ -16,7 +16,7 @@ interface Props {
 }
 const { caption } = Astro.props;
 
-const x = (nm: number) => Math.round(610 - nm * 11);
+const x = (nm: number) => Math.round(690 - nm * 12.5);
 const y = (ft: number) => Math.round(250 - ft * 0.026);
 const FT_PER_NM = 1852 / 0.3048;
 const TAN = Math.tan((3 * Math.PI) / 180);
@@ -32,22 +32,23 @@ const R = 46;
 const dirLen = Math.hypot(top.x - end.x, top.y - end.y);
 const arcEnd = { x: end.x + ((top.x - end.x) / dirLen) * R, y: end.y + ((top.y - end.y) / dirLen) * R };
 const bands = [
-	{ from: 50, to: COUNT, text: 'VNV ARMED' },
+	{ from: 48, to: COUNT, text: 'VNV ARMED' },
 	{ from: COUNT, to: START, text: 'VNV IN 9:59 … :01' },
-	{ from: START, to: 5, text: 'VNV 5200ft' },
+	{ from: START, to: 5, text: 'VNV 7500ft…3000ft' },
+	{ from: 5, to: -3, text: 'VNV INACTV' },
 ];
 const marks = [
 	{ nm: COUNT, name: '39.6 NM', role: '10 min' },
-	{ nm: START, name: '19.1 NM', role: 'start' },
+	{ nm: START, name: '19.1 NM', role: 'descent point' },
 	{ nm: 5, name: '5 NM', role: 'offset' },
 	{ nm: 0, name: 'KSEA', role: '' },
 ];
 ---
 
-<GpsFigure caption={caption} viewBox="0 0 650 320" id="vnav-path">
-	<line x1={x(50)} y1={y(0)} x2={ksea.x} y2={y(0)} class="ax" />
-	<line x1={x(50)} y1={y(7500)} x2={x(0)} y2={y(7500)} class="grid" />
-	<line x1={x(50)} y1={y(3000)} x2={x(0)} y2={y(3000)} class="grid" />
+<GpsFigure caption={caption} viewBox="0 0 770 320" id="vnav-path">
+	<line x1={x(48)} y1={y(0)} x2={x(-3)} y2={y(0)} class="ax" />
+	<line x1={x(48)} y1={y(7500)} x2={x(-3)} y2={y(7500)} class="grid" />
+	<line x1={x(48)} y1={y(3000)} x2={x(-3)} y2={y(3000)} class="grid" />
 	<text x="0" y={y(7500) + 6} class="t small">7,500 ft</text>
 	<text x="0" y={y(3000) + 6} class="t small">3,000 ft</text>
 	{marks.map(m => <line x1={x(m.nm)} y1="40" x2={x(m.nm)} y2={y(0)} class="grid" />)}
