@@ -6,12 +6,15 @@ sidebar:
 ---
 
 import KlnScreen from '../../../components/KlnScreen.astro';
+import RefWaypoint from '../../../components/drawings/RefWaypoint.astro';
 
 The REF page of the KLN 90B makes a reference waypoint on the flight plan on the left side: the point of the plan that lies abeam a waypoint you enter. It needs an FPL page on the left side and shows `DISPLAY DESIRED FPL ON LEFT PAGE` otherwise.
 
 ## REF page: a waypoint on the plan abeam another
 
 The REF page works with the left page, as the other right pages that act on a flight plan do ([Page pairs](/kln90b/unit/controls-and-display/#page-pairs)). Its flight plan is the one of the FPL page on the left side, FPL 0 or a numbered flight plan. The procedure and the rules that choose the reference waypoint, the waypoint the unit creates on the plan, are in [Reference waypoints](/kln90b/operation/flight-plans/#reference-waypoints).
+
+<RefWaypoint caption="The leg KPDX to KSEA and the waypoint you enter, the VOR OLM. The reference waypoint OLMA lies at the foot of the line at right angles from OLM to the leg; the SUP page shows OLM as the reference with the radial and the distance of OLMA from it." />
 
 <KlnScreen screen="pages/ref/ref-entry" />
 

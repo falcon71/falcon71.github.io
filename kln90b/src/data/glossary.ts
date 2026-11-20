@@ -105,10 +105,6 @@ export const glossary: Record<string, GlossaryEntry> = {
 		expansion: 'Enroute-Leg mode',
 		text: 'The mode annunciation of leg mode en route: the unit guides you along the active leg of the flight plan or a direct-to.',
 	},
-	DIS: {
-		expansion: 'Distance',
-		text: 'The distance to the active waypoint, in NM.',
-	},
 	BRG: {
 		expansion: 'Bearing',
 		text: 'The magnetic bearing from your position to the active waypoint.',

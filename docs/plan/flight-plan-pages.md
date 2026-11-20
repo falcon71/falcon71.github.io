@@ -63,3 +63,12 @@ page; numbered plans), `flight-plans/ctr-computed` and `flight-plans/ref-approve
 void rule, the duplicate on a recompute); FPL chapter, the scrolling of FPL 0; Controls and display `#page-pairs`
 (CTR 2 follows the left page too). The generator names the Centers so that CTR 2 shows their abbreviations
 (`kln90b/generator/lib/navdata.ts`, `boundaryOf`).
+
+## Issues
+
+- kln90b#506: D/T 1 to D/T 3 under the NAV flag (`#dashes-and-blank-rows`); the issue also carries the question
+  whether the first waypoint's row before NAV ready is blank or dashed.
+- kln90b#508: the duplicate center waypoint on a recompute (Flight plans, `#center-waypoints`).
+- kln90b#507: a reference waypoint approved into a full FPL 0 skips the question to make room. Not confirmed on a
+  screen, so no page describes it; when it is confirmed or fixed, Flight plans (`#the-question-to-make-room-in-fpl-0`)
+  says it in one sentence.

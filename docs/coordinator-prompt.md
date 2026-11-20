@@ -116,7 +116,8 @@ The first session writes the plan of the whole manual and no page.
    warning or state the pilot may search for (style guide, section 9), and never shrinks one to "one sentence and
    the link" because another page owns its cause. It plans a screen for every step whose result the pilot must
    recognize (style guide, section 13), including a step that carries data from one side to the other, where the
-   screen shows both halves. If the research shows that a topic's owner must change, or that the
+   screen shows both halves. It plans a drawing for every computation or geometry the pilot must picture (style
+   guide, section 16); the REF and CTR chapters were first written without one (maintainer, 2026-11-20). If the research shows that a topic's owner must change, or that the
    package is too large for the session, change the plan first; split a package rather than rush it.
 3. **Writing.** One writer per page or per few small pages, in parallel only where they own different files,
    topics and screens. A writer writes its pages, describes and generates its screens and writes their field
@@ -233,7 +234,8 @@ mechanical part and reports only what is wrong:
 - File the reported bugs (style guide, section 5): search open and closed issues first. Then **show the maintainer a
   summary of the bugs you want to file** (for each: the title, what is wrong and the reproduction, in a line or two)
   and ask for permission; file only the approved ones, with the `bug` label, and add the `kln90b#NN` comment to the
-  paragraph. Do the same before any comment on an issue. Filing without that approval is refused by the permission
+  paragraph. An issue states the expected behavior in its own terms and may cite a manual page number; it never
+  says what a manual describes, not even paraphrased (the permission check refused such an issue, 2026-11-20). Do the same before any comment on an issue. Filing without that approval is refused by the permission
   check of the maintainer's session (maintainer, 2026-11-18).
 - Write what the agents found for other packages into those packages' files, in full.
 - Run `npm run build` in `kln90b/`. It must pass; a `[page links]` warning is fine only for a page that does not

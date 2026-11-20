@@ -183,7 +183,7 @@ anchors and page links above. After them the order follows "owners before the pa
 | 8 | navigation | Modes of operation; Sequencing and turn anticipation; MOD chapter | done (2026-11-18) |
 | 9 | nav-pages | NAV chapter with Super NAV 1 and Super NAV 5 | done (2026-11-18) |
 | 10 | flight-plans | Flight plans; FPL chapter | done (2026-11-19) |
-| 11 | flight-plan-pages | D/T, REF and CTR chapters | in review (2026-11-20) |
+| 11 | flight-plan-pages | D/T, REF and CTR chapters | in review (2026-11-20, maintainer feedback applied) |
 | 12 | sid-star | SID and STAR procedures | not started |
 | 13 | approaches | Non-precision approaches | not started |
 | 14 | vnav-alerts | VNAV; Airspace and altitude alerting | not started |
@@ -251,6 +251,11 @@ it is written when those owners exist. A package that proves too large in its re
   and "reference waypoint" for the waypoint the REF page creates (the waypoint typed on the REF page is "the waypoint
   you enter"). The final pass searches once more ("the time now", "following waypoint", "new waypoint" for a
   reference waypoint, "loses its position" for the NAV flag).
+- **Two rules of 2026-11-20 (maintainer, on the package flight-plan-pages):** an abbreviation every pilot reads at
+  once is no glossary term (style guide, section 14; `DIS` is gone), and a computation or a geometry the pilot must
+  picture gets a drawing (section 16). The final pass checks the other glossary entries against the first and the
+  Operation pages written earlier against the second (for example the reference waypoint and the center waypoints on
+  Flight plans, which link the drawings of the REF and CTR chapters).
 - The ETE and ETA threshold of 2 kt is stated on the D/T chapter, GPS reception and RAIM, the ETE glossary entry and
   the field explanations of the NAV 1 and Super NAV 1 screens; the final pass decides on one owner and lets the others
   refer to the event (style guide, section 8).

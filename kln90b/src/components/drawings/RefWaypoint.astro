@@ -1,0 +1,59 @@
+---
+/**
+ * Synthetic drawing: the leg of the screen flight-plans/ref-approve, KPDX to KSEA, with the VOR OLM beside it, the
+ * line at right angles from OLM to the leg and the reference waypoint OLMA at its foot. The places are drawn
+ * schematically, to one scale in both directions (latitude 165 px per degree, longitude shortened by the cosine of
+ * 46.5°), except that OLM is drawn farther from the leg than its distance, so that the labels fit along the line;
+ * the line stays at right angles. Positions: the airports and the VOR of the screens' navigation data, and OLMA as the screen shows it
+ * (N 46°56.15', W122°23.55', radial 076.7° and 21.0 NM from OLM).
+ * Drawings use currentColor and the theme variables only, so they work in light and dark mode.
+ */
+import GpsFigure from './GpsFigure.astro';
+
+interface Props {
+	caption: string;
+}
+const { caption } = Astro.props;
+
+const K = 165;
+const KX = K * Math.cos((46.5 * Math.PI) / 180);
+const project = (lat: number, lon: number) => ({ x: Math.round(150 + (lon + 123.3) * KX), y: Math.round((47.65 - lat) * K) });
+const kpdx = project(45.589, -122.597);
+const ksea = project(47.45, -122.312);
+const olma = project(46.9358, -122.3925);
+const dx = ksea.x - kpdx.x;
+const dy = ksea.y - kpdx.y;
+const len = Math.hypot(dx, dy);
+const along = { x: dx / len, y: dy / len };
+// OLM lies west of the leg, on the perpendicular through the foot, 170 px from it
+const LINE = 170;
+const olm = { x: Math.round(olma.x + along.y * LINE), y: Math.round(olma.y - along.x * LINE) };
+// The small square that marks the right angle at the foot, on the OLM side
+const toward = { x: (olm.x - olma.x) / Math.hypot(olm.x - olma.x, olm.y - olma.y), y: (olm.y - olma.y) / Math.hypot(olm.x - olma.x, olm.y - olma.y) };
+const s = 22;
+const corner = [
+	{ x: olma.x + toward.x * s, y: olma.y + toward.y * s },
+	{ x: olma.x + toward.x * s - along.x * s, y: olma.y + toward.y * s - along.y * s },
+	{ x: olma.x - along.x * s, y: olma.y - along.y * s },
+];
+const mid = { x: (olm.x + olma.x) / 2, y: (olm.y + olma.y) / 2 };
+const angle = (Math.atan2(olma.y - olm.y, olma.x - olm.x) * 180) / Math.PI;
+// The unit normal on the upper side of the line
+const n = { x: (olma.y - olm.y) / LINE, y: -(olma.x - olm.x) / LINE };
+---
+
+<GpsFigure caption={caption} viewBox="0 0 560 350" id="ref-waypoint">
+	<line x1={kpdx.x} y1={kpdx.y} x2={ksea.x} y2={ksea.y} class="muted" />
+	<line x1={olm.x} y1={olm.y} x2={olma.x} y2={olma.y} class="accent" />
+	<polyline points={corner.map(p => `${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ')} class="ax" />
+	<circle cx={kpdx.x} cy={kpdx.y} r="7" class="ring" />
+	<circle cx={ksea.x} cy={ksea.y} r="7" class="ring" />
+	<circle cx={olm.x} cy={olm.y} r="7" class="ring" />
+	<circle cx={olma.x} cy={olma.y} r="7" class="dot" />
+	<text x={kpdx.x + 16} y={kpdx.y + 6} class="t">KPDX</text>
+	<text x={ksea.x + 16} y={ksea.y + 6} class="t">KSEA</text>
+	<text x={olm.x - 16} y={olm.y + 6} text-anchor="end" class="t">OLM</text>
+	<text x={olma.x + 16} y={olma.y + 6} class="t t-accent">OLMA</text>
+	<text x={mid.x + n.x * 12} y={mid.y + n.y * 12} text-anchor="middle" transform={`rotate(${angle} ${mid.x + n.x * 12} ${mid.y + n.y * 12})`} class="t small">radial 076.7°</text>
+	<text x={mid.x - n.x * 28} y={mid.y - n.y * 28} text-anchor="middle" transform={`rotate(${angle} ${mid.x - n.x * 28} ${mid.y - n.y * 28})`} class="t small">21.0 NM</text>
+</GpsFigure>
