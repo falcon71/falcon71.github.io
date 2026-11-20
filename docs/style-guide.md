@@ -585,6 +585,14 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | the active leg symbol (the arrow on an FPL page from the from waypoint to the active waypoint, its tail and its head); the arrow (the one mark at the active waypoint in OBS mode or during a direct-to) | the leg marks, the Direct To symbol (on an FPL page) |
 | blank waypoint position (the empty numbered row after the last waypoint of a flight plan) | next position, first position, blank position |
 | fence (the line `*NO WPT SEQ` in FPL 0) | |
+| the Distance/Time pages at the first mention, then the D/T pages | |
+| estimated time en route (`ETE`), estimated time of arrival (`ETA`) | time en route, time of arrival |
+| present time (`TIME` on D/T 4) | the time now |
+| next waypoint (the waypoint after the active waypoint) | following waypoint |
+| destination waypoint (the last waypoint of the flight plan) | |
+| the unit flags its navigation; the NAV flag (no position good enough to navigate) | the unit loses its position (for the flag) |
+| reference waypoint: with the REF page, the waypoint the unit creates on the plan (`OLMA`); the waypoint you enter on the REF page is "the waypoint you enter". On the INT and SUP pages, the reference waypoint is the waypoint of their `REF` field. | new waypoint (for the one the REF page creates) |
+| center waypoint (the waypoint the CTR pages create at a Center boundary); area control center (ACC or ARTCC) where a page first introduces the concept, then Center (maintainer, 2026-11-20) | air route traffic control center alone, ACC alone |
 
 ### Spelling and style
 
@@ -686,6 +694,8 @@ The explanations of a screen's fields live in its `fields.mdx` and appear wherev
 - **A display form is no abbreviation of the manual.** Where the unit writes a word short because of the room on
   its screen (`RW` before a runway number), the manual quotes it in the screen text and otherwise writes the word
   ("runway 16L"); it gets no glossary entry (maintainer, 2026-11-17).
+- **Nor is an abbreviation that every pilot reads at once.** `DIS` for distance, a label whose word is plain from
+  the screen, needs no tooltip and gets no glossary entry; the field explanation names it (maintainer, 2026-11-20).
 - **Operating concepts are not glossary terms.** The nearest list, the active waypoint, waypoint alerting, turn
   anticipation, the scan, OBS mode, user waypoints and the like are ways the unit works, explained in their Operation
   section. A tooltip cannot explain how something works, so these get no glossary entry and no `<Term>`; the text
@@ -719,8 +729,13 @@ the modes, a selected course to a waypoint, a holding pattern entry. Drawings ar
 `kln90b/src/components/drawings/`, in the site's colors, readable in light and dark themes, with a caption that says
 what to notice.
 
-- Drawings are synthetic. Never draw or trace a real chart or real navigation data; a drawing may use a generic airport
-  and invented fixes, which is the one place where invented names are right.
+- **A computation or a geometry the pilot must picture gets a drawing:** where the REF page puts a reference
+  waypoint abeam a VOR, where the CTR pages find the crossing of a Center boundary. Words and a screen of the result
+  do not show it (maintainer, 2026-11-20).
+- Drawings are synthetic. Never draw or trace a real chart or real navigation data. A drawing either uses a generic
+  airport and invented fixes, which is the one place where invented names are right, or it illustrates the example of
+  a screen on the same page: then it shows the screen's places schematically, labeled with their identifiers, so that
+  the pilot recognizes the screen in it (maintainer, 2026-11-20).
 - A drawing explains the unit's behavior, not general aviation knowledge the readers already have.
 
 ---

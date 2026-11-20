@@ -24,6 +24,10 @@ export const glossary: Record<string, GlossaryEntry> = {
 		expansion: 'Groundspeed',
 		text: 'Your speed over the ground, from the GPS. It shows dashes while the unit has no position.',
 	},
+	ETA: {
+		expansion: 'Estimated time of arrival',
+		text: 'The time of day at which you reach a waypoint at your present groundspeed, in the time zone the page shows.',
+	},
 	ETE: {
 		expansion: 'Estimated time en route',
 		text: 'The time to a waypoint at your present groundspeed. It shows dashes at a groundspeed of 2 kt or less and when the unit has no position.',
@@ -100,10 +104,6 @@ export const glossary: Record<string, GlossaryEntry> = {
 	'ENR-LEG': {
 		expansion: 'Enroute-Leg mode',
 		text: 'The mode annunciation of leg mode en route: the unit guides you along the active leg of the flight plan or a direct-to.',
-	},
-	DIS: {
-		expansion: 'Distance',
-		text: 'The distance to the active waypoint, in NM.',
 	},
 	BRG: {
 		expansion: 'Bearing',

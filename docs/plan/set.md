@@ -87,6 +87,12 @@ Only the pages and their fields.
   74°N, the `MAG V` line for entering a variation), whose field explanations cover the whole page. The SET chapter's
   SET 2 screens and these must agree, or the chapter reuses this one.
 
+### From the package flight-plan-pages (2026-11-20)
+
+- SET 4: the field `RUN WHEN` (as the writer of D/T read it; check it) has the choices `GS > 30kt` and
+  `POWER IS ON`. The code starts the timer at 30 kt or more (`>=`), while the label says `>`; the setting takes effect
+  at once. The D/T chapter names SET 4 and links Trip planning and calculators, which owns the flight timer as a task.
+
 ## Changes to earlier pages
 
 The pages that named a SET page before this chapter existed link to it by the page links; the seam check verifies

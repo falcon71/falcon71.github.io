@@ -1,0 +1,31 @@
+<Field id="plan" title="Flight plan on the left page">
+	The waypoints of FPL 0, one per row and numbered from 1, in the same rows as the values of D/T 2. The [active leg symbol](/kln90b/pages/fpl/#the-active-leg-symbol) in front of the first two waypoints shows the leg the unit flies.
+</Field>
+
+<Field id="header" title="Column heading">
+	`DIS` is the distance. The column beside it gives the <Term t="ETA">estimated time of arrival</Term> at the waypoint in the same row of the flight plan. Beside a numbered flight plan only `DIS` has values.
+</Field>
+
+<Field id="zone" title="Time zone">
+	The time zone of the ETAs below it. The right <kbd>CRSR</kbd> puts the cursor on it, and the right inner knob chooses another zone, which applies at once. It is the time zone of every page that shows a time ([Trip planning and calculators](/kln90b/operation/trip-planning/)).
+</Field>
+
+<Field id="active" title="The active waypoint">
+	The distance in NM from your present position to the waypoint, and the ETA there: the present time plus the <Term t="ETE">estimated time en route</Term> at your present groundspeed, as hours and minutes of a 24-hour clock in the time zone at the top. The row of the from waypoint and the rows of the waypoints you have passed stay blank. While the unit has no estimated time en route, the ETA shows dashes ([Dashes and blank rows](/kln90b/pages/dt/#dashes-and-blank-rows)).
+</Field>
+
+<Field id="next" title="A later waypoint">
+	The distance from your present position to the waypoint along the flight plan, that is, to the active waypoint and from there along each leg in a straight line. The ETA is the present time plus the estimated time en route over that distance at your present groundspeed. It can differ by a minute from the present time plus the `ETE` of D/T 1, because the unit drops the seconds of an ETA and rounds an estimated time en route.
+</Field>
+
+<Field id="lname" title="Page identification of the left side">
+	The page identification on the left side. FPL 0 is the active flight plan.
+</Field>
+
+<Field id="mode" title="Mode annunciation">
+	The mode annunciation, which shows the mode of the unit. <Term t="ENR-LEG">`ENR-LEG`</Term> is Enroute-Leg mode.
+</Field>
+
+<Field id="rname" title="Page identification of the right side">
+	The page identification on the right side. While the left page is an FPL page, D/T 2 lines its rows up with the rows of that page; beside any other page it shows the active waypoint and the destination waypoint.
+</Field>

@@ -1,0 +1,53 @@
+---
+title: REF page
+description: What the REF page does, which left pages it works with, what DISPLAY DESIRED FPL ON LEFT PAGE and INVALID REF mean, and where the entered identifier stays.
+sidebar:
+  order: 11
+---
+
+import KlnScreen from '../../../components/KlnScreen.astro';
+import RefWaypoint from '../../../components/drawings/RefWaypoint.astro';
+
+The REF page of the KLN 90B makes a reference waypoint on the flight plan on the left side: the point of the plan that lies abeam a waypoint you enter. It needs an FPL page on the left side and shows `DISPLAY DESIRED FPL ON LEFT PAGE` otherwise.
+
+## REF page: a waypoint on the plan abeam another
+
+The REF page works with the left page, as the other right pages that act on a flight plan do ([Page pairs](/kln90b/unit/controls-and-display/#page-pairs)). Its flight plan is the one of the FPL page on the left side, FPL 0 or a numbered flight plan. The procedure and the rules that choose the reference waypoint, the waypoint the unit creates on the plan, are in [Reference waypoints](/kln90b/operation/flight-plans/#reference-waypoints).
+
+<RefWaypoint caption="The leg KPDX to KSEA and the waypoint you enter, the VOR OLM. The reference waypoint OLMA lies at the foot of the line at right angles from OLM to the leg; the SUP page shows OLM as the reference with the radial and the distance of OLMA from it." />
+
+<KlnScreen screen="pages/ref/ref-entry" />
+
+The page has one field, the identifier of the waypoint you enter. The right <kbd>CRSR</kbd> turns the cursor on, and you enter the identifier as on every waypoint page ([Entering an identifier](/kln90b/operation/waypoints/#entering-an-identifier)). Any waypoint type will do, from the database or one of your own. The REF page does not offer to create a waypoint: an identifier that no waypoint has answers `NO SUCH WPT`.
+
+Two approvals follow <kbd>ENT</kbd>: first the waypoint page of the waypoint you enter ([Approving the waypoint page](/kln90b/operation/waypoints/#approving-the-waypoint-page)), then the reference waypoint. The right side shows the SUP page of the reference waypoint, whose `REF` field holds the waypoint you entered, with the radial and the distance from it.
+
+<KlnScreen screen="flight-plans/ref-approve" />
+
+After the approval or the rejection with <kbd>CLR</kbd>, the right side shows the REF page with an empty field. The right cursor is still on, so that you can enter the next identifier at once, and the left cursor is off. The reference waypoint is an ordinary user waypoint ([Waypoints the unit creates by itself](/kln90b/operation/user-waypoints/#waypoints-the-unit-creates-by-itself)).
+
+### `DISPLAY DESIRED FPL ON LEFT PAGE`
+
+`DISPLAY DESIRED FPL ON LEFT PAGE` means that the left page is not an FPL page, so that the REF page has no plan to work on.
+
+<KlnScreen screen="pages/ref/ref-no-fpl" />
+
+The page has no field then, and the right <kbd>CRSR</kbd> changes nothing. A right cursor that was on turns off as soon as the left page is no FPL page. Turn the left outer knob to FPL 0 or to a numbered flight plan, and the entry is there.
+
+### `INVALID REF`
+
+`INVALID REF` on the status line means that the unit found no waypoint to make: the plan holds fewer than two waypoints, no leg has a line at right angles from the waypoint you enter that meets the leg itself, or all 26 letters of the name are taken. The message comes after you approve the waypoint you enter, not when you press <kbd>ENT</kbd> on the identifier.
+
+<KlnScreen screen="pages/ref/ref-invalid" />
+
+Nothing is inserted, and the identifier stays in the field. Enter another waypoint; if the plan holds fewer than two waypoints, add one first. A waypoint that lies beyond the ends of the plan, such as one far to the south of a plan that runs north, has no line that meets a leg.
+
+A reference waypoint that you reject while it flashes stays among the waypoints the unit made ([Waypoints the unit creates by itself](/kln90b/operation/user-waypoints/#waypoints-the-unit-creates-by-itself)) and keeps its letter. Rejecting the reference waypoint made from the same identifier 26 times therefore ends in `INVALID REF`, even though the plan holds none of them. [Reference waypoints](/kln90b/operation/flight-plans/#reference-waypoints) explains the name.
+
+The approval of the reference waypoint can fail with `USR DB FULL` ([`USR DB FULL`](/kln90b/operation/user-waypoints/#usr-db-full)), and with `FPL FULL` in a full numbered flight plan ([`FPL FULL`](/kln90b/operation/flight-plans/#fpl-full)). The plan stays as it was in both cases.
+
+## Where the REF page is used
+
+- [Flight plans](/kln90b/operation/flight-plans/#reference-waypoints): creating a reference waypoint.
+- [Waypoints and the database](/kln90b/operation/waypoints/): entering an identifier and approving the waypoint page.
+- [User waypoints](/kln90b/operation/user-waypoints/#waypoints-the-unit-creates-by-itself): what becomes of the reference waypoint.

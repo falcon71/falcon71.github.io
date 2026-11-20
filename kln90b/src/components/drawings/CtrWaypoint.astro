@@ -1,0 +1,39 @@
+---
+/**
+ * Synthetic drawing: the route of the screen flight-plans/ctr-computed, KPDX to KBKE, crossing the boundary between
+ * the Seattle and the Salt Lake City Centers, with the center waypoint BKE00 where it crosses. The places are drawn
+ * schematically, to one scale in both directions (latitude 125 px per degree, longitude shortened by the cosine of
+ * 45°). The boundary is simplified to its three straight pieces near the route. Positions: the airports and the VOR
+ * of the screens' navigation data, and BKE00 as the screen pages/ctr/ctr-2 shows it (N 44°55.31', W118°20.83').
+ * Drawings use currentColor and the theme variables only, so they work in light and dark mode.
+ */
+import GpsFigure from './GpsFigure.astro';
+
+interface Props {
+	caption: string;
+}
+const { caption } = Astro.props;
+
+const K = 125;
+const KX = K * Math.cos((45 * Math.PI) / 180);
+const project = (lat: number, lon: number) => ({ x: Math.round((lon + 123) * KX), y: Math.round((46.3 - lat) * K) });
+const kpdx = project(45.589, -122.597);
+const kbke = project(44.837, -117.809);
+const bke00 = project(44.922, -118.347);
+// The boundary runs east along 45°20' N, turns south-west near 117°45' W and runs on south-south-west
+const boundary = [project(45.333, -117.2), project(45.333, -117.75), project(44.85, -118.45), project(44.3, -118.83)];
+---
+
+<GpsFigure caption={caption} viewBox="0 0 560 280" id="ctr-waypoint">
+	<polyline points={boundary.map(p => `${p.x},${p.y}`).join(' ')} class="dash" />
+	<line x1={kpdx.x} y1={kpdx.y} x2={kbke.x} y2={kbke.y} class="accent" />
+	<circle cx={kpdx.x} cy={kpdx.y} r="7" class="ring" />
+	<circle cx={kbke.x} cy={kbke.y} r="7" class="ring" />
+	<circle cx={bke00.x} cy={bke00.y} r="7" class="dot" />
+	<text x={kpdx.x - 12} y={kpdx.y - 14} class="t">KPDX</text>
+	<text x={kbke.x + 4} y={kbke.y + 30} class="t">KBKE</text>
+	<text x={bke00.x - 12} y={bke00.y - 18} text-anchor="end" class="t t-accent ko">BKE00</text>
+	<text x="140" y="235" text-anchor="middle" class="t small">Seattle Center (SEA)</text>
+	<text x="410" y="236" class="t small">Salt Lake City</text>
+	<text x="410" y="258" class="t small">Center (SLC)</text>
+</GpsFigure>

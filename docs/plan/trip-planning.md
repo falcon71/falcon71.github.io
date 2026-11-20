@@ -39,6 +39,19 @@ See the index: trip planning, the calculators, times and the flight timer as tas
 From the planning survey: the fuel values of the TRI pages are the pilot's own entries and separate from the fuel
 computer of OTH 5 to OTH 8; the chapter says so and links to Fuel and air data (planned).
 
+### From the package flight-plan-pages (2026-11-20)
+
+- The D/T chapter (`pages/dt.mdx`) explains the D/T pages and their fields, including the time zone field of D/T 2
+  and D/T 4 and the flight time of D/T 4, and links to this page (page link only) for times, time zones and the
+  flight timer as tasks. Sharpen those links to this page's sections.
+- The time zone list, as the writer of D/T read it in the code (check it): 19 zones in knob order, UTC, GST, GDT,
+  ATS, ATD, EST, EDT, CST, CDT, MST, MDT, PST, PDT, AKS, AKD, HAS, HAD, SST, SDT, each with a fixed offset from UTC
+  and no automatic change to daylight saving time. The zone is one setting shared by D/T 2, D/T 4, SET 2, STA 5 and
+  the CAL pages that show it; it changes at once as the knob turns, without ENT. This page owns the list.
+- The flight timer: it runs at a groundspeed of 30 kt or more (the code compares `>=` 30 while SET 4 labels it
+  `GS > 30kt`) or from power-on, as SET 4 sets; the setting takes effect at once. The departure time of D/T 4 is the
+  time at which the timer starts. Both are cleared at every power-on, and the pilot cannot reset them.
+
 ## Changes to earlier pages
 
 The D/T chapter and the SET chapter (SET 4) get their links to this page sharpened to its sections.

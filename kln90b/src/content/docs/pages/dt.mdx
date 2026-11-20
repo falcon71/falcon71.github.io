@@ -1,0 +1,120 @@
+---
+title: D/T pages
+description: What the D/T pages show (distance, estimated time en route, estimated time of arrival, desired track and the flight times), how they follow the left page, and when they show dashes or stay blank.
+sidebar:
+  order: 13
+---
+
+import KlnScreen from '../../../components/KlnScreen.astro';
+import Term from '../../../components/Term.astro';
+
+The Distance/Time pages of the KLN 90B, the D/T pages, give distances and times. D/T 1 to D/T 3 show the distance together with the <Term t="ETE">estimated time en route</Term>, the <Term t="ETA">estimated time of arrival</Term> or the desired track for the waypoints of a flight plan; D/T 4 shows the flight times and the arrival at the destination waypoint.
+
+## The D/T pages: beside the left page
+
+D/T 1 to D/T 3 are a page pair: they look at the left page and change their layout at once when you change it ([Page pairs](/kln90b/unit/controls-and-display/#page-pairs)). Beside an FPL page they give one row per waypoint of the flight plan, in the row of that waypoint; beside any other page they give the active waypoint and one more. D/T 4 looks the same beside every left page.
+
+## D/T 1: distance and estimated time en route
+
+D/T 1 gives the distance and the estimated time en route to waypoints. Use it to see how far and how long it is to the active waypoint, to the destination waypoint, or to any waypoint of the flight plan.
+
+### D/T 1 beside an FPL page
+
+Each row of D/T 1 belongs to the waypoint in the same row of the FPL page on the left. The top row of the page holds the column headings, and the waypoint of the left page that stands in that row gets no value.
+
+<KlnScreen screen="pages/dt/dt-1-fpl-0" />
+
+Beside FPL 0 the values are measured from your present position, not leg by leg. The row of the active waypoint gives the distance from where you are, and each row below gives that distance plus every leg to the waypoint. The legs are straight lines between the waypoints: the unit does not follow a DME arc or the path of a procedure, and a waypoint that the plan holds twice in a row adds nothing. The time is the distance at your present groundspeed. The rows before the active waypoint, which includes the from waypoint, stay blank, and so do the row of a [procedure header](/kln90b/pages/fpl/#procedure-headers), the fence, the blank waypoint position and a waypoint you are entering.
+
+The rows follow the FPL page as it scrolls ([The FPL pages](/kln90b/pages/fpl/#the-fpl-pages-waypoints-in-a-list)). With more waypoints than rows, the bottom row gives the total to the last waypoint, and that total includes the legs of the waypoints out of view.
+
+<KlnScreen screen="pages/dt/dt-1-fpl-0-long" />
+
+A numbered flight plan is not flown, so it has no present position to measure from and no time. Beside FPL 1 to FPL 25 only `DIS` has values: the distance from the first waypoint of the flight plan along its legs, with the row of the first waypoint blank. The `ETE` column of D/T 1 and the ETA column of D/T 2 stay blank, without dashes.
+
+<KlnScreen screen="pages/dt/dt-1-fpl-1" />
+
+### D/T 1 beside any other page
+
+Beside any page that is not an FPL page, D/T 1 shows two blocks of three lines. The first is the [active waypoint](/kln90b/operation/modes-of-operation/#the-active-waypoint) with the distance to it and the estimated time en route. The second is the destination waypoint: the last waypoint of FPL 0, or the <Term t="MAP">missed approach point</Term> where FPL 0 holds an approach. Its distance and time are measured from your present position along the flight plan.
+
+<KlnScreen screen="pages/dt/dt-1-other" />
+
+The second block is hidden while the destination waypoint is the active waypoint, because it would repeat the first, and during a direct-to to a waypoint that FPL 0 does not hold, which has no flight plan to follow.
+
+## D/T 2: estimated time of arrival
+
+D/T 2 gives the distance and the ETA at the waypoints, in the time zone you choose. It has the same two variants as D/T 1, with the same rows and the same rules, and gives the ETA where D/T 1 gives the estimated time en route.
+
+### D/T 2 beside an FPL page
+
+<KlnScreen screen="pages/dt/dt-2-fpl-0" />
+
+The ETA is the present time plus the estimated time en route, as hours and minutes of a 24-hour clock.
+
+### D/T 2 beside any other page
+
+Beside any other page the first block shows the time zone in a field on the line of the ETA, and the second block shows the zone as plain text after its ETA.
+
+<KlnScreen screen="pages/dt/dt-2-other" />
+
+### The time zone
+
+The time zone is the one field of D/T 2. The right <kbd>CRSR</kbd> puts the cursor on it, and the right inner knob chooses the next zone clockwise and the previous one counterclockwise, around the list. The times change with every step and the unit stores the zone at once, so you need no <kbd>ENT</kbd>. The zone is the same on every page that shows a time, so choosing it here also changes SET 2, D/T 4 and the others ([Trip planning and calculators](/kln90b/operation/trip-planning/)).
+
+<KlnScreen screen="pages/dt/dt-2-cursor" />
+
+## D/T 3: desired track
+
+D/T 3 gives the distance and the <Term t="DTK">desired track</Term>, a magnetic course. Use it to see which course the next legs of the flight plan have.
+
+### D/T 3 beside an FPL page
+
+<KlnScreen screen="pages/dt/dt-3-fpl-0" />
+
+Beside an FPL page the rows are those of D/T 1. The desired track of a row is the course of the leg that ends at that waypoint, from the waypoint before it. The row of the active waypoint shows the desired track of the active leg; in [OBS mode](/kln90b/operation/modes-of-operation/#obs-mode) it shows the selected course instead, and the rows below keep the courses of their legs. A waypoint that FPL 0 holds twice in a row repeats the values of the row above. Beside a numbered flight plan, the rows give the course of each leg and the distance from the first waypoint.
+
+### D/T 3 beside any other page
+
+Beside any other page D/T 3 shows the active waypoint with its distance and desired track, and below it the next waypoint, not the destination waypoint. Its distance is measured from your present position by way of the active waypoint, and its desired track is the course of the leg from the active waypoint to it.
+
+<KlnScreen screen="pages/dt/dt-3-other" />
+
+The second block is hidden while the active waypoint is the last waypoint of FPL 0 and during a direct-to to a waypoint that FPL 0 does not hold.
+
+## D/T 4: flight times
+
+D/T 4 shows the times of the flight: when you departed, the present time, how long you have flown and when you arrive. It looks the same beside every left page.
+
+<KlnScreen screen="pages/dt/dt-4" />
+
+The top line names the destination waypoint, in front of the time zone. It is the last waypoint of FPL 0 or, with an approach in FPL 0, its missed approach point; during a direct-to to a waypoint outside the flight plan it is that waypoint. Unlike D/T 1, D/T 4 shows the destination waypoint while it is the active waypoint, and marks it then with an arrow, or with the Direct To symbol during a direct-to to it, also one to a waypoint of FPL 0. The time zone is a field here too, and works as on D/T 2. You cannot reset `DEP` or `FLT`.
+
+The flight timer counts while the groundspeed is 30 kt or more; [Trip planning and calculators](/kln90b/operation/trip-planning/) explains it, and [What the unit keeps while it is off](/kln90b/unit/power-on/#what-the-unit-keeps-while-it-is-off) says that a power-on clears the departure time and the flight time.
+
+## Dashes and blank rows
+
+A D/T page shows dashes where the unit has no value to give, and a blank where the page has nothing to say. These are the cases, for all four pages.
+
+- **The aircraft barely moves.** The estimated time en route exists only at a groundspeed above 2 kt. At 2 kt or less every estimated time en route and every ETA shows dashes, and the distances stay. On the ground before the flight you see the distances of the flight plan and no times.
+
+  <KlnScreen screen="pages/dt/dt-1-fpl-0-stopped" />
+
+- **No active waypoint.** Before the unit is NAV ready, and while FPL 0 holds fewer than two waypoints with no direct-to, every waypoint of FPL 0 beside an FPL page shows dashes in its distance, and in its time or desired track. Beside any other page the first block shows no identifier and dashes, and no second block appears ([No active waypoint](/kln90b/operation/modes-of-operation/#no-active-waypoint)). D/T 4 shows no destination waypoint.
+
+  <KlnScreen screen="pages/dt/dt-1-fpl-0-no-active" />
+
+- **A direct-to outside the flight plan.** The active waypoint is not in FPL 0, so beside FPL 0 the column is blank under the headings, which stay. Beside any other page the second block of D/T 1 to D/T 3 is hidden. D/T 4 shows the direct-to waypoint as the destination waypoint, marked with the Direct To symbol.
+
+  <KlnScreen screen="pages/dt/dt-1-fpl-0-direct-to" />
+
+While the unit flags its navigation, beside FPL 0 the row of the active waypoint reads 0 with dashes for the time, and each later row gives only the legs from the active waypoint on, with a time at the last groundspeed. Beside any other page, the distance in the second block of D/T 3 is only the length of the leg after the active waypoint.
+
+{/* kln90b#506: describes the current behavior; the fix makes the distances show dashes like the active waypoint while the unit flags its navigation */}
+
+## Where the D/T pages are used
+
+- [Page pairs](/kln90b/unit/controls-and-display/#page-pairs): how the right pages follow the left page.
+- [Direct-to](/kln90b/operation/direct-to/#the-default-waypoint): with a D/T page on the right, the Direct To page offers the active waypoint.
+- [Flight plans](/kln90b/operation/flight-plans/): the flight plan whose waypoints D/T 1 to D/T 3 list.
+- [Trip planning and calculators](/kln90b/operation/trip-planning/): the time zone and the flight timer.

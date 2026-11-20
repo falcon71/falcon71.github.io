@@ -1,63 +1,74 @@
 # Package: flight-plan-pages (the D/T, REF and CTR chapters)
 
-The right pages that work with a flight plan, written right after Flight plans. Pointers come from the planning
-survey of the code (paths relative to `vendor/kln90b/kln90b/`); they are not checked facts. Screens are planned by
-the session after its research.
-
-## Pages
-
-- **D/T pages** (`pages/dt.mdx`): D/T 1 to D/T 4. Each page in its two variants: with an FPL page on the left, and
-  with any other page on the left. When rows show dashes or are left out. D/T 4 and the flight timer (the fields;
-  the tasks are Trip planning and calculators', planned).
-- **REF page** (`pages/ref.mdx`): the page, its states (no flight plan on the left, the entry, the result), what
-  the unit refuses.
-- **CTR pages** (`pages/ctr.mdx`): CTR 1 and its states, CTR 2 with one page per waypoint (`CTR+2`), what the unit
-  refuses.
+Done 2026-11-20. Written by two writers in parallel (D/T; REF and CTR), each reviewed in two rounds. The sections below
+are as written.
 
 ## Topics this package owns
 
 Only the pages and their fields. Links instead of explanations: page pairs (Controls and display, `#page-pairs`);
-reference and center waypoints as tasks, and the limits of a flight plan (Flight plans); user waypoints and the
-waypoints the unit removes by itself (Waypoints and the database); times and the flight timer (Trip planning and
-calculators, planned).
+reference and center waypoints as tasks, the computation and the duplicate on a recompute (Flight plans,
+`#reference-waypoints`, `#center-waypoints`); the waypoints the unit makes and deletes by itself and `USR DB FULL`
+(User waypoints); times, time zones and the flight timer as tasks (Trip planning and calculators, planned, page link
+only); how FPL 0 scrolls (FPL chapter, `#the-fpl-pages-waypoints-in-a-list`).
 
-## Where to look
+## Pages
 
-`pages/right/Dt1Page.tsx` to `Dt4Page.tsx` with their `Fpl` and `Other` variants, `RefPage.tsx`, `Ctr1Page.tsx`,
-`Ctr2Page.tsx`, `CtrState.ts`, `services/Timers.ts`, `pages/left/FplPage.tsx` (`insertRefWpt`).
+### D/T pages (`pages/dt.mdx`, `sidebar.order` 13)
 
-## Notes from other packages
+- `#the-dt-pages-beside-the-left-page`: the page pair in one paragraph and the link.
+- `#dt-1-distance-and-estimated-time-en-route`, with `#dt-1-beside-an-fpl-page` (FPL 0, a numbered flight plan)
+  and `#dt-1-beside-any-other-page` (the active waypoint and the destination waypoint).
+- `#dt-2-estimated-time-of-arrival`, with `#dt-2-beside-an-fpl-page`, `#dt-2-beside-any-other-page`,
+  `#the-time-zone` (the field; the list and the task are Trip planning's).
+- `#dt-3-desired-track`, with `#dt-3-beside-an-fpl-page`, `#dt-3-beside-any-other-page` (active and next waypoint).
+- `#dt-4-flight-times`: the fields; the flight timer in one sentence with the links.
+- `#dashes-and-blank-rows`: groundspeed, no active waypoint, a direct-to outside the plan, before NAV ready, and the
+  NAV flag (the `kln90b#TBD` paragraph).
+- `#where-the-dt-pages-are-used`.
 
-From the planning survey: a comment in `Ctr2Page.tsx` says the layout of CTR 2 without waypoints is a guess. The
-reviewer checks that state against the real manuals; if they show it differently, that is a kln90b bug.
+Screens `pages/dt/`: `dt-1-fpl-0`, `-fpl-0-stopped`, `-fpl-0-direct-to`, `-fpl-0-long`, `-fpl-0-no-active`,
+`dt-1-fpl-1`, `dt-1-other`, `dt-2-fpl-0`, `dt-2-other`, `dt-2-cursor`, `dt-3-fpl-0`, `dt-3-other`, `dt-4`; the
+shared route is in `pages/dt/states.ts`.
 
-### From the package controls (2026-11-17)
+### REF page (`pages/ref.mdx`, `sidebar.order` 11)
 
-- **D/T 1 with an FPL page on the left** shows, for each waypoint of the flight plan, the cumulative distance and ETE
-  from the present position, blank for waypoints already passed; the distance is the distance to the active waypoint
-  plus the leg lengths (`pages/right/Dt1FplPage.tsx`, as read by the writer of Controls and display; check it). The
-  screen `display/page-pair-fpl-0-dt-1` and its field explanations, shown on Controls and display `#page-pairs`, say this; the
-  D/T chapter must agree with them or have them corrected in its review.
-- Controls and display `#page-pairs` gives the general rule only; each of D/T, REF and CTR says in one sentence that
-  it works with the left page, links there, and then gives its own variants.
+- `#ref-page-a-waypoint-on-the-plan-abeam-another`, with `#display-desired-fpl-on-left-page` and `#invalid-ref`.
+- `#where-the-ref-page-is-used`.
 
-- Cut from Controls and display: with a page other than an FPL page on the left, D/T 1 to D/T 3 show the active leg and
-  the legs after it; REF and CTR show `DISPLAY DESIRED FPL ON LEFT PAGE` without an FPL page on the left. These are
-  the chapters' own variants.
+Screens `pages/ref/`: `ref-entry`, `ref-no-fpl`, `ref-invalid`; the approval is `flight-plans/ref-approve`.
 
-### From the package flight-plans (2026-11-19)
+### CTR pages (`pages/ctr.mdx`, `sidebar.order` 10)
 
-- Flight plans owns the tasks: `#reference-waypoints` and `#center-waypoints`. The REF and CTR chapters give the
-  pages, their states and fields, and link there.
-- Found by the review of Flight plans in the code: CTR 1 has no cursor; ENT on it computes and inserts the center
-  waypoint. On the REF page, `DISPLAY DESIRED FPL ON LEFT PAGE` appears only when no FPL page is on the left; with
-  fewer than two waypoints in the plan, the approval answers `INVALID REF`. The radial of a reference waypoint is
-  stored true and shown magnetic, converted with the VOR's published magnetic variation, or the variation at the
-  reference waypoint for other waypoint types. The result of CTR is void when the pilot leaves the FPL page. Check
-  each in the code.
-- Screens of the package: `flight-plans/ref-approve`, `flight-plans/ctr-computed`, `flight-plans/ctr-complete` show
-  the steps; the chapters need their own page screens.
+- `#ctr-1-computing-center-waypoints`, with `#display-desired-fpl-on-left-page`, `#not-enough-room-in-fpl`,
+  `#a-crossing-without-a-waypoint`.
+- `#ctr-2-the-center-waypoints-one-by-one`, with `#no-ctr-waypoints`.
+- `#where-the-ctr-pages-are-used`.
+
+Screens `pages/ctr/`: `ctr-1-prompt`, `ctr-1-no-fpl`, `ctr-1-not-enough-room`, `ctr-2`, `ctr-2-none`; the count
+and the complete state are `flight-plans/ctr-computed` and `flight-plans/ctr-complete`.
+
+## Screens that could not be staged as planned
+
+- D/T before NAV ready: the generator cannot boot the unit cold; the text describes it without a screen.
+- CTR 2 with a center waypoint that the plan already holds: a recompute never lists one (the duplicate bug), so
+  the state the code would draw cannot be reached.
+- CTR 2 without waypoints (`NO CTR WAYPOINTS`) is drawn as the code draws it; the code calls its layout a guess, and
+  the reviewer found no evidence of how the real unit shows it.
 
 ## Changes to earlier pages
 
-None planned.
+Made in this package and reviewed: the field explanations of `display/page-pair-fpl-0-dt-1` (D/T 1 beside another
+page; numbered plans), `flight-plans/ctr-computed` and `flight-plans/ref-approve`; Flight plans
+`#reference-waypoints` and `#center-waypoints` (the term reference waypoint, deletion at power-off and power-on, the
+void rule, the duplicate on a recompute); FPL chapter, the scrolling of FPL 0; Controls and display `#page-pairs`
+(CTR 2 follows the left page too). The generator names the Centers so that CTR 2 shows their abbreviations
+(`kln90b/generator/lib/navdata.ts`, `boundaryOf`).
+
+## Issues
+
+- kln90b#506: D/T 1 to D/T 3 under the NAV flag (`#dashes-and-blank-rows`); the issue also carries the question
+  whether the first waypoint's row before NAV ready is blank or dashed.
+- kln90b#508: the duplicate center waypoint on a recompute (Flight plans, `#center-waypoints`).
+- kln90b#507: a reference waypoint approved into a full FPL 0 skips the question to make room. Not confirmed on a
+  screen, so no page describes it; when it is confirmed or fixed, Flight plans (`#the-question-to-make-room-in-fpl-0`)
+  says it in one sentence.
