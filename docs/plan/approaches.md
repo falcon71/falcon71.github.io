@@ -55,7 +55,7 @@ loading an approach"); the approach messages and the RAIM paragraph on GPS recep
 the link; the RAIM links of GPS reception and RAIM, the STA chapter and the NAV chapter sharpened to
 `#raim-in-an-approach`.
 
-## Left open
+## Settled with the maintainer
 
-- When Super NAV 5 with the `AUTO` range scale shows the runway diagram on an approach (the code: at a range scale of
-  2 NM or less, so within about 2 NM of the MAP) could not be settled by the review; not filed, for the maintainer.
+- Super NAV 5 with the `AUTO` range scale shows the runway diagrams only at a range scale of 2 NM or less, as the code
+  does (maintainer, 2026-11-20).
