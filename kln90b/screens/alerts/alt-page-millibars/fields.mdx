@@ -1,0 +1,20 @@
+<Field id="title" title="Page title">
+	`ALTITUDE` names the ALT page. With the alert off, the page has no empty line below it.
+</Field>
+
+<Field id="baro" title="Baro setting">
+	<p>The altimeter <Term t="BARO">baro setting</Term> that the unit applies to the pressure altitude of the altitude input to get the indicated altitude: `29.92"` in inches of mercury, or `1013MB` in millibars, as SET 7 chooses. You change it only with the cursor, and each step takes effect at once, without <kbd>ENT</kbd>.</p>
+	<p>In inches the cursor stops on three cells: the first two digits (00 to 30), the tenths and the hundredths. In millibars it stops on the first two digits (7, 8, 9 or 10 for 700 to 1099 millibars), the tens and the ones. Where an air data system supplies the setting, the field follows the setting of the aircraft's altimeter and the cursor skips it. The setting does not reach the altimeter of the aircraft.</p>
+</Field>
+
+<Field id="alert" title="Altitude alert">
+	`ON` or `OFF`: whether the unit sounds the aural alarm. The inner knob switches it. With `ON` the page moves down one line, shows the `WARN` line and shows an arrow after `ON` that points at the selected altitude on the right page. Without altitude alerting in the installation the field shows `OFF` and the cursor skips it. The unit keeps the setting across a power-off. [Altitude alerting](/kln90b/operation/alerts/#altitude-alerting) explains the tones.
+</Field>
+
+<Field id="warn" title="Warn altitude">
+	The warn altitude: the distance from the selected altitude beyond which the unit sounds the four tones of the altitude deviation alert, as `±` and the number of feet: 200 to 900 ft in steps of 100 ft, 300 ft to start with. The line shows only while the alert is `ON`, and the cursor stops on the digit. The unit keeps the setting across a power-off.
+</Field>
+
+<Field id="page" title="CRSR annunciation">
+	<Term t="CRSR">`CRSR`</Term> replaces the page identification `ALT` while the left cursor is on.
+</Field>

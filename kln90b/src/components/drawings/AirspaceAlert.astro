@@ -1,0 +1,72 @@
+---
+/**
+ * Synthetic drawing: when the airspace alert speaks. Above, an area seen from above with its margin of 2 NM and three
+ * aircraft with the track of the next 10 minutes; below, the same area seen from the side with its floor, its ceiling
+ * and the vertical buffer of SET 8 above and below. The area, its limits and the aircraft are invented. The drawing is
+ * schematic: the margin and the buffer are drawn wider than to scale so that the labels fit.
+ * Drawings use currentColor and the theme variables only, so they work in light and dark mode.
+ */
+import GpsFigure from './GpsFigure.astro';
+
+interface Props {
+	caption: string;
+}
+const { caption } = Astro.props;
+---
+
+<GpsFigure caption={caption} viewBox="0 0 560 560" id="airspace-alert">
+	<!-- Seen from above -->
+	<text x="10" y="24" class="t small">Seen from above</text>
+	<rect x="226" y="74" width="148" height="92" rx="14" class="dash" />
+	<rect x="250" y="98" width="100" height="44" class="area" />
+	<rect x="250" y="98" width="100" height="44" class="ax" />
+	<text x="285" y="126" text-anchor="middle" class="t">area</text>
+	<line x1="350" y1="142" x2="374" y2="166" class="ax" />
+	<text x="382" y="190" class="t small">2 NM</text>
+
+	<!-- Aircraft A: the track meets the area -->
+	<line x1="328" y1="290" x2="328" y2="112" class="accent" />
+	<polygon points="328,100 319,120 337,120" class="dot" />
+	<circle cx="328" cy="290" r="7" class="dot-plain" />
+	<text x="338" y="320" text-anchor="middle" class="t small">alert</text>
+
+	<!-- Aircraft B: passes well clear -->
+	<line x1="90" y1="290" x2="90" y2="112" class="muted" />
+	<polygon points="90,100 81,120 99,120" fill="currentColor" />
+	<circle cx="90" cy="290" r="7" class="dot-plain" />
+	<text x="90" y="320" text-anchor="middle" class="t small">no alert</text>
+
+	<!-- Aircraft C: passes within 2 NM -->
+	<line x1="238" y1="290" x2="238" y2="112" class="accent" />
+	<polygon points="238,100 229,120 247,120" class="dot" />
+	<circle cx="238" cy="290" r="7" class="dot-plain" />
+	<text x="236" y="320" text-anchor="middle" class="t small">alert</text>
+
+	<text x="440" y="226" text-anchor="middle" class="t small">the track of the</text>
+	<text x="440" y="248" text-anchor="middle" class="t small">next 10 minutes</text>
+	<line x1="410" y1="260" x2="340" y2="272" class="ax" />
+
+	<!-- Seen from the side -->
+	<line x1="10" y1="368" x2="550" y2="368" class="grid" />
+	<text x="10" y="390" class="t small">Seen from the side</text>
+	<rect x="150" y="436" width="400" height="56" class="area" />
+	<line x1="150" y1="436" x2="550" y2="436" class="ax" />
+	<line x1="150" y1="492" x2="550" y2="492" class="ax" />
+	<line x1="150" y1="410" x2="550" y2="410" class="dash" />
+	<line x1="150" y1="518" x2="550" y2="518" class="dash" />
+	<text x="140" y="442" text-anchor="end" class="t small">ceiling</text>
+	<text x="140" y="498" text-anchor="end" class="t small">floor</text>
+	<text x="140" y="416" text-anchor="end" class="t small">buffer</text>
+	<text x="140" y="524" text-anchor="end" class="t small">buffer</text>
+
+	<circle cx="230" cy="386" r="7" class="dot-plain" />
+	<text x="246" y="392" class="t small">outside the buffer</text>
+	<circle cx="230" cy="423" r="7" class="dot" />
+	<text x="246" y="429" class="t small">inside</text>
+	<circle cx="230" cy="464" r="7" class="dot" />
+	<text x="246" y="470" class="t small">inside</text>
+	<circle cx="230" cy="505" r="7" class="dot" />
+	<text x="246" y="511" class="t small">inside</text>
+	<circle cx="230" cy="544" r="7" class="dot-plain" />
+	<text x="246" y="550" class="t small">outside the buffer</text>
+</GpsFigure>

@@ -1,0 +1,48 @@
+<Field id="title" title="Page title">
+	`ALTITUDE` names the ALT page. With the alert off, the page has no empty line below it.
+</Field>
+
+<Field id="baro" title="Baro setting">
+	<p>The altimeter <Term t="BARO">baro setting</Term> that the unit applies to the pressure altitude of the altitude input to get the indicated altitude: `29.92"` in inches of mercury, or `1013MB` in millibars, as SET 7 chooses. You change it only with the cursor, and each step takes effect at once, without <kbd>ENT</kbd>.</p>
+	<p>In inches the cursor stops on three cells: the first two digits (00 to 30), the tenths and the hundredths. In millibars it stops on the first two digits (7, 8, 9 or 10 for 700 to 1099 millibars), the tens and the ones. Where an air data system supplies the setting, the field follows the setting of the aircraft's altimeter and the cursor skips it. The setting does not reach the altimeter of the aircraft.</p>
+</Field>
+
+<Field id="alert" title="Altitude alert">
+	`ON` or `OFF`: whether the unit sounds the aural alarm. The inner knob switches it. With `ON` the page moves down one line, shows the `WARN` line and shows an arrow after `ON` that points at the selected altitude on the right page. Without altitude alerting in the installation the field shows `OFF` and the cursor skips it. The unit keeps the setting across a power-off. [Altitude alerting](/kln90b/operation/alerts/#altitude-alerting) explains the tones.
+</Field>
+
+<Field id="warn" title="Warn altitude">
+	The warn altitude: the distance from the selected altitude beyond which the unit sounds the four tones of the altitude deviation alert, as `±` and the number of feet: 200 to 900 ft in steps of 100 ft, 300 ft to start with. The line shows only while the alert is `ON`, and the cursor stops on the digit. The unit keeps the setting across a power-off.
+</Field>
+
+<Field id="page" title="CRSR annunciation">
+	<Term t="CRSR">`CRSR`</Term> replaces the page identification `ALT` while the left cursor is on.
+</Field>
+
+<Field id="vnav" title="VNAV state">
+	The state of VNAV, in the top line of NAV 4: `VNV INACTV` while VNAV is inactive. [Flying the vertical path](/kln90b/operation/vnav/#flying-the-vertical-path) says what each state means.
+</Field>
+
+<Field id="ind" title="Indicated altitude">
+	The indicated altitude from the altitude input of the aircraft, with the baro setting applied, rounded to 100 ft. It shows five digits and `00000` below 0 ft, and you cannot change it.
+</Field>
+
+<Field id="sel" title="Selected altitude">
+	The altitude to climb or descend to, in steps of 100 ft from 0 to 99,900 ft. The cursor stops on the ten-thousands, thousands and hundreds digits, and a digit takes effect at once. Changing it stops VNAV. The altitude alert uses the selected altitude, and the arrow after `ON` on the ALT page points at it.
+</Field>
+
+<Field id="dist" title="Offset">
+	The distance before the VNAV waypoint where the descent or climb should end, in NM from 0 to 99. It shows `:-00nm` without a VNAV waypoint. Changing it stops VNAV.
+</Field>
+
+<Field id="angle" title="Angle">
+	The angle of the vertical path, negative for a descent, in tenths of a degree up to 9.9°. Without an active waypoint it shows `0.0`. [The angle](/kln90b/operation/vnav/#the-angle) says the rest.
+</Field>
+
+<Field id="mode" title="Mode annunciation">
+	<Term t="ENR-LEG">`ENR-LEG`</Term>: Enroute-Leg mode. See [The mode annunciations](/kln90b/operation/modes-of-operation/#the-mode-annunciations).
+</Field>
+
+<Field id="rpage" title="CRSR annunciation">
+	<Term t="CRSR">`CRSR`</Term> replaces the page identification `NAV 4` while the right cursor is on.
+</Field>

@@ -90,7 +90,7 @@ The altitude input depends on how the unit is installed in the aircraft. Not eve
 
 When the aircraft gives the unit an altitude, from an encoding altimeter or an air data computer, the receiver uses it as one more measurement. STA 1 then shows `NAV A` while the unit navigates, unless `DEGRD` or `NAV D` shows; three satellites are enough for a position, and four satellites give RAIM the measurements it needs.
 
-The receiver uses the indicated altitude, corrected with the baro setting of the unit ([Airspace and altitude alerting](/kln90b/operation/alerts/)). A wrong baro setting moves the position a little, and more when few satellites are in use.
+The receiver uses the indicated altitude, corrected with the baro setting of the unit ([The baro setting](/kln90b/operation/alerts/#the-baro-setting)). A wrong baro setting moves the position a little, and more when few satellites are in use.
 
 A unit installed without an altitude input, or one whose altitude input has failed, shows `ALTITUDE FAIL` on the MSG page as long as the altitude is missing; a unit installed for VFR only does not. STA 1 then never shows `NAV A`, the unit needs four satellites for a position, and five for RAIM.
 

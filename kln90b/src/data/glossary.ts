@@ -147,7 +147,7 @@ export const glossary: Record<string, GlossaryEntry> = {
 	},
 	BARO: {
 		expansion: 'Altimeter baro setting',
-		text: 'The baro setting of the altimeter, in inches of mercury, which the unit uses for altitude.',
+		text: 'The baro setting of the altimeter, in inches of mercury or millibars, which the unit uses for altitude.',
 	},
 };
 

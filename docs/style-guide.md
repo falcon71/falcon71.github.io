@@ -598,6 +598,12 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | reference waypoint: with the REF page, the waypoint the unit creates on the plan (`OLMA`); the waypoint you enter on the REF page is "the waypoint you enter". On the INT and SUP pages, the reference waypoint is the waypoint of their `REF` field. | new waypoint (for the one the REF page creates) |
 | airport reference point (the point of an airport that the 30 NM of arming an approach are measured from); in FPL 0 the row is the airport itself | the airport (as the point a distance is measured from) |
 | the ARM annunciator, the ACTV annunciator (the remote annunciators of the approach modes, at the GPS APR switch) | the arm lamp, the active lamp |
+| VNAV: the vertical path; the descent point (where the descent starts); the advisory altitude; the VNAV waypoint; the offset point (the offset before the VNAV waypoint, where the path ends); VNAV is inactive (`VNV INACTV`), armed, active | the path (at its first mention), the start of the path, VNAV not running |
+| the altimeter baro setting at the first mention, then the baro setting | altimeter setting (for the unit's own setting) |
+| the warn altitude (`WARN` on the ALT page); the altitude deviation alert (the tones when you leave the selected altitude) | deviation limit |
+| the aural alarm (the tones of altitude alerting as a whole); a tone | the alert tones |
+| the special use airspace alert at the first mention, then the airspace alert (as SET 8 names it); special use airspace; the vertical buffer (SET 8) | SUA alert |
+| the height above airport alert; the offset height (its height, set on SET 5) | |
 | center waypoint (the waypoint the CTR pages create at a Center boundary); area control center (ACC or ARTCC) where a page first introduces the concept, then Center (maintainer, 2026-11-20) | air route traffic control center alone, ACC alone |
 
 ### Spelling and style
@@ -638,6 +644,10 @@ general; the screen shows one concrete case.
 - **A step that carries data from one side to the other gets a screen** that shows both halves: where the data
   comes from and where it goes, such as the identifier of the right page taken into a field of the left page. The
   pilot learns such a step by seeing it (maintainer, 2026-11-17).
+- **A page that works with a field of the other side shows both halves.** Where a page points to a value on the
+  other half and uses it (the arrow after `ON` on the ALT page points to the selected altitude of NAV 4, which the
+  altitude alert uses), its screen shows both halves, so that the pilot sees what the page works with. The rule
+  below, to show only the page the text is about, gives way to this one (maintainer, 2026-11-20).
 - **Show only the page the text is about.** A screen of both halves, or an excerpt of both halves, where the text
   is about one page shows the other page's data as well, and where the other page repeats the same data (the top
   line of NAV 1 and of NAV 3), the pilot sees it twice and wonders why. Show the one half, and let the other page
