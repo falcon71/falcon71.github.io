@@ -114,7 +114,7 @@ A step of the left inner knob on a waypoint opens a new entry in front of it. Th
 
 <KlnScreen screen="pages/fpl/fpl-0-insert" />
 
-On a header the cursor changes the row to `CHANGE SID?`, `CHANGE STAR?` or `CHANGE APR?` ([SID and STAR procedures](/kln90b/operation/departures-arrivals/)). <kbd>ENT</kbd> on a waypoint while the right side shows a waypoint page takes that page's waypoint into a new entry in front of it ([Taking the waypoint of the right page into a flight plan](/kln90b/operation/flight-plans/#taking-the-waypoint-of-the-right-page-into-a-flight-plan)). An identifier that the database lacks brings up the offer to create a user waypoint ([Creating a user waypoint](/kln90b/operation/user-waypoints/#creating-a-user-waypoint)).
+On a header the cursor changes the row to `CHANGE SID?`, `CHANGE STAR?` or `CHANGE APR?` ([Changing a procedure](/kln90b/operation/departures-arrivals/#changing-a-procedure)). <kbd>ENT</kbd> on a waypoint while the right side shows a waypoint page takes that page's waypoint into a new entry in front of it ([Taking the waypoint of the right page into a flight plan](/kln90b/operation/flight-plans/#taking-the-waypoint-of-the-right-page-into-a-flight-plan)). An identifier that the database lacks brings up the offer to create a user waypoint ([Creating a user waypoint](/kln90b/operation/user-waypoints/#creating-a-user-waypoint)).
 
 ### The delete questions
 
@@ -124,13 +124,13 @@ These questions are page states of their own.
 
 <KlnScreen screen="pages/fpl/fpl-0-delete-question" />
 
-**`MOVE ?`** replaces the row of the DME arc waypoint of an approach in FPL 0 when you press <kbd>CLR</kbd> on it, instead of `INVALID DEL`; a second <kbd>CLR</kbd> withdraws it. On the DME arc waypoint of a SID or a STAR, <kbd>CLR</kbd> asks `DEL` instead ([Moving the DME arc waypoint](/kln90b/operation/dme-arcs/#moving-the-dme-arc-waypoint)).
+**`MOVE ?`** replaces the row of the DME arc waypoint of an approach in FPL 0 when you press <kbd>CLR</kbd> on it, instead of `INVALID DEL`; a second <kbd>CLR</kbd> withdraws it. On the DME arc waypoint of a SID or a STAR, <kbd>CLR</kbd> asks `DEL` instead ([Moving the DME arc waypoint](/kln90b/operation/dme-arcs/#moving-the-dme-arc-waypoint)). {/* kln90b#509: describes the current behavior; the fix makes FPL 0 offer MOVE ? for the arcs of SIDs and STARs too */}
 
 **`DELETE FPL?`** asks about the whole flight plan. <kbd>CLR</kbd> with the cursor off turns the cursor on and replaces the top line with the question, which flashes. It works on every FPL page, FPL 0 and a plan with waypoints included. <kbd>ENT</kbd> deletes every waypoint of the plan and turns the cursor off. A numbered flight plan then shows `LOAD FPL 0?`, and an FPL 0 without waypoints has no active leg. <kbd>CLR</kbd> again withdraws the question and turns the cursor off. A <kbd>CLR</kbd> that you meant for a field on the right page can start it; [`DELETE FPL?`](/kln90b/operation/flight-plans/#delete-fpl) explains how.
 
 <KlnScreen screen="pages/fpl/fpl-1-delete-question" />
 
-**`DELETE SID?`**, `DELETE STAR?` and `DELETE APR?` ask about a procedure of FPL 0: <kbd>CLR</kbd> on a header turns `CHANGE SID?` into the delete question ([SID and STAR procedures](/kln90b/operation/departures-arrivals/)).
+**`DELETE SID?`**, `DELETE STAR?` and `DELETE APR?` ask about a procedure of FPL 0: <kbd>CLR</kbd> on a header turns `CHANGE SID?` into the delete question ([Deleting a procedure](/kln90b/operation/departures-arrivals/#deleting-a-procedure)).
 
 ## Where the FPL pages are used
 

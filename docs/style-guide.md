@@ -515,7 +515,10 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | the power/brightness knob | the brightness knob, the power button, the power knob |
 | waypoint type (airport, VOR, NDB, intersection, supplemental) | kind of waypoint |
 | procedure header, approach header (the line of FPL 0 that names a loaded procedure) | |
-| DME arc waypoint | arc entry |
+| DME arc waypoint (also the one the unit computes where you join the arc) | arc entry |
+| the beginning of the arc, the end of the arc (of a DME arc as published) | published start fix, end fix |
+| the present radial is within the arc, outside the arc | abeam the arc |
+| the reference VOR of the arc (the VOR a DME arc is flown around; on the SUP page of the DME arc waypoint it is the reference waypoint) | the VOR of the arc, the arc's VOR |
 | several pages with one page name ("there is more than one APT 3 page", shown by the `+`) | subpage |
 | SID, STAR; SIDs, STARs; SID and STAR procedures; a SID procedure, a STAR procedure | departure, arrival (as names of the procedures) |
 | suffix (the letter after a waypoint of a loaded procedure) | mark, marker |

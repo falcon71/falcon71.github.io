@@ -137,11 +137,11 @@ that writes the owner records the anchors in this table, and the final pass shar
 | The FPL page: the active leg symbol, the arrow in OBS mode and during a direct-to, the fence, the questions of the top line as page states | FPL chapter: `#fpl-0-the-active-flight-plan` (`#the-active-leg-symbol`, `#procedure-headers`, `#fpl-0-during-a-direct-to-and-in-obs-mode`), `#fpl-1-to-fpl-25-numbered-flight-plans` (`#use-invrt`), `#the-delete-questions` | Flight plans and Direct-to: link `#the-active-leg-symbol` instead of describing the marks |
 | A route from the EFB and FPL 0 sent to the EFB | Flight plans: `#loading-a-route-from-the-efb`, `#sending-fpl-0-to-the-efb` | Tutorial flight 2: the steps (style guide, section 17); FAQ: the question and the link |
 | Reference waypoints and center waypoints as tasks, the computation, the duplicate on a recompute | Flight plans: `#reference-waypoints`, `#center-waypoints` | REF and CTR chapters: the pages, their states (`#invalid-ref`, `#not-enough-room-in-fpl`, `#no-ctr-waypoints`) and fields |
-| What a loaded procedure does in FPL 0: where it goes, headers and suffixes, `CHANGE` and `DELETE` on a header, editing procedure waypoints, the make-room question | SID and STAR procedures (Non-precision approaches for what differs for an approach) | Flight plans: one paragraph and the link; APT 7 and APT 8: one sentence and the link |
+| What a loaded procedure does in FPL 0: where it goes, procedure headers, `CHANGE` and `DELETE` on a header, editing procedure waypoints, the make-room question for a procedure, `REDUNDANT WPTS IN FPL` | SID and STAR procedures: `#which-procedures-the-unit-offers`, `#what-the-unit-keeps-of-a-procedure`, `#loading-a-sid`, `#loading-a-star`, `#a-transition-must-be-selected` (`#redundant-wpts-in-fpl`), `#where-the-procedure-goes-in-fpl-0`, `#the-procedure-in-fpl-0`, `#the-question-to-make-room-for-a-procedure`, `#changing-a-procedure`, `#deleting-a-procedure`, `#editing-the-waypoints-of-a-procedure`, `#flying-a-sid-or-a-star` (Non-precision approaches for what differs for an approach) | Flight plans: one paragraph and the link; APT 7 and APT 8: one sentence and the link |
 | The two rules (a transition must be selected; an approach starts only at an IAF) | SID and STAR procedures, Non-precision approaches | stated plainly on APT 7, APT 8 and in the FAQ too (style guide, section 17) |
 | Approach arming and activation, the approach modes, the suffixes of approach waypoints, `INVALID ADD` and `INVALID DEL`, the missed approach, what the unit does not fly | Non-precision approaches | APT 8 links |
-| DME arcs: which legs become arcs, the DME arc waypoint (computation, name), moving it (`MOVE ?`, `NO INTRCEPT`), flying the arc, OBS mode on an arc | DME arcs: `#arcs-in-a-procedure`, `#the-dme-arc-waypoint` (`#the-name-of-a-dme-arc-waypoint`), `#moving-the-dme-arc-waypoint` (`#no-intrcept`), `#flying-the-arc`, `#an-arc-in-obs-mode` | SID and STAR procedures, Non-precision approaches, APT 7 and APT 8: one sentence and the link; NAV chapter: its fields; FPL chapter: `MOVE ?` as a row state and the link |
-| Holding patterns and procedure turns the unit drops, `IF REQUIRED SELECT OBS` | SID and STAR procedures, `#if-required-select-obs` (planned) | Non-precision approaches: what differs, and the link |
+| DME arcs: which legs become arcs, the DME arc waypoint (computation, name), moving it (`MOVE ?`, `NO INTRCEPT`), flying the arc, OBS mode on an arc | DME arcs: `#arcs-in-a-procedure`, `#the-dme-arc-waypoint` (`#the-name-of-a-dme-arc-waypoint`), `#moving-the-dme-arc-waypoint` (`#move--in-fpl-0`, `#no-intrcept`), `#flying-the-arc` (`#distance-time-and-bearing-on-the-arc`, `#nav-2-and-super-nav-5-on-an-arc`, `#leaving-the-arc`), `#the-dme-arc-waypoint-as-a-waypoint`, `#an-arc-in-obs-mode` | SID and STAR procedures, Non-precision approaches, APT 7 and APT 8: one sentence and the link; NAV chapter: its fields; FPL chapter: `MOVE ?` as a row state and the link |
+| Holding patterns and procedure turns the unit drops, `IF REQUIRED SELECT OBS` | SID and STAR procedures, `#if-required-select-obs` | Non-precision approaches: what differs, and the link |
 | VNAV | VNAV | NAV chapter: the fields of NAV 4; CAL chapter: CAL 4 as a page |
 | The ALT page, the barometric setting, the selected altitude, altitude alerting, the height above airport alert | Airspace and altitude alerting | NAV chapter: the altitude fields of NAV 4; SET chapter: SET 5, SET 7, SET 9 as pages |
 | The airspace alert (SET 8), its messages | Airspace and altitude alerting | APT 1, OTH 2, TRI 2, TRI 4, TRI 6 show airspaces and link |
@@ -189,7 +189,7 @@ anchors and page links above. After them the order follows "owners before the pa
 | 9 | nav-pages | NAV chapter with Super NAV 1 and Super NAV 5 | done (2026-11-18) |
 | 10 | flight-plans | Flight plans; FPL chapter | done (2026-11-19) |
 | 11 | flight-plan-pages | D/T, REF and CTR chapters | done (2026-11-20) |
-| 12 | sid-star | SID and STAR procedures; DME arcs | researched |
+| 12 | sid-star | SID and STAR procedures; DME arcs | in review |
 | 13 | approaches | Non-precision approaches | not started |
 | 14 | vnav-alerts | VNAV; Airspace and altitude alerting | not started |
 | 15 | set | SET chapter | not started |
@@ -267,6 +267,15 @@ it is written when those owners exist. A package that proves too large in its re
 - The FLR chapter ("Leaving the FLR pages") repeats some general rules of pages opened over the page tree that
   Controls and display now owns (`#pages-that-no-knob-reaches`); the final pass cuts them to the FLR specifics and
   the link.
+
+- The package sid-star (2026-11-20) brought the official terms the beginning and the end of the arc, a radial
+  within or outside the arc, and the reference VOR of the arc, and split "transition" (of a turn, of a procedure) in
+  the word list. The final pass searches once more ("end fix", "published start", "abeam the arc", "the VOR of the
+  arc", "header row").
+- The reviewer of SID and STAR procedures named "airport reference point" as the official term where the pages say
+  "the airport" of a procedure in FPL 0; not adopted (the row of FPL 0 is the airport itself), for the maintainer.
+- The screen `navigation/msg-adj-nav-ind-crs` explains a flashing `MSG` as "in inverse video", and the field `sid`
+  of `pages/fpl/fpl-0-procedures` lacks the `<Term>` at its first SID (reviewer of SID and STAR procedures).
 
 ## Site and generator notes
 
