@@ -105,4 +105,12 @@ with that condition.
 - Power-on and initialization: the five beeps of the approval sound only where the unit is installed with altitude
   alerting as well as given a sound output (`services/AudioGenerator.ts:46-48`, `pages/right/SelfTestRightPage.tsx:149`;
   researcher of alerts, 2026-11-20). Say it in pilot terms, linking `#altitude-alerting`.
+- Simulated failures (or GPS reception and RAIM, "Losing the position in flight"): a loss of the position ends VNAV
+  (writer of VNAV, 2026-11-20, reproduced by failing the GPS antenna; `Vnav.ts:204,206`, a candidate bug). Paragraph
+  proposed: "A loss of the position ends VNAV. Within a few seconds NAV 4 shows `VNV INACTV` and clears the VNAV plan
+  as at the end of a path: the waypoint goes back to the active waypoint, the offset to `00` and the angle to `0.0`.
+  When the position returns, VNAV does not start again by itself; plan the descent again on NAV 4 ([VNAV](/kln90b/operation/vnav/#when-vnav-ends))."
+- The NAV chapter, `nav.mdx` "Take care with the angle…", repeats what VNAV `#starting-vnav` owns; the NAV 4 field
+  explanations list the VNAV states in their title field and keep only the link.
+- The glossary entry `BARO` says inches of mercury only; the unit shows millibars as well (writer of alerts).
 - GPS reception and RAIM links the baro setting to the page; the seam check sharpens it to `#the-baro-setting`.

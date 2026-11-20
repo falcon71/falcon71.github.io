@@ -1,0 +1,73 @@
+---
+/**
+ * Synthetic drawing: the descent of the VNAV screens (vnav/nav-4-*), seen from the side. The x axis is the distance to
+ * KSEA along the leg from KPDX, to scale (11 px per NM); the y axis is the altitude, to its own scale (0.026 px per ft),
+ * so that the angle looks far steeper than 3.0°. The aircraft flies at 7,500 ft and 123 kt; VNAV descends at 3.0° to
+ * the selected altitude 3,000 ft at the offset point 5 NM before KSEA. The start of the descent is where a 3.0° path
+ * through that point reaches 7,500 ft, 19.1 NM from KSEA; the countdown begins 10 minutes earlier at 123 kt, 39.6 NM
+ * from KSEA. The advisory altitude is marked at 12 NM (5,229 ft, shown as 5,200 ft), as on vnav/nav-4-active. The NAV 4
+ * titles of each stretch stand above it.
+ * Drawings use currentColor and the theme variables only, so they work in light and dark mode.
+ */
+import GpsFigure from './GpsFigure.astro';
+
+interface Props {
+	caption: string;
+}
+const { caption } = Astro.props;
+
+const x = (nm: number) => Math.round(610 - nm * 11);
+const y = (ft: number) => Math.round(250 - ft * 0.026);
+const FT_PER_NM = 1852 / 0.3048;
+const TAN = Math.tan((3 * Math.PI) / 180);
+const START = 5 + 4500 / TAN / FT_PER_NM;
+const COUNT = START + (123 * 10) / 60;
+const adv = { x: x(12), y: y(3000 + TAN * 7 * FT_PER_NM) };
+const aircraft = { x: x(30), y: y(7500) };
+const top = { x: x(START), y: y(7500) };
+const end = { x: x(5), y: y(3000) };
+const ksea = { x: x(0), y: y(0) };
+// The arc of the angle at the offset point, between the path and the line of the selected altitude
+const R = 46;
+const dirLen = Math.hypot(top.x - end.x, top.y - end.y);
+const arcEnd = { x: end.x + ((top.x - end.x) / dirLen) * R, y: end.y + ((top.y - end.y) / dirLen) * R };
+const bands = [
+	{ from: 50, to: COUNT, text: 'VNV ARMED' },
+	{ from: COUNT, to: START, text: 'VNV IN 9:59 … :01' },
+	{ from: START, to: 5, text: 'VNV 5200ft' },
+];
+const marks = [
+	{ nm: COUNT, name: '39.6 NM', role: '10 min' },
+	{ nm: START, name: '19.1 NM', role: 'start' },
+	{ nm: 5, name: '5 NM', role: 'offset' },
+	{ nm: 0, name: 'KSEA', role: '' },
+];
+---
+
+<GpsFigure caption={caption} viewBox="0 0 650 320" id="vnav-path">
+	<line x1={x(50)} y1={y(0)} x2={ksea.x} y2={y(0)} class="ax" />
+	<line x1={x(50)} y1={y(7500)} x2={x(0)} y2={y(7500)} class="grid" />
+	<line x1={x(50)} y1={y(3000)} x2={x(0)} y2={y(3000)} class="grid" />
+	<text x="0" y={y(7500) + 6} class="t small">7,500 ft</text>
+	<text x="0" y={y(3000) + 6} class="t small">3,000 ft</text>
+	{marks.map(m => <line x1={x(m.nm)} y1="40" x2={x(m.nm)} y2={y(0)} class="grid" />)}
+	{bands.map(b => (
+		<text x={(x(b.from) + x(b.to)) / 2} y="30" text-anchor="middle" class="t small t-accent">{b.text}</text>
+	))}
+	<line x1={aircraft.x} y1={aircraft.y} x2={top.x} y2={top.y} class="dash" />
+	<line x1={top.x} y1={top.y} x2={end.x} y2={end.y} class="accent" />
+	<path d={`M${end.x - R},${end.y} A${R},${R} 0 0 1 ${arcEnd.x.toFixed(1)},${arcEnd.y.toFixed(1)}`} class="ax" />
+	<text x={end.x - R - 8} y={end.y - 8} text-anchor="end" class="t small ko">3.0°</text>
+	<circle cx={adv.x} cy={adv.y} r="6" class="ring" />
+	<text x={adv.x + 12} y={adv.y - 10} class="t small ko">5,200 ft at 12 NM</text>
+	<circle cx={aircraft.x} cy={aircraft.y} r="7" class="dot" />
+	<text x={aircraft.x} y={aircraft.y + 28} text-anchor="middle" class="t small ko">aircraft</text>
+	<circle cx={end.x} cy={end.y} r="6" class="dot-plain" />
+	<circle cx={ksea.x} cy={ksea.y} r="7" class="ring" />
+	{marks.map(m => (
+		<g>
+			<text x={x(m.nm)} y="276" text-anchor="middle" class="t small">{m.name}</text>
+			<text x={x(m.nm)} y="300" text-anchor="middle" class="t small">{m.role}</text>
+		</g>
+	))}
+</GpsFigure>

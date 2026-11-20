@@ -1,0 +1,23 @@
+<Field id="message" title="Airspace alert">
+	The first line of the message. The unit warns you that the track of the next 10 minutes meets an area of special use airspace, or that you are within 2 NM of one. The next two lines name the area and give its limits. [`AIRSPACE ALERT:`](/kln90b/operation/alerts/#airspace-alert) explains the message.
+</Field>
+
+<Field id="name" title="Name of the area">
+	The name of the area, cut to fit the line.
+</Field>
+
+<Field id="type" title="Type of the area">
+	The type of the area at the right end of the line: `CL B` for Class B, `CL C` for Class C, `ALRT` for an alert area, `DNGR` for a danger area, `MOA`, `PROH` for a prohibited area, `REST` for a restricted area, `TRNG` for a training area and `WARN` for a warning area.
+</Field>
+
+<Field id="limits" title="Limits of the area">
+	The vertical limits of the area in feet above mean sea level: `1000ft to 18000ft` with floor and ceiling, `ABOVE 1000ft` with a floor only, `BELOW 7000ft` with a ceiling only. Class B and C show the ceiling only. The line is missing where the area has no limit above mean sea level.
+</Field>
+
+<Field id="mode" title="Mode annunciation">
+	<Term t="ENR-LEG">`ENR-LEG`</Term>: Enroute-Leg mode. See [The mode annunciations](/kln90b/operation/modes-of-operation/#the-mode-annunciations).
+</Field>
+
+<Field id="msg" title="Message prompt">
+	<Term t="MSG">`MSG`</Term> in inverse video: the unit holds messages. <kbd>MSG</kbd> shows the next one or closes the page after the last.
+</Field>

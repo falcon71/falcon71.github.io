@@ -1,0 +1,27 @@
+<Field id="title" title="Advisory altitude">
+	`VNV` and the advisory altitude: the altitude of the path at the present position of the aircraft, rounded to 100 ft. It falls toward the selected altitude in a descent and rises toward it in a climb, and VNAV ends where it reaches it ([Flying the vertical path](/kln90b/operation/vnav/#flying-the-vertical-path)).
+</Field>
+
+<Field id="ind" title="Indicated altitude">
+	The indicated altitude from the altitude input of the aircraft, with the baro setting applied, rounded to 100 ft. It shows five digits and `00000` below 0 ft, and you cannot change it. While VNAV is armed, the unit works out the start of the descent or climb from it.
+</Field>
+
+<Field id="sel" title="Selected altitude">
+	The altitude the descent or climb ends at, in steps of 100 ft from 0 to 99,900 ft. A digit takes effect at once, and changing it stops VNAV. The altitude alert reads the selected altitude too ([Altitude alerting](/kln90b/operation/alerts/#altitude-alerting)).
+</Field>
+
+<Field id="wpt" title="VNAV waypoint">
+	The waypoint the descent or climb is planned to, the active waypoint until you enter another one. [Which waypoint VNAV can use](/kln90b/operation/vnav/#which-waypoint-vnav-can-use) says which waypoints the field takes. A different waypoint stops VNAV.
+</Field>
+
+<Field id="dist" title="Offset">
+	How far before the VNAV waypoint the descent or climb ends, in NM from 0 to 99. Changing it stops VNAV.
+</Field>
+
+<Field id="angle" title="Angle">
+	The angle of the path VNAV uses, in tenths of a degree up to 9.9°, negative for a descent. While VNAV is armed or active, moving the cursor onto it changes nothing, and a digit you enter starts VNAV again at the new angle ([The angle](/kln90b/operation/vnav/#the-angle)).
+</Field>
+
+<Field id="page" title="Page identification">
+	The page identification of the side that shows the page: `NAV 4`. NAV 4 is the same page on the left and on the right side.
+</Field>
