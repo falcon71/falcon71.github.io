@@ -1,0 +1,110 @@
+---
+title: Status line messages
+description: Every short message that replaces the middle of the KLN 90B's status line, with what it means and what to do.
+sidebar:
+  order: 2
+---
+
+Look up a message here as the status line shows it. Each entry gives the cause and what to do, and links to the section that explains the message at length. A value is marked in lowercase: `nnn` stands for a number.
+
+[Messages](/kln90b/operation/messages/#status-line-messages) explains how the status line shows these messages, and how they appear on the message page for as long as they are shown. The longer messages that you read on the message page are in [Message page messages](/kln90b/lists/messages/).
+
+## `ACTIVE WPT`
+
+You pressed <kbd>CLR</kbd> on OTH 3 on a user waypoint that is the active waypoint, also the waypoint of a direct-to. The unit does not ask to delete it. Make another waypoint active first. See [Deleting a user waypoint](/kln90b/operation/user-waypoints/#deleting-a-user-waypoint).
+
+## The Direct To symbol and `CRS nnn°`
+
+After a direct-to in OBS mode the unit shows the Direct To symbol and `CRS` with the course `nnn` of the direct path, as a magnetic course. Turn the external indicator to it. The message appears only where the unit does not turn the course on the indicator itself, and `ACTIVATE` shows none. See [`CRS nnn°` in the status line](/kln90b/operation/direct-to/#crs-nnn-in-the-status-line).
+
+## `DUP IDENT`
+
+The identifier on a waypoint page matches two or more waypoints of the page's waypoint type. The page shows the first of them; scan to reach the others. See [`DUP IDENT`](/kln90b/operation/waypoints/#dup-ident).
+
+## `ENT LAT/LON`
+
+You are creating a user waypoint on an APT, VOR, NDB, INT or SUP page, and the waypoint is not created yet, because the latitude or the longitude is still missing. Enter both and press <kbd>ENT</kbd> after each. See [Creating a waypoint on a waypoint page](/kln90b/operation/user-waypoints/#creating-a-waypoint-on-a-waypoint-page).
+
+## `FPL FULL`
+
+The unit could not make room for a waypoint in a flight plan. In a full numbered flight plan it refuses the waypoint you approved. In a full FPL 0 whose first waypoint is part of the active leg it asks nothing and answers so at the approval, and it does the same when loading a SID, a STAR or an approach would need a deletion that it must not make. Delete waypoints yourself and try again. See [`FPL FULL`](/kln90b/operation/flight-plans/#fpl-full), [The question to make room in FPL 0](/kln90b/operation/flight-plans/#the-question-to-make-room-in-fpl-0) and [The question to make room for a procedure](/kln90b/operation/departures-arrivals/#the-question-to-make-room-for-a-procedure).
+
+## `IN ACT LIST`
+
+You changed the magnetic variation of a user VOR that is the active waypoint. The unit keeps the old value; make another waypoint active first if you need to change the variation. See [Editing a user waypoint](/kln90b/operation/user-waypoints/#editing-a-user-waypoint).
+
+## `INVALID ADD`
+
+You tried to insert or add a waypoint on a waypoint of an approach in FPL 0, with the left inner knob, <kbd>ENT</kbd> or a typed character. The waypoints of an approach cannot be changed, and nothing is inserted. See [`INVALID ADD` and `INVALID DEL`](/kln90b/operation/approaches/#invalid-add-and-invalid-del).
+
+## `INVALID DEL`
+
+You pressed <kbd>CLR</kbd> on a waypoint of an approach in FPL 0, and nothing is deleted. The DME arc waypoint of an approach asks `MOVE ?` instead. See [`INVALID ADD` and `INVALID DEL`](/kln90b/operation/approaches/#invalid-add-and-invalid-del).
+
+## `INVALID ENT`
+
+You pressed <kbd>ENT</kbd> on a number, a time or a date that is not valid, such as a date that does not exist. The unit applies nothing and the entry stays open: correct it, or press <kbd>CLR</kbd>. See [Entries that take effect with ENT](/kln90b/unit/controls-and-display/#entries-that-take-effect-with-ent).
+
+## `INVALID REF`
+
+The unit found no reference waypoint to make from the waypoint you entered on the REF page: the plan holds fewer than two waypoints, no leg has a line at right angles from the waypoint that meets the leg, or all letters of the name are taken. Nothing is inserted. See [`INVALID REF`](/kln90b/pages/ref/#invalid-ref).
+
+## `INVALID VNV`
+
+You entered a VNAV waypoint on NAV 4 that VNAV cannot use. The unit keeps the VNAV waypoint it had. Enter the active waypoint or one ahead of it in FPL 0; in OBS mode, or during a direct-to to a waypoint outside FPL 0, only the active waypoint. See [`INVALID VNV`](/kln90b/operation/vnav/#invalid-vnv).
+
+## `NO ACTV WPT`
+
+You changed to OBS mode with no active waypoint: <kbd>ENT</kbd> on MOD 2 cannot change to OBS mode, and the unit stays in leg mode; the GPS CRS switch changes to OBS mode all the same. Make a direct-to or activate a flight plan first. See [`NO ACTV WPT` in the status line](/kln90b/operation/modes-of-operation/#no-actv-wpt-in-the-status-line).
+
+## `NO APPROACH`
+
+You pressed the GPS APR switch in an en route mode with no approach in FPL 0. Load the approach first. See [`NO APPROACH` in the status line](/kln90b/operation/approaches/#no-approach-in-the-status-line).
+
+## `NO APT WPTS`
+
+You selected an APT page, and the complete list of airports is empty. It appears only when the navigation data hold no airport. See [`NO SUP WPTS` and the other empty lists](/kln90b/operation/waypoints/#no-sup-wpts-and-the-other-empty-lists).
+
+## `NO INT WPTS`
+
+You selected the INT page, and the complete list of intersections is empty. It appears only when the navigation data hold no intersection. See [`NO SUP WPTS` and the other empty lists](/kln90b/operation/waypoints/#no-sup-wpts-and-the-other-empty-lists).
+
+## `NO INTRCEPT`
+
+You selected `MOVE ?` on the DME arc waypoint of an approach, and the unit found no point to move it to: your actual track does not meet the arc between its first and last radial, or the groundspeed is too low for a track. The waypoint stays where it was. Turn to a heading that crosses the arc and select `MOVE ?` again. See [`NO INTRCEPT`](/kln90b/operation/dme-arcs/#no-intrcept).
+
+## `NO NDB WPTS`
+
+You selected the NDB page, and the complete list of NDBs is empty. It appears only when the navigation data hold no NDB. See [`NO SUP WPTS` and the other empty lists](/kln90b/operation/waypoints/#no-sup-wpts-and-the-other-empty-lists).
+
+## `NO SUCH WPT`
+
+You pressed <kbd>ENT</kbd> on an identifier that no waypoint has, in a field that cannot offer to create a waypoint, such as the one on the REF page. The entry stays open: correct the identifier, or press <kbd>CLR</kbd>. See [`NO SUCH WPT`](/kln90b/operation/waypoints/#no-such-wpt).
+
+## `NO SUP WPTS`
+
+You selected the SUP page, and you have no supplemental waypoint. Create one if you need it ([Creating a user waypoint](/kln90b/operation/user-waypoints/#creating-a-user-waypoint)). See [`NO SUP WPTS` and the other empty lists](/kln90b/operation/waypoints/#no-sup-wpts-and-the-other-empty-lists).
+
+## `NO VOR WPTS`
+
+You selected the VOR page, and the complete list of VORs is empty. It appears only when the navigation data hold no VOR. See [`NO SUP WPTS` and the other empty lists](/kln90b/operation/waypoints/#no-sup-wpts-and-the-other-empty-lists).
+
+## `OUTDATED DB`
+
+You turned the cursor on, on APT 7 or APT 8, while the database is expired. It reminds you that the procedures come from an expired cycle, and you can still select and load them. See [`OUTDATED DB`](/kln90b/operation/waypoints/#outdated-db).
+
+## `RMKS FULL`
+
+You entered an airport remark on APT 5, and the unit could not store it, because the airport remarks are full. Delete the remarks of an airport on OTH 4 to make room; the remarks of an airport that already has some can always be changed. See [APT 5: remarks](/kln90b/pages/apt/#apt-5-remarks).
+
+## `SERVICED`
+
+You serviced the unit on FLR 1: it has a new battery, the failures are repaired and the clock is set right. See [Service](/kln90b/operation/failures/#service).
+
+## `USED IN FPL`
+
+You pressed <kbd>CLR</kbd> on OTH 3 on a user waypoint that a flight plan holds, any of FPL 0 to FPL 25. The unit does not ask to delete it. Take the waypoint out of the flight plan that the last cell of the row names, and out of the others that hold it, and delete it then. See [Deleting a user waypoint](/kln90b/operation/user-waypoints/#deleting-a-user-waypoint).
+
+## `USR DB FULL`
+
+The user database is full, and the unit cannot store another waypoint. Nothing is created. It appears when you create a user waypoint on an APT, VOR, NDB, INT or SUP page, when the REF page or the CTR pages cannot add a waypoint of their own, and when a route from the EFB has a waypoint to create. Delete a user waypoint on OTH 3 to make room. See [`USR DB FULL`](/kln90b/operation/user-waypoints/#usr-db-full).

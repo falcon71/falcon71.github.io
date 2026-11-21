@@ -578,6 +578,10 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | total operational time (STA 4) | total operating time |
 | software revision status (STA 3) | software version |
 | remote annunciators (the annunciators outside the unit that it drives) | annunciator lamps, external annunciators |
+| the message annunciator (the remote annunciator that follows the message prompt; `MSG` where quoted) | the MSG annunciator, the MSG light |
+| one-time message, lasting message (the two kinds of message page message: gone once read, or kept while the cause lasts; the manual's own names) | |
+| the super flag (the output that takes the NAV flag of the external indicator out of view; `NAV SUPER FLAG FAILURE`) | the nav super flag |
+| airport remarks (APT 5) | remarks alone in running text |
 | internal battery (at its first mention; "the battery" after that) | memory battery, backup battery |
 | fuel management system | fuel computer |
 | air data system | air data computer |

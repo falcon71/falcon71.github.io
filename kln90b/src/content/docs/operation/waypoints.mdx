@@ -24,7 +24,7 @@ The fifth waypoint type, supplemental, has no part in the database: the SUP page
 
 The unit reads one database cycle when you load the aircraft. The Database page shows the last day of that cycle at every power-on that runs the whole sequence ([the Database page](/kln90b/unit/power-on/#the-database-page)). The cycle is expired when the date of the unit is past that day. The unit compares the date on its own clock, which you set on SET 2 and the satellites correct, and tests only the end: a date before the cycle began counts as current. An expired database changes nothing about what the unit can do: every waypoint and procedure stays available. The unit says so on the Database page, with `DATA BASE OUT OF DATE` when the cycle runs out while the unit is on, and with `OUTDATED DB` on APT 7 and APT 8.
 
-A flight plan and the active waypoint are stored by identifier. When you install a newer cycle that no longer has a waypoint of them, the unit drops that waypoint at the next power-on and tells you with a message such as `WAYPOINT xxxxx DELETED` ([Messages](/kln90b/operation/messages/)). A unit that cannot load the navigation data at all fails its self test and posts `DATA BASE CHECKSUM ERR` ([`TEST FAIL` on the Self Test page](/kln90b/unit/power-on/#test-fail-on-the-self-test-page)).
+A flight plan and the active waypoint are stored by identifier. When you install a newer cycle that no longer has a waypoint of them, the unit drops that waypoint at the next power-on and tells you with a message such as `WAYPOINT xxxxx DELETED` ([the list entry](/kln90b/lists/messages/#waypoint-xxxxx-deleted)). A unit that cannot load the navigation data at all fails its self test and posts `DATA BASE CHECKSUM ERR` ([`TEST FAIL` on the Self Test page](/kln90b/unit/power-on/#test-fail-on-the-self-test-page)).
 
 ### `NO SUP WPTS` and the other empty lists
 
@@ -92,7 +92,7 @@ To enter an identifier in a field of a left page:
 
 ### `NO SUCH WPT`
 
-`NO SUCH WPT` replaces the middle of the status line ([The status line](/kln90b/unit/controls-and-display/#the-status-line)) when you press <kbd>ENT</kbd> on an identifier that no waypoint has, on a left page that cannot offer to create one. The entry stays open: correct the identifier and press <kbd>ENT</kbd> again, or press <kbd>CLR</kbd>.
+`NO SUCH WPT` replaces the middle of the status line ([The status line](/kln90b/operation/messages/#status-line-messages)) when you press <kbd>ENT</kbd> on an identifier that no waypoint has, in a field that cannot offer to create a waypoint, such as the one on the REF page. The entry stays open: correct the identifier and press <kbd>ENT</kbd> again, or press <kbd>CLR</kbd>.
 
 <KlnScreen screen="waypoint/no-such-wpt" />
 

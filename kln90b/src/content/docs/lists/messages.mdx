@@ -1,0 +1,295 @@
+---
+title: Message page messages
+description: Every message the KLN 90B can show on the message page, as the unit shows it, with what it means, whether it stays and what to do.
+sidebar:
+  order: 1
+---
+
+import Term from '../../../components/Term.astro';
+
+Look up the first line of a message here, as the message page shows it. Each entry gives the cause, whether the message stays while the cause lasts, and what to do; where the manual explains the message at length, the entry links to the section. A value is marked in lowercase: `nnn` stands for a number, `xxxxx` for an identifier and `cccc` for a code. A failure message stays until you repair the part on FLR 2 or have the unit serviced on FLR 1 ([What can fail](/kln90b/operation/failures/#what-can-fail), [Service](/kln90b/operation/failures/#service)).
+
+[Messages](/kln90b/operation/messages/#reading-the-messages) explains how you read the message page, and [which messages stay while their cause lasts](/kln90b/operation/messages/#messages-that-stay-while-their-cause-lasts). The short messages that replace the middle of the status line are in [Status line messages](/kln90b/lists/status-line-messages/).
+
+## `ACTV ANNUNCIATOR FAIL`
+
+The driver of the ACTV annunciator, the remote annunciator of the GPS APR switch for approach active mode, is stuck, so that the annunciator is lit all the time while the unit is on. The mode annunciation in the status line shows the true mode. The message stays until the part is repaired, and the Self Test page shows `TEST FAIL` meanwhile. See [The annunciators](/kln90b/operation/failures/#the-annunciators).
+
+## `ADJ NAV IND CRS`
+
+The unit turns the course on the external indicator itself, and the indicator has not followed the course the unit sent for more than 12 seconds. Turn the indicator to the desired track or to the selected course that NAV 3 shows. The message stays while the indicator is off the course, also after you have read it. [`ADJ NAV IND CRS`](/kln90b/operation/modes-of-operation/#adj-nav-ind-crs) explains it.
+
+## `ADJ NAV IND CRS TO nnn°`
+
+The unit asks you to turn the external indicator to the desired track `nnn`, as a magnetic course. It appears in leg mode only, and only where the unit does not turn the indicator. Where the unit reads the indicator, it comes when the indicator is more than 5° off the desired track, at a change to the next leg at once and otherwise after 12 seconds. Where it cannot read the indicator, it comes at a change to the next leg that changes the desired track by more than 5°. It goes once you have read it, and when the indicator is within 5°; where the unit reads the indicator and you leave it off, it comes back unread after 12 seconds. Where the unit cannot read the indicator, a message that came with a turn also goes when the turn ends, and the next change of leg replaces it with the new course. [`ADJ NAV IND CRS TO nnn°`](/kln90b/operation/modes-of-operation/#adj-nav-ind-crs-to-nnn) gives the rules.
+
+## `AIRSPACE ALERT:`
+
+```
+AIRSPACE ALERT:
+ SEATTLE CLASS B   CL B
+ BELOW 7000FT
+```
+
+The track of the next 10 minutes meets an area of special use airspace, or the area lies within 2 NM, and you are within the area's altitude limits, with the vertical buffer, but not yet inside it laterally. The lines below the first are an example. The second names the area with its type at the right end, the third gives its limits above mean sea level and is missing where the area has none. The message stays while the unit still warns of the area, also after you have read it; it is replaced by `INSIDE SPC USE AIRSPACE` when you enter the area. Check your track and your altitude against the area. [`AIRSPACE ALERT:`](/kln90b/operation/alerts/#airspace-alert) explains the types and the limits and how you turn the alert on.
+
+## `ALTITUDE FAIL`
+
+The unit has no altitude input: it is installed without one (a unit installed for VFR only does not show the message), or the input that carries the altitude has failed. The altitude no longer helps the receiver, so <Term t="RAIM" /> is lost more often. The message stays while the altitude is missing. [The altitude input](/kln90b/operation/gps-receiver/#the-altitude-input) explains what the unit does without it, and [The inputs from the aircraft](/kln90b/operation/failures/#the-inputs-from-the-aircraft) which failures take the altitude.
+
+## `ARINC 429 AIR DATA FAIL`
+
+The air data from the air data system over the ARINC 429 input have failed. OTH 9 and OTH 10 show dashes and the altitude input is lost, so `ALTITUDE FAIL` follows. The message stays until the part is repaired. See [The inputs from the aircraft](/kln90b/operation/failures/#the-inputs-from-the-aircraft).
+
+## `ARINC 429 OUTPUT FAIL`
+
+The ARINC 429 output to the aircraft's electronic instruments and autopilot has failed. The navigation data that the aircraft takes from the unit, the roll steering command to the autopilot and the integrity warning stop; the deviation on the CDI or HSI keeps working. The message stays until the part is repaired, and the Self Test page shows `TEST FAIL` meanwhile. See [The outputs to the aircraft](/kln90b/operation/failures/#the-outputs-to-the-aircraft).
+
+## `ARM ANNUNCIATOR FAIL`
+
+The driver of the ARM annunciator, the remote annunciator of the GPS APR switch for approach arm mode, is stuck, so that the annunciator is lit all the time while the unit is on. The mode annunciation in the status line shows the true mode. The message stays until the part is repaired, and the Self Test page shows `TEST FAIL` meanwhile. See [The annunciators](/kln90b/operation/failures/#the-annunciators).
+
+## `ARM GPS APPROACH`
+
+The unit is not in approach arm mode, although the <Term t="FAF" /> is the active waypoint and 3 NM away or less: the unit arms an approach by itself, so you disarmed it with the GPS APR switch. Press the GPS APR switch to arm the approach. The message stays while the situation lasts and goes with the arming. [`ARM GPS APPROACH`](/kln90b/operation/approaches/#arm-gps-approach) explains it.
+
+## `BAD SATELLITE GEOMETRY` `AND RAIM NOT AVAILABLE`
+
+```
+BAD SATELLITE GEOMETRY
+ AND RAIM NOT AVAILABLE
+```
+
+The unit is in approach active mode, and RAIM has not been available for more than 10 seconds, for lack of satellites or because of their geometry. It replaces `RAIM NOT AVAILABLE` `CROSS CHECK POSITION` and the other `BAD SATELLITE GEOMETRY` message while the unit is in approach active mode. It stays while RAIM is missing. After about 2 minutes without RAIM the unit flags its navigation: see [RAIM in an approach](/kln90b/operation/approaches/#raim-in-an-approach) for what to do, and [Messages of the receiver](/kln90b/operation/gps-receiver/#messages-of-the-receiver).
+
+## `BAD SATELLITE GEOMETRY` `SEE EPE ON STA 2 PAGE`
+
+```
+BAD SATELLITE GEOMETRY
+ SEE EPE ON STA 2 PAGE
+```
+
+The geometry of the satellites in use does not meet the limit of the mode for more than 10 seconds, in leg mode, OBS mode or approach arm mode. It comes together with `RAIM NOT AVAILABLE` `CROSS CHECK POSITION`. STA 2 shows how large the <Term t="EPE" /> is; cross-check the position with other navigation. The message stays while the geometry is bad. See [Messages of the receiver](/kln90b/operation/gps-receiver/#messages-of-the-receiver).
+
+## `BATTERY LOW: SERVICE`
+
+```
+BATTERY LOW: SERVICE
+ REQUIRED TO PREVENT
+ LOSS OF USER DATA
+```
+
+The internal battery has a charge of 1.5 % or less, or the `BATTERY` failure is active. It appears once the power-on pages are done, and stays until a service on FLR 1 gives the unit a new battery. Have the unit serviced before you next turn it off: a power-on while the `BATTERY` failure is active erases the user waypoints, the flight plans, the airport remarks and the settings. [The battery](/kln90b/operation/failures/#the-battery) says what is lost and how to avoid it.
+
+## `CHECK ACTV ANNUNCIATOR`
+
+The wiring of the ACTV annunciator, the remote annunciator of the GPS APR switch for approach active mode, is shorted, so that the annunciator never lights. The mode annunciation in the status line shows the true mode. The message stays until the part is repaired. See [The annunciators](/kln90b/operation/failures/#the-annunciators).
+
+## `CHECK ARM ANNUNCIATOR`
+
+The wiring of the ARM annunciator, the remote annunciator of the GPS APR switch for approach arm mode, is shorted, so that the annunciator never lights. The mode annunciation in the status line shows the true mode. The message stays until the part is repaired. See [The annunciators](/kln90b/operation/failures/#the-annunciators).
+
+## `CHECK MSG ANNUNCIATOR`
+
+The wiring of the message annunciator is shorted, so that the annunciator never lights. The <Term t="MSG">`MSG`</Term> in the status line still tells you that the unit holds a message. The message stays until the part is repaired. See [The annunciators](/kln90b/operation/failures/#the-annunciators).
+
+## `CHECK WPT ANNUNCIATOR`
+
+The wiring of the WPT annunciator is shorted, so that the annunciator never lights. The unit shows waypoint alerting itself too; [Waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting) says how. The message stays until the part is repaired. See [The annunciators](/kln90b/operation/failures/#the-annunciators).
+
+## `DATA BASE CHECKSUM ERR`
+
+The unit could not load the navigation data of the simulator when it started, and the Self Test page shows `TEST FAIL`. It goes once you have read it. Turn the unit off and on again once; a failure to load the data can go away. [`TEST FAIL` on the Self Test page](/kln90b/unit/power-on/#test-fail-on-the-self-test-page) says what else to try.
+
+## `DATA BASE OUT OF DATE`
+
+```
+DATA BASE OUT OF DATE
+ ALL DATA MUST BE
+ CONFIRMED BEFORE USE
+```
+
+The database has just turned from current to expired while the unit is on: you entered a date or a time past the end of the cycle, the satellites corrected the date past it, or the cycle ended during the flight. It comes once for each such change, and it goes once you have read it. A power-on with a date that is already past the end posts no message; the Database page says so. The unit keeps working with its data; to remove the cause, install a current cycle ([How do I update the database?](/kln90b/help/faq/#how-do-i-update-the-database)). [`DATA BASE OUT OF DATE`](/kln90b/operation/waypoints/#data-base-out-of-date) explains it.
+
+## `EEPROM FAILURE: IC1045`
+
+```
+EEPROM FAILURE: IC1045
+ EXTERNAL D-BAR INVALID
+```
+
+The memory that holds the unit's calibration has failed. Do not fly by the GPS deviation on the CDI or HSI while the message stands; the D-bar on the unit's own screen is right. The unit reads the memory only at power-on, so the message comes at the first power-on after the failure, once the power-on pages are done, and the Self Test page shows `TEST FAIL`. It stays until the failure is repaired, which takes effect at the next power-on. See [The memory of the unit](/kln90b/operation/failures/#the-memory-of-the-unit).
+
+## `IF REQUIRED SELECT OBS`
+
+The active waypoint is the fix of a holding pattern or a procedure turn of a <Term t="SID" />, a <Term t="STAR" /> or an approach, it is 4 NM away or less, and the unit is not in OBS mode. The unit does not fly the pattern itself: change to OBS mode and fly it on a selected course through the fix, or ignore the message if the clearance has no hold. It stays while the situation lasts, and it goes in OBS mode. [`IF REQUIRED SELECT OBS`](/kln90b/operation/departures-arrivals/#if-required-select-obs) explains it.
+
+## `INSIDE SPC USE AIRSPACE`
+
+```
+INSIDE SPC USE AIRSPACE
+ SEATTLE CLASS B   CL B
+ BELOW 7000FT
+```
+
+You are inside an area of special use airspace, laterally and, within the vertical buffer, vertically. The lines below the first are those of `AIRSPACE ALERT:`, here an example. The message stays while you are inside, also after you have read it, and it goes when you leave the area; leaving sideways makes `AIRSPACE ALERT:` for the same area follow. [`INSIDE SPC USE AIRSPACE`](/kln90b/operation/alerts/#inside-spc-use-airspace) explains it.
+
+## `MAGNETIC VAR INVALID`
+
+```
+MAGNETIC VAR INVALID
+ ALL DATA REFERENCED
+ TO TRUE NORTH
+```
+
+The unit has no magnetic variation at your position (in OBS mode at the active waypoint) and you entered none on SET 2, so every course and bearing it shows is true. Fly true courses, or enter the variation on SET 2. The message stays while the variation is missing. [`MAGNETIC VAR INVALID`](/kln90b/operation/modes-of-operation/#magnetic-var-invalid) explains it.
+
+## `MSG ANNUNCIATOR FAIL`
+
+The driver of the message annunciator is stuck, so that the annunciator is lit all the time while the unit is on, whether or not a message is waiting. The `MSG` in the status line is the check on the annunciator you doubt. The message stays until the part is repaired, and the Self Test page shows `TEST FAIL` meanwhile. See [The annunciators](/kln90b/operation/failures/#the-annunciators).
+
+## `NAV SUPER FLAG FAILURE`
+
+The super flag, the output that takes the NAV flag of the CDI or HSI out of view, does not clear the flag. The flag stays in view, as with the unit off, while the deviation still moves, so the NAV flag of the indicator no longer tells whether the unit navigates: watch the unit's own flag on NAV 1. The unit raises the message when it tries to clear the flag: with an active waypoint, or during the self test, which then fails. The message stays until the part is repaired. See [The outputs to the aircraft](/kln90b/operation/failures/#the-outputs-to-the-aircraft).
+
+## `NO RCVR DATA`
+
+The GPS receiver does not answer the unit. STA 1 shows the GPS state `FAILR` with no satellites and the unit flags its navigation; navigate by other means. The message takes the place of `RCVR HARDWARE ERROR:`, which the unit cannot read from a receiver that does not answer, and the Self Test page shows `TEST FAIL`. The message stays until the failure is repaired. See [The receiver and the antenna](/kln90b/operation/failures/#the-receiver-and-the-antenna).
+
+## `NO RS-232 DATA`
+
+The RS-232 input, the serial line from a fuel management system, an air data system or a heading source, has gone silent. The unit loses all of that data: the fuel on board from the fuel management system, the air data and the heading, so that NAV 5 and Super NAV 5 draw north up. `ALTITUDE FAIL` follows if the air data came over this line. The message stays until the part is repaired. See [The inputs from the aircraft](/kln90b/operation/failures/#the-inputs-from-the-aircraft).
+
+## `OBS WPT > 200NM`
+
+You are in OBS mode and the active waypoint is more than 200 NM away. Far from the waypoint each degree of the selected course moves the course line by several miles, so the D-bar reacts strongly to every degree you turn. The message stays while you are farther away, and goes when you come within 200 NM or change to leg mode. [`OBS WPT > 200NM`](/kln90b/operation/modes-of-operation/#obs-wpt--200nm) explains it.
+
+## `OTHER WAYPOINTS DELETED`
+
+More than ten waypoints of one load were deleted: the unit posts a `WAYPOINT xxxxx DELETED` message for the first ten and this message for the rest. It goes once you have read it. See [`WAYPOINT xxxxx DELETED`](#waypoint-xxxxx-deleted).
+
+## `POSITION DIFFERS FROM`
+
+```
+POSITION DIFFERS FROM
+ LAST POSITION BY >2NM
+```
+
+The first position after a power-on is more than 2 NM from the position stored at power-off, for example because the aircraft was loaded at another airport. A position regained in flight never posts it, and neither does the first position after a loss of the unit's memory. It goes once you have read it; there is nothing to do if you know why the position differs. See [Messages of the receiver](/kln90b/operation/gps-receiver/#messages-of-the-receiver).
+
+## `PRESS ALT TO SET BARO`
+
+The unit has changed to an approach arm mode, and you have not shown the ALT page since. Press <kbd>ALT</kbd>, check the baro setting, and press <kbd>ALT</kbd> again; the message goes once the ALT page has been shown. It does not appear where an air data system supplies the baro setting. [`PRESS ALT TO SET BARO`](/kln90b/operation/approaches/#press-alt-to-set-baro) explains it.
+
+{/* kln90b#513: describes the current behavior; the fix makes the message come only on the change from an en route mode into an arm mode */}
+
+## `PRESS GPS APR FOR NAV`
+
+The unit has flagged its navigation in approach active mode: it lost its position, RAIM found an error, or RAIM was missing for about 2 minutes. Fly the missed approach and press the GPS APR switch; the unit returns to Approach Arm-Leg mode and the flag goes. The message stays with the flag. [`PRESS GPS APR FOR NAV`](/kln90b/operation/approaches/#press-gps-apr-for-nav) explains it.
+
+## `RAIM NOT AVAILABLE` `APR MODE INHIBITED`
+
+```
+RAIM NOT AVAILABLE
+ APR MODE INHIBITED
+ PREDICT RAIM ON STA 5
+```
+
+The unit has refused to make the approach active, because RAIM is not available now, has found an error, or is predicted not available at the FAF or the <Term t="MAP" />. The unit stays in approach arm mode: do not fly the final approach on it, and predict RAIM on STA 5 to find out when it returns. The message goes when the approach becomes active, when the unit leaves Approach Arm-Leg mode, or when the unit stops checking (the FAF is no longer the active waypoint, you are more than 2 NM from it, or the unit has no position). [`RAIM NOT AVAILABLE` `APR MODE INHIBITED`](/kln90b/operation/approaches/#raim-not-available-apr-mode-inhibited) explains it.
+
+## `RAIM NOT AVAILABLE` `CROSS CHECK POSITION`
+
+```
+RAIM NOT AVAILABLE
+ CROSS CHECK POSITION
+```
+
+The unit has a position and navigates in leg mode, OBS mode or approach arm mode, and RAIM has not been available for more than 10 seconds. The unit keeps navigating: cross-check the position with other navigation. The message stays while RAIM is missing. In approach active mode `BAD SATELLITE GEOMETRY` `AND RAIM NOT AVAILABLE` takes its place. See [Messages of the receiver](/kln90b/operation/gps-receiver/#messages-of-the-receiver).
+
+## `RAIM POSITION ERROR`
+
+```
+RAIM POSITION ERROR
+ CROSS CHECK POSITION
+```
+
+RAIM has found a measurement that does not fit, while the unit has a position. The message comes at once and stays while the error is found; the unit goes on using the position, so cross-check it. Only a simulated failure of a satellite or a spoofer causes it. See [RAIM](/kln90b/operation/gps-receiver/#raim) and [Interference and a faulty satellite](/kln90b/operation/failures/#interference-and-a-faulty-satellite).
+
+## `RCVR HARDWARE ERROR:`
+
+```
+RCVR HARDWARE ERROR:
+ cccc
+```
+
+The GPS receiver reports a fault, or one of its antenna, with a four-digit code `cccc`. It appears once the power-on pages are done and stays while the code is not `0000`; it flashes unread again when a new fault joins, and it changes its code when one ends. The Self Test page shows `TEST FAIL` for every code. With the GPS state `FAILR` on STA 1 the receiver delivers nothing and you navigate by other means; without it the receiver works and the code reports a fault it lives with, such as a slow first position. [The receiver and the antenna](/kln90b/operation/failures/#the-receiver-and-the-antenna) gives the codes.
+
+## `RECYCLE POWER TO USE`
+
+```
+RECYCLE POWER TO USE
+ CORRECT DATA BASE DATA
+```
+
+A date or a time that you entered on SET 2 has changed whether the unit counts the database as current, from current to expired or back. It goes once you have read it. Turn the unit off and on again so that the Database page judges the new date; the unit loads no other cycle of data. [`RECYCLE POWER TO USE`](/kln90b/operation/waypoints/#recycle-power-to-use) explains it.
+
+## `REDUNDANT WPTS IN FPL`
+
+```
+REDUNDANT WPTS IN FPL
+ EDIT ENROUTE WPTS
+ AS NECESSARY
+```
+
+A SID, a STAR or an approach that you loaded holds a waypoint that FPL 0 already has as an en route waypoint. Look through FPL 0 and delete the copies you do not need. It comes once for the load, and it goes once you have read it. [`REDUNDANT WPTS IN FPL`](/kln90b/operation/departures-arrivals/#redundant-wpts-in-fpl) explains it.
+
+## `RS-232 DATA ERROR`
+
+The RS-232 input, the serial line from a fuel management system, an air data system or a heading source, delivers garbled data. The unit loses all of that data as with `NO RS-232 DATA`, and `ALTITUDE FAIL` follows if the air data came over this line. The message stays until the part is repaired. See [The inputs from the aircraft](/kln90b/operation/failures/#the-inputs-from-the-aircraft).
+
+## `RS-232 OUTPUT ERROR`
+
+The RS-232 output, the serial line over which some aircraft take the navigation data instead of ARINC 429, has failed. The navigation data that the aircraft takes from the unit, the route its flight planner takes from FPL 0 and the route exchange with the <Term t="EFB" /> stop; the deviation on the CDI or HSI keeps working. The message stays until the part is repaired, and the Self Test page shows `TEST FAIL` meanwhile. See [The outputs to the aircraft](/kln90b/operation/failures/#the-outputs-to-the-aircraft).
+
+## `SATELLITE COVERAGE`
+
+```
+SATELLITE COVERAGE
+ INADEQUATE FOR NAV
+```
+
+The unit has lost its position in flight after having had one since the power-on. During the search after the power-on it does not appear, and it does not appear while the receiver has failed. Navigate by other means. The message stays until the unit navigates again. See [Messages of the receiver](/kln90b/operation/gps-receiver/#messages-of-the-receiver) and [Losing the position in flight](/kln90b/operation/gps-receiver/#losing-the-position-in-flight).
+
+## `SET FUEL ON BOARD`
+
+```
+SET FUEL ON BOARD
+ ON OTH 5 IF NECESSARY
+```
+
+The aircraft has a fuel management system that does not send the fuel on board, so the unit asks for it at every power-on, once the power-on pages are done. You need not answer: enter the fuel on board on OTH 5 when you want the landing fuel on board, the extra fuel and the endurance and the range. It goes once you have read it; entering the fuel does not clear it earlier. [`SET FUEL ON BOARD`](/kln90b/pages/oth/#set-fuel-on-board) explains it.
+
+## `SYSTEM TIME UPDATED`
+
+```
+SYSTEM TIME UPDATED
+ TO GPS TIME
+```
+
+The satellites have moved the unit's clock by more than 10 minutes, usually at the first position after a power-on when the clock was wrong. The clock is right now and there is nothing to do. It goes once you have read it. After a loss of the unit's memory the date is about 39 years too early: [The battery](/kln90b/operation/failures/#the-battery) says how to set it. See [Messages of the receiver](/kln90b/operation/gps-receiver/#messages-of-the-receiver).
+
+## `USER DATA LOST`
+
+The unit could not restore the user data that it keeps while it is off, or its memory was lost. It appears at the power-on; check your user waypoints and your flight plans. After a loss of the memory the user waypoints, the flight plans, the airport remarks and the settings are back to their defaults and the clock is wrong. It goes once you have read it. [The battery](/kln90b/operation/failures/#the-battery) explains the loss.
+
+## `VNV ALERT`
+
+VNAV is armed and the descent point is about 90 seconds ahead. Turn to NAV 4 to watch the countdown. The unit gives the message only while neither side shows NAV 4, and it goes as soon as a side shows NAV 4 and when VNAV becomes active or inactive. [`VNV ALERT`](/kln90b/operation/vnav/#vnv-alert) explains it.
+
+## `WAYPOINT xxxxx DELETED`
+
+The unit dropped the waypoint `xxxxx` from a flight plan, or as the active waypoint, because it could not keep it. It comes at a power-on for each waypoint of the flight plans and for the active waypoint that the installed cycle lacks, and when you load a route from the EFB, for each waypoint the unit cannot place and each one beyond the limit of FPL 0. At most ten of these come for one load, followed by `OTHER WAYPOINTS DELETED`. Check the flight plan for the gap. It goes once you have read it. See [The database](/kln90b/operation/waypoints/#the-database) and [Loading a route from the EFB](/kln90b/operation/flight-plans/#loading-a-route-from-the-efb).
+
+## `WPT ANNUNCIATOR FAIL`
+
+The driver of the WPT annunciator is stuck, so that the annunciator is lit all the time while the unit is on and no longer tells a waypoint alert. The unit shows waypoint alerting itself too; [Waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting) says how. The message stays until the part is repaired, and the Self Test page shows `TEST FAIL` meanwhile. See [The annunciators](/kln90b/operation/failures/#the-annunciators).

@@ -67,7 +67,7 @@ To have the unit serviced:
 1. Open FLR 1 from SET 10.
 2. Press the left <kbd>CRSR</kbd> and turn the left outer knob to `SERVICE?`.
 3. Press <kbd>ENT</kbd>. The entry asks `CONFIRM?`. If you do not want the service, press <kbd>CLR</kbd>.
-4. Press <kbd>ENT</kbd>. The status line shows `SERVICED` for 5 seconds, and the cursor goes off.
+4. Press <kbd>ENT</kbd>. The status line shows `SERVICED` for a few seconds, and the cursor goes off.
 
 A service does three things:
 
@@ -81,7 +81,7 @@ It does not bring back data the unit has already lost, nor the receiver's almana
 
 The unit notices most failures of its own parts and reports them, in the self test at power-on and with a message on the MSG page in operation. Some failures it never notices; you find them only by what they do.
 
-At power-on the Self Test page shows a flashing `TEST FAIL` in place of `ANNUN ON` when the self test has found a fault. This happens for a failed ARINC 429 output, RS-232 output, nav super flag, EEPROM, GPS receiver or annunciator driver, and for every fault the GPS receiver reports with a code (see [The receiver and the antenna](#the-receiver-and-the-antenna)). `TEST FAIL` does not stop the power-on: approve the page as usual. [Power-on and initialization](/kln90b/unit/power-on/#the-self-test-page) explains the self test.
+At power-on the Self Test page shows a flashing `TEST FAIL` in place of `ANNUN ON` when the self test has found a fault. This happens for a failed ARINC 429 output, RS-232 output, super flag, EEPROM, GPS receiver or annunciator driver, and for every fault the GPS receiver reports with a code (see [The receiver and the antenna](#the-receiver-and-the-antenna)). `TEST FAIL` does not stop the power-on: approve the page as usual. [Power-on and initialization](/kln90b/unit/power-on/#the-self-test-page) explains the self test.
 
 <KlnScreen screen="failures/self-test-fail" />
 
@@ -89,19 +89,19 @@ In operation the unit posts a failure's message on the MSG page once it notices 
 
 - A fault inside the unit or the receiver, and a failed output, within a second.
 - A failed input from the aircraft after up to 10 seconds. At power-on the RS-232 input is reported as soon as the power-on pages are done, and the air data and altitude inputs about 5 seconds later.
-- A failed remote annunciator or nav super flag when the unit next switches it: the annunciator on or off, the flag out of view.
+- A failed remote annunciator or super flag when the unit next switches it: the annunciator on or off, the flag out of view.
 
 No failure message appears before the power-on pages are done. A failure's message stays on the MSG page while the failure is active, also after you have read it, so the `MSG` in the status line stays lit; it goes when the part is repaired. At the next power-on the message comes back unread, so `MSG` flashes again once the power-on pages are done.
 
-The unit never notices a failed OBS input, a failed <Term t="RMI" /> output, a burnt-out bulb, a loss of antenna gain, jamming, spoofing or a faulty satellite. Of those, the GPS failures show in the receiver's own state and messages: lost satellites, `SATELLITE COVERAGE` `INADEQUATE FOR NAV`, the <Term t="RAIM" /> messages.
+The unit never notices a failed OBS input, a failed RMI output, a burnt-out bulb, a loss of antenna gain, jamming, spoofing or a faulty satellite. Of those, the GPS failures show in the receiver's own state and messages: lost satellites, `SATELLITE COVERAGE` `INADEQUATE FOR NAV`, the <Term t="RAIM" /> messages.
 
 ## What can fail
 
 <Callout kind="availability">
-The failures of the inputs, of the outputs other than ARINC 429 and the nav super flag, and of the remote annunciators depend on how the unit is installed in the aircraft. FLR 3 offers only the failures of parts the aircraft has: an aircraft without an air data system offers no failure of the air data input.
+The failures of the inputs, of the outputs other than ARINC 429 and the super flag, and of the remote annunciators depend on how the unit is installed in the aircraft. FLR 3 offers only the failures of parts the aircraft has: an aircraft without an air data system offers no failure of the air data input.
 </Callout>
 
-Every aircraft has the GPS receiver, its antenna, the ARINC 429 output, the nav super flag, the EEPROM and the internal battery, so their failures are always offered. Each failure below has the name FLR 2 and FLR 3 show. An active failure ends when you repair it on FLR 2 or have the unit serviced on FLR 1; the entries say where something else ends it, or where it acts only from the next power-on. [Inside the GPS simulation](/kln90b/operation/gps-simulation/#the-simulated-failures-in-the-model) explains how the simulation produces the GPS failures, for the pilot who wants to know more.
+Every aircraft has the GPS receiver, its antenna, the ARINC 429 output, the super flag, the EEPROM and the internal battery, so their failures are always offered. Each failure below has the name FLR 2 and FLR 3 show. An active failure ends when you repair it on FLR 2 or have the unit serviced on FLR 1; the entries say where something else ends it, or where it acts only from the next power-on. [Inside the GPS simulation](/kln90b/operation/gps-simulation/#the-simulated-failures-in-the-model) explains how the simulation produces the GPS failures, for the pilot who wants to know more.
 
 ### The receiver and the antenna
 
@@ -184,7 +184,7 @@ The navigation data go over the output the aircraft takes them from: ARINC 429 i
 - `429 OUTPUT`: the ARINC 429 output, the digital bus to the aircraft's electronic instruments and autopilot. Besides the navigation data where the aircraft takes them over it, it always carries the roll steering command to the autopilot, the course for a remotely set course pointer, the integrity warning, and in some aircraft the bearing for the RMI; all of that stops. Message `ARINC 429 OUTPUT FAIL`; the self test fails.
 - `RS-232 OUT`: the RS-232 output, the serial line over which some aircraft take the navigation data instead of ARINC 429. The navigation data stop as above. Message `RS-232 OUTPUT ERROR`; the self test fails.
 - `RMI OUTPUT`: the line to an RMI that the unit drives directly. The RMI needle no longer gets the bearing to the active waypoint. No message.
-- `SUPERFLAG`: the nav super flag, the line that takes the NAV flag of the CDI or HSI out of view. The flag stays in view, as with the unit off, while the deviation still moves. Message `NAV SUPER FLAG FAILURE`, once the unit tries to clear the flag: with an active waypoint, or during the self test, which fails.
+- `SUPERFLAG`: the super flag, the line that takes the NAV flag of the CDI or HSI out of view. The flag stays in view, as with the unit off, while the deviation still moves. Message `NAV SUPER FLAG FAILURE`, once the unit tries to clear the flag: with an active waypoint, or during the self test, which fails.
 
 ### The annunciators
 

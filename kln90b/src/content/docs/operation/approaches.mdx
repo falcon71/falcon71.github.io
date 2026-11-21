@@ -21,7 +21,7 @@ Approaches are available only if the unit is installed for non-precision approac
 
 APT 8 lists the approaches of the airport that the unit can fly:
 
-- <Term t="RNAV" /> (GPS) approaches that have <Term t="LNAV" /> minima;
+- <Term t="RNAV" /> (GPS) approaches that have LNAV minima, the minima for flying with lateral guidance only;
 - GPS approaches;
 - VOR, VOR/DME, NDB and NDB/DME approaches, which the unit flies as overlays along their fixes.
 
@@ -127,7 +127,7 @@ The message replaces the middle part of the status line for a few seconds. To ad
 
 ## Arming the approach
 
-The unit arms the approach in FPL 0 by itself when the aircraft comes within 30 NM of the approach's airport reference point, straight-line, whichever leg is active. The mode annunciation changes from <Term t="ENR-LEG">`ENR-LEG`</Term> to <Term t="ARM-LEG">`ARM-LEG`</Term>, Approach Arm-Leg mode, or in OBS mode from <Term t="ENR:">`ENR:`</Term> to <Term t="ARM:">`ARM:`</Term>, Approach Arm-OBS mode ([The mode annunciations](/kln90b/operation/modes-of-operation/#the-mode-annunciations)). The ARM <Term t="ANNUN">annunciator</Term> of the GPS APR switch lights, and the CDI scale factor narrows ([The CDI scale along the approach](#the-cdi-scale-along-the-approach)).
+The unit arms the approach in FPL 0 by itself when the aircraft comes within 30 NM of the approach's airport reference point, straight-line, whichever leg is active. The mode annunciation changes from <Term t="ENR-LEG">`ENR-LEG`</Term> to <Term t="ARM-LEG">`ARM-LEG`</Term>, Approach Arm-Leg mode, or in OBS mode from <Term t="ENR:">`ENR:`</Term> to <Term t="ARM:">`ARM:`</Term>, Approach Arm-OBS mode ([The mode annunciations](/kln90b/operation/modes-of-operation/#the-mode-annunciations)). The ARM annunciator of the GPS APR switch lights, and the CDI scale factor narrows ([The CDI scale along the approach](#the-cdi-scale-along-the-approach)).
 
 The GPS APR switch arms the approach at any distance. The CDI scale factor then stays where it is until you come within that distance. Pressed in approach arm mode, the switch disarms the approach: the unit returns to en route, the scale widens at once, and the unit does not arm by itself again until you press the switch once more, load an approach anew or turn the unit off and on.
 

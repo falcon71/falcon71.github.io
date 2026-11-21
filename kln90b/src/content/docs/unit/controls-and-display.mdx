@@ -31,7 +31,7 @@ Under the screen sit five buttons that act on the unit as a whole. The controls 
 | 1 | Left <kbd>CRSR</kbd> button | Turns the cursor on the left page on and off. |
 | 2 | Left outer knob | Selects the page type on the left. With the left cursor on, it moves the cursor from field to field. |
 | 3 | Left inner knob | Selects the page within the page type on the left. With the left cursor on, it changes the field. |
-| 4 | <kbd>MSG</kbd> button | Shows the message page. [Messages](/kln90b/operation/messages/) explains it. |
+| 4 | <kbd>MSG</kbd> button | Shows the message page. [Messages](/kln90b/operation/messages/#reading-the-messages) explains it. |
 | 5 | <kbd>ALT</kbd> button | Shows the ALT page on the left and NAV 4 on the right. [The ALT page](/kln90b/operation/alerts/#the-alt-page) explains it. |
 | 6 | <DirectToKey /> button | Shows the Direct To page on the left, with the cursor on the waypoint identifier. [Direct-to](/kln90b/operation/direct-to/) explains it. |
 | 7 | <kbd>CLR</kbd> button | Takes back an entry, withdraws a question, or asks to delete. |
@@ -57,11 +57,11 @@ The status line has three parts, from left to right:
 - **The middle part.** Its first seven cells hold the mode annunciation, the course mode of the unit: `ENR-LEG`, `ENR:` with the selected course, `ARM-LEG`, `ARM:` or `APR-LEG` ([Modes of operation](/kln90b/operation/modes-of-operation/) explains them). The mode annunciation is blank while SET 0 is shown. The last three cells hold the enter prompt <Term t="ENT">`ENT`</Term> or the message prompt <Term t="MSG">`MSG`</Term>.
 - **The page identification of the right page.**
 
-While a cursor is on, the page identification of its side shows **the CRSR annunciation**: <Term t="CRSR">`CRSR`</Term> in inverse video. On the left side it stands in the last four of the five cells, one cell to the right of where the page name starts; on the right side it stands in the first four. It reminds you that the knobs of that side no longer select pages. In keyboard mode a flashing <Term t="KYBD">`KYBD`</Term> takes its place ([Keyboard mode](/kln90b/unit/keyboard-mode/)).
+While a cursor is on, the page identification of its side shows **the CRSR annunciation**: <Term t="CRSR">`CRSR`</Term> in inverse video. On the left side it stands in the last four of the five cells, one cell to the right of where the page name starts; on the right side it stands in the first four. It reminds you that the knobs of that side no longer select pages. In keyboard mode a flashing `KYBD` takes its place ([Keyboard mode](/kln90b/unit/keyboard-mode/)).
 
-`ENT` flashes whenever <kbd>ENT</kbd> would accept something: an entry that is open, a question, or a page that takes <kbd>ENT</kbd> with the cursor off (MOD 1, MOD 2, CTR 1 and a waypoint page shown for approval). `MSG` shows in inverse video while the unit holds messages. It is steady when you have read them all and flashes while at least one is unread; press <kbd>MSG</kbd> to read them. The enter prompt and the message prompt share their three cells, so `ENT` hides `MSG` for as long as it shows, and `MSG` comes back afterward.
+`ENT` flashes whenever <kbd>ENT</kbd> would accept something: an entry that is open, a question, or a page that takes <kbd>ENT</kbd> with the cursor off (MOD 1, MOD 2, CTR 1 and a waypoint page shown for approval). `MSG` shows in inverse video while the unit holds messages ([The message prompt](/kln90b/operation/messages/#the-message-prompt) says what its flashing means). The enter prompt and the message prompt share their three cells, so `ENT` hides `MSG` for as long as it shows, and `MSG` comes back afterward.
 
-A short message of the unit, such as `NO SUCH WPT`, replaces the middle of the status line in inverse video for about 5 seconds, and a newer one replaces an older one at once. [Messages](/kln90b/operation/messages/) explains the message page.
+A short message of the unit, such as `NO SUCH WPT`, replaces the middle of the status line for a few seconds ([Status line messages](/kln90b/operation/messages/#status-line-messages)).
 
 ### What flashes
 
@@ -155,7 +155,7 @@ Four pages cover both halves. What brings each up, and how you leave it:
 
 A step of any knob of either side moves that side's page, so the two NAV pages are no longer a pair and Super NAV 1 or Super NAV 5 gives way to the page you selected. SET 0 stays until the left side leaves it, and the right knobs go on moving the right page tree beneath it. You turn them without seeing the right page, and it is there when you leave SET 0.
 
-<kbd>MSG</kbd> again shows the next message and closes the page after the last ([Messages](/kln90b/operation/messages/)). A step of a knob that is pushed in and either <kbd>CRSR</kbd> button close the message page too, and the same step then acts on the page beneath, so the knob that closes it also changes a page. Scan turns of the pulled right inner knob do not close it. <kbd>CLR</kbd> does nothing on the message page. <kbd>ALT</kbd> and <DirectToKey /> close it and show their own page.
+The MSG page covers both sides, and <kbd>MSG</kbd> pages through it and closes it ([Reading the messages](/kln90b/operation/messages/#reading-the-messages)).
 
 ## Page pairs
 
