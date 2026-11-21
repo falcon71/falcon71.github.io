@@ -192,7 +192,7 @@ anchors and page links above. After them the order follows "owners before the pa
 | 12 | sid-star | SID and STAR procedures; DME arcs | done (2026-11-20) |
 | 13 | approaches | Non-precision approaches | done (2026-11-20) |
 | 14 | vnav-alerts | VNAV; Airspace and altitude alerting | done (2026-11-20) |
-| 15 | set | SET chapter | not started |
+| 15 | set | SET chapter | in review (2026-11-21) |
 | 16 | trip-planning | Trip planning and calculators; TRI and CAL chapters | not started |
 | 17 | fuel-air-data | Fuel and air data; OTH chapter | not started |
 | 18 | messages | Messages; Message page messages; Status line messages; the Glossary page | not started |
@@ -286,6 +286,10 @@ it is written when those owners exist. A package that proves too large in its re
 - **Rule of 2026-11-20 (maintainer, on the package vnav-alerts):** a page that works with a field of the other side
   shows both halves (style guide, section 13; the ALT page with NAV 4). The final pass looks for other half screens
   of such pages.
+
+- The package set (2026-11-21) brought the official terms the setup pages (named once on the SET chapter) and the
+  initial heading (SET 1), and wrote "NAV ready" where SET 2 depends on a fix. Power-on and initialization says "has a
+  position" for the same condition; the final pass makes it "NAV ready" there too.
 
 ## Site and generator notes
 

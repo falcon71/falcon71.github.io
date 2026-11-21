@@ -607,6 +607,8 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | the special use airspace alert at the first mention, then the airspace alert (as SET 8 names it); special use airspace; the vertical buffer (SET 8) | SUA alert |
 | the height above airport alert; the offset height (its height, set on SET 5) | |
 | center waypoint (the waypoint the CTR pages create at a Center boundary); area control center (ACC or ARTCC) where a page first introduces the concept, then Center (maintainer, 2026-11-20) | air route traffic control center alone, ACC alone |
+| the SET pages, named once on the SET chapter as the setup pages of the unit | the settings pages |
+| the initial heading (the degrees on the groundspeed line of SET 1) | track (on SET 1) |
 
 ### Spelling and style
 

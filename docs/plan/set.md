@@ -1,99 +1,43 @@
 # Package: set (the SET chapter)
 
-Written late on purpose: nearly every SET page is the setting of a function that an Operation page owns, and those
-owners exist by now. Pointers come from the planning survey of the code (paths relative to
-`vendor/kln90b/kln90b/`); they are not checked facts. Screens are planned by the session after its research.
+Done 2026-11-21. Paths of code relative to `vendor/kln90b/kln90b/`.
 
 ## Pages
 
-### SET pages (`pages/set.mdx`)
+### SET pages (`pages/set.mdx`), as written
 
-Sections in knob order: SET 1 to SET 10, then SET 0. Each section: what the page sets, the screen, the variants,
-and the link to the page that owns the function.
+The summary names the SET pages once as the setup pages of the unit, says that the options are kept while the unit is
+off, that most pages set a function another page explains, and that SET 0 loads nothing because the unit takes its
+database from the simulator. Each section: what the page sets, its screens, the rules of the page as a whole, and the
+link to the owner; the owners' numbers are not repeated in the text (the field explanations give ranges and steps).
 
-| Page | What it is for | Owner of the function |
-| --- | --- | --- |
-| SET 1 | the initial position | Power-on and initialization |
-| SET 2 | date, time and time zone; the magnetic variation field | Power-on and initialization; Modes of operation |
-| SET 3 | the criteria for nearest airports | Nearest |
-| SET 4 | when the flight timer runs | Trip planning and calculators (planned) |
-| SET 5 | the height above airport alert (Availability box) | Airspace and altitude alerting |
-| SET 6 | turn anticipation | Sequencing and turn anticipation |
-| SET 7 | the barometer units | Airspace and altitude alerting |
-| SET 8 | the airspace alert | Airspace and altitude alerting |
-| SET 9 | the altitude alert volume (Availability box) | Airspace and altitude alerting |
-| SET 10 | real or fast acquisition; the way to the FLR pages (Simulator only box; style guide, section 17) | GPS reception and RAIM; the FLR chapter |
-| SET 0 | the database update page, full screen | Waypoints and the database |
+| Section | Anchor | Screens | Links to |
+| --- | --- | --- | --- |
+| The SET pages: settings and entries | `#the-set-pages-settings-and-entries` | – | Controls and display (selecting a page, the two ways of entering data) |
+| SET 1: initial position | `#set-1-initial-position` | `pages/set/set-1`, `set-1-latitude-entry` | Power-on `#initializing-the-position-and-the-time` |
+| SET 2: date, time and time zone | `#set-2-date-time-and-time-zone` | `pages/set/set-2`, `set-2-date-entry`, `navigation/set-2-magvar` | Power-on; D/T `#the-time-zone`; Modes of operation `#flying-without-a-magnetic-variation`; Waypoints `#recycle-power-to-use`; Simulated failures `#the-battery` |
+| SET 3: nearest airport criteria | `#set-3-nearest-airport-criteria` | `pages/set/set-3`, `set-3-cursor` | Nearest `#setting-the-nearest-airport-criteria` |
+| SET 4: flight timer | `#set-4-flight-timer` | `pages/set/set-4`, `set-4-cursor` | Trip planning and calculators (page link, not written yet) |
+| SET 5: height above airport alert | `#set-5-height-above-airport-alert` | `pages/set/set-5`, `set-5-on`, `set-5-disabled` | Airspace and altitude alerting `#the-height-above-airport-alert` |
+| SET 6: turn anticipation | `#set-6-turn-anticipation` | `pages/set/set-6`, `set-6-cursor` | Sequencing `#turning-off-turn-anticipation` |
+| SET 7: baro setting units | `#set-7-baro-setting-units` | `pages/set/set-7`, `set-7-cursor` | Airspace and altitude alerting `#the-baro-setting` |
+| SET 8: airspace alert | `#set-8-airspace-alert` | `pages/set/set-8`, `set-8-cursor`, `set-8-disabled` | `#the-airspace-alert` |
+| SET 9: volume of the aural alarm | `#set-9-volume-of-the-aural-alarm` | `pages/set/set-9`, `set-9-disabled` | `#the-aural-alarm` |
+| SET 10: acquisition and failures | `#set-10-acquisition-and-failures` | `pages/set/set-10`, `set-10-real`, `set-10-failures` | GPS reception and RAIM `#real-and-fast-acquisition`; FLR chapter |
+| SET 0: database update | `#set-0-database-update` | `pages/set/set-0`, `set-0-cursor`, `set-0-expiry`, `set-0-loader-not-ready` | Waypoints `#the-database`; FAQ `#how-do-i-update-the-database` (planned) |
+
+Decisions: SET 1 says that its values are shown as they were when the page was selected, and that once the unit is
+NAV ready the measured position replaces an entry. SET 2 that stays read-only after a fix lost while it is shown is
+not described (a failure state, style guide section 8). The spaced letters of SET 0 are quoted as the unit shows
+them. Every screen could be staged.
 
 ## Topics this package owns
 
 Only the pages and their fields.
 
-## Where to look
+## Notes for the maintainer (bugs not filed, see the session report)
 
-`pages/left/Set0Page.tsx` to `Set10Page.tsx`, `pages/PageTreeController.ts` (the order), the wiki page
-`SET-10-Page.md`. The screen `pages/set/set-3-cursor` of the Quickstart exists; reuse or replace.
-
-## Notes from other packages
-
-- From the package getting-started: SET 0 follows SET 10 in the knob order; while it is shown, the status line
-  shows no mode and no right page name.
-- From the planning survey: SET 5 and SET 9 show a text instead of their fields where the installation has no
-  altitude alerting; SET 0 has no loader behind it in the simulation, and the chapter says what the pilot sees and
-  no more (style guide, section 3).
-
-### From the package failures (2026-11-16)
-
-- SET 10 opens the FLR pages. The FLR chapter owns the way in and out (`/kln90b/pages/flr/`, its opening section)
-  and has the screen `pages/set/set-10-failures` (SET 10 with the cursor on `FAILURES?`), which the SET chapter may show.
-  The SET chapter says one sentence and links. The existing screen `pages/set/set-10` still has placeholder field
-  explanations.
-- After a loss of the unit's memory SET 2 takes a date only until the unit has a position (Simulated failures,
-  `#the-battery`).
-
-### From the package power-on (2026-11-17)
-
-- Power-on and initialization, `#initializing-the-position-and-the-time`, owns the task of correcting the position
-  on SET 1 and the date and time on SET 2, with procedures and the screens `pages/set/set-1-latitude-entry` and
-  `pages/set/set-2-date-entry`. The SET chapter explains the pages and fields and links there for the task.
-- SET 2 takes no date and no time once the unit has a position; the cursor skips them. The Self Test page still takes
-  them until it is approved.
-- Suspected and not verified: `CONFIRM?` on SET 1 still sets the position while the unit has one
-  (`pages/left/Set1Page.tsx:104-114`), and the next calculation replaces it with the measured one. Check before the
-  chapter says anything about it.
-- A date on SET 2 that moves the database from current to expired or back posts `RECYCLE POWER TO USE`
-  `CORRECT DATA BASE DATA`.
-
-### From the package waypoints (2026-11-17)
-
-- SET 0 shows the database cycle status again, behind `UPDATE PUBLISHED DB`, and loads nothing (check in
-  `pages/left/Set0Page.tsx`). Link `/kln90b/operation/waypoints/#the-database` for the cycle and its expiry.
-- `RECYCLE POWER TO USE` (with the database out of date) comes from a date entered on SET 2, not from the Self Test
-  page; Waypoints and the database owns it (`#recycle-power-to-use`). SET 2 links there.
-
-### From the package nearest-direct-to (2026-11-18)
-
-- SET 3: Nearest owns the nearest airport criteria (word list) and has the procedure for setting them
-  (`/kln90b/operation/nearest/#setting-the-nearest-airport-criteria`); the SET chapter explains the page and links.
-  The screen `pages/set/set-3` (no cursor, defaults) exists and its field explanations match those of
-  `nearest/msg-ent`; `pages/set/set-3-cursor` exists too.
-
-### From the package navigation (2026-11-18)
-
-- SET 6 is shown on Sequencing, `#turning-off-turn-anticipation`, with the screens `pages/set/set-6` and
-  `pages/set/set-6-cursor`; the SET chapter reuses them under a heading "SET 6: …" (the page link of Sequencing warns
-  until that heading exists) and links there.
-- SET 2: Modes of operation, `#flying-without-a-magnetic-variation`, shows `navigation/set-2-magvar` (SET 2 north of
-  74°N, the `MAG V` line for entering a variation), whose field explanations cover the whole page. The SET chapter's
-  SET 2 screens and these must agree, or the chapter reuses this one.
-
-### From the package flight-plan-pages (2026-11-20)
-
-- SET 4: the field `RUN WHEN` (as the writer of D/T read it; check it) has the choices `GS > 30kt` and
-  `POWER IS ON`. The code starts the timer at 30 kt or more (`>=`), while the label says `>`; the setting takes effect
-  at once. The D/T chapter names SET 4 and links Trip planning and calculators, which owns the flight timer as a task.
-
-## Changes to earlier pages
-
-The pages that named a SET page before this chapter existed link to it by the page links; the seam check verifies
-that every SET heading the page links need exists.
+- SET 4 counts at a groundspeed of 30 kt or more (`services/Timers.ts:27`) while its label says `GS > 30kt`.
+- SET 1 reads its values once when the page is built (`pages/left/Set1Page.tsx:207-211`); whether the real page is
+  live is not settled.
+- SET 0 goes from `U P D A T E ?` straight to `LOADER NOT READY`; deliberate in the code.
