@@ -382,7 +382,9 @@ before you reuse one):
   pilot may open the page to find: the screen stays dark for a few seconds after power-on while the unit warms up. Put
   it where the pilot meets the surprise, so that the text around it stays in its natural order. Two or three
   sentences. It is rare: a page has at most one, and most pages have none; an ordinary exception stays a sentence or a
-  note.
+  note. The one exception is a page with two separate facts that each catch pilots off guard, such as Non-precision
+  approaches, with the missing ILS approaches and the missing vertical guidance; it may have two (maintainer,
+  2026-11-21).
 - **The Optional reading box** (`<Callout kind="optional">`) opens a page or a section that goes deeper than a
   pilot needs to operate the unit, and says in one or two sentences that nothing in it is needed and where the
   operating knowledge is. So far only Inside the GPS simulation has one (section 17).
