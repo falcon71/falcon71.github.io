@@ -153,7 +153,7 @@ To predict RAIM for another destination or another ETA:
 
 ## Messages of the receiver
 
-The receiver tells you about its position and RAIM with messages on the MSG page. Most stay on the MSG page as long as their condition lasts, also after you have read them, and come back unread when the condition returns; the messages about the clock and the first position go once you have read them. [Messages](/kln90b/operation/messages/) explains how messages arrive and are read, and the [message list](/kln90b/lists/messages/) has every message of the unit.
+The receiver tells you about its position and RAIM with messages on the MSG page. Most stay on the MSG page as long as their condition lasts, also after you have read them, and come back unread when the condition returns; the messages about the clock and the first position go once you have read them. [Messages](/kln90b/operation/messages/#reading-the-messages) explains how messages arrive and are read, and the [message list](/kln90b/lists/messages/) has every message of the unit.
 
 ```
 SATELLITE COVERAGE
@@ -218,6 +218,7 @@ POSITION DIFFERS FROM
  LAST POSITION BY >2NM
 ```
 
+{/* kln90b#532: describes the current behavior; the fix adds a space between > and 2NM */}
 The first position after power-on is more than 2 NM from the position stored at power-off, for example because the aircraft was loaded at another airport. Nothing to do if you know why; a position regained in flight never posts it.
 
 `ALTITUDE FAIL` is described in [The altitude input](#the-altitude-input).

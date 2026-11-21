@@ -1,0 +1,96 @@
+---
+title: Messages
+description: What the flashing MSG of the KLN 90B means, how to read the messages on the MSG page, which messages stay while their cause lasts, what happens to them over a power-off, and how status line messages and the remote mounted annunciators work.
+sidebar:
+  order: 13
+---
+
+import KlnScreen from '../../../components/KlnScreen.astro';
+import DirectToKey from '../../../components/DirectToKey.astro';
+import Callout from '../../../components/Callout.astro';
+import Term from '../../../components/Term.astro';
+
+When the KLN 90B has something to tell you, <Term t="MSG">`MSG`</Term> flashes in the status line. Press <kbd>MSG</kbd> to read the messages on the MSG page. Some messages go once you have read them; others stay for as long as their cause lasts.
+
+## The message prompt
+
+The message prompt `MSG` stands in the middle part of the status line ([The status line](/kln90b/unit/controls-and-display/#the-status-line)). It flashes in inverse video while the unit holds a message that you have not read, it stays steady in inverse video once you have read them all, and it is blank when the unit holds no message.
+
+<KlnScreen screen="messages/msg-prompt" rows="7" />
+
+Super NAV 5 has no status line and draws its own `MSG` over the map, which flashes and stays steady in the same way.
+
+## Reading the messages
+
+The MSG page lists the messages of the unit, the newest first. It covers both halves of the screen, and its status line shows no page identifications, only the mode annunciation and `MSG`. A message of several lines shows its further lines indented by one cell.
+
+To read the messages:
+
+1. Press <kbd>MSG</kbd>. The MSG page appears.
+2. Press <kbd>MSG</kbd> again for each further page. Pressing it after the last page closes the MSG page, and the screen shows the pages you left.
+
+<KlnScreen screen="messages/msg-page" />
+
+The page holds six lines, and a message is never split: one that does not fit under the messages above it goes to the next page. The page lists the messages the unit held when you opened it. A message that arrives while the page is open is not on it, and `MSG` keeps flashing: close the page and open it again.
+
+A message counts as read when it has been on a page you had in view: the messages of the first page when it opens, those of every other page when you reach it. If you close the page before the last one, the messages on the pages you did not reach stay unread, and `MSG` keeps flashing. A message you have read stays on the list while its cause lasts ([Messages that stay while their cause lasts](#messages-that-stay-while-their-cause-lasts)). With no message, the MSG page is blank and shows `MSG` plain, not in inverse video.
+
+Besides <kbd>MSG</kbd>, these close the MSG page:
+
+- **A step of any knob** (the right inner knob pushed in), and either <kbd>CRSR</kbd> button. The same step then acts on the page beneath: a step of the left outer knob moves that page on, and <kbd>CRSR</kbd> turns the cursor of its side on, on the page beneath.
+- **<DirectToKey />** and <kbd>ALT</kbd>. The page closes, and the Direct To page or the ALT page shows at once.
+
+<kbd>CLR</kbd> does nothing on the MSG page.
+
+### Showing the nearest airport from the MSG page
+
+<kbd>ENT</kbd> on the MSG page closes it and shows APT 1 of the nearest airport on the right side, as [Finding the nearest airport quickly](/kln90b/operation/nearest/#finding-the-nearest-airport-quickly) describes. The messages on pages you have not reached stay unread.
+
+## Messages that stay while their cause lasts
+
+A message is one of two kinds. A one-time message reports an event, such as `SYSTEM TIME UPDATED` `TO GPS TIME`. It goes within a second after you have read it, and `MSG` goes with it if no other message is left. An unread one waits until you have read it.
+
+A lasting message reports a condition, such as `RAIM NOT AVAILABLE` `CROSS CHECK POSITION`, and stays for as long as the condition holds. Reading it changes the prompt from flashing to steady, but the message stays on the list and `MSG` stays lit. It goes when the cause ends, and `MSG` goes with it if nothing else is left.
+
+When the cause returns, the message returns too, and it is unread again: `MSG` flashes anew. A few lasting messages go when you have read them although their cause lasts, or when you do what they ask; the entry of each message in [Message page messages](/kln90b/lists/messages/) says which.
+
+## Messages after a power-on
+
+The unit forgets all its messages when it is turned off, unread ones included. At the next power-on it raises them again only where the cause is still there.
+
+- **A lasting message** whose cause still holds comes back as soon as the unit runs. It comes back as you left it: one you had read is read, with a steady `MSG`.
+- **A failure message** of the simulated failures, the battery warning `BATTERY LOW: SERVICE` and `RCVR HARDWARE ERROR:` come back unread once the power-on pages are done, so that `MSG` flashes again. [When the unit notices a failure](/kln90b/operation/failures/#when-the-unit-notices-a-failure) lists when each is raised.
+- **A one-time message** is gone. The unit raises it again only if its event happens again.
+
+## Status line messages
+
+A short message of the unit, such as `INVALID ENT`, replaces the middle part of the status line for about 5 seconds, in inverse video: the mode annunciation and the prompts are hidden meanwhile. It answers something you just did. A newer status line message replaces an older one at once and gets a time of its own.
+
+<KlnScreen screen="messages/status-line-message" />
+
+While it shows, a status line message is also an entry on the MSG page, and its status line shows the message in the same way. You see no `MSG` then, but the message annunciator flashes, and on Super NAV 5 its own `MSG` does. The message never counts as read: pressing <kbd>MSG</kbd> does not stop the flashing, only the end of the message does. When it ends, it leaves the MSG page, and the prompt and the message annunciator go out if the unit holds no other message; otherwise they follow the other messages as usual. A page you open while the message shows lists it as a one-line entry.
+
+Super NAV 5 has no status line, so you cannot see the message there. `MSG` flashes over the map, and the MSG page lists the message. The message ends after you leave Super NAV 5, once the status line has shown it for its usual time.
+
+[Status line messages](/kln90b/lists/status-line-messages/) lists the texts and what each means.
+
+## The remote mounted annunciators
+
+<Callout kind="availability">
+The remote mounted annunciators are outside the unit, in the aircraft. Which of them your aircraft has depends on how the unit is installed in it.
+</Callout>
+
+The remote mounted annunciators repeat what the unit shows. The **message annunciator** flashes while a message is unread, a status line message included, stays lit once you have read them all, and is dark when the unit holds no message. It is lit during the self test, whatever the messages ([The Self Test page](/kln90b/unit/power-on/#the-self-test-page)).
+
+The other three each have an owner:
+
+- The **waypoint alert annunciator** shows waypoint alerting ([The waypoint alert annunciator](/kln90b/operation/sequencing/#the-waypoint-alert-annunciator)).
+- The **ARM annunciator** at the GPS APR switch lights in approach arm mode ([Arming the approach](/kln90b/operation/approaches/#arming-the-approach)).
+- The **ACTV annunciator** at the GPS APR switch lights in approach active mode ([Activating the approach](/kln90b/operation/approaches/#activating-the-approach)).
+
+A remote mounted annunciator can fail in the simulation, and the unit's own screen is then the check on it ([The annunciators](/kln90b/operation/failures/#the-annunciators)).
+
+## Where to go next
+
+- [Message page messages](/kln90b/lists/messages/) lists every message of the MSG page with its meaning and what to do.
+- [Status line messages](/kln90b/lists/status-line-messages/) lists the short messages of the status line.

@@ -7,7 +7,6 @@ sidebar:
 
 import KlnScreen from '../../../components/KlnScreen.astro';
 import Callout from '../../../components/Callout.astro';
-import Term from '../../../components/Term.astro';
 
 Every power-on with the knob runs the same sequence. The Turn-On page is shown first, you approve the self test on the Self Test page and you acknowledge the Database page; depending on the installation, a VFR-only warning page and an OBS warning page come in between. The unit finds its position by itself, and you correct the position, the date or the time only when the search takes too long.
 
@@ -60,7 +59,7 @@ The Self Test page lets you check the instruments of the aircraft against its te
 
 <KlnScreen screen="power-on/self-test" />
 
-The left page holds fixed test values: a distance of 34.5 NM, a half-scale deflection of the D-bar to the right with the TO/FROM indicator on FROM, an `OBS OUT` course of 315° and a bearing of 130° for the <Term t="RMI" />. The unit sends them to the aircraft that it drives, so that the CDI or HSI and the RMI show the same values and the autopilot receives the bearing. `ANNUN` `ON` lights the remote annunciators that the aircraft has. The one live value is <Term t="OBS IN" />, the course of the OBS setting of the aircraft, which follows when you turn the OBS knob.
+The left page holds fixed test values: a distance of 34.5 NM, a half-scale deflection of the D-bar to the right with the TO/FROM indicator on FROM, an `OBS OUT` course of 315° and a bearing of 130° for the RMI, the radio magnetic indicator of the aircraft. The unit sends them to the aircraft that it drives, so that the CDI or HSI and the RMI show the same values and the autopilot receives the bearing. `ANNUN` `ON` lights the remote mounted annunciators that the aircraft has. The one live value is `OBS IN`, the course of the OBS setting of the aircraft, which follows when you turn the OBS knob.
 
 On the right page you check the date and the time, in the time zone beside them, the altitude and the baro setting, and correct them where they are wrong. The cursor is on the baro setting when the page appears ([Entering data with the cursor](/kln90b/unit/controls-and-display/#entering-data-with-the-cursor)).
 
@@ -199,7 +198,7 @@ The unit keeps its data while it is off, and it forgets some of it after more th
 - the approach arm mode and the entries of NAV 4, including the selected altitude and the VNAV entries;
 - the departure time and the flight timer of D/T 4, the entries of CAL 6 and CAL 7 and the fuel on board;
 - the page last shown in each page type;
-- the messages ([Messages](/kln90b/operation/messages/) says how they come back).
+- the messages ([Messages](/kln90b/operation/messages/#messages-after-a-power-on) says how they come back).
 
 A failed internal battery erases the user data at a power-on, and [The battery](/kln90b/operation/failures/#the-battery) says what is lost.
 

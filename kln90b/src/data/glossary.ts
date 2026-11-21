@@ -1,8 +1,6 @@
 /**
  * The single source for every explained term. <Term> builds its tooltip from here and the glossary page lists
  * the whole collection, so the two never disagree.
- *
- * Draft: the definitions are placeholders.
  */
 export interface GlossaryEntry {
 	/** The written-out form, e.g. "Cross-track error" */
@@ -71,10 +69,6 @@ export const glossary: Record<string, GlossaryEntry> = {
 		expansion: 'Area navigation',
 		text: 'Navigation between waypoints anywhere, rather than to and from ground stations. On APT 8, RNAV names an RNAV (GPS) approach.',
 	},
-	LNAV: {
-		expansion: 'Lateral navigation',
-		text: 'The minima of an RNAV (GPS) approach flown with lateral guidance only. The unit offers an RNAV approach only when it has LNAV minima.',
-	},
 	'RF leg': {
 		expansion: 'Radius-to-fix leg',
 		text: 'A procedure leg that follows a turn of fixed radius to a fix. The unit cannot fly it and leaves out every procedure that contains one.',
@@ -84,7 +78,7 @@ export const glossary: Record<string, GlossaryEntry> = {
 		text: 'Procedures that need a special approval of aircraft and crew. The unit does not offer them.',
 	},
 	MSG: {
-		text: 'The message prompt. It shows in the status line when the unit holds a message and flashes while you have not read all of them. You read the messages with the MSG button.',
+		text: 'The message prompt in the status line: it flashes while a message is unread and stays steady while the unit holds only messages you have read. The MSG button shows them.',
 	},
 	ENT: {
 		text: 'The enter prompt. It flashes in the status line when ENT accepts what you have entered or selected.',
@@ -96,10 +90,6 @@ export const glossary: Record<string, GlossaryEntry> = {
 	CRSR: {
 		expansion: 'Cursor',
 		text: 'Replaces the page name in the status line while the cursor is on for that side. Pressing the CRSR button of that side turns the cursor off again.',
-	},
-	KYBD: {
-		expansion: 'Keyboard',
-		text: 'Flashes in the status line in place of CRSR while keyboard mode is on for that side.',
 	},
 	'ENR-LEG': {
 		expansion: 'Enroute-Leg mode',
@@ -124,26 +114,6 @@ export const glossary: Record<string, GlossaryEntry> = {
 	'APR-LEG': {
 		expansion: 'Approach Active-Leg mode',
 		text: 'The mode annunciation of the active approach: the unit guides you along the legs of the approach with the approach CDI scale factor.',
-	},
-	'OBS IN': {
-		expansion: 'OBS input',
-		text: 'The course that the unit reads from the OBS setting of the course indicator in the aircraft, in degrees magnetic.',
-	},
-	OUT: {
-		expansion: 'OBS output',
-		text: 'On the Self Test page, the desired track that the unit sends out; it shows a fixed test value.',
-	},
-	RMI: {
-		expansion: 'Radio magnetic indicator',
-		text: 'An instrument that shows bearings; the unit sends it the bearing to the active waypoint.',
-	},
-	ANNUN: {
-		expansion: 'Annunciators',
-		text: 'The lamps of the aircraft that the unit lights to show its state, such as MSG and the approach and waypoint lamps.',
-	},
-	ALT: {
-		expansion: 'Altitude',
-		text: 'The indicated altitude from the altitude input of the aircraft, rounded to 100 ft.',
 	},
 	BARO: {
 		expansion: 'Altimeter baro setting',

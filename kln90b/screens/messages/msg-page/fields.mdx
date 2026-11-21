@@ -1,0 +1,19 @@
+<Field id="raim" title="RAIM not available">
+	The receiver cannot check its position for errors. A message of two lines: the second line is indented by one cell. It stays while the condition lasts, also after you have read it. See [RAIM](/kln90b/operation/gps-receiver/#raim).
+</Field>
+
+<Field id="time" title="System time updated">
+	The satellites moved the unit's clock by more than 10 minutes, so the unit set its clock to GPS time. It goes once you have read it.
+</Field>
+
+<Field id="position" title="Position differs from last position">
+	The first position after power-on is more than 2 NM from the position the unit stored when it was turned off. It goes once you have read it.
+</Field>
+
+<Field id="mode" title="Mode annunciation">
+	The mode annunciation; <Term t="ENR-LEG">`ENR-LEG`</Term> is Enroute-Leg mode. It stays in the status line while the MSG page is shown.
+</Field>
+
+<Field id="msg" title="Message prompt">
+	<Term t="MSG">`MSG`</Term> in inverse video: the unit holds messages. It is steady once you have read them all and flashes while one is unread. Pressing <kbd>MSG</kbd> shows the next page of messages or closes the MSG page.
+</Field>
