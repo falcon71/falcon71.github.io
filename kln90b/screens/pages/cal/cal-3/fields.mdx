@@ -1,0 +1,27 @@
+<Field id="title" title="Page title">
+	`WIND` heads the page that works out the wind from your true airspeed, your heading and your movement over the ground.
+</Field>
+
+<Field id="tas" title="True airspeed">
+	`TAS` is the true airspeed in kt, from 000 to 999, which the wind calculation uses. Showing CAL 2 puts its true airspeed here; you can also enter one with the cursor, and it then stays until CAL 2 is shown again. The value counts at once. A value above 999 kt, which CAL 2 can hand over, shows dashes here and in the three wind lines.
+</Field>
+
+<Field id="hdg" title="Heading">
+	`HDG` is your magnetic heading, from 000 to 359°. You enter it with the cursor: the first two digits are the tens of degrees, from 00 to 35. The value counts at once. The unit turns it into a true heading with its magnetic variation.
+</Field>
+
+<Field id="component" title="Headwind or tailwind component">
+	`HDWND` is the part of the wind that blows against your heading, `TLWND` the part that blows from behind, in kt. The label shows `HDWND` for a headwind and for no component at all. The values follow your true airspeed, your heading and the groundspeed and track of the GPS, and change with them.
+</Field>
+
+<Field id="direction" title="Wind direction">
+	`WIND` is the direction that the wind blows from, in degrees. The symbol after the degrees marks it as a true direction, not a magnetic one.
+</Field>
+
+<Field id="speed" title="Wind speed">
+	The speed of the wind in kt, from the same values as the wind direction.
+</Field>
+
+<Field id="page" title="Page identification">
+	The page identification of the left page, `CAL 3`.
+</Field>

@@ -44,7 +44,7 @@ The second block is hidden while the destination waypoint is the active waypoint
 
 ## D/T 2: estimated time of arrival
 
-D/T 2 gives the distance and the ETA at the waypoints, in the time zone you choose. It has the same two variants as D/T 1, with the same rows and the same rules, and gives the ETA where D/T 1 gives the estimated time en route.
+D/T 2 gives the distance and the ETA at the waypoints, in the system time zone you choose. It has the same two variants as D/T 1, with the same rows and the same rules, and gives the ETA where D/T 1 gives the estimated time en route.
 
 ### D/T 2 beside an FPL page
 
@@ -60,7 +60,7 @@ Beside any other page the first block shows the time zone in a field on the line
 
 ### The time zone
 
-The time zone is the one field of D/T 2. The right <kbd>CRSR</kbd> puts the cursor on it, and the right inner knob chooses the next zone clockwise and the previous one counterclockwise, around the list. The times change with every step and the unit stores the zone at once, so you need no <kbd>ENT</kbd>. The zone is the same on every page that shows a time, so choosing it here also changes SET 2, D/T 4 and the others ([Trip planning and calculators](/kln90b/operation/trip-planning/)).
+The time zone is the one field of D/T 2. The right <kbd>CRSR</kbd> puts the cursor on it, and the right inner knob chooses the next zone clockwise and the previous one counterclockwise, around the list. The times change with every step and the unit stores the zone at once, so you need no <kbd>ENT</kbd>. The zone is the same on every page that shows a time, so choosing it here also changes SET 2, D/T 4 and the others ([The time zone](/kln90b/operation/trip-planning/#the-time-zone)).
 
 <KlnScreen screen="pages/dt/dt-2-cursor" />
 
@@ -90,7 +90,7 @@ D/T 4 shows the times of the flight: when you departed, the present time, how lo
 
 The top line names the destination waypoint, in front of the time zone. It is the last waypoint of FPL 0 or, with an approach in FPL 0, its missed approach point; during a direct-to to a waypoint outside the flight plan it is that waypoint. Unlike D/T 1, D/T 4 shows the destination waypoint while it is the active waypoint, and marks it then with an arrow, or with the Direct To symbol during a direct-to to it, also one to a waypoint of FPL 0. The time zone is a field here too, and works as on D/T 2. You cannot reset `DEP` or `FLT`.
 
-The flight timer counts while the groundspeed is 30 kt or more; [Trip planning and calculators](/kln90b/operation/trip-planning/) explains it, and [What the unit keeps while it is off](/kln90b/unit/power-on/#what-the-unit-keeps-while-it-is-off) says that a power-on clears the departure time and the flight time.
+`DEP` and `FLT` count while the flight timer runs, which [The flight timer](/kln90b/operation/trip-planning/#the-flight-timer) explains. [What the unit keeps while it is off](/kln90b/unit/power-on/#what-the-unit-keeps-while-it-is-off) says that a power-on clears the departure time and the flight time.
 
 ## Dashes and blank rows
 
@@ -117,4 +117,4 @@ While the unit flags its navigation, beside FPL 0 the row of the active waypoint
 - [Page pairs](/kln90b/unit/controls-and-display/#page-pairs): how the right pages follow the left page.
 - [Direct-to](/kln90b/operation/direct-to/#the-default-waypoint): with a D/T page on the right, the Direct To page offers the active waypoint.
 - [Flight plans](/kln90b/operation/flight-plans/): the flight plan whose waypoints D/T 1 to D/T 3 list.
-- [Trip planning and calculators](/kln90b/operation/trip-planning/): the time zone and the flight timer.
+- [Trip planning and calculators](/kln90b/operation/trip-planning/): [the time zone](/kln90b/operation/trip-planning/#the-time-zone) and [the flight timer](/kln90b/operation/trip-planning/#the-flight-timer).

@@ -1,0 +1,19 @@
+<Field id="title" title="Page title">
+	`VNV ANGLE` heads the page that converts between a rate of descent or ascent and a descent or ascent angle.
+</Field>
+
+<Field id="gs" title="Groundspeed">
+	`GS:` is the groundspeed that the conversion uses, in kt, from 000 to 999. You enter it with the cursor, and the value counts at once. The unit takes no groundspeed from the GPS here. Entering it recalculates the angle.
+</Field>
+
+<Field id="fpm" title="Rate of descent or ascent">
+	`FPM:` is the rate of descent or ascent in ft per minute, entered in steps of 100 fpm from 0000 to 9900: the cursor visits only the thousands and the hundreds. Entering it recalculates the angle, and entering the angle recalculates it, rounded to the nearest 100 fpm. A rate that does not fit the four cells, which an angle at a high groundspeed can give, shows dashes and holds no value, and an entry in it starts from 0000.
+</Field>
+
+<Field id="angle" title="Descent or ascent angle">
+	`ANGLE:` is the descent or ascent angle in degrees, in tenths, from 0.0 to 9.9. Entering the groundspeed or the rate of descent or ascent recalculates it, and entering it recalculates the rate of descent or ascent. An angle of 10° or more does not fit the two cells and shows dashes. With a groundspeed of 000 it is 0.0.
+</Field>
+
+<Field id="page" title="Page identification">
+	The page identification of the left page, `CAL 4`.
+</Field>

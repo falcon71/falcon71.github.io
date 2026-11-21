@@ -1,0 +1,31 @@
+<Field id="plan" title="Flight plan number and distance">
+	`FP` and the number of the flight plan the page plans along, from ` 0`, the active flight plan, to `25`, followed by the length of its legs added together in whole NM. The cursor starts on the number, and the inner knob goes through the numbers around the ends; the figures follow at once, without <kbd>ENT</kbd>. The unit keeps the number while it is off, and TRI 6 shows the same one. The distance shows dashes for a flight plan with fewer than two waypoints and for 10,000 NM or more.
+</Field>
+
+<Field id="route" title="The first and the last waypoint of the flight plan">
+	The identifiers of the first and the last waypoint of the flight plan, with a hyphen between them. The cursor does not stop here. They are blank for a flight plan without waypoints, and the last one is blank for a flight plan of one waypoint.
+</Field>
+
+<Field id="gs" title="Average groundspeed">
+	<Term t="GS">`GS`</Term> is the average groundspeed of the flight plan in knots: the total distance over the total time, with the wind of TRI 0 on the course of every leg. With the cursor on it, the inner knob changes a digit and the page takes the groundspeed you typed; the time and the fuel required follow at once, and the unit forgets the typed value when you leave the page or change the number. It shows `000` for a flight plan with fewer than two waypoints.
+</Field>
+
+<Field id="ete" title="Estimated time en route">
+	<Term t="ETE">`ETE`</Term> is the sum of the times of the legs, each at the groundspeed that the wind gives on its course, rounded to the whole minute, as hours and minutes. Below one hour the hours show as 0. It shows dashes while the groundspeed is `000`, and for 100 hours or more.
+</Field>
+
+<Field id="ff" title="Fuel flow">
+	`FF` is the fuel flow per hour, as a number from 00000.0 to 99999.9 in the unit you use for the fuel; the unit shows none. The cursor stops on every digit, the tenth included, and the inner knob changes a digit at once, without <kbd>ENT</kbd>. The unit keeps it while it is off. TRI 1, TRI 3 and TRI 5 show the same entry, and it is not a reading of a fuel management system.
+</Field>
+
+<Field id="res" title="Reserve fuel">
+	`RES` is the reserve fuel, as a number from 00000.0 to 99999.9 in the unit you use for the fuel flow; the unit shows none. The cursor stops on every digit, the tenth included, and the inner knob changes a digit at once, without <kbd>ENT</kbd>. The unit adds it once to the fuel of the trip and keeps it while it is off. TRI 1, TRI 3 and TRI 5 show the same entry, and it is not that of OTH 5 to OTH 8.
+</Field>
+
+<Field id="freq" title="Fuel required">
+	`F REQ` is the fuel the trip needs: the time en route at the fuel flow, plus the reserve. It is in the unit of the fuel flow and shows a tenth below 100 (`20.4`) and whole units from 100. It shows dashes while the time shows dashes and from 100,000 on. With a fuel flow of 0 it equals the reserve.
+</Field>
+
+<Field id="page" title="Page identification">
+	The page identification of the left side: `TRI 5`. TRI 5 plans a trip along a flight plan.
+</Field>

@@ -1,65 +1,99 @@
 # Package: trip-planning (Trip planning and calculators; the TRI and CAL chapters)
 
-Many small pages of one pattern. Pointers come from the planning survey of the code (paths relative to
-`vendor/kln90b/kln90b/`); they are not checked facts. Screens are planned by the session after its research. If the
-package is too large for one session, the CAL chapter becomes a package of its own.
+Written 2026-11-21. Paths of code relative to `vendor/kln90b/kln90b/`.
 
-## Pages
+## Pages, as written
 
-### Trip planning and calculators (`operation/trip-planning.mdx`)
+### Trip planning and calculators (`operation/trip-planning.mdx`, `sidebar.order` 15)
 
-1. Summary.
-2. Planning a trip: from the present position, between two waypoints, along a flight plan; the speed, wind and fuel
-   the unit plans with; the airspaces and the minimum safe altitude along the route.
-3. Times in flight: the D/T pages in use, time zones, the flight timer and SET 4.
-4. The calculators: which page answers which question, with one worked example where the pages work together.
-5. Links on.
+The task page: the procedures, which page to use and the consequences. The rules of the pages stay in the TRI and CAL
+chapters; this page links there. It names "the system time zone" (word list) and owns the zone list.
 
-### TRI pages (`pages/tri.mdx`)
+| Section | Anchor | Screens | Links to |
+| --- | --- | --- | --- |
+| Planning a trip | `#planning-a-trip` | – | Fuel and air data (planned; TRI's fuel entries are the pilot's own) |
+| Setting the true airspeed and the wind | `#setting-the-true-airspeed-and-the-wind` | `pages/tri/tri-0` | TRI `#tri-0-true-airspeed-and-wind` (the true "from" wind, a sentence) |
+| Planning from the present position | `#planning-from-the-present-position` | `pages/tri/tri-1` | TRI `#the-tri-pages-planning-a-trip` (figures computed once, a sentence); D/T 4 and D/T 1 for what is left of FPL 0 |
+| Planning between two waypoints | `#planning-between-two-waypoints` | `pages/tri/tri-3` | – |
+| Planning along a flight plan | `#planning-along-a-flight-plan` | `pages/tri/tri-5` | – |
+| The safe altitude and the airspaces along the route | `#the-safe-altitude-and-the-airspaces-along-the-route` | `pages/tri/tri-2` | TRI `#the-airspaces-along-the-route`; NAV `#minimum-safe-altitudes` |
+| Times in flight | `#times-in-flight` | – | – |
+| The time zone | `#the-time-zone` | `trip-planning/time-zone` (SET 2, cursor on the zone) | the procedure on SET 2, the page a pilot sets it on (maintainer, 2026-11-21); owns the zone list (19 zones, fixed offsets, no daylight saving change) and the sharing |
+| The flight timer | `#the-flight-timer` | `pages/dt/dt-4`, `pages/set/set-4-cursor` | owns the 30 kt (kln90b#522 on the paragraph); `POWER IS ON` chosen later keeps the count and `DEP` |
+| The calculators | `#the-calculators` | – | a question-to-page table; VNAV `#the-angle` |
+| Finding the wind in flight | `#finding-the-wind-in-flight` | `pages/cal/cal-2`, `pages/cal/cal-3` | CAL 2's true airspeed passes to CAL 3 |
+| Where to go next | `#where-to-go-next` | – | – |
 
-TRI 0 to TRI 6: the pages, their variants (`TRI+2`, `TRI+4`, `TRI+6`; no position; no flight plan), the fields.
+### TRI pages (`pages/tri.mdx`, `sidebar.order` 1)
 
-### CAL pages (`pages/cal.mdx`)
+| Section | Anchor | Screens |
+| --- | --- | --- |
+| The TRI pages: planning a trip | `#the-tri-pages-planning-a-trip` | Good to know box: the figures are computed when the page is selected and do not update; a page selected before NAV ready stays dashed |
+| TRI 0: true airspeed and wind | `#tri-0-true-airspeed-and-wind` | `tri-0`; Good to know box: the wind direction is true and "from", with no advice on converting winds |
+| TRI 1: from the present position (with "TRI 1 without a position or a waypoint", "The limits of the values") | `#tri-1-from-the-present-position` | `tri-1`, `tri-1-gs`, `tri-1-no-fix` |
+| TRI 2: safe altitude and airspaces from the present position | `#tri-2-safe-altitude-and-airspaces-from-the-present-position` | `tri-2` (KTIW), `tri-2-none` (KYKM–KELN) |
+| TRI 3: between two waypoints | `#tri-3-between-two-waypoints` | `tri-3` (KPAE–KBFI) |
+| TRI 4: safe altitude and airspaces between two waypoints | `#tri-4-safe-altitude-and-airspaces-between-two-waypoints` | `tri-4` (KGEG–KSFF), `tri-4-plus` (KPAE–KBFI, page 2 of 3) |
+| TRI 5: along a flight plan | `#tri-5-along-a-flight-plan` | `tri-5`, `tri-5-empty` |
+| TRI 6: safe altitude and airspaces along a flight plan | `#tri-6-safe-altitude-and-airspaces-along-a-flight-plan` | `tri-6` |
+| The airspaces along the route (which are listed, what counts as along the route, two lines for each, the pages of the list) | `#the-airspaces-along-the-route` | – |
+| Where the TRI pages are used | `#where-the-tri-pages-are-used` | – |
 
-CAL 1 to CAL 7: the pages, what each takes from the aircraft's sensors where the installation has them
-(Availability boxes), the fields.
+The screens share their entries and steps in `screens/pages/tri/states.ts`. The generator's extract has only Class B
+and Class C airspace, so no screen shows another type.
+
+### CAL pages (`pages/cal.mdx`, `sidebar.order` 5)
+
+| Section | Anchor | Screens |
+| --- | --- | --- |
+| The CAL pages: calculators | `#the-cal-pages-calculators` | – |
+| CAL 1: pressure and density altitude | `#cal-1-pressure-and-density-altitude` | `cal-1`, `cal-1-mb`, `cal-1-cursor` |
+| CAL 2: true airspeed | `#cal-2-true-airspeed` | `cal-2` |
+| CAL 3: wind | `#cal-3-wind` | `cal-3`, `cal-3-heading`; Availability box for the heading input |
+| CAL 4: VNAV angle | `#cal-4-vnav-angle` | `cal-4` |
+| CAL 5: temperature and speed | `#cal-5-temperature-and-speed` | `cal-5` |
+| CAL 6: time conversion | `#cal-6-time-conversion` | `cal-6`; Good to know box: the time is that of the first look after power-on |
+| CAL 7: sunrise and sunset | `#cal-7-sunrise-and-sunset` | `cal-7`, `cal-7-blank`, `cal-7-date-entry` |
+| Where the CAL pages are used | `#where-the-cal-pages-are-used` | – |
+
+The screens share their locators in `screens/pages/cal/fields.ts`; `cal-3-heading` uses the harness's
+`HEADING_INPUT`, re-exported by `kln90b/generator/api.ts`. No `<Term>` on `BARO` and `GS` in the CAL fields: the
+glossary entries describe the unit's own baro setting and the GPS groundspeed. Example values are the writers' own,
+not those of the kln90b tests.
+
+Every planned screen could be staged; the polar case of CAL 7 is not shown (the extract has no polar place), its
+dashes look like `cal-7-blank`.
 
 ## Topics this package owns
 
-See the index: trip planning, the calculators, times and the flight timer as tasks.
+Trip planning as a task; the system time zone (the list and the sharing) and the flight timer; which calculator
+answers which question (Trip planning and calculators). The rules of the TRI pages and the airspace list of TRI 2, 4
+and 6 (TRI chapter). The CAL pages, including that CAL 6 and CAL 7 keep their own zone after starting from the system
+time zone (CAL chapter).
 
-## Where to look
+## Changes to earlier pages (made)
 
-`pages/left/Tri0Page.tsx` to `Tri6Page.tsx`, `Cal1Page.tsx` to `Cal7Page.tsx`, `services/AirspacesAlongRoute.ts`,
-`services/MSA.ts`, `services/KLNNavmath.ts`, `services/Timers.ts`, `services/TimezoneService.ts`, `data/Time.ts`,
-`data/Sun.ts`, `pages/left/Set4Page.tsx`, `pages/right/Dt4Page.tsx`.
+- `pages/dt.mdx`: the links sharpened to `#the-time-zone` and `#the-flight-timer`; D/T 4 refers to the flight timer
+  instead of repeating the 30 kt; "the system time zone" at the first mention.
+- `pages/set.mdx`: SET 4 links `#the-flight-timer`; SET 2 says "the system time zone".
 
-## Notes from other packages
+Removed after the maintainer's review (2026-11-21), as cases a pilot hardly meets: the TRI 1 section and screen of
+a wind that leaves no groundspeed, and the CAL 1 example and screen of a never-entered altimeter setting (style guide,
+section 8).
 
-From the planning survey: the fuel values of the TRI pages are the pilot's own entries and separate from the fuel
-computer of OTH 5 to OTH 8; the chapter says so and links to Fuel and air data (planned).
+## Bugs
 
-### From the package flight-plan-pages (2026-11-20)
+Filed 2026-11-21 with the maintainer's approval, each marked on the paragraph that describes it:
 
-- The D/T chapter (`pages/dt.mdx`) explains the D/T pages and their fields, including the time zone field of D/T 2
-  and D/T 4 and the flight time of D/T 4, and links to this page (page link only) for times, time zones and the
-  flight timer as tasks. Sharpen those links to this page's sections.
-- The time zone list, as the writer of D/T read it in the code (check it): 19 zones in knob order, UTC, GST, GDT,
-  ATS, ATD, EST, EDT, CST, CDT, MST, MDT, PST, PDT, AKS, AKD, HAS, HAD, SST, SDT, each with a fixed offset from UTC
-  and no automatic change to daylight saving time. The zone is one setting shared by D/T 2, D/T 4, SET 2, STA 5 and
-  the CAL pages that show it; it changes at once as the knob turns, without ENT. This page owns the list.
-- The flight timer: it runs at a groundspeed of 30 kt or more (the code compares `>=` 30 while SET 4 labels it
-  `GS > 30kt`) or from power-on, as SET 4 sets; the setting takes effect at once. The departure time of D/T 4 is the
-  time at which the timer starts. Both are cleared at every power-on, and the pilot cannot reset them.
+- kln90b#523: TRI 2/4/6 list a Class B or C area once per sector (TRI chapter).
+- kln90b#524: TRI 2 and TRI 4 show the previous route's list after the waypoint changes during the search (not
+  described in the manual, no mark).
+- kln90b#525: turning back onto TRI 2/4/6 shows the first page of the list (TRI chapter).
+- kln90b#526: an area's name and type split across pages (TRI chapter, `tri-4-plus`).
+- kln90b#527: CAL 1/2 in millibars show 700 while 0 is stored (no longer described after the CAL 1 example was cut;
+  no mark).
+- kln90b#528: TRI 1 and TRI 2 compute only when selected (TRI chapter box, Trip planning).
+- kln90b#529: CAL 3 computes a wind without a fix (CAL chapter).
 
-### From the package set (2026-11-21)
-
-- The SET chapter (`pages/set.mdx`, "SET 4: …") explains the page and its two choices and links this page by the
-  page link `/kln90b/operation/trip-planning/`; sharpen it to the section on the flight timer. The 30 kt threshold
-  is in SET 4's field explanations (`pages/set/set-4`, `set-4-cursor`); this page owns it as a fact of the timer.
-- The CAL chapter: CAL 1 and CAL 2 take the baro setting in the units chosen on SET 7 (the reviewer of the SET
-  chapter read it in the code). Say so on those pages in one sentence; SET 7 links there by its page names.
-
-## Changes to earlier pages
-
-The D/T chapter and the SET chapter (SET 4) get their links to this page sharpened to its sections.
+Not filed: the `ESA` line that waits for the airspace search (cosmetic); CAL 4's angle at groundspeed 0; SET 4's
+`POWER IS ON` chosen in flight keeping its earlier count (the maintainer filed 1 to 7 of the list).

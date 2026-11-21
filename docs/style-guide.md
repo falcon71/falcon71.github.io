@@ -233,6 +233,11 @@ The model packs several facts into every paragraph and wastes no words. So does 
 - **Every exception.** Someone studying a chapter wants the edge cases: what happens with no GPS fix, with an empty flight plan,
   in OBS mode, when the field is dashed, when the list is full, when a value is out of range. Put each right after the
   rule it qualifies (section 11).
+- **No section and no screen for a case a pilot hardly ever meets.** An exception earns its place by happening in
+  normal use. A wind stronger than the true airspeed on TRI 1, or the setting of a calculator that was never entered
+  on a new unit, happens to nobody in flight; such a case gets neither a section, nor a screen, nor a rule in a field
+  explanation. A plain field that shows dashes says so in its explanation, and that is enough (maintainer,
+  2026-11-21).
 - **Say each fact once,** in the place a pilot would look for it, and link to it from everywhere else. A field is
   explained in its screen's field explanation; a task in Operation; a page's overall purpose in the page reference.
   This holds above all for the basic operation of the unit: how a page type is selected, how the cursor and the knobs
@@ -354,6 +359,12 @@ A procedure is introduced by a line that ends in a colon: "To add a waypoint to 
 - **End in a stable state:** the last step turns the cursor off if the procedure turned it on, or says what the unit
   shows now.
 - **Conditions go before the steps,** not in them: "The flight plan must have fewer than 30 waypoints."
+- **The page a pilot would use.** Where several pages can do the same thing, the procedure uses the page that a
+  pilot normally does it on, and a sentence names the others: the time zone is set on SET 2, not on D/T 4, although
+  both change it (maintainer, 2026-11-21).
+- **No advice from general aviation knowledge.** Do not tell the pilot which winds, charts or reports come in which
+  reference; they know (section 2). Say how the unit takes the value, and leave the rest to them (maintainer,
+  2026-11-21: en route winds are published true).
 - A screen may follow the step whose result it shows.
 
 An example of the form (the facts in the examples of this guide illustrate the form; check every fact in the code
@@ -609,6 +620,13 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | center waypoint (the waypoint the CTR pages create at a Center boundary); area control center (ACC or ARTCC) where a page first introduces the concept, then Center (maintainer, 2026-11-20) | air route traffic control center alone, ACC alone |
 | the SET pages, named once on the SET chapter as the setup pages of the unit | the settings pages |
 | the initial heading (the degrees on the groundspeed line of SET 1) | track (on SET 1) |
+| the system time zone (the one zone that SET 2, D/T 2, D/T 4, STA 5 and the Self Test page share; CAL 6 and CAL 7 start from it) | the time zone of SET 2, the chosen zone |
+| reserve fuel (`RES` on the TRI pages) | the reserve |
+| the "from" waypoint, the "to" waypoint (TRI 3 and TRI 4), with the quotation marks | the first waypoint, the second waypoint |
+| areas of special use airspace (what the list of TRI 2, 4 and 6 shows, Class B and Class C areas included); military operation area (`MOA`) | the airspaces along the route (except in a title) |
+| the Calculator pages at the first mention, then the CAL pages | the calculator pages |
+| altimeter setting (the entry of CAL 1 and CAL 2, separate from the unit's baro setting) | baro setting (for the CAL entry) |
+| the descent or ascent angle and the rate of descent or ascent (CAL 4) | descent angle, vertical speed (on CAL 4) |
 
 ### Spelling and style
 

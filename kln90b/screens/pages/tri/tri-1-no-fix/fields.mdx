@@ -1,0 +1,35 @@
+<Field id="to" title="The waypoint the route ends at">
+	`P.POS-` stands for your present position, and the waypoint after it is where the trip ends. Enter it like any waypoint of a left page: the cursor starts on it, <kbd>ENT</kbd> shows the waypoint page of the identifier on the right, and a second <kbd>ENT</kbd> approves it. The unit keeps it while it is off, and TRI 2 shows the same waypoint. <kbd>CLR</kbd> and then <kbd>ENT</kbd> blank it.
+</Field>
+
+<Field id="distance" title="Distance without a position">
+	Four dashes in front of `nm` while the unit is not NAV ready, or no waypoint is entered, or the distance is 10,000 NM or more.
+</Field>
+
+<Field id="bearing" title="Bearing without a position">
+	Three dashes in front of the degree sign while the unit is not NAV ready or no waypoint is entered.
+</Field>
+
+<Field id="gs" title="Groundspeed without a route">
+	<Term t="GS">`GS`</Term> shows `000` while there is no route to compute: the unit is not NAV ready or no waypoint is entered.
+</Field>
+
+<Field id="ete" title="Estimated time en route without a groundspeed">
+	<Term t="ETE">`ETE`</Term> shows dashes in place of the hours and minutes while the unit has no route or no groundspeed.
+</Field>
+
+<Field id="ff" title="Fuel flow">
+	`FF` is the fuel flow per hour, as a number from 00000.0 to 99999.9 in the unit you use for the fuel; the unit shows none. The cursor stops on every digit, the tenth included, and the inner knob changes a digit at once, without <kbd>ENT</kbd>. The unit keeps it while it is off. TRI 1, TRI 3 and TRI 5 show the same entry, and it is not a reading of a fuel management system.
+</Field>
+
+<Field id="res" title="Reserve fuel">
+	`RES` is the reserve fuel, as a number from 00000.0 to 99999.9 in the unit you use for the fuel flow; the unit shows none. The cursor stops on every digit, the tenth included, and the inner knob changes a digit at once, without <kbd>ENT</kbd>. The unit adds it once to the fuel of the trip and keeps it while it is off. TRI 1, TRI 3 and TRI 5 show the same entry, and it is not that of OTH 5 to OTH 8.
+</Field>
+
+<Field id="freq" title="Fuel required without a time">
+	Dashes while the time shows dashes: the fuel required needs the time en route.
+</Field>
+
+<Field id="page" title="Page identification">
+	The page identification of the left side: `TRI 1`. TRI 1 plans a trip from your present position to a waypoint.
+</Field>
