@@ -1,0 +1,27 @@
+<Field id="title" title="Page title">
+	`TAS` heads the page that works out the true airspeed from a calibrated airspeed.
+</Field>
+
+<Field id="cas" title="Calibrated airspeed">
+	`CAS:` is the calibrated airspeed that the airspeed indicator shows, in kt, from 000 to 999. You enter it with the cursor, and the value counts at once, without <kbd>ENT</kbd>.
+</Field>
+
+<Field id="alt" title="Indicated altitude">
+	`ALT:` is the altitude that the altimeter shows, in feet, entered in steps of 100 ft from 0 to 99,900 ft. CAL 1 shows the same value as `IND:`, so an entry on one page is on the other.
+</Field>
+
+<Field id="baro" title="Altimeter setting">
+	`BARO:` is the altimeter setting, in inches or in millibars as SET 7 chooses. CAL 1 shows the same value. It is not the baro setting of the unit that the ALT page holds. A unit that was never given an altimeter setting shows `00.00"`, and the true airspeed then shows `0`.
+</Field>
+
+<Field id="temp" title="Total air temperature">
+	`TEMP:` is the total air temperature in °C, the temperature that a probe in the airflow measures, from -99 to 99. The first cell is the sign, a choice of `-` and `0`. CAL 1 has a temperature of its own, the outside air temperature, and the two do not change each other.
+</Field>
+
+<Field id="tas" title="True airspeed">
+	`TAS` is the true airspeed that the calibrated airspeed gives at the altitude, the altimeter setting and the temperature above, in kt. The unit works it out, and it shows dashes above 999 kt. Every time CAL 2 is shown, the unit also puts this value into the `TAS` of CAL 3. The cursor skips it.
+</Field>
+
+<Field id="page" title="Page identification">
+	The page identification of the left page, `CAL 2`.
+</Field>

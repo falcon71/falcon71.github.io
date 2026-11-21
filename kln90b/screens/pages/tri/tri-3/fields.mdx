@@ -1,0 +1,35 @@
+<Field id="route" title="The from waypoint and the to waypoint">
+	The from waypoint and the to waypoint of the route, with a hyphen between them. The cursor starts on the from waypoint and moves on to the to waypoint when you approve the first. A waypoint is entered like any waypoint of a left page (<kbd>ENT</kbd> shows its waypoint page, a second <kbd>ENT</kbd> approves it) and kept while the unit is off. TRI 4 shows the same two waypoints. <kbd>CLR</kbd> and then <kbd>ENT</kbd> blank one.
+</Field>
+
+<Field id="distance" title="Distance">
+	The length of the great circle between the two ends of the route in whole NM, right-aligned in front of `nm`. It shows dashes while the route has no two ends, and for 10,000 NM or more.
+</Field>
+
+<Field id="bearing" title="Bearing">
+	The magnetic bearing from the from waypoint to the to waypoint, in degrees, with the magnetic variation at the from waypoint. It shows dashes while the route has no length and when the two waypoints are the same.
+</Field>
+
+<Field id="gs" title="Groundspeed">
+	<Term t="GS">`GS`</Term> is the groundspeed in knots, three digits, followed by `kt`. The unit works it out from the true airspeed and the wind of TRI 0 on the course of the route; the unit holds the course against the wind, so a crosswind lowers it. With the cursor on it, the inner knob changes a digit and the page takes the groundspeed you typed: the time and the fuel required follow at once. The unit forgets the typed value when you leave the page or enter another waypoint. It shows dashes while the wind leaves no groundspeed (a crosswind stronger than the true airspeed, or a wind at least as strong as the true airspeed from ahead of the wingtips) and above 999 kt, and `000` while the route has no two ends.
+</Field>
+
+<Field id="ete" title="Estimated time en route">
+	<Term t="ETE">`ETE`</Term> is the distance divided by the groundspeed, rounded to the whole minute, as hours and minutes. Below one hour the hours show as 0 (`0:52`). It shows dashes while the groundspeed shows dashes or is `000`, and for 100 hours or more.
+</Field>
+
+<Field id="ff" title="Fuel flow">
+	`FF` is the fuel flow per hour, as a number from 00000.0 to 99999.9 in the unit you use for the fuel; the unit shows none. The cursor stops on every digit, the tenth included, and the inner knob changes a digit at once, without <kbd>ENT</kbd>. The unit keeps it while it is off. TRI 1, TRI 3 and TRI 5 show the same entry, and it is not a reading of a fuel management system.
+</Field>
+
+<Field id="res" title="Reserve fuel">
+	`RES` is the reserve fuel, as a number from 00000.0 to 99999.9 in the unit you use for the fuel flow; the unit shows none. The cursor stops on every digit, the tenth included, and the inner knob changes a digit at once, without <kbd>ENT</kbd>. The unit adds it once to the fuel of the trip and keeps it while it is off. TRI 1, TRI 3 and TRI 5 show the same entry, and it is not that of OTH 5 to OTH 8.
+</Field>
+
+<Field id="freq" title="Fuel required">
+	`F REQ` is the fuel the trip needs: the time en route at the fuel flow, plus the reserve. It is in the unit of the fuel flow and shows a tenth below 100 (`20.4`) and whole units from 100. It shows dashes while the time shows dashes and from 100,000 on. With a fuel flow of 0 it equals the reserve.
+</Field>
+
+<Field id="page" title="Page identification">
+	The page identification of the left side: `TRI 3`. TRI 3 plans a trip between two waypoints.
+</Field>

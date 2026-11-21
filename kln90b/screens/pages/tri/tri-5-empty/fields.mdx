@@ -1,0 +1,31 @@
+<Field id="plan" title="Flight plan number without waypoints">
+	`FP`, the number of the flight plan and four dashes in front of `nm`: the flight plan has fewer than two waypoints, so there is no distance.
+</Field>
+
+<Field id="route" title="The first and the last waypoint without waypoints">
+	Blank on both sides of the hyphen: the flight plan holds no waypoint. A flight plan of one waypoint shows it in front of the hyphen.
+</Field>
+
+<Field id="gs" title="Groundspeed without a route">
+	<Term t="GS">`GS`</Term> shows `000` while there is no route to compute. Where the wind leaves no groundspeed on a leg, the field shows dashes instead.
+</Field>
+
+<Field id="ete" title="Estimated time en route without a route">
+	<Term t="ETE">`ETE`</Term> shows dashes in place of the hours and minutes while the flight plan has no route.
+</Field>
+
+<Field id="ff" title="Fuel flow">
+	`FF` is the fuel flow per hour, as a number from 00000.0 to 99999.9 in the unit you use for the fuel; the unit shows none. The cursor stops on every digit, the tenth included, and the inner knob changes a digit at once, without <kbd>ENT</kbd>. The unit keeps it while it is off. TRI 1, TRI 3 and TRI 5 show the same entry, and it is not a reading of a fuel management system.
+</Field>
+
+<Field id="res" title="Reserve fuel">
+	`RES` is the reserve fuel, as a number from 00000.0 to 99999.9 in the unit you use for the fuel flow; the unit shows none. The cursor stops on every digit, the tenth included, and the inner knob changes a digit at once, without <kbd>ENT</kbd>. The unit adds it once to the fuel of the trip and keeps it while it is off. TRI 1, TRI 3 and TRI 5 show the same entry, and it is not that of OTH 5 to OTH 8.
+</Field>
+
+<Field id="freq" title="Fuel required without a time">
+	Dashes while the time shows dashes: the fuel required needs the time en route.
+</Field>
+
+<Field id="page" title="Page identification">
+	The page identification of the left side: `TRI 5`. TRI 5 plans a trip along a flight plan.
+</Field>

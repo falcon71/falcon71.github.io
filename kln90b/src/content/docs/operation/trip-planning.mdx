@@ -1,0 +1,200 @@
+---
+title: Trip planning and calculators
+description: How to plan the distance, time, fuel, safe altitude and airspaces of a trip with the KLN 90B, how the time zone and the flight timer work, and which calculator answers which question.
+sidebar:
+  order: 15
+---
+
+import KlnScreen from '../../../components/KlnScreen.astro';
+import Term from '../../../components/Term.astro';
+
+The TRI pages plan a trip from the true airspeed, the wind and the fuel flow that you enter: they give the distance, the time, the fuel, the safe altitude and the airspaces along the route. The Calculator pages calculate altitudes, airspeeds, wind, descent angles, temperatures, times and sunrise. One time zone, chosen on any page that shows a time, applies to every time the unit shows, and D/T 4 shows the flight timer that SET 4 controls.
+
+## Planning a trip
+
+The KLN 90B plans with your own entries, not with the sensors of the aircraft and not with the fuel of OTH 5 to OTH 8 ([Fuel and air data](/kln90b/operation/fuel-air-data/)). [The TRI pages](/kln90b/pages/tri/#the-tri-pages-planning-a-trip) explain the pages and their fields.
+
+TRI 1 plans from your present position to one waypoint, TRI 3 between two waypoints and TRI 5 along a flight plan. TRI 2, TRI 4 and TRI 6 are their second pages, with the safe altitude and the airspaces along the same route. A trip you plan before the flight is still there after the power-on.
+
+### Setting the true airspeed and the wind
+
+TRI 0 holds the true airspeed and the wind that TRI 1, TRI 3 and TRI 5 plan with. Set both before you plan, because a new unit has values of its own.
+
+To set the true airspeed and the wind:
+
+1. Turn the left outer knob to the TRI pages and the left inner knob to TRI 0.
+2. Press the left <kbd>CRSR</kbd>. The cursor is on the true airspeed.
+3. Enter the true airspeed in knots with the left knobs.
+4. Enter the direction the wind blows from, as a true direction, and then its speed in knots, the same way. The unit applies the wind to the true course of each leg, so you need not correct anything for the magnetic bearing it shows ([TRI 0](/kln90b/pages/tri/#tri-0-true-airspeed-and-wind)).
+5. Press the left <kbd>CRSR</kbd> to turn the cursor off.
+
+<KlnScreen screen="pages/tri/tri-0" />
+
+### Planning from the present position
+
+TRI 1 gives the distance, the bearing, the groundspeed, the time and the fuel from where the aircraft is to a waypoint. It needs a GPS fix; on the ground before the first fix, plan on TRI 3.
+
+To plan a trip from the present position:
+
+1. Turn the left outer knob to the TRI pages and the left inner knob to TRI 1.
+2. Press the left <kbd>CRSR</kbd>. The cursor is on the waypoint after `P.POS-`.
+3. Enter the identifier of the destination with the left knobs and press <kbd>ENT</kbd>. The waypoint page appears on the right so that you can check it. If it is the wrong waypoint, enter the identifier again.
+4. Press <kbd>ENT</kbd> again to approve it. The distance, the bearing, the groundspeed, the <Term t="ETE">estimated time en route</Term> and the fuel required appear.
+5. Turn the left outer knob to `FF` and enter the fuel flow per hour.
+6. Enter the reserve fuel, `RES`, the same way.
+7. Press the left <kbd>CRSR</kbd> to turn the cursor off.
+
+<KlnScreen screen="pages/tri/tri-1" />
+
+Enter the fuel flow and the reserve fuel in the same unit, whichever you like; the fuel required, `F REQ`, comes out in that unit. They are the same entries on TRI 1, TRI 3 and TRI 5.
+
+TRI 1 computes its figures when you approve the waypoint or select the page, and does not follow the aircraft. Select the page again for the figures of the moment ([The TRI pages](/kln90b/pages/tri/#the-tri-pages-planning-a-trip)).
+
+To see the time and the fuel at a speed other than the computed one, such as your climb speed, move the cursor to the <Term t="GS">`GS`</Term> and enter that speed.
+
+### Planning between two waypoints
+
+TRI 3 plans a route between any two waypoints, with the same figures as TRI 1. It needs no GPS fix, so you can plan on the ground before the unit has a fix, and between waypoints that are in no flight plan.
+
+To plan a trip between two waypoints:
+
+1. Turn the left outer knob to the TRI pages and the left inner knob to TRI 3.
+2. Press the left <kbd>CRSR</kbd>. The cursor is on the "from" waypoint, the one the route starts from.
+3. Enter its identifier with the left knobs, press <kbd>ENT</kbd> and approve the waypoint page with a second <kbd>ENT</kbd>. The cursor moves on to the "to" waypoint.
+4. Enter the identifier of the "to" waypoint the same way. The figures appear.
+5. Enter the fuel flow and the reserve fuel as on TRI 1.
+6. Press the left <kbd>CRSR</kbd> to turn the cursor off.
+
+<KlnScreen screen="pages/tri/tri-3" />
+
+### Planning along a flight plan
+
+TRI 5 plans a whole flight plan: the total distance, the total time and the fuel from its first waypoint to its last. It works with the active flight plan, FPL 0, or with a numbered flight plan, FPL 1 to FPL 25. It needs no GPS fix.
+
+To plan a flight plan:
+
+1. Turn the left outer knob to the TRI pages and the left inner knob to TRI 5.
+2. Press the left <kbd>CRSR</kbd>. The cursor is on the number of the flight plan, where `0` is the active flight plan.
+3. Turn the left inner knob to the number of the flight plan. The figures follow at once, and the second row names the first and the last waypoint of the plan.
+4. Enter the fuel flow and the reserve fuel as on TRI 1.
+5. Press the left <kbd>CRSR</kbd> to turn the cursor off.
+
+<KlnScreen screen="pages/tri/tri-5" />
+
+TRI 5 always plans the whole flight plan, wherever the aircraft is, so it does not tell you what is left of the flight. For that, D/T 4 and D/T 1 give the time to the destination at your present groundspeed. TRI 1 gives the direct route from where you are to the destination or to an alternate.
+
+### The safe altitude and the airspaces along the route
+
+The second page of each pair tells you what lies under and along the route of the first: TRI 2 for TRI 1, TRI 4 for TRI 3 and TRI 6 for TRI 5. Each shows `ESA`, the minimum en route safe altitude of the route, and the areas of special use airspace that the route crosses.
+
+<KlnScreen screen="pages/tri/tri-2" />
+
+`ESA` is no clearance for your route. Use it to see whether a trip crosses high terrain, and fly the altitudes of your charts ([Minimum safe altitudes](/kln90b/pages/nav/#minimum-safe-altitudes)). The list names an area whatever your altitude, so read it as the areas the route crosses, and check the limits on your charts. [The airspaces along the route](/kln90b/pages/tri/#the-airspaces-along-the-route) gives the types and the rules.
+
+## Times in flight
+
+The time zone and the flight timer decide what the times on D/T 4 and the other pages mean.
+
+### The time zone
+
+The unit has one time zone, the system time zone, for every page that shows a time: D/T 2, D/T 4, SET 2, STA 5 and the Self Test page all show and change the same zone. Every time the unit shows (the <Term t="ETA">ETAs</Term>, the departure time and the present time) is in that zone at once, and the unit keeps the zone while it is off.
+
+To choose the system time zone:
+
+1. Turn the right outer knob to the D/T pages and the right inner knob to D/T 4.
+2. Press the right <kbd>CRSR</kbd>. The cursor is on the time zone.
+3. Turn the right inner knob until the zone you want shows. The times change with every step, and you need no <kbd>ENT</kbd>. After the last zone the first follows, so both directions work.
+4. Press the right <kbd>CRSR</kbd> to turn the cursor off.
+
+<KlnScreen screen="trip-planning/time-zone" />
+
+The unit never changes to daylight time by itself. A daylight zone is a zone of its own, next to the standard zone, and you choose it when daylight time begins. Every zone is a fixed number of whole hours from UTC. No zone lies east of UTC, so west of it you pick the zone, and east of it you stay on `UTC` and add the difference yourself. The list, in the order of the knob:
+
+| Zone | Name on the screen | Hours from UTC |
+| --- | --- | --- |
+| `UTC` | `CORD UNIV/Z` | 0 |
+| `GST` | `GREENL STD` | −3 |
+| `GDT` | `GREENL DAY` | −2 |
+| `ATS` | `ATLANT STD` | −4 |
+| `ATD` | `ATLANT DAY` | −3 |
+| `EST` | `EASTERN STD` | −5 |
+| `EDT` | `EASTERN DAY` | −4 |
+| `CST` | `CENTRAL STD` | −6 |
+| `CDT` | `CENTRAL DAY` | −5 |
+| `MST` | `MOUNT STD` | −7 |
+| `MDT` | `MOUNT DAY` | −6 |
+| `PST` | `PACIFIC STD` | −8 |
+| `PDT` | `PACIFIC DAY` | −7 |
+| `AKS` | `ALASKA STD` | −9 |
+| `AKD` | `ALASKA DAY` | −8 |
+| `HAS` | `HAWAII STD` | −10 |
+| `HAD` | `HAWAII DAY` | −9 |
+| `SST` | `SAMOA STD` | −11 |
+| `SDT` | `SAMOA DAY` | −10 |
+
+CAL 6 and CAL 7 take the system time zone as their zone at their first view after a power-on, and then keep a zone of their own, which they forget at the next power-on. Turning the zone there changes nothing else, and a zone you choose elsewhere later does not reach them. The time zone that APT 2 shows for an airport is the airport's own and does not depend on your choice.
+
+### The flight timer
+
+The flight timer counts the time of your flight. D/T 4 shows the time at which it began to count as `DEP`, which is dashes until the timer has counted its first second, and what it has counted as `FLT`. SET 4 chooses when the timer counts.
+
+<KlnScreen screen="pages/dt/dt-4" />
+
+With `GS > 30kt`, the choice of a new unit, the timer counts while the groundspeed is 30 kt or more. {/* kln90b#522: describes the current behavior; the fix makes the timer start above 30 kt as SET 4 says */} Below that speed it stops and keeps its count, and it goes on from there when you speed up again, so a stop on the way does not reset it. `DEP` is the time at which the groundspeed first reached 30 kt.
+
+With `POWER IS ON`, the timer counts for as long as the unit is on, and `DEP` is the time of its first second. Where you choose `POWER IS ON` while the unit is on, the timer goes on from its count and counts every second from then on; the time below 30 kt before your choice stays uncounted, and `DEP` keeps the departure time it had.
+
+To choose when the flight timer counts:
+
+1. Turn the left outer knob to the SET pages and the left inner knob to SET 4.
+2. Press the left <kbd>CRSR</kbd>. The cursor is on the choice.
+3. Turn the left inner knob to the choice you want. It takes effect at once.
+4. Press the left <kbd>CRSR</kbd> to turn the cursor off.
+
+<KlnScreen screen="pages/set/set-4-cursor" />
+
+Every power-on clears the count and the departure time, however short the time off was, so a power cycle in flight starts them anew. You cannot reset them in any other way. The unit keeps the choice of SET 4 while it is off ([What the unit keeps while it is off](/kln90b/unit/power-on/#what-the-unit-keeps-while-it-is-off)).
+
+## The calculators
+
+CAL 3 is the one calculator that reads the aircraft, the GPS groundspeed and track and, where the unit is installed with a heading input, the heading, so you use it in flight. The others work with what you enter. The table says which page answers your question.
+
+| Question | Page |
+| --- | --- |
+| What are the pressure altitude and the density altitude at this indicated altitude, altimeter setting and temperature? | CAL 1 |
+| What true airspeed does this calibrated airspeed give at this altitude, altimeter setting and total air temperature? | CAL 2 |
+| What wind blows now, with the true airspeed and the heading I fly and the groundspeed and the track the unit measures? | CAL 3 |
+| What descent angle does this vertical speed give at this groundspeed, and what vertical speed does this angle need? | CAL 4 |
+| What is this temperature in °C or °F, and this speed in kt or mph? | CAL 5 |
+| What time is it in another time zone? | CAL 6 |
+| When does the sun rise and set at a waypoint on a date? | CAL 7 |
+
+CAL 4 gives you the angle that you then enter on NAV 4; [The angle](/kln90b/operation/vnav/#the-angle) explains how VNAV uses it. [The CAL pages](/kln90b/pages/cal/) explain every field.
+
+### Finding the wind in flight
+
+CAL 3 works out the wind from the difference between the speed you fly through the air and the speed over the ground. It needs the true airspeed, which CAL 2 calculates from the calibrated airspeed, the altitude, the altimeter setting and the total air temperature. You need a GPS fix and the aircraft in steady flight, because the wind is worked out from the groundspeed and the track at that moment.
+
+To find the wind in flight:
+
+1. Turn the left outer knob to the CAL pages and the left inner knob to CAL 2.
+2. Press the left <kbd>CRSR</kbd>.
+3. Enter the calibrated airspeed, the indicated altitude, the altimeter setting and the total air temperature with the left knobs.
+
+   <KlnScreen screen="pages/cal/cal-2" />
+
+4. Press the left <kbd>CRSR</kbd> to turn the cursor off.
+5. Turn the left inner knob one step to CAL 3. CAL 2 hands its true airspeed to CAL 3 whenever it is shown, so the true airspeed on CAL 3 is now the one you found.
+6. Where CAL 3 shows a `HDG` line, press the left <kbd>CRSR</kbd>, enter the magnetic heading you are flying and turn the cursor off. Where the unit takes the heading from the aircraft, that line stays blank.
+7. Read the wind. The unit works it out again every second, so keep the heading steady until the figures settle.
+
+<KlnScreen screen="pages/cal/cal-3" />
+
+The wind is true and the direction it blows from, as on TRI 0. CAL 3 passes nothing to TRI 0: to plan with this wind, enter it on TRI 0 ([Setting the true airspeed and the wind](#setting-the-true-airspeed-and-the-wind)).
+
+## Where to go next
+
+- [The TRI pages](/kln90b/pages/tri/) and [the CAL pages](/kln90b/pages/cal/) explain every field of the pages used here.
+- [Flight plans](/kln90b/operation/flight-plans/) shows how to build the flight plan that TRI 5 plans.
+- [Airspace and altitude alerting](/kln90b/operation/alerts/) covers the special use airspace alert, which watches your position instead of your route.
+- [Fuel and air data](/kln90b/operation/fuel-air-data/) covers the fuel pages that work with the fuel management system.

@@ -146,7 +146,9 @@ that writes the owner records the anchors in this table, and the final pass shar
 | The ALT page, the baro setting, the selected altitude as the alert's input, altitude alerting and its aural alarm, the height above airport alert | Airspace and altitude alerting: `#the-alt-page`, `#the-baro-setting`, `#altitude-alerting` (`#the-aural-alarm`, `#the-altitude-deviation-alert`), `#the-height-above-airport-alert` | NAV chapter: the altitude fields of NAV 4; SET chapter: SET 5, SET 7, SET 9 as pages and the link; Power-on: the approval beeps need altitude alerting, one sentence and the link |
 | The airspace alert (SET 8), its messages | Airspace and altitude alerting: `#the-airspace-alert` (`#airspace-alert`, `#inside-spc-use-airspace`) | APT 1, OTH 2, TRI 2, TRI 4, TRI 6 show airspaces and link; SET chapter: SET 8 as a page |
 | Minimum safe altitudes (`MSA`, `ESA`) | NAV chapter, `/kln90b/pages/nav/#minimum-safe-altitudes` | TRI chapter links |
-| Trip planning; the calculators; times, time zones and the flight timer as tasks | Trip planning and calculators | TRI, CAL, D/T chapters: the pages; SET chapter: SET 4 as a page |
+| Trip planning; the calculators; the system time zone (its list and the pages that share it) and the flight timer | Trip planning and calculators: `#planning-a-trip` (`#setting-the-true-airspeed-and-the-wind`, `#planning-from-the-present-position`, `#planning-between-two-waypoints`, `#planning-along-a-flight-plan`, `#the-safe-altitude-and-the-airspaces-along-the-route`), `#the-time-zone`, `#the-flight-timer`, `#the-calculators` (`#finding-the-wind-in-flight`) | TRI, CAL, D/T chapters: the pages; SET chapter: SET 2 and SET 4 as pages and the link; a page that shows the zone names it and links `#the-time-zone`; the 30 kt is said only at `#the-flight-timer` (and in SET 4's field explanations, which carry kln90b#522) |
+| The TRI pages' rules (entries shared and kept, figures computed when the page is selected), the airspace list of TRI 2, 4 and 6 | TRI chapter: `#the-tri-pages-planning-a-trip`, `#the-airspaces-along-the-route` | Trip planning: the steps, one sentence and the link |
+| CAL 6 and CAL 7 keep their own zone after starting from the system time zone | CAL chapter: `#cal-6-time-conversion`, `#cal-7-sunrise-and-sunset` | Trip planning `#the-time-zone`: one sentence |
 | Fuel management and air data | Fuel and air data | OTH chapter: the pages; TRI chapter: its own fuel fields |
 | The MSG page, how messages arrive and are read, the annunciators | Messages | others link |
 | Message texts: meaning and what to do | Message page messages, Status line messages | a page quotes the text where it is raised and links |
@@ -193,7 +195,7 @@ anchors and page links above. After them the order follows "owners before the pa
 | 13 | approaches | Non-precision approaches | done (2026-11-20) |
 | 14 | vnav-alerts | VNAV; Airspace and altitude alerting | done (2026-11-20) |
 | 15 | set | SET chapter | done (2026-11-21) |
-| 16 | trip-planning | Trip planning and calculators; TRI and CAL chapters | not started |
+| 16 | trip-planning | Trip planning and calculators; TRI and CAL chapters | in review (2026-11-21) |
 | 17 | fuel-air-data | Fuel and air data; OTH chapter | not started |
 | 18 | messages | Messages; Message page messages; Status line messages; the Glossary page | not started |
 | 19 | help | External hardware; FAQ and troubleshooting; Known limitations; Contact | not started |
@@ -290,6 +292,16 @@ it is written when those owners exist. A package that proves too large in its re
 - The package set (2026-11-21) brought the official terms the setup pages (named once on the SET chapter) and the
   initial heading (SET 1), and wrote "NAV ready" where SET 2 depends on a fix. Power-on and initialization says "has a
   position" for the same condition; the final pass makes it "NAV ready" there too.
+
+- The package trip-planning (2026-11-21) brought the official terms system time zone, reserve fuel, the "from" and
+  "to" waypoint, areas of special use airspace, military operation area, the Calculator pages, altimeter setting (the
+  CAL entry) and the descent or ascent angle with the rate of descent or ascent (CAL 4). Its seam check put "the system
+  time zone" on D/T and SET 2; the final pass looks for "time zone" elsewhere (STA 5, Power-on, the Self Test screen).
+- The time zone list is repeated in the field explanations of `pages/set/set-2`, `set-2-date-entry` and
+  `power-on/self-test`; the final pass cuts them to a sentence and the link to `operation/trip-planning/#the-time-zone`
+  (seam check, 2026-11-21).
+- The glossary entries `BARO` and `GS` describe the unit's own baro setting and the GPS groundspeed; the CAL pages
+  therefore use no `<Term>` for them. The final pass decides whether the entries should cover the CAL fields too.
 
 ## Site and generator notes
 

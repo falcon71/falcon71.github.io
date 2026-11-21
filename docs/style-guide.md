@@ -609,6 +609,13 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | center waypoint (the waypoint the CTR pages create at a Center boundary); area control center (ACC or ARTCC) where a page first introduces the concept, then Center (maintainer, 2026-11-20) | air route traffic control center alone, ACC alone |
 | the SET pages, named once on the SET chapter as the setup pages of the unit | the settings pages |
 | the initial heading (the degrees on the groundspeed line of SET 1) | track (on SET 1) |
+| the system time zone (the one zone that SET 2, D/T 2, D/T 4, STA 5 and the Self Test page share; CAL 6 and CAL 7 start from it) | the time zone of SET 2, the chosen zone |
+| reserve fuel (`RES` on the TRI pages) | the reserve |
+| the "from" waypoint, the "to" waypoint (TRI 3 and TRI 4), with the quotation marks | the first waypoint, the second waypoint |
+| areas of special use airspace (what the list of TRI 2, 4 and 6 shows, Class B and Class C areas included); military operation area (`MOA`) | the airspaces along the route (except in a title) |
+| the Calculator pages at the first mention, then the CAL pages | the calculator pages |
+| altimeter setting (the entry of CAL 1 and CAL 2, separate from the unit's baro setting) | baro setting (for the CAL entry) |
+| the descent or ascent angle and the rate of descent or ascent (CAL 4) | descent angle, vertical speed (on CAL 4) |
 
 ### Spelling and style
 

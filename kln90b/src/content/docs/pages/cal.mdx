@@ -1,0 +1,138 @@
+---
+title: CAL pages
+description: What the CAL pages calculate (pressure and density altitude, true airspeed, wind, a descent or ascent angle, temperature and speed conversions, the time in another time zone, sunrise and sunset), which values you enter and which the pages share.
+sidebar:
+  order: 5
+---
+
+import KlnScreen from '../../../components/KlnScreen.astro';
+import Callout from '../../../components/Callout.astro';
+
+The Calculator pages of the KLN 90B, the CAL pages, work out the answer as you enter the values. They give the pressure altitude and the density altitude (CAL 1), the true airspeed (CAL 2), the wind (CAL 3), a descent or ascent angle or a rate of descent or ascent (CAL 4), conversions of temperature and speed (CAL 5), the time in another time zone (CAL 6), and the times of sunrise and sunset (CAL 7). [Trip planning and calculators](/kln90b/operation/trip-planning/#the-calculators) says which page answers which question.
+
+## The CAL pages: calculators
+
+The CAL pages are left pages. Except for the waypoint and the date of CAL 7, the value you enter counts at once, without <kbd>ENT</kbd>, and the answer changes with every step ([Fields the knob changes directly](/kln90b/unit/controls-and-display/#fields-the-knob-changes-directly)). CAL 7 takes its waypoint and its date with <kbd>ENT</kbd> ([Entries that take effect with ENT](/kln90b/unit/controls-and-display/#entries-that-take-effect-with-ent)).
+
+The pages take almost nothing from the aircraft. You enter the altitude, the altimeter setting, the temperatures and the speeds yourself, even in an installation with an air data system. Only CAL 3 reads the aircraft: the groundspeed and the track from the GPS, and the heading where the unit has a heading input. CAL 6 and CAL 7 use the clock of the unit, and CAL 7 starts from the active flight plan.
+
+The unit keeps the entries of CAL 1 to CAL 5 while it is off. CAL 6 and CAL 7 forget theirs at every power-on and start again from the time and the date of the unit and from the system time zone, the zone that SET 2 sets.
+
+Some entries are shared:
+
+- CAL 1 and CAL 2 share the indicated altitude, which CAL 1 labels `IND:` and CAL 2 `ALT:`, and the altimeter setting, which both label `BARO:`. Their temperatures are separate: CAL 1 takes the outside air temperature, CAL 2 the total air temperature.
+- CAL 2 passes its true airspeed to CAL 3 every time you show it.
+- CAL 6 and CAL 7 take the system time zone as their start and then keep their own ([The time zone](/kln90b/operation/trip-planning/#the-time-zone)). Choosing a zone on either page changes no other page.
+
+Nothing else is shared. The TRI pages keep a true airspeed and a wind of their own, and the altimeter setting of CAL 1 and CAL 2 is its own entry, not the baro setting of the unit. The unit uses the one you set on the ALT page, and neither changes the other ([The baro setting](/kln90b/operation/alerts/#the-baro-setting)).
+
+## CAL 1: pressure and density altitude
+
+CAL 1 works out the pressure altitude and the density altitude from the indicated altitude, the altimeter setting and the outside air temperature. You use it to find how high the air feels to the aircraft, for example before a takeoff from a high airport.
+
+<KlnScreen screen="pages/cal/cal-1" />
+
+A unit that was never given an altimeter setting starts with `00.00"`, not with the standard setting, and until you enter one, `PRS` and `DEN` read 65600. Enter the altimeter setting first; the unit keeps it while it is off.
+
+<KlnScreen screen="pages/cal/cal-1-default" />
+
+SET 7 chooses the unit of the altimeter setting, inches or millibars, and the page shows it in that unit.
+
+<KlnScreen screen="pages/cal/cal-1-mb" />
+
+In millibars, a unit that was never given a setting shows `BARO: 700MB`, the lowest value the field holds, while the calculation still works with no setting. Turn every cell of the setting, the first one included, even where it already shows the digit you want.
+
+The unit rounds both answers to 100 ft and shows 0 ft for anything lower and 65,600 ft for anything higher. You can enter an indicated altitude up to 99,900 ft but never a negative one; cold air at a low altitude can give a density altitude below zero, which shows as 0.
+
+With the cursor on the sign of the temperature, the page looks like this:
+
+<KlnScreen screen="pages/cal/cal-1-cursor" />
+
+## CAL 2: true airspeed
+
+CAL 2 works out the true airspeed from the calibrated airspeed, the indicated altitude, the altimeter setting and the total air temperature. It shares the indicated altitude and the altimeter setting with CAL 1, so an altitude or a setting that you entered there is already here.
+
+<KlnScreen screen="pages/cal/cal-2" />
+
+A unit that was never given an altimeter setting shows a true airspeed of `0` until you enter one. The true airspeed is rounded to whole knots.
+
+**Note:** CAL 2 hands its true airspeed to CAL 3 every time you show it, also when you change nothing. Turning the left inner knob from CAL 1 to CAL 3 passes CAL 2, so it replaces a true airspeed that you typed on CAL 3. Arriving at CAL 3 from CAL 4 does not pass CAL 2.
+
+## CAL 3: wind
+
+<Callout kind="availability">
+The unit takes the heading from the aircraft only if it is installed with a heading input. Not every aircraft has one. With a heading input, the heading line of CAL 3 is blank; without one, you enter the heading yourself.
+</Callout>
+
+CAL 3 works out the wind from your true airspeed, your heading and your movement over the ground. It shows the head or tail component of the wind, the direction the wind blows from and its speed. You use it in flight, to find out what the wind does to your groundspeed.
+
+<KlnScreen screen="pages/cal/cal-3" />
+
+The page recalculates the wind as the groundspeed and the track of the GPS change. The direction is a true direction, the direction the wind blows from.
+
+With a heading input, the heading line is blank and the unit uses the heading of the aircraft:
+
+<KlnScreen screen="pages/cal/cal-3-heading" />
+
+The page does not check that the GPS has a position. Without a fix, it calculates with the last groundspeed and track, which are 0 and 000 after power-on; on the ground, the groundspeed is 0. In both cases the wind it shows is as strong as the true airspeed and blows from your heading. Read the wind only in flight, with the unit NAV ready.
+
+[Finding the wind in flight](/kln90b/operation/trip-planning/#finding-the-wind-in-flight) uses CAL 2 and CAL 3 together.
+
+## CAL 4: VNAV angle
+
+CAL 4 converts between a rate of descent or ascent and a descent or ascent angle at a groundspeed. You use it to find the angle that a rate gives, or the rate that a published angle needs. It passes nothing to NAV 4; enter the angle there yourself ([The angle](/kln90b/operation/vnav/#the-angle)).
+
+<KlnScreen screen="pages/cal/cal-4" />
+
+Entering the groundspeed or the rate of descent or ascent always recalculates the angle, and entering the angle always recalculates the rate, rounded to the nearest 100 fpm: 3.0° at 120 kt gives 600 fpm. To get the rate for an angle at a new groundspeed, enter the groundspeed first and the angle last.
+
+An angle of 10° or more does not fit the field and shows dashes, and so does a rate that does not fit its four cells. With a groundspeed of 000, the angle is 0.0 whenever you enter the groundspeed or the rate, and an angle that you enter then sets the rate to 0000.
+
+## CAL 5: temperature and speed
+
+CAL 5 converts a temperature between °C and °F and a speed between kt and mph. Each pair works both ways: you enter a value in either field, and the other changes at once.
+
+<KlnScreen screen="pages/cal/cal-5" />
+
+A converted value that does not fit shows dashes, or all three digits where a temperature has them, and a field in that state holds no value; the field explanations give the cases.
+
+## CAL 6: time conversion
+
+CAL 6 shows the same moment in two time zones. You use it to find the time somewhere else, for example the time at your destination.
+
+<KlnScreen screen="pages/cal/cal-6" />
+
+<Callout kind="info">
+CAL 6 is no clock. It takes the time of the unit the first time you show it after power-on and keeps that time, however long you stay on other pages, until you turn the unit off or enter a time. Enter the present time, which you can read on SET 2, before you convert.
+</Callout>
+
+The upper zone starts as the system time zone, the lower zone as `UTC`. Entering a time in either zone changes the other time at once. Choosing another zone keeps the moment and changes the time of that zone, so the time of the zone you changed moves, and the other stays. The pair shows no date: a conversion across midnight shows only the time. The unit keeps the zones of CAL 6 until the next power-on and does not write them back to the system time zone.
+
+The time you enter on CAL 6 does not set the clock of the unit; SET 2 does ([SET 2: date, time and time zone](/kln90b/pages/set/#set-2-date-time-and-time-zone)).
+
+## CAL 7: sunrise and sunset
+
+CAL 7 gives the times of sunrise and sunset at a waypoint on a date. You use it to find out whether you reach your destination in daylight.
+
+<KlnScreen screen="pages/cal/cal-7" />
+
+The first time you show CAL 7 after power-on, it starts with the destination waypoint of the active flight plan, or with the waypoint of a [direct-to](/kln90b/operation/direct-to/) outside the flight plan, with today's date in the time zone that the page shows, and with the system time zone. Where FPL 0 ends in an approach, the destination is its missed approach point, not the airport. Without a flight plan or a direct-to, the waypoint is blank, and `RISE` and `SET` show `--:--`.
+
+<KlnScreen screen="pages/cal/cal-7-blank" />
+
+You enter a waypoint as in any field of a left page ([In a field of a left page](/kln90b/operation/waypoints/#in-a-field-of-a-left-page)); a waypoint that you enter stays until you turn the unit off, while a blank field takes the destination again the next time you show the page. The unit works out the times for the waypoint, not for the position of the aircraft. It shows them in the time zone of the page, to the minute, so a sunrise that falls on another day in UTC shows only its clock time. The page starts in the system time zone whatever the waypoint is, so choose the zone of the waypoint to read its local times; changing the zone changes the times and keeps the date.
+
+The times change only after <kbd>ENT</kbd> takes the date.
+
+<KlnScreen screen="pages/cal/cal-7-date-entry" />
+
+The date accepts the years 1988 to 2087. A date that does not exist, such as 30 FEB, raises `INVALID ENT` and leaves the old date. The date does not follow the clock: after midnight it stays on the day you started with, until you enter another.
+
+Where the sun does not rise or does not set on the date, in the far north in summer or in winter, both lines show `--:--`; the page does not tell the two cases apart, nor from a blank waypoint.
+
+## Where the CAL pages are used
+
+- [Trip planning and calculators](/kln90b/operation/trip-planning/#the-calculators): which calculator answers which question, and finding the wind in flight with CAL 2 and CAL 3.
+- [The angle](/kln90b/operation/vnav/#the-angle): the angle that CAL 4 works out.
+- [The baro setting](/kln90b/operation/alerts/#the-baro-setting): the baro setting of the unit, which CAL 1 and CAL 2 do not use.
+- [The time zone](/kln90b/operation/trip-planning/#the-time-zone): the time zone that CAL 6 and CAL 7 start from.
