@@ -192,7 +192,7 @@ anchors and page links above. After them the order follows "owners before the pa
 | 12 | sid-star | SID and STAR procedures; DME arcs | done (2026-11-20) |
 | 13 | approaches | Non-precision approaches | done (2026-11-20) |
 | 14 | vnav-alerts | VNAV; Airspace and altitude alerting | done (2026-11-20) |
-| 15 | set | SET chapter | in review (2026-11-21) |
+| 15 | set | SET chapter | done (2026-11-21) |
 | 16 | trip-planning | Trip planning and calculators; TRI and CAL chapters | not started |
 | 17 | fuel-air-data | Fuel and air data; OTH chapter | not started |
 | 18 | messages | Messages; Message page messages; Status line messages; the Glossary page | not started |

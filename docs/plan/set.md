@@ -35,9 +35,11 @@ them. Every screen could be staged.
 
 Only the pages and their fields.
 
-## Notes for the maintainer (bugs not filed, see the session report)
+## Bugs
 
-- SET 4 counts at a groundspeed of 30 kt or more (`services/Timers.ts:27`) while its label says `GS > 30kt`.
-- SET 1 reads its values once when the page is built (`pages/left/Set1Page.tsx:207-211`); whether the real page is
-  live is not settled.
-- SET 0 goes from `U P D A T E ?` straight to `LOADER NOT READY`; deliberate in the code.
+- kln90b#521: SET 1 shows the values of the moment the page was selected (`pages/left/Set1Page.tsx:36-43`); marked on
+  the SET 1 paragraph.
+- kln90b#522: SET 4 runs the timer at 30 kt or more while the label says `GS > 30kt` (`services/Timers.ts:27`);
+  marked on the SET 4 paragraph and the field `run` of `set-4` and `set-4-cursor`.
+- SET 0 goes from `U P D A T E ?` straight to `LOADER NOT READY`: modeled on the real unit without a loader
+  connected, confirmed by the maintainer (2026-11-21); no bug.

@@ -152,8 +152,8 @@ manual page cited in the code to the page of the PDF and lists topics and facts.
   observed and expected values), the file and line, the impact on the pilot and a suggested fix. It never mentions
   this manual or how the bug was found ("found while writing the docs"), because the kln90b project must not learn
   about the manual (coordinator, 2026-11-19, after three issues said so). If it continues a
-  closed issue, it references that issue. A reviewer may cite a manual page number in a kln90b issue, never the
-  manual's text; a writer has no manual to cite.
+  closed issue, it references that issue. An issue cites neither a manual page number nor the
+  manual's text; the permission check of the maintainer's session refused an issue with a page number (2026-11-21).
 - **Never change kln90b.** Nothing in `vendor/kln90b` is edited, and no fix or test is added there for the
   documentation. The kln90b project does not know about this manual.
 - **The manual describes the simulation as it is now**, bug included, and the paragraph or field explanation carries a

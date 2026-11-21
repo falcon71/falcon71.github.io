@@ -17,6 +17,7 @@ The SET pages are left pages, and the unit keeps their options while it is off. 
 
 ## SET 1: initial position
 
+{/* kln90b#521: describes the current behavior; the fix makes SET 1 follow the aircraft while the cursor is off */}
 SET 1 shows the position, the <Term t="GS">groundspeed</Term> and the heading as they were when you selected the page, and lets you replace the position. You use it when the unit is not NAV ready and its position is wrong, so that the search for satellites starts from the right place.
 
 <KlnScreen screen="pages/set/set-1" />
@@ -61,6 +62,7 @@ The nearest list follows a change at once. The second screen shows the minimum l
 
 ## SET 4: flight timer
 
+{/* kln90b#522: the timer runs at 30 kt or more now; the fix makes it run only above 30 kt */}
 SET 4 sets when the flight timer runs: while the groundspeed is above the threshold of `GS > 30kt`, or for as long as the unit is on (`POWER IS ON`). The change takes effect at once, also while the timer runs.
 
 <KlnScreen screen="pages/set/set-4" />
