@@ -9,6 +9,7 @@ defineScreen(import.meta.url, {
 	},
 	fields: [
 		{id: 'gps', find: {re: /GPS: +\S+/, area: 'L'}},
+		{id: 'failures', find: {re: /FAILURES\?/, area: 'L'}},
 		{id: 'page', find: {re: /SET10/, area: 'S'}},
 	],
 });

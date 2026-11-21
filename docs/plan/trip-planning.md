@@ -52,6 +52,14 @@ computer of OTH 5 to OTH 8; the chapter says so and links to Fuel and air data (
   `GS > 30kt`) or from power-on, as SET 4 sets; the setting takes effect at once. The departure time of D/T 4 is the
   time at which the timer starts. Both are cleared at every power-on, and the pilot cannot reset them.
 
+### From the package set (2026-11-21)
+
+- The SET chapter (`pages/set.mdx`, "SET 4: …") explains the page and its two choices and links this page by the
+  page link `/kln90b/operation/trip-planning/`; sharpen it to the section on the flight timer. The 30 kt threshold
+  is in SET 4's field explanations (`pages/set/set-4`, `set-4-cursor`); this page owns it as a fact of the timer.
+- The CAL chapter: CAL 1 and CAL 2 take the baro setting in the units chosen on SET 7 (the reviewer of the SET
+  chapter read it in the code). Say so on those pages in one sentence; SET 7 links there by its page names.
+
 ## Changes to earlier pages
 
 The D/T chapter and the SET chapter (SET 4) get their links to this page sharpened to its sections.

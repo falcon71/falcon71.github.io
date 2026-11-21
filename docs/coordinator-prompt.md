@@ -234,7 +234,7 @@ mechanical part and reports only what is wrong:
 - File the reported bugs (style guide, section 5): search open and closed issues first. Then **show the maintainer a
   summary of the bugs you want to file** (for each: the title, what is wrong and the reproduction, in a line or two)
   and ask for permission; file only the approved ones, with the `bug` label, and add the `kln90b#NN` comment to the
-  paragraph. An issue states the expected behavior in its own terms and may cite a manual page number; it never
+  paragraph. An issue states the expected behavior in its own terms and cites no manual page number (the permission check refused an issue with one, 2026-11-21); it never
   says what a manual describes, not even paraphrased (the permission check refused such an issue, 2026-11-20). Do the same before any comment on an issue. Filing without that approval is refused by the permission
   check of the maintainer's session (maintainer, 2026-11-18).
 - Write what the agents found for other packages into those packages' files, in full.

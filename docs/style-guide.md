@@ -152,8 +152,8 @@ manual page cited in the code to the page of the PDF and lists topics and facts.
   observed and expected values), the file and line, the impact on the pilot and a suggested fix. It never mentions
   this manual or how the bug was found ("found while writing the docs"), because the kln90b project must not learn
   about the manual (coordinator, 2026-11-19, after three issues said so). If it continues a
-  closed issue, it references that issue. A reviewer may cite a manual page number in a kln90b issue, never the
-  manual's text; a writer has no manual to cite.
+  closed issue, it references that issue. An issue cites neither a manual page number nor the
+  manual's text; the permission check of the maintainer's session refused an issue with a page number (2026-11-21).
 - **Never change kln90b.** Nothing in `vendor/kln90b` is edited, and no fix or test is added there for the
   documentation. The kln90b project does not know about this manual.
 - **The manual describes the simulation as it is now**, bug included, and the paragraph or field explanation carries a
@@ -607,6 +607,8 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | the special use airspace alert at the first mention, then the airspace alert (as SET 8 names it); special use airspace; the vertical buffer (SET 8) | SUA alert |
 | the height above airport alert; the offset height (its height, set on SET 5) | |
 | center waypoint (the waypoint the CTR pages create at a Center boundary); area control center (ACC or ARTCC) where a page first introduces the concept, then Center (maintainer, 2026-11-20) | air route traffic control center alone, ACC alone |
+| the SET pages, named once on the SET chapter as the setup pages of the unit | the settings pages |
+| the initial heading (the degrees on the groundspeed line of SET 1) | track (on SET 1) |
 
 ### Spelling and style
 

@@ -1,30 +1,190 @@
 ---
 title: SET pages
-description: SET 1 to SET 10, the settings of the unit.
+description: What SET 1 to SET 10 and SET 0 set (the position, the date and time, the nearest airport criteria, the flight timer, the alerts, turn anticipation, the baro setting units, the acquisition mode and the database update) and which page explains each function.
 sidebar:
   order: 7
 ---
 
 import KlnScreen from '../../../components/KlnScreen.astro';
 import Callout from '../../../components/Callout.astro';
+import Term from '../../../components/Term.astro';
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-aliqua.
+The SET pages, the setup pages of the KLN 90B, hold the initial position, the date, the time and the time zone, and the options of functions that other pages explain, such as turn anticipation or the airspace alert. Each section below says what its page sets and links to the page that explains the function. SET 0, at the end, shows the update pages of the database but loads nothing, because the unit takes its database from the simulator.
 
-## SET 1
+## The SET pages: settings and entries
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+The SET pages are left pages, and the unit keeps their options while it is off. A setting that the knob changes directly takes effect at once ([Fields the knob changes directly](/kln90b/unit/controls-and-display/#fields-the-knob-changes-directly)); an entry takes effect with <kbd>ENT</kbd> ([Entries that take effect with ENT](/kln90b/unit/controls-and-display/#entries-that-take-effect-with-ent)).
 
-## SET 2 to SET 9
+## SET 1: initial position
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+{/* kln90b#521: describes the current behavior; the fix makes SET 1 follow the aircraft while the cursor is off */}
+SET 1 shows the position, the <Term t="GS">groundspeed</Term> and the heading as they were when you selected the page, and lets you replace the position. You use it when the unit is not NAV ready and its position is wrong, so that the search for satellites starts from the right place.
 
-## SET 10
+<KlnScreen screen="pages/set/set-1" />
 
-<Callout kind="sim-only">
-	Lorem ipsum: the real unit has no SET 10 page. It holds settings for the simulation.
+With the cursor on, you give the unit a position in one of two ways: you enter the identifier of a waypoint close to the aircraft in `WPT:`, which works as in any field of a left page ([In a field of a left page](/kln90b/operation/waypoints/#in-a-field-of-a-left-page)), or you enter the latitude and the longitude. You can enter the groundspeed and the heading too, but they have no effect on the search for satellites. `CONFIRM?` gives the unit what you entered.
+
+<KlnScreen screen="pages/set/set-1-latitude-entry" />
+
+Once the unit is NAV ready, the satellites supply it, and the measured position replaces what you entered. SET 1 therefore helps only while the unit searches. [Initializing the position and the time](/kln90b/unit/power-on/#initializing-the-position-and-the-time) gives the steps.
+
+## SET 2: date, time and time zone
+
+SET 2 shows the date, the time and the time zone of the unit. You correct the date and the time on it while the unit is not NAV ready, and you choose the time zone at any time.
+
+<KlnScreen screen="pages/set/set-2" />
+
+Once the unit is NAV ready, the satellites supply the date and the time, and the cursor skips them and stops only on the time zone. While the unit is not NAV ready, the cursor visits the date, the time and the time zone in turn, and an entry restarts the search for satellites from the new date or time.
+
+<KlnScreen screen="pages/set/set-2-date-entry" />
+
+The date and the time are entered in the time zone that the page shows. The time zone is the same on every page that shows a time; D/T 2 and D/T 4 change it too ([The time zone](/kln90b/pages/dt/#the-time-zone)).
+
+A date or a time that moves the database from current to expired, or back, raises `RECYCLE POWER TO USE` `CORRECT DATA BASE DATA` ([`RECYCLE POWER TO USE`](/kln90b/operation/waypoints/#recycle-power-to-use)). After a loss of the unit's memory the clock starts decades off: enter the right date on SET 2 before the unit is NAV ready, because otherwise the first position sets a date that is decades wrong and keeps it ([The battery](/kln90b/operation/failures/#the-battery)).
+
+SET 2 adds a line, `MAG V`, where you enter a magnetic variation, while the unit has none of its own: outside the primary coverage area, and in OBS mode while the active waypoint lies outside it. The line is not on the page otherwise.
+
+<KlnScreen screen="navigation/set-2-magvar" />
+
+[Flying without a magnetic variation](/kln90b/operation/modes-of-operation/#flying-without-a-magnetic-variation) explains when the unit has no variation and how you enter one. [Initializing the position and the time](/kln90b/unit/power-on/#initializing-the-position-and-the-time) gives the steps for the date and the time.
+
+## SET 3: nearest airport criteria
+
+SET 3 sets the minimum runway length and the runway surface that an airport needs to be in the nearest list. Both settings change at once.
+
+<KlnScreen screen="pages/set/set-3" />
+
+The nearest list follows a change at once. The second screen shows the minimum length after one step.
+
+<KlnScreen screen="pages/set/set-3-cursor" />
+
+[Setting the nearest airport criteria](/kln90b/operation/nearest/#setting-the-nearest-airport-criteria) gives the steps and says what the criteria filter.
+
+## SET 4: flight timer
+
+{/* kln90b#522: the timer runs at 30 kt or more now; the fix makes it run only above 30 kt */}
+SET 4 sets when the flight timer runs: while the groundspeed is above the threshold of `GS > 30kt`, or for as long as the unit is on (`POWER IS ON`). The change takes effect at once, also while the timer runs.
+
+<KlnScreen screen="pages/set/set-4" />
+
+The second screen shows `POWER IS ON` chosen.
+
+<KlnScreen screen="pages/set/set-4-cursor" />
+
+The flight timer itself is on D/T 4; [Trip planning and calculators](/kln90b/operation/trip-planning/) describes it.
+
+## SET 5: height above airport alert
+
+<Callout kind="availability">
+The height above airport alert comes with altitude alerting: an installation with one has the other. Its tones also need an audio output of the aircraft. Without altitude alerting, SET 5 shows `FEATURE DISABLED` and nothing on it can be changed.
 </Callout>
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+SET 5 turns the height above airport alert on and off and sets its offset height.
+
+<KlnScreen screen="pages/set/set-5" />
+
+With the alert off, the page has the one setting. Turning it on adds the offset height below it.
+
+<KlnScreen screen="pages/set/set-5-on" />
+
+In an installation without altitude alerting the page shows this instead:
+
+<KlnScreen screen="pages/set/set-5-disabled" />
+
+[The height above airport alert](/kln90b/operation/alerts/#the-height-above-airport-alert) says when the alert sounds and gives the steps.
+
+## SET 6: turn anticipation
+
+SET 6 turns turn anticipation on and off. The setting changes at once.
+
+<KlnScreen screen="pages/set/set-6" />
+
+The second screen shows the cursor on and `DISABLE` chosen.
+
+<KlnScreen screen="pages/set/set-6-cursor" />
+
+[Turning off turn anticipation](/kln90b/operation/sequencing/#turning-off-turn-anticipation) gives the steps and says what the unit does without it.
+
+## SET 7: baro setting units
+
+SET 7 chooses the unit of the <Term t="BARO">altimeter baro setting</Term>: inches or millibars. It applies to every page that takes the baro setting, such as the ALT page, the Self Test page, CAL 1 and CAL 2.
+
+<KlnScreen screen="pages/set/set-7" />
+
+The second screen shows the cursor on and millibars chosen.
+
+<KlnScreen screen="pages/set/set-7-cursor" />
+
+[The baro setting](/kln90b/operation/alerts/#the-baro-setting) says what the unit does with it.
+
+## SET 8: airspace alert
+
+SET 8 turns the airspace alert on and off and sets its vertical buffer. It is on every installation of the unit, with or without altitude alerting.
+
+<KlnScreen screen="pages/set/set-8" />
+
+The cursor visits only the ten thousands, the thousands and the hundreds of the vertical buffer, because it is set in steps of the hundreds.
+
+<KlnScreen screen="pages/set/set-8-cursor" />
+
+With the alert disabled, the buffer is not shown and the cursor cannot go to it.
+
+<KlnScreen screen="pages/set/set-8-disabled" />
+
+[The airspace alert](/kln90b/operation/alerts/#the-airspace-alert) explains what the buffer does and says what the alert watches.
+
+## SET 9: volume of the aural alarm
+
+<Callout kind="availability">
+The aural alarm comes with altitude alerting and needs an audio output of the aircraft. Whether the tones get louder with the volume you set depends on the installation. Without altitude alerting, SET 9 shows `FEATURE DISABLED` and nothing on it can be changed.
+</Callout>
+
+SET 9 sets the volume of the aural alarm. The setting changes at once.
+
+<KlnScreen screen="pages/set/set-9" />
+
+In an installation without altitude alerting the page shows this instead:
+
+<KlnScreen screen="pages/set/set-9-disabled" />
+
+[The aural alarm](/kln90b/operation/alerts/#the-aural-alarm) lists the tones.
+
+## SET 10: acquisition and failures
+
+<Callout kind="sim-only">
+The real KLN 90B has no SET 10 page. It holds a setting of the simulation and the way to the FLR pages.
+</Callout>
+
+SET 10 chooses how the receiver acquires the satellites at power-on, `REAL` or `FAST`, and has the button that opens the FLR pages. The unit writes the page identification without a space: `SET10`.
 
 <KlnScreen screen="pages/set/set-10" />
+
+The unit stores the mode at once. `FAST` chosen while the unit is not NAV ready restarts the search at once; `FAST` chosen while it is NAV ready, and `REAL` at any time, take effect at the next power-on ([Real and fast acquisition](/kln90b/operation/gps-receiver/#real-and-fast-acquisition)).
+
+<KlnScreen screen="pages/set/set-10-real" />
+
+The button `FAILURES?` opens FLR 1, from where you fail and repair parts of the unit ([The FLR pages: failing and repairing parts of the unit](/kln90b/pages/flr/#the-flr-pages-failing-and-repairing-parts-of-the-unit)). Press <kbd>ENT</kbd> with the cursor on it.
+
+<KlnScreen screen="pages/set/set-10-failures" />
+
+## SET 0: database update
+
+SET 0 shows the update pages of the database but loads nothing: the unit takes its database from the simulator when the aircraft is loaded, so SET 0 has nothing to load. [How do I update the database?](/kln90b/help/faq/#how-do-i-update-the-database) says how you get a current cycle. The page takes the whole screen, and the status line shows `SET 0` alone, with no mode annunciation and no right page identification. Turn the left inner knob one step counterclockwise from SET 1 or one step clockwise from SET 10 to reach it.
+
+<KlnScreen screen="pages/set/set-0" />
+
+Press the left <kbd>CRSR</kbd> to turn the cursor on. The text gives way to the update button.
+
+<KlnScreen screen="pages/set/set-0-cursor" />
+
+<kbd>ENT</kbd> on the button shows the end of the database cycle, `DATA BASE EXPIRES`, or `DATA BASE EXPIRED` once the clock of the unit is past it.
+
+<KlnScreen screen="pages/set/set-0-expiry" />
+
+<kbd>ENT</kbd> on the update question, `U P D A T E ?`, ends in `L O A D E R` `N O T   R E A D Y` and turns the cursor off.
+
+<KlnScreen screen="pages/set/set-0-loader-not-ready" />
+
+<kbd>CLR</kbd> goes back one step at a time: from there to the end of the cycle without the cursor, and then to the first screen. With the cursor on at the first screen, <kbd>CLR</kbd> turns the cursor off. Leaving SET 0 and coming back starts at the first screen again.
+
+[The database](/kln90b/operation/waypoints/#the-database) explains the database cycle and its expiry.

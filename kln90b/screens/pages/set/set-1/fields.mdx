@@ -1,0 +1,27 @@
+<Field id="title" title="Page title">
+	`INIT POSN` heads the page for the initial position: where the unit believes the aircraft is.
+</Field>
+
+<Field id="wpt" title="Waypoint of the position">
+	The identifier of a waypoint to take the position from. The field is blank until you enter one. When you have entered an identifier and approved its waypoint page, the latitude and longitude below take the position of the waypoint, and the cursor moves to `CONFIRM?`. An identifier that no waypoint has is refused with `NO SUCH WPT`.
+</Field>
+
+<Field id="lat" title="Latitude">
+	The latitude of the position, `N` or `S`, in degrees and minutes with two decimals. It is an entry: the first step of the left inner knob opens it, and <kbd>ENT</kbd> accepts it. The degrees go up to 89.
+</Field>
+
+<Field id="lon" title="Longitude">
+	The longitude of the position, `E` or `W`, in degrees and minutes with two decimals. It is entered like the latitude. A longitude beyond 180° is refused with `INVALID ENT`.
+</Field>
+
+<Field id="speed" title="Groundspeed and heading">
+	The <Term t="GS">groundspeed</Term> in kt, 0 to 999, and the magnetic heading in degrees, 0° to 359°. Each is an entry that takes effect with <kbd>ENT</kbd>, like the latitude. They have no effect on the search for satellites.
+</Field>
+
+<Field id="confirm" title="Confirm the position">
+	`CONFIRM?` is a button, always shown. <kbd>ENT</kbd> with the cursor on it gives the unit the values of the page and turns the cursor off.
+</Field>
+
+<Field id="page" title="Page identification">
+	The page identification of the left page, `SET 1`.
+</Field>
