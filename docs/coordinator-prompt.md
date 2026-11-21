@@ -100,6 +100,8 @@ The first session writes the plan of the whole manual and no page.
    - An Operation page and the page group it mainly operates go next to each other in the order, so that the
      second is written while the first is fresh in the plan's notes.
    - Getting started, the reference lists and Help come after the pages they summarize; the tutorials come last.
+   - Plan an Operation page only for a topic that spans page types (style guide, section 10, "Task pages"). A topic
+     done entirely on one page type stays in its chapter.
 4. **Stop and ask the maintainer to approve the plan.** Commit it when it is approved. The session ends here.
 
 ## A package session
@@ -121,7 +123,10 @@ The first session writes the plan of the whole manual and no page.
    recognize (style guide, section 13), including a step that carries data from one side to the other, where the
    screen shows both halves. It plans a drawing for every computation or geometry the pilot must picture (style
    guide, section 16); the REF and CTR chapters were first written without one (maintainer, 2026-11-20). If the research shows that a topic's owner must change, or that the
-   package is too large for the session, change the plan first; split a package rather than rush it.
+   package is too large for the session, change the plan first; split a package rather than rush it. If the
+   research shows that an Operation page of the package would only use one page type, fold it into that chapter
+   before anyone writes (style guide, section 10, "Task pages"; the Fuel and air data page was written and then
+   folded into the OTH chapter, maintainer, 2026-11-21).
 3. **Writing.** One writer per page or per few small pages, in parallel only where they own different files,
    topics and screens. A writer writes its pages, describes and generates its screens and writes their field
    explanations.

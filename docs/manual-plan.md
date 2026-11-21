@@ -37,7 +37,6 @@ as `/kln90b/<slug>/`) and its package. Pages that do not exist yet are linked by
 | | Messages | `operation/messages` | messages |
 | | Airspace and altitude alerting | `operation/alerts` | vnav-alerts |
 | | Trip planning and calculators | `operation/trip-planning` | trip-planning |
-| | Fuel and air data | `operation/fuel-air-data` | fuel-air-data |
 | | Simulated failures (new) | `operation/failures` | failures (done) |
 | Page reference, left | TRI | `pages/tri` | trip-planning |
 | | MOD | `pages/mod` | navigation |
@@ -149,7 +148,7 @@ that writes the owner records the anchors in this table, and the final pass shar
 | Trip planning; the calculators; the system time zone (its list and the pages that share it) and the flight timer | Trip planning and calculators: `#planning-a-trip` (`#setting-the-true-airspeed-and-the-wind`, `#planning-from-the-present-position`, `#planning-between-two-waypoints`, `#planning-along-a-flight-plan`, `#the-safe-altitude-and-the-airspaces-along-the-route`), `#the-time-zone`, `#the-flight-timer`, `#the-calculators` (`#finding-the-wind-in-flight`) | TRI, CAL, D/T chapters: the pages; SET chapter: SET 2 and SET 4 as pages and the link; a page that shows the zone names it and links `#the-time-zone`; the 30 kt is said only at `#the-flight-timer` (and in SET 4's field explanations, which carry kln90b#522) |
 | The TRI pages' rules (entries shared and kept, figures computed when the page is selected), the airspace list of TRI 2, 4 and 6 | TRI chapter: `#the-tri-pages-planning-a-trip`, `#the-airspaces-along-the-route` | Trip planning: the steps, one sentence and the link |
 | CAL 6 and CAL 7 keep their own zone after starting from the system time zone | CAL chapter: `#cal-6-time-conversion`, `#cal-7-sunrise-and-sunset` | Trip planning `#the-time-zone`: one sentence |
-| Fuel management and air data | Fuel and air data | OTH chapter: the pages; TRI chapter: its own fuel fields |
+| Fuel management and air data: which OTH pages an installation has, entering the fuel on board and `SET FUEL ON BOARD`, the fuel reserve, the destination waypoint of the fuel figures, the wind and the heading input | OTH chapter: `#the-oth-pages-which-pages-your-unit-has`, `#oth-5-fuel-on-board-and-fuel-required` (with the message section), `#oth-9-true-airspeed-and-wind`, `#the-air-data-pages-without-a-fuel-management-system` (no Operation page, maintainer, 2026-11-21) | TRI chapter and Trip planning: TRI's own fuel entries, one sentence and the link |
 | The MSG page, how messages arrive and are read, the annunciators | Messages | others link |
 | Message texts: meaning and what to do | Message page messages, Status line messages | a page quotes the text where it is raised and links |
 | Hardware events and their setup | External hardware | Keyboard mode: its two toggles, with the link |
@@ -196,7 +195,7 @@ anchors and page links above. After them the order follows "owners before the pa
 | 14 | vnav-alerts | VNAV; Airspace and altitude alerting | done (2026-11-20) |
 | 15 | set | SET chapter | done (2026-11-21) |
 | 16 | trip-planning | Trip planning and calculators; TRI and CAL chapters | done (2026-11-21) |
-| 17 | fuel-air-data | Fuel and air data; OTH chapter | not started |
+| 17 | fuel-air-data | OTH chapter (the Operation page Fuel and air data was folded into it, maintainer, 2026-11-21) | in review |
 | 18 | messages | Messages; Message page messages; Status line messages; the Glossary page | not started |
 | 19 | help | External hardware; FAQ and troubleshooting; Known limitations; Contact | not started |
 | 20 | tutorial-1 | Tutorial flight 1 | not started |
@@ -303,6 +302,12 @@ it is written when those owners exist. A package that proves too large in its re
 - The glossary entries `BARO` and `GS` describe the unit's own baro setting and the GPS groundspeed; the CAL pages
   therefore use no `<Term>` for them. The final pass decides whether the entries should cover the CAL fields too.
 
+- The package fuel-air-data (2026-11-21) brought the official terms the fuel management pages, fuel units, landing
+  fuel on board, fuel reserve (OTH 5 and OTH 6; TRI keeps reserve fuel), fuel efficiency and static air temperature,
+  and the rule that a topic done on one page type gets no Operation page (style guide, section 10). The final pass
+  searches once more ("fuel pages", "fuel left on board", "air data computer", "fuel computer", "outside air
+  temperature") and checks the other Operation pages against the rule.
+
 ## Site and generator notes
 
 Not manual text; for the maintainer or a session that works on the site.
@@ -311,7 +316,7 @@ Not manual text; for the maintainer or a session that works on the site.
   MOD 2, FPL 3, NAV 4, CAL 5, STA 6, SET 7, FLR 8, OTH 9, CTR 10, REF 11, ACT 12, D/T 13, APT 14, VOR 15, NDB 16,
   INT 17, SUP 18. The Operation pages take their number from the order of the style guide's chapter list (section
   17); Waypoints and the database has 1, User waypoints 2, DME arcs 8.5 (added after the numbering, 2026-11-20), GPS reception and RAIM 11, Inside the GPS simulation 12 and Simulated
-  failures 17, so Nearest to VNAV take 3 to 10 and Messages to Fuel and air data 13 to 16 (renumbered when User
+  failures 17, so Nearest to VNAV take 3 to 10 and Messages to Trip planning and calculators 13 to 15 (Fuel and air data, 16, was folded into the OTH chapter, 2026-11-21; renumbered when User
   waypoints was added, 2026-11-17; the placeholders Direct-to and Modes of operation have 4 and 6).
 - The source tree of kln90b holds the software revision as a template that only its build fills in, and the
   generator fails on it. `kln90b/screens/sta-3/screen.ts` works around this with a mock that reads the version
