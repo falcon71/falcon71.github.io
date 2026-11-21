@@ -29,6 +29,8 @@ The unit keeps every entry of the TRI pages while it is off. A digit takes effec
 A TRI page works out its figures when you select it or approve a waypoint on it, and keeps them while it is shown. On TRI 1 and TRI 2 the distance, the bearing, the time, the safe altitude and the list of airspaces therefore stay as they were when the aircraft moves on, and a page that you selected before the unit was NAV ready stays dashed. Turn to another page and back to get the figures of the moment.
 </Callout>
 
+{/* kln90b#528: describes the current behavior; the fix updates the values of TRI 1 and TRI 2 while the page is shown */}
+
 ## TRI 0: true airspeed and wind
 
 TRI 0 holds the true airspeed and the wind that TRI 1, TRI 3 and TRI 5 plan with. It needs no GPS position.
@@ -38,7 +40,7 @@ TRI 0 holds the true airspeed and the wind that TRI 1, TRI 3 and TRI 5 plan with
 A new unit holds a true airspeed of 150 kt and no wind (direction `000`, speed `000` kt), with which the groundspeed is the true airspeed. Set both before you trust a time. You set the wind direction in two steps: first the tens of degrees (`00` to `35`), then the last digit, so 360° cannot be entered.
 
 <Callout kind="info">
-The wind direction is a true direction, and it is the direction the wind blows from. The bearings on TRI 1 and TRI 3 are magnetic. Convert a magnetic wind to true before you enter it.
+The wind direction is a true direction, and it is the direction the wind blows from. The bearings on TRI 1 and TRI 3 are magnetic.
 </Callout>
 
 The unit works out the groundspeed with the true course of the leg, so the difference between the true wind and the magnetic bearing needs no correction from you. CAL 3 and OTH 9 have a wind of their own, which TRI 0 neither changes nor reads.
@@ -65,12 +67,6 @@ TRI 1 needs a unit that is NAV ready ([GPS reception and RAIM](/kln90b/operation
 
 <KlnScreen screen="pages/tri/tri-1-no-fix" />
 
-### TRI 1 with no groundspeed from the wind
-
-Where the crosswind is stronger than the true airspeed, or the wind is at least as strong as the true airspeed and comes from ahead of the wingtips, the aircraft would make no progress. The groundspeed, the time and the fuel required then show dashes, and the distance and the bearing stay.
-
-<KlnScreen screen="pages/tri/tri-1-no-solution" />
-
 ### The limits of the values
 
 - A distance above 9,999 NM shows dashes, and so does a time of 100 hours or more.
@@ -96,7 +92,7 @@ TRI 3 gives the same figures as TRI 1 for a route from one waypoint to another t
 
 <KlnScreen screen="pages/tri/tri-3" />
 
-The cursor comes on at the from waypoint, and when you approve it, it moves on to the to waypoint. The bearing is magnetic, with the magnetic variation at the from waypoint. TRI 3 needs no GPS position. With either waypoint blank it shows the dashes of TRI 1 without a position, with a groundspeed of `000`. With the two waypoints the same, it shows a distance of 0, and dashes for the bearing, the groundspeed, the time and the fuel required. A wind that leaves no groundspeed and the limits of the values are those of TRI 1.
+The cursor comes on at the from waypoint, and when you approve it, it moves on to the to waypoint. The bearing is magnetic, with the magnetic variation at the from waypoint. TRI 3 needs no GPS position. With either waypoint blank it shows the dashes of TRI 1 without a position, with a groundspeed of `000`. With the two waypoints the same, it shows a distance of 0, and dashes for the bearing, the groundspeed, the time and the fuel required. The limits of the values are those of TRI 1.
 
 [Planning between two waypoints](/kln90b/operation/trip-planning/#planning-between-two-waypoints) gives the steps.
 
@@ -118,7 +114,7 @@ TRI 5 gives the total distance, the time and the fuel of a whole flight plan, fr
 
 The number runs from 0, the active flight plan, to 25, and goes around at both ends. The figures follow when the number changes. The flight plan does not have to be active, and TRI 5 always plans the whole of it: not from your present position, not from the active leg. The waypoints of a SID, a STAR and an approach count like any others, and so do the legs of the missed approach, so the distance and the time of an approach in the flight plan run past the missed approach point. A waypoint that follows itself adds nothing. TRI 5 needs no GPS position.
 
-The wind applies to the course of every leg, and the groundspeed on the page is the total distance over the total time. A wind that leaves no groundspeed on even one leg turns the groundspeed, the time and the fuel required of the whole plan to dashes, and the distance stays. A flight plan with fewer than two waypoints has no distance:
+The wind applies to the course of every leg, and the groundspeed on the page is the total distance over the total time. A flight plan with fewer than two waypoints has no distance:
 
 <KlnScreen screen="pages/tri/tri-5-empty" />
 
@@ -170,11 +166,17 @@ Each airspace takes two lines. The first holds the first 11 characters of the na
 
 An airspace of several sectors is listed once for each sector, under the same name; the TRI 4 screen shows Spokane Class C twice. A route through Seattle Class B lists `SEATTLE CLA` and `SS B CL B` more than once, as the screens of TRI 2 and of the second page of TRI 4 show. You cannot tell the sectors apart on the page.
 
+{/* kln90b#523: describes the current behavior; the fix lists each area once */}
+
 ### The pages of the list
 
 A page holds five lines. The `ESA` line takes the first line of the first page, which therefore holds two airspaces, and every later page holds five more lines of the list. When the list needs more than one page, the page identification reads `TRI+2`, `TRI+4` or `TRI+6`, and with the cursor off the left inner knob turns through the pages and then on to the next TRI page. Turned back onto a list from the page after it (from TRI 3 to TRI 2, from TRI 5 to TRI 4, from TRI 0 to TRI 6), the knob lands on the first page of the list, not the last.
 
+{/* kln90b#525: describes the current behavior; the fix lands on the last page of the list */}
+
 The list breaks after every fifth line and takes no notice that an airspace needs two. From the second page on, the name of an airspace can therefore stand on the last line of a page with its type on the first line of the next, and the pairs on the pages that follow are out of step with them.
+
+{/* kln90b#526: describes the current behavior; the fix keeps each area whole on one page */}
 
 The `+` appears only when the list is complete.
 

@@ -1,25 +1,21 @@
-import {defineScreen, wait} from '../../../generator/api.ts';
-import {BOOT, flyAndAdjust} from '../../pages/dt/states.ts';
+import {defineScreen, place} from '../../../generator/api.ts';
 
 defineScreen(import.meta.url, {
-	title: 'D/T 4 with the time zone chosen',
-	show: 'right',
-	boot: BOOT,
+	title: 'SET 2 with the time zone chosen',
+	show: 'left',
+	boot: {position: place('KSEA')},
 	steps: async u => {
-		await flyAndAdjust(u);
-		await wait(60000);
-		await u.panel.selectPage('R', 'D/T 4');
-		await u.panel.cursor('R');
-		await u.panel.inner('R', 11);
+		await u.panel.selectPage('L', 'SET 2');
+		await u.panel.cursor('L');
+		await u.panel.inner('L', 11);
 	},
 	fields: [
-		{id: 'dest', find: {area: 'R', row: 0, from: 0, to: 7}},
-		{id: 'zone', find: {re: /[A-Z]{3}$/, area: 'R', row: 0}},
-		{id: 'dep', find: {area: 'R', row: 1}},
-		{id: 'time', find: {area: 'R', row: 2}},
-		{id: 'eta', find: {area: 'R', row: 3}},
-		{id: 'flt', find: {area: 'R', row: 4}},
-		{id: 'ete', find: {area: 'R', row: 5}},
-		{id: 'rname', find: {re: /CRSR/, area: 'S'}},
+		{id: 'title', find: {re: /DATE\/TIME/, area: 'L'}},
+		{id: 'date', find: {re: /\d\d [A-Z]{3} \d\d/, area: 'L', row: 2}},
+		{id: 'time', find: {re: /\d\d:\d\d/, area: 'L', row: 3}},
+		{id: 'seconds', find: {re: /(?<=:\d\d:)\d\d/, area: 'L', row: 3}},
+		{id: 'zone', find: {re: /[A-Z]{3}$/, area: 'L', row: 3}},
+		{id: 'zonename', find: {area: 'L', row: 4}},
+		{id: 'cursor', find: {re: /CRSR/, area: 'S'}},
 	],
 });

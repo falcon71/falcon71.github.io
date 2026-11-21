@@ -32,15 +32,9 @@ CAL 1 works out the pressure altitude and the density altitude from the indicate
 
 <KlnScreen screen="pages/cal/cal-1" />
 
-A unit that was never given an altimeter setting starts with `00.00"`, not with the standard setting, and until you enter one, `PRS` and `DEN` read 65600. Enter the altimeter setting first; the unit keeps it while it is off.
-
-<KlnScreen screen="pages/cal/cal-1-default" />
-
 SET 7 chooses the unit of the altimeter setting, inches or millibars, and the page shows it in that unit.
 
 <KlnScreen screen="pages/cal/cal-1-mb" />
-
-In millibars, a unit that was never given a setting shows `BARO: 700MB`, the lowest value the field holds, while the calculation still works with no setting. Turn every cell of the setting, the first one included, even where it already shows the digit you want.
 
 The unit rounds both answers to 100 ft and shows 0 ft for anything lower and 65,600 ft for anything higher. You can enter an indicated altitude up to 99,900 ft but never a negative one; cold air at a low altitude can give a density altitude below zero, which shows as 0.
 
@@ -74,7 +68,7 @@ With a heading input, the heading line is blank and the unit uses the heading of
 
 <KlnScreen screen="pages/cal/cal-3-heading" />
 
-The page does not check that the GPS has a position. Without a fix, it calculates with the last groundspeed and track, which are 0 and 000 after power-on; on the ground, the groundspeed is 0. In both cases the wind it shows is as strong as the true airspeed and blows from your heading. Read the wind only in flight, with the unit NAV ready.
+The page does not check that the GPS has a position. Without a fix, it calculates with the last groundspeed and track, which are 0 and 000 after power-on; on the ground, the groundspeed is 0. In both cases the wind it shows is as strong as the true airspeed and blows from your heading. Read the wind only in flight, with the unit NAV ready. {/* kln90b#529: describes the current behavior; the fix shows dashes for the wind values while the unit is not NAV ready */}
 
 [Finding the wind in flight](/kln90b/operation/trip-planning/#finding-the-wind-in-flight) uses CAL 2 and CAL 3 together.
 

@@ -18,7 +18,7 @@ chapters; this page links there. It names "the system time zone" (word list) and
 | Planning along a flight plan | `#planning-along-a-flight-plan` | `pages/tri/tri-5` | – |
 | The safe altitude and the airspaces along the route | `#the-safe-altitude-and-the-airspaces-along-the-route` | `pages/tri/tri-2` | TRI `#the-airspaces-along-the-route`; NAV `#minimum-safe-altitudes` |
 | Times in flight | `#times-in-flight` | – | – |
-| The time zone | `#the-time-zone` | `trip-planning/time-zone` | owns the zone list (19 zones, fixed offsets, no daylight saving change) and the sharing |
+| The time zone | `#the-time-zone` | `trip-planning/time-zone` (SET 2, cursor on the zone) | the procedure on SET 2, the page a pilot sets it on (maintainer, 2026-11-21); owns the zone list (19 zones, fixed offsets, no daylight saving change) and the sharing |
 | The flight timer | `#the-flight-timer` | `pages/dt/dt-4`, `pages/set/set-4-cursor` | owns the 30 kt (kln90b#522 on the paragraph); `POWER IS ON` chosen later keeps the count and `DEP` |
 | The calculators | `#the-calculators` | – | a question-to-page table; VNAV `#the-angle` |
 | Finding the wind in flight | `#finding-the-wind-in-flight` | `pages/cal/cal-2`, `pages/cal/cal-3` | CAL 2's true airspeed passes to CAL 3 |
@@ -29,8 +29,8 @@ chapters; this page links there. It names "the system time zone" (word list) and
 | Section | Anchor | Screens |
 | --- | --- | --- |
 | The TRI pages: planning a trip | `#the-tri-pages-planning-a-trip` | Good to know box: the figures are computed when the page is selected and do not update; a page selected before NAV ready stays dashed |
-| TRI 0: true airspeed and wind | `#tri-0-true-airspeed-and-wind` | `tri-0`; Good to know box: the wind direction is true and "from" |
-| TRI 1: from the present position (with "TRI 1 without a position or a waypoint", "TRI 1 with no groundspeed from the wind", "The limits of the values") | `#tri-1-from-the-present-position` | `tri-1`, `tri-1-gs`, `tri-1-no-fix`, `tri-1-no-solution` |
+| TRI 0: true airspeed and wind | `#tri-0-true-airspeed-and-wind` | `tri-0`; Good to know box: the wind direction is true and "from", with no advice on converting winds |
+| TRI 1: from the present position (with "TRI 1 without a position or a waypoint", "The limits of the values") | `#tri-1-from-the-present-position` | `tri-1`, `tri-1-gs`, `tri-1-no-fix` |
 | TRI 2: safe altitude and airspaces from the present position | `#tri-2-safe-altitude-and-airspaces-from-the-present-position` | `tri-2` (KTIW), `tri-2-none` (KYKM–KELN) |
 | TRI 3: between two waypoints | `#tri-3-between-two-waypoints` | `tri-3` (KPAE–KBFI) |
 | TRI 4: safe altitude and airspaces between two waypoints | `#tri-4-safe-altitude-and-airspaces-between-two-waypoints` | `tri-4` (KGEG–KSFF), `tri-4-plus` (KPAE–KBFI, page 2 of 3) |
@@ -47,7 +47,7 @@ and Class C airspace, so no screen shows another type.
 | Section | Anchor | Screens |
 | --- | --- | --- |
 | The CAL pages: calculators | `#the-cal-pages-calculators` | – |
-| CAL 1: pressure and density altitude | `#cal-1-pressure-and-density-altitude` | `cal-1`, `cal-1-default` (an unentered altimeter setting gives `65600ft`, a plain sentence), `cal-1-mb`, `cal-1-cursor` |
+| CAL 1: pressure and density altitude | `#cal-1-pressure-and-density-altitude` | `cal-1`, `cal-1-mb`, `cal-1-cursor` |
 | CAL 2: true airspeed | `#cal-2-true-airspeed` | `cal-2` |
 | CAL 3: wind | `#cal-3-wind` | `cal-3`, `cal-3-heading`; Availability box for the heading input |
 | CAL 4: VNAV angle | `#cal-4-vnav-angle` | `cal-4` |
@@ -77,6 +77,23 @@ time zone (CAL chapter).
   instead of repeating the 30 kt; "the system time zone" at the first mention.
 - `pages/set.mdx`: SET 4 links `#the-flight-timer`; SET 2 says "the system time zone".
 
+Removed after the maintainer's review (2026-11-21), as cases a pilot hardly meets: the TRI 1 section and screen of
+a wind that leaves no groundspeed, and the CAL 1 example and screen of a never-entered altimeter setting (style guide,
+section 8).
+
 ## Bugs
 
-See the report of 2026-11-21 to the maintainer; the filed issues are marked on the paragraphs.
+Filed 2026-11-21 with the maintainer's approval, each marked on the paragraph that describes it:
+
+- kln90b#523: TRI 2/4/6 list a Class B or C area once per sector (TRI chapter).
+- kln90b#524: TRI 2 and TRI 4 show the previous route's list after the waypoint changes during the search (not
+  described in the manual, no mark).
+- kln90b#525: turning back onto TRI 2/4/6 shows the first page of the list (TRI chapter).
+- kln90b#526: an area's name and type split across pages (TRI chapter, `tri-4-plus`).
+- kln90b#527: CAL 1/2 in millibars show 700 while 0 is stored (no longer described after the CAL 1 example was cut;
+  no mark).
+- kln90b#528: TRI 1 and TRI 2 compute only when selected (TRI chapter box, Trip planning).
+- kln90b#529: CAL 3 computes a wind without a fix (CAL chapter).
+
+Not filed: the `ESA` line that waits for the airspace search (cosmetic); CAL 4's angle at groundspeed 0; SET 4's
+`POWER IS ON` chosen in flight keeping its earlier count (the maintainer filed 1 to 7 of the list).

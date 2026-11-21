@@ -112,7 +112,10 @@ The first session writes the plan of the whole manual and no page.
 2. **The package plan.** From the researcher's summary, settle the sections and the screens in the package file,
    and check them against topic ownership. A fact sheet lists every rule the code has; the plan takes only what the
    pilot needs (style guide, section 8, "What feels natural in use needs no rule"), and plans no section that writes
-   out behavior the pilot meets naturally, such as which side takes ENT. It does plan a section of its own for every
+   out behavior the pilot meets naturally, such as which side takes ENT. Nor does it plan a section or a screen for
+   a case a pilot hardly ever meets, however exactly the fact sheet describes it (section 8; the trip-planning plan
+   had a no-groundspeed TRI 1 and a never-entered CAL 1, maintainer, 2026-11-21). A procedure uses the page a pilot
+   normally does the task on (section 10, "Procedures"). It does plan a section of its own for every
    warning or state the pilot may search for (style guide, section 9), and never shrinks one to "one sentence and
    the link" because another page owns its cause. It plans a screen for every step whose result the pilot must
    recognize (style guide, section 13), including a step that carries data from one side to the other, where the
