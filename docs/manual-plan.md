@@ -195,7 +195,7 @@ anchors and page links above. After them the order follows "owners before the pa
 | 14 | vnav-alerts | VNAV; Airspace and altitude alerting | done (2026-11-20) |
 | 15 | set | SET chapter | done (2026-11-21) |
 | 16 | trip-planning | Trip planning and calculators; TRI and CAL chapters | done (2026-11-21) |
-| 17 | fuel-air-data | OTH chapter (the Operation page Fuel and air data was folded into it, maintainer, 2026-11-21) | in review |
+| 17 | fuel-air-data | OTH chapter (the Operation page Fuel and air data was folded into it, maintainer, 2026-11-21) | done (2026-11-21) |
 | 18 | messages | Messages; Message page messages; Status line messages; the Glossary page | not started |
 | 19 | help | External hardware; FAQ and troubleshooting; Known limitations; Contact | not started |
 | 20 | tutorial-1 | Tutorial flight 1 | not started |
