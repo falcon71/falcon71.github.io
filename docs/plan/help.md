@@ -1,72 +1,54 @@
 # Package: help (External hardware; FAQ and troubleshooting; Known limitations; Contact)
 
-Requirements: style guide, section 17, for each page. The pages come after the pages they point into. Screens: none
-planned, except where an FAQ answer needs one that exists.
+Done (2026-11-21). Requirements: style guide, section 17, for each page. No screens: every answer links to the page
+that shows the screen.
 
-## Pages
+## Pages as written
 
-- **External hardware** (`help/external-hardware.md`): based on the wiki page `External-Hardware.md` and
-  `vendor/kln90b/kln90b/HEvents.ts`. The only page that may show copyable configuration.
-- **FAQ and troubleshooting** (`help/faq.md`): based on the wiki's `FAQ.md` (its part about version 1.x does not
-  apply) and on the Good to know boxes and gotchas of the pages written. Each answer in its first sentence, then
-  the link to the full treatment. Required entries (style guide, section 17): the two rules of procedure selection;
-  loading an airway by hand.
-- **Known limitations** (`help/known-limitations.md`): based on the wiki page `Known-Limitations.md` and on what
-  the packages noted.
-- **Contact** (`help/contact.md`).
+### External hardware (`help/external-hardware.mdx`)
 
-## Notes from other packages
+Based on the wiki page `External-Hardware.md` and `vendor/kln90b/kln90b/HEvents.ts`. It names every tool, hardware
+and community project the wiki names, with their links and videos (maintainer, 2026-11-21; style guide, section 3).
+The SPAD.neXt XML and the FSUIPC `myevents.txt` are downloads (`kln90b/public/downloads/`), written by
+`npm run hardware-files` (`kln90b/generator/hardware-files.mjs`), which fails when an event of `HEvents.ts` is neither
+written nor one of the internal events it leaves out; rerun when the pin moves (style guide, section 19).
 
-Candidates for the FAQ and Known limitations, collected by earlier packages; every later package adds its own here.
+- Summary: H events for every control, the brightness variable.
+- `#the-events`: where the list is, how the names are formed, the internal events left out, the scan and approach
+  arming events with their links, the keyboard toggles named with the link to Keyboard mode, the brightness variable
+  (the events preferred; 0 looks like a unit that is off), hot-swapping (the unit ignores every event while another
+  GPS unit is selected).
+- `#spadnext`, `#fsuipc`: numbered procedures with the download links; FSUIPC: add the lines to an existing
+  `myevents.txt`.
+- `#stream-deck`, `#realsimgear-gns430`, `#a-3d-printed-unit`: a sentence or two and the links. The wiki's
+  "Popped out window" is obsolete and left out.
 
-- From the package getting-started: the package cannot be installed on Xbox, so only aircraft that bundle their own
-  copy offer the unit there (wiki, "Bundling the KLN with your aircraft").
-- From the package getting-started: keyboard mode has two H events for hardware
-  (`KLN90B_LeftKeyboard_Toggle`, `KLN90B_RightKeyboard_Toggle`; kln90b README) for External hardware.
-- From the package apt: the simulation has no search of an airport by name or city (Known limitations); the enhancement is kln90b#482, which the entry can link.
-- From the planning survey, as candidates to verify: the screen stays dark after power-on (FAQ, linked to the
-  Quickstart's box); slow acquisition and the setting on SET 10 (FAQ, linked to GPS reception and RAIM); the unit
-  does not sequence (FAQ, linked to Sequencing); OTH 1 lists no flight service stations; course reversals and holds
-  are not flown as legs.
+### FAQ and troubleshooting (`help/faq.md`)
 
-### From the package power-on (2026-11-17)
+Questions as `###` under `##` topics; each answers in its first sentence and links its owner:
 
-- **The FAQ entry "How do I update the database?"** with the planned anchor `#how-do-i-update-the-database`, which
-  Power-on and initialization (the Database page) links to already: the unit uses the navigation data of the
-  simulator, so its database is as current as the simulator's; how to update the simulator's navigation data, and
-  the workaround of an earlier date in the simulator (wiki, FAQ, "The AIRAC is out of date"). Name no company
-  (style guide, section 3) beyond what a pilot needs to find the update.
+- `#turning-the-unit-on`: `#why-does-the-unit-not-turn-on`, `#why-does-the-self-test-page-show-test-fail`,
+  `#why-does-it-take-so-long-to-get-a-gps-position`.
+- `#the-database`: `#how-do-i-update-the-database` (names Navigraph and links its instructions, as the wiki does;
+  start the simulator again after installing navigation data).
+- `#flight-plans-and-procedures`: `#how-do-i-load-a-flight-plan-from-the-simulator`, `#how-do-i-enter-an-airway`,
+  `#why-did-my-flight-plan-disappear`, `#why-are-my-sid-star-and-approach-gone-after-the-flight`,
+  `#why-must-i-select-a-transition-and-why-are-waypoints-in-my-flight-plan-twice-afterward`,
+  `#why-can-i-not-start-an-approach-at-an-intermediate-fix`, `#why-can-i-not-select-an-ils-approach`,
+  `#why-does-the-unit-not-fly-the-holding-pattern-or-the-procedure-turn`.
+- `#navigation`: `#why-does-the-unit-not-sequence-to-the-next-waypoint`, `#why-is-my-map-blank`.
 
-### From the package navigation (2026-11-18)
+### Known limitations (`help/known-limitations.md`)
 
-- The FAQ entry "Why does the unit not sequence to the next waypoint?" answers in its first sentence: most often the
-  unit is in OBS mode (the mode annunciation shows a colon and a course, such as `ENR:351`), where it never
-  sequences. Otherwise the waypoint is the last of FPL 0, a direct-to waypoint outside FPL 0 or the missed approach
-  point, or the navigation is flagged. Link `/kln90b/operation/sequencing/#when-the-unit-does-not-sequence`.
+One `##` entry each: no search of an airport by name or city (kln90b#482), no flight service stations on OTH 1, no
+fuel, oxygen, customs or fee data on APT 6, minimum safe altitudes from terrain alone, no dark outline around map
+text, the screen refreshes as a whole, no installation on Xbox.
 
-### From the package nav-pages (2026-11-18)
+### Contact (`help/contact.md`)
 
-- Known limitations: the minimum safe altitudes (`MSA`, `ESA` on NAV 3) come from terrain alone; obstacles are not
-  in the simulator's data. The NAV chapter says so (`/kln90b/pages/nav/#minimum-safe-altitudes`).
-- FAQ candidate: "Why is my map blank?" Track up below 2 kt blanks NAV 5 and Super NAV 5
-  (`/kln90b/pages/nav/#the-map-is-blank-in-actual-track-up`).
-
-### From the package flight-plans (2026-11-19)
-
-- FAQ candidates, each linking to Flight plans: "Why did my flight plan disappear?" (CLR with the cursor off on an
-  FPL page asks `DELETE FPL?`, and ENT then deletes it, even when the CLR was meant for the right side: `#delete-fpl`);
-  "How do I load a flight plan from the simulator?" (`#loading-a-route-from-the-efb`); "Why are my SID, STAR and
-  approach gone after the flight?" (procedures are not kept with a flight plan: Power-on,
-  `#what-the-unit-keeps-while-it-is-off`); "How do I enter an airway?" (waypoint by waypoint, `#adding-a-waypoint`).
-
-### From the package approaches (2026-11-20)
-
-- **The FAQ entry "Why can I not select an ILS approach?"** (maintainer, 2026-11-20): ILS approaches, and the other
-  precision approaches, are deliberately not in the unit's database. That is the behavior of the real unit and is
-  correct; many pilots expect them because every modern navigator offers them. The FAQ answers this in its first
-  sentence and links to the Good to know box of Non-precision approaches, which says the same where a pilot is likely
-  to look it up first: `/kln90b/operation/approaches/#which-approaches-the-unit-offers`.
+The kln90b issues (search first; the aircraft and the package version in a report), Discord, and this repository's
+issues for errors in the manual.
 
 ## Changes to earlier pages
 
-None planned.
+None.

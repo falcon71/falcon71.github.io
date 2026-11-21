@@ -165,3 +165,10 @@ that was not answered with `adjustCourseIndicator`.
 4. Run `npm run screens` without filters, which also writes the new commit to `screens/kln90b-commit.txt`, and review the
    diff: a screen file changes only when the screen itself changed, so it shows which screens and which field
    explanations need a look.
+
+## Hardware files
+
+`npm run hardware-files` (`hardware-files.mjs`) reads the public events of `vendor/kln90b/kln90b/HEvents.ts` and writes
+`public/downloads/KLN90B-SPADneXt-Events.xml` and `public/downloads/myevents.txt`, the two files that the External
+hardware page offers as downloads. The site build reads only those files, not the submodule. Rerun the script whenever
+the pin moves and commit the files if they changed.

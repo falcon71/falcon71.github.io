@@ -123,7 +123,7 @@ that writes the owner records the anchors in this table, and the final pass shar
 | The reference waypoint of the INT and SUP pages: the nearest VOR, the search and its duration, another reference, not stored | INT chapter, `#the-reference-waypoint` | SUP chapter and the field explanations: one sentence and the link; User waypoints: the order of entry when creating |
 | User waypoints: creating (`CREATE NEW WPT AT`, `USER POS?`, present position), the limit, `USR DB FULL`, editing, deleting, temporary waypoints | User waypoints: `#creating-a-user-waypoint`, `#usr-db-full`, `#editing-a-user-waypoint`, `#deleting-a-user-waypoint`, `#waypoints-the-unit-creates-by-itself` | waypoint chapters: the fields of a user waypoint of their type; OTH chapter: OTH 3 as a page |
 | The database: cycle, expiry, the messages about it | Waypoints and the database, `#the-database` (with a section per message, `#data-base-out-of-date`) | Power-on: the Database page; SET chapter: SET 0 |
-| Updating the database (the simulator's navigation data) | FAQ, `#how-do-i-update-the-database` (planned) | Power-on (the Database page) and Waypoints and the database: where the data comes from in one sentence, and the link |
+| Updating the database (the simulator's navigation data) | FAQ, `#how-do-i-update-the-database` | Power-on (the Database page) and Waypoints and the database: where the data comes from in one sentence, and the link |
 | Airport remarks | APT chapter (APT 5) | OTH chapter: OTH 4 as a page (deleting) |
 | The nearest lists: the nearest airport criteria (SET 3), radius, count, renewal, how they are reached, the MSG and ENT shortcut | Nearest: `#the-nearest-lists`, `#showing-a-nearest-list`, `#finding-the-nearest-airport-quickly`, `#no-airport-in-the-nearest-list`, `#setting-the-nearest-airport-criteria`, `#flying-to-a-nearest-waypoint` | waypoint chapters: the nearest variant of their page; SET chapter: SET 3 as a page and the link; a user-defined airport (APT 3): one sentence and the link |
 | Direct-to: the Direct To page, every way to start one, the default waypoint, leaving the page, recentering, canceling, direct-to in OBS mode and its course message | Direct-to: `#flying-direct-to-a-waypoint`, `#the-default-waypoint`, `#leaving-the-direct-to-page`, `#flying-direct-to-a-waypoint-of-the-flight-plan`, `#recentering-the-d-bar`, `#canceling-a-direct-to`, `#flying-a-direct-to-in-obs-mode` (`#crs-nnn-in-the-status-line`) | Flight plans: a direct-to to a waypoint of FPL 0, in one paragraph with the link; Controls and display: one sentence on leaving the page and the link |
@@ -151,7 +151,7 @@ that writes the owner records the anchors in this table, and the final pass shar
 | Fuel management and air data: which OTH pages an installation has, entering the fuel on board and `SET FUEL ON BOARD`, the fuel reserve, the destination waypoint of the fuel figures, the wind and the heading input | OTH chapter: `#the-oth-pages-which-pages-your-unit-has`, `#oth-5-fuel-on-board-and-fuel-required` (with the message section), `#oth-9-true-airspeed-and-wind`, `#the-air-data-pages-without-a-fuel-management-system` (no Operation page, maintainer, 2026-11-21) | TRI chapter and Trip planning: TRI's own fuel entries, one sentence and the link |
 | The MSG page (with its closing rules), how messages arrive and are read, one-time and lasting messages, messages over a power cycle, status line messages and their duration, the message annunciator and the remote mounted annunciators as a group | Messages: `#the-message-prompt`, `#reading-the-messages` (`#showing-the-nearest-airport-from-the-msg-page`), `#messages-that-stay-while-their-cause-lasts`, `#messages-after-a-power-on`, `#status-line-messages`, `#the-remote-mounted-annunciators` | Controls and display: where the prompts stand, one sentence on the MSG page and the link; others link |
 | Message texts: meaning and what to do | Message page messages, Status line messages: one entry per message, its anchor the slug of the message text (`/kln90b/lists/messages/#no-such-wpt`) | a page quotes the text where it is raised and links the entry |
-| Hardware events and their setup | External hardware | Keyboard mode: its two toggles, with the link |
+| Hardware events and their setup, the download files | External hardware: `#the-events`, `#spadnext`, `#fsuipc` | Keyboard mode: its two toggles, with the link |
 
 ## Example pages
 
@@ -164,7 +164,7 @@ Every writer reads the example of its kind before it writes, and every reviewer 
 | Task page (Operation) | Direct-to, `operation/direct-to.mdx` (approved 2026-11-18) |
 | Tutorial flight | Tutorial flight 1, once approved |
 | Lists | Message page messages, `lists/messages.mdx`, once approved |
-| FAQ, Known limitations | the pages of the help package, once approved |
+| FAQ, Known limitations | `help/faq.md`, `help/known-limitations.md`, once approved |
 
 The first Operation pages come from the packages sta and failures, which are not typical task pages and are not
 examples. The final pass compares them with Direct-to.
@@ -197,7 +197,7 @@ anchors and page links above. After them the order follows "owners before the pa
 | 16 | trip-planning | Trip planning and calculators; TRI and CAL chapters | done (2026-11-21) |
 | 17 | fuel-air-data | OTH chapter (the Operation page Fuel and air data was folded into it, maintainer, 2026-11-21) | done (2026-11-21) |
 | 18 | messages | Messages; Message page messages; Status line messages; the Glossary page | done (2026-11-21) |
-| 19 | help | External hardware; FAQ and troubleshooting; Known limitations; Contact | not started |
+| 19 | help | External hardware; FAQ and troubleshooting; Known limitations; Contact | in review (2026-11-21) |
 | 20 | tutorial-1 | Tutorial flight 1 | not started |
 | 21 | tutorial-2 | Tutorial flight 2 | not started |
 | – | final pass | the whole manual (`docs/coordinator-prompt.md`, "The final pass") | not started |
@@ -314,6 +314,12 @@ it is written when those owners exist. A package that proves too large in its re
   more ("MSG annunciator", "MSG light", "nav super flag", "WPT annunciator", "remote annunciator").
 - `display/screen-layout` shows the same state as `messages/msg-prompt` and still has filler field explanations;
   the final pass removes it if no page shows it.
+
+- The package help (2026-11-21) brought the exception of section 3 for External hardware (tools and sim hardware
+  named, the RealSimGear GNS430 included) and the download files of External hardware (section 19). Its reviewers
+  noted for other pages: Controls and display could say that a fully dimmed screen looks like a unit that is off;
+  GPS reception and RAIM could say that a never-used unit acquires as with an old almanac (`REAL` on SET 10); Keyboard
+  mode could say that its two hardware toggles also close the MSG page, and link External hardware `#the-events`.
 
 ## Site and generator notes
 

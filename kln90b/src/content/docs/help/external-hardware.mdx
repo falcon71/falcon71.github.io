@@ -1,0 +1,64 @@
+---
+title: External hardware
+description: Which H events control the unit, and how to bind them to the buttons and knobs of hardware panels in SPAD.neXt, FSUIPC and other tools.
+---
+
+import DirectToKey from '../../../components/DirectToKey.astro';
+
+Hardware panels, button boxes and controllers drive the KLN 90B through H events, one for each control: each button, each direction of each knob, power, brightness, the scan, keyboard mode and the GPS APR switch. An axis can drive the brightness of the screen through a writable variable.
+
+## The events
+
+The list of events is the file [HEvents.ts](https://github.com/falcon71/kln90b/blob/main/kln90b/HEvents.ts) of the kln90b repository. The names start with `KLN90B_`, and a tool that sends an H event puts `H:` before the name, as in `H:KLN90B_RightCursor_Toggle`. The events marked internal in that file, `KLN90B_Internal_...`, are not for hardware and are left out of the files below. In an aircraft that offers the unit by hot-swapping, the unit ignores every event, power and brightness included, while another GPS unit is selected.
+
+The events fall into these kinds:
+
+- **Power and brightness:** `KLN90B_Power_Toggle` turns the unit on and off like the power/brightness knob. `KLN90B_Power_On` and `KLN90B_Power_Off` set one state and suit hardware with a switch. `KLN90B_Brt_Inc` and `KLN90B_Brt_Dec` turn the brightness up and down in steps.
+- **Buttons:** `KLN90B_MSG_Push`, `KLN90B_DCT_Push`, `KLN90B_CLR_Push`, `KLN90B_ENT_Push` and `KLN90B_ALT_Push` press <kbd>MSG</kbd>, <DirectToKey />, <kbd>CLR</kbd>, <kbd>ENT</kbd> and <kbd>ALT</kbd>.
+- **Knobs:** each of the four knobs has a `_Left` and a `_Right` event for one step counterclockwise and clockwise: `KLN90B_LeftLargeKnob_*` is the left outer knob, `KLN90B_LeftSmallKnob_*` the left inner knob, and `KLN90B_RightLargeKnob_*` and `KLN90B_RightSmallKnob_*` the right ones.
+- **Cursor and scan:** `KLN90B_LeftCursor_Toggle` and `KLN90B_RightCursor_Toggle` press the left and the right <kbd>CRSR</kbd> button. `KLN90B_RightScan_Toggle` pulls the right inner knob out and pushes it back in, each press changing its position; [Scanning](/kln90b/unit/controls-and-display/#scanning) says what the pulled knob does.
+- **Keyboard mode:** `KLN90B_LeftKeyboard_Toggle` and `KLN90B_RightKeyboard_Toggle` switch [keyboard mode](/kln90b/unit/keyboard-mode/#switching-keyboard-mode-on-and-off-with-hardware) on and off for one side.
+- **Approach arming:** `KLN90B_ApprArm_Push` does what pressing the GPS APR switch does: it arms and disarms the approach. [Arming the approach](/kln90b/operation/approaches/#arming-the-approach) says what a press does, and [Non-precision approaches](/kln90b/operation/approaches/) says when the unit offers approaches. Without an approach to arm, a press in an en route mode shows [`NO APPROACH`](/kln90b/operation/approaches/#no-approach-in-the-status-line) in the status line.
+
+The variable `L:KLN90B_Brightness` (Decimal, 0 to 1) is writable, and an axis of your hardware can drive it. The events are the preferred way: a value written to the variable right after the unit changed the brightness itself is ignored until the unit's own write has landed, so an axis and the events together can lose a movement. At 0, the darkest setting, the screen is black while the unit keeps running (see [the front panel](/kln90b/unit/controls-and-display/#the-front-panel)), so an axis at its lower end looks like a unit that does not turn on.
+
+## SPAD.neXt
+
+To import all events at once:
+
+1. Download <a href="/kln90b/downloads/KLN90B-SPADneXt-Events.xml" download="KLN90B-SPADneXt-Events.xml">KLN90B-SPADneXt-Events.xml</a>.
+2. Open the extra tab (the plus icon) and select CLIENT EVENTS.
+3. Click the Import button and select the downloaded file.
+
+To add one event by hand, click Add client event, then Standard Client Event. The event ID is the name with the prefix `H:`, and the name is up to you.
+
+To bind an event to a button of your hardware unit:
+
+1. Select the button.
+2. Click Add Event, then Button pressed.
+3. Click Add Action, then Send simulation event.
+4. Search for KLN and select the event.
+
+Nathan Palmer shows in a video tutorial how to set up your hardware with SPAD.neXt: [watch on YouTube](https://www.youtube.com/watch?v=xxQArEl2_3w).
+
+## FSUIPC
+
+FSUIPC reads custom events from a file named `myevents.txt`. If you already have a `myevents.txt`, add the lines of the downloaded file to it instead of replacing it.
+
+To make the events available:
+
+1. Download <a href="/kln90b/downloads/myevents.txt" download="myevents.txt">myevents.txt</a> and put it in the folder of `FSUIPC7.exe`.
+2. Restart FSUIPC.
+3. Assign the events to the buttons of your hardware.
+
+## Stream Deck
+
+The Avionics Suite AxisAndOhs plugin by Guenseli includes the KLN 90B: [Standard Avionics Suite for StreamDeck XL](https://en.flightsim.to/file/44350/standard-avionics-suite-for-streamdeck-xl).
+
+## RealSimGear GNS430
+
+You can use the unit with the [RealSimGear GNS430](https://realsimgear.com/products/realsimgear-gns430-bezel-for-x-plane-realistic-gps-for-your-sim). A demonstration is on [YouTube](https://www.youtube.com/watch?v=Im_0-ebD_F4). The tutorial by Nathan Palmer that sets up the GNS is the video linked in the SPAD.neXt section: [watch on YouTube](https://www.youtube.com/watch?v=xxQArEl2_3w).
+
+## A 3D-printed unit
+
+ccrawford provides files and instructions to print your own KLN 90B and to control it with MobiFlight: [FSHardware, KLN 90B GPS](https://github.com/ccrawford/FSHardware/tree/main/KLN%2090B%20GPS).
