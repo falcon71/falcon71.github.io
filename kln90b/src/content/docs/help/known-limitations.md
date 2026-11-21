@@ -7,7 +7,7 @@ These are the things you might expect of the unit that it does not do.
 
 ## No search of an airport by name or city
 
-You find an airport only by its identifier. The unit cannot search by the name of the airport or of its city. The enhancement is tracked as [kln90b#482](https://github.com/falcon71/kln90b/issues/482). [Entering an identifier](/kln90b/operation/waypoints/#entering-an-identifier) explains the entry.
+You find an airport only by its identifier. The unit cannot search by the name of the airport or of its city. [Entering an identifier](/kln90b/operation/waypoints/#entering-an-identifier) explains the entry.
 
 ## No flight service stations on OTH 1
 

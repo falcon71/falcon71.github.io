@@ -29,8 +29,8 @@ Questions as `###` under `##` topics; each answers in its first sentence and lin
 
 - `#turning-the-unit-on`: `#why-does-the-unit-not-turn-on`, `#why-does-the-self-test-page-show-test-fail`,
   `#why-does-it-take-so-long-to-get-a-gps-position`.
-- `#the-database`: `#how-do-i-update-the-database` (names Navigraph and links its instructions, as the wiki does;
-  start the simulator again after installing navigation data).
+- `#the-database`: `#how-do-i-update-the-database` (where the data comes from and the earlier-date workaround; no
+  steps of a provider and no link to them, style guide, section 3).
 - `#flight-plans-and-procedures`: `#how-do-i-load-a-flight-plan-from-the-simulator`, `#how-do-i-enter-an-airway`,
   `#why-did-my-flight-plan-disappear`, `#why-are-my-sid-star-and-approach-gone-after-the-flight`,
   `#why-must-i-select-a-transition-and-why-are-waypoints-in-my-flight-plan-twice-afterward`,
@@ -40,7 +40,7 @@ Questions as `###` under `##` topics; each answers in its first sentence and lin
 
 ### Known limitations (`help/known-limitations.md`)
 
-One `##` entry each: no search of an airport by name or city (kln90b#482), no flight service stations on OTH 1, no
+One `##` entry each: no search of an airport by name or city (not linked to kln90b#482: unlikely to change), no flight service stations on OTH 1, no
 fuel, oxygen, customs or fee data on APT 6, minimum safe altitudes from terrain alone, no dark outline around map
 text, the screen refreshes as a whole, no installation on Xbox.
 

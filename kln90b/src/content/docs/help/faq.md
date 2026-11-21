@@ -25,7 +25,7 @@ The acquisition is set to `REAL` on SET 10, and the unit starts from a memory th
 
 ### How do I update the database?
 
-Update the navigation data of the simulator; there is nothing to load in the unit, because it uses the navigation data of the simulator. The updates of the simulator itself arrive automatically when they are available. If you use Navigraph, follow its instructions for installing the navigation data of the simulator (the [Navigraph FAQ](https://forum.navigraph.com/t/faq-msfs-how-to-install-update-the-navigraph-navdata-installer/4135)). Then start the simulator again, which is always enough, because the simulator reads newly installed navigation data when it starts.
+The unit uses the navigation data of the simulator, so its database is as current as the simulator's, and there is nothing to load in the unit. The updates of the simulator itself arrive by themselves, or you install current navigation data from a provider such as Navigraph.
 
 Until a current cycle is installed, set the date of the simulator to an earlier day. [The database](/kln90b/operation/waypoints/#the-database) explains why that helps and what an expired database changes, and [`DATA BASE OUT OF DATE`](/kln90b/operation/waypoints/#data-base-out-of-date) the message that tells you.
 

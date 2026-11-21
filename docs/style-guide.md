@@ -60,6 +60,11 @@ GitHub wiki of the kln90b project.
   (OTH 1 shows no flight service stations, because the simulator has none).
 - **Nothing that matters only in real aviation.** Database subscriptions, certification paperwork, the flight manual
   supplement, antenna installation and the like are left out.
+- **Other products are not explained.** How to install or update the simulator's navigation data, or how to operate
+  any other product, is that product's business: the manual says what the unit needs and where it comes from, names
+  the product where the pilot needs the name, and gives no steps and no link to the product's own instructions,
+  which change without notice (maintainer, 2026-11-21: the FAQ linked an outdated page of a navigation data
+  provider). External hardware is the exception, below.
 - **Features that depend on the installation** (an approach-certified unit for APT 8, a fuel management system for OTH 5 to OTH
   8, an air data system for OTH 9 and OTH 10, VFR-only units, altitude alerting) are described the way a pilot meets
   them: the feature depends on how the unit is installed in the aircraft. Never name the panel.xml key or any other
@@ -354,7 +359,10 @@ waypoint?"), then the answer in its first sentence, then the explanation and a l
 
 ### Known limitations
 
-What the simulation does not do that a pilot might expect, one short entry each, in pilot terms.
+What the simulation does not do that a pilot might expect, one short entry each, in pilot terms. An entry links a
+kln90b issue only where a change is expected; a limitation that will stay is stated plainly, with no link that
+suggests it may change (maintainer, 2026-11-21: the search by name depends on the simulator, which is unlikely to
+offer it).
 
 ### Procedures
 
