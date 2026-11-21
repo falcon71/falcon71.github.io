@@ -21,7 +21,7 @@ OTH chapter before the package closed (2026-11-21; style guide, section 10, "Tas
 | OTH 5: fuel on board and fuel required | `#oth-5-fuel-on-board-and-fuel-required` | `oth-5` | Availability box of the fuel management pages; the destination waypoint rule; TRI keeps its own fuel entries; kln90b#531 in the `fob` field |
 | Entering the fuel on board | `#entering-the-fuel-on-board` | `oth-5-fob-entry` | Good to know box: the entry is lost at every power change and never counted down (kln90b#530) |
 | `SET FUEL ON BOARD` | `#set-fuel-on-board` | `msg-set-fuel-on-board` | the message in full |
-| Setting the fuel reserve | `#setting-the-fuel-reserve` | `oth-5-reserve-entry` | the procedure on OTH 6, where the cursor starts on `RES`; OTH 5 in a sentence with the screen |
+| Setting the fuel reserve | `#setting-the-fuel-reserve` | `oth-5-reserve-entry` | the procedure on OTH 5, as its screen shows (maintainer, 2026-11-21); OTH 6 in a sentence |
 | OTH 6: endurance and range | `#oth-6-endurance-and-range` | `oth-6` | – |
 | OTH 7: fuel flow | `#oth-7-fuel-flow` | `oth-7-twin`, `oth-7-single` | – |
 | OTH 8: fuel used | `#oth-8-fuel-used` | `oth-8-twin`, `oth-8-single` | follows the aircraft, no reset on the unit |
@@ -51,5 +51,5 @@ pages, it writes `OTH 5` and `OTH 6` in code formatting. The status line writes 
   waypoints.
 - **final pass:** CAL 1's "outside air temperature" (an entry of the calculator) was left alone; check the term
   there. A user waypoint deleted on OTH 3 stays in TRI 1, TRI 3 and CAL 7 until the next power-on (from the code; a
-  case a pilot hardly meets, not written). OTH 2 merges the frequencies of every Center airspace that contains the
-  position and takes the name of the lowest frequency; not filed (maintainer, 2026-11-21).
+  case a pilot hardly meets, not written).
+- **OTH 2 with overlapping Center airspaces is no bug** (maintainer, 2026-11-21): do not report or raise it again.

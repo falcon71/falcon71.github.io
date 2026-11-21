@@ -372,7 +372,10 @@ A procedure is introduced by a line that ends in a colon: "To add a waypoint to 
 - **No advice from general aviation knowledge.** Do not tell the pilot which winds, charts or reports come in which
   reference; they know (section 2). Say how the unit takes the value, and leave the rest to them (maintainer,
   2026-11-21: en route winds are published true).
-- A screen may follow the step whose result it shows.
+- A screen may follow the step whose result it shows. **The screen shows the page the steps use.** A procedure on
+  one page beside a screen of another reads wrong; where two pages take the same entry, the procedure and its
+  screen use one of them and a sentence names the other (maintainer, 2026-11-21: the fuel reserve was described on
+  OTH 6 beside a screen of OTH 5).
 
 An example of the form (the facts in the examples of this guide illustrate the form; check every fact in the code
 before you reuse one):
