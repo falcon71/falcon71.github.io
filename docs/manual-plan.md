@@ -164,7 +164,7 @@ Every writer reads the example of its kind before it writes, and every reviewer 
 | Task page (Operation) | Direct-to, `operation/direct-to.mdx` (approved 2026-11-18) |
 | Tutorial flight | Tutorial flight 1, once approved |
 | Lists | Message page messages, `lists/messages.mdx`, once approved |
-| FAQ, Known limitations | `help/faq.md`, `help/known-limitations.md`, once approved |
+| FAQ, Known limitations | `help/faq.md`, `help/known-limitations.md` (approved 2026-11-21) |
 
 The first Operation pages come from the packages sta and failures, which are not typical task pages and are not
 examples. The final pass compares them with Direct-to.
@@ -197,7 +197,7 @@ anchors and page links above. After them the order follows "owners before the pa
 | 16 | trip-planning | Trip planning and calculators; TRI and CAL chapters | done (2026-11-21) |
 | 17 | fuel-air-data | OTH chapter (the Operation page Fuel and air data was folded into it, maintainer, 2026-11-21) | done (2026-11-21) |
 | 18 | messages | Messages; Message page messages; Status line messages; the Glossary page | done (2026-11-21) |
-| 19 | help | External hardware; FAQ and troubleshooting; Known limitations; Contact | in review (2026-11-21) |
+| 19 | help | External hardware; FAQ and troubleshooting; Known limitations; Contact | done (2026-11-21) |
 | 20 | tutorial-1 | Tutorial flight 1 | not started |
 | 21 | tutorial-2 | Tutorial flight 2 | not started |
 | – | final pass | the whole manual (`docs/coordinator-prompt.md`, "The final pass") | not started |
