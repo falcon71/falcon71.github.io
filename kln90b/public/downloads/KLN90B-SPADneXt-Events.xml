@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CustomClientEvents xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <CustomClientEvent Name="KLN90B_Brt_Inc" EventID="H:KLN90B_Brt_Inc" />
+  <CustomClientEvent Name="KLN90B_Brt_Dec" EventID="H:KLN90B_Brt_Dec" />
+  <CustomClientEvent Name="KLN90B_Power_Toggle" EventID="H:KLN90B_Power_Toggle" />
+  <CustomClientEvent Name="KLN90B_Power_On" EventID="H:KLN90B_Power_On" />
+  <CustomClientEvent Name="KLN90B_Power_Off" EventID="H:KLN90B_Power_Off" />
+  <CustomClientEvent Name="KLN90B_MSG_Push" EventID="H:KLN90B_MSG_Push" />
+  <CustomClientEvent Name="KLN90B_DCT_Push" EventID="H:KLN90B_DCT_Push" />
+  <CustomClientEvent Name="KLN90B_CLR_Push" EventID="H:KLN90B_CLR_Push" />
+  <CustomClientEvent Name="KLN90B_ENT_Push" EventID="H:KLN90B_ENT_Push" />
+  <CustomClientEvent Name="KLN90B_ALT_Push" EventID="H:KLN90B_ALT_Push" />
+  <CustomClientEvent Name="KLN90B_LeftCursor_Toggle" EventID="H:KLN90B_LeftCursor_Toggle" />
+  <CustomClientEvent Name="KLN90B_LeftLargeKnob_Left" EventID="H:KLN90B_LeftLargeKnob_Left" />
+  <CustomClientEvent Name="KLN90B_LeftLargeKnob_Right" EventID="H:KLN90B_LeftLargeKnob_Right" />
+  <CustomClientEvent Name="KLN90B_LeftSmallKnob_Left" EventID="H:KLN90B_LeftSmallKnob_Left" />
+  <CustomClientEvent Name="KLN90B_LeftSmallKnob_Right" EventID="H:KLN90B_LeftSmallKnob_Right" />
+  <CustomClientEvent Name="KLN90B_RightCursor_Toggle" EventID="H:KLN90B_RightCursor_Toggle" />
+  <CustomClientEvent Name="KLN90B_RightLargeKnob_Left" EventID="H:KLN90B_RightLargeKnob_Left" />
+  <CustomClientEvent Name="KLN90B_RightLargeKnob_Right" EventID="H:KLN90B_RightLargeKnob_Right" />
+  <CustomClientEvent Name="KLN90B_RightSmallKnob_Left" EventID="H:KLN90B_RightSmallKnob_Left" />
+  <CustomClientEvent Name="KLN90B_RightSmallKnob_Right" EventID="H:KLN90B_RightSmallKnob_Right" />
+  <CustomClientEvent Name="KLN90B_RightScan_Toggle" EventID="H:KLN90B_RightScan_Toggle" />
+  <CustomClientEvent Name="KLN90B_LeftKeyboard_Toggle" EventID="H:KLN90B_LeftKeyboard_Toggle" />
+  <CustomClientEvent Name="KLN90B_RightKeyboard_Toggle" EventID="H:KLN90B_RightKeyboard_Toggle" />
+  <CustomClientEvent Name="KLN90B_ApprArm_Push" EventID="H:KLN90B_ApprArm_Push" />
+</CustomClientEvents>

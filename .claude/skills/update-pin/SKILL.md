@@ -73,7 +73,11 @@ mutation (the maintainer's CLAUDE.md): break the subject, see it fail, restore, 
 generator test is the generator (`kln90b/generator/`, a helper such as `adjustCourseIndicator`), so that is where
 the mutation goes; `vendor/kln90b` is never mutated.
 
-Commit the screens and the generator changes before the text work starts, so that writers see the committed screens.
+Then run `npm run hardware-files` in `kln90b/`: it rewrites the SPAD.neXt and FSUIPC files that External hardware
+offers for download (`kln90b/public/downloads/`) from the new `HEvents.ts`. A changed file means the H events
+changed; External hardware is then part of the text work below.
+
+Commit the screens, the download files and the generator changes before the text work starts, so that writers see the committed screens.
 
 ## 3. Update the manual
 

@@ -60,6 +60,11 @@ GitHub wiki of the kln90b project.
   (OTH 1 shows no flight service stations, because the simulator has none).
 - **Nothing that matters only in real aviation.** Database subscriptions, certification paperwork, the flight manual
   supplement, antenna installation and the like are left out.
+- **Other products are not explained.** How to install or update the simulator's navigation data, or how to operate
+  any other product, is that product's business: the manual says what the unit needs and where it comes from, names
+  the product where the pilot needs the name, and gives no steps and no link to the product's own instructions,
+  which change without notice (maintainer, 2026-11-21: the FAQ linked an outdated page of a navigation data
+  provider). External hardware is the exception, below.
 - **Features that depend on the installation** (an approach-certified unit for APT 8, a fuel management system for OTH 5 to OTH
   8, an air data system for OTH 9 and OTH 10, VFR-only units, altitude alerting) are described the way a pilot meets
   them: the feature depends on how the unit is installed in the aircraft. Never name the panel.xml key or any other
@@ -74,7 +79,10 @@ GitHub wiki of the kln90b project.
   may stay; text the pilot writes into the unit on a screen uses neutral words (maintainer, 2026-11-17). The name of
   a real place that contains a company name, as the database gives it (Boeing Field, `BOEING FLDK` on the APT
   pages), is a place name and stays (maintainer, 2026-11-19). Microsoft
-  Flight Simulator is named, because the manual is for it.
+  Flight Simulator is named, because the manual is for it. The one exception is External hardware: it names the
+  tools and the hardware that pilots use with the unit, as the wiki page does, the product names of their makers
+  included (the RealSimGear GNS430), because naming them is in those makers' interest; the aircraft makers stay
+  unnamed there too (maintainer, 2026-11-21).
 - **Features that exist only in the simulation** (the SET 10 page, the FLR pages and the failures they set, keyboard
   mode) are marked with the Simulator only box (section 11).
 
@@ -175,6 +183,7 @@ manual page cited in the code to the page of the PDF and lists topics and facts.
 | A glossary entry | `kln90b/src/data/glossary.ts` |
 | The sidebar | `kln90b/astro.config.mjs` |
 | The page tree (knob order, optional pages) | `kln90b/src/data/pageTree.ts` |
+| The download files of External hardware | `kln90b/public/downloads/`, written by `kln90b/generator/hardware-files.mjs` |
 
 ---
 
@@ -350,7 +359,10 @@ waypoint?"), then the answer in its first sentence, then the explanation and a l
 
 ### Known limitations
 
-What the simulation does not do that a pilot might expect, one short entry each, in pilot terms.
+What the simulation does not do that a pilot might expect, one short entry each, in pilot terms. An entry links a
+kln90b issue only where a change is expected; a limitation that will stay is stated plainly, with no link that
+suggests it may change (maintainer, 2026-11-21: the search by name depends on the simulator, which is unlikely to
+offer it).
 
 ### Procedures
 
@@ -975,8 +987,10 @@ STARs (APT 7) work without it, so that such a pilot does not skip the whole proc
 
 ### External hardware
 
-Based on the wiki page "External Hardware". The only page that may show copyable configuration snippets: event names,
-the SPAD.neXt XML, the FSUIPC `myevents.txt`.
+Based on the wiki page "External Hardware". The only page that may show configuration: the event names. The
+SPAD.neXt XML and the FSUIPC `myevents.txt` are offered as downloads, not as code to copy (`kln90b/public/downloads/`,
+written by `npm run hardware-files` from kln90b's events, section 19; maintainer, 2026-11-21). The page names every
+tool, hardware and community project the wiki page names, with their links (section 3).
 
 ### FAQ and troubleshooting
 
@@ -1082,10 +1096,12 @@ session in this repository and asks for an update to that release. The session:
 4. Regenerates all screens with `npm run screens` (no filters, so that `kln90b/screens/kln90b-commit.txt` is updated) and
    goes through the diff of `kln90b/screens/`: every changed screen needs a look at its field explanations and at the
    text around it on every page that shows it.
-5. Updates the pages for every other user-visible change: new or removed pages and fields, changed behavior, new
+5. Regenerates the download files of External hardware with `npm run hardware-files` in `kln90b/`; a changed file
+   means the H events changed, and the page is checked against them.
+6. Updates the pages for every other user-visible change: new or removed pages and fields, changed behavior, new
    messages, changed installation options (in pilot terms).
-6. Updates the version in the footer if the major version changed.
-7. Hands the result to review like any other change.
+7. Updates the version in the footer if the major version changed.
+8. Hands the result to review like any other change.
 
 The kln90b repository is not touched and not told.
 
@@ -1114,7 +1130,7 @@ Before a writer hands in a page:
 - [ ] Screens shown by id, generated, every field explained, explanations free of context; an excerpt where the text
       describes a single line.
 - [ ] Installation-dependent and simulator-only features in their boxes; no configuration keys.
-- [ ] No code (outside External hardware), no manual page numbers, no invented identifiers outside drawings.
+- [ ] No code or configuration (outside External hardware), no manual page numbers, no invented identifiers outside drawings.
 - [ ] Bugs found are reported to the coordinator, with the paragraph that describes the current behavior; it adds
       the `kln90b#NN` comment once the issue is filed.
 - [ ] `npm run build` in `kln90b/` passes without new `[page links]` warnings.
