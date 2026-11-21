@@ -11,7 +11,7 @@ chapters; this page links there. It names "the system time zone" (word list) and
 
 | Section | Anchor | Screens | Links to |
 | --- | --- | --- | --- |
-| Planning a trip | `#planning-a-trip` | – | Fuel and air data (planned; TRI's fuel entries are the pilot's own) |
+| Planning a trip | `#planning-a-trip` | – | the OTH 5 section of the OTH chapter (TRI's fuel entries are the pilot's own; the Operation page Fuel and air data was folded into OTH, 2026-11-21) |
 | Setting the true airspeed and the wind | `#setting-the-true-airspeed-and-the-wind` | `pages/tri/tri-0` | TRI `#tri-0-true-airspeed-and-wind` (the true "from" wind, a sentence) |
 | Planning from the present position | `#planning-from-the-present-position` | `pages/tri/tri-1` | TRI `#the-tri-pages-planning-a-trip` (figures computed once, a sentence); D/T 4 and D/T 1 for what is left of FPL 0 |
 | Planning between two waypoints | `#planning-between-two-waypoints` | `pages/tri/tri-3` | – |

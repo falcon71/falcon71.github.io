@@ -1,0 +1,31 @@
+<Field id="fob" title="Fuel on board, with the cursor on">
+	The fuel on board, a whole number from 0 to 99999, with the cursor on it. The colon after `FOB` says that the aircraft does not send the fuel, so you enter it: each step of the left inner knob changes it by 1, and the change takes effect at once, so you need no <kbd>ENT</kbd>. The unit does not burn the entry down in flight, and it forgets the entry when it is turned off: after the next power-on the fuel on board is 0. {/* kln90b#530: describes the current behavior; the fix makes the entry count down with the fuel flow and survive a power cycle */}
+</Field>
+
+<Field id="res" title="Fuel reserve">
+	`RES:` is the fuel reserve, five digits that you enter. OTH 6 shows and changes the same figure, and the unit keeps it while it is off.
+</Field>
+
+<Field id="crsr" title="The CRSR annunciation">
+	<Term t="CRSR">`CRSR`</Term> takes the place of the page identification of the left side while that side's cursor is on.
+</Field>
+
+<Field id="destination" title="Destination waypoint">
+	The identifier of the destination waypoint ([OTH 5](/kln90b/pages/oth/#oth-5-fuel-on-board-and-fuel-required)). The arrow stands in front of it when the destination waypoint is the active waypoint. The field is blank without a flight plan and without a direct-to.
+</Field>
+
+<Field id="unit" title="Fuel unit">
+	The fuel unit of every fuel figure on the page: `GAL` for US gallons, `IMP` for imperial gallons, `L` for liters, `KG` for kilograms or `LB` for pounds. The installation decides it.
+</Field>
+
+<Field id="reqd" title="Fuel required">
+	`REQD` is the fuel you need to reach the destination waypoint: the present total fuel flow times the <Term t="ETE">estimated time en route</Term> to it along the flight plan. It shows dashes without a destination waypoint, while the <Term t="GS">groundspeed</Term> is too low for an estimated time en route ([The aircraft barely moves](/kln90b/pages/dt/#dashes-and-blank-rows)) and while the fuel flow is missing.
+</Field>
+
+<Field id="l-fob" title="Landing fuel on board">
+	`L FOB` is the landing fuel on board: the fuel on board minus the fuel required, which is what you land with. A shortage shows 0. Dashes when `REQD` or `FOB` is dashed.
+</Field>
+
+<Field id="extra" title="Extra fuel">
+	`EXTRA` is the extra fuel, what you have beyond the fuel reserve at the destination waypoint: `L FOB` minus `RES`. A shortage shows 0. Dashes when `L FOB` is dashed.
+</Field>

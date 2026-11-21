@@ -1,0 +1,31 @@
+<Field id="destination" title="Destination waypoint">
+	The identifier of the destination waypoint ([OTH 5](/kln90b/pages/oth/#oth-5-fuel-on-board-and-fuel-required)). The arrow stands in front of it when the destination waypoint is the active waypoint. The field is blank without a flight plan and without a direct-to.
+</Field>
+
+<Field id="unit" title="Fuel unit">
+	The fuel unit of every fuel figure on the page: `GAL` for US gallons, `IMP` for imperial gallons, `L` for liters, `KG` for kilograms or `LB` for pounds. The installation decides it.
+</Field>
+
+<Field id="fob" title="Fuel on board">
+	`FOB` is the fuel on board, a whole number, or dashes while the value is missing. {/* kln90b#531: describes the current behavior (a transmitted value of 100000 or more overflows the field); the fix limits it */} In an aircraft that sends it the figure follows the tanks and the cursor skips it. Where the aircraft does not send it, a colon follows `FOB` and you set the figure yourself ([Entering the fuel on board](/kln90b/pages/oth/#entering-the-fuel-on-board)).
+</Field>
+
+<Field id="reqd" title="Fuel required">
+	`REQD` is the fuel you need to reach the destination waypoint: the present total fuel flow times the <Term t="ETE">estimated time en route</Term> to it along the flight plan. It shows dashes without a destination waypoint, while the <Term t="GS">groundspeed</Term> is too low for an estimated time en route ([The aircraft barely moves](/kln90b/pages/dt/#dashes-and-blank-rows)) and while the fuel flow is missing.
+</Field>
+
+<Field id="l-fob" title="Landing fuel on board">
+	`L FOB` is the landing fuel on board: the fuel on board minus the fuel required, which is what you land with. A shortage shows 0. Dashes when `REQD` or `FOB` is dashed.
+</Field>
+
+<Field id="res" title="Fuel reserve">
+	`RES:` is the fuel reserve, five digits in fuel units that you enter. With the cursor on, the left outer knob moves between the digits and the left inner knob changes the digit, and the figure counts at once without <kbd>ENT</kbd>. OTH 6 shows and changes the same figure, and the unit keeps it while it is off ([Setting the fuel reserve](/kln90b/pages/oth/#setting-the-fuel-reserve)). The TRI pages have a reserve fuel of their own.
+</Field>
+
+<Field id="extra" title="Extra fuel">
+	`EXTRA` is the extra fuel, what you have beyond the fuel reserve at the destination waypoint: `L FOB` minus `RES`. A shortage shows 0. Dashes when `L FOB` is dashed.
+</Field>
+
+<Field id="page" title="Page identification">
+	The page identification on the left side.
+</Field>

@@ -304,6 +304,12 @@ They answer "how do I…". Each task section has a sentence of context (what the
 what must be true first), the procedure ("Procedures" below), and the rules and exceptions that apply. A task names the pages
 it uses; the names link to the page reference by themselves.
 
+**An Operation page earns its place** by a task or a concept that spans several page types, or that the pilot looks
+for apart from the pages (direct-to, flight plans, modes of operation). Where every task of a topic is done on one
+page type and its chapter can say it all, there is no Operation page: the chapter carries the procedures, the
+gotchas and the messages, with the screens beside the text that explains them. A second page would split the topic
+in half and add nothing (maintainer, 2026-11-21: Fuel and air data was folded into the OTH chapter).
+
 ### Page reference
 
 It answers "what is this page and what is this field". One chapter per page type, in page tree order (section 17).
@@ -314,7 +320,8 @@ Each page gets its section:
 3. The screen (section 13). Its field explanations explain every field; the text does not go through the fields again.
 4. The rules of the page as a whole: when it shows dashes, what the cursor can change on it, how it differs on the left
    and the right side, the variants of the page and what selects them (section 13 says which variants get a screen).
-5. A sentence linking to the Operation sections that use the page.
+5. A sentence linking to the Operation sections that use the page. A page type that has no Operation page ("Task
+   pages" above) holds its procedures, its gotchas and its messages in its own sections instead.
 
 A chapter explains what is specific to its page type and nothing that is the same on other pages. The waypoint
 pages (APT, VOR, NDB, INT, SUP) share the way an identifier is entered, the scan through the database, the nearest
@@ -627,6 +634,10 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | the Calculator pages at the first mention, then the CAL pages | the calculator pages |
 | altimeter setting (the entry of CAL 1 and CAL 2, separate from the unit's baro setting) | baro setting (for the CAL entry) |
 | the descent or ascent angle and the rate of descent or ascent (CAL 4) | descent angle, vertical speed (on CAL 4) |
+| the fuel management pages (OTH 5 to OTH 8); fuel units (`GAL`, `IMP`, `L`, `KG`, `LB`) | the fuel pages; the unit of the installation |
+| fuel on board (`FOB`), fuel required (`REQD`), landing fuel on board (`L FOB`), extra fuel (`EXTRA`), fuel reserve (`RES` on OTH 5 and OTH 6, a value of its own; the TRI pages' `RES` is reserve fuel) | fuel left on board |
+| fuel efficiency (the NM per fuel unit of OTH 6) | efficiency |
+| static air temperature (`SAT`), total air temperature (`TAT`), pressure altitude, density altitude (OTH 10) | outside air temperature |
 
 ### Spelling and style
 
@@ -787,7 +798,7 @@ The sidebar has these chapters and pages. Operation explains tasks ("how do I…
 | --- | --- |
 | Getting started | Table of contents (home page) · Installation · Quickstart · Tutorial flight 1 · Tutorial flight 2 |
 | The unit | Controls and display (knobs, buttons, the two halves, status line, cursor and data entry, scan, page tree) · Keyboard mode · Power-on and initialization |
-| Operation | Waypoints and the database · User waypoints · Nearest · Direct-to · Flight plans · Modes of operation (leg and OBS) · Sequencing and turn anticipation · SID and STAR procedures · DME arcs · Non-precision approaches · VNAV · GPS reception and RAIM · Inside the GPS simulation (optional) · Messages · Airspace and altitude alerting · Trip planning and calculators · Fuel and air data · Simulated failures |
+| Operation | Waypoints and the database · User waypoints · Nearest · Direct-to · Flight plans · Modes of operation (leg and OBS) · Sequencing and turn anticipation · SID and STAR procedures · DME arcs · Non-precision approaches · VNAV · GPS reception and RAIM · Inside the GPS simulation (optional) · Messages · Airspace and altitude alerting · Trip planning and calculators · Simulated failures |
 | Page reference | One chapter per page type in page tree order. Left: TRI, MOD, FPL, NAV, CAL, STA, SET, FLR, OTH. Right: CTR, REF, ACT, D/T, NAV, APT, VOR, NDB, INT, SUP. Each page with its screen. |
 | Reference lists | Message page messages · Status line messages · Glossary |
 | Help | External hardware · FAQ and troubleshooting · Known limitations · Contact |

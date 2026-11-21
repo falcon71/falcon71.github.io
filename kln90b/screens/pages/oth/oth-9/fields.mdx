@@ -1,0 +1,27 @@
+<Field id="title" title="Page title">
+	`AIR DATA` heads the pages of the air data system.
+</Field>
+
+<Field id="tas" title="True airspeed">
+	`TAS` is the true airspeed in kt, from 0 to 999. Dashes while the value is missing.
+</Field>
+
+<Field id="mach" title="Mach number">
+	`MACH` is the Mach number, two decimals without the leading zero, up to `.99`. Dashes while the value is missing.
+</Field>
+
+<Field id="component" title="Headwind or tailwind component">
+	`HDWND` is the part of the wind that blows against your heading, `TLWND` the part that blows from behind, in kt. The figure comes from the true airspeed, the heading of the aircraft and the <Term t="GS">groundspeed</Term> and track of the GPS. The three wind rows show dashes while the heading or the true airspeed is missing.
+</Field>
+
+<Field id="direction" title="Wind direction">
+	`WIND` is the direction that the wind blows from, in degrees. The symbol after the degrees marks it as a true direction, not a magnetic one. Dashes while the heading or the true airspeed is missing.
+</Field>
+
+<Field id="speed" title="Wind speed">
+	The speed of the wind in kt, from the same values as the wind direction. Dashes while the heading or the true airspeed is missing.
+</Field>
+
+<Field id="page" title="Page identification">
+	The page identification on the left side. An installation with a fuel management system calls the first air data page `OTH 9`; one without calls it `OTH 5`.
+</Field>

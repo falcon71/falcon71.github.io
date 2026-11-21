@@ -1,42 +1,202 @@
 ---
 title: OTH pages
-description: OTH 1 to OTH 10, the other pages of the unit, from the Center frequencies to the fuel and air data computers.
+description: What the OTH pages show (the Center at your position, user waypoints, airports with remarks, fuel and air data), how to enter the fuel on board and the fuel reserve, what SET FUEL ON BOARD asks, which pages your unit has and how the air data pages are named.
 sidebar:
   order: 9
 ---
 
 import KlnScreen from '../../../components/KlnScreen.astro';
 import Callout from '../../../components/Callout.astro';
+import Term from '../../../components/Term.astro';
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-aliqua.
+The OTH pages of the KLN 90B are the left pages for what belongs nowhere else: flight service stations (OTH 1), the Center at your position (OTH 2), your user waypoints (OTH 3) and the airports with your remarks (OTH 4). With a fuel management system the unit also has the fuel management pages OTH 5 to OTH 8, and with an air data system the air data pages. You enter the fuel reserve here and, where the aircraft does not send it, the fuel on board.
 
-## OTH 1
+## The OTH pages: which pages your unit has
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+OTH 1 to OTH 4 are on every unit. The other pages depend on how the unit is installed in the aircraft, and an air data page takes its name from the fuel management pages:
 
-## OTH 2
+| The unit is installed with | Pages |
+| --- | --- |
+| Neither a fuel management system nor an air data system | OTH 1 to OTH 4 |
+| A fuel management system | OTH 1 to OTH 8 |
+| An air data system | OTH 1 to OTH 4, then the air data pages as `OTH 5` and `OTH 6` |
+| Both | OTH 1 to OTH 8, then the air data pages as OTH 9 and OTH 10 |
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+The OTH pages exist on the left side only. You reach them with the left outer knob and step through them with the left inner knob, as with every page type ([Selecting a page](/kln90b/unit/controls-and-display/#selecting-a-page)). OTH 3 and OTH 4 and the fuel management pages OTH 5 and OTH 6 have a cursor; the other pages have nothing to change. This chapter names the air data pages OTH 9 and OTH 10, as they are with both systems; [the air data pages without a fuel management system](#the-air-data-pages-without-a-fuel-management-system) shows how they look otherwise.
+
+## OTH 1: flight service stations
+
+OTH 1 is the page for the nearest flight service station. The simulator has no flight service stations, so the page shows `NO NEAREST` and `FSS` on the line below.
+
+<KlnScreen screen="pages/oth/oth-1" />
+
+## OTH 2: the Center at your position
+
+OTH 2 shows the frequencies of the area control center (ACC or ARTCC) whose airspace contains your present position, the Center. Use it to find the frequency to call while you are en route; you tune the radio yourself.
 
 <KlnScreen screen="pages/oth/oth-2-zse" />
 
-## OTH 3 and OTH 4
+Outside every Center, over the ocean for example, the page shows `OUTSIDE` and `ARTCC` and no frequencies.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+<KlnScreen screen="pages/oth/oth-2-outside" />
 
-## OTH 5 to OTH 8
+The CTR pages use the same Center boundaries to make center waypoints ([Center waypoints](/kln90b/operation/flight-plans/#center-waypoints)).
+
+## OTH 3: user waypoints
+
+OTH 3 lists every user waypoint, with its waypoint type and the flight plan that holds it, and it is where you delete one. The list includes the waypoints that the unit makes for itself ([Waypoints the unit creates by itself](/kln90b/operation/user-waypoints/#waypoints-the-unit-creates-by-itself)).
+
+<KlnScreen screen="pages/oth/oth-3-user-waypoints" />
+
+With the cursor on, the left outer knob moves from row to row and scrolls the list. <kbd>CLR</kbd> on a row refuses the active waypoint with `ACTIVE WPT` and a waypoint that a flight plan holds with `USED IN FPL`.
+
+<KlnScreen screen="pages/oth/oth-3-used-in-fpl" />
+
+Any other waypoint turns its row into the question to delete it.
+
+<KlnScreen screen="pages/oth/oth-3-delete-question" />
+
+[Deleting a user waypoint](/kln90b/operation/user-waypoints/#deleting-a-user-waypoint) lists the steps and the answers.
+
+## OTH 4: airports with remarks
+
+OTH 4 lists, in alphabetical order, the airports for which you wrote remarks on APT 5, and it is where you delete them. An airport whose remark lines you blanked out on APT 5 stays on the list until you delete it here.
+
+<KlnScreen screen="pages/oth/oth-4-remarks" />
+
+To delete the remarks of an airport:
+
+1. Turn the left outer knob to the OTH pages and the left inner knob to OTH 4.
+2. Press the left <kbd>CRSR</kbd> button. The cursor is on the top row shown.
+3. Turn the left outer knob to the airport.
+4. Press <kbd>CLR</kbd>. The row turns into the question `DEL` and the identifier.
+5. Press <kbd>ENT</kbd> to delete all three remark lines of the airport, or <kbd>CLR</kbd> to keep them.
+6. Press the left <kbd>CRSR</kbd> button to turn the cursor off.
+
+<KlnScreen screen="pages/oth/oth-4-delete-question" />
+
+Moving the cursor with the left outer knob also withdraws the question ([Questions in lists](/kln90b/unit/controls-and-display/#questions-in-lists)).
+
+## OTH 5: fuel on board and fuel required
 
 <Callout kind="availability">
-	Lorem ipsum: these pages exist only if a fuel computer is connected to the unit.
+The fuel management pages OTH 5 to OTH 8 are available only if the unit is installed with a fuel management system. Not every aircraft has one, and the installation decides whether the aircraft sends the fuel on board and the fuel used.
 </Callout>
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+OTH 5 shows the fuel on board, the fuel you need to reach the destination waypoint and what that leaves you, so that you see at a glance whether the fuel is enough. The other fuel management pages need no destination waypoint; OTH 5 needs a flight plan or a direct-to to give it one.
 
-## OTH 9 and OTH 10
+<KlnScreen screen="pages/oth/oth-5" />
+
+The destination waypoint is the last waypoint of the active flight plan. Where the plan holds an approach, it is the <Term t="MAP">missed approach point</Term> of the approach, until you fly direct to a waypoint of the missed approach; then it is the last waypoint of the plan. During a direct-to to a waypoint that the flight plan does not hold, it is that waypoint ([The active waypoint](/kln90b/operation/modes-of-operation/#the-active-waypoint)).
+
+The TRI pages keep their own fuel flow and reserve fuel, which you enter and which are separate from these ([Planning a trip](/kln90b/operation/trip-planning/#planning-a-trip)).
+
+### Entering the fuel on board
+
+Where the aircraft does not send the fuel on board, the page shows a colon after `FOB` and you enter the figure yourself, before the flight and after refueling.
+
+To enter the fuel on board:
+
+1. Turn the left outer knob to the OTH pages and the left inner knob to OTH 5.
+2. Press the left <kbd>CRSR</kbd>. The cursor is on the fuel on board.
+3. Turn the left inner knob until the field shows your fuel in the fuel units of the page, clockwise to raise it and counterclockwise to lower it. Each step changes it by 1, from 0 to 99999. If you turned too far, turn the knob back.
+4. Press the left <kbd>CRSR</kbd> to turn the cursor off.
+
+<KlnScreen screen="pages/oth/oth-5-fob-entry" />
+
+[Fields the knob changes directly](/kln90b/unit/controls-and-display/#fields-the-knob-changes-directly) explains such fields.
+
+<Callout kind="info">
+The unit does not burn the fuel you entered down. It shows the value until you change it, and the landing fuel on board, the extra fuel, the endurance and the range are worked out from it, so enter it again when the figure drifts from your gauges. The unit forgets the entry when it is turned off, and after the next power-on the fuel on board is 0.
+</Callout>
+
+{/* kln90b#530: describes the current behavior; the fix makes the entry count down with the fuel flow and survive a power cycle */}
+
+### `SET FUEL ON BOARD`
+
+Where the aircraft does not send the fuel on board, the unit asks for it at every power-on, once the power-on pages are done. The message page shows:
+
+```
+SET FUEL ON BOARD
+ ON OTH 5 IF NECESSARY
+```
+
+<KlnScreen screen="pages/oth/msg-set-fuel-on-board" />
+
+You need not answer it. Enter the fuel on board as described above when you want the landing fuel on board and the extra fuel of OTH 5 and the endurance and the range of OTH 6; the fuel required, the fuel flow, the fuel used and the fuel efficiency do not depend on it. The message is gone once you have read it, and entering the fuel does not clear it earlier.
+
+### Setting the fuel reserve
+
+The fuel reserve is the fuel you want to land with: the unit takes it off the landing fuel on board to give the extra fuel on OTH 5, and off the fuel on board to give the endurance on OTH 6. You always enter it yourself.
+
+To set the fuel reserve on OTH 6:
+
+1. Turn the left outer knob to the OTH pages and the left inner knob to OTH 6.
+2. Press the left <kbd>CRSR</kbd>. The cursor is on the first digit of the fuel reserve, `RES`.
+3. Turn the left inner knob to set the digit, and the left outer knob one step clockwise to the next digit. Repeat for each digit.
+4. Press the left <kbd>CRSR</kbd> to turn the cursor off.
+
+OTH 5 takes the fuel reserve the same way. There the cursor starts on `RES` where the aircraft sends the fuel on board, and otherwise on the fuel on board, one step of the left outer knob before it.
+
+<KlnScreen screen="pages/oth/oth-5-reserve-entry" />
+
+## OTH 6: endurance and range
+
+OTH 6 shows how long and how far the fuel on board takes you, and the fuel efficiency. The range is the endurance flown at the present groundspeed, so it follows the wind.
+
+<KlnScreen screen="pages/oth/oth-6" />
+
+## OTH 7: fuel flow
+
+OTH 7 shows the present fuel flow per hour. A twin shows each engine and the total; any other aircraft shows the total only, which for three or more engines is the total of all of them.
+
+<KlnScreen screen="pages/oth/oth-7-twin" />
+
+<KlnScreen screen="pages/oth/oth-7-single" />
+
+## OTH 8: fuel used
+
+OTH 8 shows the fuel the engines have used, laid out as OTH 7: each engine and the total for a twin, the total only otherwise. It follows the aircraft live, and turning the unit off and on does not clear it. Where the aircraft does not send the fuel used, the page shows dashes throughout.
+
+<KlnScreen screen="pages/oth/oth-8-twin" />
+
+<KlnScreen screen="pages/oth/oth-8-single" />
+
+## OTH 9: true airspeed and wind
 
 <Callout kind="availability">
-	Lorem ipsum: these pages exist only if an air data computer is connected to the unit.
+The air data pages are available only if the unit is installed with an air data system. Not every aircraft has one. The wind rows of OTH 9 need a heading input as well.
 </Callout>
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+OTH 9 shows the true airspeed and the Mach number and, with a heading input, the headwind or tailwind component, the direction and the speed of the wind.
+
+<KlnScreen screen="pages/oth/oth-9" />
+
+Without a heading input the page has no wind rows at all, and CAL 3 finds the wind when you enter the heading ([Finding the wind in flight](/kln90b/operation/trip-planning/#finding-the-wind-in-flight)):
+
+<KlnScreen screen="pages/oth/oth-9-no-heading" />
+
+The true airspeed here is the one the air data system measures, not the one of TRI 0, which you enter. OTH 9 passes nothing to TRI 0: to plan with this wind, enter it there ([Setting the true airspeed and the wind](/kln90b/operation/trip-planning/#setting-the-true-airspeed-and-the-wind)).
+
+## OTH 10: temperatures and altitudes
+
+OTH 10 shows the static and the total air temperature, the pressure altitude and the density altitude. The unit works the density altitude out itself.
+
+<KlnScreen screen="pages/oth/oth-10" />
+
+The pressure altitude of the air data system is also the altitude input of the receiver ([The altitude input](/kln90b/operation/gps-receiver/#the-altitude-input)).
+
+## The air data pages without a fuel management system
+
+A unit with an air data system and no fuel management system has no fuel management pages, so the air data pages move up: the page of OTH 9 appears as `OTH 5`, and the page of OTH 10 as `OTH 6`. The pages and their fields are the same.
+
+<KlnScreen screen="pages/oth/oth-5-air-data" />
+
+Everything this chapter says about OTH 9 holds for the page shown as `OTH 5`, and everything about OTH 10 for the page shown as `OTH 6`. A mention of OTH 5 or OTH 6 elsewhere in the manual means the fuel management pages.
+
+## Where the OTH pages are used
+
+- [User waypoints](/kln90b/operation/user-waypoints/): deleting a user waypoint with OTH 3.
+- [Trip planning and calculators](/kln90b/operation/trip-planning/): the TRI pages with their own fuel entries and the CAL pages.
+- [Simulated failures](/kln90b/operation/failures/): when an input from the aircraft fails, the figures that depend on it show dashes.
+- APT 5 holds the remarks that OTH 4 lists.

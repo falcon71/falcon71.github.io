@@ -1,51 +1,55 @@
-# Package: fuel-air-data (Fuel and air data; the OTH chapter)
+# Package: fuel-air-data (the OTH chapter)
 
-Pointers come from the planning survey of the code (paths relative to `vendor/kln90b/kln90b/`); they are not
-checked facts. Screens are planned by the session after its research.
+Written 2026-11-21. Paths of code relative to `vendor/kln90b/kln90b/`.
 
-## Pages
+The package was planned with an Operation page Fuel and air data next to the OTH chapter. The maintainer found that
+it split the topic in half without adding anything the page reference could not say, and it was folded into the
+OTH chapter before the package closed (2026-11-21; style guide, section 10, "Task pages"). There is no page
+`operation/fuel-air-data`.
 
-### Fuel and air data (`operation/fuel-air-data.mdx`)
+## Pages, as written
 
-Both halves stand under Availability boxes (a fuel computer; an air data computer).
+### OTH pages (`pages/oth.mdx`, `sidebar.order` 9)
 
-1. Summary.
-2. Fuel management: entering the fuel on board where the aircraft does not send it, reading fuel required, reserve,
-   endurance and range, the message that asks for the fuel on board.
-3. Air data: true airspeed, wind and temperatures, and what needs a heading input.
-4. Links on.
+| Section | Anchor | Screens (in `pages/oth/`) | Notes |
+| --- | --- | --- | --- |
+| The OTH pages: which pages your unit has | `#the-oth-pages-which-pages-your-unit-has` | – | which pages each installation has; owns the numbering |
+| OTH 1: flight service stations | `#oth-1-flight-service-stations` | `oth-1` | the simulator has no stations |
+| OTH 2: the Center at your position | `#oth-2-the-center-at-your-position` | `oth-2-zse`, `oth-2-outside` | introduces area control center (ACC or ARTCC), then Center |
+| OTH 3: user waypoints | `#oth-3-user-waypoints` | `oth-3-user-waypoints`, `oth-3-used-in-fpl`, `oth-3-delete-question` | the task stays on User waypoints; temporary waypoints are listed (correct, reviewer) |
+| OTH 4: airports with remarks | `#oth-4-airports-with-remarks` | `oth-4-remarks`, `oth-4-delete-question` | deleting remarks, procedure |
+| OTH 5: fuel on board and fuel required | `#oth-5-fuel-on-board-and-fuel-required` | `oth-5` | Availability box of the fuel management pages; the destination waypoint rule; TRI keeps its own fuel entries; kln90b#531 in the `fob` field |
+| Entering the fuel on board | `#entering-the-fuel-on-board` | `oth-5-fob-entry` | Good to know box: the entry is lost at every power change and never counted down (kln90b#530) |
+| `SET FUEL ON BOARD` | `#set-fuel-on-board` | `msg-set-fuel-on-board` | the message in full |
+| Setting the fuel reserve | `#setting-the-fuel-reserve` | `oth-5-reserve-entry` | the procedure on OTH 6, where the cursor starts on `RES`; OTH 5 in a sentence with the screen |
+| OTH 6: endurance and range | `#oth-6-endurance-and-range` | `oth-6` | – |
+| OTH 7: fuel flow | `#oth-7-fuel-flow` | `oth-7-twin`, `oth-7-single` | – |
+| OTH 8: fuel used | `#oth-8-fuel-used` | `oth-8-twin`, `oth-8-single` | follows the aircraft, no reset on the unit |
+| OTH 9: true airspeed and wind | `#oth-9-true-airspeed-and-wind` | `oth-9`, `oth-9-no-heading` | Availability box of the air data pages with the heading input |
+| OTH 10: temperatures and altitudes | `#oth-10-temperatures-and-altitudes` | `oth-10` | – |
+| The air data pages without a fuel management system | `#the-air-data-pages-without-a-fuel-management-system` | `oth-5-air-data` | shown as `OTH 5` and `OTH 6` |
+| Where the OTH pages are used | `#where-the-oth-pages-are-used` | – | – |
 
-### OTH pages (`pages/oth.mdx`)
+The screens share `kln90b/screens/pages/oth/common.ts` and `kln90b/screens/shared/fuel-air-data.ts`.
 
-OTH 1 to OTH 10. The pages that exist depend on the installation, and so do the numbers of the air data pages; the
-type's opening section says which pages a pilot finds. OTH 1 says in one sentence that the simulator has no flight
-service stations (style guide, section 3). OTH 3 and OTH 4 are the lists for deleting user waypoints and remarks.
+**The names of the air data pages** (maintainer, 2026-11-21): the chapter heads them OTH 9 and OTH 10, the names with
+a fuel management system; one section and a screen say that without a fuel management system they appear as OTH 5
+and OTH 6. A page link of OTH 5 or OTH 6 goes to the fuel management pages; where the text means the air data
+pages, it writes `OTH 5` and `OTH 6` in code formatting. The status line writes `OTH10`; prose writes OTH 10.
 
-## Topics this package owns
+## Changes to earlier pages (made, through the reviewer)
 
-Fuel management and air data; the OTH pages and their fields. Links instead of explanations: user waypoints
-(Waypoints and the database); remarks (APT 5); the center's airspace (Airspace and altitude alerting).
+- `operation/trip-planning.mdx` and `pages/tri.mdx`: "fuel pages" → "fuel management pages", and the links to the
+  folded Operation page now go to the OTH 5 section.
+- `operation/gps-receiver.mdx`: "air data computer" → "air data system".
+- `unit/power-on.mdx`: "the reserve on the OTH pages" → "the fuel reserve of OTH 5 and OTH 6".
 
-## Where to look
+## Notes for later packages
 
-`pages/left/Oth1Page.tsx` to `Oth10Page.tsx`, `pages/PageTreeController.ts` (which pages exist), `Sensors.ts`,
-`pages/PageManager.ts` (the fuel message), `controls/WaypointDeleteListItem.tsx`, `settings/RemarksManager.ts`.
-
-## Notes from other packages
-
-- From the package apt: APT 5 links to OTH 4 for deleting remarks; a remark blanked out on APT 5 keeps its slot
-  until it is deleted on OTH 4.
-- From the planning survey: without a fuel computer the air data pages carry the names OTH 5 and OTH 6. The page
-  links and `kln90b/src/data/pageTree.ts` know OTH 5 to OTH 10 as optional pages; the session settles with the
-  maintainer how the chapter's headings name the air data pages so that the page links stay right.
-
-### From the package waypoints (2026-11-17)
-
-- OTH 3 is shown on User waypoints for the deleting task (`#deleting-a-user-waypoint`): the screens
-  `pages/oth/oth-3-user-waypoints`, `pages/oth/oth-3-delete-question` and `pages/oth/oth-3-used-in-fpl` exist; the OTH chapter reuses them and
-  links back for the task. OTH 3 checks only the active waypoint and the flight plans before it deletes; what happens
-  to a deleted waypoint that TRI, CAL 7, NAV 4 or STA 5 holds was not settled.
-
-## Changes to earlier pages
-
-None planned.
+- **messages:** `SET FUEL ON BOARD` / `ON OTH 5 IF NECESSARY` gets an entry in Message page messages that links
+  `/kln90b/pages/oth/#set-fuel-on-board`. The refusals `ACTIVE WPT` and `USED IN FPL` of OTH 3 are explained on User
+  waypoints.
+- **final pass:** CAL 1's "outside air temperature" (an entry of the calculator) was left alone; check the term
+  there. A user waypoint deleted on OTH 3 stays in TRI 1, TRI 3 and CAL 7 until the next power-on (from the code; a
+  case a pilot hardly meets, not written). OTH 2 merges the frequencies of every Center airspace that contains the
+  position and takes the name of the lowest frequency; not filed (maintainer, 2026-11-21).
