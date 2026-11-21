@@ -13,7 +13,7 @@ Look up the first line of a message here, as the message page shows it. Each ent
 
 ## `ACTV ANNUNCIATOR FAIL`
 
-The driver of the ACTV annunciator, the remote annunciator of the GPS APR switch for approach active mode, is stuck, so that the annunciator is lit all the time while the unit is on. The mode annunciation in the status line shows the true mode. The message stays until the part is repaired, and the Self Test page shows `TEST FAIL` meanwhile. See [The annunciators](/kln90b/operation/failures/#the-annunciators).
+The driver of the ACTV annunciator, the remote mounted annunciator of the GPS APR switch for approach active mode, is stuck, so that the annunciator is lit all the time while the unit is on. The mode annunciation in the status line shows the true mode. The message stays until the part is repaired, and the Self Test page shows `TEST FAIL` meanwhile. See [The annunciators](/kln90b/operation/failures/#the-annunciators).
 
 ## `ADJ NAV IND CRS`
 
@@ -47,7 +47,7 @@ The ARINC 429 output to the aircraft's electronic instruments and autopilot has 
 
 ## `ARM ANNUNCIATOR FAIL`
 
-The driver of the ARM annunciator, the remote annunciator of the GPS APR switch for approach arm mode, is stuck, so that the annunciator is lit all the time while the unit is on. The mode annunciation in the status line shows the true mode. The message stays until the part is repaired, and the Self Test page shows `TEST FAIL` meanwhile. See [The annunciators](/kln90b/operation/failures/#the-annunciators).
+The driver of the ARM annunciator, the remote mounted annunciator of the GPS APR switch for approach arm mode, is stuck, so that the annunciator is lit all the time while the unit is on. The mode annunciation in the status line shows the true mode. The message stays until the part is repaired, and the Self Test page shows `TEST FAIL` meanwhile. See [The annunciators](/kln90b/operation/failures/#the-annunciators).
 
 ## `ARM GPS APPROACH`
 
@@ -83,11 +83,11 @@ The internal battery has a charge of 1.5 % or less, or the `BATTERY` failure is 
 
 ## `CHECK ACTV ANNUNCIATOR`
 
-The wiring of the ACTV annunciator, the remote annunciator of the GPS APR switch for approach active mode, is shorted, so that the annunciator never lights. The mode annunciation in the status line shows the true mode. The message stays until the part is repaired. See [The annunciators](/kln90b/operation/failures/#the-annunciators).
+The wiring of the ACTV annunciator, the remote mounted annunciator of the GPS APR switch for approach active mode, is shorted, so that the annunciator never lights. The mode annunciation in the status line shows the true mode. The message stays until the part is repaired. See [The annunciators](/kln90b/operation/failures/#the-annunciators).
 
 ## `CHECK ARM ANNUNCIATOR`
 
-The wiring of the ARM annunciator, the remote annunciator of the GPS APR switch for approach arm mode, is shorted, so that the annunciator never lights. The mode annunciation in the status line shows the true mode. The message stays until the part is repaired. See [The annunciators](/kln90b/operation/failures/#the-annunciators).
+The wiring of the ARM annunciator, the remote mounted annunciator of the GPS APR switch for approach arm mode, is shorted, so that the annunciator never lights. The mode annunciation in the status line shows the true mode. The message stays until the part is repaired. See [The annunciators](/kln90b/operation/failures/#the-annunciators).
 
 ## `CHECK MSG ANNUNCIATOR`
 
@@ -95,7 +95,7 @@ The wiring of the message annunciator is shorted, so that the annunciator never 
 
 ## `CHECK WPT ANNUNCIATOR`
 
-The wiring of the WPT annunciator is shorted, so that the annunciator never lights. The unit shows waypoint alerting itself too; [Waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting) says how. The message stays until the part is repaired. See [The annunciators](/kln90b/operation/failures/#the-annunciators).
+The wiring of the waypoint alert annunciator is shorted, so that the annunciator never lights. The unit shows waypoint alerting itself too; [Waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting) says how. The message stays until the part is repaired. See [The annunciators](/kln90b/operation/failures/#the-annunciators).
 
 ## `DATA BASE CHECKSUM ERR`
 
@@ -175,6 +175,7 @@ POSITION DIFFERS FROM
  LAST POSITION BY >2NM
 ```
 
+{/* kln90b#532: describes the current behavior; the fix adds a space between > and 2NM */}
 The first position after a power-on is more than 2 NM from the position stored at power-off, for example because the aircraft was loaded at another airport. A position regained in flight never posts it, and neither does the first position after a loss of the unit's memory. It goes once you have read it; there is nothing to do if you know why the position differs. See [Messages of the receiver](/kln90b/operation/gps-receiver/#messages-of-the-receiver).
 
 ## `PRESS ALT TO SET BARO`
@@ -292,4 +293,4 @@ The unit dropped the waypoint `xxxxx` from a flight plan, or as the active waypo
 
 ## `WPT ANNUNCIATOR FAIL`
 
-The driver of the WPT annunciator is stuck, so that the annunciator is lit all the time while the unit is on and no longer tells a waypoint alert. The unit shows waypoint alerting itself too; [Waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting) says how. The message stays until the part is repaired, and the Self Test page shows `TEST FAIL` meanwhile. See [The annunciators](/kln90b/operation/failures/#the-annunciators).
+The driver of the waypoint alert annunciator is stuck, so that the annunciator is lit all the time while the unit is on and no longer tells a waypoint alert. The unit shows waypoint alerting itself too; [Waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting) says how. The message stays until the part is repaired, and the Self Test page shows `TEST FAIL` meanwhile. See [The annunciators](/kln90b/operation/failures/#the-annunciators).

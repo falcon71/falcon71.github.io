@@ -13,7 +13,7 @@ import Term from '../../../components/Term.astro';
 The failures and the FLR pages that set them exist only in the simulation. A real KLN 90B fails by itself; nobody can order it to.
 </Callout>
 
-The simulation can let parts of the KLN 90B and of its installation fail: the GPS receiver and its antenna, the inputs and outputs that connect the unit to the aircraft, the remote annunciators, the unit's memory and its internal battery. A part fails at random if you turn random failures on, or when you fail it on FLR 3. The failure stays active, also over power-off and into your next flight in the same aircraft, until you repair it on FLR 2 or have the unit serviced on FLR 1.
+The simulation can let parts of the KLN 90B and of its installation fail: the GPS receiver and its antenna, the inputs and outputs that connect the unit to the aircraft, the remote mounted annunciators, the unit's memory and its internal battery. A part fails at random if you turn random failures on, or when you fail it on FLR 3. The failure stays active, also over power-off and into your next flight in the same aircraft, until you repair it on FLR 2 or have the unit serviced on FLR 1.
 
 ## Random failures
 
@@ -89,7 +89,7 @@ In operation the unit posts a failure's message on the MSG page once it notices 
 
 - A fault inside the unit or the receiver, and a failed output, within a second.
 - A failed input from the aircraft after up to 10 seconds. At power-on the RS-232 input is reported as soon as the power-on pages are done, and the air data and altitude inputs about 5 seconds later.
-- A failed remote annunciator or super flag when the unit next switches it: the annunciator on or off, the flag out of view.
+- A failed remote mounted annunciator or super flag when the unit next switches it: the annunciator on or off, the flag out of view.
 
 No failure message appears before the power-on pages are done. A failure's message stays on the MSG page while the failure is active, also after you have read it, so the `MSG` in the status line stays lit; it goes when the part is repaired. At the next power-on the message comes back unread, so `MSG` flashes again once the power-on pages are done.
 
@@ -98,7 +98,7 @@ The unit never notices a failed OBS input, a failed RMI output, a burnt-out bulb
 ## What can fail
 
 <Callout kind="availability">
-The failures of the inputs, of the outputs other than ARINC 429 and the super flag, and of the remote annunciators depend on how the unit is installed in the aircraft. FLR 3 offers only the failures of parts the aircraft has: an aircraft without an air data system offers no failure of the air data input.
+The failures of the inputs, of the outputs other than ARINC 429 and the super flag, and of the remote mounted annunciators depend on how the unit is installed in the aircraft. FLR 3 offers only the failures of parts the aircraft has: an aircraft without an air data system offers no failure of the air data input.
 </Callout>
 
 Every aircraft has the GPS receiver, its antenna, the ARINC 429 output, the super flag, the EEPROM and the internal battery, so their failures are always offered. Each failure below has the name FLR 2 and FLR 3 show. An active failure ends when you repair it on FLR 2 or have the unit serviced on FLR 1; the entries say where something else ends it, or where it acts only from the next power-on. [Inside the GPS simulation](/kln90b/operation/gps-simulation/#the-simulated-failures-in-the-model) explains how the simulation produces the GPS failures, for the pilot who wants to know more.
@@ -188,15 +188,15 @@ The navigation data go over the output the aircraft takes them from: ARINC 429 i
 
 ### The annunciators
 
-The aircraft may have remote annunciators for the unit: MSG and WPT, and ARM and ACTV on the GPS APR switch. Each remote annunciator the aircraft has can fail in three ways. The unit's own screen keeps telling the truth, so the `MSG` in the status line and the unit's own indications are the check on a remote annunciator you doubt.
+The aircraft may have remote mounted annunciators for the unit: MSG and WPT, and ARM and ACTV on the GPS APR switch. Each remote mounted annunciator the aircraft has can fail in three ways. The unit's own screen keeps telling the truth, so the `MSG` in the status line and the unit's own indications are the check on a remote mounted annunciator you doubt.
 
-| Failure | The remote annunciator | Message | Self test |
+| Failure | The remote mounted annunciator | Message | Self test |
 | --- | --- | --- | --- |
 | `MSG BULB`, `WPT BULB`, `ARM BULB`, `ACTV BULB` | never lights: its bulb has burnt out | none | passes |
 | `MSG WIRING`, `WPT WIRING`, `ARM WIRING`, `ACTV WIRING` | never lights: a short in the wiring | `CHECK MSG ANNUNCIATOR` and so on, once the unit turns the annunciator on | passes |
 | `MSG DRIVER`, `WPT DRIVER`, `ARM DRIVER`, `ACTV DRIVER` | is lit all the time while the unit is on: its driver in the unit is stuck | `MSG ANNUNCIATOR FAIL` and so on, once the unit turns the annunciator off | fails |
 
-The self test lights every remote annunciator, so a failed wiring is found at every power-on and its message appears once the power-on pages are done. An annunciator with a stuck driver and a burnt-out bulb or broken wiring stays dark.
+The self test lights every remote mounted annunciator, so a failed wiring is found at every power-on and its message appears once the power-on pages are done. An annunciator with a stuck driver and a burnt-out bulb or broken wiring stays dark.
 
 ### The memory of the unit
 

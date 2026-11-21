@@ -577,8 +577,8 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | the GPS APR switch, the GPS CRS switch (the aircraft's switches with their annunciators; the unit's screen text says `BUTTON` and is quoted as it is) | the GPS APR button, the GPS CRS button |
 | total operational time (STA 4) | total operating time |
 | software revision status (STA 3) | software version |
-| remote annunciators (the annunciators outside the unit that it drives) | annunciator lamps, external annunciators |
-| the message annunciator (the remote annunciator that follows the message prompt; `MSG` where quoted) | the MSG annunciator, the MSG light |
+| remote mounted annunciators (the annunciators outside the unit that it drives) | remote annunciators, annunciator lamps, external annunciators |
+| the message annunciator (the remote mounted annunciator that follows the message prompt; `MSG` where quoted) | the MSG annunciator, the MSG light |
 | one-time message, lasting message (the two kinds of message page message: gone once read, or kept while the cause lasts; the manual's own names) | |
 | the super flag (the output that takes the NAV flag of the external indicator out of view; `NAV SUPER FLAG FAILURE`) | the nav super flag |
 | airport remarks (APT 5) | remarks alone in running text |
@@ -601,7 +601,7 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | transition, in a turn (the curved path the unit guides through a turn at a waypoint); the midpoint of the transition (where the unit makes the next leg active). Where the page also speaks of procedures, say "the transition through the turn" | curved path, bisector |
 | transition, of a procedure (the part of a SID, a STAR or an approach that you select on APT 7 or APT 8; `<Term t="Transition">`) | |
 | the beginning of turn anticipation (where the unit starts guiding the turn) | turn start |
-| abeam the waypoint; fly-over waypoint; the WPT annunciator (one of the remote annunciators) | |
+| abeam the waypoint; fly-over waypoint; the waypoint alert annunciator (one of the remote mounted annunciators; `WPT` where quoted) | the WPT annunciator |
 | the waypoint type identification page (`TYPE WPT`, `1 EN ROUTE?`, `2 SID/STAR?`) | the `TYPE WPT` question |
 | cross-track error (`XTK`) | cross-track distance |
 | actual track (`TK`) | track over the ground, your track |
@@ -624,7 +624,7 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | the unit flags its navigation; the NAV flag (no position good enough to navigate) | the unit loses its position (for the flag) |
 | reference waypoint: with the REF page, the waypoint the unit creates on the plan (`OLMA`); the waypoint you enter on the REF page is "the waypoint you enter". On the INT and SUP pages, the reference waypoint is the waypoint of their `REF` field. | new waypoint (for the one the REF page creates) |
 | airport reference point (the point of an airport that the 30 NM of arming an approach are measured from); in FPL 0 the row is the airport itself | the airport (as the point a distance is measured from) |
-| the ARM annunciator, the ACTV annunciator (the remote annunciators of the approach modes, at the GPS APR switch) | the arm lamp, the active lamp |
+| the ARM annunciator, the ACTV annunciator (the remote mounted annunciators of the approach modes, at the GPS APR switch) | the arm lamp, the active lamp |
 | VNAV: the vertical path; the descent point (where the descent starts); the advisory altitude; the VNAV waypoint; the offset point (the offset before the VNAV waypoint, where the path ends); VNAV is inactive (`VNV INACTV`), armed, active | the path (at its first mention), the start of the path, VNAV not running |
 | the altimeter baro setting at the first mention, then the baro setting | altimeter setting (for the unit's own setting) |
 | the warn altitude (`WARN` on the ALT page); the altitude deviation alert (the tones when you leave the selected altitude) | deviation limit |

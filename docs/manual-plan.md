@@ -130,7 +130,7 @@ that writes the owner records the anchors in this table, and the final pass shar
 | The active waypoint and the active leg | Modes of operation, `#the-active-waypoint` (`#no-active-waypoint`) | every page that names it links at its first use |
 | Leg and OBS mode (the course modes), selecting them, the GPS CRS switch, the selected course and where it is set, the course messages, changing between the modes, the mode annunciations, the CDI scale factor | Modes of operation: `#leg-mode`, `#obs-mode` (`#selecting-leg-or-obs-mode`, `#the-selected-course`), `#the-course-messages` (`#adj-nav-ind-crs-to-nnn`, `#adj-nav-ind-crs`, `#obs-wpt--200nm`), `#changing-between-the-modes`, `#the-mode-annunciations`, `#the-cdi-scale-factor` | MOD chapter: the pages; NAV chapter: the fields; Non-precision approaches: arming and activation, linking `#the-cdi-scale-factor` for the factors |
 | Magnetic variation: where the unit has none, the entered variation, `MAGNETIC VAR INVALID` | Modes of operation, `#magnetic-variation` (`#flying-without-a-magnetic-variation`, `#magnetic-var-invalid`) | SET chapter (SET 2): the field |
-| Waypoint alerting, the WPT annunciator | Sequencing and turn anticipation, `#waypoint-alerting` (`#the-wpt-annunciator`) | every page that names it links at its first use |
+| Waypoint alerting, the waypoint alert annunciator | Sequencing and turn anticipation, `#waypoint-alerting` (`#the-waypoint-alert-annunciator`) | every page that names it links at its first use |
 | Waypoint sequencing, turn anticipation (SET 6), fly-over waypoints, when the unit does not sequence | Sequencing and turn anticipation: `#waypoint-sequencing` (`#when-the-unit-does-not-sequence`), `#turn-anticipation` (`#where-turn-anticipation-begins`, `#turning-off-turn-anticipation`), `#fly-over-waypoints` | SET chapter: SET 6 as a page; FAQ: the question and the link; Flight plans: the waypoint type identification page |
 | Flight plans: FPL 0 and the numbered ones, creating, editing, the limits, a full flight plan and the make-room question for a waypoint, the waypoint type identification page, activating and inverting, storing FPL 0, deleting (`DELETE FPL?`), flying and editing the active flight plan | Flight plans: `#the-flight-plans-of-the-unit`, `#creating-a-flight-plan`, `#adding-a-waypoint` (`#taking-the-waypoint-of-the-right-page-into-a-flight-plan`), `#deleting-a-waypoint`, `#a-full-flight-plan` (`#fpl-full`, `#the-question-to-make-room-in-fpl-0`), `#the-waypoint-type-identification-page`, `#activating-a-flight-plan` (`#activating-a-flight-plan-inverted`), `#storing-fpl-0`, `#deleting-a-flight-plan` (`#delete-fpl`), `#flying-the-active-flight-plan`, `#editing-the-active-flight-plan` | FPL chapter: the page, its variants and fields, one sentence and the link per task |
 | The FPL page: the active leg symbol, the arrow in OBS mode and during a direct-to, the fence, the questions of the top line as page states | FPL chapter: `#fpl-0-the-active-flight-plan` (`#the-active-leg-symbol`, `#procedure-headers`, `#fpl-0-during-a-direct-to-and-in-obs-mode`), `#fpl-1-to-fpl-25-numbered-flight-plans` (`#use-invrt`), `#the-delete-questions` | Flight plans and Direct-to: link `#the-active-leg-symbol` instead of describing the marks |
@@ -149,7 +149,7 @@ that writes the owner records the anchors in this table, and the final pass shar
 | The TRI pages' rules (entries shared and kept, figures computed when the page is selected), the airspace list of TRI 2, 4 and 6 | TRI chapter: `#the-tri-pages-planning-a-trip`, `#the-airspaces-along-the-route` | Trip planning: the steps, one sentence and the link |
 | CAL 6 and CAL 7 keep their own zone after starting from the system time zone | CAL chapter: `#cal-6-time-conversion`, `#cal-7-sunrise-and-sunset` | Trip planning `#the-time-zone`: one sentence |
 | Fuel management and air data: which OTH pages an installation has, entering the fuel on board and `SET FUEL ON BOARD`, the fuel reserve, the destination waypoint of the fuel figures, the wind and the heading input | OTH chapter: `#the-oth-pages-which-pages-your-unit-has`, `#oth-5-fuel-on-board-and-fuel-required` (with the message section), `#oth-9-true-airspeed-and-wind`, `#the-air-data-pages-without-a-fuel-management-system` (no Operation page, maintainer, 2026-11-21) | TRI chapter and Trip planning: TRI's own fuel entries, one sentence and the link |
-| The MSG page (with its closing rules), how messages arrive and are read, one-time and lasting messages, messages over a power cycle, status line messages and their duration, the message annunciator and the remote annunciators as a group | Messages: `#the-message-prompt`, `#reading-the-messages` (`#showing-the-nearest-airport-from-the-msg-page`), `#messages-that-stay-while-their-cause-lasts`, `#messages-after-a-power-on`, `#status-line-messages`, `#the-remote-annunciators` | Controls and display: where the prompts stand, one sentence on the MSG page and the link; others link |
+| The MSG page (with its closing rules), how messages arrive and are read, one-time and lasting messages, messages over a power cycle, status line messages and their duration, the message annunciator and the remote mounted annunciators as a group | Messages: `#the-message-prompt`, `#reading-the-messages` (`#showing-the-nearest-airport-from-the-msg-page`), `#messages-that-stay-while-their-cause-lasts`, `#messages-after-a-power-on`, `#status-line-messages`, `#the-remote-mounted-annunciators` | Controls and display: where the prompts stand, one sentence on the MSG page and the link; others link |
 | Message texts: meaning and what to do | Message page messages, Status line messages: one entry per message, its anchor the slug of the message text (`/kln90b/lists/messages/#no-such-wpt`) | a page quotes the text where it is raised and links the entry |
 | Hardware events and their setup | External hardware | Keyboard mode: its two toggles, with the link |
 
@@ -207,12 +207,6 @@ it is written when those owners exist. A package that proves too large in its re
 (`docs/coordinator-prompt.md`, "A package session"); the likely splits are named in the package files.
 
 ## Open questions for the maintainer
-
-- **Two annunciator terms** (package messages, 2026-11-21): the reviewer gives "waypoint alert annunciator" and
-  "remote mounted annunciators" as the official forms of the word list's WPT annunciator and remote annunciators,
-  which earlier packages use throughout.
-- **The glossary entries** the audit of the package messages left open: `ETA`, `ETE`, `GS`, `BRG`, `BARO`, the mode
-  annunciations (`ENR:`, `ARM:`, the three `-LEG`), `RNAV`, `RF leg`, `RNP AR`, `Transition`, `EFB`.
 
 - **The FAA extract** carries no state and only public airports, so APT 2's state abbreviation and the private and
   military flags cannot be staged. Changing that is an extract change, not a manual change.
@@ -314,14 +308,10 @@ it is written when those owners exist. A package that proves too large in its re
   searches once more ("fuel pages", "fuel left on board", "air data computer", "fuel computer", "outside air
   temperature") and checks the other Operation pages against the rule.
 
-- The package messages (2026-11-21) brought the official terms message annunciator, super flag and airport
-  remarks, and the manual's own names one-time and lasting message. Its reviewer named "waypoint alert annunciator"
-  and "remote mounted annunciators" as the official forms of the WPT annunciator and the remote annunciators; not
-  adopted, for the maintainer (open question). The final pass searches once more ("MSG annunciator", "MSG light",
-  "nav super flag").
-- The glossary audit of the package messages (2026-11-21, its file `docs/plan/messages.md`, "Glossary") left
-  `ETA`, `ETE`, `GS`, `BRG`, `BARO`, the mode annunciations, `RNAV`, `RF leg`, `RNP AR`, `Transition` and `EFB` for
-  the maintainer; the final pass applies the decision.
+- The package messages (2026-11-21) brought the official terms message annunciator, super flag, airport remarks,
+  waypoint alert annunciator and remote mounted annunciators (the last two applied across the manual on the
+  maintainer's decision), and the manual's own names one-time and lasting message. The final pass searches once
+  more ("MSG annunciator", "MSG light", "nav super flag", "WPT annunciator", "remote annunciator").
 - `display/screen-layout` shows the same state as `messages/msg-prompt` and still has filler field explanations;
   the final pass removes it if no page shows it.
 

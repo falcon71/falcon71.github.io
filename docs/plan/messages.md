@@ -29,8 +29,8 @@ Written as planned (2026-11-21); the sections below are the pages as written. Se
    failure messages that come back unread (link Simulated failures).
 6. `## Status line messages` (`#status-line-messages`): the middle part in inverse for 5 seconds, on the MSG page
    only while shown, the prompt flashing meanwhile. Screen `messages/status-line-message` (both halves).
-7. `## The remote annunciators` (`#the-remote-annunciators`): the message annunciator follows the prompt; WPT, ARM and
-   ACTV in one sentence each with the link to their owners (Sequencing `#the-wpt-annunciator`, Non-precision
+7. `## The remote mounted annunciators` (`#the-remote-mounted-annunciators`): the message annunciator follows the prompt; WPT, ARM and
+   ACTV in one sentence each with the link to their owners (Sequencing `#the-waypoint-alert-annunciator`, Non-precision
    approaches); Availability box.
 8. Where to go next: the two lists.
 
@@ -53,9 +53,14 @@ The same form. The course message after a direct-to in OBS mode is headed with t
 
 The glossary audit (2026-11-21) found every entry used and none a placeholder. Removed in this package, because
 only one topic or the Self Test screens use them: `KYBD`, `LNAV`, `OBS IN`, `OUT`, `RMI`, `ANNUN`, `ALT`; the
-field explanations that used them explain the word themselves. `MSG` was cut to two sentences. Left for the
-maintainer: `ETA`, `ETE`, `GS`, `BRG`, `BARO`, the mode annunciations (`ENR:`, `ARM:` and the three `-LEG`),
-`RNAV`, `RF leg`, `RNP AR`, `Transition`, `EFB`.
+field explanations that used them explain the word themselves. `MSG` was cut to two sentences. The audit's
+borderline entries (`ETA`, `ETE`, `GS`, `BRG`, `BARO`, the mode annunciations, `RNAV`, `RF leg`, `RNP AR`,
+`Transition`, `EFB`) stay; the maintainer found the glossary clean (2026-11-21).
+
+## Bugs
+
+- kln90b#532 (filed 2026-11-21): `LAST POSITION BY >2NM` lacks the space before `2NM`; marked on the list entry and
+  on GPS reception and RAIM. Not filed: the airspace alert lines of kln90b#210, closed as not planned.
 
 ## Screens
 
