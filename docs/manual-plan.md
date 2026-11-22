@@ -199,7 +199,7 @@ anchors and page links above. After them the order follows "owners before the pa
 | 18 | messages | Messages; Message page messages; Status line messages; the Glossary page | done (2026-11-21) |
 | 19 | help | External hardware; FAQ and troubleshooting; Known limitations; Contact | done (2026-11-21) |
 | 20 | tutorial-1 | Tutorial flight 1 | done (2026-11-22) |
-| 21 | tutorial-2 | Tutorial flight 2, up to the top of descent (split, 2026-11-22) | in review |
+| 21 | tutorial-2 | Tutorial flight 2, up to the top of descent (split, 2026-11-22) | done (2026-11-22; branch `manual-tutorial-2` stays open for tutorial-2-approach) |
 | 22 | tutorial-2-approach | Tutorial flight 2, from the top of descent: the arrival, the approach, the visual approach | not started |
 | – | final pass | the whole manual (`docs/coordinator-prompt.md`, "The final pass") | not started |
 
