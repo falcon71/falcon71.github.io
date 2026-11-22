@@ -1,48 +1,191 @@
 ---
 title: Tutorial flight 1
-description: A short cross-country flight that uses direct-to navigation only.
+description: A flight from Friday Harbor direct to Tacoma Narrows that walks you through turning the KLN 90B on, looking up an airport, flying a direct-to and reading the unit en route and at the arrival.
 ---
 
-import { Steps } from '@astrojs/starlight/components';
-import DirectToKey from '../../../components/DirectToKey.astro';
 import KlnScreen from '../../../components/KlnScreen.astro';
+import DirectToKey from '../../../components/DirectToKey.astro';
+import Term from '../../../components/Term.astro';
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-aliqua.
+This flight takes you from Friday Harbor in the San Juan Islands direct to Tacoma Narrows, south of Seattle, with no flight plan. On the way you turn the KLN 90B on from cold and dark, look up an airport with the knobs and the cursor, fly a direct-to, read the navigation pages, answer the special use airspace alert for the Seattle Class B and find the nearest airport.
 
-| Departure | Destination | Distance | Aircraft                  | Checked with |
-| --------- | ----------- | -------- | ------------------------- | ------------ |
-| KAAA      | KBBB        | 98 NM    | Any single-engine piston  | Default navdata, AIRAC 0000 |
+| Departure | Destination | Distance | Aircraft | Checked with |
+| --- | --- | --- | --- | --- |
+| KFHR, Friday Harbor | KTIW, Tacoma Narrows | 77 NM | A small single-engine propeller aircraft that carries the KLN 90B | The simulator's default navigation data, AIRAC 2611 |
 
-Charts for both airports: [FAA digital terminal procedures](https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/dtpp/).
+The flight takes about an hour. After each important step the page says what the unit shows, so that you notice at once when something went differently.
 
-## Before engine start
+## What you need
 
-<Steps>
+You need an aircraft in which the KLN 90B is the main GPS: the KLN 90B must drive your CDI or HSI. That is the normal installation. If the needle of your CDI or HSI does not move during the self test or in the first direct-to, choose another aircraft; [An aircraft that carries the unit](/kln90b/getting-started/installation/#an-aircraft-that-carries-the-unit) says where to find one.
 
-1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Press the power button.
+The flight flies no procedure, so the charts you need are the FAA's free VFR charts: the Seattle sectional chart and the Seattle-Portland terminal area chart, both on the FAA's [VFR charts](https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/vfr/) page. For the airports, the FAA's [chart search](https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/dtpp/search/) finds the KTIW airport diagram, and for KFHR its approach charts, which show the airport diagram.
 
-2. Sed do eiusmod tempor incididunt ut labore. Wait for the self test and confirm it with <kbd>ENT</kbd>.
+## Turning the unit on at Friday Harbor
 
-3. Ut enim ad minim veniam, quis nostrud exercitation. Check the position on SET 1.
+Start cold and dark, parked at Friday Harbor. The unit runs its power-on sequence: you approve the self test, acknowledge the database, and the unit becomes NAV ready by itself. [Quickstart](/kln90b/getting-started/quickstart/#turning-the-unit-on) walks through the same pages, and [Power-on and initialization](/kln90b/unit/power-on/) explains each one.
 
-</Steps>
+To turn the unit on:
 
-## Direct to the first waypoint
+1. Turn on the battery and the avionics of the aircraft.
+2. Push in the power/brightness knob. The screen stays dark for a few seconds while the unit warms up ([Turning the unit on](/kln90b/unit/power-on/#turning-the-unit-on)), and then shows the Turn-On page with `SELF TEST IN PROGRESS`. Press nothing while it is shown.
+3. Wait for the Self Test page. Compare your CDI or HSI with the left page, as [The Self Test page](/kln90b/unit/power-on/#the-self-test-page) describes. This is the first check that the unit drives your indicator.
 
-<Steps>
+   <KlnScreen screen="power-on/self-test" />
 
-1. Press <DirectToKey />. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+4. Press <kbd>ENT</kbd> until the cursor is on `APPROVE?`, and press <kbd>ENT</kbd> once more. The unit approves the self test. Depending on the aircraft, a VFR-only warning page or an OBS warning page can come next; [The pages after the self test](/kln90b/unit/power-on/#the-pages-after-the-self-test) says how to leave each.
+5. Wait for the Database page. It shows the end of the database cycle of your simulator, so its date differs from the one on this screen.
 
-2. Turn the left inner knob to enter the first letter, sed do eiusmod tempor.
+   <KlnScreen screen="power-on/database-page" />
 
-3. Press <kbd>ENT</kbd> twice. Ut enim ad minim veniam.
+6. Press <kbd>ENT</kbd> on `ACKNOWLEDGE?`. The unit shows its first pages, with NAV 2 on the left.
 
-</Steps>
+   <KlnScreen screen="tutorial-1/first-pages" />
 
-<KlnScreen screen="tutorial-1/direct-to" />
+NAV 2 shows where you are: the position of Friday Harbor and the radial and distance from a nearby VOR. That tells you that the unit is NAV ready. With `FAST`, the acquisition setting on SET 10 that the unit starts with, it is usually NAV ready before the Self Test page appears, and you enter nothing on SET 1 or SET 2. If NAV 2 shows dashes, the unit is still searching; [Initializing the position and the time](/kln90b/unit/power-on/#initializing-the-position-and-the-time) says what to do.
+
+The page on the right side depends on your last flight: the page of the waypoint that was active when you turned the unit off, or the SUP page when none was ([The first pages](/kln90b/unit/power-on/#the-first-pages)). You leave it in the next step.
+
+If you loaded the aircraft with the engine running, the unit came up ready and skipped these pages ([An aircraft loaded with the engine running](/kln90b/unit/power-on/#an-aircraft-loaded-with-the-engine-running)). To see them, pull the power/brightness knob out and push it in again: every later power-on runs the whole sequence.
+
+## Looking up Friday Harbor
+
+Before you leave, look up your departure airport on the right side. This is the first use of the cursor: the right <kbd>CRSR</kbd> turns it on, the right inner knob changes the character under it, and the right outer knob moves it from character to character. [Entering data with the cursor](/kln90b/unit/controls-and-display/#entering-data-with-the-cursor) explains how the cursor and the knobs work.
+
+To show Friday Harbor on the APT pages:
+
+1. Turn the right outer knob to the APT pages and the right inner knob to APT 1. The status line shows `APT 1` on the right. The page shows whichever airport the APT pages showed last.
+2. Press the right <kbd>CRSR</kbd>. <Term t="CRSR">`CRSR`</Term> replaces the page name in the status line, and the cursor is on the first character of the identifier.
+3. Turn the right inner knob until the first character is K.
+4. Turn the right outer knob one step clockwise, and turn the right inner knob to F.
+5. Go on the same way with H and R. The unit fills in the characters to the right of the cursor at each step, so the page can show KFHR before you reach the last character.
+
+   <KlnScreen screen="tutorial-1/apt-1-kfhr" />
+
+6. Check that the page shows `FRIDAY HARB` `OR` and the position of the airport, and press the right <kbd>CRSR</kbd> to turn the cursor off. `APT 1` returns to the status line.
+
+If you turn past a character, turn the inner knob back. The airport you set on APT 1 is the airport of all APT pages, and the unit keeps it while it is off ([The APT pages: one airport on every page](/kln90b/pages/apt/#the-apt-pages-one-airport-on-every-page)).
+
+Now look at the frequencies. Turn the right inner knob clockwise until the status line shows `APT 4`. On the way it passes APT 2 and the pages of APT 3, the runway diagram and the list of runways.
+
+<KlnScreen screen="tutorial-1/apt-4-kfhr" />
+
+The unit only shows the frequencies; you tune your radios yourself ([APT 4: communication frequencies](/kln90b/pages/apt/#apt-4-communication-frequencies)). Turn the right inner knob back to APT 1 for the next step.
+
+## Flying direct to Tacoma Narrows
+
+A direct-to makes Tacoma Narrows the active waypoint, with a course from where you are, and you can make it on the ground before you taxi. [Direct-to](/kln90b/operation/direct-to/) explains it in full.
+
+To fly direct to Tacoma Narrows:
+
+1. Press <DirectToKey />. The Direct To page appears on the left side with `KFHR` flashing, and the right side shows APT 1 of Friday Harbor with <Term t="ENT">`ENT`</Term> flashing in the status line. The page offers the airport of the right page as its [default waypoint](/kln90b/operation/direct-to/#the-default-waypoint). Do not press <kbd>ENT</kbd> now, or you fly direct to the airport you are standing on.
+
+   <KlnScreen screen="tutorial-1/direct-to" />
+
+2. Enter KTIW with the left knobs: the left inner knob selects a character, the left outer knob moves to the next one. The first step of the left inner knob drops the offered waypoint and starts a new entry, and the unit fills in the rest of the identifier as you go.
+3. Press <kbd>ENT</kbd>. The right side shows APT 1 of Tacoma Narrows for approval: `TACOMA NARR` `OWS`, `CL B` because the airport lies in the Seattle Class B, and its position.
+
+   <KlnScreen screen="tutorial-1/direct-to-approve" />
+
+4. Press <kbd>ENT</kbd> again. The direct-to is active: the Direct To page closes, NAV 2 comes back on the left, and the right side shows NAV 1.
+
+   <KlnScreen screen="tutorial-1/nav-1-start" />
+
+If APT 1 in step 3 shows another airport, turn the left inner knob and enter the identifier again. If you approved Friday Harbor by mistake, press <DirectToKey /> again and enter KTIW over the waypoint it offers.
+
+NAV 1 now shows the Direct To symbol before `KTIW`, the D-bar centered, a distance of 77.5 NM and the bearing 151°. The groundspeed is 0 kt, and the time to KTIW shows dashes until you move. [NAV 1: the navigation situation](/kln90b/pages/nav/#nav-1-the-navigation-situation) explains each field.
+
+If <Term t="MSG">`MSG`</Term> flashes in the status line a few seconds after the direct-to, press <kbd>MSG</kbd>. The message is `ADJ NAV IND CRS TO 151°`: turn the course of your CDI or HSI to 151°, and the message goes. Press <kbd>MSG</kbd> again to close the MSG page. Whether this message appears depends on how the unit is connected to the indicator ([`ADJ NAV IND CRS TO nnn°`](/kln90b/operation/modes-of-operation/#adj-nav-ind-crs-to-nnn)).
+
+Taxi, take off and turn toward Tacoma Narrows. Fly so that the D-bar on NAV 1 and the needle of your CDI or HSI come back to the center: the bar stands on the side the course lies on. After a departure that takes you well off the line, you can lay a new course from where you are; [Recentering the D-bar](/kln90b/operation/direct-to/#recentering-the-d-bar) says how.
 
 ## En route
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-aliqua.
+The direct line leaves the islands, crosses the Strait of Juan de Fuca and Admiralty Inlet and runs over the Kitsap Peninsula, close past Bremerton, before it reaches the Narrows. The unit stays on the direct-to the whole way, and you only watch it.
+
+With NAV 2 on the left and NAV 1 on the right you see where you are and how you fly. At 40 NM from Friday Harbor and 110 kt the screen looks like this:
+
+<KlnScreen screen="tutorial-1/nav-en-route" />
+
+- **NAV 1** counts the distance down and shows the time to Tacoma Narrows at your groundspeed. The bearing turns from 151° to 152° on the way.
+- **NAV 2** relates your position to the nearby VOR, and the VOR changes along the way as another one comes nearer: CVV at the start, PAE in the middle of the flight and SEA before the arrival ([NAV 2: the present position](/kln90b/pages/nav/#nav-2-the-present-position)).
+
+The Olympic Mountains rise just west of the route, so look at the safe altitudes too. Turn the left inner knob one step clockwise to NAV 3. `MSA` is the minimum safe altitude of the sector you are in, and `ESA` the minimum en route safe altitude, the highest minimum safe altitude along the rest of your way to Tacoma Narrows ([Minimum safe altitudes](/kln90b/pages/nav/#minimum-safe-altitudes)).
+
+<KlnScreen screen="tutorial-1/nav-3-en-route" />
+
+Here both show 5,400 ft. Before you crossed 48°N, 8 NM back, both were higher: 8,400 ft for most of the way. The mountains lie in the next sector to the west, which begins about 8 NM to your right, so `MSA` rises if you stray that far west of the route.
+
+For a map, turn the left inner knob two steps clockwise, past NAV 4, to NAV 5. Unless you changed it before, NAV 5 shows north up. In actual track up the map turns with the aircraft, so that what lies ahead of you is up, as through the windshield.
+
+To turn the map to actual track up:
+
+1. Press the left <kbd>CRSR</kbd>. The cursor comes on at the range scale, the number at the bottom right.
+2. Turn the left outer knob one step counterclockwise. The cursor moves to the map orientation at the bottom left.
+3. Turn the left inner knob clockwise until the field shows `TK^`, actual track up. The map turns at once. If you turn past it, turn the inner knob back.
+4. Press the left <kbd>CRSR</kbd> to turn the cursor off. The field now shows your actual track as a magnetic course, 152° on this screen.
+
+   <KlnScreen screen="tutorial-1/nav-5-en-route" />
+
+NAV 5 draws the arrow of the direct-to from Friday Harbor, Tacoma Narrows as a star, and the aircraft as an aircraft symbol three quarters of the way down, so that the map reaches farther ahead of you than behind ([What NAV 5 draws](/kln90b/pages/nav/#what-nav-5-draws)). [The map orientation](/kln90b/pages/nav/#the-map-orientation) explains the other map orientations. NAV 5 keeps the map orientation while the unit is off, so after the next power-on on the ground the map stays blank until you start to move ([The map is blank in actual track up](/kln90b/pages/nav/#the-map-is-blank-in-actual-track-up)).
+
+At the start of the flight Tacoma Narrows lies beyond the range scale, and the star appears only once you are close enough. You can choose a larger range scale to see more of the route; [The range scale](/kln90b/pages/nav/#the-range-scale) says how.
+
+### The airspace alert for the Seattle Class B
+
+About halfway, `MSG` starts to flash in the status line. The track ahead of you meets the Seattle Class B, and the unit's airspace alert, which is on to start with, tells you so ([The airspace alert](/kln90b/operation/alerts/#the-airspace-alert)).
+
+To read the messages:
+
+1. Press <kbd>MSG</kbd>. The MSG page covers the whole screen and shows `AIRSPACE ALERT:` for the Seattle Class B, once for each part of the area that lies ahead. {/* kln90b#523: describes the current behavior; the fix makes the unit give one message per area */}
+
+   <KlnScreen screen="tutorial-1/msg-airspace-alert" />
+
+2. Press <kbd>MSG</kbd> until the MSG page closes. The pages you left come back, and `MSG` stays steady in the status line, because the messages stay while their cause lasts ([Messages that stay while their cause lasts](/kln90b/operation/messages/#messages-that-stay-while-their-cause-lasts)).
+
+The messages come although you may plan to stay below the floor of the Class B; [The airspace alert](/kln90b/operation/alerts/#the-airspace-alert) explains why. Further on, `MSG` flashes again when the unit finds you inside the area and adds `INSIDE SPC USE AIRSPACE`; read it the same way. The messages last to the end of the flight, because Tacoma Narrows lies inside the Class B. SET 8 turns the airspace alert off, if you prefer; with it off, no messages come.
+
+### The nearest airport
+
+Wherever you are, two presses bring up the nearest airport, which is worth trying once on the way. [Finding the nearest airport quickly](/kln90b/operation/nearest/#finding-the-nearest-airport-quickly) explains it.
+
+To show the nearest airport:
+
+1. Press <kbd>MSG</kbd>. The MSG page appears, with the airspace messages on it.
+2. Press <kbd>ENT</kbd>. The MSG page closes, and the right side shows APT 1 of the nearest airport, with `NR 1` at the end of the top line and the bearing and distance to it. Near Bremerton it is Bremerton National:
+
+   <KlnScreen screen="tutorial-1/apt-nearest" />
+
+3. Turn the right outer knob one step counterclockwise. The right side returns to NAV 1.
+
+The APT pages now keep the nearest airport you looked at. With the right inner knob pulled out, you can step through the other airports of the nearest list ([Showing a nearest list](/kln90b/operation/nearest/#showing-a-nearest-list)); push it in again afterward.
+
+## Arriving at Tacoma Narrows
+
+For the arrival you want the pages of Tacoma Narrows. The APT pages do not show it: they show the last airport you put there, Friday Harbor or the nearest airport you looked at. The Active Waypoint pages, the ACT pages, show the waypoint pages of the active waypoint, and that is Tacoma Narrows ([ACT pages](/kln90b/pages/act/)).
+
+To show the frequencies of Tacoma Narrows:
+
+1. Turn the right outer knob counterclockwise to the ACT pages, two steps from NAV 1. ACT 1 shows Tacoma Narrows with the arrow of the active waypoint before its identifier and `A` for airport at the end of the top line.
+2. Turn the right inner knob clockwise to ACT 4, past ACT 2 and the pages of ACT 3. ACT 3 shows the runway.
+
+   <KlnScreen screen="tutorial-1/act-4-ktiw" />
+
+3. Turn the right inner knob one step further for the second page of frequencies; `ACT+4` in the status line says there is one.
+4. Turn the right outer knob two steps clockwise to return to NAV 1.
+
+The D-bar keeps its en route scale all the way to the airport: the scale goes down by itself only in an approach, which this flight does not fly ([The CDI scale factor](/kln90b/operation/modes-of-operation/#the-cdi-scale-factor)).
+
+Shortly before Tacoma Narrows the arrow before `KTIW` flashes on NAV 1 and on the ACT pages. This is waypoint alerting: you are about to reach the active waypoint ([Waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting)).
+
+When you pass over the airport, the unit keeps Tacoma Narrows as the active waypoint: a direct-to to a waypoint outside a flight plan has nothing to follow it ([When the unit does not sequence](/kln90b/operation/sequencing/#when-the-unit-does-not-sequence)). The TO/FROM indicator in the D-bar changes to FROM, the distance counts up again, and the bearing points back to the airport. One mile past it NAV 1 looks like this:
+
+<KlnScreen screen="tutorial-1/nav-1-past-ktiw" />
+
+Fly the pattern and land as you normally would. After landing, pull the power/brightness knob out to turn the unit off. At the next power-on the right side shows APT 4 of Tacoma Narrows, the airport that was active ([The first pages](/kln90b/unit/power-on/#the-first-pages)).
+
+## Where to go next
+
+- [Tutorial flight 2](/kln90b/getting-started/tutorial-2/) builds a flight plan with a <Term t="SID" />, a <Term t="STAR" /> and an approach.
+- [Direct-to](/kln90b/operation/direct-to/) covers the rest of the direct-to: canceling it and flying it in OBS mode.
+- [Nearest](/kln90b/operation/nearest/) explains the nearest lists and how to fly to a nearest airport.

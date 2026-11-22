@@ -1,0 +1,59 @@
+<Field id="title" title="Title">
+	The title of NAV 2. The rows below give the position of the aircraft as a radial and a distance from a VOR and as latitude and longitude.
+</Field>
+
+<Field id="vor" title="Nearby VOR and radial">
+	The nearby VOR that the position is related to and the magnetic radial from that VOR to the aircraft, in whole degrees (`fr` is from). The nearby VOR is the nearest low or high altitude VOR, which the unit looks for again while the page is shown, so it changes as you fly past the middle between two VORs.
+</Field>
+
+<Field id="dist" title="Distance to the nearby VOR">
+	The direct distance from the aircraft to the nearby VOR, in NM with tenths.
+</Field>
+
+<Field id="lat" title="Latitude">
+	The latitude of the present position as hemisphere, degrees and minutes to hundredths.
+</Field>
+
+<Field id="lon" title="Longitude">
+	The longitude of the present position as hemisphere, degrees and minutes to hundredths.
+</Field>
+
+<Field id="from" title="Direct To symbol">
+	The Direct To symbol stands in place of the from waypoint: the active leg is a [direct-to](/kln90b/operation/direct-to/) that starts where you made it. The arrow after it marks the active waypoint.
+</Field>
+
+<Field id="to" title="Active waypoint">
+	The identifier of the [active waypoint](/kln90b/operation/modes-of-operation/#the-active-waypoint). The distance, the time and the bearing of the page refer to it.
+</Field>
+
+<Field id="cdi" title="D-bar">
+	The D-bar shows how far the aircraft is from the active leg, on a scale of five dots on each side of the center; the bar stands on the side you must fly to. What a dot is worth depends on the [CDI scale factor](/kln90b/operation/modes-of-operation/#the-cdi-scale-factor). The center of the scale is the TO/FROM indicator, which shows whether the active waypoint lies ahead (TO) or behind you (FROM).
+</Field>
+
+<Field id="dis" title="Distance to the active waypoint">
+	`DIS` is the direct distance to the active waypoint in NM, with one decimal below 100 NM.
+</Field>
+
+<Field id="gs" title="Groundspeed">
+	<Term t="GS">Your groundspeed</Term> in kt.
+</Field>
+
+<Field id="ete" title="Estimated time en route">
+	The <Term t="ETE">time to the active waypoint</Term> at your present groundspeed. Below one hour the hours stay blank, and `:20` is 20 minutes.
+</Field>
+
+<Field id="brg" title="Bearing to the active waypoint">
+	<Term t="BRG">`BRG`</Term> is the magnetic bearing from your position to the active waypoint, in whole degrees.
+</Field>
+
+<Field id="lpage" title="Page identification of the left page">
+	The page identification on the left side: `NAV 2`.
+</Field>
+
+<Field id="mode" title="Mode annunciation">
+	The mode annunciation, which shows the mode of the unit. <Term t="ENR-LEG">`ENR-LEG`</Term> is Enroute-Leg mode.
+</Field>
+
+<Field id="rpage" title="Page identification of the right page">
+	The page identification on the right side: `NAV 1`.
+</Field>

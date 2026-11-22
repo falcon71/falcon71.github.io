@@ -198,7 +198,7 @@ anchors and page links above. After them the order follows "owners before the pa
 | 17 | fuel-air-data | OTH chapter (the Operation page Fuel and air data was folded into it, maintainer, 2026-11-21) | done (2026-11-21) |
 | 18 | messages | Messages; Message page messages; Status line messages; the Glossary page | done (2026-11-21) |
 | 19 | help | External hardware; FAQ and troubleshooting; Known limitations; Contact | done (2026-11-21) |
-| 20 | tutorial-1 | Tutorial flight 1 | not started |
+| 20 | tutorial-1 | Tutorial flight 1 | in review |
 | 21 | tutorial-2 | Tutorial flight 2 | not started |
 | – | final pass | the whole manual (`docs/coordinator-prompt.md`, "The final pass") | not started |
 
@@ -320,6 +320,13 @@ it is written when those owners exist. A package that proves too large in its re
   noted for other pages: Controls and display could say that a fully dimmed screen looks like a unit that is off;
   GPS reception and RAIM could say that a never-used unit acquires as with an old almanac (`REAL` on SET 10); Keyboard
   mode could say that its two hardware toggles also close the MSG page, and link External hardware `#the-events`.
+
+- The package tutorial-1 (2026-11-22): `unit/power-on.mdx` ("What the unit keeps while it is off") and
+  `operation/direct-to.mdx` disagree on what is left after a power-off of more than five minutes. Power-on says the
+  active waypoint is kept, Direct-to says the direct-to is dropped and the closest leg of FPL 0 becomes active; with an
+  empty FPL 0 there is no active waypoint, yet the first pages still show APT 4 of the waypoint that was active
+  (`VolatileMemory.ts`, the start-page waypoint). The final pass makes the two owners agree (reviewer of Tutorial
+  flight 1).
 
 ## Site and generator notes
 
