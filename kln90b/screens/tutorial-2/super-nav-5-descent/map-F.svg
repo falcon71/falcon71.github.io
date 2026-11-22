@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 148 91" width="148" height="91" shape-rendering="crispEdges" fill="currentColor">
+<g data-field="legs" data-draw="line RADDY HUMPP" data-box="74 86 1 5">
+<path d="M74 86h1v1h-1z"/>
+<path d="M74 87h1v1h-1z"/>
+<path d="M74 88h1v1h-1z"/>
+<path d="M74 89h1v1h-1z"/>
+<path d="M74 90h1v1h-1z"/>
+</g>
+<g data-field="active-leg" data-draw="arrow HUMPP COVOG" data-box="71 63 7 15">
+<path d="M74 63h1v1h-1z"/>
+<path d="M73 64h3v1h-3z"/>
+<path d="M72 65h1v1h-1zM74 65h1v1h-1zM76 65h1v1h-1z"/>
+<path d="M71 66h1v1h-1zM74 66h1v1h-1zM77 66h1v1h-1z"/>
+<path d="M74 67h1v1h-1z"/>
+<path d="M74 68h1v1h-1z"/>
+<path d="M74 69h1v1h-1z"/>
+<path d="M74 70h1v1h-1z"/>
+<path d="M74 71h1v1h-1z"/>
+<path d="M74 72h1v1h-1z"/>
+<path d="M74 73h1v1h-1z"/>
+<path d="M74 74h1v1h-1z"/>
+<path d="M74 75h1v1h-1z"/>
+<path d="M74 76h1v1h-1z"/>
+<path d="M74 77h1v1h-1z"/>
+</g>
+<g data-field="legs" data-draw="line COVOG AUBRN" data-box="74 49 1 6">
+<path d="M74 49h1v1h-1z"/>
+<path d="M74 50h1v1h-1z"/>
+<path d="M74 51h1v1h-1z"/>
+<path d="M74 52h1v1h-1z"/>
+<path d="M74 53h1v1h-1z"/>
+<path d="M74 54h1v1h-1z"/>
+</g>
+<g data-field="legs" data-draw="line AUBRN DUANE" data-box="75 36 3 5">
+<path d="M77 36h1v1h-1z"/>
+<path d="M77 37h1v1h-1z"/>
+<path d="M76 38h1v1h-1z"/>
+<path d="M76 39h1v1h-1z"/>
+<path d="M75 40h1v1h-1z"/>
+</g>
+<g data-field="legs" data-draw="line DUANE 47.5168,-122.2911" data-box="82 26 1 2">
+<path d="M82 26h1v1h-1z"/>
+<path d="M82 27h1v1h-1z"/>
+</g>
+<g data-field="waypoints" data-draw="icon @ HUMPP" data-box="73 81 3 3">
+<path d="M73 81h3v1h-3z"/>
+<path d="M73 82h3v1h-3z"/>
+<path d="M73 83h3v1h-3z"/>
+</g>
+<g data-field="waypoints" data-draw="label HUMPP HUMPP" data-box="44 73 28 7">
+<path d="M44 73h1v1h-1zM47 73h1v1h-1zM49 73h1v1h-1zM53 73h1v1h-1zM55 73h1v1h-1zM59 73h1v1h-1zM61 73h4v1h-4zM67 73h4v1h-4z"/>
+<path d="M44 74h1v1h-1zM47 74h1v1h-1zM49 74h1v1h-1zM53 74h1v1h-1zM55 74h2v1h-2zM58 74h2v1h-2zM61 74h1v1h-1zM65 74h1v1h-1zM67 74h1v1h-1zM71 74h1v1h-1z"/>
+<path d="M44 75h1v1h-1zM47 75h1v1h-1zM49 75h1v1h-1zM53 75h1v1h-1zM55 75h1v1h-1zM57 75h1v1h-1zM59 75h1v1h-1zM61 75h1v1h-1zM65 75h1v1h-1zM67 75h1v1h-1zM71 75h1v1h-1z"/>
+<path d="M44 76h4v1h-4zM49 76h1v1h-1zM53 76h1v1h-1zM55 76h1v1h-1zM57 76h1v1h-1zM59 76h1v1h-1zM61 76h4v1h-4zM67 76h4v1h-4z"/>
+<path d="M44 77h1v1h-1zM47 77h1v1h-1zM49 77h1v1h-1zM53 77h1v1h-1zM55 77h1v1h-1zM59 77h1v1h-1zM61 77h1v1h-1zM67 77h1v1h-1z"/>
+<path d="M44 78h1v1h-1zM47 78h1v1h-1zM49 78h1v1h-1zM53 78h1v1h-1zM55 78h1v1h-1zM59 78h1v1h-1zM61 78h1v1h-1zM67 78h1v1h-1z"/>
+<path d="M44 79h1v1h-1zM47 79h1v1h-1zM50 79h3v1h-3zM55 79h1v1h-1zM59 79h1v1h-1zM61 79h1v1h-1zM67 79h1v1h-1z"/>
+</g>
+<g data-field="active-waypoint" data-draw="icon @ COVOG" data-box="73 58 3 3">
+<path d="M73 58h3v1h-3z"/>
+<path d="M73 59h3v1h-3z"/>
+<path d="M73 60h3v1h-3z"/>
+</g>
+<g data-field="active-waypoint" data-draw="label COVOG COVOG" data-box="43 50 29 7">
+<path d="M44 50h3v1h-3zM50 50h3v1h-3zM55 50h1v1h-1zM59 50h1v1h-1zM62 50h3v1h-3zM68 50h3v1h-3z"/>
+<path d="M43 51h1v1h-1zM47 51h1v1h-1zM49 51h1v1h-1zM53 51h1v1h-1zM55 51h1v1h-1zM59 51h1v1h-1zM61 51h1v1h-1zM65 51h1v1h-1zM67 51h1v1h-1zM71 51h1v1h-1z"/>
+<path d="M43 52h1v1h-1zM49 52h1v1h-1zM53 52h1v1h-1zM55 52h1v1h-1zM59 52h1v1h-1zM61 52h1v1h-1zM65 52h1v1h-1zM67 52h1v1h-1z"/>
+<path d="M43 53h1v1h-1zM49 53h1v1h-1zM53 53h1v1h-1zM55 53h1v1h-1zM59 53h1v1h-1zM61 53h1v1h-1zM65 53h1v1h-1zM67 53h1v1h-1z"/>
+<path d="M43 54h1v1h-1zM49 54h1v1h-1zM53 54h1v1h-1zM55 54h1v1h-1zM59 54h1v1h-1zM61 54h1v1h-1zM65 54h1v1h-1zM67 54h1v1h-1zM70 54h2v1h-2z"/>
+<path d="M43 55h1v1h-1zM47 55h1v1h-1zM49 55h1v1h-1zM53 55h1v1h-1zM56 55h1v1h-1zM58 55h1v1h-1zM61 55h1v1h-1zM65 55h1v1h-1zM67 55h1v1h-1zM71 55h1v1h-1z"/>
+<path d="M44 56h3v1h-3zM50 56h3v1h-3zM57 56h1v1h-1zM62 56h3v1h-3zM68 56h3v1h-3z"/>
+</g>
+<g data-field="waypoints" data-draw="icon @ AUBRN" data-box="73 44 3 3">
+<path d="M73 44h3v1h-3z"/>
+<path d="M73 45h3v1h-3z"/>
+<path d="M73 46h3v1h-3z"/>
+</g>
+<g data-field="waypoints" data-draw="label AUBRN AUBRN" data-box="43 36 29 7">
+<path d="M44 36h3v1h-3zM49 36h1v1h-1zM53 36h1v1h-1zM55 36h4v1h-4zM61 36h4v1h-4zM67 36h1v1h-1zM71 36h1v1h-1z"/>
+<path d="M43 37h1v1h-1zM47 37h1v1h-1zM49 37h1v1h-1zM53 37h1v1h-1zM55 37h1v1h-1zM59 37h1v1h-1zM61 37h1v1h-1zM65 37h1v1h-1zM67 37h2v1h-2zM71 37h1v1h-1z"/>
+<path d="M43 38h1v1h-1zM47 38h1v1h-1zM49 38h1v1h-1zM53 38h1v1h-1zM55 38h1v1h-1zM59 38h1v1h-1zM61 38h1v1h-1zM65 38h1v1h-1zM67 38h2v1h-2zM71 38h1v1h-1z"/>
+<path d="M43 39h5v1h-5zM49 39h1v1h-1zM53 39h1v1h-1zM55 39h4v1h-4zM61 39h4v1h-4zM67 39h1v1h-1zM69 39h1v1h-1zM71 39h1v1h-1z"/>
+<path d="M43 40h1v1h-1zM47 40h1v1h-1zM49 40h1v1h-1zM53 40h1v1h-1zM55 40h1v1h-1zM59 40h1v1h-1zM61 40h1v1h-1zM63 40h1v1h-1zM67 40h1v1h-1zM70 40h2v1h-2z"/>
+<path d="M43 41h1v1h-1zM47 41h1v1h-1zM49 41h1v1h-1zM53 41h1v1h-1zM55 41h1v1h-1zM59 41h1v1h-1zM61 41h1v1h-1zM64 41h1v1h-1zM67 41h1v1h-1zM70 41h2v1h-2z"/>
+<path d="M43 42h1v1h-1zM47 42h1v1h-1zM50 42h3v1h-3zM55 42h4v1h-4zM61 42h1v1h-1zM65 42h1v1h-1zM67 42h1v1h-1zM71 42h1v1h-1z"/>
+</g>
+<g data-field="waypoints" data-draw="icon @ DUANE" data-box="78 31 3 3">
+<path d="M78 31h3v1h-3z"/>
+<path d="M78 32h3v1h-3z"/>
+<path d="M78 33h3v1h-3z"/>
+</g>
+<g data-field="waypoints" data-draw="label DUANE DUANE" data-box="48 23 29 7">
+<path d="M48 23h3v1h-3zM54 23h1v1h-1zM58 23h1v1h-1zM61 23h3v1h-3zM66 23h1v1h-1zM70 23h1v1h-1zM72 23h5v1h-5z"/>
+<path d="M48 24h1v1h-1zM51 24h1v1h-1zM54 24h1v1h-1zM58 24h1v1h-1zM60 24h1v1h-1zM64 24h1v1h-1zM66 24h2v1h-2zM70 24h1v1h-1zM72 24h1v1h-1z"/>
+<path d="M48 25h1v1h-1zM52 25h1v1h-1zM54 25h1v1h-1zM58 25h1v1h-1zM60 25h1v1h-1zM64 25h1v1h-1zM66 25h2v1h-2zM70 25h1v1h-1zM72 25h1v1h-1z"/>
+<path d="M48 26h1v1h-1zM52 26h1v1h-1zM54 26h1v1h-1zM58 26h1v1h-1zM60 26h5v1h-5zM66 26h1v1h-1zM68 26h1v1h-1zM70 26h1v1h-1zM72 26h4v1h-4z"/>
+<path d="M48 27h1v1h-1zM52 27h1v1h-1zM54 27h1v1h-1zM58 27h1v1h-1zM60 27h1v1h-1zM64 27h1v1h-1zM66 27h1v1h-1zM69 27h2v1h-2zM72 27h1v1h-1z"/>
+<path d="M48 28h1v1h-1zM51 28h1v1h-1zM54 28h1v1h-1zM58 28h1v1h-1zM60 28h1v1h-1zM64 28h1v1h-1zM66 28h1v1h-1zM69 28h2v1h-2zM72 28h1v1h-1z"/>
+<path d="M48 29h3v1h-3zM55 29h3v1h-3zM60 29h1v1h-1zM64 29h1v1h-1zM66 29h1v1h-1zM70 29h1v1h-1zM72 29h5v1h-5z"/>
+</g>
+<g data-field="waypoints" data-draw="icon @ 47.5168,-122.2911" data-box="83 21 3 3">
+<path d="M83 21h3v1h-3z"/>
+<path d="M83 22h3v1h-3z"/>
+<path d="M83 23h3v1h-3z"/>
+</g>
+<g data-field="waypoints" data-draw="label RW32L 47.5168,-122.2911" data-box="53 13 29 7">
+<path d="M53 13h4v1h-4zM59 13h1v1h-1zM63 13h1v1h-1zM66 13h3v1h-3zM72 13h3v1h-3zM77 13h1v1h-1z"/>
+<path d="M53 14h1v1h-1zM57 14h1v1h-1zM59 14h1v1h-1zM63 14h1v1h-1zM65 14h1v1h-1zM69 14h1v1h-1zM71 14h1v1h-1zM75 14h1v1h-1zM77 14h1v1h-1z"/>
+<path d="M53 15h1v1h-1zM57 15h1v1h-1zM59 15h1v1h-1zM63 15h1v1h-1zM69 15h1v1h-1zM75 15h1v1h-1zM77 15h1v1h-1z"/>
+<path d="M53 16h4v1h-4zM59 16h1v1h-1zM63 16h1v1h-1zM67 16h2v1h-2zM74 16h1v1h-1zM77 16h1v1h-1z"/>
+<path d="M53 17h1v1h-1zM55 17h1v1h-1zM59 17h1v1h-1zM61 17h1v1h-1zM63 17h1v1h-1zM69 17h1v1h-1zM73 17h1v1h-1zM77 17h1v1h-1z"/>
+<path d="M53 18h1v1h-1zM56 18h1v1h-1zM59 18h1v1h-1zM61 18h1v1h-1zM63 18h1v1h-1zM65 18h1v1h-1zM69 18h1v1h-1zM72 18h1v1h-1zM77 18h1v1h-1z"/>
+<path d="M53 19h1v1h-1zM57 19h1v1h-1zM60 19h1v1h-1zM62 19h1v1h-1zM66 19h3v1h-3zM71 19h5v1h-5zM77 19h5v1h-5z"/>
+</g>
+<g data-field="waypoints" data-draw="icon @ FEVAS" data-box="88 12 3 3">
+<path d="M88 12h3v1h-3z"/>
+<path d="M88 13h3v1h-3z"/>
+<path d="M88 14h3v1h-3z"/>
+</g>
+<g data-field="waypoints" data-draw="label FEVAS FEVAS" data-box="58 4 29 7">
+<path d="M58 4h5v1h-5zM64 4h5v1h-5zM70 4h1v1h-1zM74 4h1v1h-1zM77 4h3v1h-3zM83 4h3v1h-3z"/>
+<path d="M58 5h1v1h-1zM64 5h1v1h-1zM70 5h1v1h-1zM74 5h1v1h-1zM76 5h1v1h-1zM80 5h1v1h-1zM82 5h1v1h-1zM86 5h1v1h-1z"/>
+<path d="M58 6h1v1h-1zM64 6h1v1h-1zM70 6h1v1h-1zM74 6h1v1h-1zM76 6h1v1h-1zM80 6h1v1h-1zM82 6h1v1h-1z"/>
+<path d="M58 7h4v1h-4zM64 7h4v1h-4zM70 7h1v1h-1zM74 7h1v1h-1zM76 7h5v1h-5zM83 7h3v1h-3z"/>
+<path d="M58 8h1v1h-1zM64 8h1v1h-1zM70 8h1v1h-1zM74 8h1v1h-1zM76 8h1v1h-1zM80 8h1v1h-1zM86 8h1v1h-1z"/>
+<path d="M58 9h1v1h-1zM64 9h1v1h-1zM71 9h1v1h-1zM73 9h1v1h-1zM76 9h1v1h-1zM80 9h1v1h-1zM82 9h1v1h-1zM86 9h1v1h-1z"/>
+<path d="M58 10h1v1h-1zM64 10h5v1h-5zM72 10h1v1h-1zM76 10h1v1h-1zM80 10h1v1h-1zM83 10h3v1h-3z"/>
+</g>
+<g data-field="waypoints" data-draw="icon @ KBFI" data-box="84 19 3 3">
+<path d="M84 19h3v1h-3z"/>
+<path d="M84 20h3v1h-3z"/>
+<path d="M86 21h1v1h-1z"/>
+</g>
+<g data-field="waypoints" data-draw="label KBFI KBFI" data-box="88 17 23 7">
+<path d="M88 17h1v1h-1zM92 17h1v1h-1zM94 17h4v1h-4zM100 17h5v1h-5zM108 17h3v1h-3z"/>
+<path d="M88 18h1v1h-1zM91 18h1v1h-1zM94 18h1v1h-1zM98 18h1v1h-1zM100 18h1v1h-1zM109 18h1v1h-1z"/>
+<path d="M88 19h1v1h-1zM90 19h1v1h-1zM94 19h1v1h-1zM98 19h1v1h-1zM100 19h1v1h-1zM109 19h1v1h-1z"/>
+<path d="M88 20h2v1h-2zM94 20h4v1h-4zM100 20h4v1h-4zM109 20h1v1h-1z"/>
+<path d="M88 21h1v1h-1zM90 21h1v1h-1zM94 21h1v1h-1zM98 21h1v1h-1zM100 21h1v1h-1zM109 21h1v1h-1z"/>
+<path d="M88 22h1v1h-1zM91 22h1v1h-1zM94 22h1v1h-1zM98 22h1v1h-1zM100 22h1v1h-1zM109 22h1v1h-1z"/>
+<path d="M88 23h1v1h-1zM92 23h1v1h-1zM94 23h4v1h-4zM100 23h1v1h-1zM108 23h3v1h-3z"/>
+</g>
+<g data-field="aircraft" data-draw="icon # 47.2678,-121.9383" data-box="72 67 5 3">
+<path d="M72 67h2v1h-2zM75 67h2v1h-2z"/>
+<path d="M73 69h1v1h-1zM75 69h1v1h-1z"/>
+</g>
+</svg>

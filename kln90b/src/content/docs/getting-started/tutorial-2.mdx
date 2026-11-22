@@ -299,60 +299,76 @@ The descent point lies about 12 NM past RADDY, about 2 NM before HUMPP and about
 
 From RADDY the unit flies the STAR on to HUMPP and the approach over COVOG and AUBRN to DUANE, its <Term t="FAF" />, and VNAV guides your descent to 6,000 ft at COVOG. The approach header `R32L-KBFI` is no waypoint, like the header of the STAR, so the unit goes from RADDY straight on to HUMPP. The arrival and the approach are legs of FPL 0, and leg mode flies all their turns with [turn anticipation](/kln90b/operation/sequencing/#turn-anticipation); none needs OBS mode.
 
-Keep NAV 4 on the left, and turn the right inner knob to NAV 1, which shows the distance to each waypoint and, during the approach, the D-bar at its approach scale.
+Fly the descent on Super NAV 5: its field 1 shows the state of VNAV, the countdown and then the advisory altitude, beside the map ([The left side of Super NAV 5](/kln90b/pages/nav/#the-left-side-of-super-nav-5)). NAV 4 stays the page where you enter the plan.
 
-At 120 kt, about 8 NM before RADDY, the top line of NAV 4 changes from `VNV ARMED` to `VNV IN` and the time to the descent point. 10 NM before HUMPP it looks like this:
+To show VNAV on Super NAV 5:
 
-<KlnScreen screen="tutorial-2/nav-4-vnav-countdown" />
+1. Turn the left inner knob one step clockwise from NAV 4 to NAV 5. Super NAV 5 fills the screen again, still in actual track up at the range scale 30.
+2. Press the left <kbd>CRSR</kbd>. The cursor comes on at the range scale.
+3. Turn the left outer knob three steps counterclockwise. The cursor is on field 1, which shows `ETE`.
+4. Turn the left inner knob two steps clockwise, past `XTK`, to `VNAV`. Field 1 shows `V ARM`.
+5. Press the left <kbd>CRSR</kbd> to turn the cursor off.
 
-With NAV 4 in view the unit raises no `VNV ALERT`; that message comes only while neither side shows NAV 4 ([`VNV ALERT`](/kln90b/operation/vnav/#vnv-alert)).
+At 120 kt, about 8 NM before RADDY, field 1 changes from `V ARM` to `V` and the time to the descent point. 10 NM before HUMPP it looks like this:
+
+<KlnScreen screen="tutorial-2/super-nav-5-vnav-countdown" />
+
+Shortly before the descent point, about 5 NM before HUMPP, `MSG` flashes over the map for `VNV ALERT`. The unit raises it while neither side shows NAV 4, and Super NAV 5 does not count, although it shows the countdown ([`VNV ALERT`](/kln90b/operation/vnav/#vnv-alert)). Press <kbd>MSG</kbd> to read it, and <kbd>MSG</kbd> again to return to Super NAV 5. The message stays, and the message prompt with it, until VNAV becomes active.
 
 About 2 NM before HUMPP three things happen at the same moment: VNAV becomes active, the unit arms the approach, and `MSG` flashes for `PRESS ALT TO SET BARO`, which comes with the arming. The descent point and the arming are independent of each other: the descent point comes from your altitude and the angle, the arming from the distance to Boeing Field, and on this route, at 10,000 ft, the two happen to lie together. What you see:
 
-- The top line of NAV 4 shows `VNV` and the advisory altitude: this is your descent point ([Flying the vertical path](/kln90b/operation/vnav/#flying-the-vertical-path)).
-- The mode annunciation shows <Term t="ARM-LEG">`ARM-LEG`</Term>, and the ARM annunciator of the GPS APR switch lights. The unit arms the approach by itself as you come near Boeing Field ([Arming the approach](/kln90b/operation/approaches/#arming-the-approach)); you do not press the switch.
-- The message prompt `MSG` flashes for `PRESS ALT TO SET BARO`, which asks you to check the baro setting before the approach ([`PRESS ALT TO SET BARO`](/kln90b/operation/approaches/#press-alt-to-set-baro)). Where an air data system supplies the baro setting, the message does not come, and you skip the steps below.
+- Field 1 shows `V` and the advisory altitude: this is your descent point ([Flying the vertical path](/kln90b/operation/vnav/#flying-the-vertical-path)). `VNV ALERT` goes.
+- The mode on the left side of Super NAV 5 shows <Term t="ARM-LEG">`ARM-LEG`</Term>, and the ARM annunciator of the GPS APR switch lights. The unit arms the approach by itself as you come near Boeing Field ([Arming the approach](/kln90b/operation/approaches/#arming-the-approach)); you do not press the switch.
+- The message prompt `MSG` over the map flashes for `PRESS ALT TO SET BARO`, which asks you to check the baro setting before the approach ([`PRESS ALT TO SET BARO`](/kln90b/operation/approaches/#press-alt-to-set-baro)). Where an air data system supplies the baro setting, the message does not come, and you skip the steps below.
 
-<KlnScreen screen="tutorial-2/nav-4-vnav-arm" />
+<KlnScreen screen="tutorial-2/super-nav-5-vnav-arm" />
 
 Start the descent first, and answer the message once you are on the path. The message changes nothing in VNAV, and VNAV changes nothing in the approach.
 
 To check the baro setting:
 
-1. Press <kbd>ALT</kbd>. The ALT page appears on the left with the cursor on the baro setting, and NAV 4 moves to the right side with its cursor on the selected altitude. `MSG` stops flashing: the message is answered once the ALT page is shown.
+1. Press <kbd>ALT</kbd>. The ALT page appears on the left with the cursor on the baro setting, and NAV 4 on the right with its cursor on the selected altitude. `MSG` stops flashing: the message is answered once the ALT page is shown.
 
    <KlnScreen screen="tutorial-2/alt-baro" />
 
 2. Check that the baro setting is the one on your altimeter, and if not, set it with the left knobs ([The baro setting](/kln90b/operation/alerts/#the-baro-setting)). `IND` on NAV 4 follows it. Leave the right knobs alone: the right cursor is on the selected altitude, and a change there stops VNAV.
-3. Press <kbd>ALT</kbd> again. NAV 4 returns to the left side, and NAV 1 to the right.
+3. Press <kbd>ALT</kbd> again. Super NAV 5 returns.
 
-With the arming, the CDI scale factor narrows to ±1.00 NM, so the D-bar becomes more sensitive ([The CDI scale along the approach](/kln90b/operation/approaches/#the-cdi-scale-along-the-approach)).
+With the arming, the CDI scale factor narrows to ±1.00 NM, so the needle of your CDI or HSI becomes more sensitive; MOD 1 shows the factor ([The CDI scale along the approach](/kln90b/operation/approaches/#the-cdi-scale-along-the-approach)).
 
-Descend so that your altimeter stays at the advisory altitude on NAV 4. As the unit passes COVOG, at 6,000 ft, VNAV ends: NAV 4 shows `VNV INACTV` and clears the plan ([When VNAV ends](/kln90b/operation/vnav/#when-vnav-ends)). From COVOG on, fly the altitudes of the approach chart. NAV 4 has nothing more to do, so turn the left outer knob to the MOD pages and the left inner knob to MOD 1, where you watch the CDI scale factor through the approach; it shows `CDI:±1.00NM`.
+Descend so that your altimeter stays at the advisory altitude in field 1. 4 NM before COVOG it looks like this:
+
+<KlnScreen screen="tutorial-2/super-nav-5-descent" />
+
+As the unit passes COVOG, at 6,000 ft, VNAV ends: field 1 shows `V OFF`, and NAV 4 clears the plan ([When VNAV ends](/kln90b/operation/vnav/#when-vnav-ends)). From COVOG on, fly the altitudes of the approach chart. For the approach, turn field 1 to `XTK`, the cross-track error, the way you turned it to `VNAV`: press the left <kbd>CRSR</kbd>, turn the left outer knob three steps counterclockwise, turn the left inner knob one step counterclockwise, and press the left <kbd>CRSR</kbd> again.
 
 Shortly before AUBRN the course turns right. Unless the unit sets the course of your indicator itself, `MSG` flashes for `ADJ NAV IND CRS TO 311°`: read the message with <kbd>MSG</kbd> and turn the indicator to 311°. Before DUANE the course turns by about 5° more; if `MSG` flashes again, turn the indicator to the course the message gives ([`ADJ NAV IND CRS TO nnn°`](/kln90b/operation/modes-of-operation/#adj-nav-ind-crs-to-nnn)).
 
 ## The approach
 
-Shortly before DUANE, the FAF, the unit makes the approach active by itself ([Activating the approach](/kln90b/operation/approaches/#activating-the-approach)). The mode annunciation shows <Term t="APR-LEG">`APR-LEG`</Term>, the ACTV annunciator of the GPS APR switch lights, and MOD 1 shows `CDI:±0.30NM`. The D-bar narrows to that scale by DUANE and keeps it on the final approach ([The CDI scale along the approach](/kln90b/operation/approaches/#the-cdi-scale-along-the-approach)).
+<Callout kind="info">
+The KLN 90B gives lateral guidance only: along the approach it has no glidepath and no vertical guidance ([Non-precision approaches](/kln90b/operation/approaches/)). VNAV is for the descent: on this flight it ends at COVOG and gives no path for the final approach ([VNAV](/kln90b/operation/vnav/)). Fly the altitudes of the approach chart.
+</Callout>
 
-<KlnScreen screen="tutorial-2/nav-1-apr" />
+Shortly before DUANE, the FAF, the unit makes the approach active by itself ([Activating the approach](/kln90b/operation/approaches/#activating-the-approach)). The mode on Super NAV 5 shows <Term t="APR-LEG">`APR-LEG`</Term>, and the ACTV annunciator of the GPS APR switch lights. The CDI scale factor narrows to ±0.30 NM by DUANE and keeps it on the final approach ([The CDI scale along the approach](/kln90b/operation/approaches/#the-cdi-scale-along-the-approach)).
 
-If the status line still shows `ARM-LEG` at DUANE, the approach is not active, and the message page says why ([RAIM in an approach](/kln90b/operation/approaches/#raim-in-an-approach)); do not fly the final approach on the unit then, but fly the missed approach.
+<KlnScreen screen="tutorial-2/super-nav-5-apr" />
+
+If the mode still shows `ARM-LEG` at DUANE, the approach is not active, and the message page says why ([RAIM in an approach](/kln90b/operation/approaches/#raim-in-an-approach)); do not fly the final approach on the unit then, but fly the missed approach.
 
 Past DUANE the active leg runs from DUANE to `RW32L`, the threshold of runway 32L, which is the <Term t="MAP" /> of the approach. Fly the final approach by the chart and land.
 
-The unit does not sequence past the MAP: in FPL 0 the fence `*NO WPT SEQ` follows `RW32L` ([The approach in FPL 0](/kln90b/operation/approaches/#the-approach-in-fpl-0)). Past the threshold `RW32L` stays the active waypoint, the TO/FROM indicator shows FROM, the distance counts up and the bearing points back to the threshold. 1 NM past it, NAV 1 looks like this:
+The unit does not sequence past the MAP: in FPL 0 the fence `*NO WPT SEQ` follows `RW32L` ([The approach in FPL 0](/kln90b/operation/approaches/#the-approach-in-fpl-0)). Past the threshold `RW32L` stays the active waypoint, your CDI or HSI shows FROM, and the distance counts up. Super NAV 5 draws no legs past the MAP. 1 NM past the threshold it looks like this:
 
-<KlnScreen screen="tutorial-2/nav-1-past-threshold" />
+<KlnScreen screen="tutorial-2/super-nav-5-past-threshold" />
 
 To fly the missed approach instead, once you have passed the threshold:
 
-1. Press <DirectToKey />. The Direct To page offers FEVAS, the first waypoint of the missed approach, and the right side shows the INT page of FEVAS for approval. The page offers FEVAS because NAV 1 was on the right, not a waypoint page ([The missed approach](/kln90b/operation/approaches/#the-missed-approach)).
+1. Press <DirectToKey />. The Direct To page offers FEVAS, the first waypoint of the missed approach, and the right side shows the INT page of FEVAS for approval. It offers FEVAS because the window of Super NAV 5 is closed and its right side is no waypoint page ([The missed approach](/kln90b/operation/approaches/#the-missed-approach)).
 
    <KlnScreen screen="tutorial-2/direct-to-fevas" />
 
-2. Press <kbd>ENT</kbd>. The unit flies direct to FEVAS and returns to `ARM-LEG`, the scale widens to ±1.00 NM at once, and `PRESS ALT TO SET BARO` comes again; answer it with <kbd>ALT</kbd> as before when you have time. {/* kln90b#513: describes the current behavior; the fix makes the message come only on the change from an en route mode into an arm mode */}
+2. Press <kbd>ENT</kbd>. The unit flies direct to FEVAS and turns the right side to NAV 1, so Super NAV 5 gives way to NAV 5 on the left and NAV 1 on the right; turn the right inner knob to NAV 5 to bring the map back ([What the unit does](/kln90b/operation/direct-to/#what-the-unit-does)). The unit returns to `ARM-LEG`, the scale widens to ±1.00 NM at once, and `PRESS ALT TO SET BARO` comes again; answer it with <kbd>ALT</kbd> as before when you have time. {/* kln90b#513: describes the current behavior; the fix makes the message come only on the change from an en route mode into an arm mode */}
 3. Fly the missed approach as the chart says. The unit sequences over FEVAS and GRRAM to LOFAL, the <Term t="MAHP" />, and where the course turns, a course message may ask you to turn your indicator.
 
 Near LOFAL the unit raises `IF REQUIRED SELECT OBS` for the holding pattern of the chart ([`IF REQUIRED SELECT OBS`](/kln90b/operation/departures-arrivals/#if-required-select-obs)). In leg mode the unit flies over LOFAL and on to KBFI, so you hold in OBS mode.
@@ -360,11 +376,11 @@ Near LOFAL the unit raises `IF REQUIRED SELECT OBS` for the holding pattern of t
 To hold at LOFAL:
 
 1. Turn your CDI or HSI to the inbound course of the hold from the chart.
-2. Before you reach LOFAL, set the GPS CRS switch to OBS. The mode annunciation shows <Term t="ARM:">`ARM:`</Term> and the course, and `PRESS ALT TO SET BARO` comes once more; answer it with <kbd>ALT</kbd>. {/* kln90b#513: describes the current behavior; the fix makes the message come only on the change from an en route mode into an arm mode */}
+2. Before you reach LOFAL, set the GPS CRS switch to OBS. The mode on the left side of Super NAV 5 shows `ARM` and the course, Approach Arm-OBS mode, and `PRESS ALT TO SET BARO` comes once more; answer it with <kbd>ALT</kbd>. {/* kln90b#513: describes the current behavior; the fix makes the message come only on the change from an en route mode into an arm mode */}
 3. Fly the hold by the chart, as at TITON. LOFAL stays the active waypoint the whole time.
-4. To leave the hold, set the GPS CRS switch to LEG on the inbound leg, with LOFAL ahead. The mode annunciation shows `ARM-LEG`, and `PRESS ALT TO SET BARO` comes again; answer it with <kbd>ALT</kbd>. The unit flies to LOFAL and goes on along FPL 0 to KBFI. {/* kln90b#513: describes the current behavior; the fix makes the message come only on the change from an en route mode into an arm mode */}
+4. To leave the hold, set the GPS CRS switch to LEG on the inbound leg, with LOFAL ahead. The mode shows `ARM-LEG` again, and `PRESS ALT TO SET BARO` comes again; answer it with <kbd>ALT</kbd>. The unit flies to LOFAL and goes on along FPL 0 to KBFI. {/* kln90b#513: describes the current behavior; the fix makes the message come only on the change from an en route mode into an arm mode */}
 
-Without a GPS CRS switch, turn the left inner knob to MOD 2 and press <kbd>ENT</kbd> in step 2, and turn it back to MOD 1 and press <kbd>ENT</kbd> in step 4.
+Without a GPS CRS switch, turn the left outer knob to the MOD pages and the left inner knob to MOD 2 and press <kbd>ENT</kbd> in step 2, and turn the left inner knob to MOD 1 and press <kbd>ENT</kbd> in step 4.
 
 ## A visual approach without approaches on the unit
 

@@ -417,7 +417,8 @@ before you reuse one):
   sentences. It is rare: a page has at most one, and most pages have none; an ordinary exception stays a sentence or a
   note. The one exception is a page with two separate facts that each catch pilots off guard, such as Non-precision
   approaches, with the missing ILS approaches and the missing vertical guidance; it may have two (maintainer,
-  2026-11-21).
+  2026-11-21). So may a tutorial flight that flies an approach: its second box is the missing vertical guidance
+  (maintainer, 2026-11-22, Tutorial flight 2).
 - **The Optional reading box** (`<Callout kind="optional">`) opens a page or a section that goes deeper than a
   pilot needs to operate the unit, and says in one or two sentences that nothing in it is needed and where the
   operating knowledge is. So far only Inside the GPS simulation has one (section 17).
@@ -939,6 +940,13 @@ unit.
   on their approach charts, so name those (maintainer, 2026-11-22: KFHR).
 - **The map in actual track up.** A tutorial that shows NAV 5 teaches the pilot to set it to actual track up and shows
   it so; pilots find that the most intuitive (maintainer, 2026-11-22).
+- **Super NAV 5 in flight.** Pilots fly with Super NAV 5 most of the time, because it gives the most situational
+  awareness. Where Super NAV 5 can show what a step watches (the VNAV countdown and the advisory altitude in its field
+  1), the tutorial shows it there and teaches how; NAV 4 and the other single pages remain for entering data
+  (maintainer, 2026-11-22).
+- **No vertical guidance on an approach.** A tutorial that flies an approach says in a Good to know box, where the
+  approach begins, that the unit gives lateral guidance only, with no glidepath, and that VNAV is for the descent, not
+  for the approach; pilots new to the unit look for vertical guidance (maintainer, 2026-11-22).
 - **Safe altitudes near terrain.** Where high terrain lies near the route, the tutorial has the pilot look up `MSA`
   and `ESA` on NAV 3 at that point (maintainer, 2026-11-22: the Olympic Mountains beside `KFHR DCT KTIW`).
 - **The course mode switch first.** Most aircraft that carry the unit have an external switch for leg and OBS mode

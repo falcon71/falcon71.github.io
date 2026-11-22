@@ -11,12 +11,13 @@ import {
 	place,
 	pointFrom,
 	savedFlightplan,
+	showSuperNav5,
 	wait,
 	type ScreenDescription,
 } from '../../generator/api.ts';
 import {COURSE_MESSAGE_DELAY} from '../../../vendor/kln90b/kln90b/data/PersistentMessages';
 import type {HeadlessUnit} from '../../../vendor/kln90b/test/harness/boot';
-import {fplIdents} from '../../../vendor/kln90b/test/harness/readers';
+import {fplIdents, messages} from '../../../vendor/kln90b/test/harness/readers';
 import {LEG_OBS_SWITCH} from '../../../vendor/kln90b/test/harness/panelXml';
 import {Screen} from '../../../vendor/kln90b/test/harness/render/screen';
 import {distanceNm} from '../../../vendor/kln90b/test/harness/flight/geo';
@@ -372,7 +373,20 @@ export async function vnavToCovog(u: HeadlessUnit): Promise<void> {
 	u.env.sim.set('PLANE ALTITUDE', 'feet', ARRIVAL_ALTITUDE_FT);
 	u.env.sim.set('PRESSURE ALTITUDE', 'feet', ARRIVAL_ALTITUDE_FT);
 	await wait(2000);
+	await planDescentToCovog(u);
+}
+
+/**
+ * The entries of NAV 4 for the descent to COVOG, made with the left knobs: the left side turned to NAV 4, the selected
+ * altitude 6,000 ft, the VNAV waypoint COVOG with no offset, and the angle 3.0. The left cursor is off at the end.
+ */
+async function planDescentToCovog(u: HeadlessUnit): Promise<void> {
 	await u.panel.selectPage('L', 'NAV 4');
+	await enterDescentToCovog(u);
+}
+
+/** The entries of the descent to COVOG on NAV 4, which the left side shows. */
+async function enterDescentToCovog(u: HeadlessUnit): Promise<void> {
 	// The cursor comes on at the ten thousands of the selected altitude; the outer knob moves on to the thousands
 	await u.panel.cursor('L');
 	await u.panel.outer('L', 1);
@@ -427,39 +441,57 @@ async function onPath(u: HeadlessUnit): Promise<void> {
 	await wait(1000);
 }
 
-/**
- * The countdown to the descent: past RADDY with the right side turned to NAV 1, 10 NM before HUMPP at 10,000 ft. NAV 4
- * stays on the left.
- */
-export async function vnavCountdown(u: HeadlessUnit): Promise<void> {
-	await vnavToCovog(u);
-	await u.panel.selectPage('R', 'NAV 1');
-	// A mile past RADDY, so that the unit sequences it, then on along the leg to HUMPP
-	await onLeg(u, 'RADDY', 'HUMPP', courseLegNm(u, 'RADDY', 'HUMPP') - 1);
-	await wait(1000);
-	await adjustCourseIndicator(u);
-	await onLeg(u, 'RADDY', 'HUMPP', 10);
-}
-
 /** The length of the great circle from the waypoint `from` of FPL 0 to the waypoint `to`, in NM. */
 function courseLegNm(u: HeadlessUnit, from: string, to: string): number {
 	return distanceNm(fplWpt(u, from), fplWpt(u, to));
 }
 
 /**
- * 2 NM before HUMPP, still at 10,000 ft: the descent point and the point 30 NM from KBFI, where the unit arms the
- * approach, lie together here, so VNAV has become active and the approach armed at once, and PRESS ALT TO SET BARO waits
- * unread.
+ * Answers ADJ NAV IND CRS TO on the external indicator without reading the MSG page, which the harness cannot do from
+ * Super NAV 5: the message goes once the indicator is within 5° of the course.
  */
-export async function vnavActiveAndArmed(u: HeadlessUnit): Promise<void> {
-	await vnavCountdown(u);
+async function answerCourseMessage(u: HeadlessUnit): Promise<void> {
+	const course = messages(u).map(m => /^ADJ NAV IND CRS TO (\d{3})/.exec(m)).find(m => m !== null);
+	if (course == null) return;
+	u.env.sim.set('Nav OBS:1', 'degrees', Number(course[1]));
+	await wait(2000);
+}
+
+/** A mile past the waypoint `at` on the leg to `next`, so that the unit has sequenced it, with the course message answered. */
+async function pastWaypoint(u: HeadlessUnit, at: string, next: string): Promise<void> {
+	await onLeg(u, at, next, courseLegNm(u, at, next) - 1);
+	await onPath(u);
+	// The message comes at once at the change of leg; a longer wait only slows the map down
+	await wait(1000);
+	await answerCourseMessage(u);
+}
+
+/** The countdown on Super NAV 5: past RADDY, 10 NM before HUMPP at 10,000 ft. */
+export async function superNav5Countdown(u: HeadlessUnit): Promise<void> {
+	await superNav5Vnav(u);
+	await pastWaypoint(u, 'RADDY', 'HUMPP');
+	await onLeg(u, 'RADDY', 'HUMPP', 10);
+}
+
+/**
+ * 2 NM before HUMPP, still at 10,000 ft. VNV ALERT came about 5 NM before HUMPP, because no side shows NAV 4, and was
+ * read with MSG. Then the descent point and the point 30 NM from KBFI, which lie together here, made VNAV active and armed
+ * the approach at once: PRESS ALT TO SET BARO waits unread, and VNV ALERT has gone.
+ */
+export async function superNav5Armed(u: HeadlessUnit): Promise<void> {
+	await superNav5Countdown(u);
+	await onLeg(u, 'RADDY', 'HUMPP', 5);
+	await wait(1000);
+	if (!messages(u).includes('VNV ALERT')) throw new Error(`superNav5Armed: no VNV ALERT (${messages(u).join(' | ')})`);
+	await u.panel.msg();
+	await u.panel.msg();
 	await onLeg(u, 'RADDY', 'HUMPP', 2);
 	await wait(1000);
 }
 
 /** The ALT page called up with ALT 1.5 NM before HUMPP, on the path: the ALT page on the left, NAV 4 on the right. */
 export async function altPageBeforeHumpp(u: HeadlessUnit): Promise<void> {
-	await vnavActiveAndArmed(u);
+	await superNav5Armed(u);
 	await onLeg(u, 'RADDY', 'HUMPP', 1.5);
 	await onPath(u);
 	await u.panel.alt();
@@ -467,37 +499,76 @@ export async function altPageBeforeHumpp(u: HeadlessUnit): Promise<void> {
 }
 
 /**
- * On along the approach in approach arm mode, the baro setting checked and the ALT page closed, the left side turned to
- * MOD 1 after VNAV ended at COVOG, to 1.8 NM before the FAF DUANE, where the approach has become active. Each course
- * message is answered on the indicator.
+ * Leaves Super NAV 5 for the staging of the flight that follows: the map redraws on every tick of the clock, which makes
+ * the staging slow. The left inner knob turns to NAV 4 and the right side to NAV 1; `backToSuperNav5` returns. Super NAV 5
+ * keeps its map orientation, its range scale and its fields meanwhile.
  */
-export async function approachActive(u: HeadlessUnit): Promise<void> {
-	await altPageBeforeHumpp(u);
-	await u.panel.alt();
-	await wait(1000);
-	const legs: [string, string][] = [['RADDY', 'HUMPP'], ['HUMPP', 'COVOG'], ['COVOG', 'AUBRN'], ['AUBRN', 'DUANE']];
-	for (let i = 1; i < legs.length; i++) {
-		const [from, to] = legs[i];
-		await onLeg(u, from, to, courseLegNm(u, from, to) - 1);
-		await onPath(u);
-		await wait(COURSE_MESSAGE_DELAY + 1000);
-		await adjustCourseIndicator(u);
-	}
-	await u.panel.selectPage('L', 'MOD 1');
-	await onLeg(u, 'AUBRN', 'DUANE', 1.8);
-	await wait(2000);
-	await adjustCourseIndicator(u);
+async function leaveSuperNav5(u: HeadlessUnit): Promise<void> {
+	await u.panel.inner('L', -1);
+	await u.panel.selectPage('R', 'NAV 1');
 }
 
-/** 1 NM past the threshold of runway 32L, the MAP, on the extended final approach course, still in approach active mode. */
-export async function pastThreshold(u: HeadlessUnit): Promise<void> {
-	await approachActive(u);
-	await onLeg(u, 'DUANE', 'RW32L', courseLegNm(u, 'DUANE', 'RW32L') - 1);
-	await wait(COURSE_MESSAGE_DELAY + 1000);
-	await adjustCourseIndicator(u);
+/** Super NAV 5 again after `leaveSuperNav5`: NAV 5 on the right, then the left inner knob from NAV 4 to NAV 5. */
+async function backToSuperNav5(u: HeadlessUnit): Promise<void> {
+	await u.panel.selectPage('R', 'NAV 5');
+	await u.panel.inner('L', 1);
+	await wait(1000);
+}
+
+/** The flight on to 4 NM before COVOG on the path, after the ALT page, staged away from Super NAV 5. */
+async function toDescent(u: HeadlessUnit): Promise<void> {
+	await altPageBeforeHumpp(u);
+	// ALT again returns to Super NAV 5
+	await u.panel.alt();
+	await wait(1000);
+	await leaveSuperNav5(u);
+	await pastWaypoint(u, 'HUMPP', 'COVOG');
+	await onLeg(u, 'HUMPP', 'COVOG', 4);
+	await onPath(u);
+}
+
+/** The descent on Super NAV 5: the ALT page closed again, past HUMPP, 4 NM before COVOG on the path. */
+export async function superNav5Descent(u: HeadlessUnit): Promise<void> {
+	await toDescent(u);
+	await backToSuperNav5(u);
+}
+
+/** The flight on to 1.8 NM before the FAF DUANE, where the approach becomes active, staged away from Super NAV 5. */
+async function toApproachActive(u: HeadlessUnit): Promise<void> {
+	await toDescent(u);
+	await pastWaypoint(u, 'COVOG', 'AUBRN');
+	await pastWaypoint(u, 'AUBRN', 'DUANE');
+	await onLeg(u, 'AUBRN', 'DUANE', 1.8);
+	await wait(2000);
+	await answerCourseMessage(u);
+}
+
+/**
+ * Super NAV 5 with field 1 turned from VNAV, which ended at COVOG, to XTK: the left CRSR puts the cursor on the range
+ * scale, the left outer knob moves it up to field 1, and one step of the left inner knob turns it back to XTK.
+ */
+async function superNav5Xtk(u: HeadlessUnit): Promise<void> {
+	await backToSuperNav5(u);
+	await u.panel.cursor('L');
+	await u.panel.outer('L', -3);
+	await u.panel.inner('L', -1);
+	await u.panel.cursor('L');
+}
+
+/** Super NAV 5 1.8 NM before the FAF DUANE, where the approach has become active, with XTK in field 1. */
+export async function superNav5ApproachActive(u: HeadlessUnit): Promise<void> {
+	await toApproachActive(u);
+	await superNav5Xtk(u);
+}
+
+/** Super NAV 5 1 NM past the threshold of runway 32L, the MAP, on the extended final approach course, in approach active mode. */
+export async function superNav5PastThreshold(u: HeadlessUnit): Promise<void> {
+	await toApproachActive(u);
+	await pastWaypoint(u, 'DUANE', 'RW32L');
 	await onLeg(u, 'DUANE', 'RW32L', -1);
 	await wait(2000);
-	await adjustCourseIndicator(u);
+	await answerCourseMessage(u);
+	await superNav5Xtk(u);
 }
 
 /**
@@ -555,5 +626,46 @@ export async function vnavToKbfi(u: HeadlessUnit): Promise<void> {
 	await u.panel.outer('L', 1);
 	await setLeftDigit(u, '0');
 	await wait(1000);
+	await u.panel.cursor('L');
+}
+
+/**
+ * Super NAV 5 as the en route section leaves it, 8 NM past CHINS: NAV 5 on both sides, the map in actual track up at
+ * the range scale 30.
+ */
+export async function superNav5TrackUp(u: HeadlessUnit): Promise<void> {
+	await pastChins(u, 8);
+	await showSuperNav5(u);
+	// The right CRSR opens the pop-up menu, the right outer knob moves its cursor down to the map orientation, two steps
+	// of the right inner knob turn it from north up to actual track up, and the right CRSR closes the menu
+	await u.panel.cursor('R');
+	await u.panel.outer('R', 3);
+	await u.panel.inner('R', 2);
+	await u.panel.cursor('R');
+	// The left CRSR puts the cursor on the range scale, and the left inner knob turns it from 40 to 30 NM
+	await u.panel.cursor('L');
+	await u.panel.inner('L', -1);
+	await u.panel.cursor('L');
+}
+
+/**
+ * The descent to COVOG planned on NAV 4 12 NM past CHINS at 10,000 ft, with Super NAV 5 before and after it: the left
+ * inner knob turns from NAV 5 to NAV 4 for the entries and back, and field 1 of Super NAV 5 is turned to VNAV.
+ */
+export async function superNav5Vnav(u: HeadlessUnit): Promise<void> {
+	await superNav5TrackUp(u);
+	await onLeg(u, 'CHINS', 'RADDY', courseLegNm(u, 'CHINS', 'RADDY') - 12);
+	setAltitude(u, ARRIVAL_ALTITUDE_FT);
+	await wait(2000);
+	// The left inner knob one step counterclockwise from NAV 5 to NAV 4, which Super NAV 5 gives way to, and back
+	await u.panel.inner('L', -1);
+	await enterDescentToCovog(u);
+	await u.panel.inner('L', 1);
+	await wait(1000);
+	// The left CRSR puts the cursor on the range scale; the left outer knob moves it up to field 1, and two steps of the
+	// left inner knob turn field 1 from ETE past XTK to VNAV
+	await u.panel.cursor('L');
+	await u.panel.outer('L', -3);
+	await u.panel.inner('L', 2);
 	await u.panel.cursor('L');
 }

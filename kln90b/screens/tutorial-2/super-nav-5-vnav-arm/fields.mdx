@@ -1,0 +1,55 @@
+<Field id="distance" title="Distance to the active waypoint">
+	The direct distance to the active waypoint in NM, never the distance along the route. It shows one decimal below 100 NM and whole NM from 100 NM.
+</Field>
+
+<Field id="ident" title="Active waypoint">
+	The identifier of the [active waypoint](/kln90b/operation/modes-of-operation/#the-active-waypoint), followed by the suffix of an approach waypoint where it has one: `-I` for an initial approach fix, `-F` for the final approach fix, `-M` for the missed approach point and `-H` for the missed approach holding point. It flashes during [waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting).
+</Field>
+
+<Field id="mode" title="Mode annunciation">
+	The mode of the unit, which Super NAV 5 shows here because it has no status line: <Term t="ARM-LEG">`ARM-LEG`</Term> is Approach Arm-Leg mode: the approach is armed ([Arming the approach](/kln90b/operation/approaches/#arming-the-approach)). [The mode annunciations](/kln90b/operation/modes-of-operation/#the-mode-annunciations) explain the modes.
+</Field>
+
+<Field id="groundspeed" title="Groundspeed">
+	Your <Term t="GS">groundspeed</Term> in whole knots.
+</Field>
+
+<Field id="vnav" title="Field 1: advisory altitude">
+	Field 1 of the left side of Super NAV 5 with the choice `VNAV`: `V` and the advisory altitude in feet, the altitude of the vertical path at the present position of the aircraft, rounded to 100 ft, as on NAV 4 with `VNV`. It shows `V OFF` while VNAV is inactive, and `V ARM` or `V` and the time to the descent point while VNAV is armed ([Flying the vertical path](/kln90b/operation/vnav/#flying-the-vertical-path)). With the left cursor on the field, the inner knob changes it to <Term t="ETE" /> or <Term t="XTK" />.
+</Field>
+
+<Field id="msg" title="Message prompt">
+	`MSG` over the map: the unit holds messages, which Super NAV 5 shows here because it has no status line. It is steady once you have read them all and flashes while one is unread. Pressing <kbd>MSG</kbd> shows the MSG page, and pressing it after the last message returns to Super NAV 5.
+</Field>
+
+<Field id="dtk" title="Field 2: desired track">
+	Field 2 of the left side of Super NAV 5 with the choice `DTK`: the <Term t="DTK">desired track</Term> as a magnetic course in whole degrees. The number flashes while an external course indicator that the unit reads is more than 10° off it. With the left cursor on the field, the inner knob changes it to <Term t="BRG" /> or `RAD` ([The left side of Super NAV 5](/kln90b/pages/nav/#the-left-side-of-super-nav-5)).
+</Field>
+
+<Field id="track" title="Field 3: track">
+	Field 3 of the left side of Super NAV 5 with the choice `TK`: your actual track as a magnetic course in whole degrees, which points up on the map in actual track up. It shows `---°` below a groundspeed of 2 kt. With the left cursor on the field, the inner knob changes it to <Term t="BRG" /> or `RAD` ([The left side of Super NAV 5](/kln90b/pages/nav/#the-left-side-of-super-nav-5)).
+</Field>
+
+<Field id="range" title="Range scale">
+	The range scale in NM: the distance from the aircraft to the top of the map. In actual track up the map reaches a third of that distance behind the aircraft. The left cursor comes on at this field ([The range scale and AUTO](/kln90b/pages/nav/#the-range-scale-and-auto)).
+</Field>
+
+<Field id="active-leg" title="Active leg">
+	The active leg of FPL 0: a line with an arrow that points to the active waypoint. In actual track up it runs up the map while you fly along it.
+</Field>
+
+<Field id="legs" title="Other legs of the flight plan">
+	The legs of FPL 0 before and after the active leg, as plain lines. The map draws no legs past the missed approach point. Where a leg leaves the map, only the part on the map shows.
+</Field>
+
+<Field id="active-waypoint" title="Active waypoint on the map">
+	The active waypoint, a waypoint of FPL 0, as a small square followed by its identifier.
+</Field>
+
+<Field id="waypoints" title="Other waypoints of the flight plan">
+	The other waypoints of FPL 0 on the map, each a small square followed by its identifier; the threshold of the runway is labeled `RW32L`. Where the square lies off the map, the identifier can still show. The map draws no legs past the missed approach point, so the waypoints of the missed approach stand alone.
+</Field>
+
+<Field id="aircraft" title="Aircraft">
+	The aircraft, an aircraft symbol three quarters of the way down the map in actual track up. In North up and desired track up it is a diamond.
+</Field>
