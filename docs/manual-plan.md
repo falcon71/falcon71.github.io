@@ -200,7 +200,7 @@ anchors and page links above. After them the order follows "owners before the pa
 | 19 | help | External hardware; FAQ and troubleshooting; Known limitations; Contact | done (2026-11-21) |
 | 20 | tutorial-1 | Tutorial flight 1 | done (2026-11-22) |
 | 21 | tutorial-2 | Tutorial flight 2, up to the top of descent (split, 2026-11-22) | done (2026-11-22) |
-| 22 | tutorial-2-approach | Tutorial flight 2, from the top of descent: the arrival, the approach, the visual approach | in review (2026-11-22, on the branch `manual-tutorial-2`) |
+| 22 | tutorial-2-approach | Tutorial flight 2, from the top of descent: the arrival, the approach, the visual approach | done (2026-11-22) |
 | – | final pass | the whole manual (`docs/coordinator-prompt.md`, "The final pass") | not started |
 
 The SET chapter comes late on purpose: nearly every SET page is the setting of a function that another page owns, so
