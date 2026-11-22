@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 148 91" width="148" height="91" shape-rendering="crispEdges" fill="currentColor">
+<g data-field="legs" data-draw="line CADED CHINS" data-box="74 90 1 1">
+<path d="M74 90h1v1h-1z"/>
+</g>
+<g data-field="active-leg" data-draw="arrow CHINS RADDY" data-box="71 26 7 56">
+<path d="M74 26h1v1h-1z"/>
+<path d="M73 27h3v1h-3z"/>
+<path d="M72 28h1v1h-1zM74 28h1v1h-1zM76 28h1v1h-1z"/>
+<path d="M71 29h1v1h-1zM74 29h1v1h-1zM77 29h1v1h-1z"/>
+<path d="M74 30h1v1h-1z"/>
+<path d="M74 31h1v1h-1z"/>
+<path d="M74 32h1v1h-1z"/>
+<path d="M74 33h1v1h-1z"/>
+<path d="M74 34h1v1h-1z"/>
+<path d="M74 35h1v1h-1z"/>
+<path d="M74 36h1v1h-1z"/>
+<path d="M74 37h1v1h-1z"/>
+<path d="M74 38h1v1h-1z"/>
+<path d="M74 39h1v1h-1z"/>
+<path d="M74 40h1v1h-1z"/>
+<path d="M74 41h1v1h-1z"/>
+<path d="M74 42h1v1h-1z"/>
+<path d="M74 43h1v1h-1z"/>
+<path d="M74 44h1v1h-1z"/>
+<path d="M74 45h1v1h-1z"/>
+<path d="M74 46h1v1h-1z"/>
+<path d="M74 47h1v1h-1z"/>
+<path d="M74 48h1v1h-1z"/>
+<path d="M74 49h1v1h-1z"/>
+<path d="M74 50h1v1h-1z"/>
+<path d="M74 51h1v1h-1z"/>
+<path d="M74 52h1v1h-1z"/>
+<path d="M74 53h1v1h-1z"/>
+<path d="M74 54h1v1h-1z"/>
+<path d="M74 55h1v1h-1z"/>
+<path d="M74 56h1v1h-1z"/>
+<path d="M74 57h1v1h-1z"/>
+<path d="M74 58h1v1h-1z"/>
+<path d="M74 59h1v1h-1z"/>
+<path d="M74 60h1v1h-1z"/>
+<path d="M74 61h1v1h-1z"/>
+<path d="M74 62h1v1h-1z"/>
+<path d="M74 63h1v1h-1z"/>
+<path d="M74 64h1v1h-1z"/>
+<path d="M74 65h1v1h-1z"/>
+<path d="M74 66h1v1h-1z"/>
+<path d="M74 67h1v1h-1z"/>
+<path d="M74 68h1v1h-1z"/>
+<path d="M74 69h1v1h-1z"/>
+<path d="M74 70h1v1h-1z"/>
+<path d="M74 71h1v1h-1z"/>
+<path d="M74 72h1v1h-1z"/>
+<path d="M74 73h1v1h-1z"/>
+<path d="M74 74h1v1h-1z"/>
+<path d="M74 75h1v1h-1z"/>
+<path d="M74 76h1v1h-1z"/>
+<path d="M74 77h1v1h-1z"/>
+<path d="M74 78h1v1h-1z"/>
+<path d="M74 79h1v1h-1z"/>
+<path d="M74 80h1v1h-1z"/>
+<path d="M74 81h1v1h-1z"/>
+</g>
+<g data-field="legs" data-draw="line RADDY HUMPP" data-box="73 0 1 18">
+<path d="M73 0h1v1h-1z"/>
+<path d="M73 1h1v1h-1z"/>
+<path d="M73 2h1v1h-1z"/>
+<path d="M73 3h1v1h-1z"/>
+<path d="M73 4h1v1h-1z"/>
+<path d="M73 5h1v1h-1z"/>
+<path d="M73 6h1v1h-1z"/>
+<path d="M73 7h1v1h-1z"/>
+<path d="M73 8h1v1h-1z"/>
+<path d="M73 9h1v1h-1z"/>
+<path d="M73 10h1v1h-1z"/>
+<path d="M73 11h1v1h-1z"/>
+<path d="M73 12h1v1h-1z"/>
+<path d="M73 13h1v1h-1z"/>
+<path d="M73 14h1v1h-1z"/>
+<path d="M73 15h1v1h-1z"/>
+<path d="M73 16h1v1h-1z"/>
+<path d="M73 17h1v1h-1z"/>
+</g>
+<g data-field="chins" data-draw="icon @ CHINS" data-box="73 85 3 3">
+<path d="M73 85h3v1h-3z"/>
+<path d="M73 86h3v1h-3z"/>
+<path d="M73 87h3v1h-3z"/>
+</g>
+<g data-field="chins" data-draw="label CHINS CHINS" data-box="43 77 29 7">
+<path d="M44 77h3v1h-3zM50 77h1v1h-1zM53 77h1v1h-1zM57 77h3v1h-3zM61 77h1v1h-1zM65 77h1v1h-1zM68 77h3v1h-3z"/>
+<path d="M43 78h1v1h-1zM47 78h1v1h-1zM50 78h1v1h-1zM53 78h1v1h-1zM58 78h1v1h-1zM61 78h2v1h-2zM65 78h1v1h-1zM67 78h1v1h-1zM71 78h1v1h-1z"/>
+<path d="M43 79h1v1h-1zM50 79h1v1h-1zM53 79h1v1h-1zM58 79h1v1h-1zM61 79h2v1h-2zM65 79h1v1h-1zM67 79h1v1h-1z"/>
+<path d="M43 80h1v1h-1zM50 80h4v1h-4zM58 80h1v1h-1zM61 80h1v1h-1zM63 80h1v1h-1zM65 80h1v1h-1zM68 80h3v1h-3z"/>
+<path d="M43 81h1v1h-1zM50 81h1v1h-1zM53 81h1v1h-1zM58 81h1v1h-1zM61 81h1v1h-1zM64 81h2v1h-2zM71 81h1v1h-1z"/>
+<path d="M43 82h1v1h-1zM47 82h1v1h-1zM50 82h1v1h-1zM53 82h1v1h-1zM58 82h1v1h-1zM61 82h1v1h-1zM64 82h2v1h-2zM67 82h1v1h-1zM71 82h1v1h-1z"/>
+<path d="M44 83h3v1h-3zM50 83h1v1h-1zM53 83h1v1h-1zM57 83h3v1h-3zM61 83h1v1h-1zM65 83h1v1h-1zM68 83h3v1h-3z"/>
+</g>
+<g data-field="active-waypoint" data-draw="icon @ RADDY" data-box="73 21 3 3">
+<path d="M73 21h3v1h-3z"/>
+<path d="M73 22h3v1h-3z"/>
+<path d="M73 23h3v1h-3z"/>
+</g>
+<g data-field="active-waypoint" data-draw="label RADDY RADDY" data-box="43 13 29 7">
+<path d="M43 13h4v1h-4zM50 13h3v1h-3zM55 13h3v1h-3zM61 13h3v1h-3zM67 13h1v1h-1zM71 13h1v1h-1z"/>
+<path d="M43 14h1v1h-1zM47 14h1v1h-1zM49 14h1v1h-1zM53 14h1v1h-1zM55 14h1v1h-1zM58 14h1v1h-1zM61 14h1v1h-1zM64 14h1v1h-1zM67 14h1v1h-1zM71 14h1v1h-1z"/>
+<path d="M43 15h1v1h-1zM47 15h1v1h-1zM49 15h1v1h-1zM53 15h1v1h-1zM55 15h1v1h-1zM59 15h1v1h-1zM61 15h1v1h-1zM65 15h1v1h-1zM68 15h1v1h-1zM70 15h1v1h-1z"/>
+<path d="M43 16h4v1h-4zM49 16h5v1h-5zM55 16h1v1h-1zM59 16h1v1h-1zM61 16h1v1h-1zM65 16h1v1h-1zM69 16h1v1h-1z"/>
+<path d="M43 17h1v1h-1zM45 17h1v1h-1zM49 17h1v1h-1zM53 17h1v1h-1zM55 17h1v1h-1zM59 17h1v1h-1zM61 17h1v1h-1zM65 17h1v1h-1zM69 17h1v1h-1z"/>
+<path d="M43 18h1v1h-1zM46 18h1v1h-1zM49 18h1v1h-1zM53 18h1v1h-1zM55 18h1v1h-1zM58 18h1v1h-1zM61 18h1v1h-1zM64 18h1v1h-1zM69 18h1v1h-1z"/>
+<path d="M43 19h1v1h-1zM47 19h1v1h-1zM49 19h1v1h-1zM53 19h1v1h-1zM55 19h3v1h-3zM61 19h3v1h-3zM69 19h1v1h-1z"/>
+</g>
+<g data-field="aircraft" data-draw="icon # 46.8868,-121.1126" data-box="72 67 5 3">
+<path d="M72 67h2v1h-2zM75 67h2v1h-2z"/>
+<path d="M73 69h1v1h-1zM75 69h1v1h-1z"/>
+</g>
+</svg>

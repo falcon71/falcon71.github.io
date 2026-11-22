@@ -17,7 +17,7 @@ as `/kln90b/<slug>/`) and its package. Pages that do not exist yet are linked by
 | Getting started | Installation | `getting-started/installation` | getting-started (done) |
 | | Quickstart | `getting-started/quickstart` | getting-started (done) |
 | | Tutorial flight 1 | `getting-started/tutorial-1` | tutorial-1 |
-| | Tutorial flight 2 | `getting-started/tutorial-2` | tutorial-2 |
+| | Tutorial flight 2 | `getting-started/tutorial-2` | tutorial-2, tutorial-2-approach |
 | The unit | Controls and display | `unit/controls-and-display` | controls |
 | | Keyboard mode | `unit/keyboard-mode` | controls |
 | | Power-on and initialization | `unit/power-on` | power-on (done) |
@@ -199,7 +199,8 @@ anchors and page links above. After them the order follows "owners before the pa
 | 18 | messages | Messages; Message page messages; Status line messages; the Glossary page | done (2026-11-21) |
 | 19 | help | External hardware; FAQ and troubleshooting; Known limitations; Contact | done (2026-11-21) |
 | 20 | tutorial-1 | Tutorial flight 1 | done (2026-11-22) |
-| 21 | tutorial-2 | Tutorial flight 2 | not started |
+| 21 | tutorial-2 | Tutorial flight 2, up to the top of descent (split, 2026-11-22) | in review |
+| 22 | tutorial-2-approach | Tutorial flight 2, from the top of descent: the arrival, the approach, the visual approach | not started |
 | – | final pass | the whole manual (`docs/coordinator-prompt.md`, "The final pass") | not started |
 
 The SET chapter comes late on purpose: nearly every SET page is the setting of a function that another page owns, so
@@ -328,6 +329,11 @@ it is written when those owners exist. A package that proves too large in its re
   (`VolatileMemory.ts`, the start-page waypoint). The final pass makes the two owners agree (reviewer of Tutorial
   flight 1).
 
+- The package tutorial-2 (2026-11-22): in leg mode the desired track uses the variation at the aircraft, not a VOR's
+  published variation, so a leg along a charted VOR radial reads a few degrees off it (YKM to TITON on the radial 284
+  of YKM reads 290°). Modes of operation (`#leg-mode`) or the `DTK` field explanation could say so in a sentence
+  (writer of Tutorial flight 2).
+
 ## Site and generator notes
 
 Not manual text; for the maintainer or a session that works on the site.
@@ -359,6 +365,8 @@ Not manual text; for the maintainer or a session that works on the site.
   identification page never comes up by itself, and the ACT pages may show `I` where the simulator shows `T`.
   `flight-plans/type-page` works around it in its steps; making a CIFP terminal reference a terminal waypoint with
   its airport would be the clean fix (reviewer of Flight plans, 2026-11-19).
+- A screen folder name must match `[a-z0-9-]+`; throwaway screens of a researcher or a reviewer use `review-*`,
+  not `_review-*` (2026-11-22).
 - The generator cannot boot the unit cold: it settles every boot until the first fix, so a state before NAV ready
   is staged by a receiver reset (`pages/fpl/fpl-0-no-fix`).
 - The generator names a Center airspace with `K`, its ARTCC identifier and its FAA name (`KZSE SEATTLE`), because

@@ -4,13 +4,17 @@
 import {
 	adjustCourseIndicator,
 	APR_ARM_SWITCH,
+	courseDeg,
 	facility,
+	moveAircraft,
 	panelXml,
 	place,
+	pointFrom,
 	savedFlightplan,
 	wait,
 	type ScreenDescription,
 } from '../../generator/api.ts';
+import {COURSE_MESSAGE_DELAY} from '../../../vendor/kln90b/kln90b/data/PersistentMessages';
 import type {HeadlessUnit} from '../../../vendor/kln90b/test/harness/boot';
 import {fplIdents} from '../../../vendor/kln90b/test/harness/readers';
 import {Screen} from '../../../vendor/kln90b/test/harness/render/screen';
@@ -25,10 +29,30 @@ export const tut2Boot: NonNullable<ScreenDescription['boot']> = {
 	panelXml: panelXml(APR_ARM_SWITCH),
 };
 
+/**
+ * The unit at KYKM with FPL 0 empty, the way the tutorial starts: the pilot enters the route by hand
+ * (`enterRoute`). The other screens boot with the same FPL 0 stored, which gives the unit the same state.
+ */
+export const tut2EmptyBoot: NonNullable<ScreenDescription['boot']> = {
+	position: place('KYKM'),
+	panelXml: panelXml(APR_ARM_SWITCH),
+};
+
+/**
+ * Enters the en route waypoints into the empty FPL 0 the way the tutorial does: the left cursor on the blank waypoint
+ * position, each identifier, ENT and ENT. FPL 0 becomes active with its second waypoint, and the message ADJ NAV IND CRS
+ * TO that follows is answered on the external indicator. Ends with FPL 0 on the left and the cursor off.
+ */
+export async function enterRoute(u: HeadlessUnit): Promise<void> {
+	await u.panel.appendToFpl0(TUT2_ENROUTE);
+	await wait(1000);
+	await adjustCourseIndicator(u);
+}
+
 // The text of a list entry on APT 7 and APT 8 is its number and its name; the cursor covers the whole entry
 const YKM7 = '3 YKM7';
 const CHINS5 = '1 CHINS5';
-const YKM = '3 YKM';
+const YKM_TRANSITION = '3 YKM';
 // The list of approaches shows the RNAV (GPS) Y approach to 32L without its suffix
 const RNAV_32L = '1 RNAV 32L';
 const HUMPP = '2 HUMPP';
@@ -88,7 +112,7 @@ export async function cursorOnYkmTransition(u: HeadlessUnit): Promise<void> {
 	await cursorOnChins5(u);
 	await u.panel.ent();
 	// The cursor comes on at the first transition
-	await u.panel.cursorTo('R', YKM);
+	await u.panel.cursorTo('R', YKM_TRANSITION);
 }
 
 /**
@@ -167,7 +191,7 @@ export const CLEANED_UP = [
  * Turns the left outer knob until the cursor is on the entry of FPL 0 that shows `entry`, its number, mark and
  * waypoint ('4:TITON'). The search turns clockwise and, once the cursor stops at the end of the list, counterclockwise.
  */
-async function cursorToEntry(u: HeadlessUnit, entry: string): Promise<void> {
+export async function cursorToEntry(u: HeadlessUnit, entry: string): Promise<void> {
 	let dir: 1 | -1 = 1;
 	for (let i = 0; i < 60; i++) {
 		const field = u.panel.focused('L');
@@ -203,4 +227,102 @@ export async function cleanUpDuplicates(u: HeadlessUnit): Promise<void> {
 	if (idents.join(' ') !== CLEANED_UP.join(' ')) {
 		throw new Error(`cleanUpDuplicates: FPL 0 is ${idents.join(' ')}\n${Screen.read().dump()}`);
 	}
+}
+
+// The flight. The aircraft is staged, not flown: each step puts it where the tutorial has the pilot do something
+
+export const KYKM = place('KYKM');
+export const YKM = place('YKM');
+export const TITON = place('TITON');
+export const CHINS = place('CHINS');
+export const RADDY = place('RADDY');
+
+/** The true course of runway 27 at KYKM, 274° magnetic with the variation there. */
+const RUNWAY_27_TRUE = 289;
+const CLIMB_KT = 90;
+/** The groundspeed of the flight en route. */
+export const GROUNDSPEED_KT = 120;
+/** The radial 284 of YKM, along which the departure runs to TITON, as a true course. */
+const RADIAL_TRUE = courseDeg(YKM, TITON);
+
+/**
+ * The departure: FPL 0 complete, the right side turned to NAV 1 before takeoff, and the aircraft 2 NM out on runway
+ * heading, climbing. The unit flies the leg from KYKM to YKM, which the SID load made active.
+ */
+export async function climbOut(u: HeadlessUnit): Promise<void> {
+	await cleanUpDuplicates(u);
+	await u.panel.selectPage('R', 'NAV 1');
+	await moveAircraft(u, pointFrom(KYKM, RUNWAY_27_TRUE, 2), {groundspeedKt: CLIMB_KT, trackTrue: RUNWAY_27_TRUE});
+}
+
+/**
+ * The direct-to YKM made after the turn back toward YKM, 3 NM west of it: the Direct To page offers the active waypoint
+ * YKM, and ENT approves it. The course message that follows is answered on the indicator.
+ */
+export async function directToYkm(u: HeadlessUnit): Promise<void> {
+	await climbOut(u);
+	await u.panel.dct();
+	await u.panel.ent();
+	const west = pointFrom(YKM, 270, 3);
+	await moveAircraft(u, west, {groundspeedKt: CLIMB_KT, trackTrue: courseDeg(west, YKM)});
+	await wait(COURSE_MESSAGE_DELAY + 1000);
+	await adjustCourseIndicator(u);
+}
+
+/**
+ * OBS mode before YKM: the pilot turns the external indicator to 284, the radial of the SID, and presses ENT on MOD 2.
+ * The unit reads the indicator, so the selected course is 284.
+ */
+export async function obsOnRadial(u: HeadlessUnit): Promise<void> {
+	await directToYkm(u);
+	u.env.sim.set('Nav OBS:1', 'degrees', 284);
+	await wait(2000);
+	await u.panel.obsMode();
+}
+
+/** The aircraft `nm` out from YKM on the radial 284, flying outbound, in OBS mode. */
+export async function outboundOnRadial(u: HeadlessUnit, nm: number): Promise<void> {
+	await obsOnRadial(u);
+	await moveAircraft(u, pointFrom(YKM, RADIAL_TRUE, nm), {groundspeedKt: CLIMB_KT, trackTrue: RADIAL_TRUE});
+}
+
+/**
+ * Back to leg mode 8 NM out on the radial: YKM lies behind, so the unit makes the leg from YKM to TITON active. Its
+ * desired track differs from the indicator by more than 5°, and the course message that follows is answered on the
+ * indicator.
+ */
+export async function legModeToTiton(u: HeadlessUnit): Promise<void> {
+	await outboundOnRadial(u, 8);
+	await u.panel.selectPage('L', 'MOD 1');
+	await u.panel.ent();
+	await wait(COURSE_MESSAGE_DELAY + 1000);
+	await adjustCourseIndicator(u);
+}
+
+/**
+ * OBS mode 2 NM before TITON on the radial, for the hold: the indicator still shows the desired track of the leg, which
+ * the unit takes as the selected course through TITON.
+ */
+export async function obsAtTiton(u: HeadlessUnit): Promise<void> {
+	await legModeToTiton(u);
+	await moveAircraft(u, pointFrom(TITON, RADIAL_TRUE + 180, 2), {groundspeedKt: CLIMB_KT, trackTrue: RADIAL_TRUE});
+	await u.panel.obsMode();
+}
+
+/**
+ * En route in leg mode, `nm` past CHINS on the leg to RADDY. The aircraft is staged a mile past each waypoint before,
+ * so that the unit sequences them as in flight, and each course message is answered on the indicator.
+ */
+export async function pastChins(u: HeadlessUnit, nm: number): Promise<void> {
+	await cleanUpDuplicates(u);
+	const route = ['YKM', 'TITON', 'CADED', 'CHINS', 'RADDY'].map(place);
+	for (let i = 0; i < route.length - 1; i++) {
+		const legTrack = courseDeg(route[i], route[i + 1]);
+		await moveAircraft(u, pointFrom(route[i], legTrack, 1), {groundspeedKt: GROUNDSPEED_KT, trackTrue: legTrack});
+		await wait(2000);
+	}
+	const track = courseDeg(CHINS, RADDY);
+	await moveAircraft(u, pointFrom(CHINS, track, nm), {groundspeedKt: GROUNDSPEED_KT, trackTrue: track});
+	await wait(COURSE_MESSAGE_DELAY + 1000);
+	await adjustCourseIndicator(u);
 }

@@ -1,6 +1,23 @@
-<Field id="ident" title="Airport identifier">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Field>
-<Field id="title" title="Kind of procedure">Lorem ipsum dolor sit amet, sed do eiusmod tempor.</Field>
-<Field id="gromo4" title="First departure">Lorem ipsum dolor sit amet, ut labore et dolore magna aliqua.</Field>
-<Field id="wenas7" title="Second departure">Lorem ipsum dolor sit amet, quis nostrud exercitation.</Field>
-<Field id="ykm7" title="Departure under the cursor">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Field>
-<Field id="crsr" title="CRSR annunciation">Lorem ipsum dolor sit amet, sed do eiusmod tempor.</Field>
+<Field id="ident" title="Airport identifier">
+	The airport whose SIDs and STARs APT 7 shows, the same airport as on the other APT pages. To change it, turn the right outer knob counterclockwise from the first entry of the list until the cursor is on the identifier, and enter the new one.
+</Field>
+
+<Field id="title" title="List heading">
+	`SELECT SID` heads the list of the airport's <Term t="SID" />s. On the page of STARs it reads `SELECT STAR`.
+</Field>
+
+<Field id="gromo4" title="SID in the list">
+	A SID the unit offers for the airport, with its number in the list. The SIDs are numbered from 1 in the order of the database; SIDs the unit cannot fly are not listed and get no number.
+</Field>
+
+<Field id="wenas7" title="SID in the list">
+	Another SID of the airport, with its number in the list.
+</Field>
+
+<Field id="ykm7" title="SID under the cursor">
+	The SID the cursor marks, with its number. Press <kbd>ENT</kbd> to select it; the unit then asks for its runway or its transition, or shows its waypoints when there is nothing to ask. When the list is longer than the page, the bottom row shows the last SID, so its number tells you how many there are.
+</Field>
+
+<Field id="crsr" title="CRSR annunciation">
+	`CRSR` shows that the right cursor is on. With the cursor off, this field shows the page identification, `APT+7` or `APT 7`.
+</Field>

@@ -1,0 +1,51 @@
+<Field id="distance" title="Distance to the active waypoint">
+	The direct distance to the active waypoint in NM, never the distance along the route. It shows one decimal below 100 NM and whole NM from 100 NM.
+</Field>
+
+<Field id="ident" title="Active waypoint">
+	The identifier of the [active waypoint](/kln90b/operation/modes-of-operation/#the-active-waypoint). It flashes during [waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting).
+</Field>
+
+<Field id="mode" title="Mode annunciation">
+	The mode of the unit, which Super NAV 5 shows here because it has no status line: <Term t="ENR-LEG">`ENR-LEG`</Term> is Enroute-Leg mode. [The mode annunciations](/kln90b/operation/modes-of-operation/#the-mode-annunciations) explain the modes.
+</Field>
+
+<Field id="groundspeed" title="Groundspeed">
+	Your <Term t="GS">groundspeed</Term> in whole knots.
+</Field>
+
+<Field id="ete" title="Field 1: estimated time en route">
+	Field 1 of the left side of Super NAV 5 with the choice `ETE`: the <Term t="ETE">time to the active waypoint</Term> at your present groundspeed, as hours and minutes. With the left cursor on the field, the inner knob changes it to <Term t="XTK" /> or `VNAV` ([The left side of Super NAV 5](/kln90b/pages/nav/#the-left-side-of-super-nav-5)).
+</Field>
+
+<Field id="dtk" title="Field 2: desired track">
+	Field 2 of the left side of Super NAV 5 with the choice `DTK`: the <Term t="DTK">desired track</Term> as a magnetic course in whole degrees. The number flashes while an external course indicator that the unit reads is more than 10° off it. With the left cursor on the field, the inner knob changes it to <Term t="BRG" /> or `RAD` ([The left side of Super NAV 5](/kln90b/pages/nav/#the-left-side-of-super-nav-5)).
+</Field>
+
+<Field id="track" title="Field 3: track">
+	Field 3 of the left side of Super NAV 5 with the choice `TK`: your actual track as a magnetic course in whole degrees, which points up on the map in actual track up. It shows `---°` below a groundspeed of 2 kt. With the left cursor on the field, the inner knob changes it to <Term t="BRG" /> or `RAD` ([The left side of Super NAV 5](/kln90b/pages/nav/#the-left-side-of-super-nav-5)).
+</Field>
+
+<Field id="range" title="Range scale">
+	The range scale in NM: the distance from the aircraft to the top of the map. In actual track up the map reaches a third of that distance behind the aircraft. The left cursor comes on at this field ([The range scale and AUTO](/kln90b/pages/nav/#the-range-scale-and-auto)).
+</Field>
+
+<Field id="active-leg" title="Active leg">
+	The active leg of FPL 0: a line with an arrow that points to the active waypoint. In actual track up it runs up the map while you fly along it.
+</Field>
+
+<Field id="legs" title="Other legs of the flight plan">
+	The legs of FPL 0 before and after the active leg, as plain lines. Where a leg leaves the map, only the part on the map shows.
+</Field>
+
+<Field id="active-waypoint" title="Active waypoint on the map">
+	The active waypoint, a waypoint of FPL 0, as a small square followed by its identifier.
+</Field>
+
+<Field id="chins" title="Waypoint behind the aircraft">
+	A waypoint of FPL 0 that you have passed, as a small square followed by its identifier. In actual track up the waypoints behind you lie below the aircraft.
+</Field>
+
+<Field id="aircraft" title="Aircraft">
+	The aircraft, an aircraft symbol three quarters of the way down the map in actual track up. In North up and desired track up it is a diamond.
+</Field>

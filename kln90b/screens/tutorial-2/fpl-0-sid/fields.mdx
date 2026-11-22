@@ -1,0 +1,27 @@
+<Field id="from" title="From waypoint">
+	The departure airport, the waypoint the active leg starts from, with the tail of the [active leg symbol](/kln90b/pages/fpl/#the-active-leg-symbol) in front of it. The colon after the number shows an en route waypoint.
+</Field>
+
+<Field id="header" title="Procedure header">
+	The header of a <Term t="SID" />: its name, a dash and `SID`. The shaft of the active leg symbol in front of it shows that the active leg runs through the header. A header counts as no waypoint and has no number.
+</Field>
+
+<Field id="to" title="Active waypoint">
+	The first waypoint of the SID, the [active waypoint](/kln90b/operation/modes-of-operation/#the-active-waypoint), with the head of the active leg symbol in front of it. The period after the number shows a waypoint of a SID or a <Term t="STAR" />.
+</Field>
+
+<Field id="titon-sid" title="Last waypoint of the SID">
+	The last waypoint of the SID, with a period after the number.
+</Field>
+
+<Field id="titon-enroute" title="The same waypoint as an en route waypoint">
+	An en route waypoint, with a colon, that is also a waypoint of the SID. A load that repeats an en route waypoint in a procedure raises `REDUNDANT WPTS IN FPL`, and FPL 0 holds both copies until you delete one ([`REDUNDANT WPTS IN FPL`](/kln90b/operation/departures-arrivals/#redundant-wpts-in-fpl)).
+</Field>
+
+<Field id="last" title="Last waypoint">
+	The last waypoint of FPL 0, the destination airport. While the list is longer than the page, the last waypoint stays in the bottom row and the rows between scroll. The numbers count every waypoint of FPL 0, those of procedures included.
+</Field>
+
+<Field id="page" title="Page identification">
+	`FPL 0`, the active flight plan.
+</Field>

@@ -1,6 +1,23 @@
-<Field id="ident" title="Airport identifier">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Field>
-<Field id="title" title="Kind of procedure">Lorem ipsum dolor sit amet, sed do eiusmod tempor.</Field>
-<Field id="chins5" title="Arrival under the cursor">Lorem ipsum dolor sit amet, ut labore et dolore magna aliqua.</Field>
-<Field id="olm2" title="Second arrival">Lorem ipsum dolor sit amet, quis nostrud exercitation.</Field>
-<Field id="skyko1" title="Third arrival">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</Field>
-<Field id="crsr" title="CRSR annunciation">Lorem ipsum dolor sit amet, sed do eiusmod tempor.</Field>
+<Field id="ident" title="Airport identifier">
+	The airport whose SIDs and STARs APT 7 shows, the same airport as on the other APT pages. To change it, turn the right outer knob counterclockwise from the first entry of the list until the cursor is on the identifier, and enter the new one.
+</Field>
+
+<Field id="title" title="List heading">
+	`SELECT STAR` heads the list of the airport's <Term t="STAR" />s. On the page of SIDs it reads `SELECT SID`.
+</Field>
+
+<Field id="chins5" title="STAR under the cursor">
+	The STAR the cursor marks, with its number in the list. Press <kbd>ENT</kbd> to select it; the unit then asks for its transition or its runway, or shows its waypoints when there is nothing to ask.
+</Field>
+
+<Field id="olm2" title="STAR in the list">
+	Another STAR the unit offers for the airport, with its number. The STARs are numbered from 1 in the order of the database; STARs the unit cannot fly are not listed and get no number.
+</Field>
+
+<Field id="skyko1" title="Last STAR in the list">
+	The last STAR of the list. When the list is longer than the page, the bottom row shows the last STAR, so its number tells you how many there are.
+</Field>
+
+<Field id="crsr" title="CRSR annunciation">
+	`CRSR` shows that the right cursor is on. With the cursor off, this field shows the page identification, `APT+7` for an airport with SIDs and STARs.
+</Field>

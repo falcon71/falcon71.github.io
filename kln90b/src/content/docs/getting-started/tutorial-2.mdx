@@ -1,53 +1,286 @@
 ---
 title: Tutorial flight 2
-description: A flight plan with a departure, an arrival and a non-precision approach.
+description: A flight from Yakima to Boeing Field that walks you through building a flight plan with a SID, an airway, a STAR and an RNAV approach, flying a VOR radial and a hold in OBS mode, and reading the safe altitudes near Mount Rainier.
 ---
 
-import Callout from '../../../components/Callout.astro';
 import KlnScreen from '../../../components/KlnScreen.astro';
+import DirectToKey from '../../../components/DirectToKey.astro';
+import Callout from '../../../components/Callout.astro';
+import Term from '../../../components/Term.astro';
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-aliqua.
+This flight takes you from Yakima across the Cascades to Boeing Field in Seattle on an IFR route. You enter the route into FPL 0 by hand, load a <Term t="SID" />, a <Term t="STAR" /> and an <Term t="RNAV" /> approach, and clean up the waypoints they repeat. In flight you fly the departure along a VOR radial and a hold in OBS mode, and you read the safe altitudes near Mount Rainier.
+
+| Departure | Destination | Distance | Aircraft | Checked with |
+| --- | --- | --- | --- | --- |
+| KYKM, Yakima Air Terminal/McAllister Field, runway 27 | KBFI, Boeing Field/King County International, runway 32L | 100 NM along the flight plan | A small single-engine propeller aircraft that carries the KLN 90B | The simulator's default navigation data, AIRAC 2610 |
+
+{/* The maintainer confirms the AIRAC cycle when flying the tutorial. */}
+
+The route is `KYKM/27 YKM7 TITON V4 CHINS CHINS5 KBFI/R32LY`: the YAKIMA SEVEN departure from runway 27 to TITON, the airway V4 to CHINS, the CHINS FIVE arrival and the RNAV (GPS) Y approach to runway 32L. With the climb, the turn back to Yakima and the hold, the flight takes about an hour.
+
+## What you need
+
+You need an aircraft in which the KLN 90B is the main GPS: the KLN 90B must drive your CDI or HSI. That is the normal installation. If the needle of your CDI or HSI does not move once FPL 0 is active, choose another aircraft; [An aircraft that carries the unit](/kln90b/getting-started/installation/#an-aircraft-that-carries-the-unit) says where to find one.
 
 <Callout kind="availability">
-	Lorem ipsum: the approach part of this flight needs a unit that is installed for approaches. Without it, the
-	departure and the arrival on APT 7 still work; only the approach is replaced by a visual approach.
+The approach at the end of this flight needs a unit installed for non-precision approaches, which has APT 8. Not every aircraft has such an installation. The SID and the STAR are on APT 7, which every installation has, so fly this flight all the same: you load both and fly a visual approach at the end instead of the RNAV approach.
 </Callout>
 
-## Route
+The flight builds on [Tutorial flight 1](/kln90b/getting-started/tutorial-1/): it takes the power-on, the cursor and entering an identifier as known, and starts with the unit on and NAV ready at Yakima.
 
-| Leg | From | To   | Via                  |
-| --- | ---- | ---- | -------------------- |
-| 1   | KCCC | ABCDE | Departure LOREM1    |
-| 2   | ABCDE | FGHIJ | Direct             |
-| 3   | FGHIJ | KDDD | Arrival IPSUM2       |
+The unit holds no altitudes, no headings and no holding patterns of the procedures, so fly with the charts. The FAA's [chart search](https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/dtpp/search/) finds them by airport:
 
-## Building the flight plan
+- for KYKM, the airport diagram and the departure YAKIMA SEVEN;
+- for KBFI, the airport diagram, the arrival CHINS FIVE and the approach RNAV (GPS) Y RWY 32L.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+For V4 between TITON and CHINS you need the FAA's [IFR en route low altitude chart](https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/ifr/) of the area. Every altitude, and the direction and the inbound course of the hold at TITON, comes from these charts.
 
-<KlnScreen screen="tutorial-2/apt-7-sid-procedure" />
+{/* Maintainer: name the FAA IFR en route low altitude chart that shows V4 between YKM and CHINS. */}
 
-<KlnScreen screen="tutorial-2/apt-7-sid-load" />
+## Entering the flight plan
 
-<KlnScreen screen="tutorial-2/apt-7-star-procedure" />
+You enter the route into FPL 0 on the ground at Yakima, waypoint by waypoint: KYKM, TITON, CADED, CHINS and KBFI. [Creating a flight plan](/kln90b/operation/flight-plans/#creating-a-flight-plan) explains each step; [Keyboard mode](/kln90b/unit/keyboard-mode/) lets you type the identifiers instead.
 
-<KlnScreen screen="tutorial-2/apt-7-star-transition" />
+**The unit cannot load an airway.** FPL 0 holds waypoints only, so you enter V4 fix by fix from the en route chart: TITON where you join it, CADED on the way and CHINS where you leave it. A route loaded from the <Term t="EFB" /> can name an airway, but the unit enters it as its fixes too ([Loading a route from the EFB](/kln90b/operation/flight-plans/#loading-a-route-from-the-efb)); this flight enters its route by hand.
 
-<KlnScreen screen="tutorial-2/apt-7-star-load" />
+FPL 0 must be empty. If it holds an old route, delete it first ([Deleting a flight plan](/kln90b/operation/flight-plans/#deleting-a-flight-plan)).
 
-{/* For the test only: this screen proves that the generator can show the whole assembled route on Super NAV 5. At
-this range scale the map is crowded and the labels cover most of the legs, so it is not an example for the manual. The written
-tutorial uses a less crowded Super NAV 5 screen: a shorter range scale or a part of the route. */}
+To enter the route:
 
-<KlnScreen screen="tutorial-2/super-nav-5-route" />
+1. Turn the left outer knob to the FPL pages and the left inner knob to FPL 0.
+2. Press the left <kbd>CRSR</kbd>. The cursor is on the blank first waypoint position.
+3. Enter KYKM with the left knobs and press <kbd>ENT</kbd>. The right side shows APT 1 of Yakima for approval. Press <kbd>ENT</kbd> again to approve it.
+4. Enter TITON the same way and approve its INT page. With two waypoints in FPL 0, the unit makes the leg from KYKM to TITON active at once, and <Term t="MSG">`MSG`</Term> flashes in the status line for `ADJ NAV IND CRS TO 302°`. Leave it for now; the course changes with the next steps.
+5. Enter CADED, CHINS and KBFI the same way.
+6. Press the left <kbd>CRSR</kbd> to turn the cursor off.
 
-## The approach
+<KlnScreen screen="tutorial-2/fpl-0-route" />
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+Every waypoint has a colon after its number: you entered it, so it is an en route waypoint. The active leg symbol runs from `1:KYKM` to `2:TITON` ([The active leg symbol](/kln90b/pages/fpl/#the-active-leg-symbol)). If an identifier brings up a list of waypoints with the same identifier, choose the one in Washington ([Choosing between duplicate identifiers](/kln90b/operation/waypoints/#choosing-between-duplicate-identifiers)).
 
-<KlnScreen screen="tutorial-2/apt-8-approach" />
+## Loading the departure
 
-<KlnScreen screen="tutorial-2/apt-8-iaf" />
+The SID goes into FPL 0 on the ground, from APT 7 of Yakima ([Loading a SID](/kln90b/operation/departures-arrivals/#loading-a-sid)). YAKIMA SEVEN is listed as `YKM7`.
 
-<KlnScreen screen="tutorial-2/apt-8-load" />
+To load YKM7:
+
+1. Show KYKM on APT 1, as you showed Friday Harbor in Tutorial flight 1.
+2. Turn the right inner knob counterclockwise to APT 7. KYKM has SIDs only, so APT 7 has one page.
+3. Press the right <kbd>CRSR</kbd> and turn the right outer knob until the cursor is on `3 YKM7`.
+
+   <KlnScreen screen="tutorial-2/apt-7-sid-procedure" />
+
+4. Press <kbd>ENT</kbd>. The unit shows the waypoints of the SID at once, `YKM` and `TITON`, with the cursor on `LOAD IN FPL`. It asks for no runway, because every runway of YKM7 leads to the same waypoints, and for no <Term t="Transition">transition</Term>, because YKM7 has none.
+
+   <KlnScreen screen="tutorial-2/apt-7-sid-load" />
+
+5. Press <kbd>ENT</kbd> on `LOAD IN FPL`. The unit loads the SID and shows FPL 0 on the left side.
+
+<KlnScreen screen="tutorial-2/fpl-0-sid" />
+
+The SID stands right after `1:KYKM` under its header `YKM7-SID`, and its waypoints have a period after the number. `TITON` is now in FPL 0 twice: `3.TITON` of the SID and `4:TITON`, the en route waypoint you entered. The unit tells you so with `REDUNDANT WPTS IN FPL` ([`REDUNDANT WPTS IN FPL`](/kln90b/operation/departures-arrivals/#redundant-wpts-in-fpl)); you delete the copies once all procedures are loaded.
+
+The active leg is now the leg from KYKM to YKM, the leg of FPL 0 closest to the aircraft ([Flying a SID or a STAR](/kln90b/operation/departures-arrivals/#flying-a-sid-or-a-star)). Press <kbd>MSG</kbd> to read the messages: one is `ADJ NAV IND CRS TO 074°`, so turn your CDI or HSI to 074°. Press <kbd>MSG</kbd> again to close the MSG page.
+
+Of YKM7 the unit keeps the two waypoints, YKM and TITON. It drops the climb from the runway, which ends at an altitude, and the hold at TITON, because it drops every holding pattern and keeps only its fix ([What the unit keeps of a procedure](/kln90b/operation/departures-arrivals/#what-the-unit-keeps-of-a-procedure)). You fly the turns toward YKM and TITON as the chart shows, and the hold yourself, as the departure and the hold below describe.
+
+## Loading the arrival
+
+On a real flight you load the STAR en route, once you know the arrival. Here you load it on the ground, so that the whole flight plan is ready before takeoff. CHINS FIVE is on APT 7 of Boeing Field as `CHINS5`.
+
+To load CHINS5:
+
+1. Turn the right inner knob to APT 1 and enter KBFI.
+2. Turn the right inner knob two steps counterclockwise, past APT 8, to APT 7. KBFI has SIDs and STARs, and this way you come to its STARs first ([APT 7: SID and STAR procedures](/kln90b/pages/apt/#apt-7-sid-and-star-procedures)).
+3. Press the right <kbd>CRSR</kbd>. The cursor comes on at `1 CHINS5`.
+
+   <KlnScreen screen="tutorial-2/apt-7-star-procedure" />
+
+4. Press <kbd>ENT</kbd>. The unit shows the transitions of CHINS5: `1 PDT`, `2 SUNED` and `3 YKM`.
+5. Turn the right outer knob until the cursor is on `3 YKM`.
+
+   <KlnScreen screen="tutorial-2/apt-7-star-transition" />
+
+6. Press <kbd>ENT</kbd>. The unit shows the waypoints of the STAR from YKM, with the cursor on `LOAD IN FPL`. It asks for no runway, because every runway of CHINS5 leads to the same waypoints.
+
+   <KlnScreen screen="tutorial-2/apt-7-star-load" />
+
+7. Press <kbd>ENT</kbd> on `LOAD IN FPL`. The unit loads the STAR in front of KBFI and shows FPL 0 on the left side.
+
+**A transition must be selected whenever the procedure has one.** Your route joins CHINS5 at CHINS, but every transition of CHINS5 starts before CHINS, and the list has no entry for the STAR from CHINS alone. This is the unit's correct behavior, not a fault ([A transition must be selected](/kln90b/operation/departures-arrivals/#a-transition-must-be-selected)). You select the transition that suits the route best, here YKM, and delete the waypoints that FPL 0 then holds twice.
+
+The STAR goes after `6:CHINS`, in front of KBFI. To see it, press the left <kbd>CRSR</kbd> and turn the left outer knob down the list:
+
+<KlnScreen screen="tutorial-2/fpl-0-star" />
+
+`8.CHINS` repeats the en route waypoint `6:CHINS`, and `REDUNDANT WPTS IN FPL` comes again. `7.YKM` raises no message, because the YKM that FPL 0 already holds is in the SID, not among the en route waypoints, yet it would send you from CHINS back to Yakima. Read the message with <kbd>MSG</kbd>, and press the left <kbd>CRSR</kbd> to turn the cursor off.
+
+## Loading the approach
+
+<Callout kind="availability">
+Approaches are available only if the unit is installed for non-precision approaches. Without such an installation the unit has no APT 8; skip this section and go on with [Deleting the waypoints the flight plan holds twice](#deleting-the-waypoints-the-flight-plan-holds-twice).
+</Callout>
+
+The approach goes into FPL 0 from APT 8 of Boeing Field, which lists RNAV (GPS) Y RWY 32L as `RNAV 32L` ([Loading an approach](/kln90b/operation/approaches/#loading-an-approach)). It is the only approach of KBFI that the unit offers ([Which approaches the unit offers](/kln90b/operation/approaches/#which-approaches-the-unit-offers)).
+
+To load the approach:
+
+1. Turn the right inner knob one step clockwise from the STARs of APT 7 to APT 8.
+2. Press the right <kbd>CRSR</kbd>. The cursor comes on at `1 RNAV 32L`.
+
+   <KlnScreen screen="tutorial-2/apt-8-approach" />
+
+3. Press <kbd>ENT</kbd>. The unit lists the <Term t="IAF">initial approach fixes</Term> after `IAF`: `ARVAD`, `HUMPP` and `WOODI`.
+4. Turn the right outer knob until the cursor is on `2 HUMPP`.
+
+   <KlnScreen screen="tutorial-2/apt-8-iaf" />
+
+5. Press <kbd>ENT</kbd>. The unit shows the waypoints of the approach from HUMPP to the end of the missed approach, with the cursor on `LOAD IN FPL`.
+
+   <KlnScreen screen="tutorial-2/apt-8-load" />
+
+6. Press <kbd>ENT</kbd> on `LOAD IN FPL`. The unit loads the approach after the STAR, in front of KBFI.
+
+**An approach starts only at an IAF.** CHINS5 runs over HUMPP and AUBRN, the IAF and the intermediate fix of the approach, but you cannot start the approach at AUBRN. You select the IAF on the STAR, HUMPP, as the unit requires ([An approach starts only at an IAF](/kln90b/operation/approaches/#an-approach-starts-only-at-an-iaf)).
+
+This load raises no message, although HUMPP and AUBRN are now in FPL 0 twice: the copies stand in the STAR, and only copies among the en route waypoints raise one ([Waypoints that FPL 0 holds twice](/kln90b/operation/approaches/#waypoints-that-fpl-0-holds-twice)).
+
+## Deleting the waypoints the flight plan holds twice
+
+FPL 0 now holds five waypoints that the procedures repeat. Delete them from the bottom of the list up, so that the numbers of the waypoints above stay as this list gives them:
+
+- **`11.AUBRN` and `10.HUMPP`,** the end of the STAR. The approach starts at HUMPP and runs over AUBRN, and the waypoints of an approach cannot be deleted, so the copies go from the STAR.
+- **`7.YKM`,** the start of the STAR's transition. It lies behind you by the time you reach CHINS.
+- **`6:CHINS`,** the en route copy of the STAR's `8.CHINS`. Delete the en route copy, so that the STAR stays complete.
+- **`4:TITON`,** the en route copy of the SID's `3.TITON`. Keep the SID's TITON: where the unit knows the hold of YKM7, that is the waypoint that carries it.
+
+To delete each of them:
+
+1. Press the left <kbd>CRSR</kbd> and turn the left outer knob until the cursor is on the waypoint.
+2. Press <kbd>CLR</kbd>. The row asks `DEL` and the identifier with `?`.
+3. Press <kbd>ENT</kbd>. The waypoint is gone, and the rows below it move up.
+
+When all five are gone, press the left <kbd>CRSR</kbd> to turn the cursor off. [Deleting a waypoint](/kln90b/operation/flight-plans/#deleting-a-waypoint) explains the steps, and how to keep a waypoint you selected by mistake. FPL 0 now holds 15 waypoints and reads from the top:
+
+<KlnScreen screen="tutorial-2/fpl-0-done" />
+
+Further down, the STAR `CHINS5-STAR` holds `5.CHINS` and `6.RADDY`, and the approach follows with its header `R32L-KBFI`:
+
+<KlnScreen screen="tutorial-2/fpl-0-done-approach" />
+
+After `8 COVOG` come `9 AUBRN`, `10 DUANE-F`, the runway `11 RW32L-M`, the fence `*NO WPT SEQ`, the missed approach `12 FEVAS`, `13 GRRAM` and `14 LOFAL-H`, and the airport `15:KBFI` ([The approach in FPL 0](/kln90b/operation/approaches/#the-approach-in-fpl-0)). Compare the waypoints with your charts once more before you go on.
+
+**Without an approach** in FPL 0, delete only `7.YKM`, `6:CHINS` and `4:TITON`. The STAR keeps HUMPP and AUBRN, and FPL 0 ends with `7.HUMPP`, `8.AUBRN` and `9:KBFI`.
+
+## The flight plan in the EFB
+
+<Callout kind="sim-only">
+The real unit has no EFB. In the simulator, the EFB can ask the unit for FPL 0.
+</Callout>
+
+With FPL 0 complete, you can show it in the simulator's EFB as a reference for the flight ([Sending FPL 0 to the EFB](/kln90b/operation/flight-plans/#sending-fpl-0-to-the-efb)). Open the flight planner app of the EFB, select the Route tab, click Import and choose `REQUEST FROM AVIONICS`. The unit sends KYKM and KBFI as the airports, YKM7, CHINS5 with its transition YKM and the approach with HUMPP by name, and CADED as the only en route fix, because every other waypoint belongs to a procedure. FPL 0 stays as it is. The EFB names runway 09 for the departure and runway 14L for the arrival, because the unit asked you for no runway; that changes nothing in FPL 0, and you still depart from runway 27 and land on 32L. If nothing arrives, a simulated failure of the output that carries the navigation data may be active, and the request then fails without a message ([The outputs to the aircraft](/kln90b/operation/failures/#the-outputs-to-the-aircraft)).
+
+## The departure
+
+YAKIMA SEVEN has you make a climbing right turn from runway 27 direct to YKM, and then follow the radial 284 of YKM to TITON. The unit holds YKM and TITON, so you fly the turns toward them as the chart shows; then OBS mode flies the radial the way a VOR receiver does ([OBS mode](/kln90b/operation/modes-of-operation/#obs-mode)).
+
+Before you taxi, turn the right outer knob one step counterclockwise from the APT pages to the NAV pages, and the right inner knob to NAV 1. With APT 8 of KBFI on the right, the Direct To page would offer KBFI; with NAV 1 it offers the active waypoint ([The default waypoint](/kln90b/operation/direct-to/#the-default-waypoint)). Leave FPL 0 on the left.
+
+To fly to YKM:
+
+1. Take off from runway 27 and start the climbing right turn toward YKM as the chart says. The unit flies the leg from KYKM to YKM, which the turn takes you away from at first.
+2. Press <DirectToKey />. The Direct To page offers YKM, the active waypoint, and the right side shows the VOR page of YKM for approval.
+
+   <KlnScreen screen="tutorial-2/direct-to-ykm" />
+
+3. Press <kbd>ENT</kbd>. The direct-to is active: NAV 1 shows the Direct To symbol before `YKM`, with the D-bar centered on a course from where you are.
+
+The direct-to lays a new course to YKM, the way [Recentering the D-bar](/kln90b/operation/direct-to/#recentering-the-d-bar) describes, and because YKM is in FPL 0 the unit goes on along FPL 0 after it ([Flying direct to a waypoint of the flight plan](/kln90b/operation/direct-to/#flying-direct-to-a-waypoint-of-the-flight-plan)). If `MSG` flashes, read `ADJ NAV IND CRS TO` and turn your CDI or HSI to the course it gives.
+
+To fly the radial in OBS mode:
+
+1. Turn the course of your CDI or HSI to 284°, the radial of the chart.
+2. Turn the left outer knob one step counterclockwise to the MOD pages and the left inner knob to MOD 2.
+3. Press <kbd>ENT</kbd>. MOD 2 shows `ACTIVE MODE` and `OBS 284°`, and the mode annunciation <Term t="ENR:">`ENR:284`</Term>.
+
+   <KlnScreen screen="tutorial-2/mod-2-obs-284" />
+
+4. Fly over YKM and turn right onto the radial, as the chart says. The unit keeps YKM as the active waypoint, because it never sequences in OBS mode, and the D-bar shows how far you are from the radial.
+
+MOD 2 shows `OBS 284°` without a colon where the unit reads your CDI or HSI and takes its course. Where it shows `OBS:` with a colon, the unit chose the course itself when you pressed <kbd>ENT</kbd>; set 284° on MOD 2 then, as [The selected course](/kln90b/operation/modes-of-operation/#the-selected-course) describes. Where your aircraft has a GPS CRS switch, the switch selects OBS mode instead of <kbd>ENT</kbd> ([Selecting leg or OBS mode](/kln90b/operation/modes-of-operation/#selecting-leg-or-obs-mode)).
+
+Before YKM the D-bar already shows FROM, because the course points away from YKM to the northwest; it shows where the radial lies and centers once you are on it. Past YKM, on the radial, turn the left outer knob two steps clockwise to the NAV pages and the left inner knob to NAV 3. At 5 NM out it looks like this:
+
+<KlnScreen screen="tutorial-2/nav-radial" />
+
+NAV 3 shows `OBS 284°` and a track of 284°, and `FLY` is close to zero. NAV 1 shows the bearing back to YKM, 104°, the reciprocal of the radial. `ESA` covers only the way to YKM in OBS mode, which lies behind you, so it shows the value of your own sector ([Minimum safe altitudes](/kln90b/pages/nav/#minimum-safe-altitudes)).
+
+Once you are established on the radial, change back to [leg mode](/kln90b/operation/modes-of-operation/#leg-mode). Leg mode flies the leg of FPL 0 to TITON, gives you its <Term t="DTK">desired track</Term> as the course for your indicator, and, where the database has the hold, reminds you of it before TITON.
+
+To change back to leg mode:
+
+1. Turn the left outer knob to the MOD pages and the left inner knob to MOD 1.
+2. Press <kbd>ENT</kbd>. MOD 1 shows `ACTIVE MODE`, and the mode annunciation `ENR-LEG`.
+
+YKM lies behind you, so the unit makes the leg of FPL 0 closest to you active, the leg from YKM to TITON ([Changing between the modes](/kln90b/operation/modes-of-operation/#changing-between-the-modes)). On NAV 3 it reads like this:
+
+<KlnScreen screen="tutorial-2/nav-3-leg-titon" />
+
+The desired track is 290°, not 284°, although the leg runs along the radial. The radial is measured with the published magnetic variation of YKM, 21°E, which the VOR page shows; the desired track with the variation at your position, about 6° less. Both numbers describe the same line. Where the unit reads your CDI or HSI, `MSG` flashes for `ADJ NAV IND CRS TO 290°`: turn the indicator to 290°.
+
+## The hold at TITON
+
+YAKIMA SEVEN has a holding pattern at TITON, in which you climb to the altitude the charts give for V4 before you go on; the arrival needs at least 10,000 ft. The inbound leg of the hold is the radial 284 itself, toward TITON, with left turns, so the hold lies southeast of TITON along the radial you fly. The unit does not fly the hold, so you fly it in OBS mode with TITON as the active waypoint.
+
+Where the database has the hold of YKM7, the unit keeps TITON as a [fly-over waypoint](/kln90b/operation/sequencing/#fly-over-waypoints), and as you near it, `MSG` flashes for `IF REQUIRED SELECT OBS`. That is the unit's reminder that the procedure holds here and that you fly the hold in OBS mode ([`IF REQUIRED SELECT OBS`](/kln90b/operation/departures-arrivals/#if-required-select-obs)). Read it with <kbd>MSG</kbd>; it goes when you change to OBS mode.
+
+<Callout kind="info">
+At TITON the unit measures the selected course with the magnetic variation at TITON, not with the 21°E of YKM that the radial uses ([The selected course](/kln90b/operation/modes-of-operation/#the-selected-course)). The radial 284 of YKM therefore reads about 290° here, and every course that the chart gives from YKM reads about 6° more on the unit.
+</Callout>
+
+To enter the hold:
+
+1. Turn the left outer knob to the MOD pages and the left inner knob to MOD 2, before you reach TITON.
+2. Leave your CDI or HSI on 290°, the desired track of the leg to TITON: it is the inbound course of the hold, the radial 284, as the unit counts it at TITON.
+3. Press <kbd>ENT</kbd>. The unit is in OBS mode with TITON as the active waypoint and the selected course 290°.
+4. Turn the left outer knob two steps clockwise to the NAV pages and the left inner knob to NAV 3. `FLY` is close to zero: the course line runs along the radial.
+
+   <KlnScreen screen="tutorial-2/obs-titon" />
+
+5. Fly the hold by the chart. TITON stays the active waypoint the whole time, and the D-bar guides you on the inbound leg.
+
+Where MOD 2 shows `OBS:` with a colon, the unit takes the course of the leg at TITON, about 290° as well; check it on MOD 2, and change it there if needed, as on the departure.
+
+With the inbound course as the selected course, the TO/FROM indicator shows FROM only from TITON until you are abeam TITON in the turn to the outbound leg. On the outbound leg and on the inbound leg it shows TO, because the hold lies on your side of TITON. On the outbound leg you fly against the selected course, so the D-bar reads reversed there.
+
+When you have reached your altitude, leave the hold on the inbound leg, with TITON ahead of you, and change back to leg mode as on the departure: MOD 1 and <kbd>ENT</kbd>. The unit flies to TITON along the selected course and then goes on along FPL 0 to CADED. Change to leg mode before TITON: with TITON behind you, the unit makes the leg of FPL 0 closest to you active, and that can already be a leg after CADED ([Changing between the modes](/kln90b/operation/modes-of-operation/#changing-between-the-modes)). If `MSG` flashes, turn your indicator to the course of `ADJ NAV IND CRS TO`.
+
+## En route
+
+From TITON the unit flies V4 over CADED to CHINS, and then the STAR on to RADDY, in leg mode. It sequences from waypoint to waypoint by itself, with [waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting) before each one, and the turns along V4 are a degree or two. The header `CHINS5-STAR` is no waypoint, so the unit goes from CADED straight on to CHINS ([The procedure in FPL 0](/kln90b/operation/departures-arrivals/#the-procedure-in-fpl-0)).
+
+Past CHINS the leg to RADDY runs south of Mount Rainier, so look at the safe altitudes. Turn the left outer knob to the NAV pages and the left inner knob to NAV 3. At 8 NM past CHINS it looks like this:
+
+<KlnScreen screen="tutorial-2/nav-3-cascades" />
+
+`MSA`, the minimum safe altitude of the sector you are in, shows 16,300 ft: the one-degree sector that holds Mount Rainier begins about 3 NM past CHINS. `ESA`, the highest minimum safe altitude along the rest of FPL 0, shows the same, and in leg mode it has shown 16,300 ft since Yakima, because the route crosses this sector ([Minimum safe altitudes](/kln90b/pages/nav/#minimum-safe-altitudes)). Before the sector, `MSA` showed 8,100 ft; about 19 NM past CHINS, where you cross 47°N, it falls to 9,900 ft. A sector value covers the highest terrain anywhere in the sector; the altitudes of the route are on the charts.
+
+For a map, show Super NAV 5, the map on the whole screen, in actual track up. Super NAV 5 has a map orientation of its own, so it starts in North up even if you turned NAV 5 to actual track up in Tutorial flight 1 ([Super NAV 5: the map on the whole screen](/kln90b/pages/nav/#super-nav-5-the-map-on-the-whole-screen)).
+
+To show Super NAV 5 in actual track up:
+
+1. Turn the right inner knob to NAV 5, and then the left inner knob to NAV 5. With NAV 5 on both sides, Super NAV 5 fills the screen.
+2. Press the right <kbd>CRSR</kbd>. The pop-up menu opens at the top right, with the cursor on its first entry ([The pop-up menu](/kln90b/pages/nav/#the-pop-up-menu)).
+3. Turn the right outer knob three steps clockwise. The cursor is on the map orientation, the last entry.
+4. Turn the right inner knob clockwise until the entry shows `TK^`, actual track up. The map turns at once.
+5. Press the right <kbd>CRSR</kbd> to close the pop-up menu.
+6. Press the left <kbd>CRSR</kbd>. The cursor comes on at the range scale, 40 to start with.
+7. Turn the left inner knob one step counterclockwise to 30, and press the left <kbd>CRSR</kbd> to turn the cursor off.
+
+<KlnScreen screen="tutorial-2/super-nav-5-track-up" />
+
+The leg to RADDY runs straight up the map ahead of the aircraft symbol, with CHINS behind you. The left side shows RADDY with its distance, the mode, the groundspeed, the time to RADDY, the desired track and the actual track ([The left side of Super NAV 5](/kln90b/pages/nav/#the-left-side-of-super-nav-5)). [The map orientation](/kln90b/pages/nav/#the-map-orientation) explains the other map orientations. To leave Super NAV 5, turn either side to another page.
+
+Near RADDY, 28 NM past CHINS, the descent for the arrival begins.
+
+{/* The package tutorial-2-approach continues here: the descent and the arrival, the approach, a visual approach without approaches, where to go next. */}
