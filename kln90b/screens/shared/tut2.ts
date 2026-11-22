@@ -19,6 +19,7 @@ import type {HeadlessUnit} from '../../../vendor/kln90b/test/harness/boot';
 import {fplIdents} from '../../../vendor/kln90b/test/harness/readers';
 import {LEG_OBS_SWITCH} from '../../../vendor/kln90b/test/harness/panelXml';
 import {Screen} from '../../../vendor/kln90b/test/harness/render/screen';
+import {distanceNm} from '../../../vendor/kln90b/test/harness/flight/geo';
 
 /** The en route waypoints of the flight, in the order the pilot enters them into FPL 0. */
 export const TUT2_ENROUTE = ['KYKM', 'TITON', 'CADED', 'CHINS', 'KBFI'];
@@ -327,6 +328,14 @@ export async function obsAtTiton(u: HeadlessUnit): Promise<void> {
  */
 export async function pastChins(u: HeadlessUnit, nm: number): Promise<void> {
 	await cleanUpDuplicates(u);
+	await flyPastChins(u, nm);
+}
+
+/**
+ * The flight from KYKM to `nm` past CHINS in leg mode, with whatever procedures FPL 0 holds: the aircraft is staged a
+ * mile past each waypoint, and each course message is answered on the indicator.
+ */
+export async function flyPastChins(u: HeadlessUnit, nm: number): Promise<void> {
 	const route = ['YKM', 'TITON', 'CADED', 'CHINS', 'RADDY'].map(place);
 	for (let i = 0; i < route.length - 1; i++) {
 		const legTrack = courseDeg(route[i], route[i + 1]);
@@ -375,6 +384,172 @@ export async function vnavToCovog(u: HeadlessUnit): Promise<void> {
 	await u.panel.ent();
 	// Past the offset, which stays 00, onto the units of the angle
 	await u.panel.outer('L', 2);
+	await wait(1000);
+	await setLeftDigit(u, '3');
+	await u.panel.outer('L', 1);
+	await setLeftDigit(u, '0');
+	await wait(1000);
+	await u.panel.cursor('L');
+}
+
+// The descent and the approach. The aircraft is staged along the legs of FPL 0 from the state `vnavToCovog` leaves
+
+/** The position of the first waypoint of FPL 0 with the identifier `ident`. */
+function fplWpt(u: HeadlessUnit, ident: string): {lat: number; lon: number} {
+	const leg = u.props.memory.fplPage.flightplans[0].getLegs().find(l => l.wpt.icaoStruct.ident === ident);
+	if (leg === undefined) throw new Error(`fplWpt: no ${ident} in FPL 0 (${fplIdents(u).join(' ')})`);
+	return {lat: leg.wpt.lat, lon: leg.wpt.lon};
+}
+
+/**
+ * Puts the aircraft `nm` before the waypoint `to` of FPL 0 on the great circle from the waypoint `from`, flying toward
+ * `to` at the en route groundspeed; a negative `nm` puts it that far past `to` on the same course. Then waits a second.
+ */
+export async function onLeg(u: HeadlessUnit, from: string, to: string, nm: number): Promise<void> {
+	const a = fplWpt(u, from);
+	const b = fplWpt(u, to);
+	const track = courseDeg(a, b);
+	const p = nm >= 0 ? pointFrom(b, courseDeg(b, a), nm) : pointFrom(b, track, -nm);
+	await moveAircraft(u, p, {groundspeedKt: GROUNDSPEED_KT, trackTrue: nm >= 0 ? courseDeg(p, b) : track});
+	await wait(1000);
+}
+
+/** Sets the altitude of the aircraft, the indicated altitude and the pressure altitude the unit reads alike. */
+function setAltitude(u: HeadlessUnit, ft: number): void {
+	u.env.sim.set('PLANE ALTITUDE', 'feet', ft);
+	u.env.sim.set('PRESSURE ALTITUDE', 'feet', ft);
+}
+
+/** Puts the aircraft on the vertical path: at the advisory altitude of an active VNAV, rounded to 10 ft. */
+async function onPath(u: HeadlessUnit): Promise<void> {
+	const advisory = u.props.vnav.advisoryAltitude;
+	if (advisory !== null) setAltitude(u, Math.round(advisory / 10) * 10);
+	await wait(1000);
+}
+
+/**
+ * The countdown to the descent: past RADDY with the right side turned to NAV 1, 10 NM before HUMPP at 10,000 ft. NAV 4
+ * stays on the left.
+ */
+export async function vnavCountdown(u: HeadlessUnit): Promise<void> {
+	await vnavToCovog(u);
+	await u.panel.selectPage('R', 'NAV 1');
+	// A mile past RADDY, so that the unit sequences it, then on along the leg to HUMPP
+	await onLeg(u, 'RADDY', 'HUMPP', courseLegNm(u, 'RADDY', 'HUMPP') - 1);
+	await wait(1000);
+	await adjustCourseIndicator(u);
+	await onLeg(u, 'RADDY', 'HUMPP', 10);
+}
+
+/** The length of the great circle from the waypoint `from` of FPL 0 to the waypoint `to`, in NM. */
+function courseLegNm(u: HeadlessUnit, from: string, to: string): number {
+	return distanceNm(fplWpt(u, from), fplWpt(u, to));
+}
+
+/**
+ * 2 NM before HUMPP, still at 10,000 ft: the descent point and the point 30 NM from KBFI, where the unit arms the
+ * approach, lie together here, so VNAV has become active and the approach armed at once, and PRESS ALT TO SET BARO waits
+ * unread.
+ */
+export async function vnavActiveAndArmed(u: HeadlessUnit): Promise<void> {
+	await vnavCountdown(u);
+	await onLeg(u, 'RADDY', 'HUMPP', 2);
+	await wait(1000);
+}
+
+/** The ALT page called up with ALT 1.5 NM before HUMPP, on the path: the ALT page on the left, NAV 4 on the right. */
+export async function altPageBeforeHumpp(u: HeadlessUnit): Promise<void> {
+	await vnavActiveAndArmed(u);
+	await onLeg(u, 'RADDY', 'HUMPP', 1.5);
+	await onPath(u);
+	await u.panel.alt();
+	await wait(1000);
+}
+
+/**
+ * On along the approach in approach arm mode, the baro setting checked and the ALT page closed, the left side turned to
+ * MOD 1 after VNAV ended at COVOG, to 1.8 NM before the FAF DUANE, where the approach has become active. Each course
+ * message is answered on the indicator.
+ */
+export async function approachActive(u: HeadlessUnit): Promise<void> {
+	await altPageBeforeHumpp(u);
+	await u.panel.alt();
+	await wait(1000);
+	const legs: [string, string][] = [['RADDY', 'HUMPP'], ['HUMPP', 'COVOG'], ['COVOG', 'AUBRN'], ['AUBRN', 'DUANE']];
+	for (let i = 1; i < legs.length; i++) {
+		const [from, to] = legs[i];
+		await onLeg(u, from, to, courseLegNm(u, from, to) - 1);
+		await onPath(u);
+		await wait(COURSE_MESSAGE_DELAY + 1000);
+		await adjustCourseIndicator(u);
+	}
+	await u.panel.selectPage('L', 'MOD 1');
+	await onLeg(u, 'AUBRN', 'DUANE', 1.8);
+	await wait(2000);
+	await adjustCourseIndicator(u);
+}
+
+/** 1 NM past the threshold of runway 32L, the MAP, on the extended final approach course, still in approach active mode. */
+export async function pastThreshold(u: HeadlessUnit): Promise<void> {
+	await approachActive(u);
+	await onLeg(u, 'DUANE', 'RW32L', courseLegNm(u, 'DUANE', 'RW32L') - 1);
+	await wait(COURSE_MESSAGE_DELAY + 1000);
+	await adjustCourseIndicator(u);
+	await onLeg(u, 'DUANE', 'RW32L', -1);
+	await wait(2000);
+	await adjustCourseIndicator(u);
+}
+
+/**
+ * The unit of an aircraft without approaches: no GPS APR switch and so no APT 8, but the GPS CRS switch. The pilot
+ * loads the departure and the arrival as with approaches.
+ */
+export const tut2NoApproachBoot: NonNullable<ScreenDescription['boot']> = {
+	position: place('KYKM'),
+	storage: savedFlightplan(0, TUT2_ENROUTE.map(facility)),
+	panelXml: panelXml({...LEG_OBS_SWITCH}),
+};
+
+/** FPL 0 of a unit without approaches once the duplicates are deleted: the arrival keeps HUMPP and AUBRN. */
+export const CLEANED_UP_NO_APPROACH = ['KYKM', 'YKM', 'TITON', 'CADED', 'CHINS', 'RADDY', 'HUMPP', 'AUBRN', 'KBFI'];
+
+/**
+ * The descent planned to KBFI on a unit without approaches, 12 NM past CHINS at 10,000 ft: the selected altitude 700 ft,
+ * the pattern altitude of runway 32L, the VNAV waypoint KBFI with an offset of 3 NM, and the angle 3.0. The left cursor
+ * is turned off at the end, and NAV 4 stays on the left.
+ */
+export async function vnavToKbfi(u: HeadlessUnit): Promise<void> {
+	await loadStar(u);
+	await u.panel.cursor('L');
+	for (const entry of ['7.YKM', '6:CHINS', '4:TITON']) {
+		await cursorToEntry(u, entry);
+		await u.panel.clr();
+		await u.panel.ent();
+	}
+	await u.panel.cursor('L');
+	await wait(1000);
+	await adjustCourseIndicator(u);
+	const idents = fplIdents(u);
+	if (idents.join(' ') !== CLEANED_UP_NO_APPROACH.join(' ')) {
+		throw new Error(`vnavToKbfi: FPL 0 is ${idents.join(' ')}\n${Screen.read().dump()}`);
+	}
+	await flyPastChins(u, 12);
+	setAltitude(u, ARRIVAL_ALTITUDE_FT);
+	await wait(2000);
+	await u.panel.selectPage('L', 'NAV 4');
+	// The cursor comes on at the ten thousands of the selected altitude; the outer knob moves on to the hundreds
+	await u.panel.cursor('L');
+	await u.panel.outer('L', 2);
+	await setLeftDigit(u, '7');
+	await u.panel.outer('L', 1);
+	await u.panel.enterIdent('L', 'KBFI');
+	await u.panel.ent();
+	await u.panel.ent();
+	// The ones of the offset
+	await u.panel.outer('L', 1);
+	await setLeftDigit(u, '3');
+	// Onto the units of the angle
+	await u.panel.outer('L', 1);
 	await wait(1000);
 	await setLeftDigit(u, '3');
 	await u.panel.outer('L', 1);

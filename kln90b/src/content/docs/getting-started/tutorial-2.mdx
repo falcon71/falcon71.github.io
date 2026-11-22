@@ -225,7 +225,7 @@ YKM lies behind you, so the unit makes the leg of FPL 0 closest to you active, t
 The desired track of the leg to TITON is 290°, not 284°, although the leg runs along the radial. The radial is measured with the published magnetic variation of YKM, 21°E, which its VOR page shows; the unit measures the desired track with the variation where you are, and the selected course at TITON with the variation at TITON, both about 6° less ([The selected course](/kln90b/operation/modes-of-operation/#the-selected-course)). Every course along the radial that the chart gives therefore reads about 6° more on the unit wherever YKM is not the active waypoint, the inbound course of the hold at TITON included; with YKM active, the selected course uses YKM's own variation and reads as charted.
 </Callout>
 
-Where the unit reads your CDI or HSI, `MSG` flashes for `ADJ NAV IND CRS TO 290°`: turn the indicator to 290°.
+Unless the unit sets the course of your indicator itself, `MSG` flashes for `ADJ NAV IND CRS TO 290°`: turn the indicator to 290°.
 
 ## The hold at TITON
 
@@ -291,8 +291,102 @@ To plan the descent, at 10,000 ft and 12 NM past CHINS:
 
 <KlnScreen screen="tutorial-2/nav-4-vnav-covog" />
 
-[Setting up a descent or a climb](/kln90b/operation/vnav/#setting-up-a-descent-or-a-climb) explains each step, and [Which waypoint VNAV can use](/kln90b/operation/vnav/#which-waypoint-vnav-can-use) why COVOG, a waypoint of the approach after the active waypoint, will do. Without an altitude input, NAV 4 asks for `FR`, the altitude to start from, first; enter `10000`, 10,000 ft, there ([VNAV without an altitude input](/kln90b/operation/vnav/#vnav-without-an-altitude-input)). Without an approach in FPL 0 there is no COVOG to choose; leave VNAV and descend as the visual approach at the end of this flight describes.
+[Setting up a descent or a climb](/kln90b/operation/vnav/#setting-up-a-descent-or-a-climb) explains each step, and [Which waypoint VNAV can use](/kln90b/operation/vnav/#which-waypoint-vnav-can-use) why COVOG, a waypoint of the approach after the active waypoint, will do. Without an altitude input, NAV 4 asks for `FR`, the altitude to start from, first; enter `10000`, 10,000 ft, there ([VNAV without an altitude input](/kln90b/operation/vnav/#vnav-without-an-altitude-input)). Without an approach in FPL 0 there is no COVOG to choose; plan the descent to KBFI instead, as [A visual approach without approaches on the unit](#a-visual-approach-without-approaches-on-the-unit) describes.
 
 The descent point lies about 12 NM past RADDY, about 2 NM before HUMPP and about 28 NM ahead of you. Hold 10,000 ft until then, because the unit plans the descent point from your present altitude; as it comes closer, NAV 4 counts down to it, and there VNAV becomes active ([Flying the vertical path](/kln90b/operation/vnav/#flying-the-vertical-path)).
 
-{/* The package tutorial-2-approach continues here: the descent and the arrival, the approach, a visual approach without approaches, where to go next. */}
+## The descent and the arrival
+
+From RADDY the unit flies the STAR on to HUMPP and the approach over COVOG and AUBRN to DUANE, its <Term t="FAF" />, and VNAV guides your descent to 6,000 ft at COVOG. The approach header `R32L-KBFI` is no waypoint, like the header of the STAR, so the unit goes from RADDY straight on to HUMPP. The arrival and the approach are legs of FPL 0, and leg mode flies all their turns with [turn anticipation](/kln90b/operation/sequencing/#turn-anticipation); none needs OBS mode.
+
+Keep NAV 4 on the left, and turn the right inner knob to NAV 1, which shows the distance to each waypoint and, during the approach, the D-bar at its approach scale.
+
+At 120 kt, about 8 NM before RADDY, the top line of NAV 4 changes from `VNV ARMED` to `VNV IN` and the time to the descent point. 10 NM before HUMPP it looks like this:
+
+<KlnScreen screen="tutorial-2/nav-4-vnav-countdown" />
+
+With NAV 4 in view the unit raises no `VNV ALERT`; that message comes only while neither side shows NAV 4 ([`VNV ALERT`](/kln90b/operation/vnav/#vnv-alert)).
+
+About 2 NM before HUMPP three things happen at the same moment: VNAV becomes active, the unit arms the approach, and `MSG` flashes for `PRESS ALT TO SET BARO`, which comes with the arming. The descent point and the arming are independent of each other: the descent point comes from your altitude and the angle, the arming from the distance to Boeing Field, and on this route, at 10,000 ft, the two happen to lie together. What you see:
+
+- The top line of NAV 4 shows `VNV` and the advisory altitude: this is your descent point ([Flying the vertical path](/kln90b/operation/vnav/#flying-the-vertical-path)).
+- The mode annunciation shows <Term t="ARM-LEG">`ARM-LEG`</Term>, and the ARM annunciator of the GPS APR switch lights. The unit arms the approach by itself as you come near Boeing Field ([Arming the approach](/kln90b/operation/approaches/#arming-the-approach)); you do not press the switch.
+- The message prompt `MSG` flashes for `PRESS ALT TO SET BARO`, which asks you to check the baro setting before the approach ([`PRESS ALT TO SET BARO`](/kln90b/operation/approaches/#press-alt-to-set-baro)). Where an air data system supplies the baro setting, the message does not come, and you skip the steps below.
+
+<KlnScreen screen="tutorial-2/nav-4-vnav-arm" />
+
+Start the descent first, and answer the message once you are on the path. The message changes nothing in VNAV, and VNAV changes nothing in the approach.
+
+To check the baro setting:
+
+1. Press <kbd>ALT</kbd>. The ALT page appears on the left with the cursor on the baro setting, and NAV 4 moves to the right side with its cursor on the selected altitude. `MSG` stops flashing: the message is answered once the ALT page is shown.
+
+   <KlnScreen screen="tutorial-2/alt-baro" />
+
+2. Check that the baro setting is the one on your altimeter, and if not, set it with the left knobs ([The baro setting](/kln90b/operation/alerts/#the-baro-setting)). `IND` on NAV 4 follows it. Leave the right knobs alone: the right cursor is on the selected altitude, and a change there stops VNAV.
+3. Press <kbd>ALT</kbd> again. NAV 4 returns to the left side, and NAV 1 to the right.
+
+With the arming, the CDI scale factor narrows to ±1.00 NM, so the D-bar becomes more sensitive ([The CDI scale along the approach](/kln90b/operation/approaches/#the-cdi-scale-along-the-approach)).
+
+Descend so that your altimeter stays at the advisory altitude on NAV 4. As the unit passes COVOG, at 6,000 ft, VNAV ends: NAV 4 shows `VNV INACTV` and clears the plan ([When VNAV ends](/kln90b/operation/vnav/#when-vnav-ends)). From COVOG on, fly the altitudes of the approach chart. NAV 4 has nothing more to do, so turn the left outer knob to the MOD pages and the left inner knob to MOD 1, where you watch the CDI scale factor through the approach; it shows `CDI:±1.00NM`.
+
+Shortly before AUBRN the course turns right. Unless the unit sets the course of your indicator itself, `MSG` flashes for `ADJ NAV IND CRS TO 311°`: read the message with <kbd>MSG</kbd> and turn the indicator to 311°. Before DUANE the course turns by about 5° more; if `MSG` flashes again, turn the indicator to the course the message gives ([`ADJ NAV IND CRS TO nnn°`](/kln90b/operation/modes-of-operation/#adj-nav-ind-crs-to-nnn)).
+
+## The approach
+
+Shortly before DUANE, the FAF, the unit makes the approach active by itself ([Activating the approach](/kln90b/operation/approaches/#activating-the-approach)). The mode annunciation shows <Term t="APR-LEG">`APR-LEG`</Term>, the ACTV annunciator of the GPS APR switch lights, and MOD 1 shows `CDI:±0.30NM`. The D-bar narrows to that scale by DUANE and keeps it on the final approach ([The CDI scale along the approach](/kln90b/operation/approaches/#the-cdi-scale-along-the-approach)).
+
+<KlnScreen screen="tutorial-2/nav-1-apr" />
+
+If the status line still shows `ARM-LEG` at DUANE, the approach is not active, and the message page says why ([RAIM in an approach](/kln90b/operation/approaches/#raim-in-an-approach)); do not fly the final approach on the unit then, but fly the missed approach.
+
+Past DUANE the active leg runs from DUANE to `RW32L`, the threshold of runway 32L, which is the <Term t="MAP" /> of the approach. Fly the final approach by the chart and land.
+
+The unit does not sequence past the MAP: in FPL 0 the fence `*NO WPT SEQ` follows `RW32L` ([The approach in FPL 0](/kln90b/operation/approaches/#the-approach-in-fpl-0)). Past the threshold `RW32L` stays the active waypoint, the TO/FROM indicator shows FROM, the distance counts up and the bearing points back to the threshold. 1 NM past it, NAV 1 looks like this:
+
+<KlnScreen screen="tutorial-2/nav-1-past-threshold" />
+
+To fly the missed approach instead, once you have passed the threshold:
+
+1. Press <DirectToKey />. The Direct To page offers FEVAS, the first waypoint of the missed approach, and the right side shows the INT page of FEVAS for approval. The page offers FEVAS because NAV 1 was on the right, not a waypoint page ([The missed approach](/kln90b/operation/approaches/#the-missed-approach)).
+
+   <KlnScreen screen="tutorial-2/direct-to-fevas" />
+
+2. Press <kbd>ENT</kbd>. The unit flies direct to FEVAS and returns to `ARM-LEG`, the scale widens to ±1.00 NM at once, and `PRESS ALT TO SET BARO` comes again; answer it with <kbd>ALT</kbd> as before when you have time. {/* kln90b#513: describes the current behavior; the fix makes the message come only on the change from an en route mode into an arm mode */}
+3. Fly the missed approach as the chart says. The unit sequences over FEVAS and GRRAM to LOFAL, the <Term t="MAHP" />, and where the course turns, a course message may ask you to turn your indicator.
+
+Near LOFAL the unit raises `IF REQUIRED SELECT OBS` for the holding pattern of the chart ([`IF REQUIRED SELECT OBS`](/kln90b/operation/departures-arrivals/#if-required-select-obs)). In leg mode the unit flies over LOFAL and on to KBFI, so you hold in OBS mode.
+
+To hold at LOFAL:
+
+1. Turn your CDI or HSI to the inbound course of the hold from the chart.
+2. Before you reach LOFAL, set the GPS CRS switch to OBS. The mode annunciation shows <Term t="ARM:">`ARM:`</Term> and the course, and `PRESS ALT TO SET BARO` comes once more; answer it with <kbd>ALT</kbd>. {/* kln90b#513: describes the current behavior; the fix makes the message come only on the change from an en route mode into an arm mode */}
+3. Fly the hold by the chart, as at TITON. LOFAL stays the active waypoint the whole time.
+4. To leave the hold, set the GPS CRS switch to LEG on the inbound leg, with LOFAL ahead. The mode annunciation shows `ARM-LEG`, and `PRESS ALT TO SET BARO` comes again; answer it with <kbd>ALT</kbd>. The unit flies to LOFAL and goes on along FPL 0 to KBFI. {/* kln90b#513: describes the current behavior; the fix makes the message come only on the change from an en route mode into an arm mode */}
+
+Without a GPS CRS switch, turn the left inner knob to MOD 2 and press <kbd>ENT</kbd> in step 2, and turn it back to MOD 1 and press <kbd>ENT</kbd> in step 4.
+
+## A visual approach without approaches on the unit
+
+On a unit without approaches, FPL 0 ends with the STAR's HUMPP and AUBRN and then KBFI, as [Deleting the waypoints the flight plan holds twice](#deleting-the-waypoints-the-flight-plan-holds-twice) shows, and you fly a visual approach to runway 32L. The unit stays in `ENR-LEG` all the way, and the D-bar keeps its en route scale to the airport. At AUBRN it goes on to KBFI; unless the unit sets the course of your indicator itself, `MSG` flashes for `ADJ NAV IND CRS TO 313°`, and you turn the indicator to 313°. KBFI, the last waypoint of FPL 0, stays the active waypoint after you pass it ([When the unit does not sequence](/kln90b/operation/sequencing/#when-the-unit-does-not-sequence)).
+
+CHINS FIVE gives a propeller aircraft no altitude at AUBRN, its last waypoint, so plan VNAV to KBFI itself, down to the pattern altitude of runway 32L, 700 ft MSL, which the FAA's [Boeing Field pilot page](https://www.faa.gov/flight_deck/bfi) gives. VNAV is advisory: its path is a plan for your descent, not a clearance. Give the path an offset of 3 NM, so that you reach pattern altitude 3 NM before the airport and not over the field.
+
+To plan the descent to KBFI, at 10,000 ft and 12 NM past CHINS, follow the steps of [En route](#en-route) with these entries:
+
+- the selected altitude `00700`, 700 ft;
+- the waypoint KBFI, whose waypoint page you approve with <kbd>ENT</kbd>;
+- the offset `03`: turn the left outer knob to the second digit of the offset and the left inner knob until it shows `3`;
+- the angle `-3.0°`, as in the steps there.
+
+<KlnScreen screen="tutorial-2/nav-4-vnav-kbfi" />
+
+The descent point lies about 4 NM before HUMPP, and VNAV ends 3 NM before KBFI, where the advisory altitude reaches 700 ft.
+
+Boeing Field lies close to Seattle-Tacoma, and its VFR arrival is intricate. Read the VFR procedures in the KBFI entry of the Chart Supplement, which the FAA's [Chart Supplement search](https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/dafd/search/) finds, and the FAA's [Boeing Field pilot page](https://www.faa.gov/flight_deck/bfi), and fly the arrival and the pattern as they say.
+
+## Where to go next
+
+- [Non-precision approaches](/kln90b/operation/approaches/) explains the approach modes, RAIM in an approach and the missed approach in full.
+- [VNAV](/kln90b/operation/vnav/) covers climbs, offsets and when VNAV ends.
+- [Storing FPL 0](/kln90b/operation/flight-plans/#storing-fpl-0) keeps this route in a numbered flight plan for the next flight.

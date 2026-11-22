@@ -199,8 +199,8 @@ anchors and page links above. After them the order follows "owners before the pa
 | 18 | messages | Messages; Message page messages; Status line messages; the Glossary page | done (2026-11-21) |
 | 19 | help | External hardware; FAQ and troubleshooting; Known limitations; Contact | done (2026-11-21) |
 | 20 | tutorial-1 | Tutorial flight 1 | done (2026-11-22) |
-| 21 | tutorial-2 | Tutorial flight 2, up to the top of descent (split, 2026-11-22) | done (2026-11-22; branch `manual-tutorial-2` stays open for tutorial-2-approach) |
-| 22 | tutorial-2-approach | Tutorial flight 2, from the top of descent: the arrival, the approach, the visual approach | not started |
+| 21 | tutorial-2 | Tutorial flight 2, up to the top of descent (split, 2026-11-22) | done (2026-11-22) |
+| 22 | tutorial-2-approach | Tutorial flight 2, from the top of descent: the arrival, the approach, the visual approach | in review (2026-11-22, on the branch `manual-tutorial-2`) |
 | – | final pass | the whole manual (`docs/coordinator-prompt.md`, "The final pass") | not started |
 
 The SET chapter comes late on purpose: nearly every SET page is the setting of a function that another page owns, so
@@ -342,6 +342,15 @@ it is written when those owners exist. A package that proves too large in its re
   published variation, so a leg along a charted VOR radial reads a few degrees off it (YKM to TITON on the radial 284
   of YKM reads 290°). Modes of operation (`#leg-mode`) or the `DTK` field explanation could say so in a sentence
   (writer of Tutorial flight 2).
+
+- The package tutorial-2-approach (2026-11-22, reviewer): the owner screens share two gaps the tutorial's screens
+  had. `approaches/press-alt` explains the flashing message prompt as inverse video, and `approaches/at-map` gives
+  `ETE` no sentence for the time past the waypoint. Non-precision approaches, "Flying the approach" (the step on the
+  activation), could add the consequence when the approach does not become active: fly the missed approach. The
+  field explanation of the ALT page title in `alerts/alt-page-off` says "no empty line below it"; it means that the
+  page drops a line when the alert is on, and should say so plainly. The heading "The CDI scale along the approach"
+  lacks "factor" (word list); renaming it changes its anchor `#the-cdi-scale-along-the-approach`, which the tutorials
+  link.
 
 ## Site and generator notes
 

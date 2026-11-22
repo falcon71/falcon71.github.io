@@ -1,0 +1,47 @@
+<Field id="title" title="Page title">
+	`ALTITUDE` names the ALT page. With the alert off, the page has no empty line below it.
+</Field>
+
+<Field id="baro" title="Baro setting">
+	The altimeter <Term t="BARO">baro setting</Term> that the unit applies to the pressure altitude of the altitude input to get the indicated altitude, here in inches of mercury, with the left cursor on its first two digits. You change it with the left knobs, and each step takes effect at once, without <kbd>ENT</kbd>. It does not reach the altimeter of the aircraft ([The baro setting](/kln90b/operation/alerts/#the-baro-setting)).
+</Field>
+
+<Field id="alert" title="Altitude alert">
+	`ON` or `OFF`: whether the unit sounds the aural alarm. Without altitude alerting in the installation the field shows `OFF` and the cursor skips it. [Altitude alerting](/kln90b/operation/alerts/#altitude-alerting) explains the tones.
+</Field>
+
+<Field id="r-title" title="Advisory altitude">
+	`VNV` and the advisory altitude: the altitude of the vertical path at the present position of the aircraft, rounded to 100 ft. It falls toward the selected altitude in a descent and rises toward it in a climb, and VNAV becomes inactive where it reaches it ([Flying the vertical path](/kln90b/operation/vnav/#flying-the-vertical-path)).
+</Field>
+
+<Field id="r-ind" title="Indicated altitude">
+	The indicated altitude from the altitude input of the aircraft, with the <Term t="BARO">altimeter baro setting</Term> applied, rounded to 100 ft. It shows five digits and `00000` below 0 ft, and you cannot change it. While VNAV is armed, the unit works out the descent point from it.
+</Field>
+
+<Field id="r-sel" title="Selected altitude">
+	The altitude the descent or climb ends at, with the right cursor on its first digit, so that you can set the altitude alert and the selected altitude in one visit. A digit you change stops VNAV. The altitude alert reads the selected altitude too ([Altitude alerting](/kln90b/operation/alerts/#altitude-alerting)).
+</Field>
+
+<Field id="r-wpt" title="VNAV waypoint">
+	The waypoint the descent or climb is planned to, the active waypoint until you enter another one. [Which waypoint VNAV can use](/kln90b/operation/vnav/#which-waypoint-vnav-can-use) says which waypoints the field takes. A different waypoint stops VNAV.
+</Field>
+
+<Field id="r-dist" title="Offset">
+	How far before the VNAV waypoint the descent or climb ends, in NM. Changing it stops VNAV.
+</Field>
+
+<Field id="r-angle" title="Angle">
+	The angle of the vertical path VNAV uses, negative for a descent. While VNAV is armed or active, moving the cursor onto it changes nothing, and a digit you enter starts VNAV again at the new angle ([The angle](/kln90b/operation/vnav/#the-angle)).
+</Field>
+
+<Field id="lcrsr" title="CRSR annunciation of the left side">
+	<Term t="CRSR">`CRSR`</Term> replaces the page identification `ALT` while the left cursor is on.
+</Field>
+
+<Field id="mode" title="Mode annunciation">
+	<Term t="ARM-LEG">`ARM-LEG`</Term>: Approach Arm-Leg mode, the approach is armed. See [Arming the approach](/kln90b/operation/approaches/#arming-the-approach).
+</Field>
+
+<Field id="rcrsr" title="CRSR annunciation of the right side">
+	`CRSR` replaces the page identification `NAV 4` while the right cursor is on.
+</Field>

@@ -46,7 +46,9 @@ No agent ever holds the whole manual. These carry the coherence instead, and eve
    which one you start, in one line. If the previous package is still in review with the maintainer, or its branch
    is not merged, ask before you build on it.
 3. Read the plan file of your package (`docs/plan/<package>.md`), including the notes earlier packages left for it.
-4. Create a development branch for the package (`manual-<package>`). Commit to it; never push.
+4. Create a development branch for the package (`manual-<package>`), unless the plan says that the package
+   continues on a branch that stays open (a package split from another one continues on that one's branch;
+   maintainer, 2026-11-22). Commit to it; never push.
 
 Do not read the reference library yourself, except in the planning session (for the structure and the style of the
 real manual) or to settle a reviewer's finding. Your project memory, `reference-library-pointer`, says where it is;

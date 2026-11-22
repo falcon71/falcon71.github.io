@@ -1,0 +1,63 @@
+<Field id="title" title="Advisory altitude">
+	`VNV` and the advisory altitude: the altitude of the vertical path at the present position of the aircraft, rounded to 100 ft. It falls toward the selected altitude in a descent and rises toward it in a climb, and VNAV becomes inactive where it reaches it ([Flying the vertical path](/kln90b/operation/vnav/#flying-the-vertical-path)).
+</Field>
+
+<Field id="ind" title="Indicated altitude">
+	The indicated altitude from the altitude input of the aircraft, with the <Term t="BARO">altimeter baro setting</Term> applied, rounded to 100 ft. It shows five digits and `00000` below 0 ft, and you cannot change it. While VNAV is armed, the unit works out the descent point from it.
+</Field>
+
+<Field id="sel" title="Selected altitude">
+	The altitude the descent or climb ends at. Changing it stops VNAV. The altitude alert reads the selected altitude too ([Altitude alerting](/kln90b/operation/alerts/#altitude-alerting)).
+</Field>
+
+<Field id="wpt" title="VNAV waypoint">
+	The waypoint the descent or climb is planned to, the active waypoint until you enter another one. [Which waypoint VNAV can use](/kln90b/operation/vnav/#which-waypoint-vnav-can-use) says which waypoints the field takes. A different waypoint stops VNAV.
+</Field>
+
+<Field id="dist" title="Offset">
+	How far before the VNAV waypoint the descent or climb ends, in NM. Changing it stops VNAV.
+</Field>
+
+<Field id="angle" title="Angle">
+	The angle of the vertical path VNAV uses, negative for a descent. While VNAV is armed or active, moving the cursor onto it changes nothing, and a digit you enter starts VNAV again at the new angle ([The angle](/kln90b/operation/vnav/#the-angle)).
+</Field>
+
+<Field id="r-leg" title="Active leg">
+	The waypoint the active leg starts at, an arrow and the [active waypoint](/kln90b/operation/modes-of-operation/#the-active-waypoint). After a direct-to the leg starts at the Direct To symbol. A waypoint of an approach shows without its suffix.
+</Field>
+
+<Field id="r-cdi" title="D-bar">
+	The D-bar shows the cross-track error from the desired track: the bar stands on the side the course lies on, so you fly toward it. Each of the five dots on either side is a fifth of the CDI scale factor, which the approach modes narrow by themselves ([The CDI scale along the approach](/kln90b/operation/approaches/#the-cdi-scale-along-the-approach)). The TO/FROM indicator in the middle shows TO while the active waypoint lies ahead, FROM once it lies behind. `F L A G` in place of the dots means that the unit cannot navigate.
+</Field>
+
+<Field id="r-dis" title="Distance to the active waypoint">
+	The distance to the active waypoint, in NM.
+</Field>
+
+<Field id="r-gs" title="Groundspeed">
+	The groundspeed, in kt.
+</Field>
+
+<Field id="r-ete" title="Estimated time en route">
+	The time to the active waypoint at the present groundspeed, as hours and minutes. Below one hour the hours stay blank.
+</Field>
+
+<Field id="r-brg" title="Bearing to the active waypoint">
+	The magnetic bearing from the aircraft to the active waypoint.
+</Field>
+
+<Field id="lpage" title="Page identification of the left side">
+	The page identification of the left page, `NAV 4`.
+</Field>
+
+<Field id="mode" title="Mode annunciation">
+	<Term t="ARM-LEG">`ARM-LEG`</Term>: Approach Arm-Leg mode, the approach is armed. See [Arming the approach](/kln90b/operation/approaches/#arming-the-approach).
+</Field>
+
+<Field id="msg" title="Message prompt">
+	<Term t="MSG" /> in inverse video: the unit holds messages. It is steady once you have read them all and flashes while one is unread. Pressing <kbd>MSG</kbd> shows the next page of messages or closes the MSG page.
+</Field>
+
+<Field id="rpage" title="Page identification of the right side">
+	The page identification of the right page, `NAV 1`.
+</Field>
