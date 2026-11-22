@@ -6,7 +6,7 @@ status yes
 text
 |VNV ARMED  | KBFI IAP  |
 |           | 1 RNAV 32L|
-|IND 11000ft|           |
+|IND 10000ft|           |
 |SEL:06000ft|           |
 |COVOG:-00nm|           |
 |ANGLE:-3.0°|           |

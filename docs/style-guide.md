@@ -951,6 +951,11 @@ unit.
 - **Procedures in the chart's terms.** Describe a charted hold or turn as the chart gives it (the inbound and outbound
   course of a hold, not "the radial itself") and claim nothing the chart or the data does not show, such as the side
   or the turn direction of a hold the data does not code (maintainer, 2026-11-22).
+- **Altitudes come from the chart.** The unit reads no altitudes of a procedure, so a tutorial takes every altitude
+  it uses (a crossing altitude, a VNAV target) from the chart, for the tutorial's aircraft, a small propeller
+  aircraft. Navigation data is no source: it often lacks restrictions that depend on the aircraft type (maintainer,
+  2026-11-22: RADDY on CHINS FIVE, 11,000 ft for turbojets in the data, 10,000 ft for props and turboprops on the
+  chart).
 - **`MSA` and `ESA` are off-route values.** Where a tutorial has the pilot read them, it says so and names the route's
   own minimum altitude from the en route chart beside them (maintainer, 2026-11-22: V4 between TITON and CADED, 7,400 ft).
 - **The aircraft requirement.** Both tutorials need an aircraft in which the KLN 90B is the main GPS, the one that

@@ -90,11 +90,13 @@ Note for the writer: D/T 1 and D/T 3 count the missed approach to KBFI (150 NM);
 
 ### From the package tutorial-2: the state the en route section leaves (2026-11-22)
 
-- **VNAV is armed.** The section En route plans it on NAV 4 12 NM past CHINS at 11,000 ft (the altitude input with
+- **VNAV is armed.** The section En route plans it on NAV 4 12 NM past CHINS at 10,000 ft (the altitude input with
   the baro setting 29.92"): selected altitude 6,000 ft, VNAV waypoint COVOG (the approach's, `8 COVOG`), offset `00`,
-  angle -3.0°. The descent point lies about 9 NM past RADDY, 5.4 NM before HUMPP (24.8 NM from RADDY to COVOG along the
-  great-circle legs, 14.48 + 10.29 NM; 15.7 NM for 5,000 ft at 3.0°). The altitudes come from CIFP 2610: RADDY at 11,000 ft in the runway transition 32B of CHINS5,
-  COVOG at or above 6,000 ft in the HUMPP transition of R32LY. Staged in `vnavToCovog`
+  angle -3.0°. The descent point lies about 12.2 NM past RADDY, about 2.3 NM before HUMPP (24.77 NM from RADDY to COVOG
+  along the great-circle legs, 14.48 + 10.29 NM; 12.56 NM for 4,000 ft at 3.0°), about 28 NM from the staging point.
+  That is about where the researcher put the 30 NM arming point (about 2.3 NM before HUMPP); check which comes first
+  before the page says anything about it. The altitudes come from the charts (maintainer, 2026-11-22): propeller and
+  turboprop aircraft cross RADDY at 10,000 ft (11,000 ft is for turbojets), and COVOG is at or above 6,000 ft. Staged in `vnavToCovog`
   (`kln90b/screens/shared/tut2.ts`), screen `tutorial-2/nav-4-vnav-covog`. This package flies the descent: the
   countdown, `VNV ALERT` if NAV 4 is not in view, VNAV active and the advisory altitude, VNAV ending as the unit
   sequences past COVOG; and it checks what arming the approach about 2.3 NM before HUMPP and

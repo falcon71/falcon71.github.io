@@ -44,11 +44,11 @@ Sections as written (2026-11-22), with their anchors under `/kln90b/getting-star
 10. **The hold at TITON** (`#the-hold-at-titon`): the hold as charted, inbound course 284° toward TITON, outbound 104°,
     turns as the chart shows (the turn direction is not confirmed, so the page names none); no
     `IF REQUIRED SELECT OBS`, because the data codes no hold, so the pilot changes to OBS before TITON; the indicator
-    stays on 290°; TO/FROM and the reversed D-bar outbound.
+    stays on 290°; TO/FROM in the hold.
 11. **En route** (`#en-route`): leg mode on V4, NAV 3 with `MSA` and `ESA` 16,300 ft past CHINS (`MSA` and `ESA` off-route
     values; V4 TITON to CADED 7,400 ft, the maintainer's figure), Super NAV 5 in actual track up at range 30, then VNAV
-    planned on NAV 4 12 NM past CHINS at 11,000 ft: 6,000 ft at COVOG, offset 00, angle 3.0°, armed, descent point
-    about 9 NM past RADDY. The page ends with a comment where the package tutorial-2-approach goes on.
+    planned on NAV 4 12 NM past CHINS at 10,000 ft: 6,000 ft at COVOG, offset 00, angle 3.0°, armed, descent point
+    about 12 NM past RADDY, about 2 NM before HUMPP. The page ends with a comment where the package tutorial-2-approach goes on.
 
 ## Screens
 
@@ -63,8 +63,9 @@ installed with the GPS CRS switch (`LEG_OBS_SWITCH`), and the steps change the c
 - The maintainer flies the tutorial in the simulator before it is published; the session's report hands over a
   list of what to check in the cockpit.
 - The screens use the FAA extract of AIRAC 2610 (NASR 2026-10-01, CIFP 2610). The extract carries no altitudes; the
-  VNAV altitudes (RADDY at 11,000 ft in the runway transition 32B of CHINS5, COVOG at or above 6,000 ft in the HUMPP
-  transition of R32LY) were read from the raw CIFP 2610 file (`FAACIFP18`); the maintainer checks them on the charts.
+  VNAV altitudes come from the charts (maintainer, 2026-11-22): propeller and turboprop aircraft cross RADDY at
+  10,000 ft on CHINS FIVE (11,000 ft is for turbojets), and the approach has COVOG at or above 6,000 ft. The unit
+  reads no altitudes, so the chart wins over any data.
 
 ## For the maintainer's flight in the simulator
 
@@ -80,18 +81,17 @@ To check in the cockpit before the tutorial is published (researcher, writer and
    TITON. Check that none comes.
 6. In OBS mode at TITON (switch to OBS before TITON), 290° centers the needle on the inbound course; in the hold the
    TO/FROM indicator shows FROM from TITON until abeam TITON again in the turn, and TO on the outbound and inbound
-   legs, with the needle reversed outbound; the turns as the chart shows them. Leaving the hold with the switch to LEG
+   legs; the turns as the chart shows them. Leaving the hold with the switch to LEG
    and TITON ahead, the unit goes direct to TITON and then on to CADED.
 7. Past CHINS `MSA` and `ESA` read 16,300 ft, and `MSA` drops to 9,900 ft near 47°N.
 8. Super NAV 5: after North up, two steps of the right inner knob give actual track up; range 30 shows the map as the
    screen does.
 9. The EFB after `REQUEST FROM AVIONICS` names runway 09 and 14L (no bug, kln90b#409).
 10. Done (2026-11-22): the table names AIRAC 2611 and the text names L-13.
-11. VNAV, 12 NM past CHINS at 11,000 ft: NAV 4 takes COVOG (its INT page comes for approval), the angle field first
-    shows about -1.2°, and 3.0 entered gives `VNV ARMED`; the countdown starts later, and VNAV becomes active about
-    9 NM past RADDY, 5.4 NM before HUMPP.
-12. On the charts of 2611: CHINS FIVE has RADDY at 11,000 ft toward runway 32, and RNAV (GPS) Y RWY 32L has COVOG
-    at or above 6,000 ft.
+11. VNAV, 12 NM past CHINS at 10,000 ft: NAV 4 takes COVOG (its INT page comes for approval), the angle field first
+    shows about -0.9° with VNAV active, and 3.0 entered gives `VNV ARMED`; the countdown starts later, and VNAV
+    becomes active about 12 NM past RADDY, about 2 NM before HUMPP.
+12. On the charts of 2611: RNAV (GPS) Y RWY 32L has COVOG at or above 6,000 ft.
 
 ## Notes from other packages
 

@@ -339,8 +339,8 @@ export async function pastChins(u: HeadlessUnit, nm: number): Promise<void> {
 	await adjustCourseIndicator(u);
 }
 
-/** The altitude of the aircraft on the arrival, where CHINS5 has it cross RADDY toward runway 32. */
-export const ARRIVAL_ALTITUDE_FT = 11000;
+/** The altitude of the aircraft on the arrival: the chart of CHINS5 has propeller aircraft cross RADDY at 10,000 ft. */
+export const ARRIVAL_ALTITUDE_FT = 10000;
 
 /** Turns the left inner knob until the character under the left cursor reads `ch`. */
 async function setLeftDigit(u: HeadlessUnit, ch: string): Promise<void> {

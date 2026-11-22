@@ -1,7 +1,7 @@
 import {defineScreen} from '../../../generator/api.ts';
 import {tut2Boot, vnavToCovog} from '../../shared/tut2.ts';
 
-// 12 NM past CHINS at 11,000 ft, the descent at 3.0° to 6,000 ft at COVOG starts about 25 NM ahead, more than 10 minutes
+// 12 NM past CHINS at 10,000 ft, the descent at 3.0° to 6,000 ft at COVOG starts about 28 NM ahead, more than 10 minutes
 // away at 120 kt
 defineScreen(import.meta.url, {
 	title: 'NAV 4 with VNAV armed for the descent to COVOG',
