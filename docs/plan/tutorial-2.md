@@ -20,39 +20,51 @@ identifier, the power-on); it says in one sentence that the flight assumes it, w
 Sections as written (2026-11-22), with their anchors under `/kln90b/getting-started/tutorial-2/`:
 
 1. **Summary and the table of the flight** (before the first heading): KYKM to KBFI, 100 NM along the flight plan
-   to runway 32L; the "checked with" cell carries a comment for the maintainer to confirm the cycle.
+   to runway 32L; the "checked with" cell: flown with the simulator's default data, AIRAC 2611, screens from the
+   FAA's AIRAC 2610.
 2. **What you need** (`#what-you-need`): the aircraft requirement; the Availability box for the approach (SIDs and
-   STARs work without it); the charts by name through the FAA chart search; the en route low altitude chart, whose
-   number a comment leaves to the maintainer.
+   STARs work without it); the charts by name through the FAA chart search; the en route low altitude chart L-13,
+   with where V4 is on it.
 3. **Entering the flight plan** (`#entering-the-flight-plan`): KYKM, TITON, CADED, CHINS, KBFI by hand; the unit loads
    no airway; FPL 0 becomes active with the second waypoint.
 4. **Loading the departure** (`#loading-the-departure`): YKM7 on APT 7, no runway question, `REDUNDANT WPTS IN FPL`;
-   the unit drops the climb (it ends at an altitude) and the hold, and keeps YKM and TITON.
+   the unit drops the climb (it ends at an altitude) and the heading to intercept, and keeps YKM and TITON; the data
+   codes no hold.
 5. **Loading the arrival** (`#loading-the-arrival`): CHINS5 with the YKM transition; a transition must be selected.
 6. **Loading the approach** (`#loading-the-approach`): RNAV 32L with the IAF HUMPP; an approach starts only at an IAF.
 7. **Deleting the waypoints the flight plan holds twice** (`#deleting-the-waypoints-the-flight-plan-holds-twice`):
-   five deletions bottom up, the finished FPL 0 with and without the approach.
+   five deletions bottom up (the en route copies of CHINS and TITON, so that the STAR and the SID stay complete), the
+   finished FPL 0 with and without the approach.
 8. **The flight plan in the EFB** (`#the-flight-plan-in-the-efb`): `REQUEST FROM AVIONICS`; the runways 09 and 14L the
-   EFB names (bug candidate, see below); the failed output, with the link.
+   EFB names (no bug: the EFB needs a runway, kln90b#409, maintainer 2026-11-22); the failed output, with the link.
 9. **The departure** (`#the-departure`): the climbing right turn direct to YKM and the direct-to, OBS mode on the
-   radial 284, the steps back to leg mode (given once, the hold links them).
-10. **The hold at TITON** (`#the-hold-at-titon`): the Good to know box on the course at TITON (290°, not 284°); the
-    hold in OBS mode, inbound on the radial with left turns; TO/FROM and the reversed D-bar outbound; the reminder
-    `IF REQUIRED SELECT OBS` where the database has the hold.
-11. **En route** (`#en-route`): leg mode on V4, NAV 3 with `MSA` and `ESA` 16,300 ft past CHINS, Super NAV 5 in actual
-    track up at range 30. The page ends with a comment where the package tutorial-2-approach goes on.
+   radial 284 and back to leg mode, each with the GPS CRS switch first and MOD 2 or MOD 1 with ENT for aircraft
+   without one (maintainer, 2026-11-22); the Good to know box on the courses along the radial (290° on the unit, 284°
+   on the chart), right after the change back to leg mode at the screen `nav-3-leg-titon`.
+10. **The hold at TITON** (`#the-hold-at-titon`): the hold as charted, inbound course 284° toward TITON, outbound 104°,
+    turns as the chart shows (the turn direction is not confirmed, so the page names none); no
+    `IF REQUIRED SELECT OBS`, because the data codes no hold, so the pilot changes to OBS before TITON; the indicator
+    stays on 290°; TO/FROM and the reversed D-bar outbound.
+11. **En route** (`#en-route`): leg mode on V4, NAV 3 with `MSA` and `ESA` 16,300 ft past CHINS (`MSA` and `ESA` off-route
+    values; V4 TITON to CADED 7,400 ft, the maintainer's figure), Super NAV 5 in actual track up at range 30, then VNAV
+    planned on NAV 4 12 NM past CHINS at 11,000 ft: 6,000 ft at COVOG, offset 00, angle 3.0°, armed, descent point
+    about 9 NM past RADDY. The page ends with a comment where the package tutorial-2-approach goes on.
 
 ## Screens
 
-All staged except `IF REQUIRED SELECT OBS` at TITON (CIFP 2610 codes no hold in YKM7). Ids under
-`kln90b/screens/tutorial-2/`, shared steps in `kln90b/screens/shared/tut2.ts` (hand entry of the route from an empty
-FPL 0, and the flight steps from the climb-out to 8 NM past CHINS). `super-nav-5-route` is deleted.
+All staged. Ids under `kln90b/screens/tutorial-2/`, shared steps in `kln90b/screens/shared/tut2.ts` (hand entry of the
+route from an empty FPL 0, and the flight steps from the climb-out to 12 NM past CHINS). The unit of the flight is
+installed with the GPS CRS switch (`LEG_OBS_SWITCH`), and the steps change the course mode with the switch
+(`gpsCrsSwitch`); the screens came out the same as with ENT on the MOD pages. `nav-4-vnav-covog` (VNAV armed,
+`vnavToCovog`) was added on 2026-11-22. `super-nav-5-route` is deleted.
 
 ## Notes for the session
 
 - The maintainer flies the tutorial in the simulator before it is published; the session's report hands over a
   list of what to check in the cockpit.
-- The screens use the FAA extract of AIRAC 2610 (NASR 2026-10-01, CIFP 2610).
+- The screens use the FAA extract of AIRAC 2610 (NASR 2026-10-01, CIFP 2610). The extract carries no altitudes; the
+  VNAV altitudes (RADDY at 11,000 ft in the runway transition 32B of CHINS5, COVOG at or above 6,000 ft in the HUMPP
+  transition of R32LY) were read from the raw CIFP 2610 file (`FAACIFP18`); the maintainer checks them on the charts.
 
 ## For the maintainer's flight in the simulator
 
@@ -62,16 +74,24 @@ To check in the cockpit before the tutorial is published (researcher, writer and
    identification page.
 2. KYKM has one APT 7 page with GROMO4, WENAS7 and YKM7; YKM7 and CHINS5 ask no runway.
 3. After takeoff, with NAV 1 on the right, the Direct To button offers YKM; YKM's VOR page shows 21°E.
-4. OBS 284 centers the needle on the radial near YKM; back in leg mode `ADJ NAV IND CRS TO 290°` comes.
-5. The simulator's YKM7 has the hold at TITON: `IF REQUIRED SELECT OBS` appears; note the hold's side, turns and
-   inbound course (the page says southeast of TITON, inbound on the radial 284, left turns).
-6. In OBS mode at TITON, 290° centers the needle on the radial; leaving the hold in leg mode with TITON ahead, the
-   unit goes direct to TITON and then on to CADED.
+4. The GPS CRS (LEG/OBS) switch to OBS with the indicator on 284 gives `ENR:284` and centers the needle on the
+   radial near YKM; MOD 2 showed `PRESS GPS` `CRS FOR` before. Back to LEG, `ADJ NAV IND CRS TO 290°` comes.
+5. Answered (2026-11-22): the simulator's YKM7 (AIRAC 2611) codes no hold, so no `IF REQUIRED SELECT OBS` comes at
+   TITON. Check that none comes.
+6. In OBS mode at TITON (switch to OBS before TITON), 290° centers the needle on the inbound course; in the hold the
+   TO/FROM indicator shows FROM from TITON until abeam TITON again in the turn, and TO on the outbound and inbound
+   legs, with the needle reversed outbound; the turns as the chart shows them. Leaving the hold with the switch to LEG
+   and TITON ahead, the unit goes direct to TITON and then on to CADED.
 7. Past CHINS `MSA` and `ESA` read 16,300 ft, and `MSA` drops to 9,900 ft near 47°N.
 8. Super NAV 5: after North up, two steps of the right inner knob give actual track up; range 30 shows the map as the
    screen does.
-9. The EFB after `REQUEST FROM AVIONICS` names runway 09 and 14L (bug candidate).
-10. The table names the cycle flown, and the en route chart's number is filled in (the two comments on the page).
+9. The EFB after `REQUEST FROM AVIONICS` names runway 09 and 14L (no bug, kln90b#409).
+10. Done (2026-11-22): the table names AIRAC 2611 and the text names L-13.
+11. VNAV, 12 NM past CHINS at 11,000 ft: NAV 4 takes COVOG (its INT page comes for approval), the angle field first
+    shows about -1.2°, and 3.0 entered gives `VNV ARMED`; the countdown starts later, and VNAV becomes active about
+    9 NM past RADDY, 5.4 NM before HUMPP.
+12. On the charts of 2611: CHINS FIVE has RADDY at 11,000 ft toward runway 32, and RNAV (GPS) Y RWY 32L has COVOG
+    at or above 6,000 ft.
 
 ## Notes from other packages
 

@@ -214,6 +214,15 @@ it is written when those owners exist. A package that proves too large in its re
 
 ## For the final pass
 
+- **The GPS CRS switch is the common case** (maintainer, 2026-11-22, on Tutorial flight 2): most aircraft that carry
+  the unit have an external switch for leg and OBS mode, often labeled LEG/OBS, where <kbd>ENT</kbd> on MOD 1 and
+  MOD 2 does nothing. Modes of operation (`#selecting-leg-or-obs-mode`) describes <kbd>ENT</kbd> first and the switch
+  under an Availability box that says "some aircraft"; the final pass turns the order around there and on every other
+  page that changes the course mode, and reconsiders the term (the word list has "the GPS CRS switch").
+- **VNAV, entering the angle** (review of Tutorial flight 2, 2026-11-22): step 7 of `operation/vnav.mdx`, "Setting up
+  a descent or a climb", says the angle is entered with the left inner knob, units first, then tenths; moving to the
+  tenths takes the left outer knob. Tutorial flight 2 words it precisely; the owner page needs the same.
+
 - **The glossary is cleared of single-screen entries** (style guide, section 14, rule of 2026-11-16). The package
   waypoint-pages did this for the APT chapter (2026-11-17); the Quickstart and other pages written under the earlier
   rule are left for the final pass.

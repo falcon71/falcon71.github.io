@@ -941,6 +941,18 @@ unit.
   it so; pilots find that the most intuitive (maintainer, 2026-11-22).
 - **Safe altitudes near terrain.** Where high terrain lies near the route, the tutorial has the pilot look up `MSA`
   and `ESA` on NAV 3 at that point (maintainer, 2026-11-22: the Olympic Mountains beside `KFHR DCT KTIW`).
+- **The course mode switch first.** Most aircraft that carry the unit have an external switch for leg and OBS mode
+  (the GPS CRS switch, often labeled LEG/OBS), and there <kbd>ENT</kbd> on MOD 1 or MOD 2 does nothing. Every change of
+  course mode in a tutorial gives the switch first, and MOD 1 or MOD 2 with <kbd>ENT</kbd> only for aircraft without
+  one (maintainer, 2026-11-22).
+- **Explain a surprise where the pilot first sees it.** When a screen of the tutorial shows a value the pilot does not
+  expect, the explanation stands at that screen or before it, not at a later step that needs the value (maintainer,
+  2026-11-22: the desired track 290° on the radial 284 of YKM, explained only at the hold at TITON).
+- **Procedures in the chart's terms.** Describe a charted hold or turn as the chart gives it (the inbound and outbound
+  course of a hold, not "the radial itself") and claim nothing the chart or the data does not show, such as the side
+  or the turn direction of a hold the data does not code (maintainer, 2026-11-22).
+- **`MSA` and `ESA` are off-route values.** Where a tutorial has the pilot read them, it says so and names the route's
+  own minimum altitude from the en route chart beside them (maintainer, 2026-11-22: V4 between TITON and CADED, 7,400 ft).
 - **The aircraft requirement.** Both tutorials need an aircraft in which the KLN 90B is the main GPS, the one that
   drives the course indicator. That is the normal installation. Where the unit is installed only as a secondary GPS
   (the aircraft option `Output.WriteGPSSimVars` off), it sends almost nothing to the aircraft: the CDI does not move
@@ -970,7 +982,10 @@ STARs (APT 7) work without it, so that such a pilot does not skip the whole proc
 - What the maintainer found when flying it in the simulator (2026-10-21):
   - YKM7 can be selected as it is, and the unit recognizes TITON as a holding fix. The unit keeps only the legs of a
     procedure that end at a fix, so the climb on runway heading and the heading to intercept the radial are not in the
-    flight plan; the pilot flies them by heading.
+    flight plan; the pilot flies them by heading. (Coordinator, 2026-11-22, from the simulator's data of AIRAC 2611
+    read with kln90b's sim debugger: YKM7 codes the climb, the direct-to YKM, the heading of 314° to intercept and the
+    course to TITON, but no hold leg. The unit keeps YKM and TITON and raises no `IF REQUIRED SELECT OBS` at TITON;
+    the pilot changes to OBS mode for the hold by hand.)
   - V4 has the waypoint CADED between TITON and CHINS. The pilot enters every waypoint of the airway by hand, because
     the unit cannot load an airway as a whole. Make this an explicit lesson: pilots often ask about it.
   - CHINS5 cannot be loaded without a transition, and all its transitions start before CHINS. The pilot selects the
@@ -980,6 +995,11 @@ STARs (APT 7) work without it, so that such a pilot does not skip the whole proc
   - This is the unit's correct behavior, not a bug (confirmed by the maintainer, 2026-10-22; see "Departures,
     arrivals and approaches" above). The tutorial says so where the pilot meets it, and has the pilot edit the
     procedures by hand as above.
+- **VNAV for the descent.** The en route part sets up VNAV on NAV 4 for the descent of the arrival, and the descent
+  is flown with it (maintainer, 2026-11-22).
+- **The EFB runway.** The EFB needs a runway at all times, so when APT 7 asked the pilot for none, the unit sends the
+  first runway of the procedure (09 for YKM7, 14L for CHINS5). That is a deliberate design decision of kln90b#409, not
+  a bug (maintainer, 2026-11-22).
 - **No flight plan file to download** (maintainer's decision, 2026-10-21). The pilot enters the whole flight plan in
   the KLN 90B by hand, which is the point of the flight; a file imported into the EFB and sent to the unit would skip
   that.

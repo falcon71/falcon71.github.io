@@ -88,6 +88,24 @@ Note for the writer: D/T 1 and D/T 3 count the missed approach to KBFI (150 NM);
 
 ## Notes from other packages
 
+### From the package tutorial-2: the state the en route section leaves (2026-11-22)
+
+- **VNAV is armed.** The section En route plans it on NAV 4 12 NM past CHINS at 11,000 ft (the altitude input with
+  the baro setting 29.92"): selected altitude 6,000 ft, VNAV waypoint COVOG (the approach's, `8 COVOG`), offset `00`,
+  angle -3.0°. The descent point lies about 9 NM past RADDY, 5.4 NM before HUMPP (24.8 NM from RADDY to COVOG along the
+  great-circle legs, 14.48 + 10.29 NM; 15.7 NM for 5,000 ft at 3.0°). The altitudes come from CIFP 2610: RADDY at 11,000 ft in the runway transition 32B of CHINS5,
+  COVOG at or above 6,000 ft in the HUMPP transition of R32LY. Staged in `vnavToCovog`
+  (`kln90b/screens/shared/tut2.ts`), screen `tutorial-2/nav-4-vnav-covog`. This package flies the descent: the
+  countdown, `VNV ALERT` if NAV 4 is not in view, VNAV active and the advisory altitude, VNAV ending as the unit
+  sequences past COVOG; and it checks what arming the approach about 2.3 NM before HUMPP and
+  `PRESS ALT TO SET BARO` do to a running VNAV.
+- Without an approach in FPL 0 there is no COVOG; the first half tells the pilot to leave VNAV and descend as the
+  visual approach at the end of the flight describes, so section 3 of this package must say how.
+- **The GPS CRS switch first.** The unit of the flight is installed with the GPS CRS switch, and every change of course
+  mode in this package (OBS at the missed approach holding point LOFAL, back to leg mode) describes the switch first,
+  and MOD 2 or MOD 1 with ENT only for aircraft without one, as the first half does (maintainer, 2026-11-22). The steps
+  use `gpsCrsSwitch` of `tut2.ts`.
+
 ### From the review of tutorial-2 (2026-11-22)
 
 - Bug candidate for this half, not yet filed: in OBS mode the unit measures the selected course with the published
@@ -96,8 +114,8 @@ Note for the writer: D/T 1 and D/T 3 count the missed approach to KBFI (150 NM);
   treated like a VOR. It matters if this half has the pilot use OBS at an approach waypoint (the MAHP LOFAL asks for
   OBS). kln90b#371 (closed) asked which variation the unit uses for a waypoint that is not a VOR; read it before
   filing, since this may continue it.
-- The EFB step of the first half carries the runway bug (`REQUEST FROM AVIONICS` sends runway 09 and 14L); see the
-  first half's paragraph for its `kln90b#` comment.
+- The EFB runways 09 and 14L are no bug: the EFB needs a runway at all times, a deliberate decision of kln90b#409
+  (maintainer, 2026-11-22; style guide, section 17).
 
 ## Changes to earlier pages
 

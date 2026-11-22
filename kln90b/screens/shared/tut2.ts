@@ -17,6 +17,7 @@ import {
 import {COURSE_MESSAGE_DELAY} from '../../../vendor/kln90b/kln90b/data/PersistentMessages';
 import type {HeadlessUnit} from '../../../vendor/kln90b/test/harness/boot';
 import {fplIdents} from '../../../vendor/kln90b/test/harness/readers';
+import {LEG_OBS_SWITCH} from '../../../vendor/kln90b/test/harness/panelXml';
 import {Screen} from '../../../vendor/kln90b/test/harness/render/screen';
 
 /** The en route waypoints of the flight, in the order the pilot enters them into FPL 0. */
@@ -25,8 +26,9 @@ export const TUT2_ENROUTE = ['KYKM', 'TITON', 'CADED', 'CHINS', 'KBFI'];
 export const tut2Boot: NonNullable<ScreenDescription['boot']> = {
 	position: place('KYKM'),
 	storage: savedFlightplan(0, TUT2_ENROUTE.map(facility)),
-	// The flight ends with an approach, so the unit is installed for approaches, which gives it APT 8
-	panelXml: panelXml(APR_ARM_SWITCH),
+	// The flight ends with an approach, so the unit is installed for approaches, which gives it APT 8. The aircraft has
+	// a GPS CRS switch, which selects leg or OBS mode in place of ENT on the MOD pages
+	panelXml: panelXml({...APR_ARM_SWITCH, ...LEG_OBS_SWITCH}),
 };
 
 /**
@@ -35,7 +37,7 @@ export const tut2Boot: NonNullable<ScreenDescription['boot']> = {
  */
 export const tut2EmptyBoot: NonNullable<ScreenDescription['boot']> = {
 	position: place('KYKM'),
-	panelXml: panelXml(APR_ARM_SWITCH),
+	panelXml: panelXml({...APR_ARM_SWITCH, ...LEG_OBS_SWITCH}),
 };
 
 /**
@@ -270,14 +272,24 @@ export async function directToYkm(u: HeadlessUnit): Promise<void> {
 }
 
 /**
- * OBS mode before YKM: the pilot turns the external indicator to 284, the radial of the SID, and presses ENT on MOD 2.
- * The unit reads the indicator, so the selected course is 284.
+ * Sets the GPS CRS switch of the aircraft to OBS (true) or LEG (false). The unit reads the switch every cycle, and the
+ * wait lets it follow.
+ */
+export async function gpsCrsSwitch(u: HeadlessUnit, obs: boolean): Promise<void> {
+	u.env.sim.set('GPS OBS ACTIVE', 'bool', obs);
+	await wait(2000);
+}
+
+/**
+ * OBS mode before YKM: the pilot turns the external indicator to 284, the radial of the SID, turns the left side to
+ * MOD 2 and sets the GPS CRS switch to OBS. The unit reads the indicator, so the selected course is 284.
  */
 export async function obsOnRadial(u: HeadlessUnit): Promise<void> {
 	await directToYkm(u);
 	u.env.sim.set('Nav OBS:1', 'degrees', 284);
 	await wait(2000);
-	await u.panel.obsMode();
+	await u.panel.selectPage('L', 'MOD 2');
+	await gpsCrsSwitch(u, true);
 }
 
 /** The aircraft `nm` out from YKM on the radial 284, flying outbound, in OBS mode. */
@@ -287,26 +299,26 @@ export async function outboundOnRadial(u: HeadlessUnit, nm: number): Promise<voi
 }
 
 /**
- * Back to leg mode 8 NM out on the radial: YKM lies behind, so the unit makes the leg from YKM to TITON active. Its
- * desired track differs from the indicator by more than 5°, and the course message that follows is answered on the
- * indicator.
+ * Back to leg mode 8 NM out on the radial, with NAV 3 on the left and the GPS CRS switch set to LEG: YKM lies behind,
+ * so the unit makes the leg from YKM to TITON active. Its desired track differs from the indicator by more than 5°, and
+ * the course message that follows is answered on the indicator.
  */
 export async function legModeToTiton(u: HeadlessUnit): Promise<void> {
 	await outboundOnRadial(u, 8);
-	await u.panel.selectPage('L', 'MOD 1');
-	await u.panel.ent();
+	await u.panel.selectPage('L', 'NAV 3');
+	await gpsCrsSwitch(u, false);
 	await wait(COURSE_MESSAGE_DELAY + 1000);
 	await adjustCourseIndicator(u);
 }
 
 /**
- * OBS mode 2 NM before TITON on the radial, for the hold: the indicator still shows the desired track of the leg, which
- * the unit takes as the selected course through TITON.
+ * OBS mode 2 NM before TITON on the radial, for the hold: the GPS CRS switch set to OBS, with the indicator still on the
+ * desired track of the leg, which the unit takes as the selected course through TITON.
  */
 export async function obsAtTiton(u: HeadlessUnit): Promise<void> {
 	await legModeToTiton(u);
 	await moveAircraft(u, pointFrom(TITON, RADIAL_TRUE + 180, 2), {groundspeedKt: CLIMB_KT, trackTrue: RADIAL_TRUE});
-	await u.panel.obsMode();
+	await gpsCrsSwitch(u, true);
 }
 
 /**
@@ -325,4 +337,48 @@ export async function pastChins(u: HeadlessUnit, nm: number): Promise<void> {
 	await moveAircraft(u, pointFrom(CHINS, track, nm), {groundspeedKt: GROUNDSPEED_KT, trackTrue: track});
 	await wait(COURSE_MESSAGE_DELAY + 1000);
 	await adjustCourseIndicator(u);
+}
+
+/** The altitude of the aircraft on the arrival, where CHINS5 has it cross RADDY toward runway 32. */
+export const ARRIVAL_ALTITUDE_FT = 11000;
+
+/** Turns the left inner knob until the character under the left cursor reads `ch`. */
+async function setLeftDigit(u: HeadlessUnit, ch: string): Promise<void> {
+	for (let i = 0; i < 10 && u.panel.focused('L').text !== ch; i++) {
+		await u.panel.inner('L', 1);
+	}
+	if (u.panel.focused('L').text !== ch) {
+		throw new Error(`setLeftDigit: the cursor shows ${u.panel.focused('L').text}, not ${ch}\n${Screen.read().dump()}`);
+	}
+}
+
+/**
+ * The descent planned on NAV 4, 12 NM past CHINS at the altitude of the arrival: the selected altitude 6,000 ft, the
+ * VNAV waypoint COVOG of the approach with no offset, then the cursor on the angle, which starts VNAV at the angle shown,
+ * and the angle 3.0 entered, which starts it again at that angle with the descent point ahead. The left cursor is
+ * turned off at the end, and NAV 4 stays on the left.
+ */
+export async function vnavToCovog(u: HeadlessUnit): Promise<void> {
+	await pastChins(u, 12);
+	u.env.sim.set('PLANE ALTITUDE', 'feet', ARRIVAL_ALTITUDE_FT);
+	u.env.sim.set('PRESSURE ALTITUDE', 'feet', ARRIVAL_ALTITUDE_FT);
+	await wait(2000);
+	await u.panel.selectPage('L', 'NAV 4');
+	// The cursor comes on at the ten thousands of the selected altitude; the outer knob moves on to the thousands
+	await u.panel.cursor('L');
+	await u.panel.outer('L', 1);
+	await setLeftDigit(u, '6');
+	// Past the hundreds to the waypoint, which is entered and its waypoint page approved
+	await u.panel.outer('L', 2);
+	await u.panel.enterIdent('L', 'COVOG');
+	await u.panel.ent();
+	await u.panel.ent();
+	// Past the offset, which stays 00, onto the units of the angle
+	await u.panel.outer('L', 2);
+	await wait(1000);
+	await setLeftDigit(u, '3');
+	await u.panel.outer('L', 1);
+	await setLeftDigit(u, '0');
+	await wait(1000);
+	await u.panel.cursor('L');
 }
