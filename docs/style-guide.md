@@ -935,7 +935,12 @@ unit.
 - The unit drops procedures with RF legs and RNP AR approaches. Choose procedures that the unit offers.
 - Link the free official FAA charts for the airports and procedures instead of drawing anything. The address of a
   chart PDF changes every cycle, so link the FAA's chart search and name each chart exactly (airport and procedure
-  name) so that the pilot finds it in one search.
+  name) so that the pilot finds it in one search. Some small airports have no airport diagram of their own; theirs is
+  on their approach charts, so name those (maintainer, 2026-11-22: KFHR).
+- **The map in actual track up.** A tutorial that shows NAV 5 teaches the pilot to set it to actual track up and shows
+  it so; pilots find that the most intuitive (maintainer, 2026-11-22).
+- **Safe altitudes near terrain.** Where high terrain lies near the route, the tutorial has the pilot look up `MSA`
+  and `ESA` on NAV 3 at that point (maintainer, 2026-11-22: the Olympic Mountains beside `KFHR DCT KTIW`).
 - **The aircraft requirement.** Both tutorials need an aircraft in which the KLN 90B is the main GPS, the one that
   drives the course indicator. That is the normal installation. Where the unit is installed only as a secondary GPS
   (the aircraft option `Output.WriteGPSSimVars` off), it sends almost nothing to the aircraft: the CDI does not move

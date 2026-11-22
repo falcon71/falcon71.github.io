@@ -11,7 +11,7 @@ This flight takes you from Friday Harbor in the San Juan Islands direct to Tacom
 
 | Departure | Destination | Distance | Aircraft | Checked with |
 | --- | --- | --- | --- | --- |
-| KFHR, Friday Harbor | KTIW, Tacoma Narrows | 77 NM | A small single-engine propeller aircraft that carries the KLN 90B | The simulator's default navigation data, AIRAC 2610 |
+| KFHR, Friday Harbor | KTIW, Tacoma Narrows | 77 NM | A small single-engine propeller aircraft that carries the KLN 90B | The simulator's default navigation data, AIRAC 2611 |
 
 The flight takes about an hour. After each important step the page says what the unit shows, so that you notice at once when something went differently.
 
@@ -19,7 +19,7 @@ The flight takes about an hour. After each important step the page says what the
 
 You need an aircraft in which the KLN 90B is the main GPS: the KLN 90B must drive your CDI or HSI. That is the normal installation. If the needle of your CDI or HSI does not move during the self test or in the first direct-to, choose another aircraft; [An aircraft that carries the unit](/kln90b/getting-started/installation/#an-aircraft-that-carries-the-unit) says where to find one.
 
-The flight flies no procedure, so the charts you need are the FAA's free VFR charts: the Seattle sectional chart and the Seattle-Portland terminal area chart, both on the FAA's [VFR charts](https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/vfr/) page. For the arrival, the FAA's [chart search](https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/dtpp/search/) finds the KTIW airport diagram; KFHR has none.
+The flight flies no procedure, so the charts you need are the FAA's free VFR charts: the Seattle sectional chart and the Seattle-Portland terminal area chart, both on the FAA's [VFR charts](https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/vfr/) page. For the airports, the FAA's [chart search](https://www.faa.gov/air_traffic/flight_info/aeronav/digital_products/dtpp/search/) finds the KTIW airport diagram, and for KFHR its approach charts, which show the airport diagram.
 
 ## Turning the unit on at Friday Harbor
 
@@ -110,9 +110,24 @@ With NAV 2 on the left and NAV 1 on the right you see where you are and how you 
 - **NAV 1** counts the distance down and shows the time to Tacoma Narrows at your groundspeed. The bearing turns from 151° to 152° on the way.
 - **NAV 2** relates your position to the nearby VOR, and the VOR changes along the way as another one comes nearer: CVV at the start, PAE in the middle of the flight and SEA before the arrival ([NAV 2: the present position](/kln90b/pages/nav/#nav-2-the-present-position)).
 
-For a map, turn the left inner knob clockwise to NAV 5. It draws the arrow of the direct-to from Friday Harbor, Tacoma Narrows as a star, and the aircraft as a diamond in the middle, with north up ([What NAV 5 draws](/kln90b/pages/nav/#what-nav-5-draws)).
+The Olympic Mountains rise just west of the route, so look at the safe altitudes too. Turn the left inner knob one step clockwise to NAV 3. `MSA` is the minimum safe altitude of the sector you are in, and `ESA` the minimum en route safe altitude, the highest minimum safe altitude along the rest of your way to Tacoma Narrows ([Minimum safe altitudes](/kln90b/pages/nav/#minimum-safe-altitudes)).
 
-<KlnScreen screen="tutorial-1/nav-5-en-route" />
+<KlnScreen screen="tutorial-1/nav-3-en-route" />
+
+Here both show 5,400 ft. Before you crossed 48°N, 8 NM back, both were higher: 8,400 ft for most of the way. The mountains lie in the next sector to the west, which begins about 8 NM to your right, so `MSA` rises if you stray that far west of the route.
+
+For a map, turn the left inner knob two steps clockwise, past NAV 4, to NAV 5. Unless you changed it before, NAV 5 shows north up. In actual track up the map turns with the aircraft, so that what lies ahead of you is up, as through the windshield.
+
+To turn the map to actual track up:
+
+1. Press the left <kbd>CRSR</kbd>. The cursor comes on at the range scale, the number at the bottom right.
+2. Turn the left outer knob one step counterclockwise. The cursor moves to the map orientation at the bottom left.
+3. Turn the left inner knob clockwise until the field shows `TK^`, actual track up. The map turns at once. If you turn past it, turn the inner knob back.
+4. Press the left <kbd>CRSR</kbd> to turn the cursor off. The field now shows your actual track as a magnetic course, 152° on this screen.
+
+   <KlnScreen screen="tutorial-1/nav-5-en-route" />
+
+NAV 5 draws the arrow of the direct-to from Friday Harbor, Tacoma Narrows as a star, and the aircraft as an aircraft symbol three quarters of the way down, so that the map reaches farther ahead of you than behind ([What NAV 5 draws](/kln90b/pages/nav/#what-nav-5-draws)). [The map orientation](/kln90b/pages/nav/#the-map-orientation) explains the other map orientations. NAV 5 keeps the map orientation while the unit is off, so after the next power-on on the ground the map stays blank until you start to move ([The map is blank in actual track up](/kln90b/pages/nav/#the-map-is-blank-in-actual-track-up)).
 
 At the start of the flight Tacoma Narrows lies beyond the range scale, and the star appears only once you are close enough. You can choose a larger range scale to see more of the route; [The range scale](/kln90b/pages/nav/#the-range-scale) says how.
 
@@ -122,7 +137,7 @@ About halfway, `MSG` starts to flash in the status line. The track ahead of you 
 
 To read the messages:
 
-1. Press <kbd>MSG</kbd>. The MSG page covers the whole screen and shows `AIRSPACE ALERT:` for the Seattle Class B, once for each part of the area that lies ahead.
+1. Press <kbd>MSG</kbd>. The MSG page covers the whole screen and shows `AIRSPACE ALERT:` for the Seattle Class B, once for each part of the area that lies ahead. {/* kln90b#523: describes the current behavior; the fix makes the unit give one message per area */}
 
    <KlnScreen screen="tutorial-1/msg-airspace-alert" />
 

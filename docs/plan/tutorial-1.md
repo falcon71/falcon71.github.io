@@ -23,7 +23,8 @@ Sections as written (2026-11-22), with their anchors under `/kln90b/getting-star
 4. **Looking up Friday Harbor** (`#looking-up-friday-harbor`): the right cursor and entering `KFHR` on APT 1, APT 4.
 5. **Flying direct to Tacoma Narrows** (`#flying-direct-to-tacoma-narrows`): the default waypoint KFHR, entering
    `KTIW`, approving it, NAV 1 on the ground, the course message of the external indicator.
-6. **En route** (`#en-route`): NAV 1 and NAV 2, NAV 5; **The airspace alert for the Seattle Class B**
+6. **En route** (`#en-route`): NAV 1 and NAV 2, MSA and ESA on NAV 3 (the Olympic Mountains west of the route),
+   NAV 5 set to actual track up; **The airspace alert for the Seattle Class B**
    (`#the-airspace-alert-for-the-seattle-class-b`); **The nearest airport** (`#the-nearest-airport`).
 7. **Arriving at Tacoma Narrows** (`#arriving-at-tacoma-narrows`): the ACT pages of KTIW, waypoint alerting, passing
    KTIW, the next power-on.
@@ -40,11 +41,16 @@ also shows `power-on/self-test` and `power-on/database-page`. The en route scree
 - The maintainer flies the tutorial in the simulator before it is published; the session's report says so and
   hands over a list of what to check in the cockpit.
 - The screens use the FAA extract of AIRAC 2610 (NASR 2026-10-01, CIFP 2610). The "checked with" cell of the table
-  names what the maintainer flew; until then it names the cycle of the screens and the maintainer confirms it.
+  names what the maintainer flew: the simulator's default navigation data, AIRAC 2611.
+- The maintainer flew the tutorial on 2026-11-22 and confirmed it works. On that review the page gained the NAV 3
+  step and NAV 5 in actual track up, and the charts paragraph now names KFHR's airport diagram on its approach charts.
+- The airspace alert gives one message per sector of the Seattle Class B; that is reported as a comment on kln90b#523,
+  and the page carries the `kln90b#523` comment.
 
 ## For the maintainer's flight in the simulator
 
-To check in the cockpit before the tutorial is published (writer and reviewer, 2026-11-22):
+To check in the cockpit before the tutorial is published (writer and reviewer, 2026-11-22). The maintainer flew it on
+2026-11-22 and confirmed the page; the NAV 3 and NAV 5 steps were added afterward.
 
 1. Cold and dark at KFHR: the Turn-On page, the Self Test page and the Database page come; the CDI or HSI shows the
    self-test deflection with FROM. Pressing ENT until the cursor is on `APPROVE?`, then ENT once more, approves it.
@@ -62,8 +68,10 @@ To check in the cockpit before the tutorial is published (writer and reviewer, 2
 9. The arrow before `KTIW` flashes shortly before the airport; after passing it KTIW stays active, NAV 1 shows FROM
    and the bearing turns to about 332°.
 10. After a power-off and power-on, the right side shows APT 4 of KTIW.
-11. The "checked with" cell of the table names the navigation data and the cycle actually flown (now: the
-    simulator's default navigation data, AIRAC 2610, the cycle of the screens).
+11. The "checked with" cell of the table names the navigation data and the cycle actually flown (the simulator's
+    default navigation data, AIRAC 2611, confirmed by the maintainer).
+12. Added after the flight: NAV 3 at about 40 NM shows `MSA` and `ESA` 5,400 ft, both 8,400 ft before 48°N.
+13. Added after the flight: the NAV 5 cursor steps reach `TK^` as the page says, and the map shows the aircraft symbol.
 
 ## Notes from other packages
 

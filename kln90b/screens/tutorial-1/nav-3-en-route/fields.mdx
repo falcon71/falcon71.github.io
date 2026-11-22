@@ -1,0 +1,31 @@
+<Field id="from" title="Direct To symbol">
+	The Direct To symbol stands in place of the from waypoint: the active leg is a [direct-to](/kln90b/operation/direct-to/) that starts where you made it. The arrow after it marks the active waypoint. The top line is the one of NAV 1.
+</Field>
+
+<Field id="to" title="Active waypoint">
+	The identifier of the [active waypoint](/kln90b/operation/modes-of-operation/#the-active-waypoint).
+</Field>
+
+<Field id="dtk" title="Desired track">
+	<Term t="DTK">`DTK`</Term> is the magnetic course of the active leg at the point abeam the aircraft, in whole degrees.
+</Field>
+
+<Field id="tk" title="Actual track">
+	`TK` is your actual track, magnetic, in whole degrees. It shows `---°` without a position and at a groundspeed below 2 kt.
+</Field>
+
+<Field id="fly" title="Direction to fly and cross-track error">
+	The direction to fly to get back on the course, `L` or `R`, and the <Term t="XTK">cross-track error</Term>. `L0.00` is exactly on course. The distance shows hundredths of a NM below 1 NM, tenths from 1 NM and whole NM from 10 NM.
+</Field>
+
+<Field id="msa" title="Minimum safe altitude">
+	The minimum safe altitude of the one-degree sector the aircraft is in, in whole hundreds of feet, with a clearance above the terrain of the sector. [Minimum safe altitudes](/kln90b/pages/nav/#minimum-safe-altitudes) explains the sectors.
+</Field>
+
+<Field id="esa" title="Minimum en route safe altitude">
+	The minimum en route safe altitude: the highest minimum safe altitude of every sector between the aircraft and the active waypoint. On a direct-to to a waypoint that FPL 0 does not hold, that is the whole way to it. It is never lower than `MSA`. [Minimum safe altitudes](/kln90b/pages/nav/#minimum-safe-altitudes) explains the sectors.
+</Field>
+
+<Field id="page" title="Page identification">
+	The page identification of the left side: `NAV 3`. NAV 3 is the same page on the left and on the right side.
+</Field>
