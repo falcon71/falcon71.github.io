@@ -10,7 +10,7 @@ text
 | 120 É                 |
 |.00NM›                 |
 |Ó310°                  |
-|Ö310° 30               |
+|Ö310° 7                |
 mask
 |.......................|
 |.......................|
@@ -26,7 +26,7 @@ field groundspeed 3 1 6
 field xtk 4 0 6
 field dtk 5 0 5
 field track 6 0 5
-field range 6 6 8
+field range 6 6 7
 mapfield active-leg F
 mapfield legs F
 mapfield active-waypoint F

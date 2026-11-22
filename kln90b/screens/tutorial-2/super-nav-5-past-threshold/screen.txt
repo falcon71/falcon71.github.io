@@ -10,7 +10,7 @@ text
 | 120 É                 |
 |.00NM‹                 |
 |Ó315°                  |
-|Ö315° 30               |
+|Ö315° 2                |
 mask
 |.......................|
 |.......................|
@@ -26,10 +26,8 @@ field groundspeed 3 1 6
 field xtk 4 0 6
 field dtk 5 0 5
 field track 6 0 5
-field range 6 6 8
-mapfield active-leg F
-mapfield legs F
-mapfield active-waypoint F
-mapfield waypoints F
+field range 6 6 7
+mapfield runways F
+mapfield airport F
 mapfield aircraft F
 map F

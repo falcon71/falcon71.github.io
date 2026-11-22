@@ -16,10 +16,8 @@ defineScreen(import.meta.url, {
 		{id: 'dtk', find: {re: /Ó\d{3}°/, area: 'F', row: 5}},
 		{id: 'track', find: {re: /Ö\d{3}°/, area: 'F', row: 6}},
 		{id: 'range', find: {re: /\d+(?= *$)/, area: 'F', row: 6}},
-		{id: 'active-leg', find: {map: 'F', draw: /^arrow DUANE 47.5168,-122.2911$/}},
-		{id: 'legs', find: {map: 'F', draw: /^line /, many: true}},
-		{id: 'active-waypoint', find: [{map: 'F', draw: /^icon @ 47.5168,-122.2911$/}, {map: 'F', draw: /^label RW32L /}]},
-		{id: 'waypoints', find: [{map: 'F', draw: /^icon @ (?!47.5168,-122.2911$)/, many: true}, {map: 'F', draw: /^label (?!RW32L )/, many: true}]},
+		{id: 'runways', find: [{map: 'F', draw: /^plain /, many: true}, {map: 'F', draw: /^label 14R /}]},
+		{id: 'airport', find: [{map: 'F', draw: /^icon @ KBFI$/}, {map: 'F', draw: /^label KBFI /}]},
 		{id: 'aircraft', find: {map: 'F', draw: /^icon # /}},
 	],
 });

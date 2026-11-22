@@ -21,6 +21,7 @@ import {fplIdents, messages} from '../../../vendor/kln90b/test/harness/readers';
 import {LEG_OBS_SWITCH} from '../../../vendor/kln90b/test/harness/panelXml';
 import {Screen} from '../../../vendor/kln90b/test/harness/render/screen';
 import {distanceNm} from '../../../vendor/kln90b/test/harness/flight/geo';
+import {SuperNav5} from '../../../vendor/kln90b/test/harness/render/superNav5';
 
 /** The en route waypoints of the flight, in the order the pilot enters them into FPL 0. */
 export const TUT2_ENROUTE = ['KYKM', 'TITON', 'CADED', 'CHINS', 'KBFI'];
@@ -544,15 +545,21 @@ async function toApproachActive(u: HeadlessUnit): Promise<void> {
 }
 
 /**
- * Super NAV 5 with field 1 turned from VNAV, which ended at COVOG, to XTK: the left CRSR puts the cursor on the range
- * scale, the left outer knob moves it up to field 1, and one step of the left inner knob turns it back to XTK.
+ * Super NAV 5 set up for the approach after VNAV ended at COVOG: the left CRSR puts the cursor on the range scale, the
+ * left inner knob turns it counterclockwise to AUTO, the left outer knob moves the cursor up to field 1, and one step of
+ * the left inner knob turns field 1 back from VNAV to XTK.
  */
 async function superNav5Xtk(u: HeadlessUnit): Promise<void> {
 	await backToSuperNav5(u);
 	await u.panel.cursor('L');
+	for (let i = 0; i < 20 && SuperNav5.read().range.trim() !== 'AUTO'; i++) {
+		await u.panel.inner('L', -1);
+	}
+	if (SuperNav5.read().range.trim() !== 'AUTO') throw new Error(`superNav5Xtk: the range scale shows ${SuperNav5.read().range}`);
 	await u.panel.outer('L', -3);
 	await u.panel.inner('L', -1);
 	await u.panel.cursor('L');
+	await wait(1000);
 }
 
 /** Super NAV 5 1.8 NM before the FAF DUANE, where the approach has become active, with XTK in field 1. */

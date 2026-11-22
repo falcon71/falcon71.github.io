@@ -944,6 +944,9 @@ unit.
   awareness. Where Super NAV 5 can show what a step watches (the VNAV countdown and the advisory altitude in its field
   1), the tutorial shows it there and teaches how; NAV 4 and the other single pages remain for entering data
   (maintainer, 2026-11-22).
+- **The `AUTO` range scale on an approach.** For an approach the tutorial has the pilot set the range scale of Super
+  NAV 5 to `AUTO`, and its screens of the approach show it so: a fixed range scale clutters the map there, while
+  `AUTO` zooms in as the waypoints come closer (maintainer, 2026-11-22).
 - **No vertical guidance on an approach.** A tutorial that flies an approach says in a Good to know box, where the
   approach begins, that the unit gives lateral guidance only, with no glidepath, and that VNAV is for the descent, not
   for the approach; pilots new to the unit look for vertical guidance (maintainer, 2026-11-22).

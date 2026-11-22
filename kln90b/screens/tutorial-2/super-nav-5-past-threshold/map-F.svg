@@ -1,109 +1,99 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 148 91" width="148" height="91" shape-rendering="crispEdges" fill="currentColor">
-<g data-field="legs" data-draw="line AUBRN DUANE" data-box="74 86 1 5">
+<g data-field="runways" data-draw="plain 47.5380,-122.3075 47.5292,-122.3000" data-box="76 53 1 21">
+<path d="M76 53h1v1h-1z"/>
+<path d="M76 54h1v1h-1z"/>
+<path d="M76 55h1v1h-1z"/>
+<path d="M76 56h1v1h-1z"/>
+<path d="M76 57h1v1h-1z"/>
+<path d="M76 58h1v1h-1z"/>
+<path d="M76 59h1v1h-1z"/>
+<path d="M76 60h1v1h-1z"/>
+<path d="M76 61h1v1h-1z"/>
+<path d="M76 62h1v1h-1z"/>
+<path d="M76 63h1v1h-1z"/>
+<path d="M76 64h1v1h-1z"/>
+<path d="M76 65h1v1h-1z"/>
+<path d="M76 66h1v1h-1z"/>
+<path d="M76 67h1v1h-1z"/>
+<path d="M76 68h1v1h-1z"/>
+<path d="M76 69h1v1h-1z"/>
+<path d="M76 70h1v1h-1z"/>
+<path d="M76 71h1v1h-1z"/>
+<path d="M76 72h1v1h-1z"/>
+<path d="M76 73h1v1h-1z"/>
+</g>
+<g data-field="runways" data-draw="plain 47.5405,-122.3114 47.5168,-122.2911" data-box="74 46 1 45">
+<path d="M74 46h1v1h-1z"/>
+<path d="M74 47h1v1h-1z"/>
+<path d="M74 48h1v1h-1z"/>
+<path d="M74 49h1v1h-1z"/>
+<path d="M74 50h1v1h-1z"/>
+<path d="M74 51h1v1h-1z"/>
+<path d="M74 52h1v1h-1z"/>
+<path d="M74 53h1v1h-1z"/>
+<path d="M74 54h1v1h-1z"/>
+<path d="M74 55h1v1h-1z"/>
+<path d="M74 56h1v1h-1z"/>
+<path d="M74 57h1v1h-1z"/>
+<path d="M74 58h1v1h-1z"/>
+<path d="M74 59h1v1h-1z"/>
+<path d="M74 60h1v1h-1z"/>
+<path d="M74 61h1v1h-1z"/>
+<path d="M74 62h1v1h-1z"/>
+<path d="M74 63h1v1h-1z"/>
+<path d="M74 64h1v1h-1z"/>
+<path d="M74 65h1v1h-1z"/>
+<path d="M74 66h1v1h-1z"/>
+<path d="M74 67h1v1h-1z"/>
+<path d="M74 68h1v1h-1z"/>
+<path d="M74 69h1v1h-1z"/>
+<path d="M74 70h1v1h-1z"/>
+<path d="M74 71h1v1h-1z"/>
+<path d="M74 72h1v1h-1z"/>
+<path d="M74 73h1v1h-1z"/>
+<path d="M74 74h1v1h-1z"/>
+<path d="M74 75h1v1h-1z"/>
+<path d="M74 76h1v1h-1z"/>
+<path d="M74 77h1v1h-1z"/>
+<path d="M74 78h1v1h-1z"/>
+<path d="M74 79h1v1h-1z"/>
+<path d="M74 80h1v1h-1z"/>
+<path d="M74 81h1v1h-1z"/>
+<path d="M74 82h1v1h-1z"/>
+<path d="M74 83h1v1h-1z"/>
+<path d="M74 84h1v1h-1z"/>
+<path d="M74 85h1v1h-1z"/>
 <path d="M74 86h1v1h-1z"/>
 <path d="M74 87h1v1h-1z"/>
 <path d="M74 88h1v1h-1z"/>
 <path d="M74 89h1v1h-1z"/>
 <path d="M74 90h1v1h-1z"/>
 </g>
-<g data-field="active-leg" data-draw="arrow DUANE 47.5168,-122.2911" data-box="71 74 7 4">
-<path d="M74 74h1v1h-1z"/>
-<path d="M73 75h3v1h-3z"/>
-<path d="M72 76h1v1h-1zM74 76h1v1h-1zM76 76h1v1h-1z"/>
-<path d="M71 77h1v1h-1zM74 77h1v1h-1zM77 77h1v1h-1z"/>
+<g data-field="runways" data-draw="label 14R 47.5405,-122.3114" data-box="56 37 16 7">
+<path d="M57 37h1v1h-1zM64 37h1v1h-1zM67 37h4v1h-4z"/>
+<path d="M56 38h2v1h-2zM63 38h2v1h-2zM67 38h1v1h-1zM71 38h1v1h-1z"/>
+<path d="M57 39h1v1h-1zM62 39h1v1h-1zM64 39h1v1h-1zM67 39h1v1h-1zM71 39h1v1h-1z"/>
+<path d="M57 40h1v1h-1zM61 40h1v1h-1zM64 40h1v1h-1zM67 40h4v1h-4z"/>
+<path d="M57 41h1v1h-1zM61 41h5v1h-5zM67 41h1v1h-1zM69 41h1v1h-1z"/>
+<path d="M57 42h1v1h-1zM64 42h1v1h-1zM67 42h1v1h-1zM70 42h1v1h-1z"/>
+<path d="M56 43h3v1h-3zM64 43h1v1h-1zM67 43h1v1h-1zM71 43h1v1h-1z"/>
 </g>
-<g data-field="waypoints" data-draw="label AUBRN AUBRN" data-box="44 86 29 5">
-<path d="M45 86h3v1h-3zM50 86h1v1h-1zM54 86h1v1h-1zM56 86h4v1h-4zM62 86h4v1h-4zM68 86h1v1h-1zM72 86h1v1h-1z"/>
-<path d="M44 87h1v1h-1zM48 87h1v1h-1zM50 87h1v1h-1zM54 87h1v1h-1zM56 87h1v1h-1zM60 87h1v1h-1zM62 87h1v1h-1zM66 87h1v1h-1zM68 87h2v1h-2zM72 87h1v1h-1z"/>
-<path d="M44 88h1v1h-1zM48 88h1v1h-1zM50 88h1v1h-1zM54 88h1v1h-1zM56 88h1v1h-1zM60 88h1v1h-1zM62 88h1v1h-1zM66 88h1v1h-1zM68 88h2v1h-2zM72 88h1v1h-1z"/>
-<path d="M44 89h5v1h-5zM50 89h1v1h-1zM54 89h1v1h-1zM56 89h4v1h-4zM62 89h4v1h-4zM68 89h1v1h-1zM70 89h1v1h-1zM72 89h1v1h-1z"/>
-<path d="M44 90h1v1h-1zM48 90h1v1h-1zM50 90h1v1h-1zM54 90h1v1h-1zM56 90h1v1h-1zM60 90h1v1h-1zM62 90h1v1h-1zM64 90h1v1h-1zM68 90h1v1h-1zM71 90h2v1h-2z"/>
+<g data-field="airport" data-draw="icon @ KBFI" data-box="73 70 3 3">
+<path d="M73 70h1v1h-1zM75 70h1v1h-1z"/>
+<path d="M73 71h1v1h-1zM75 71h1v1h-1z"/>
+<path d="M73 72h1v1h-1zM75 72h1v1h-1z"/>
 </g>
-<g data-field="waypoints" data-draw="icon @ DUANE" data-box="73 81 3 3">
-<path d="M73 81h3v1h-3z"/>
-<path d="M73 82h3v1h-3z"/>
-<path d="M73 83h3v1h-3z"/>
+<g data-field="airport" data-draw="label KBFI KBFI" data-box="49 62 23 7">
+<path d="M49 62h1v1h-1zM53 62h1v1h-1zM55 62h4v1h-4zM61 62h5v1h-5zM69 62h3v1h-3z"/>
+<path d="M49 63h1v1h-1zM52 63h1v1h-1zM55 63h1v1h-1zM59 63h1v1h-1zM61 63h1v1h-1zM70 63h1v1h-1z"/>
+<path d="M49 64h1v1h-1zM51 64h1v1h-1zM55 64h1v1h-1zM59 64h1v1h-1zM61 64h1v1h-1zM70 64h1v1h-1z"/>
+<path d="M49 65h2v1h-2zM55 65h4v1h-4zM61 65h4v1h-4zM70 65h1v1h-1z"/>
+<path d="M49 66h1v1h-1zM51 66h1v1h-1zM55 66h1v1h-1zM59 66h1v1h-1zM61 66h1v1h-1zM70 66h1v1h-1z"/>
+<path d="M49 67h1v1h-1zM52 67h1v1h-1zM55 67h1v1h-1zM59 67h1v1h-1zM61 67h1v1h-1zM70 67h1v1h-1z"/>
+<path d="M49 68h1v1h-1zM53 68h1v1h-1zM55 68h4v1h-4zM61 68h1v1h-1zM69 68h3v1h-3z"/>
 </g>
-<g data-field="waypoints" data-draw="label DUANE DUANE" data-box="43 79 29 7">
-<path d="M43 79h3v1h-3zM49 79h1v1h-1zM53 79h1v1h-1zM56 79h3v1h-3zM61 79h1v1h-1zM65 79h1v1h-1zM67 79h5v1h-5z"/>
-<path d="M43 80h1v1h-1zM46 80h1v1h-1zM49 80h1v1h-1zM53 80h1v1h-1zM55 80h1v1h-1zM59 80h1v1h-1zM61 80h2v1h-2zM65 80h1v1h-1zM67 80h1v1h-1z"/>
-<path d="M43 81h1v1h-1zM47 81h1v1h-1zM49 81h1v1h-1zM53 81h1v1h-1zM55 81h1v1h-1zM59 81h1v1h-1zM61 81h2v1h-2zM65 81h1v1h-1zM67 81h1v1h-1z"/>
-<path d="M43 82h1v1h-1zM47 82h1v1h-1zM49 82h1v1h-1zM53 82h1v1h-1zM55 82h5v1h-5zM61 82h1v1h-1zM63 82h1v1h-1zM65 82h1v1h-1zM67 82h4v1h-4z"/>
-<path d="M43 83h1v1h-1zM47 83h1v1h-1zM49 83h1v1h-1zM53 83h1v1h-1zM55 83h1v1h-1zM59 83h1v1h-1zM61 83h1v1h-1zM64 83h2v1h-2zM67 83h1v1h-1z"/>
-<path d="M43 84h1v1h-1zM46 84h1v1h-1zM49 84h1v1h-1zM53 84h1v1h-1zM55 84h1v1h-1zM59 84h1v1h-1zM61 84h1v1h-1zM64 84h2v1h-2zM67 84h1v1h-1z"/>
-<path d="M43 85h3v1h-3zM50 85h3v1h-3zM55 85h1v1h-1zM59 85h1v1h-1zM61 85h1v1h-1zM65 85h1v1h-1zM67 85h5v1h-5z"/>
-</g>
-<g data-field="active-waypoint" data-draw="icon @ 47.5168,-122.2911" data-box="73 69 3 3">
-<path d="M73 69h3v1h-3z"/>
-<path d="M73 70h3v1h-3z"/>
-<path d="M73 71h3v1h-3z"/>
-</g>
-<g data-field="active-waypoint" data-draw="label RW32L 47.5168,-122.2911" data-box="43 61 29 7">
-<path d="M43 61h4v1h-4zM49 61h1v1h-1zM53 61h1v1h-1zM56 61h3v1h-3zM62 61h3v1h-3zM67 61h1v1h-1z"/>
-<path d="M43 62h1v1h-1zM47 62h1v1h-1zM49 62h1v1h-1zM53 62h1v1h-1zM55 62h1v1h-1zM59 62h1v1h-1zM61 62h1v1h-1zM65 62h1v1h-1zM67 62h1v1h-1z"/>
-<path d="M43 63h1v1h-1zM47 63h1v1h-1zM49 63h1v1h-1zM53 63h1v1h-1zM59 63h1v1h-1zM65 63h1v1h-1zM67 63h1v1h-1z"/>
-<path d="M43 64h4v1h-4zM49 64h1v1h-1zM53 64h1v1h-1zM57 64h2v1h-2zM64 64h1v1h-1zM67 64h1v1h-1z"/>
-<path d="M43 65h1v1h-1zM45 65h1v1h-1zM49 65h1v1h-1zM51 65h1v1h-1zM53 65h1v1h-1zM59 65h1v1h-1zM63 65h1v1h-1zM67 65h1v1h-1z"/>
-<path d="M43 66h1v1h-1zM46 66h1v1h-1zM49 66h1v1h-1zM51 66h1v1h-1zM53 66h1v1h-1zM55 66h1v1h-1zM59 66h1v1h-1zM62 66h1v1h-1zM67 66h1v1h-1z"/>
-<path d="M43 67h1v1h-1zM47 67h1v1h-1zM50 67h1v1h-1zM52 67h1v1h-1zM56 67h3v1h-3zM61 67h5v1h-5zM67 67h5v1h-5z"/>
-</g>
-<g data-field="waypoints" data-draw="icon @ FEVAS" data-box="73 59 3 3">
-<path d="M73 59h3v1h-3z"/>
-<path d="M73 60h3v1h-3z"/>
-<path d="M73 61h3v1h-3z"/>
-</g>
-<g data-field="waypoints" data-draw="label FEVAS FEVAS" data-box="43 51 29 7">
-<path d="M43 51h5v1h-5zM49 51h5v1h-5zM55 51h1v1h-1zM59 51h1v1h-1zM62 51h3v1h-3zM68 51h3v1h-3z"/>
-<path d="M43 52h1v1h-1zM49 52h1v1h-1zM55 52h1v1h-1zM59 52h1v1h-1zM61 52h1v1h-1zM65 52h1v1h-1zM67 52h1v1h-1zM71 52h1v1h-1z"/>
-<path d="M43 53h1v1h-1zM49 53h1v1h-1zM55 53h1v1h-1zM59 53h1v1h-1zM61 53h1v1h-1zM65 53h1v1h-1zM67 53h1v1h-1z"/>
-<path d="M43 54h4v1h-4zM49 54h4v1h-4zM55 54h1v1h-1zM59 54h1v1h-1zM61 54h5v1h-5zM68 54h3v1h-3z"/>
-<path d="M43 55h1v1h-1zM49 55h1v1h-1zM55 55h1v1h-1zM59 55h1v1h-1zM61 55h1v1h-1zM65 55h1v1h-1zM71 55h1v1h-1z"/>
-<path d="M43 56h1v1h-1zM49 56h1v1h-1zM56 56h1v1h-1zM58 56h1v1h-1zM61 56h1v1h-1zM65 56h1v1h-1zM67 56h1v1h-1zM71 56h1v1h-1z"/>
-<path d="M43 57h1v1h-1zM49 57h5v1h-5zM57 57h1v1h-1zM61 57h1v1h-1zM65 57h1v1h-1zM68 57h3v1h-3z"/>
-</g>
-<g data-field="waypoints" data-draw="icon @ GRRAM" data-box="65 38 3 3">
-<path d="M65 38h3v1h-3z"/>
-<path d="M65 39h3v1h-3z"/>
-<path d="M65 40h3v1h-3z"/>
-</g>
-<g data-field="waypoints" data-draw="label GRRAM GRRAM" data-box="35 30 29 7">
-<path d="M36 30h3v1h-3zM41 30h4v1h-4zM47 30h4v1h-4zM54 30h3v1h-3zM59 30h1v1h-1zM63 30h1v1h-1z"/>
-<path d="M35 31h1v1h-1zM39 31h1v1h-1zM41 31h1v1h-1zM45 31h1v1h-1zM47 31h1v1h-1zM51 31h1v1h-1zM53 31h1v1h-1zM57 31h1v1h-1zM59 31h2v1h-2zM62 31h2v1h-2z"/>
-<path d="M35 32h1v1h-1zM41 32h1v1h-1zM45 32h1v1h-1zM47 32h1v1h-1zM51 32h1v1h-1zM53 32h1v1h-1zM57 32h1v1h-1zM59 32h1v1h-1zM61 32h1v1h-1zM63 32h1v1h-1z"/>
-<path d="M35 33h1v1h-1zM41 33h4v1h-4zM47 33h4v1h-4zM53 33h5v1h-5zM59 33h1v1h-1zM61 33h1v1h-1zM63 33h1v1h-1z"/>
-<path d="M35 34h1v1h-1zM38 34h2v1h-2zM41 34h1v1h-1zM43 34h1v1h-1zM47 34h1v1h-1zM49 34h1v1h-1zM53 34h1v1h-1zM57 34h1v1h-1zM59 34h1v1h-1zM63 34h1v1h-1z"/>
-<path d="M35 35h1v1h-1zM39 35h1v1h-1zM41 35h1v1h-1zM44 35h1v1h-1zM47 35h1v1h-1zM50 35h1v1h-1zM53 35h1v1h-1zM57 35h1v1h-1zM59 35h1v1h-1zM63 35h1v1h-1z"/>
-<path d="M36 36h3v1h-3zM41 36h1v1h-1zM45 36h1v1h-1zM47 36h1v1h-1zM51 36h1v1h-1zM53 36h1v1h-1zM57 36h1v1h-1zM59 36h1v1h-1zM63 36h1v1h-1z"/>
-</g>
-<g data-field="waypoints" data-draw="icon @ LOFAL" data-box="64 12 3 3">
-<path d="M64 12h3v1h-3z"/>
-<path d="M64 13h3v1h-3z"/>
-<path d="M64 14h3v1h-3z"/>
-</g>
-<g data-field="waypoints" data-draw="label LOFAL LOFAL" data-box="34 4 29 7">
-<path d="M34 4h1v1h-1zM41 4h3v1h-3zM46 4h5v1h-5zM53 4h3v1h-3zM58 4h1v1h-1z"/>
-<path d="M34 5h1v1h-1zM40 5h1v1h-1zM44 5h1v1h-1zM46 5h1v1h-1zM52 5h1v1h-1zM56 5h1v1h-1zM58 5h1v1h-1z"/>
-<path d="M34 6h1v1h-1zM40 6h1v1h-1zM44 6h1v1h-1zM46 6h1v1h-1zM52 6h1v1h-1zM56 6h1v1h-1zM58 6h1v1h-1z"/>
-<path d="M34 7h1v1h-1zM40 7h1v1h-1zM44 7h1v1h-1zM46 7h4v1h-4zM52 7h5v1h-5zM58 7h1v1h-1z"/>
-<path d="M34 8h1v1h-1zM40 8h1v1h-1zM44 8h1v1h-1zM46 8h1v1h-1zM52 8h1v1h-1zM56 8h1v1h-1zM58 8h1v1h-1z"/>
-<path d="M34 9h1v1h-1zM40 9h1v1h-1zM44 9h1v1h-1zM46 9h1v1h-1zM52 9h1v1h-1zM56 9h1v1h-1zM58 9h1v1h-1z"/>
-<path d="M34 10h5v1h-5zM41 10h3v1h-3zM46 10h1v1h-1zM52 10h1v1h-1zM56 10h1v1h-1zM58 10h5v1h-5z"/>
-</g>
-<g data-field="waypoints" data-draw="icon @ KBFI" data-box="73 67 3 2">
-<path d="M73 67h3v1h-3z"/>
-<path d="M73 68h3v1h-3z"/>
-</g>
-<g data-field="waypoints" data-draw="label KBFI KBFI" data-box="77 59 23 7">
-<path d="M77 59h1v1h-1zM81 59h1v1h-1zM83 59h4v1h-4zM89 59h5v1h-5zM97 59h3v1h-3z"/>
-<path d="M77 60h1v1h-1zM80 60h1v1h-1zM83 60h1v1h-1zM87 60h1v1h-1zM89 60h1v1h-1zM98 60h1v1h-1z"/>
-<path d="M77 61h1v1h-1zM79 61h1v1h-1zM83 61h1v1h-1zM87 61h1v1h-1zM89 61h1v1h-1zM98 61h1v1h-1z"/>
-<path d="M77 62h2v1h-2zM83 62h4v1h-4zM89 62h4v1h-4zM98 62h1v1h-1z"/>
-<path d="M77 63h1v1h-1zM79 63h1v1h-1zM83 63h1v1h-1zM87 63h1v1h-1zM89 63h1v1h-1zM98 63h1v1h-1z"/>
-<path d="M77 64h1v1h-1zM80 64h1v1h-1zM83 64h1v1h-1zM87 64h1v1h-1zM89 64h1v1h-1zM98 64h1v1h-1z"/>
-<path d="M77 65h1v1h-1zM81 65h1v1h-1zM83 65h4v1h-4zM89 65h1v1h-1zM97 65h3v1h-3z"/>
-</g>
-<g data-field="aircraft" data-draw="icon # 47.5312,-122.3033" data-box="72 66 5 2">
-<path d="M74 66h1v1h-1z"/>
-<path d="M72 67h1v1h-1zM76 67h1v1h-1z"/>
+<g data-field="aircraft" data-draw="icon # 47.5312,-122.3033" data-box="72 67 4 3">
+<path d="M72 67h2v1h-2zM75 67h1v1h-1z"/>
+<path d="M73 69h1v1h-1zM75 69h1v1h-1z"/>
 </g>
 </svg>

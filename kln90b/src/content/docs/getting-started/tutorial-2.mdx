@@ -340,7 +340,15 @@ Descend so that your altimeter stays at the advisory altitude in field 1. 4 NM b
 
 <KlnScreen screen="tutorial-2/super-nav-5-descent" />
 
-As the unit passes COVOG, at 6,000 ft, VNAV ends: field 1 shows `V OFF`, and NAV 4 clears the plan ([When VNAV ends](/kln90b/operation/vnav/#when-vnav-ends)). From COVOG on, fly the altitudes of the approach chart. For the approach, turn field 1 to `XTK`, the cross-track error, the way you turned it to `VNAV`: press the left <kbd>CRSR</kbd>, turn the left outer knob three steps counterclockwise, turn the left inner knob one step counterclockwise, and press the left <kbd>CRSR</kbd> again.
+As the unit passes COVOG, at 6,000 ft, VNAV ends: field 1 shows `V OFF`, and NAV 4 clears the plan ([When VNAV ends](/kln90b/operation/vnav/#when-vnav-ends)). From COVOG on, fly the altitudes of the approach chart.
+
+For the approach, set Super NAV 5 to the `AUTO` range scale, which zooms in as the waypoints come closer, and turn field 1 to `XTK`, the cross-track error ([The range scale and AUTO](/kln90b/pages/nav/#the-range-scale-and-auto)). To set up Super NAV 5 for the approach:
+
+1. Press the left <kbd>CRSR</kbd>. The cursor comes on at the range scale, 30.
+2. Turn the left inner knob counterclockwise, past 1, until the field shows `AUTO`.
+3. Turn the left outer knob three steps counterclockwise to field 1.
+4. Turn the left inner knob one step counterclockwise, from `VNAV` to `XTK`.
+5. Press the left <kbd>CRSR</kbd> to turn the cursor off. The range field shows the range scale the unit chooses.
 
 Shortly before AUBRN the course turns right. Unless the unit sets the course of your indicator itself, `MSG` flashes for `ADJ NAV IND CRS TO 311°`: read the message with <kbd>MSG</kbd> and turn the indicator to 311°. Before DUANE the course turns by about 5° more; if `MSG` flashes again, turn the indicator to the course the message gives ([`ADJ NAV IND CRS TO nnn°`](/kln90b/operation/modes-of-operation/#adj-nav-ind-crs-to-nnn)).
 
@@ -352,13 +360,15 @@ The KLN 90B gives lateral guidance only: along the approach it has no glidepath 
 
 Shortly before DUANE, the FAF, the unit makes the approach active by itself ([Activating the approach](/kln90b/operation/approaches/#activating-the-approach)). The mode on Super NAV 5 shows <Term t="APR-LEG">`APR-LEG`</Term>, and the ACTV annunciator of the GPS APR switch lights. The CDI scale factor narrows to ±0.30 NM by DUANE and keeps it on the final approach ([The CDI scale along the approach](/kln90b/operation/approaches/#the-cdi-scale-along-the-approach)).
 
+1.8 NM before DUANE the unit has chosen 7 NM, which holds DUANE and the threshold beyond it:
+
 <KlnScreen screen="tutorial-2/super-nav-5-apr" />
 
 If the mode still shows `ARM-LEG` at DUANE, the approach is not active, and the message page says why ([RAIM in an approach](/kln90b/operation/approaches/#raim-in-an-approach)); do not fly the final approach on the unit then, but fly the missed approach.
 
 Past DUANE the active leg runs from DUANE to `RW32L`, the threshold of runway 32L, which is the <Term t="MAP" /> of the approach. Fly the final approach by the chart and land.
 
-The unit does not sequence past the MAP: in FPL 0 the fence `*NO WPT SEQ` follows `RW32L` ([The approach in FPL 0](/kln90b/operation/approaches/#the-approach-in-fpl-0)). Past the threshold `RW32L` stays the active waypoint, your CDI or HSI shows FROM, and the distance counts up. Super NAV 5 draws no legs past the MAP. 1 NM past the threshold it looks like this:
+The unit does not sequence past the MAP: in FPL 0 the fence `*NO WPT SEQ` follows `RW32L` ([The approach in FPL 0](/kln90b/operation/approaches/#the-approach-in-fpl-0)). Past the threshold `RW32L` stays the active waypoint, your CDI or HSI shows FROM, and the distance counts up. Super NAV 5 draws no legs past the MAP. While the MAP is the active waypoint, the missed approach does not count for `AUTO`, so near the threshold the range scale comes down to 2 NM, and at 2 NM the map draws Boeing Field as its runways ([Runway diagrams](/kln90b/pages/nav/#runway-diagrams)). 1 NM past the threshold it looks like this:
 
 <KlnScreen screen="tutorial-2/super-nav-5-past-threshold" />
 
