@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 99 78" width="99" height="78" shape-rendering="crispEdges" fill="currentColor">
+<g data-field="leg" data-draw="arrow KFHR KTIW" data-box="40 5 20 65">
+<path d="M40 5h1v1h-1z"/>
+<path d="M40 6h1v1h-1z"/>
+<path d="M41 7h1v1h-1z"/>
+<path d="M41 8h1v1h-1z"/>
+<path d="M41 9h1v1h-1z"/>
+<path d="M41 10h1v1h-1z"/>
+<path d="M42 11h1v1h-1z"/>
+<path d="M42 12h1v1h-1z"/>
+<path d="M42 13h1v1h-1z"/>
+<path d="M43 14h1v1h-1z"/>
+<path d="M43 15h1v1h-1z"/>
+<path d="M43 16h1v1h-1z"/>
+<path d="M43 17h1v1h-1z"/>
+<path d="M44 18h1v1h-1z"/>
+<path d="M44 19h1v1h-1z"/>
+<path d="M44 20h1v1h-1z"/>
+<path d="M45 21h1v1h-1z"/>
+<path d="M45 22h1v1h-1z"/>
+<path d="M45 23h1v1h-1z"/>
+<path d="M45 24h1v1h-1z"/>
+<path d="M46 25h1v1h-1z"/>
+<path d="M46 26h1v1h-1z"/>
+<path d="M46 27h1v1h-1z"/>
+<path d="M46 28h1v1h-1z"/>
+<path d="M47 29h1v1h-1z"/>
+<path d="M47 30h1v1h-1z"/>
+<path d="M47 31h1v1h-1z"/>
+<path d="M47 32h1v1h-1z"/>
+<path d="M48 33h1v1h-1z"/>
+<path d="M48 34h1v1h-1z"/>
+<path d="M48 35h1v1h-1z"/>
+<path d="M48 36h1v1h-1z"/>
+<path d="M49 37h1v1h-1z"/>
+<path d="M49 38h1v1h-1z"/>
+<path d="M49 39h1v1h-1z"/>
+<path d="M49 40h1v1h-1z"/>
+<path d="M50 41h1v1h-1z"/>
+<path d="M50 42h1v1h-1z"/>
+<path d="M50 43h1v1h-1z"/>
+<path d="M50 44h1v1h-1z"/>
+<path d="M51 45h1v1h-1z"/>
+<path d="M51 46h1v1h-1z"/>
+<path d="M51 47h1v1h-1z"/>
+<path d="M51 48h1v1h-1z"/>
+<path d="M51 49h1v1h-1z"/>
+<path d="M52 50h1v1h-1z"/>
+<path d="M52 51h1v1h-1z"/>
+<path d="M52 52h1v1h-1z"/>
+<path d="M52 53h1v1h-1z"/>
+<path d="M53 54h1v1h-1z"/>
+<path d="M53 55h1v1h-1z"/>
+<path d="M53 56h1v1h-1z"/>
+<path d="M53 57h1v1h-1z"/>
+<path d="M53 58h1v1h-1z"/>
+<path d="M54 59h1v1h-1z"/>
+<path d="M54 60h1v1h-1z"/>
+<path d="M54 61h1v1h-1z"/>
+<path d="M54 62h1v1h-1z"/>
+<path d="M54 63h1v1h-1z"/>
+<path d="M55 64h1v1h-1z"/>
+<path d="M55 65h1v1h-1z"/>
+<path d="M55 66h1v1h-1zM59 66h1v1h-1z"/>
+<path d="M52 67h1v1h-1zM55 67h1v1h-1zM58 67h1v1h-1z"/>
+<path d="M53 68h2v1h-2zM56 68h1v1h-1zM58 68h1v1h-1z"/>
+<path d="M55 69h3v1h-3z"/>
+</g>
+<g data-field="active-waypoint" data-draw="icon % KTIW" data-box="55 72 5 5">
+<path d="M55 72h1v1h-1zM57 72h1v1h-1zM59 72h1v1h-1z"/>
+<path d="M56 73h3v1h-3z"/>
+<path d="M55 74h5v1h-5z"/>
+<path d="M56 75h3v1h-3z"/>
+<path d="M55 76h1v1h-1zM57 76h1v1h-1zM59 76h1v1h-1z"/>
+</g>
+<g data-field="aircraft" data-draw="icon $ 47.8749,-122.7913" data-box="47 38 5 4">
+<path d="M48 38h1v1h-1zM50 38h1v1h-1z"/>
+<path d="M47 39h2v1h-2zM50 39h2v1h-2z"/>
+<path d="M48 40h1v1h-1zM50 40h1v1h-1z"/>
+<path d="M49 41h1v1h-1z"/>
+</g>
+</svg>
