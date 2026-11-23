@@ -46,7 +46,7 @@ To enter the route:
 1. Turn the left outer knob to the FPL pages and the left inner knob to FPL 0.
 2. Press the left <kbd>CRSR</kbd>. The cursor is on the blank first waypoint position.
 3. Enter KYKM with the left knobs and press <kbd>ENT</kbd>. The right side shows APT 1 of Yakima for approval. Press <kbd>ENT</kbd> again to approve it.
-4. Enter TITON the same way and approve its INT page. With two waypoints in FPL 0, the unit makes the leg from KYKM to TITON active at once. Unless the unit sets the course of your indicator itself, <Term t="MSG">`MSG`</Term> flashes in the status line for `ADJ NAV IND CRS TO 302°`. Leave it for now; the course changes with the next steps.
+4. Enter TITON the same way and approve its INT page. With two waypoints in FPL 0, the unit makes the leg from KYKM to TITON active at once. Where the unit reads your indicator but does not set it, <Term t="MSG">`MSG`</Term> flashes in the status line for `ADJ NAV IND CRS TO 302°`. Leave it for now; the course changes with the next steps.
 5. Enter CADED, CHINS and KBFI the same way.
 6. Press the left <kbd>CRSR</kbd> to turn the cursor off.
 
@@ -76,7 +76,7 @@ To load YKM7:
 
 The SID stands right after `1:KYKM` under its header `YKM7-SID`, and its waypoints have a period after the number. `TITON` is now in FPL 0 twice: `3.TITON` of the SID and `4:TITON`, the en route waypoint you entered. The unit tells you so with `REDUNDANT WPTS IN FPL` ([`REDUNDANT WPTS IN FPL`](/kln90b/operation/departures-arrivals/#redundant-wpts-in-fpl)); you delete the copies once all procedures are loaded.
 
-The active leg is now the leg from KYKM to YKM, the leg of FPL 0 closest to the aircraft ([Flying a SID or a STAR](/kln90b/operation/departures-arrivals/#flying-a-sid-or-a-star)). Press <kbd>MSG</kbd> to read the messages. Unless the unit sets the course of your indicator itself, one is `ADJ NAV IND CRS TO 074°`: turn your CDI or HSI to 074°. Press <kbd>MSG</kbd> again to close the MSG page.
+The active leg is now the leg from KYKM to YKM, the leg of FPL 0 closest to the aircraft ([Flying a SID or a STAR](/kln90b/operation/departures-arrivals/#flying-a-sid-or-a-star)). Press <kbd>MSG</kbd> to read the messages. Where the unit reads your indicator but does not set it, one is `ADJ NAV IND CRS TO 074°`: turn your CDI or HSI to 074°. Press <kbd>MSG</kbd> again to close the MSG page.
 
 Of YKM7 the unit keeps the two waypoints, YKM and TITON. It drops the climb from the runway, which ends at an altitude, and the heading that intercepts the radial to TITON, because neither ends at a waypoint ([What the unit keeps of a procedure](/kln90b/operation/departures-arrivals/#what-the-unit-keeps-of-a-procedure)). The navigation data codes no hold in YKM7, so the unit knows nothing of the hold at TITON that the chart shows. You fly the turns toward YKM and TITON as the chart shows, and the hold yourself, as the departure and the hold below describe.
 
@@ -207,7 +207,7 @@ To fly the radial in OBS mode:
 
 MOD 2 shows `OBS 284°` without a colon where the unit reads your CDI or HSI and takes its course. Where it shows `OBS:` with a colon, the unit chose the course itself when it changed to OBS mode; set 284° on MOD 2 then, as [The selected course](/kln90b/operation/modes-of-operation/#the-selected-course) describes.
 
-Before YKM the TO/FROM indicator already shows FROM, because the course points away from YKM to the northwest; it shows where the radial lies and centers once you are on it. Past YKM, on the radial, turn the left outer knob two steps clockwise to the NAV pages and the left inner knob to NAV 3. At 5 NM out it looks like this:
+Before YKM the TO/FROM indicator already shows FROM, because the course points away from YKM to the northwest; the D-bar shows where the radial lies and centers once you are on it. Past YKM, on the radial, turn the left outer knob two steps clockwise to the NAV pages and the left inner knob to NAV 3. At 5 NM out it looks like this:
 
 <KlnScreen screen="tutorial-2/nav-radial" />
 
@@ -225,7 +225,7 @@ YKM lies behind you, so the unit makes the leg of FPL 0 closest to you active, t
 The desired track of the leg to TITON is 290°, not 284°, although the leg runs along the radial. The radial is measured with the published magnetic variation of YKM, 21°E, which its VOR page shows; the unit measures the desired track with the variation where you are ([Magnetic variation](/kln90b/operation/modes-of-operation/#magnetic-variation)), and the selected course at TITON with the variation at TITON, both about 6° less ([The selected course](/kln90b/operation/modes-of-operation/#the-selected-course)). Every course along the radial that the chart gives therefore reads about 6° more on the unit wherever YKM is not the active waypoint, the inbound course of the hold at TITON included; with YKM active, the selected course uses YKM's own variation and reads as charted.
 </Callout>
 
-Unless the unit sets the course of your indicator itself, `MSG` flashes for `ADJ NAV IND CRS TO 290°`: turn the indicator to 290°.
+Where the unit reads your indicator but does not set it, `MSG` flashes for `ADJ NAV IND CRS TO 290°`: turn the indicator to 290°.
 
 ## The hold at TITON
 

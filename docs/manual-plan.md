@@ -128,7 +128,7 @@ that writes the owner records the anchors in this table, and the final pass shar
 | The nearest lists: the nearest airport criteria (SET 3), radius, count, renewal, how they are reached, the MSG and ENT shortcut | Nearest: `#the-nearest-lists`, `#showing-a-nearest-list`, `#finding-the-nearest-airport-quickly`, `#no-airport-in-the-nearest-list`, `#setting-the-nearest-airport-criteria`, `#flying-to-a-nearest-waypoint` | waypoint chapters: the nearest variant of their page; SET chapter: SET 3 as a page and the link; a user-defined airport (APT 3): one sentence and the link |
 | Direct-to: the Direct To page, every way to start one, the default waypoint, leaving the page, recentering, canceling, direct-to in OBS mode and its course message | Direct-to: `#flying-direct-to-a-waypoint`, `#the-default-waypoint`, `#leaving-the-direct-to-page`, `#flying-direct-to-a-waypoint-of-the-flight-plan`, `#recentering-the-d-bar`, `#canceling-a-direct-to`, `#flying-a-direct-to-in-obs-mode` (`#crs-nnn-in-the-status-line`) | Flight plans: a direct-to to a waypoint of FPL 0, in one paragraph with the link; Controls and display: one sentence on leaving the page and the link |
 | The active waypoint and the active leg | Modes of operation, `#the-active-waypoint` (`#no-active-waypoint`) | every page that names it links at its first use |
-| Leg and OBS mode (the course modes), selecting them, the GPS CRS switch, the selected course and where it is set, the course messages, changing between the modes, the mode annunciations, the CDI scale factor | Modes of operation: `#leg-mode`, `#obs-mode` (`#selecting-leg-or-obs-mode`, `#the-selected-course`), `#the-course-messages` (`#adj-nav-ind-crs-to-nnn`, `#adj-nav-ind-crs`, `#obs-wpt--200nm`), `#changing-between-the-modes`, `#the-mode-annunciations`, `#the-cdi-scale-factor` | MOD chapter: the pages; NAV chapter: the fields; Non-precision approaches: arming and activation, linking `#the-cdi-scale-factor` for the factors |
+| Leg and OBS mode (the course modes), selecting them, the GPS CRS switch, the selected course and where it is set, the course messages, changing between the modes, the mode annunciations, the CDI scale factor | Modes of operation: `#leg-mode`, `#obs-mode` (`#selecting-leg-or-obs-mode` with `#without-a-gps-crs-switch`, `#the-selected-course`), `#the-course-messages` (`#adj-nav-ind-crs-to-nnn`, `#adj-nav-ind-crs`, `#obs-wpt--200nm`), `#changing-between-the-modes`, `#the-mode-annunciations`, `#the-cdi-scale-factor` | MOD chapter: the pages; NAV chapter: the fields; Non-precision approaches: arming and activation, linking `#the-cdi-scale-factor` for the factors |
 | Magnetic variation: where the unit has none, the entered variation, `MAGNETIC VAR INVALID` | Modes of operation, `#magnetic-variation` (`#flying-without-a-magnetic-variation`, `#magnetic-var-invalid`) | SET chapter (SET 2): the field |
 | Waypoint alerting, the waypoint alert annunciator | Sequencing and turn anticipation, `#waypoint-alerting` (`#the-waypoint-alert-annunciator`) | every page that names it links at its first use |
 | Waypoint sequencing, turn anticipation (SET 6), fly-over waypoints, when the unit does not sequence | Sequencing and turn anticipation: `#waypoint-sequencing` (`#when-the-unit-does-not-sequence`), `#turn-anticipation` (`#where-turn-anticipation-begins`, `#turning-off-turn-anticipation`), `#fly-over-waypoints` | SET chapter: SET 6 as a page; FAQ: the question and the link; Flight plans: the waypoint type identification page |
@@ -138,7 +138,7 @@ that writes the owner records the anchors in this table, and the final pass shar
 | Reference waypoints and center waypoints as tasks, the computation, the duplicate on a recompute | Flight plans: `#reference-waypoints`, `#center-waypoints` | REF and CTR chapters: the pages, their states (`#invalid-ref`, `#not-enough-room-in-fpl`, `#no-ctr-waypoints`) and fields |
 | What a loaded procedure does in FPL 0: where it goes, procedure headers, `CHANGE` and `DELETE` on a header, editing procedure waypoints, the make-room question for a procedure, `REDUNDANT WPTS IN FPL` | SID and STAR procedures: `#which-procedures-the-unit-offers`, `#what-the-unit-keeps-of-a-procedure`, `#loading-a-sid`, `#loading-a-star`, `#a-transition-must-be-selected` (`#redundant-wpts-in-fpl`), `#where-the-procedure-goes-in-fpl-0`, `#the-procedure-in-fpl-0`, `#the-question-to-make-room-for-a-procedure`, `#changing-a-procedure`, `#deleting-a-procedure`, `#editing-the-waypoints-of-a-procedure`, `#flying-a-sid-or-a-star` (Non-precision approaches for what differs for an approach) | Flight plans: one paragraph and the link; APT 7 and APT 8: one sentence and the link |
 | The two rules (a transition must be selected; an approach starts only at an IAF) | SID and STAR procedures, Non-precision approaches | stated plainly on APT 7, APT 8 and in the FAQ too (style guide, section 17) |
-| Which approaches the unit offers (ILS deliberately absent), loading an approach, approach arming and activation, the CDI scale along an approach, RAIM in an approach, the suffixes of approach waypoints, `INVALID ADD` and `INVALID DEL`, the missed approach, changing and deleting an approach | Non-precision approaches: `#which-approaches-the-unit-offers`, `#loading-an-approach` (`#an-approach-starts-only-at-an-iaf`, `#replacing-an-approach`), `#the-approach-in-fpl-0` (`#invalid-add-and-invalid-del`), `#arming-the-approach` (`#press-alt-to-set-baro`, `#arm-gps-approach`), `#activating-the-approach`, `#the-cdi-scale-along-the-approach`, `#raim-in-an-approach` (`#raim-not-available-apr-mode-inhibited`, `#press-gps-apr-for-nav`), `#flying-the-approach` (`#vectors-to-final`), `#the-missed-approach`, `#changing-or-deleting-an-approach` | APT 8: the page, the two rules plainly, and links; GPS reception and RAIM: the messages and the link; FAQ: the ILS question and the link |
+| Which approaches the unit offers (ILS deliberately absent), loading an approach, approach arming and activation, the CDI scale along an approach, RAIM in an approach, the suffixes of approach waypoints, `INVALID ADD` and `INVALID DEL`, the missed approach, changing and deleting an approach | Non-precision approaches: `#which-approaches-the-unit-offers`, `#loading-an-approach` (`#an-approach-starts-only-at-an-iaf`, `#replacing-an-approach`), `#the-approach-in-fpl-0` (`#invalid-add-and-invalid-del`), `#arming-the-approach` (`#press-alt-to-set-baro`, `#arm-gps-approach`), `#activating-the-approach`, `#the-cdi-scale-factor-along-the-approach`, `#raim-in-an-approach` (`#raim-not-available-apr-mode-inhibited`, `#press-gps-apr-for-nav`), `#flying-the-approach` (`#vectors-to-final`), `#the-missed-approach`, `#changing-or-deleting-an-approach` | APT 8: the page, the two rules plainly, and links; GPS reception and RAIM: the messages and the link; FAQ: the ILS question and the link |
 | DME arcs: which legs become arcs, the DME arc waypoint (computation, name), moving it (`MOVE ?`, `NO INTRCEPT`), flying the arc, OBS mode on an arc | DME arcs: `#arcs-in-a-procedure`, `#the-dme-arc-waypoint` (`#the-name-of-a-dme-arc-waypoint`), `#moving-the-dme-arc-waypoint` (`#move--in-fpl-0`, `#no-intrcept`), `#flying-the-arc` (`#distance-time-and-bearing-on-the-arc`, `#nav-2-and-super-nav-5-on-an-arc`, `#leaving-the-arc`), `#the-dme-arc-waypoint-as-a-waypoint`, `#an-arc-in-obs-mode` | SID and STAR procedures, Non-precision approaches, APT 7 and APT 8: one sentence and the link; NAV chapter: its fields; FPL chapter: `MOVE ?` as a row state and the link |
 | Holding patterns and procedure turns the unit drops, `IF REQUIRED SELECT OBS` | SID and STAR procedures, `#if-required-select-obs` | Non-precision approaches: what differs, and the link |
 | VNAV: setting it up, starting it, the states and the countdown, `VNV ALERT`, the angle, which waypoint, `INVALID VNV`, what ends it (the NAV flag included) | VNAV: `#what-vnav-does`, `#setting-up-a-descent-or-a-climb` (`#vnav-without-an-altitude-input`), `#starting-vnav`, `#flying-the-vertical-path` (`#vnv-alert`), `#the-angle`, `#which-waypoint-vnav-can-use` (`#invalid-vnv`), `#when-vnav-ends` | NAV chapter: the fields of NAV 4 and field 1 of Super NAV 5, with the links; CAL chapter: CAL 4 as a page |
@@ -150,7 +150,7 @@ that writes the owner records the anchors in this table, and the final pass shar
 | CAL 6 and CAL 7 keep their own zone after starting from the system time zone | CAL chapter: `#cal-6-time-conversion`, `#cal-7-sunrise-and-sunset` | Trip planning `#the-time-zone`: one sentence |
 | Fuel management and air data: which OTH pages an installation has, entering the fuel on board and `SET FUEL ON BOARD`, the fuel reserve, the destination waypoint of the fuel figures, the wind and the heading input | OTH chapter: `#the-oth-pages-which-pages-your-unit-has`, `#oth-5-fuel-on-board-and-fuel-required` (with the message section), `#oth-9-true-airspeed-and-wind`, `#the-air-data-pages-without-a-fuel-management-system` (no Operation page, maintainer, 2026-11-21) | TRI chapter and Trip planning: TRI's own fuel entries, one sentence and the link |
 | The MSG page (with its closing rules), how messages arrive and are read, one-time and lasting messages, messages over a power cycle, status line messages and their duration, the message annunciator and the remote mounted annunciators as a group | Messages: `#the-message-prompt`, `#reading-the-messages` (`#showing-the-nearest-airport-from-the-msg-page`), `#messages-that-stay-while-their-cause-lasts`, `#messages-after-a-power-on`, `#status-line-messages`, `#the-remote-mounted-annunciators` | Controls and display: where the prompts stand, one sentence on the MSG page and the link; others link |
-| Message texts: meaning and what to do | Message page messages, Status line messages: one entry per message, its anchor the slug of the message text (`/kln90b/lists/messages/#no-such-wpt`) | a page quotes the text where it is raised and links the entry |
+| Message texts: meaning and what to do | Message page messages, Status line messages: one entry per message, its anchor the slug of the message text (`/kln90b/lists/status-line-messages/#no-such-wpt`) | a page quotes the text where it is raised and links the entry |
 | Hardware events and their setup, the download files | External hardware: `#the-events`, `#spadnext`, `#fsuipc` | Keyboard mode: its two toggles, with the link |
 
 ## Example pages
@@ -164,7 +164,7 @@ Every writer reads the example of its kind before it writes, and every reviewer 
 | Task page (Operation) | Direct-to, `operation/direct-to.mdx` (approved 2026-11-18) |
 | Tutorial flight | Tutorial flight 1, once approved |
 | Lists | Message page messages, `lists/messages.mdx`, once approved |
-| FAQ, Known limitations | `help/faq.md`, `help/known-limitations.md` (approved 2026-11-21) |
+| FAQ, Known limitations | `help/faq.mdx`, `help/known-limitations.md` (approved 2026-11-21) |
 
 The first Operation pages come from the packages sta and failures, which are not typical task pages and are not
 examples. The final pass compares them with Direct-to.
@@ -201,7 +201,7 @@ anchors and page links above. After them the order follows "owners before the pa
 | 20 | tutorial-1 | Tutorial flight 1 | done (2026-11-22) |
 | 21 | tutorial-2 | Tutorial flight 2, up to the top of descent (split, 2026-11-22) | done (2026-11-22) |
 | 22 | tutorial-2-approach | Tutorial flight 2, from the top of descent: the arrival, the approach, the visual approach | done (2026-11-22) |
-| – | final pass | the whole manual (`docs/coordinator-prompt.md`, "The final pass") | not started |
+| – | final pass | the whole manual (`docs/coordinator-prompt.md`, "The final pass"; `docs/plan/final-pass.md`) | in review (2026-11-23) |
 
 The SET chapter comes late on purpose: nearly every SET page is the setting of a function that another page owns, so
 it is written when those owners exist. A package that proves too large in its research is split by its session
@@ -214,143 +214,8 @@ it is written when those owners exist. A package that proves too large in its re
 
 ## For the final pass
 
-- **The GPS CRS switch is the common case** (maintainer, 2026-11-22, on Tutorial flight 2): most aircraft that carry
-  the unit have an external switch for leg and OBS mode, often labeled LEG/OBS, where <kbd>ENT</kbd> on MOD 1 and
-  MOD 2 does nothing. Modes of operation (`#selecting-leg-or-obs-mode`) describes <kbd>ENT</kbd> first and the switch
-  under an Availability box that says "some aircraft"; the final pass turns the order around there and on every other
-  page that changes the course mode, and reconsiders the term (the word list has "the GPS CRS switch").
-- **VNAV, entering the angle** (review of Tutorial flight 2, 2026-11-22): step 7 of `operation/vnav.mdx`, "Setting up
-  a descent or a climb", says the angle is entered with the left inner knob, units first, then tenths; moving to the
-  tenths takes the left outer knob. Tutorial flight 2 words it precisely; the owner page needs the same.
-
-- **The glossary is cleared of single-screen entries** (style guide, section 14, rule of 2026-11-16). The package
-  waypoint-pages did this for the APT chapter (2026-11-17); the Quickstart and other pages written under the earlier
-  rule are left for the final pass.
-- **Two rules of 2026-11-17 (maintainer, on the package waypoint-pages):** a code that a few pages show is no
-  glossary term, and a display form such as `RW` is no abbreviation of the manual (style guide, section 14); the
-  time a calculation takes is "a few seconds", never the code's number (section 8). `HRD`, `SFT` and `RW` are gone;
-  the final pass checks the other glossary entries (`NR` and `RMKS` are gone, 2026-11-17) and the durations stated on the
-  pages written earlier (GPS reception and RAIM, Power-on, STA) against both rules.
-
-- The placeholder pages use old terms (key, page group); the packages that replace them remove these.
-- `unit/power-on.mdx`, "What the unit keeps while it is off", says "a direct-to to the active waypoint" is kept; a
-  direct-to is always to the active waypoint, so "the direct-to" says it (writer of Direct-to, 2026-11-18).
-- The package navigation (2026-11-18) brought the official terms course mode, selected course, external indicator,
-  GPS CRS switch, GPS APR switch, CDI scale factor and the TO/FROM indicator, and corrected the earlier pages the
-  seam check found. The final pass searches for the old forms once more ("navigation mode", "OBS course", "course
-  indicator", "GPS APR button").
-- The package nav-pages (2026-11-18) brought the official terms cross-track error, actual track, minimum en route
-  safe altitude, range scale, map orientation, pop-up menu and the VOR, NDB and APT selections; its seam check
-  replaced the old forms on the earlier pages and screens. The final pass searches once more ("cross-track
-  distance", "track up" without "actual", "en route safe altitude" without "minimum").
-- Every planned anchor of the topic ownership table exists; page links that a later package could sharpen to a
-  section are sharpened.
-- The first Operation pages (sta, failures) have `sidebar.order` numbers that later Operation pages must fit
-  around ("Site and generator notes").
-- The pages of the packages sta and failures were written before Controls and display, Power-on and the message
-  lists existed; they are checked against those pages (terms, names of controls, links).
-
-- **Placeholder field explanations.** `display/screen-layout`, `display/cursor-example`, `pages/set/set-10`,
-  `pages/oth/oth-2-zse` and the tutorial screens still have filler text in their field explanations (found by
-  the writer of Controls and display, 2026-11-17). The packages that show them fill them in; the final pass removes
-  the screens no page shows.
-- **Left over from the package power-on (2026-11-17):** the glossary entries `OBS IN` and `OUT` are used only by the Self Test screens
-  and go into their field explanations (section 14); `OUT`'s expansion "OBS output" should match the field name
-  `OBS OUT`. Simulated failures, `#the-battery`, says the Self Test page shows `TEST FAIL` after a memory loss:
-  check which receiver code causes it.
-- The package flight-plans (2026-11-19) brought the official terms numbered flight plan, active leg symbol, blank
-  waypoint position and fence, and the rule that a symbol of the unit's font is named in words (style guide,
-  section 12). The final pass searches once more ("stored flight plan", "stored plan", "leg mark", code points such
-  as `Á` or `›` in prose).
-- The package flight-plan-pages (2026-11-20) brought the official terms Distance/Time pages, estimated time en
-  route and estimated time of arrival written out, present time, next waypoint, destination waypoint, the NAV flag,
-  and "reference waypoint" for the waypoint the REF page creates (the waypoint typed on the REF page is "the waypoint
-  you enter"). The final pass searches once more ("the time now", "following waypoint", "new waypoint" for a
-  reference waypoint, "loses its position" for the NAV flag).
-- **Two rules of 2026-11-20 (maintainer, on the package flight-plan-pages):** an abbreviation every pilot reads at
-  once is no glossary term (style guide, section 14; `DIS` is gone), and a computation or a geometry the pilot must
-  picture gets a drawing (section 16). The final pass checks the other glossary entries against the first and the
-  Operation pages written earlier against the second (for example the reference waypoint and the center waypoints on
-  Flight plans, which link the drawings of the REF and CTR chapters).
-- The ETE and ETA threshold of 2 kt is stated on the D/T chapter, GPS reception and RAIM, the ETE glossary entry and
-  the field explanations of the NAV 1 and Super NAV 1 screens; the final pass decides on one owner and lets the others
-  refer to the event (style guide, section 8).
-- The FLR chapter ("Leaving the FLR pages") repeats some general rules of pages opened over the page tree that
-  Controls and display now owns (`#pages-that-no-knob-reaches`); the final pass cuts them to the FLR specifics and
-  the link.
-
-- The package sid-star (2026-11-20) brought the official terms the beginning and the end of the arc, a radial
-  within or outside the arc, and the reference VOR of the arc, and split "transition" (of a turn, of a procedure) in
-  the word list. The final pass searches once more ("end fix", "published start", "abeam the arc", "the VOR of the
-  arc", "header row").
-- The reviewer of SID and STAR procedures named "airport reference point" as the official term where the pages say
-  "the airport" of a procedure in FPL 0; not adopted (the row of FPL 0 is the airport itself), for the maintainer.
-- The screen `navigation/msg-adj-nav-ind-crs` explains a flashing `MSG` as "in inverse video", and the field `sid`
-  of `pages/fpl/fpl-0-procedures` lacks the `<Term>` at its first SID (reviewer of SID and STAR procedures).
-
-- The package vnav-alerts (2026-11-20) brought the official terms vertical path, descent point, inactive (VNAV),
-  altimeter baro setting, warn altitude, aural alarm, altitude deviation alert, special use airspace alert and offset
-  height. The final pass searches once more ("deviation limit", "alert tones", "start of the path", "altimeter
-  setting" for the unit's own).
-- `operation/alerts.mdx` says the 10 minutes of the airspace alert in more than one place (seam check, 2026-11-20);
-  the final pass cuts it to its owner sentence.
-- **Rule of 2026-11-20 (maintainer, on the package vnav-alerts):** a page that works with a field of the other side
-  shows both halves (style guide, section 13; the ALT page with NAV 4). The final pass looks for other half screens
-  of such pages.
-
-- The package set (2026-11-21) brought the official terms the setup pages (named once on the SET chapter) and the
-  initial heading (SET 1), and wrote "NAV ready" where SET 2 depends on a fix. Power-on and initialization says "has a
-  position" for the same condition; the final pass makes it "NAV ready" there too.
-
-- The package trip-planning (2026-11-21) brought the official terms system time zone, reserve fuel, the "from" and
-  "to" waypoint, areas of special use airspace, military operation area, the Calculator pages, altimeter setting (the
-  CAL entry) and the descent or ascent angle with the rate of descent or ascent (CAL 4). Its seam check put "the system
-  time zone" on D/T and SET 2; the final pass looks for "time zone" elsewhere (STA 5, Power-on, the Self Test screen).
-- The time zone list is repeated in the field explanations of `pages/set/set-2`, `set-2-date-entry` and
-  `power-on/self-test`; the final pass cuts them to a sentence and the link to `operation/trip-planning/#the-time-zone`
-  (seam check, 2026-11-21).
-- The glossary entries `BARO` and `GS` describe the unit's own baro setting and the GPS groundspeed; the CAL pages
-  therefore use no `<Term>` for them. The final pass decides whether the entries should cover the CAL fields too.
-
-- The package fuel-air-data (2026-11-21) brought the official terms the fuel management pages, fuel units, landing
-  fuel on board, fuel reserve (OTH 5 and OTH 6; TRI keeps reserve fuel), fuel efficiency and static air temperature,
-  and the rule that a topic done on one page type gets no Operation page (style guide, section 10). The final pass
-  searches once more ("fuel pages", "fuel left on board", "air data computer", "fuel computer", "outside air
-  temperature") and checks the other Operation pages against the rule.
-
-- The package messages (2026-11-21) brought the official terms message annunciator, super flag, airport remarks,
-  waypoint alert annunciator and remote mounted annunciators (the last two applied across the manual on the
-  maintainer's decision), and the manual's own names one-time and lasting message. The final pass searches once
-  more ("MSG annunciator", "MSG light", "nav super flag", "WPT annunciator", "remote annunciator").
-- `display/screen-layout` shows the same state as `messages/msg-prompt` and still has filler field explanations;
-  the final pass removes it if no page shows it.
-
-- The package help (2026-11-21) brought the exception of section 3 for External hardware (tools and sim hardware
-  named, the RealSimGear GNS430 included) and the download files of External hardware (section 19). Its reviewers
-  noted for other pages: Controls and display could say that a fully dimmed screen looks like a unit that is off;
-  GPS reception and RAIM could say that a never-used unit acquires as with an old almanac (`REAL` on SET 10); Keyboard
-  mode could say that its two hardware toggles also close the MSG page, and link External hardware `#the-events`.
-
-- The package tutorial-1 (2026-11-22): `unit/power-on.mdx` ("What the unit keeps while it is off") and
-  `operation/direct-to.mdx` disagree on what is left after a power-off of more than five minutes. Power-on says the
-  active waypoint is kept, Direct-to says the direct-to is dropped and the closest leg of FPL 0 becomes active; with an
-  empty FPL 0 there is no active waypoint, yet the first pages still show APT 4 of the waypoint that was active
-  (`VolatileMemory.ts`, the start-page waypoint). The final pass makes the two owners agree (reviewer of Tutorial
-  flight 1).
-
-- The package tutorial-2 (2026-11-22): in leg mode the desired track uses the variation at the aircraft, not a VOR's
-  published variation, so a leg along a charted VOR radial reads a few degrees off it (YKM to TITON on the radial 284
-  of YKM reads 290°). Modes of operation (`#leg-mode`) or the `DTK` field explanation could say so in a sentence
-  (writer of Tutorial flight 2).
-
-- The package tutorial-2-approach (2026-11-22, reviewer): the owner screens share two gaps the tutorial's screens
-  had. `approaches/press-alt` explains the flashing message prompt as inverse video, and `approaches/at-map` gives
-  `ETE` no sentence for the time past the waypoint. Non-precision approaches, "Flying the approach" (the step on the
-  activation), could add the consequence when the approach does not become active: fly the missed approach. The
-  field explanation of the ALT page title in `alerts/alt-page-off` says "no empty line below it"; it means that the
-  page drops a line when the alert is on, and should say so plainly. The heading "The CDI scale along the approach"
-  lacks "factor" (word list); renaming it changes its anchor `#the-cdi-scale-along-the-approach`, which the tutorials
-  link.
+The notes that the packages left here were applied by the final pass (2026-11-23). Its plan file,
+`docs/plan/final-pass.md`, records the parts, the decisions and what is still open for the maintainer.
 
 ## Site and generator notes
 

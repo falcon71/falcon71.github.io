@@ -47,7 +47,7 @@ You load the approach en route, before the descent, usually after the STAR. The 
 
 To load an approach:
 
-1. Turn the right outer knob to the APT pages and the right inner knob to APT 8.
+1. Turn the right outer knob to the APT pages and the right inner knob to APT 8, one step counterclockwise from APT 1.
 2. Press the right <kbd>CRSR</kbd> and turn the right outer knob until the cursor is on the approach.
 3. Press <kbd>ENT</kbd>. The unit lists the IAFs after `IAF`, with the cursor on the first.
 
@@ -129,7 +129,7 @@ The message replaces the middle part of the status line for a few seconds. To ad
 
 The unit arms the approach in FPL 0 by itself when the aircraft comes within 30 NM of the approach's airport reference point, straight-line, whichever leg is active. The mode annunciation changes from <Term t="ENR-LEG">`ENR-LEG`</Term> to <Term t="ARM-LEG">`ARM-LEG`</Term>, Approach Arm-Leg mode, or in OBS mode from <Term t="ENR:">`ENR:`</Term> to <Term t="ARM:">`ARM:`</Term>, Approach Arm-OBS mode ([The mode annunciations](/kln90b/operation/modes-of-operation/#the-mode-annunciations)). The ARM annunciator of the GPS APR switch lights, and the CDI scale factor narrows ([The CDI scale factor along the approach](#the-cdi-scale-factor-along-the-approach)).
 
-The GPS APR switch arms the approach at any distance. The CDI scale factor then stays where it is until you come within that distance. Pressed in approach arm mode, the switch disarms the approach: the unit returns to en route, the scale widens at once, and the unit does not arm by itself again until you press the switch once more, load an approach anew or turn the unit off and on.
+The GPS APR switch arms the approach at any distance. The CDI scale factor then stays where it is until you come within that distance. Pressed in approach arm mode, the switch disarms the approach: the unit returns to en route, the scale widens to ±5.00 NM at once, and the unit does not arm by itself again until you press the switch once more, load an approach anew or turn the unit off and on.
 
 Approach arm mode lasts as long as the approach is in FPL 0, wherever you fly. To return to en route, delete the approach ([Changing or deleting an approach](#changing-or-deleting-an-approach)) or press the GPS APR switch.
 
@@ -184,7 +184,8 @@ The approach modes change the CDI scale factor by themselves, so that the D-bar 
 2. **Armed, near the airport:** down to ±1.00 NM, gradually over 30 seconds. A factor of ±0.30 NM that you selected stays. MOD 1 and MOD 2 show `1.00` as soon as the change starts.
 3. **Active, from where the approach becomes active:** down with the distance to the FAF, from ±1.00 NM, or from what you selected, to ±0.30 NM at the FAF. MOD 1 and MOD 2 show `0.30` at once.
 4. **From the FAF to the MAP and past it, while active:** ±0.30 NM.
-5. **Back in arm mode,** after a direct-to for the missed approach: ±1.00 NM at once.
+5. **Back in arm mode,** after a direct-to, the GPS APR switch or a change to OBS mode: ±1.00 NM at once.
+6. **Back to en route,** when you disarm the approach or remove it from FPL 0: ±5.00 NM at once, whatever you had selected.
 
 <ApproachCdiScale caption="The CDI scale factor along RNAV 17 at Olympia, flown from Seattle over CARRO, not to scale. It goes down to ±1.00 NM where the approach arms 30 NM from KOLM, stays there to 2 NM before the FAF OPOYU, where the approach becomes active, narrows to ±0.30 NM at OPOYU, keeps it past the MAP, and returns to ±1.00 NM with the direct-to into the missed approach." />
 
@@ -313,7 +314,7 @@ To delete the approach:
 4. Press <kbd>ENT</kbd>. The unit deletes every waypoint of the approach and its header. To keep the approach, press <kbd>CLR</kbd> again instead.
 5. Press the left <kbd>CRSR</kbd> to turn the cursor off.
 
-The airport stays in FPL 0. Without an approach in FPL 0 the unit returns from approach arm mode or approach active mode to en route, and the scale widens at once ([The CDI scale factor along the approach](#the-cdi-scale-factor-along-the-approach)). When the active leg belonged to the approach, the unit makes the leg of FPL 0 closest to the aircraft the active leg.
+The airport stays in FPL 0. Without an approach in FPL 0 the unit returns from approach arm mode or approach active mode to en route, and the scale widens to ±5.00 NM at once ([The CDI scale factor along the approach](#the-cdi-scale-factor-along-the-approach)). When the active leg belonged to the approach, the unit makes the leg of FPL 0 closest to the aircraft the active leg.
 
 The unit keeps the approach in FPL 0 over a short power-off only ([What the unit keeps while it is off](/kln90b/unit/power-on/#what-the-unit-keeps-while-it-is-off)). Every power-on starts in en route, and the unit arms an approach that is still in FPL 0 again by itself near the airport.
 

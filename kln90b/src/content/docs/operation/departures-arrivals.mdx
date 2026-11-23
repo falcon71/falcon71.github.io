@@ -60,7 +60,7 @@ You load the STAR en route, before the descent, once you know the arrival and th
 
 To load a STAR:
 
-1. Turn the right outer knob to the APT pages and the right inner knob to the STARs of APT 7, the last APT 7 page of an airport that has SIDs too.
+1. Turn the right outer knob to the APT pages and the right inner knob to the STARs of APT 7, the last APT 7 page of an airport that has SIDs too. From APT 1 they are two steps counterclockwise, past APT 8, or one step in a unit without APT 8.
 2. Press the right <kbd>CRSR</kbd>.
 3. Turn the right outer knob until the cursor is on the STAR.
 4. Press <kbd>ENT</kbd>.
@@ -76,15 +76,15 @@ FPL 0 holds one STAR, as it holds one SID: a second STAR replaces the first afte
 
 ## A transition must be selected
 
-**A transition must be selected whenever the procedure has one.** A SID or a STAR with two or more transitions offers no entry without one, so you cannot load only the part that all transitions share. A procedure with one transition gets it without a question.
+**A transition must be selected whenever the procedure has one.** A SID, a STAR or an approach with two or more transitions offers no entry without one, so you cannot load only the part that all transitions share. A procedure with one transition gets it without a question.
+
+**An approach starts only at an <Term t="IAF" />.** You select one of its initial approach fixes on APT 8; an intermediate fix or the <Term t="FAF" /> cannot be the start ([An approach starts only at an IAF](/kln90b/operation/approaches/#an-approach-starts-only-at-an-iaf)).
 
 The transition often starts at a waypoint that is already in FPL 0, or runs over several of them, because you entered the route up to the fix where the STAR begins, or beyond it. The unit then holds those waypoints twice: once as en route waypoints, with a colon after the number, and once in the procedure, with a period. It keeps both copies. Delete the ones you do not need, as you delete any waypoint ([Deleting a waypoint](/kln90b/operation/flight-plans/#deleting-a-waypoint)): usually the en route copies, so that the procedure stays complete. CHINS5 with the transition YKM, loaded into a route that already runs over `YKM` and `CHINS`, holds both a second time:
 
 <KlnScreen screen="sid-star/duplicates" />
 
 Two copies in a row form a leg of no length, at which the unit flies over the waypoint instead of anticipating the turn. Copies in different places make the unit fly to the waypoint twice. Look for both in FPL 0 after every load, because only some of them raise a message (next section).
-
-**An approach starts only at an <Term t="IAF" />.** You select one of its initial approach fixes on APT 8; an intermediate fix or the <Term t="FAF" /> cannot be the start ([An approach starts only at an IAF](/kln90b/operation/approaches/#an-approach-starts-only-at-an-iaf)).
 
 ### `REDUNDANT WPTS IN FPL`
 

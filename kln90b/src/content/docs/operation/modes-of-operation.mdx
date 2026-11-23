@@ -34,7 +34,7 @@ There is no active waypoint while FPL 0 is empty or holds a single waypoint and 
 
 ## Leg mode
 
-Leg mode is the normal course mode of the unit, and every power-on starts in it. The unit flies the active leg: the <Term t="DTK" /> is the course of the leg at the point abeam the aircraft, and the D-bar shows how far you are off the leg. The desired track is measured with the magnetic variation at the aircraft ([Magnetic variation](#magnetic-variation)). Because a leg is a great circle, the desired track of a long leg changes along the way.
+Leg mode is the normal course mode of the unit, and every power-on starts in it. The unit flies the active leg: the <Term t="DTK" /> is the course of the leg at the point abeam the aircraft, and the D-bar shows how far you are off the leg. Because a leg is a great circle, the desired track of a long leg changes along the way.
 
 <KlnScreen screen="navigation/leg" />
 
@@ -73,7 +73,7 @@ With a GPS CRS switch the course mode follows the switch, and <kbd>ENT</kbd> doe
 
 <KlnScreen screen="pages/mod/mod-2-switch" />
 
-The switch changes to OBS mode even without an active waypoint; the status line shows `NO ACTV WPT`, and the unit is in OBS mode all the same. When the switch selects OBS mode at power-on, the unit shows [the OBS warning page](/kln90b/unit/power-on/#the-obs-warning-page) until the switch selects leg mode.
+The switch changes to OBS mode even without an active waypoint ([`NO ACTV WPT` in the status line](#no-actv-wpt-in-the-status-line)). When the switch selects OBS mode at power-on, the unit shows [the OBS warning page](/kln90b/unit/power-on/#the-obs-warning-page) until the switch selects leg mode.
 
 #### Without a GPS CRS switch
 
@@ -89,9 +89,9 @@ To change to OBS mode:
 
 To change back to leg mode, turn the left inner knob to MOD 1 and press <kbd>ENT</kbd>.
 
-##### `NO ACTV WPT` in the status line
+#### `NO ACTV WPT` in the status line
 
-`NO ACTV WPT` appears for a moment when <kbd>ENT</kbd> on MOD 2 cannot change to OBS mode, because there is no active waypoint ([No active waypoint](#no-active-waypoint)). The unit stays in leg mode. Make a direct-to or activate a flight plan first.
+`NO ACTV WPT` appears for a moment when you select OBS mode while there is no active waypoint ([No active waypoint](#no-active-waypoint)). With the GPS CRS switch, the unit changes to OBS mode all the same. In an aircraft without the switch, <kbd>ENT</kbd> on MOD 2 cannot change to OBS mode, and the unit stays in leg mode. Make a direct-to or activate a flight plan first.
 
 <KlnScreen screen="navigation/no-actv-wpt" />
 

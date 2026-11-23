@@ -32,7 +32,7 @@ With the setting `REAL` on SET 10 (see [Real and fast acquisition](#real-and-fas
 
 The receiver collects ephemeris data while it tracks satellites, so the age counts from the last time the unit navigated. The time counts in the simulator's date and time: a flight loaded for the next day is more than 2 hours later. The unit's clock runs on while the unit is off, so it is wrong only after someone entered a wrong date or time, or after a [simulated failure](/kln90b/operation/failures/#the-battery) erased the unit's memory. The receiver renews its almanac data whenever it tracks satellites for 12.5 minutes, so the almanac data grows old only when the simulator's date is set 6 months or more away from your last flight with the unit.
 
-A unit that has never navigated in this aircraft, on your first flight in it, has no almanac data and no stored position. Under `REAL` it acquires as with almanac data 6 months old or older, the last row of the table.
+A unit that has never navigated in this aircraft, on your first flight in it, has no almanac data. Under `REAL` it acquires as with almanac data 6 months old or older, the last row of the table.
 
 A stored position far away slows the search because the receiver looks for the satellites in view at that position. The more of them are also in view where you are, the sooner it finds four. With a wrong clock it predicts the wrong satellites altogether: it gives up in `ACQ` and searches the whole sky in `INIT`, one satellite after another. With old almanac data it first searches blind for a single satellite, collects new almanac data from it, and then acquires as usual.
 
@@ -46,7 +46,7 @@ STA 1 shows the GPS state in its top line. The unit is NAV ready in the four nav
 
 <KlnScreen screen="pages/sta/sta-1-nav" rows="1" />
 
-- Initialization, `INIT`: the receiver searches the whole sky, collects new almanac data, or has been without a position in flight for longer ([Losing the position in flight](#losing-the-position-in-flight)). No position.
+- Initialization, `INIT`: the receiver searches the whole sky, collects new almanac data, or has been without a position in flight for several minutes ([Losing the position in flight](#losing-the-position-in-flight)). No position.
 - Acquisition, `ACQ`: the receiver searches the satellites it expects, or has lost its position and searches the satellites again. No position.
 - Transition, `TRAN`: the receiver has enough satellites, and the unit accepts the position 1 second later.
 - Navigation, `NAV`: the unit navigates on satellites alone, four or more.
@@ -140,12 +140,10 @@ To predict for another destination or ETA, on the ground for example:
 2. Enter the identifier with the left knobs. If you entered the wrong one, press <kbd>CLR</kbd> and enter it again.
 3. Press <kbd>ENT</kbd>. The unit shows the waypoint page on the right for approval ([Approving the waypoint page](/kln90b/operation/waypoints/#approving-the-waypoint-page)).
 4. Press <kbd>ENT</kbd>. The cursor moves on to the ETA.
-5. Enter the ETA with the left inner and outer knobs. Before you press <kbd>ENT</kbd>, <kbd>CLR</kbd> takes the entry back.
+5. Enter the ETA in UTC with the left inner and outer knobs ([The ETA in another time zone](/kln90b/pages/sta/#the-eta-in-another-time-zone)). Before you press <kbd>ENT</kbd>, <kbd>CLR</kbd> takes the entry back.
 6. Press <kbd>ENT</kbd>. The line of the bar graph shows `COMPUTING`.
 7. Press the left <kbd>CRSR</kbd> to turn the cursor off.
 8. Wait a few seconds for the bar graph.
-
-Enter the ETA in UTC ([The ETA in another time zone](/kln90b/pages/sta/#the-eta-in-another-time-zone)).
 
 ## Messages of the receiver
 

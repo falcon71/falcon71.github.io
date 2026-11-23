@@ -186,12 +186,12 @@ The unit keeps its data while it is off, and it forgets some of it after more th
 **Kept for any time off:**
 
 - the four lines of the Turn-On page, the system time zone, and the baro setting and its unit;
-- the user waypoints, the flight plans and the airport remarks, the active leg of FPL 0, and the waypoint that each waypoint page showed last;
+- the user waypoints, the flight plans and the airport remarks, and the waypoint that each waypoint page showed last;
 - the last position, the clock and the receiver's almanac and ephemeris data;
 - the settings of the pages: the nearest airport criteria, the airspace and altitude alerts, turn anticipation, the flight timer setting, the maps of NAV 5 and Super NAV 5, and the entries on CAL 1 to CAL 5 and the TRI pages, the fuel reserve of OTH 5 and OTH 6, and the acquisition setting on SET 10;
 - the total operational time and the number of power-ons on STA 4.
 
-**Kept for up to five minutes:** the procedures in FPL 0, the direct-to and the magnetic variation that you entered. After more than five minutes off the unit drops them. A restart of the simulator drops them too. After a longer time off, where a direct-to or a leg of a procedure was active, the unit makes the leg of FPL 0 closest to the aircraft active once it is NAV ready, and with fewer than two waypoints in FPL 0 nothing is active; the first pages still show the waypoint that was active when you turned the unit off.
+**Kept for up to five minutes:** the procedures in FPL 0, the direct-to and the magnetic variation that you entered. After more than five minutes off the unit drops them. A restart of the simulator drops them too. After a longer time off, the unit makes the leg of FPL 0 closest to the aircraft active once it is NAV ready, where a direct-to or a leg of a procedure was active. With fewer than two waypoints in FPL 0 nothing is active then. An active leg of FPL 0 that is no leg of a procedure stays active for any time off while the simulator runs. After a restart of the simulator, the unit makes the closest leg active once it is NAV ready. [The first pages](#the-first-pages) still show the waypoint that was active when you turned the unit off.
 
 **Forgotten at every power-on:**
 

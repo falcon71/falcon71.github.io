@@ -19,6 +19,7 @@ defineScreen(import.meta.url, {
 		{id: 'count', find: {re: /\d+ NEW WPTS?/, area: 'R'}},
 		{id: 'prompt', find: [{re: /PRESS ENT/, area: 'R'}, {re: /TO INSERT/, area: 'R'}, {re: /INTO FPL/, area: 'R'}]},
 		{id: 'mode', find: {re: /enr-leg/, area: 'S'}},
+		{id: 'ent', find: {re: /ent/, area: 'S'}},
 		{id: 'left-page', find: {re: /FPL 1/, area: 'S'}},
 		{id: 'page', find: {re: /CTR 1/, area: 'S'}},
 	],

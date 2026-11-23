@@ -7,6 +7,8 @@ defineScreen(import.meta.url, {
 	boot: {position: pointFrom(place('KSEA'), 100, 3)},
 	steps: async u => {
 		await wait(NEAREST_SEARCH_WAIT_MS);
+		// Not shown, but kept: the left side holds a page that MSG and ENT leave as it is (the text says the left side
+		// keeps its page), and without it the generated file changes in its hidden left half
 		await u.panel.selectPage('L', 'SET 3');
 		// MSG opens the message page, which holds no message; ENT closes it and shows the nearest airport on the right
 		await u.panel.msg();
