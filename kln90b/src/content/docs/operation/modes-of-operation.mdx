@@ -30,7 +30,7 @@ The waypoint pages (APT, VOR, NDB, INT and SUP) show the arrow before the identi
 
 ### No active waypoint
 
-There is no active waypoint while FPL 0 is empty or holds a single waypoint and no direct-to is active. NAV 1 then shows `F L A G` and dashes ([NAV 1 without an active waypoint](/kln90b/pages/nav/#nav-1-without-an-active-waypoint)). Before the unit is NAV ready no leg is active either, unless the unit kept one while it was off ([What the unit keeps while it is off](/kln90b/unit/power-on/#what-the-unit-keeps-while-it-is-off)). The GPS CRS switch still changes to OBS mode, with `NO ACTV WPT` in the status line; in an aircraft without one, <kbd>ENT</kbd> on MOD 2 cannot change to OBS mode, and the unit stays in leg mode ([`NO ACTV WPT` in the status line](#no-actv-wpt-in-the-status-line)).
+There is no active waypoint while FPL 0 is empty or holds a single waypoint and no direct-to is active. NAV 1 then shows `F L A G` and dashes ([NAV 1 without an active waypoint](/kln90b/pages/nav/#nav-1-without-an-active-waypoint)). Before the unit is NAV ready no leg is active either, unless the unit kept one while it was off ([What the unit keeps while it is off](/kln90b/unit/power-on/#what-the-unit-keeps-while-it-is-off)). Pressing the GPS CRS switch still changes to OBS mode, with `NO ACTV WPT` in the status line; in an aircraft without one, <kbd>ENT</kbd> on MOD 2 cannot change to OBS mode, and the unit stays in leg mode ([`NO ACTV WPT` in the status line](#no-actv-wpt-in-the-status-line)).
 
 ## Leg mode
 
@@ -67,13 +67,13 @@ You select the course mode with the GPS CRS switch of the aircraft. In an aircra
 Whether the aircraft has a GPS CRS switch depends on how the unit is installed. Most installations have one; without it, <kbd>ENT</kbd> on the MOD pages changes the course mode.
 </Callout>
 
-To change to OBS mode, set the GPS CRS switch to OBS. The mode annunciation changes to `ENR:` with the course, and MOD 2 shows `ACTIVE MODE`. To change back to leg mode, set it to LEG. [Changing between the modes](#changing-between-the-modes) says which leg the unit flies then.
+The switch changes between leg mode and OBS mode each time you press it. To change to OBS mode, press the GPS CRS switch. The unit changes to OBS mode, the mode annunciation shows `ENR:` with the selected course, and MOD 2 shows `ACTIVE MODE`. To change back to leg mode, press it again; the mode annunciation shows `ENR-LEG`. [Changing between the modes](#changing-between-the-modes) says which leg the unit flies then.
 
-With a GPS CRS switch the course mode follows the switch, and <kbd>ENT</kbd> does nothing on the MOD pages. The page of the mode that is not active shows `PRESS GPS` `CRS FOR` and the mode below it: MOD 2 in leg mode, MOD 1 in OBS mode.
+With a GPS CRS switch only the switch changes the course mode, and <kbd>ENT</kbd> does nothing on the MOD pages. The page of the mode that is not active shows `PRESS GPS` `CRS FOR` and the mode below it: MOD 2 in leg mode, MOD 1 in OBS mode.
 
 <KlnScreen screen="pages/mod/mod-2-switch" />
 
-The switch changes to OBS mode even without an active waypoint ([`NO ACTV WPT` in the status line](#no-actv-wpt-in-the-status-line)). When the switch selects OBS mode at power-on, the unit shows [the OBS warning page](/kln90b/unit/power-on/#the-obs-warning-page) until the switch selects leg mode.
+The switch changes to OBS mode even without an active waypoint ([`NO ACTV WPT` in the status line](#no-actv-wpt-in-the-status-line)). When the unit is in OBS mode at power-on, it shows [the OBS warning page](/kln90b/unit/power-on/#the-obs-warning-page) until you press the switch and it changes to leg mode.
 
 #### Without a GPS CRS switch
 

@@ -55,30 +55,20 @@ The writers of step 4 follow these; they settle what the readers left open.
 
 ## Open
 
-For the maintainer; not changed in this pass:
+The maintainer answered the open questions on 2026-11-23, and the answers are applied:
 
-- "Outside air temperature" on the CAL pages: the word list rules it out for OTH 10 (static air temperature), and
-  the reader of the CAL chapter asks whether CAL 1's `TEMP` should carry the same term.
-- The home page's heading "KLN 90B Simulator Manual" is in title case; the style guide asks for sentence case.
-- The warm-up durations on Power-on and initialization (the dark screen, the brightening, the time off that
-  shortens them): which of them are measured on the real unit and get a range with "about", and which are the
-  simulation's choice and become "a few seconds" (style guide, section 8).
-- The message lists repeat thresholds of their owner sections (seconds, miles, degrees). Section 8 says a number
-  once at its owner; the lists own the meaning of a message. Only the entries a finding named were changed.
-- Tutorial flight 2 names the CDI scale factors where the pilot sees them, and has its box on the missing vertical
-  guidance at the activation of the approach, not where the approach arms.
-- "Airport reference point" in the fields of the APT nearest list.
-- The manual says "set the GPS CRS switch to OBS, to LEG". A reviewer names "press" as the action on the real
-  installation's switch; the maintainer decides the verb, and with it the word list entry.
-- The field `use` (`USE? INVRT?`) has the new wording "Questions to activate the plan" on `flight-plans/ctr-computed`
-  and `pages/ctr/ctr-1-prompt`; the screens `flight-plans/created`, `ctr-complete`, `insert-entry`, `ref-approve`
-  and `take-right-approve` keep the older one.
-- The `sidebar.order` of Operation has a gap at 16 and DME arcs at 8.5; it sorts right and was left.
-- One bug candidate waits for the maintainer's permission to be filed: a unit that never navigated stores an
-  almanac time of zero, which the age check takes for current almanac data for simulator dates around the third
-  GPS week rollover (about May 2028 to May 2029), so the unit skips the long search (`GpsSearch.ts`,
-  `KLN90BUserSettings.ts`). If it is filed, the paragraph on the never-used unit in GPS reception and RAIM,
-  "Acquiring satellites", gets the `kln90b#NN` comment.
+- kln90b#533 is filed (a unit without almanac data skips the almanac search for dates around November 2028); the
+  paragraph on the never-used unit in GPS reception and RAIM carries the comment.
+- The temperature of CAL 1 is the static air temperature (word list). CAL 2 takes the total air temperature, as the
+  code has it.
+- The GPS CRS switch is pressed (word list); no text names a switch position any more.
+- The dark screen after power-on takes "about 5 to 7 seconds"; the brightening and the shorter warm-up after a
+  brief time off have no numbers.
+- The title case of the home page's heading stays (style guide, section 12). The thresholds in the message lists,
+  the place of the box on the missing vertical guidance in Tutorial flight 2 and the other points stay as they are.
+
+Left as it is: the field `use` (`USE? INVRT?`) has two wordings across the screens under `flight-plans/` and
+`pages/ctr/`; the `sidebar.order` of Operation has a gap at 16 and DME arcs at 8.5.
 
 ## How the pass was run (2026-11-23)
 

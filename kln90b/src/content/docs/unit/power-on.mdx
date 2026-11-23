@@ -16,7 +16,7 @@ Every power-on with the knob runs the same sequence. The Turn-On page is shown f
 You turn the unit on by pushing in the power/brightness knob and off by pulling it out. The avionics of the aircraft must have power, and [Controls and display](/kln90b/unit/controls-and-display/#using-the-controls-in-the-simulator) says what to do in an aircraft whose knob needs a right click. Pulling the knob out turns the unit off at once and without a question, and the next power-on starts the sequence from the Turn-On page, however short the time off.
 
 <Callout kind="info">
-The screen stays dark for up to 6 seconds after you turn the unit on while it warms up, and then brightens over about 4 seconds. A unit that was off for less than 10 minutes stays dark for a proportionally shorter time. An aircraft loaded cold and dark counts as off for a long time.
+The screen stays dark for about 5 to 7 seconds after you turn the unit on while it warms up, and then brightens over a few seconds. A unit that was off only briefly stays dark for a shorter time. An aircraft loaded cold and dark counts as off for a long time.
 </Callout>
 
 A loss of electrical power to the unit of up to 1.5 seconds changes nothing: the unit carries on. A longer loss turns the unit off like the knob, and when the power returns with the knob pushed in, the unit starts the sequence from the Turn-On page.
@@ -108,10 +108,10 @@ The VFR-only warning page says `FOR VFR USE ONLY`, with the cursor on `ACKNOWLED
 ### The OBS warning page
 
 <Callout kind="availability">
-The OBS warning page appears only in an aircraft with a switch for leg and OBS mode, the GPS CRS switch, and only while that switch selects OBS.
+The OBS warning page appears only in an aircraft with a switch for leg and OBS mode, the GPS CRS switch, and only while the unit is in OBS mode.
 </Callout>
 
-The unit starts every power-on in leg mode (<Term t="ENR-LEG">`ENR-LEG`</Term>), so only the switch of the aircraft can put it in OBS mode before this page. The OBS warning page tells you so: it has no `ACKNOWLEDGE?` and no cursor, and it leaves by itself, with the Database page next, as soon as the GPS CRS switch of the aircraft selects leg mode. [Modes of operation](/kln90b/operation/modes-of-operation/#obs-mode) explains OBS mode.
+The unit starts every power-on in leg mode (<Term t="ENR-LEG">`ENR-LEG`</Term>), so only the switch of the aircraft can put it in OBS mode before this page. The OBS warning page tells you so: it has no `ACKNOWLEDGE?` and no cursor, and it leaves by itself, with the Database page next, as soon as you press the GPS CRS switch and the unit changes to leg mode. [Modes of operation](/kln90b/operation/modes-of-operation/#obs-mode) explains OBS mode.
 
 <KlnScreen screen="power-on/obs-warning-page" />
 

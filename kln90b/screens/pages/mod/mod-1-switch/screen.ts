@@ -8,7 +8,7 @@ defineScreen(import.meta.url, {
 	steps: async u => {
 		await flyAndAdjust(u);
 		await u.panel.selectPage('L', 'MOD 1');
-		// The pilot sets the GPS CRS switch to OBS, and the unit follows it
+		// The pilot presses the GPS CRS switch for OBS mode, and the unit follows the state the aircraft reports
 		u.env.sim.set('GPS OBS ACTIVE', 'bool', true);
 		await wait(2000);
 	},

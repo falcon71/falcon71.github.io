@@ -588,6 +588,7 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | ETA (the field of STA 5 and wherever the unit shows `ETA`) | arrival time |
 | approach arm mode, approach active mode | approach armed, armed mode, active mode |
 | the GPS APR switch, the GPS CRS switch (the aircraft's switches with their annunciators; the unit's screen text says `BUTTON` and is quoted as it is) | the GPS APR button, the GPS CRS button |
+| press the GPS CRS switch, press the GPS APR switch (push switches: each press changes the mode, and the pilot reads the result in the mode annunciation; maintainer, 2026-11-23) | set the switch to OBS, set the switch to LEG |
 | total operational time (STA 4) | total operating time |
 | software revision status (STA 3) | software version |
 | remote mounted annunciators (the annunciators outside the unit that it drives) | remote annunciators, annunciator lamps, external annunciators |
@@ -657,11 +658,12 @@ Use these forms. A writer who needs a new one reports it to the coordinator, who
 | the fuel management pages (OTH 5 to OTH 8); fuel units (`GAL`, `IMP`, `L`, `KG`, `LB`) | the fuel pages; the unit of the installation |
 | fuel on board (`FOB`), fuel required (`REQD`), landing fuel on board (`L FOB`), extra fuel (`EXTRA`), fuel reserve (`RES` on OTH 5 and OTH 6, a value of its own; the TRI pages' `RES` is reserve fuel) | fuel left on board |
 | fuel efficiency (the NM per fuel unit of OTH 6) | efficiency |
-| static air temperature (`SAT`), total air temperature (`TAT`), pressure altitude, density altitude (OTH 10) | outside air temperature |
+| static air temperature (`SAT` on OTH 10, and the temperature entered as `TEMP` on CAL 1; CAL 2 takes the total air temperature; "outside air temperature" is not a clear term in aviation, maintainer, 2026-11-23), total air temperature (`TAT`), pressure altitude, density altitude (OTH 10) | outside air temperature |
 
 ### Spelling and style
 
-- American spelling. Sentence case for headings and titles.
+- American spelling. Sentence case for headings and titles. The one exception is the heading of the manual on the home
+  page, "KLN 90B Simulator Manual", which is a title in title case (maintainer, 2026-11-23).
 - Abbreviations: write them as the unit and pilots do (DTK, XTK, RAIM). One that has a glossary entry is explained
   with a tooltip (section 14), not with a parenthesis; one that a single screen uses is explained in that screen's
   field explanation.

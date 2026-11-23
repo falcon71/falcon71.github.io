@@ -14,12 +14,12 @@
 	`PRS` is the pressure altitude: the altitude that the standard setting of 29.92" would show at the indicated altitude and the altimeter setting above. The unit works it out and rounds it to 100 ft; it shows at least 0 ft and at most 65,600 ft. The cursor skips it.
 </Field>
 
-<Field id="temp" title="Outside air temperature">
-	`TEMP:` is the outside air temperature in °C, from -99 to 99. The first cell is the sign, a choice of `-` and `0`, so a temperature above zero shows with a leading zero (`008°C`) and a temperature below zero with a minus (`-05°C`). The value counts at once. CAL 2 has a temperature of its own.
+<Field id="temp" title="Static air temperature">
+	`TEMP:` is the static air temperature in °C, from -99 to 99. The first cell is the sign, a choice of `-` and `0`, so a temperature above zero shows with a leading zero (`008°C`) and a temperature below zero with a minus (`-05°C`). The value counts at once. CAL 2 has a temperature of its own.
 </Field>
 
 <Field id="den" title="Density altitude">
-	`DEN` is the density altitude: the pressure altitude corrected for the outside air temperature, rounded to 100 ft. It shows 0 ft where the calculation gives less and 65,600 ft where it gives more. The cursor skips it.
+	`DEN` is the density altitude: the pressure altitude corrected for the static air temperature, rounded to 100 ft. It shows 0 ft where the calculation gives less and 65,600 ft where it gives more. The cursor skips it.
 </Field>
 
 <Field id="crsr" title="CRSR annunciation">

@@ -20,7 +20,7 @@ The unit keeps the entries of CAL 1 to CAL 5 while it is off. CAL 6 and CAL 7 fo
 
 Some entries are shared:
 
-- CAL 1 and CAL 2 share the indicated altitude, which CAL 1 labels `IND:` and CAL 2 `ALT:`, and the altimeter setting, which both label `BARO:`. Their temperatures are separate: CAL 1 takes the outside air temperature, CAL 2 the total air temperature.
+- CAL 1 and CAL 2 share the indicated altitude, which CAL 1 labels `IND:` and CAL 2 `ALT:`, and the altimeter setting, which both label `BARO:`. Their temperatures are separate: CAL 1 takes the static air temperature, CAL 2 the total air temperature.
 - CAL 2 passes its true airspeed to CAL 3 every time you show it.
 - CAL 6 and CAL 7 take the system time zone as their start and then keep their own ([The time zone](/kln90b/operation/trip-planning/#the-time-zone)). Choosing a zone on either page changes no other page.
 
@@ -28,7 +28,7 @@ Nothing else is shared. The TRI pages keep a true airspeed and a wind of their o
 
 ## CAL 1: pressure and density altitude
 
-CAL 1 works out the pressure altitude and the density altitude from the indicated altitude, the altimeter setting and the outside air temperature. You use it to find how high the air feels to the aircraft, for example before a takeoff from a high airport.
+CAL 1 works out the pressure altitude and the density altitude from the indicated altitude, the altimeter setting and the static air temperature. You use it to find how high the air feels to the aircraft, for example before a takeoff from a high airport.
 
 <KlnScreen screen="pages/cal/cal-1" />
 

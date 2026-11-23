@@ -197,7 +197,7 @@ To fly the radial in OBS mode:
 
 1. Turn the course of your CDI or HSI to 284°, the radial of the chart.
 2. Turn the left outer knob one step counterclockwise to the MOD pages and the left inner knob to MOD 2. With a GPS CRS switch in the aircraft, MOD 2 shows `PRESS GPS` `CRS FOR`.
-3. Set the GPS CRS switch of the aircraft to OBS; the aircraft may label it LEG/OBS. MOD 2 shows `ACTIVE MODE` and `OBS 284°`, and the mode annunciation <Term t="ENR:">`ENR:284`</Term>.
+3. Press the GPS CRS switch of the aircraft; the aircraft may label it LEG/OBS. The unit changes to OBS mode: MOD 2 shows `ACTIVE MODE` and `OBS 284°`, and the mode annunciation <Term t="ENR:">`ENR:284`</Term>.
 
    <KlnScreen screen="tutorial-2/mod-2-obs-284" />
 
@@ -215,7 +215,7 @@ NAV 3 shows `OBS 284°` and a track of 284°, and `FLY` is close to zero. NAV 1 
 
 Once you are established on the radial, change back to [leg mode](/kln90b/operation/modes-of-operation/#leg-mode). Leg mode flies the leg of FPL 0 to TITON and gives you its <Term t="DTK">desired track</Term> as the course for your indicator.
 
-To change back to leg mode, set the GPS CRS switch to LEG. The mode annunciation shows <Term t="ENR-LEG">`ENR-LEG`</Term>. Without a GPS CRS switch, turn the left outer knob to the MOD pages, the left inner knob to MOD 1, and press <kbd>ENT</kbd>; then turn back to NAV 3.
+To change back to leg mode, press the GPS CRS switch again. The unit changes to leg mode, and the mode annunciation shows <Term t="ENR-LEG">`ENR-LEG`</Term>. Without a GPS CRS switch, turn the left outer knob to the MOD pages, the left inner knob to MOD 1, and press <kbd>ENT</kbd>; then turn back to NAV 3.
 
 YKM lies behind you, so the unit makes the leg of FPL 0 closest to you active, the leg from YKM to TITON ([Changing between the modes](/kln90b/operation/modes-of-operation/#changing-between-the-modes)). On NAV 3 it reads like this:
 
@@ -236,7 +236,7 @@ The unit gives you no reminder before TITON, because the navigation data codes n
 To enter the hold:
 
 1. Leave your CDI or HSI on 290°, the desired track of the leg to TITON: it is the inbound course of the hold, 284° on the chart, as the unit counts it at TITON.
-2. Before you reach TITON, set the GPS CRS switch to OBS. The unit is in OBS mode with TITON as the active waypoint and the selected course 290°. NAV 3 shows `OBS 290°`, and `FLY` is close to zero: the course line runs along the radial.
+2. Before you reach TITON, press the GPS CRS switch. The unit changes to OBS mode with TITON as the active waypoint and the selected course 290°. NAV 3 shows `OBS 290°`, and `FLY` is close to zero: the course line runs along the radial.
 
    <KlnScreen screen="tutorial-2/obs-titon" />
 
@@ -248,7 +248,7 @@ If NAV 3 shows `OBS:`, check that it reads about 290°, as on the departure, and
 
 With the inbound course as the selected course, the TO/FROM indicator shows FROM only from TITON until you are abeam TITON again in the turn to the outbound leg. The outbound leg lies on the side of TITON you come from, so on it, as on the inbound leg, the indicator shows TO.
 
-When you have reached your altitude, leave the hold on the inbound leg, with TITON ahead of you, and change back to leg mode as on the departure: set the GPS CRS switch to LEG, or press <kbd>ENT</kbd> on MOD 1 without a switch. The unit flies to TITON along the selected course and then goes on along FPL 0 to CADED. Change to leg mode before TITON: with TITON behind you, the unit makes the leg of FPL 0 closest to you active, and that can already be a leg after CADED ([Changing between the modes](/kln90b/operation/modes-of-operation/#changing-between-the-modes)). If `MSG` flashes, turn your indicator to the course of `ADJ NAV IND CRS TO`.
+When you have reached your altitude, leave the hold on the inbound leg, with TITON ahead of you, and change back to leg mode as on the departure, with the GPS CRS switch or, without one, with <kbd>ENT</kbd> on MOD 1, and check that the mode annunciation shows `ENR-LEG`. The unit flies to TITON along the selected course and then goes on along FPL 0 to CADED. Change to leg mode before TITON: with TITON behind you, the unit makes the leg of FPL 0 closest to you active, and that can already be a leg after CADED ([Changing between the modes](/kln90b/operation/modes-of-operation/#changing-between-the-modes)). If `MSG` flashes, turn your indicator to the course of `ADJ NAV IND CRS TO`.
 
 ## En route
 
@@ -386,9 +386,9 @@ Near LOFAL the unit raises `IF REQUIRED SELECT OBS` for the holding pattern of t
 To hold at LOFAL:
 
 1. Turn your CDI or HSI to the inbound course of the hold from the chart.
-2. Before you reach LOFAL, set the GPS CRS switch to OBS. The mode on the left side of Super NAV 5 shows `ARM` and the course, Approach Arm-OBS mode, and `PRESS ALT TO SET BARO` comes once more; answer it with <kbd>ALT</kbd>. {/* kln90b#513: describes the current behavior; the fix makes the message come only on the change from an en route mode into an arm mode */}
+2. Before you reach LOFAL, press the GPS CRS switch. The unit changes to OBS mode: the mode on the left side of Super NAV 5 shows `ARM` and the course, Approach Arm-OBS mode, and `PRESS ALT TO SET BARO` comes once more; answer it with <kbd>ALT</kbd>. {/* kln90b#513: describes the current behavior; the fix makes the message come only on the change from an en route mode into an arm mode */}
 3. Fly the hold by the chart, as at TITON. LOFAL stays the active waypoint the whole time.
-4. To leave the hold, set the GPS CRS switch to LEG on the inbound leg, with LOFAL ahead. The mode shows `ARM-LEG` again, and `PRESS ALT TO SET BARO` comes again; answer it with <kbd>ALT</kbd>. The unit flies to LOFAL and goes on along FPL 0 to KBFI. {/* kln90b#513: describes the current behavior; the fix makes the message come only on the change from an en route mode into an arm mode */}
+4. To leave the hold, press the GPS CRS switch on the inbound leg, with LOFAL ahead. The unit changes to leg mode: the mode shows `ARM-LEG` again, and `PRESS ALT TO SET BARO` comes again; answer it with <kbd>ALT</kbd>. The unit flies to LOFAL and goes on along FPL 0 to KBFI. {/* kln90b#513: describes the current behavior; the fix makes the message come only on the change from an en route mode into an arm mode */}
 
 Without a GPS CRS switch, turn the left outer knob to the MOD pages and the left inner knob to MOD 2 and press <kbd>ENT</kbd> in step 2, and turn the left inner knob to MOD 1 and press <kbd>ENT</kbd> in step 4.
 
