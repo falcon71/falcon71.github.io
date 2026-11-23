@@ -772,8 +772,8 @@ The explanations of a screen's fields live in its `fields.mdx` and appear wherev
   list](/kln90b/operation/nearest/)`), and at the first use in a field explanation. The plan's topic ownership says
   which section owns which concept.
 - **Use `<Term>` at the first use of a glossary term on a page,** and at its first use in each field explanation. Not
-  on every use. The exception is the vocabulary every pilot knows (section 2), which gets no tooltip even though the
-  glossary lists it: VOR, NDB, DME, ILS, IFR, VFR, ATC, UTC, CDI, HSI, NM, kt, ft. Add to this list only with the
+  on every use. The exception is the vocabulary every pilot knows (section 2), which gets no tooltip and no
+  glossary entry: VOR, NDB, DME, ILS, IFR, VFR, ATC, UTC, CDI, HSI, NM, kt, ft. Add to this list only with the
   coordinator.
 - **An entry** has `expansion` (the written-out form, for an abbreviation) and `text`: one or two plain sentences that
   say what the term means on this unit. No tooltips inside, no links, no formatting.

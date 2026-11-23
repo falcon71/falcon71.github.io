@@ -18,21 +18,9 @@ export const glossary: Record<string, GlossaryEntry> = {
 		expansion: 'Cross-track error',
 		text: 'How far the aircraft is to the side of the active leg or the selected course, in NM. The D-bar shows it, and the FLY line of NAV 3 gives it as a distance.',
 	},
-	GS: {
-		expansion: 'Groundspeed',
-		text: 'Your speed over the ground, from the GPS. It shows dashes while the unit has no position.',
-	},
-	ETA: {
-		expansion: 'Estimated time of arrival',
-		text: 'The time of day at which you reach a waypoint at your present groundspeed, in the time zone the page shows.',
-	},
-	ETE: {
-		expansion: 'Estimated time en route',
-		text: 'The time to a waypoint at your present groundspeed. It shows dashes at a groundspeed of 2 kt or less and when the unit has no position.',
-	},
 	RAIM: {
 		expansion: 'Receiver autonomous integrity monitoring',
-		text: 'The receiver checks its own position for errors by comparing more measurements than a position needs. It needs five measurements, and the altitude input counts as one.',
+		text: 'The receiver checks its own position for errors by comparing more measurements than a position needs.',
 	},
 	EPE: {
 		expansion: 'Estimated position error',
@@ -89,15 +77,11 @@ export const glossary: Record<string, GlossaryEntry> = {
 	},
 	CRSR: {
 		expansion: 'Cursor',
-		text: 'Replaces the page name in the status line while the cursor is on for that side. Pressing the CRSR button of that side turns the cursor off again.',
+		text: 'Replaces the page identification in the status line while the cursor is on for that side. Pressing the CRSR button of that side turns the cursor off again.',
 	},
 	'ENR-LEG': {
 		expansion: 'Enroute-Leg mode',
 		text: 'The mode annunciation of leg mode en route: the unit guides you along the active leg of the flight plan or a direct-to.',
-	},
-	BRG: {
-		expansion: 'Bearing',
-		text: 'The magnetic bearing from your position to the active waypoint.',
 	},
 	'ENR:': {
 		expansion: 'Enroute-OBS mode',
@@ -114,10 +98,6 @@ export const glossary: Record<string, GlossaryEntry> = {
 	'APR-LEG': {
 		expansion: 'Approach Active-Leg mode',
 		text: 'The mode annunciation of the active approach: the unit guides you along the legs of the approach with the approach CDI scale factor.',
-	},
-	BARO: {
-		expansion: 'Altimeter baro setting',
-		text: 'The baro setting of the altimeter, in inches of mercury or millibars, which the unit uses for altitude.',
 	},
 };
 
