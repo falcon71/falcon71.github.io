@@ -1,0 +1,104 @@
+---
+/**
+ * A table of contents built from the sidebar, so that it never falls behind it.
+ *
+ * Without `chapter` (the home page): every chapter of the sidebar, linked to its overview page
+ * (`<chapter>/index.mdx`) with that page's description.
+ * With `chapter` (an overview page, e.g. `chapter="operation"`): every page of that chapter in sidebar order, with
+ * its description.
+ *
+ * A chapter is a sidebar group whose pages all live in one folder; the folder names the chapter. The overview pages
+ * are hidden from the sidebar (`sidebar.hidden`), so they never list themselves.
+ */
+import { getCollection } from 'astro:content';
+
+interface Props {
+	chapter?: string;
+}
+
+const { chapter } = Astro.props;
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const docs = new Map((await getCollection('docs')).map((entry) => [entry.id, entry]));
+
+// '/kln90b/operation/direct-to/' → 'operation/direct-to'
+const idOf = (href: string) => href.slice(base.length).replace(/^\/|\/$/g, '');
+
+interface Link {
+	href: string;
+	label: string;
+	description?: string;
+}
+
+interface Chapter {
+	folder: string;
+	label: string;
+	links: Link[];
+}
+
+type Entry = (typeof Astro.locals.starlightRoute.sidebar)[number];
+
+const linksOf = (entries: Entry[]): Link[] =>
+	entries.flatMap((entry) =>
+		entry.type === 'link'
+			? [{ href: entry.href, label: entry.label, description: docs.get(idOf(entry.href))?.data.description }]
+			: linksOf(entry.entries),
+	);
+
+const chapters: Chapter[] = Astro.locals.starlightRoute.sidebar.flatMap((entry) => {
+	if (entry.type !== 'group') return [];
+	const links = linksOf(entry.entries);
+	const folders = new Set(links.map((link) => idOf(link.href).split('/')[0]));
+	if (folders.size !== 1) throw new Error(`ChapterContents: the sidebar group "${entry.label}" spans several folders`);
+	return [{ folder: [...folders][0], label: entry.label, links }];
+});
+
+let items: Link[];
+if (chapter === undefined) {
+	items = chapters.map(({ folder, label }) => {
+		const overview = docs.get(folder);
+		if (!overview) throw new Error(`ChapterContents: the chapter "${label}" has no overview page ${folder}/index.mdx`);
+		return { href: `${base}/${folder}/`, label, description: overview.data.description };
+	});
+} else {
+	const found = chapters.find(({ folder }) => folder === chapter);
+	if (!found) throw new Error(`ChapterContents: no sidebar group holds the pages of "${chapter}"`);
+	items = found.links;
+}
+---
+
+<ul class:list={['kln-contents', { 'kln-contents--chapters': chapter === undefined }]}>
+	{
+		items.map(({ href, label, description }) => (
+			<li>
+				<a href={href}>{label}</a>
+				{description && <p>{description}</p>}
+			</li>
+		))
+	}
+</ul>
+
+<style>
+	.kln-contents {
+		list-style: none;
+		padding: 0;
+	}
+	.kln-contents li {
+		margin-top: 1rem;
+	}
+	.kln-contents a {
+		font-weight: 600;
+	}
+	.kln-contents p {
+		margin-top: 0.25rem;
+	}
+	.kln-contents--chapters {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+		column-gap: 3rem;
+	}
+	.kln-contents--chapters a {
+		font-family: var(--kln-font-heading);
+		font-size: var(--sl-text-h4);
+	}
+</style>

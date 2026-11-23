@@ -816,12 +816,18 @@ The sidebar has these chapters and pages. Operation explains tasks ("how do I…
 
 | Chapter | Pages |
 | --- | --- |
-| Getting started | Table of contents (home page) · Installation · Quickstart · Tutorial flight 1 · Tutorial flight 2 |
+| Getting started | Installation · Quickstart · Tutorial flight 1 · Tutorial flight 2 |
 | The unit | Controls and display (knobs, buttons, the two halves, status line, cursor and data entry, scan, page tree) · Keyboard mode · Power-on and initialization |
 | Operation | Waypoints and the database · User waypoints · Nearest · Direct-to · Flight plans · Modes of operation (leg and OBS) · Sequencing and turn anticipation · SID and STAR procedures · DME arcs · Non-precision approaches · VNAV · GPS reception and RAIM · Inside the GPS simulation (optional) · Messages · Airspace and altitude alerting · Trip planning and calculators · Simulated failures |
 | Page reference | One chapter per page type in page tree order. Left: TRI, MOD, FPL, NAV, CAL, STA, SET, FLR, OTH. Right: CTR, REF, ACT, D/T, NAV, APT, VOR, NDB, INT, SUP. Each page with its screen. |
 | Reference lists | Message page messages · Status line messages · Glossary |
 | Help | External hardware · FAQ and troubleshooting · Known limitations · Contact |
+
+Each chapter also has an overview page, `<chapter>/index.mdx`, hidden from the sidebar: one or two sentences on what
+the chapter is for, then `<ChapterContents chapter="<chapter>" />`, which lists the chapter's pages in sidebar order
+with their descriptions. The home page lists the chapters the same way, with the description of each overview page.
+Both lists are built from the sidebar and the front matter, so a new page needs no entry in them; its `description`
+is what they show.
 
 The NAV pages exist on both sides. The page reference has one NAV chapter that covers both sides, in its place among
 the left page types (after FPL); the right ones skip it. The page links depend on this: a page type has exactly one chapter.
@@ -1074,7 +1080,8 @@ These are built. They are listed here so that they stay true; changes to them go
 - A print stylesheet is welcome where it is cheap.
 - **The home page** is titled "KLN 90B for Microsoft Flight Simulator" and opens with a drawing of the whole unit
   that shows a generated screen without its fields (`kln90b/src/components/Hero.astro`). Under it come a short
-  description of the unit, the download buttons, and the manual with its own heading and the table of contents.
+  description of the unit, the download buttons, and the manual with its own heading and the list of its chapters
+  (section 17).
 - **The home page has a download button for each simulator**, Microsoft Flight Simulator 2024 (version 2.x) and 2020
   (version 1.x), linking the zip of the newest full release straight from GitHub; pre-releases never get a button. The
   build reads the releases from the GitHub API (`kln90b/src/lib/releases.ts`), so the buttons follow the newest release

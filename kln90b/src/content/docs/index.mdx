@@ -6,6 +6,7 @@ hero:
 tableOfContents: false
 ---
 
+import ChapterContents from '../../components/ChapterContents.astro';
 import Downloads from '../../components/Downloads.astro';
 
 The KLN 90B is a panel-mounted GPS navigator of the 1990s, built for instrument flight en route and on
@@ -17,46 +18,7 @@ follows the real unit closely, quirks included.
 
 ## KLN 90B Simulator Manual
 
-This manual explains how to operate the KLN 90B, from the first power-on to a non-precision approach.
+This manual explains how to operate the KLN 90B, from the first power-on to a non-precision approach. If the unit is
+new to you, start with [Getting started](/kln90b/getting-started/).
 
-<div class="kln-toc">
-
-### Getting started
-
-- [Installation](/kln90b/getting-started/installation/): download the right release and put it in the community folder.
-- [Quickstart](/kln90b/getting-started/quickstart/): the two halves of the screen, the knobs and the cursor, in ten minutes.
-- [Tutorial flight 1](/kln90b/getting-started/tutorial-1/): a short cross-country flight with direct-to navigation.
-- [Tutorial flight 2](/kln90b/getting-started/tutorial-2/): a flight plan with departure, arrival and approach.
-
-### The unit
-
-- [Controls and display](/kln90b/unit/controls-and-display/): knobs, buttons, the screen layout and how data is entered.
-- [Keyboard mode](/kln90b/unit/keyboard-mode/): enter identifiers with the computer keyboard.
-- [Power-on and initialization](/kln90b/unit/power-on/): self test, database, position and GPS acquisition.
-
-### Operation
-
-- [Direct-to](/kln90b/operation/direct-to/): fly straight to any waypoint.
-- [Modes of operation](/kln90b/operation/modes-of-operation/): leg and OBS mode, the selected course, the mode annunciations and the CDI scale factor.
-
-### Page reference
-
-- [NAV pages](/kln90b/pages/nav/): every field of the navigation pages.
-- [APT pages](/kln90b/pages/apt/): airport information, departures, arrivals and approaches.
-- [SET pages](/kln90b/pages/set/): settings, including the simulator settings on SET 10.
-
-### Reference lists
-
-- [Messages](/kln90b/lists/messages/), [Glossary](/kln90b/lists/glossary/)
-
-### Help
-
-- [External hardware](/kln90b/help/external-hardware/), [FAQ and troubleshooting](/kln90b/help/faq/), [Known limitations](/kln90b/help/known-limitations/), [Contact](/kln90b/help/contact/)
-
-</div>
-
-<style>{`
-	.kln-toc { columns: 2 22rem; column-gap: 3rem; }
-	.kln-toc h3 { break-after: avoid; margin-top: 1.5rem; }
-	.kln-toc ul { break-inside: avoid; }
-`}</style>
+<ChapterContents />
