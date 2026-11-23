@@ -12,7 +12,7 @@ final pass"; a note is deleted there when the final pass has applied it.
 | 1 | Mechanical check over everything: the build, links and anchors, planned anchors, `<Term>` use, unused glossary entries and screens, old word forms, numbers said twice | done 2026-11-23 |
 | 2 | One reader per part (below) | done 2026-11-23 |
 | 3 | Across chapters: the statements the readers passed on, the links between Operation and the page reference, the late corrections | done 2026-11-23 |
-| 4 | Fixes by writers per page, with a review of the changes only | done 2026-11-23; in review with the maintainer |
+| 4 | Fixes by writers per page, with a review of the changes only | done 2026-11-23; approved by the maintainer |
 
 ## Parts of step 2
 
