@@ -8,25 +8,27 @@ sidebar:
 import KlnScreen from '../../../components/KlnScreen.astro';
 import Term from '../../../components/Term.astro';
 
-The NDB page of the KLN 90B shows one NDB: its frequency and its position. You use it to look up a station and to define an NDB of your own. Entering an identifier, scanning and approving the page work as on every waypoint page; see [Waypoints and the database](/kln90b/operation/waypoints/).
+The NDB page of the KLN 90B shows one NDB: its frequency and its position. You use it to look up a station and to define an NDB of your own.
 
 ## NDB page: frequency and position of a station
+
+Entering an identifier, the scan, duplicate identifiers and approving the waypoint page work as on every waypoint page ([Waypoints and the database](/kln90b/operation/waypoints/)).
 
 The NDB page belongs to the right side and has a single page. The top line shows the identifier and at the right end the rank of a [nearest](#a-nearest-ndb) NDB.
 
 <KlnScreen screen="pages/ndb/ndb-fhr" />
 
-On an NDB of the database you can change only the identifier; on a nearest NDB the cursor can also rest on the rank (see below). The name, the frequency and the position are read-only. A `›` in the first column marks the NDB as the [active waypoint](/kln90b/operation/modes-of-operation/#the-active-waypoint); it flashes during [waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting). When the active waypoint is an NDB, the [ACT pages](/kln90b/pages/act/) show this page for it.
+On an NDB of the database you can change only the identifier; on a nearest NDB the cursor can also rest on the rank (see below). The name, the frequency and the position are read-only. The arrow in the first column marks the NDB as the [active waypoint](/kln90b/operation/modes-of-operation/#the-active-waypoint); it flashes during [waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting). When the active waypoint is an NDB, the [ACT pages](/kln90b/pages/act/) show this page for it.
 
 When the complete list holds no NDB, the page shows empty fields and the status line says `NO NDB WPTS`; see [`NO SUP WPTS` and the other empty lists](/kln90b/operation/waypoints/#no-sup-wpts-and-the-other-empty-lists).
 
 ### A nearest NDB
 
-The page changes when you reach an NDB through the [nearest list](/kln90b/operation/nearest/): `NR` (for nearest) and the rank, counted from `NR 1` for the nearest NDB, appear at the right of the top line, and the bearing and the distance from the aircraft replace the position. An NDB that you enter by its identifier shows the plain page, even when it is the nearest.
+The page changes when you reach an NDB through the [nearest list](/kln90b/operation/nearest/): the rank (`NR 2`) appears at the right of the top line, and the bearing and the distance from the aircraft replace the position. An NDB that you enter by its identifier shows the plain page, even when it is the nearest.
 
 <KlnScreen screen="pages/ndb/ndb-nearest" />
 
-With the cursor on the rank, the page follows the list: it shows whichever NDB holds that rank as the aircraft moves. Entering another identifier turns the page back into the plain NDB page.
+With the cursor on the rank, the page follows the list ([The cursor on the rank](/kln90b/operation/nearest/#the-cursor-on-the-rank)). Entering another identifier turns the page back into the plain NDB page.
 
 ### A user-defined NDB
 

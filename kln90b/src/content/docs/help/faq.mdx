@@ -3,6 +3,8 @@ title: FAQ and troubleshooting
 description: Answers to the questions pilots ask most often about the KLN 90B, from a unit that does not turn on to a flight plan that loses its procedures, each with a link to the full explanation.
 ---
 
+import Term from '../../../components/Term.astro';
+
 The answers below say what to do when the KLN 90B does not behave as you expect, and link to the page that explains each in full.
 
 ## Turning the unit on
@@ -11,11 +13,11 @@ The answers below say what to do when the KLN 90B does not behave as you expect,
 
 The avionics of the aircraft need power: the aircraft must be powered, the avionics bus on and no circuit breaker pulled. Then push in the power/brightness knob at the upper right of the unit. In some aircraft the knob needs a right click.
 
-After you turn the unit on, the screen stays dark for a few seconds while it warms up, so wait before you try again, and do not pull the knob out, which turns the unit off. A screen that stays black while the unit runs may be turned all the way down: turn the power/brightness knob up. [Turning the unit on](/kln90b/getting-started/quickstart/#turning-the-unit-on) of the Quickstart walks you through it, [Using the controls in the simulator](/kln90b/unit/controls-and-display/#using-the-controls-in-the-simulator) covers the right click, [Controls and display](/kln90b/unit/controls-and-display/) the brightness, and [Turning the unit on](/kln90b/unit/power-on/#turning-the-unit-on) of Power-on and initialization the warm-up.
+After you turn the unit on, the screen stays dark for a few seconds while it warms up, so wait before you try again, and do not pull the knob out, which turns the unit off. A screen that stays black while the unit runs may be turned all the way down: turn the power/brightness knob up. [Turning the unit on](/kln90b/getting-started/quickstart/#turning-the-unit-on) of the Quickstart walks you through it, [Using the controls in the simulator](/kln90b/unit/controls-and-display/#using-the-controls-in-the-simulator) covers the right click, [Controls and display](/kln90b/unit/controls-and-display/#the-front-panel) the brightness, and [Turning the unit on](/kln90b/unit/power-on/#turning-the-unit-on) of Power-on and initialization the warm-up.
 
 ### Why does the Self Test page show TEST FAIL?
 
-The self test has found a fault. Open the MSG page, where the message names the cause. If it is a failure to load the navigation data, turn the unit off and on again once, and restart the simulator if `TEST FAIL` comes back. A simulated failure survives turning the unit off and on and restarting the simulator until you repair it on FLR 2, so neither helps there. [`TEST FAIL` on the Self Test page](/kln90b/unit/power-on/#test-fail-on-the-self-test-page) says what to do for each cause.
+The self test has found a fault. Open the MSG page, where the message names the cause, and turn the unit off and on again once: a failure to load the navigation data can go away. A simulated failure stays until you repair it. [`TEST FAIL` on the Self Test page](/kln90b/unit/power-on/#test-fail-on-the-self-test-page) says what to do for each cause.
 
 ### Why does it take so long to get a GPS position?
 
@@ -27,13 +29,13 @@ The acquisition is set to `REAL` on SET 10, and the unit starts from a memory th
 
 The unit uses the navigation data of the simulator, so its database is as current as the simulator's, and there is nothing to load in the unit. The updates of the simulator itself arrive by themselves, or you install current navigation data from a provider such as Navigraph.
 
-Until a current cycle is installed, set the date of the simulator to an earlier day. [The database](/kln90b/operation/waypoints/#the-database) explains why that helps and what an expired database changes, and [`DATA BASE OUT OF DATE`](/kln90b/operation/waypoints/#data-base-out-of-date) the message that tells you.
+Until a current cycle is installed, set the date of the simulator to an earlier day. The unit compares the date on its clock, which follows the simulator's date, with the end of its cycle, and a date before that end counts as current, so an earlier date keeps the expiry warnings away. An expired database works all the same ([The database](/kln90b/operation/waypoints/#the-database)); [`DATA BASE OUT OF DATE`](/kln90b/operation/waypoints/#data-base-out-of-date) is the message that tells you.
 
 ## Flight plans and procedures
 
 ### How do I load a flight plan from the simulator?
 
-Plan the route in the EFB of the simulator and send it with the send to avionics function, while the unit is on: a route with procedures that arrives while the unit is off loses them at the next power-on. The unit drops what it cannot take and tells you with a message. [Loading a route from the EFB](/kln90b/operation/flight-plans/#loading-a-route-from-the-efb) lists what it takes and what it drops.
+Plan the route in the <Term t="EFB" /> of the simulator and send it with the send to avionics function, while the unit is on: a route with procedures that arrives while the unit is off loses them at the next power-on. The unit drops what it cannot take and tells you with a message. [Loading a route from the EFB](/kln90b/operation/flight-plans/#loading-a-route-from-the-efb) lists what it takes and what it drops.
 
 ### How do I enter an airway?
 
@@ -49,11 +51,11 @@ The unit keeps the procedures in FPL 0 only over a short time off. After a longe
 
 ### Why must I select a transition, and why are waypoints in my flight plan twice afterward?
 
-A SID, a STAR or an approach that has transitions cannot be loaded without one. That is the unit's correct behavior. When the transition starts at a waypoint that FPL 0 already holds, the plan holds that waypoint twice, and you delete the copy you do not need, usually the en route one, so that the procedure stays complete. [A transition must be selected](/kln90b/operation/departures-arrivals/#a-transition-must-be-selected) shows an example.
+A <Term t="SID" />, a <Term t="STAR" /> or an approach that has transitions cannot be loaded without one. That is the unit's correct behavior. When the transition starts at a waypoint that FPL 0 already holds, the plan holds that waypoint twice, and you delete the copy you do not need, usually the en route one, so that the procedure stays complete. [A transition must be selected](/kln90b/operation/departures-arrivals/#a-transition-must-be-selected) shows an example.
 
 ### Why can I not start an approach at an intermediate fix?
 
-The unit starts an approach only at one of its initial approach fixes. You select one of the transitions the list offers, and no entry starts at the intermediate fix or at the final approach fix. When ATC gives you vectors to final, load the approach with any IAF and make the final approach fix the active waypoint. [An approach starts only at an IAF](/kln90b/operation/approaches/#an-approach-starts-only-at-an-iaf) explains how.
+The unit starts an approach only at one of its initial approach fixes. You select one of the transitions the list offers, and no entry starts at the intermediate fix or at the final approach fix. When ATC gives you vectors to final, load the approach with any <Term t="IAF" /> and make the final approach fix the active waypoint ([Vectors to final](/kln90b/operation/approaches/#vectors-to-final)). [An approach starts only at an IAF](/kln90b/operation/approaches/#an-approach-starts-only-at-an-iaf) explains the rule.
 
 ### Why can I not select an ILS approach?
 

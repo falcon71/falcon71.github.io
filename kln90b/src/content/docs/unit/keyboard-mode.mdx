@@ -23,12 +23,14 @@ While `KYBD` flashes, the simulator passes all keyboard input to the unit and ig
 
 Keyboard mode works on one side at a time, and only while that side's cursor is on ([Entering data with the cursor](/kln90b/unit/controls-and-display/#entering-data-with-the-cursor)). Left click on the `CRSR` annunciation in the status line, at the left end for the left side and at the right end for the right side. If keyboard mode is on for the other side, it moves across. Super NAV 5 has no status line, so it has no keyboard mode.
 
-Typing on a waypoint [inserts the new waypoint in front of it](/kln90b/operation/flight-plans/#inserting-in-front-of-a-waypoint), so with waypoints in FPL 0 you first move the cursor to the blank entry after the last one.
+Typing on a waypoint [inserts the new waypoint in front of it](/kln90b/operation/flight-plans/#inserting-in-front-of-a-waypoint), so with waypoints in FPL 0 you first move the cursor to the blank waypoint position after the last one.
+
+FPL 0 must be empty; otherwise move the cursor to the blank waypoint position first.
 
 To enter a flight plan in keyboard mode:
 
 1. Turn the left outer knob to the FPL pages and the left inner knob to FPL 0.
-2. Press the left <kbd>CRSR</kbd> button. The cursor stands on the blank first entry.
+2. Press the left <kbd>CRSR</kbd> button. The cursor stands on the blank waypoint position.
 3. Left click on the `CRSR` annunciation at the left end of the status line. `KYBD` flashes in its place.
 4. Type the identifier of the first waypoint, for example <kbd>K</kbd>, <kbd>P</kbd>, <kbd>D</kbd>, <kbd>X</kbd>.
 5. Press <kbd>Enter</kbd>. The waypoint page of KPDX appears on the right side, so that you can check the waypoint.
@@ -64,4 +66,4 @@ Keyboard mode ends with a right click anywhere on the screen, with <kbd>Esc</kbd
 
 ## Switching keyboard mode on and off with hardware
 
-An aircraft or a controller such as a Stream Deck can switch keyboard mode on and off, with one toggle for each side. It works like the left click on the `CRSR` annunciation, and in addition it turns the cursor of that side on if it is off, and ends keyboard mode if it is already on. [External hardware](/kln90b/help/external-hardware/) lists the names of the two events and explains how to bind them.
+An aircraft or a controller such as a Stream Deck can switch keyboard mode on and off, with one toggle for each side. It works like the left click on the `CRSR` annunciation, and in addition it closes the MSG page if it is shown, turns the cursor of that side on if it is off, and ends keyboard mode if it is already on. [External hardware](/kln90b/help/external-hardware/#the-events) lists the names of the two events and explains how to bind them.

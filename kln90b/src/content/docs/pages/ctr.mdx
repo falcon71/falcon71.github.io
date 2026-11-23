@@ -8,11 +8,11 @@ sidebar:
 import KlnScreen from '../../../components/KlnScreen.astro';
 import CtrWaypoint from '../../../components/drawings/CtrWaypoint.astro';
 
-The CTR pages of the KLN 90B compute the points where the flight plan on the left side crosses from one area control center (ACC or ARTCC) into the next, and insert them into the plan as center waypoints. CTR 1 computes and inserts them; CTR 2 shows each computed waypoint with its position.
+The CTR pages of the KLN 90B compute the points where the flight plan on the left side crosses from one area control center (ACC or ARTCC) into the next, and insert them into the plan as center waypoints. CTR 1 computes and inserts them; CTR 2 shows each computed waypoint with its position. Both pages work with the left page, as the other right pages that act on a flight plan do ([Page pairs](/kln90b/unit/controls-and-display/#page-pairs)), and neither has a field: the right <kbd>CRSR</kbd> and <kbd>CLR</kbd> do nothing on them.
 
 ## CTR 1: computing center waypoints
 
-Both CTR pages work with the left page, as the other right pages that act on a flight plan do ([Page pairs](/kln90b/unit/controls-and-display/#page-pairs)). Neither has a field: the right <kbd>CRSR</kbd> and <kbd>CLR</kbd> do nothing on them. How the unit computes and names the waypoints is in [Center waypoints](/kln90b/operation/flight-plans/#center-waypoints).
+How the unit computes and names the waypoints is in [Center waypoints](/kln90b/operation/flight-plans/#center-waypoints).
 
 <CtrWaypoint caption="The route of the screens below, KPDX to KBKE. The dashed line is the boundary between the two Centers; the unit puts the center waypoint BKE00 where the route crosses it." />
 
@@ -32,7 +32,7 @@ The page then shows how many new waypoints the computation created, and asks whe
 
 <KlnScreen screen="flight-plans/ctr-complete" />
 
-The page keeps this text, and <kbd>ENT</kbd> does nothing more, until you leave the FPL page on the left side. The computed waypoints are void when you edit the plan or leave its FPL page before you insert them; [Center waypoints](/kln90b/operation/flight-plans/#center-waypoints) has the rule, and you compute again. Before you compute again for a plan that holds center waypoints, delete them from the plan: a second computation can create a center waypoint beside one you inserted ([Center waypoints](/kln90b/operation/flight-plans/#center-waypoints)).
+The page keeps this text, and <kbd>ENT</kbd> does nothing more, until you leave the FPL page on the left side. When the computed waypoints become void, and before you compute again for a plan that already holds center waypoints, see [Center waypoints](/kln90b/operation/flight-plans/#center-waypoints).
 
 ### `DISPLAY DESIRED FPL ON LEFT PAGE`
 

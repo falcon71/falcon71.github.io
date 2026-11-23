@@ -3,7 +3,7 @@
 </Field>
 
 <Field id="ident" title="Active waypoint">
-	The identifier of the active waypoint, blank when there is none. A waypoint of an approach carries its suffix after the identifier: `-i` for the <Term t="IAF" />, `-f` for the <Term t="FAF" />, `-m` for the <Term t="MAP" /> and `-h` for the <Term t="MAHP" />. The identifier flashes during [waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting) before a turn and is steady from the beginning of [turn anticipation](/kln90b/operation/sequencing/#turn-anticipation).
+	The identifier of the active waypoint, blank when there is none. A waypoint of an approach carries its suffix after the identifier ([The approach in FPL 0](/kln90b/operation/approaches/#the-approach-in-fpl-0)). The identifier flashes during [waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting) before a turn and is steady from the beginning of [turn anticipation](/kln90b/operation/sequencing/#turn-anticipation).
 </Field>
 
 <Field id="mode" title="Mode annunciation">
@@ -20,7 +20,7 @@
 
 <Field id="dtk" title="Field 2: desired track">
 	<p>Field 2 of the left side of Super NAV 5, here showing the <Term t="DTK">desired track</Term> as a magnetic course in whole degrees, and `---°` while the unit does not know it. In OBS mode `OBS` takes the place of `DTK`, and the number is the selected course; with a colon after `OBS` you set the course on the unit.</p>
-	<p>The number flashes while an external course indicator that the unit reads is more than 10° off it ([The selected course](/kln90b/operation/modes-of-operation/#the-selected-course)). With the left cursor on the field, the inner knob changes it to `BRG` or `RAD`; while the active leg is a DME arc, the field shows `DTK` whatever you chose ([The left side of Super NAV 5](/kln90b/pages/nav/#the-left-side-of-super-nav-5)).</p>
+	<p>The number flashes while an external indicator that the unit reads is more than 10° off it ([The course messages](/kln90b/operation/modes-of-operation/#the-course-messages)). With the left cursor on the field, the inner knob changes it to `BRG` or `RAD`; while the active leg is a DME arc, the field shows `DTK` whatever you chose ([The left side of Super NAV 5](/kln90b/pages/nav/#the-left-side-of-super-nav-5)).</p>
 </Field>
 
 <Field id="track" title="Field 3: track">
@@ -32,7 +32,7 @@
 </Field>
 
 <Field id="window" title="Window">
-	The window of Super NAV 5, shown while the right inner knob is pulled out: a waypoint of FPL 0 in inverse video, followed by its suffix (`-i`, `-f`, `-m` or `-h`) where it is an approach waypoint. The window starts on the active waypoint, and the right inner knob steps through FPL 0, forward to the last waypoint and back to the first without wrapping. While FPL 0 is empty the window is a bar of six empty cells in inverse video. The Direct To page offers the waypoint of the window ([The default waypoint](/kln90b/operation/direct-to/#the-default-waypoint)).
+	The window of Super NAV 5, shown while the right inner knob is pulled out: a waypoint of FPL 0 in inverse video, followed by its suffix ([The approach in FPL 0](/kln90b/operation/approaches/#the-approach-in-fpl-0)) where it is an approach waypoint. The window starts on the active waypoint, and the right inner knob steps through FPL 0, forward to the last waypoint and back to the first without wrapping. While FPL 0 is empty the window is a bar of six empty cells in inverse video. The Direct To page offers the waypoint of the window ([The default waypoint](/kln90b/operation/direct-to/#the-default-waypoint)).
 </Field>
 
 <Field id="active-leg" title="Active leg">

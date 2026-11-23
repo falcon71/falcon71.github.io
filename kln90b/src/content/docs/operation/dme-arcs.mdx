@@ -29,7 +29,7 @@ In FPL 0 the arc of GROMO4 reads like this after the load, with the leg from the
 
 ## The DME arc waypoint
 
-The unit computes the DME arc waypoint when the waypoints of the procedure appear on APT 7 or APT 8, the last step of the selection ([Loading a SID](/kln90b/operation/departures-arrivals/#loading-a-sid), [Loading a STAR](/kln90b/operation/departures-arrivals/#loading-a-star), [Non-precision approaches](/kln90b/operation/approaches/)). It uses the position of the aircraft at that moment:
+The unit computes the DME arc waypoint when the waypoints of the procedure appear on APT 7 or APT 8, the last step of the selection ([Loading a SID](/kln90b/operation/departures-arrivals/#loading-a-sid), [Loading a STAR](/kln90b/operation/departures-arrivals/#loading-a-star), [Loading an approach](/kln90b/operation/approaches/#loading-an-approach)). It uses the position of the aircraft at that moment:
 
 - **The aircraft's radial is within the arc,** between the first and the last radial of the arc. The DME arc waypoint is the point of the arc on the aircraft's radial, the point of the arc nearest the aircraft. How far the aircraft is from the VOR does not matter.
 - **The aircraft's radial is outside the arc.** The DME arc waypoint is the beginning of the arc, on its first radial at its radius.
@@ -106,7 +106,7 @@ To move the DME arc waypoint of an approach in FPL 0:
 
 ### `NO INTRCEPT`
 
-`NO INTRCEPT` means that the unit found no point to move the DME arc waypoint to. Either your actual track, extended ahead, does not meet the arc between its first and last radial, or the unit has no actual track because the groundspeed is below 2 kt. The DME arc waypoint stays where it was. Turn to a heading that crosses the arc within its radials, let `TK` settle, and select `MOVE ?` again.
+`NO INTRCEPT` means that the unit found no point to move the DME arc waypoint to. Either your actual track, extended ahead, does not meet the arc between its first and last radial, or the unit shows no actual track. The DME arc waypoint stays where it was. Turn to a heading that crosses the arc within its radials, let `TK` settle, and select `MOVE ?` again.
 
 <KlnScreen screen="dme-arcs/no-intrcept" />
 
@@ -114,15 +114,15 @@ The message replaces the middle part of the status line for a few seconds ([`NO 
 
 ## Flying the arc
 
+<Callout kind="availability">
+An autopilot that follows the unit gets the course of the arc from it, not the bearing to the end of the arc. Whether the autopilot flies the arc depends on how the unit is installed in the aircraft.
+</Callout>
+
 You fly to the DME arc waypoint on a straight leg like any other. The unit alerts you before it and anticipates the turn onto the arc, as at any waypoint with a turn, and then makes the arc the active leg ([Sequencing and turn anticipation](/kln90b/operation/sequencing/)).
 
 On the arc the unit guides you along the curve. The D-bar and the <Term t="XTK">cross-track error</Term> show how far you are from the arc. The <Term t="DTK" /> is the course of the arc at the point abeam the aircraft, so it turns steadily as you fly around the VOR. Keep the D-bar centered as on any leg. At the end of the arc the unit sequences to the next leg with turn anticipation, worked out from the course of the arc there.
 
 Because the desired track turns all the time, keep turning the course on the external indicator to it as you fly around the arc, unless the unit turns the indicator itself. Where the unit reads the indicator, `ADJ NAV IND CRS TO nnn°` comes back again and again on the arc as the desired track moves away from the indicator ([`ADJ NAV IND CRS TO nnn°`](/kln90b/operation/modes-of-operation/#adj-nav-ind-crs-to-nnn)).
-
-<Callout kind="availability">
-An autopilot that follows the unit gets the course of the arc from it, not the bearing to the end of the arc. Whether the autopilot flies the arc depends on how the unit is installed in the aircraft.
-</Callout>
 
 ### Distance, time and bearing on the arc
 
@@ -171,7 +171,7 @@ The unit adds the DME arc waypoint to the user database as soon as it computes i
 - **The user database is full:** the unit does not add the waypoint and shows no message. The arc works all the same, and OTH 3 does not list the waypoint. {/* kln90b#512: describes the current behavior; the fix stores a moved waypoint, and a full database raises its message */}
 - **A moved waypoint** is not added to the user database at all, and OTH 3 does not list it. The waypoint it replaced stays on OTH 3 until the unit deletes it as unused. {/* kln90b#512: describes the current behavior; the fix stores a moved waypoint, and a full database raises its message */}
 
-The waypoints of an arc in an approach cannot be edited in FPL 0 ([Non-precision approaches](/kln90b/operation/approaches/)). Those of a SID or a STAR can, like the other waypoints of the procedure ([Editing the waypoints of a procedure](/kln90b/operation/departures-arrivals/#editing-the-waypoints-of-a-procedure)), but the arc does not follow the edit:
+The waypoints of an arc in an approach cannot be edited in FPL 0 ([`INVALID ADD` and `INVALID DEL`](/kln90b/operation/approaches/#invalid-add-and-invalid-del)). Those of a SID or a STAR can, like the other waypoints of the procedure ([Editing the waypoints of a procedure](/kln90b/operation/departures-arrivals/#editing-the-waypoints-of-a-procedure)), but the arc does not follow the edit:
 
 - **Deleting the DME arc waypoint** deletes the arc. The leg from the waypoint before it to the end of the arc is a straight leg.
 - **Deleting the waypoint at the end of the arc** leaves the arc in place: the unit flies the leg from the DME arc waypoint to the next waypoint around the reference VOR, at the radius of the arc, wherever that waypoint lies. {/* kln90b#511: describes the current behavior; the fix makes the leg after the edit a straight leg */}

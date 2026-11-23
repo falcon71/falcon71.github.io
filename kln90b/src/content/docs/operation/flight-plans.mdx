@@ -9,6 +9,8 @@ import KlnScreen from '../../../components/KlnScreen.astro';
 import DirectToKey from '../../../components/DirectToKey.astro';
 import Callout from '../../../components/Callout.astro';
 import Term from '../../../components/Term.astro';
+import RefWaypoint from '../../../components/drawings/RefWaypoint.astro';
+import CtrWaypoint from '../../../components/drawings/CtrWaypoint.astro';
 
 The KLN 90B holds the active flight plan, FPL 0, and 25 numbered flight plans, FPL 1 to FPL 25. You build a plan on its FPL page by entering the identifiers of its waypoints, you activate a numbered flight plan with the question `USE?`, and the unit flies FPL 0 leg after leg. A route that you send from the simulator's <Term t="EFB" /> replaces FPL 0.
 
@@ -72,7 +74,7 @@ To insert a waypoint:
 
 If you typed in [keyboard mode](/kln90b/unit/keyboard-mode/) on a waypoint, the unit opens the row in front of it and takes the key as the first character.
 
-An approach cannot be edited waypoint by waypoint: the knob, <kbd>ENT</kbd> or a typed key on one of its waypoints answers `INVALID ADD` ([Procedures in the flight plan](#procedures-in-the-flight-plan)).
+An approach cannot be edited waypoint by waypoint: the knob, <kbd>ENT</kbd> or a typed key on one of its waypoints answers `INVALID ADD` ([`INVALID ADD` and `INVALID DEL`](/kln90b/operation/approaches/#invalid-add-and-invalid-del)).
 
 ### Taking the waypoint of the right page into a flight plan
 
@@ -89,7 +91,9 @@ To take the waypoint of the right page into a flight plan:
 4. Press <kbd>ENT</kbd> again to approve it.
 5. Press the left <kbd>CRSR</kbd> to turn the cursor off.
 
-On the blank waypoint position at the end, the first <kbd>ENT</kbd> takes the waypoint directly. **Note:** After the approval the cursor stands on the waypoint that the new one went in front of, so a further <kbd>ENT</kbd> inserts the same waypoint again. Turn the cursor off, or move it on with the outer knob. When the right page is no waypoint page, <kbd>ENT</kbd> on a waypoint opens an empty row in front of it, and <kbd>CLR</kbd> closes the row again. {/* kln90b#504: describes the current behavior; the fix makes ENT do nothing when the right page is no waypoint page */}
+On the blank waypoint position at the end, the first <kbd>ENT</kbd> takes the waypoint directly.
+
+**Note:** After the approval the cursor stands on the waypoint that the new one went in front of, so a further <kbd>ENT</kbd> inserts the same waypoint again. Turn the cursor off, or move it on with the outer knob. When the right page is no waypoint page, <kbd>ENT</kbd> on a waypoint opens an empty row in front of it, and <kbd>CLR</kbd> closes the row again. {/* kln90b#504: describes the current behavior; the fix makes ENT do nothing when the right page is no waypoint page */}
 
 ## Deleting a waypoint
 
@@ -107,7 +111,7 @@ To delete a waypoint:
 
 A flight plan has no function to replace a waypoint: you insert the new waypoint and delete the old one. <kbd>CLR</kbd> on the blank waypoint position does nothing, and on an identifier that you typed and did not approve it takes the entry back. A numbered flight plan and FPL 0 are independent: deleting a waypoint of FPL 0 leaves the numbered flight plan that you copied it from as it is.
 
-You can delete a single waypoint of a SID or a STAR, but not one of an approach: <kbd>CLR</kbd> on it answers `INVALID DEL` ([Procedures in the flight plan](#procedures-in-the-flight-plan)).
+You can delete a single waypoint of a SID or a STAR, but not one of an approach: <kbd>CLR</kbd> on it answers `INVALID DEL` ([`INVALID ADD` and `INVALID DEL`](/kln90b/operation/approaches/#invalid-add-and-invalid-del)).
 
 ## A full flight plan
 
@@ -115,7 +119,7 @@ A plan is full when it holds as many waypoints as [the flight plans of the unit]
 
 ### `FPL FULL`
 
-In a full numbered flight plan you can open a row and enter the identifier as always. At the approval the unit refuses the waypoint with the status line message `FPL FULL`, and the plan stays as it was. The cursor returns to the waypoint that the new one was to go in front of.
+In a full numbered flight plan you can open a row and enter the identifier as always. At the approval the unit refuses the waypoint with the status line message `FPL FULL`, and the plan stays as it was. The cursor returns to the waypoint that the new one was to go in front of. [Status line messages](/kln90b/lists/status-line-messages/#fpl-full) lists the message.
 
 <KlnScreen screen="flight-plans/fpl-full" />
 
@@ -249,7 +253,7 @@ A SID, a STAR or an approach that you load on APT 7 or APT 8 goes into FPL 0 beh
 
 A reference waypoint is a waypoint that the unit makes on the plan, where the plan runs closest to a waypoint you enter. You enter a VOR, for example, and get the waypoint on your route that lies abeam it, to report a position or to plan a diversion. The REF page does it; the page reference has its fields.
 
-The REF page needs an FPL page on the left side, FPL 0 or a numbered flight plan. It shows `DISPLAY DESIRED FPL ON LEFT PAGE` only when no FPL page is on the left side. With fewer than two waypoints in the plan, the approval of the waypoint you enter answers `INVALID REF`.
+The REF page needs an FPL page on the left side, FPL 0 or a numbered flight plan, and shows `DISPLAY DESIRED FPL ON LEFT PAGE` without one ([`DISPLAY DESIRED FPL ON LEFT PAGE`](/kln90b/pages/ref/#display-desired-fpl-on-left-page)). Where no waypoint can be made, the approval of the waypoint you enter answers `INVALID REF` ([`INVALID REF`](/kln90b/pages/ref/#invalid-ref)).
 
 To create a reference waypoint:
 
@@ -265,15 +269,19 @@ To create a reference waypoint:
 
 If you do not want the reference waypoint, press <kbd>CLR</kbd> while it waits.
 
-The reference waypoint is the point of the plan closest to the waypoint you entered, found with a line at right angles to a leg. Every leg of the plan counts, including a leg of FPL 0 that you have already flown. The line must meet the leg itself and not its extension, the leg with the shortest line wins, and there is no limit to the distance. Legs between two approach waypoints are skipped. `INVALID REF` shows also when no leg has a line at right angles that meets it, and when all 26 letters of the name are taken. If the reference waypoint lies between the from waypoint and the active waypoint of FPL 0, it becomes the active waypoint, as for any insertion.
+The reference waypoint is the point of the plan closest to the waypoint you entered, found with a line at right angles to a leg. Every leg of the plan counts, including a leg of FPL 0 that you have already flown. The line must meet the leg itself and not its extension, the leg with the shortest line wins, and there is no limit to the distance. Legs between two approach waypoints are skipped.
 
-The unit names the reference waypoint with the first four characters of the identifier of the waypoint you entered and the first free letter from `A`, such as `OLMA`. It is a supplemental user waypoint, which the unit deletes at power-off and power-on when no flight plan uses it ([Waypoints the unit creates by itself](/kln90b/operation/user-waypoints/#waypoints-the-unit-creates-by-itself)). `USR DB FULL` shows when the user database has no room ([`USR DB FULL`](/kln90b/operation/user-waypoints/#usr-db-full)).
+<RefWaypoint caption="The leg KPDX to KSEA and the waypoint you enter, the VOR OLM. The reference waypoint OLMA lies at the foot of the line at right angles from OLM to the leg; the SUP page shows OLM as the reference with the radial and the distance of OLMA from it." />
+
+If the reference waypoint lies between the from waypoint and the active waypoint of FPL 0, it becomes the active waypoint, as for any insertion.
+
+The unit names the reference waypoint with the first four characters of the identifier of the waypoint you entered and the first free letter from `A`, such as `OLMA`. It is a supplemental user waypoint, which the unit deletes at power-off and power-on when no flight plan uses it and it is not the active waypoint ([Waypoints the unit creates by itself](/kln90b/operation/user-waypoints/#waypoints-the-unit-creates-by-itself)). `USR DB FULL` shows when the user database has no room ([`USR DB FULL`](/kln90b/operation/user-waypoints/#usr-db-full)).
 
 ## Center waypoints
 
 Center waypoints mark where the plan crosses the boundary of an area control center (ACC or ARTCC), called a Center from here on, so that you can report them. The CTR pages compute them and insert them into the plan; the page reference has their fields.
 
-CTR 1 works on the plan of the FPL page on the left side and shows `DISPLAY DESIRED FPL ON LEFT PAGE` when there is none. A plan of fewer than two waypoints gives nothing to compute.
+CTR 1 works on the plan of the FPL page on the left side and shows `DISPLAY DESIRED FPL ON LEFT PAGE` when there is none ([`DISPLAY DESIRED FPL ON LEFT PAGE`](/kln90b/pages/ctr/#display-desired-fpl-on-left-page)). A plan of fewer than two waypoints gives nothing to compute.
 
 To insert center waypoints:
 
@@ -286,7 +294,17 @@ To insert center waypoints:
 
    <KlnScreen screen="flight-plans/ctr-complete" />
 
-The unit names a center waypoint with the identifier of the nearest VOR and a free two-digit number, such as `BKE00`. Legs between two approach waypoints are left out. A second computation for a plan that already holds center waypoints does not list the inserted ones, and it can create a center waypoint close to an inserted one, with its two Centers swapped; delete the center waypoints from the plan before you compute again. {/* kln90b#508: describes the current behavior; the fix makes the unit recognize the center waypoints the plan already holds */} When the new waypoints do not fit, the page shows `NOT ENOUGH ROOM IN FPL` and creates nothing ([`NOT ENOUGH ROOM IN FPL`](/kln90b/pages/ctr/#not-enough-room-in-fpl)). `USR DB FULL` is possible here too. The result is void when you edit the plan or leave the FPL page on the left side (another numbered flight plan counts) after the page computed the waypoints and before you insert them, and when you turn the unit off; turning the right page away and back changes nothing. You then compute again. CTR 2 shows each computed waypoint before you insert it. Like the reference waypoints, center waypoints are supplemental user waypoints that the unit deletes at power-off and power-on when no plan uses them ([Waypoints the unit creates by itself](/kln90b/operation/user-waypoints/#waypoints-the-unit-creates-by-itself)).
+The unit names a center waypoint with the identifier of the nearest VOR and a free two-digit number, such as `BKE00`. Legs between two approach waypoints are left out.
+
+<CtrWaypoint caption="The route of the screens above, KPDX to KBKE. The dashed line is the boundary between the two Centers; the unit puts the center waypoint BKE00 where the route crosses it." />
+
+A second computation for a plan that already holds center waypoints does not list the inserted ones, and it can create a center waypoint close to an inserted one, with its two Centers swapped; delete the center waypoints from the plan before you compute again. {/* kln90b#508: describes the current behavior; the fix makes the unit recognize the center waypoints the plan already holds */}
+
+When the new waypoints do not fit, the page shows `NOT ENOUGH ROOM IN FPL` and creates nothing ([`NOT ENOUGH ROOM IN FPL`](/kln90b/pages/ctr/#not-enough-room-in-fpl)). `USR DB FULL` is possible here too.
+
+The result is void when you edit the plan or leave the FPL page on the left side (another numbered flight plan counts) after the page computed the waypoints and before you insert them, and when you turn the unit off; turning the right page away and back changes nothing. You then compute again. CTR 2 shows each computed waypoint before you insert it.
+
+Like the reference waypoints, center waypoints are supplemental user waypoints that the unit deletes at power-off and power-on when no plan uses them and they are not the active waypoint ([Waypoints the unit creates by itself](/kln90b/operation/user-waypoints/#waypoints-the-unit-creates-by-itself)).
 
 ## Loading a route from the EFB
 
@@ -294,7 +312,9 @@ The unit names a center waypoint with the identifier of the nearest VOR and a fr
 The real unit has no EFB. In the simulator, the route you plan in the EFB can go straight into FPL 0.
 </Callout>
 
-You load a route from the EFB when you plan in the EFB and want the KLN 90B to fly it. Send the route with the send to avionics function of the EFB. The route replaces FPL 0 at once, and the numbered flight plans stay as they are. The left page shows FPL 0 with the cursor off, and the unit activates the leg closest to the aircraft. The right page and an active direct-to are not touched. The unit takes the route in any state, even while it is off or while the self test waits for approval; a route with procedures that arrives while it is off loses them at the next power-on ([What the unit keeps while it is off](/kln90b/unit/power-on/#what-the-unit-keeps-while-it-is-off)). An aircraft that offers other GPS units ignores the route while the KLN 90B is not the unit in use.
+You load a route from the EFB when you plan in the EFB and want the KLN 90B to fly it. Send the route with the send to avionics function of the EFB. The route replaces FPL 0 at once, and the numbered flight plans stay as they are. The left page shows FPL 0 with the cursor off, and the unit activates the leg closest to the aircraft. The right page and an active direct-to are not touched.
+
+The unit takes the route in any state, even while it is off or while the self test waits for approval; a route with procedures that arrives while it is off loses them at the next power-on ([What the unit keeps while it is off](/kln90b/unit/power-on/#what-the-unit-keeps-while-it-is-off)). An aircraft that hot-swaps the unit ignores the route while the KLN 90B is not the unit in use.
 
 The route enters FPL 0 in this order: the departure airport, the SID, the en route fixes, the STAR, the approach and the destination airport.
 
@@ -304,7 +324,7 @@ The route enters FPL 0 in this order: the departure airport, the SID, the en rou
 - an airway, as the fixes between the fix before it and the exit fix, in either direction; where the airway or the fix cannot be found, the unit flies direct to the exit fix;
 - a SID, a STAR or an approach exactly where APT 7 or APT 8 would let you load it as the route names it: a transition or runway that the route names, a STAR with its transition, an approach that starts at the named <Term t="IAF" />, and the [DME arc waypoints](/kln90b/operation/dme-arcs/#the-dme-arc-waypoint) that APT 7 or APT 8 creates. An approach in the route loads even in a unit that is not installed for approaches. There, selecting `CHANGE APR?` on the approach header brings up an error, and `DELETE APR?` removes the approach. {/* kln90b#479: describes the current behavior; the fix keeps the approach out of FPL 0 in a unit without approaches */}
 
-**What the unit drops:** a waypoint that the database lacks, which includes a departure or destination airport; a procedure it cannot take as a whole (a SID with several runways when the route names none, an ILS approach, a STAR with an RF leg, a missing transition, an approach with no initial approach fix); and everything after the first leg that exceeds the limits. For each dropped waypoint the MSG page shows `WAYPOINT xxxxx DELETED`, one message per identifier ([the list entry](/kln90b/lists/messages/#waypoint-xxxxx-deleted)). When there are many, one `OTHER WAYPOINTS DELETED` stands for the rest. A procedure that the airport does not have is dropped without a message. A waypoint type identification page is not asked: a fly-over waypoint arrives as an ordinary en route waypoint.
+**What the unit drops:** a waypoint that the database lacks, which includes a departure or destination airport; a procedure it cannot take as a whole (a SID with several runways when the route names none, an ILS approach, a STAR with an <Term t="RF leg" />, a missing transition, an approach with no initial approach fix); and everything after the first leg that exceeds the limits. For each dropped waypoint the MSG page shows `WAYPOINT xxxxx DELETED`, one message per identifier ([the list entry](/kln90b/lists/messages/#waypoint-xxxxx-deleted)). When there are many, one `OTHER WAYPOINTS DELETED` stands for the rest. A procedure that the airport does not have is dropped without a message. A waypoint type identification page is not asked: a fly-over waypoint arrives as an ordinary en route waypoint.
 
 **The limits** are those of FPL 0, and the destination airport counts among the waypoints you enter. A procedure is taken whole or not at all. The unit cuts the route at the first leg or procedure that does not fit and drops everything after it, even a procedure that would fit alone. A route one waypoint over the limit loses its last en route fix, not its destination.
 

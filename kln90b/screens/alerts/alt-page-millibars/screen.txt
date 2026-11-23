@@ -5,22 +5,21 @@ layout split
 status yes
 text
 | ALTITUDE  |VNV INACTV |
-|           |           |
-|BARO:1013MB|IND 07500ft|
-|ALERT: ON ›|SEL:00000ft|
-|WARN:±300ft|     :-00nm|
+|BARO:1013MB|           |
+|ALERT:  OFF|IND 07500ft|
+|           |SEL:00000ft|
+|           |     :-00nm|
 |           |ANGLE: 0.0°|
 | CRSR|enr-leg    |CRSR |
 mask
 |.......................|
-|.......................|
 |.....II................|
+|.......................|
 |................I......|
 |.......................|
 |.......................|
 |.IIII.............IIII.|
 field title 0 1 9
-field baro 2 0 11
-field alert 3 0 11
-field warn 4 0 11
+field baro 1 0 11
+field alert 2 0 11
 field page 6 0 5

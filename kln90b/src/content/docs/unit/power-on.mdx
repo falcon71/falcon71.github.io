@@ -7,6 +7,7 @@ sidebar:
 
 import KlnScreen from '../../../components/KlnScreen.astro';
 import Callout from '../../../components/Callout.astro';
+import Term from '../../../components/Term.astro';
 
 Every power-on with the knob runs the same sequence. The Turn-On page is shown first, you approve the self test on the Self Test page and you acknowledge the Database page; depending on the installation, a VFR-only warning page and an OBS warning page come in between. The unit finds its position by itself, and you correct the position, the date or the time only when the search takes too long.
 
@@ -55,17 +56,17 @@ To drop a line you have opened, turn the cursor off before you press <kbd>ENT</k
 
 ## The Self Test page
 
-The Self Test page lets you check the instruments of the aircraft against its test values, and the clock and the altitude against what you know; you correct the clock, the time zone and the baro setting. It stays until you approve it.
+The Self Test page lets you check the instruments of the aircraft against its test values, and the clock and the altitude against what you know; you correct the clock, the system time zone and the baro setting. It stays until you approve it.
 
 <KlnScreen screen="power-on/self-test" />
 
-The left page holds fixed test values: a distance of 34.5 NM, a half-scale deflection of the D-bar to the right with the TO/FROM indicator on FROM, an `OBS OUT` course of 315° and a bearing of 130° for the RMI, the radio magnetic indicator of the aircraft. The unit sends them to the aircraft that it drives, so that the CDI or HSI and the RMI show the same values and the autopilot receives the bearing. `ANNUN` `ON` lights the remote mounted annunciators that the aircraft has. The one live value is `OBS IN`, the course of the OBS setting of the aircraft, which follows when you turn the OBS knob.
+The left page holds fixed test values that the unit sends to the instruments of the aircraft that it drives, so that you can compare them with what the instruments show. `ANNUN` `ON` lights the remote mounted annunciators that the aircraft has. The one live value is `OBS IN`, the course of the OBS setting of the aircraft, which follows when you turn the OBS knob.
 
-On the right page you check the date and the time, in the time zone beside them, the altitude and the baro setting, and correct them where they are wrong. The cursor is on the baro setting when the page appears ([Entering data with the cursor](/kln90b/unit/controls-and-display/#entering-data-with-the-cursor)).
+On the right page you check the date and the time, in the system time zone beside them, the altitude and the baro setting, and correct them where they are wrong. The cursor is on the baro setting when the page appears ([Entering data with the cursor](/kln90b/unit/controls-and-display/#entering-data-with-the-cursor)).
 
 - **The baro setting** takes effect with every change, and the altitude follows ([The baro setting](/kln90b/operation/alerts/#the-baro-setting)). Where the aircraft supplies the setting, the cursor starts on `APPROVE?`.
-- **The date and the time** matter while the unit has no position, with the acquisition on `REAL`: a correction makes the search for satellites start over from it ([Initializing the position and the time](#initializing-the-position-and-the-time)). Once the unit has a position, the satellites set the clock again within a second, so a correction does not last. The Database page that follows compares the date with the end of the database cycle.
-- **The time zone** changes how the unit shows the date and the time everywhere, and the unit keeps it.
+- **The date and the time** matter while the unit is not NAV ready, with the acquisition on `REAL`: a correction makes the search for satellites start over from it ([Initializing the position and the time](#initializing-the-position-and-the-time)). Once the unit is NAV ready, the satellites set the clock again within a second, so a correction does not last. The Database page that follows compares the date with the end of the database cycle.
+- **The system time zone** ([The time zone](/kln90b/operation/trip-planning/#the-time-zone)) changes how the unit shows the date and the time everywhere, and the unit keeps it.
 
 To approve the self test:
 
@@ -80,7 +81,7 @@ With the cursor off, <kbd>ENT</kbd> does not approve. Press the right <kbd>CRSR<
 The five short beeps that confirm the approval sound only in an aircraft that gives the unit a sound output and where the unit is installed with altitude alerting ([Altitude alerting](/kln90b/operation/alerts/#altitude-alerting)).
 </Callout>
 
-After the memory of the unit was lost, the page shows a date in 1988. Enter the right date and time here, before the unit finds its position ([The battery](/kln90b/operation/failures/#the-battery) says why and what else is lost).
+After the memory of the unit was lost, the page shows a date in 1988. Enter the right date and time here, before the unit is NAV ready ([The battery](/kln90b/operation/failures/#the-battery) says why and what else is lost).
 
 ### `TEST FAIL` on the Self Test page
 
@@ -110,7 +111,7 @@ The VFR-only warning page says `FOR VFR USE ONLY`, with the cursor on `ACKNOWLED
 The OBS warning page appears only in an aircraft with a switch for leg and OBS mode, the GPS CRS switch, and only while that switch selects OBS.
 </Callout>
 
-The unit starts every power-on in leg mode (`ENR-LEG`), so only the switch of the aircraft can put it in OBS mode before this page. The OBS warning page tells you so: it has no `ACKNOWLEDGE?` and no cursor, and it leaves by itself, with the Database page next, as soon as the GPS CRS switch of the aircraft selects leg mode. [Modes of operation](/kln90b/operation/modes-of-operation/#obs-mode) explains OBS mode.
+The unit starts every power-on in leg mode (<Term t="ENR-LEG">`ENR-LEG`</Term>), so only the switch of the aircraft can put it in OBS mode before this page. The OBS warning page tells you so: it has no `ACKNOWLEDGE?` and no cursor, and it leaves by itself, with the Database page next, as soon as the GPS CRS switch of the aircraft selects leg mode. [Modes of operation](/kln90b/operation/modes-of-operation/#obs-mode) explains OBS mode.
 
 <KlnScreen screen="power-on/obs-warning-page" />
 
@@ -136,7 +137,7 @@ The unit finds its position from the satellites by itself, and you enter a posit
 
 What the unit remembers is wrong when you load the aircraft at another airport than the one where it was last turned off, when someone entered a wrong date or time, and after a loss of the unit's memory. The clock itself follows the date and time of the simulator while the unit is off.
 
-While the unit searches, STA 1 shows the GPS state `ACQ` or `INIT` and the pages that need a position show dashes. The unit is NAV ready when the state reaches one of the navigation states; [The GPS states](/kln90b/operation/gps-receiver/#the-gps-states) lists them, and [Acquiring satellites](/kln90b/operation/gps-receiver/#acquiring-satellites) gives the times under `REAL`. A correction restarts the search from the corrected values at once, and the unit is usually NAV ready within 150 seconds. It helps only while the unit has no position: once the unit is NAV ready, the satellites supply the position and the time and an entry changes nothing.
+While the unit searches, STA 1 shows the GPS state `ACQ` or `INIT` and the pages that need a position show dashes. The unit is NAV ready when the state reaches one of the navigation states; [The GPS states](/kln90b/operation/gps-receiver/#the-gps-states) lists them, and [Acquiring satellites](/kln90b/operation/gps-receiver/#acquiring-satellites) gives the times under `REAL`. A correction restarts the search from the corrected values at once. It helps only while the unit is not NAV ready: once the unit is NAV ready, the satellites supply the position and the time and an entry changes nothing.
 
 To correct the position on SET 1:
 
@@ -161,13 +162,13 @@ To correct the date and the time on SET 2:
 2. Press the left <kbd>CRSR</kbd>. The cursor is on the date.
 3. Turn the left inner knob one step to open the date, and enter the day, the month and the two digits of the year, with the left outer knob moving from cell to cell.
 4. Press <kbd>ENT</kbd>. The unit applies the date and moves the cursor to the time.
-5. Open the time with the left inner knob and enter hours and minutes in the time zone that the page shows, with the left outer knob moving from cell to cell.
+5. Open the time with the left inner knob and enter hours and minutes in the system time zone that the page shows, with the left outer knob moving from cell to cell.
 6. Press <kbd>ENT</kbd>. The seconds start at 00.
 7. Press the left <kbd>CRSR</kbd> to turn the cursor off.
 
 <KlnScreen screen="pages/set/set-2-date-entry" />
 
-SET 2 takes no date and no time once the unit has a position; the cursor skips them. The Self Test page takes the date and the time too, until you approve it.
+SET 2 takes no date and no time once the unit is NAV ready; the cursor skips them. The Self Test page takes the date and the time too, until you approve it.
 
 A correction that moves the database from current to expired or back posts `RECYCLE POWER TO USE`: turn the unit off and on, so that the Database page judges the new date ([Waypoints and the database](/kln90b/operation/waypoints/#recycle-power-to-use)). The receiver's messages about the first position are in [Messages of the receiver](/kln90b/operation/gps-receiver/#messages-of-the-receiver): `POSITION DIFFERS FROM` `LAST POSITION BY >2NM`, which says that the first position lies more than 2 NM from where the unit was turned off, and `SYSTEM TIME UPDATED` `TO GPS TIME`.
 
@@ -184,13 +185,13 @@ The unit keeps its data while it is off, and it forgets some of it after more th
 
 **Kept for any time off:**
 
-- the four lines of the Turn-On page, the time zone, and the baro setting and its unit;
-- the user waypoints, the flight plans and the remarks, the active waypoint, and the waypoint that each waypoint page showed last;
+- the four lines of the Turn-On page, the system time zone, and the baro setting and its unit;
+- the user waypoints, the flight plans and the airport remarks, the active leg of FPL 0, and the waypoint that each waypoint page showed last;
 - the last position, the clock and the receiver's almanac and ephemeris data;
 - the settings of the pages: the nearest airport criteria, the airspace and altitude alerts, turn anticipation, the flight timer setting, the maps of NAV 5 and Super NAV 5, and the entries on CAL 1 to CAL 5 and the TRI pages, the fuel reserve of OTH 5 and OTH 6, and the acquisition setting on SET 10;
 - the total operational time and the number of power-ons on STA 4.
 
-**Kept for up to five minutes:** the procedures in FPL 0, a direct-to to the active waypoint and the magnetic variation that you entered. After more than five minutes off the unit drops them. A restart of the simulator drops them too.
+**Kept for up to five minutes:** the procedures in FPL 0, the direct-to and the magnetic variation that you entered. After more than five minutes off the unit drops them. A restart of the simulator drops them too. After a longer time off, where a direct-to or a leg of a procedure was active, the unit makes the leg of FPL 0 closest to the aircraft active once it is NAV ready, and with fewer than two waypoints in FPL 0 nothing is active; the first pages still show the waypoint that was active when you turned the unit off.
 
 **Forgotten at every power-on:**
 

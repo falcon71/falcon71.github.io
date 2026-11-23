@@ -29,7 +29,7 @@ Nothing on this page is needed to operate the unit. What you need in the cockpit
 
 ## The true and the measured position
 
-The simulation knows two positions: where the aircraft really is, which the simulator says, and where the unit believes it is, which the simulated receiver measures. The measured position is the true one plus the error that the satellites in use cause, smoothed by a filter. Everything the unit shows and sends is based on the measured position: distance and bearing to the waypoints, <Term t="DTK" /> and <Term t="XTK" />, the nearest lists, the airspace alerts, the groundspeed and the track, and the course deviation it sends to your CDI or HSI and to the autopilot. The true position only feeds the model.
+The simulation knows two positions: where the aircraft really is, which the simulator says, and where the unit believes it is, which the simulated receiver measures. The measured position is the true one plus the error that the satellites in use cause, smoothed by a filter. Everything the unit shows and sends is based on the measured position: distance and bearing to the waypoints, <Term t="DTK" /> and <Term t="XTK" />, the nearest lists, the airspace alerts, the groundspeed and the track, and the course deviation it sends to the external indicator and to the autopilot. The true position only feeds the model.
 
 With a good sky the two positions lie about 5 m apart. That is less than the smallest step of any distance the unit shows, so you never notice it, but the course deviation and the autopilot work from the measured position, as they would with a real receiver.
 

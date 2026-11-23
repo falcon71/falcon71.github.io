@@ -18,17 +18,17 @@ The database holds the navigation data of the simulator. It has four waypoint ty
 - **Airports,** on the APT pages, with the runways, frequencies, SIDs, STARs and approaches that APT 1 to APT 8 show.
 - **VORs,** on the VOR page: VOR, VOR/DME and VORTAC stations.
 - **NDBs,** on the NDB page.
-- **Intersections,** on the INT page. The list holds every intersection of the data, including the fixes of terminal procedures.
+- **Intersections,** on the INT page. The list holds every intersection of the data, including the terminal waypoints.
 
 The fifth waypoint type, supplemental, has no part in the database: the SUP page lists user waypoints only. User waypoints of the other types stand in the lists of their own type, mixed in by identifier. [User waypoints](/kln90b/operation/user-waypoints/) explains how you make them. [How do I update the database?](/kln90b/help/faq/#how-do-i-update-the-database) says where to get a current cycle.
 
 The unit reads one database cycle when you load the aircraft. The Database page shows the last day of that cycle at every power-on that runs the whole sequence ([the Database page](/kln90b/unit/power-on/#the-database-page)). The cycle is expired when the date of the unit is past that day. The unit compares the date on its own clock, which you set on SET 2 and the satellites correct, and tests only the end: a date before the cycle began counts as current. An expired database changes nothing about what the unit can do: every waypoint and procedure stays available. The unit says so on the Database page, with `DATA BASE OUT OF DATE` when the cycle runs out while the unit is on, and with `OUTDATED DB` on APT 7 and APT 8.
 
-A flight plan and the active waypoint are stored by identifier. When you install a newer cycle that no longer has a waypoint of them, the unit drops that waypoint at the next power-on and tells you with a message such as `WAYPOINT xxxxx DELETED` ([the list entry](/kln90b/lists/messages/#waypoint-xxxxx-deleted)). A unit that cannot load the navigation data at all fails its self test and posts `DATA BASE CHECKSUM ERR` ([`TEST FAIL` on the Self Test page](/kln90b/unit/power-on/#test-fail-on-the-self-test-page)).
+A flight plan and the [active waypoint](/kln90b/operation/modes-of-operation/#the-active-waypoint) are stored by identifier. When you install a newer cycle that no longer has a waypoint of them, the unit drops that waypoint at the next power-on and tells you with a message such as `WAYPOINT xxxxx DELETED` ([the list entry](/kln90b/lists/messages/#waypoint-xxxxx-deleted)). A unit that cannot load the navigation data at all fails its self test and posts `DATA BASE CHECKSUM ERR` ([`TEST FAIL` on the Self Test page](/kln90b/unit/power-on/#test-fail-on-the-self-test-page)).
 
 ### `NO SUP WPTS` and the other empty lists
 
-A waypoint page whose list holds no waypoint shows `0` in place of the identifier and raises a message in the status line each time you select it: `NO SUP WPTS` on the SUP page, and `NO APT WPTS`, `NO VOR WPTS`, `NO NDB WPTS` or `NO INT WPTS` on the pages of the other types. `NO SUP WPTS` is the one you meet: a unit without a user waypoint says it whenever you select the SUP page. The other four lists are empty only when the navigation data holds no waypoint of that type.
+A waypoint page whose list holds no waypoint shows `0` in place of the identifier and raises a message in the status line each time you select it: `NO SUP WPTS` on the SUP page, and `NO APT WPTS`, `NO VOR WPTS`, `NO NDB WPTS` or `NO INT WPTS` on the pages of the other types. `NO SUP WPTS` is the one you meet: a unit without a user waypoint says it whenever you select the SUP page. The other four lists are empty only when the navigation data holds no waypoint of that type. [Status line messages](/kln90b/lists/status-line-messages/#no-sup-wpts) lists the messages.
 
 <KlnScreen screen="waypoint/no-sup-wpts" />
 
@@ -42,7 +42,7 @@ DATA BASE OUT OF DATE
  CONFIRMED BEFORE USE
 ```
 
-The database has just turned from current to expired while the unit is on. That happens when you enter a date or a time on SET 2 that lies past the end of the cycle, when the satellites correct the date past it, and when the cycle ends during a flight. It appears once for each change to expired. At a power-on with a date that is already past the end the unit posts nothing, and the Database page says `DATA BASE EXPIRED`.
+The database has just turned from current to expired while the unit is on. That happens when you enter a date or a time on SET 2 that lies past the end of the cycle, when the satellites correct the date past it, and when the cycle ends during a flight. It appears once for each change to expired. At a power-on with a date that is already past the end the unit posts nothing, and the Database page says `DATA BASE EXPIRED`. [Message page messages](/kln90b/lists/messages/#data-base-out-of-date) lists the message.
 
 The unit keeps working with the data it has. To remove the cause, install a current cycle ([How do I update the database?](/kln90b/help/faq/#how-do-i-update-the-database)).
 
@@ -53,11 +53,11 @@ RECYCLE POWER TO USE
  CORRECT DATA BASE DATA
 ```
 
-A date or a time that you entered on SET 2 has changed whether the unit counts the database as current, in either direction. It appears once. Turn the unit off and on again, so that the Database page judges the new date. Either way the unit goes on with the same cycle of data: a power-on loads no other one.
+A date or a time that you entered on SET 2 has changed whether the unit counts the database as current, in either direction. It appears once. Turn the unit off and on again, so that the Database page judges the new date. Either way the unit goes on with the same cycle of data: a power-on loads no other one. [Message page messages](/kln90b/lists/messages/#recycle-power-to-use) lists the message.
 
 ### `OUTDATED DB`
 
-`OUTDATED DB` appears in the status line each time you turn the cursor on, on APT 7 or APT 8 while the database is expired. It reminds you that the procedures come from an expired cycle, and you can still select and load them.
+`OUTDATED DB` appears in the status line each time you turn the cursor on, on APT 7 or APT 8 while the database is expired. It reminds you that the procedures come from an expired cycle, and you can still select and load them. [Status line messages](/kln90b/lists/status-line-messages/#outdated-db) lists the message.
 
 ## Entering an identifier
 
@@ -92,7 +92,7 @@ To enter an identifier in a field of a left page:
 
 ### `NO SUCH WPT`
 
-`NO SUCH WPT` replaces the middle of the status line ([The status line](/kln90b/operation/messages/#status-line-messages)) when you press <kbd>ENT</kbd> on an identifier that no waypoint has, in a field that cannot offer to create a waypoint, such as the one on the REF page. The entry stays open: correct the identifier and press <kbd>ENT</kbd> again, or press <kbd>CLR</kbd>.
+`NO SUCH WPT` replaces the middle of the status line when you press <kbd>ENT</kbd> on an identifier that no waypoint has, in a field that cannot offer to create a waypoint, such as the one on the REF page. The entry stays open: correct the identifier and press <kbd>ENT</kbd> again, or press <kbd>CLR</kbd>. [Status line messages](/kln90b/lists/status-line-messages/#no-such-wpt) lists the message.
 
 <KlnScreen screen="waypoint/no-such-wpt" />
 
@@ -135,7 +135,7 @@ To leave without choosing, turn the cursor off and turn a left knob: the page cl
 
 ### `DUP IDENT`
 
-`DUP IDENT` appears in the status line when the identifier of a waypoint page matches two or more waypoints of the page's waypoint type. A user waypoint cannot take the identifier of a waypoint of its own type, so this needs two waypoints from different regions of the data. The page shows the first of them. Scan to reach the others: each one is an entry of the list.
+`DUP IDENT` appears in the status line when the identifier of a waypoint page matches two or more waypoints of the page's waypoint type. A user waypoint cannot take the identifier of a waypoint of its own type, so this needs two waypoints from different regions of the data. The page shows the first of them. Scan to reach the others: each one is an entry of the list. [Status line messages](/kln90b/lists/status-line-messages/#dup-ident) lists the message.
 
 ## Approving the waypoint page
 
@@ -179,7 +179,7 @@ The Active Waypoint pages, the ACT pages, show the pages of the active waypoint:
 
 ## Changing the data of a database waypoint
 
-You cannot change a waypoint of the database. Its name, position, frequency and magnetic variation are read-only. Two things act on such a waypoint without changing it: the REF field of the INT and SUP pages takes any waypoint and then shows the radial and distance from it, and APT 5 keeps your own remarks for any airport. To work with other data, create a user waypoint, which you can change ([Editing a user waypoint](/kln90b/operation/user-waypoints/#editing-a-user-waypoint)).
+You cannot change a waypoint of the database. Its name, position, frequency and magnetic variation are read-only. Two things act on such a waypoint without changing it: the REF field of the INT and SUP pages takes any waypoint and then shows the radial and distance from it, and APT 5 keeps your airport remarks for any airport. To work with other data, create a user waypoint, which you can change ([Editing a user waypoint](/kln90b/operation/user-waypoints/#editing-a-user-waypoint)).
 
 ## Where to go next
 

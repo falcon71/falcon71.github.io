@@ -30,7 +30,7 @@ The list holds up to eight satellites in the order of their numbers, four on a p
 
 ### The second page of the list
 
-The list has a second page as soon as it holds a fifth satellite, and the status line then shows `STA+1` (several pages with one name, see [Controls and display](/kln90b/unit/controls-and-display/#selecting-a-page)). The second page repeats the column headings and shows the fifth to the eighth satellite.
+The list has a second page as soon as it holds a fifth satellite, and the status line then shows `STA+1` (several pages with one name, see [Controls and display](/kln90b/unit/controls-and-display/#pages-with-a-plus-sign)). The second page repeats the column headings and shows the fifth to the eighth satellite.
 
 <KlnScreen screen="pages/sta/sta-1-nav-2" />
 
@@ -84,21 +84,21 @@ STA 5 predicts whether RAIM will be available at a destination at a time you cho
 
 <KlnScreen screen="pages/sta/sta-5-result" />
 
-The prediction is for the destination and the time at the top of the page, which the page fills in for you when it can. The destination is the last waypoint of the active flight plan, counted from the active leg; when FPL 0 holds an approach, that is the missed approach point. With a direct-to or in OBS mode it is the active waypoint, and the field is blank when nothing is active. The ETA is the present time plus the time en route to the destination, which exists only while the groundspeed is above 2 kt: on the ground the ETA is blank, and you enter it yourself. The page fills in the destination and the ETA once, when you select it. A time that has already passed today counts as tomorrow.
+The prediction is for the destination and the time at the top of the page, which the page fills in for you when it can. The destination is the last waypoint of the active flight plan, counted from the active leg; when FPL 0 holds an approach, that is the missed approach point while it lies ahead. With a direct-to or in OBS mode it is the active waypoint, and the field is blank when nothing is active. The ETA is the present time plus the estimated time en route to the destination, which exists only while the aircraft moves ([Dashes and blank rows](/kln90b/pages/dt/#dashes-and-blank-rows)): on the ground the ETA is blank, and you enter it yourself. The page fills in the destination and the ETA once, when you select it. A time that has already passed today counts as tomorrow.
 
 {/* kln90b#473: describes the current behavior; the fix makes the unit keep the default ETA up to date while the page is shown */}
 
-You can change the destination, the ETA and the time zone with the left cursor. The page does not keep your entries: when you leave it and select it again, it starts anew with the defaults.
+You can change the destination, the ETA and the system time zone with the left cursor; a change of the zone here changes it on every page ([The time zone](/kln90b/operation/trip-planning/#the-time-zone)). The page does not keep your entries: when you leave it and select it again, it starts anew with the defaults.
 
 The bar graph shows seven predictions, one for the ETA and one for each of six times around it at intervals of 5 minutes; the scale under the bars gives the minutes before and after the ETA. A bar above the line means that RAIM is predicted to be available at the destination, a bar below the line that it is predicted not to be. The prediction works without a position, so you can make it on the ground before you start.
 
 ### Calculating
 
-Selecting the page and every new destination or ETA start a calculation, which takes 10 seconds. Until it is done, the line of the bar graph reads `COMPUTING`:
+Selecting the page and every new destination or ETA start a calculation, which takes a few seconds. Until it is done, the line of the bar graph reads `COMPUTING`:
 
 <KlnScreen screen="pages/sta/sta-5-computing" />
 
-A new time zone changes only how the ETA is shown and starts no calculation.
+A new system time zone changes only how the ETA is shown and starts no calculation.
 
 ### Without a destination or an ETA
 
@@ -108,7 +108,7 @@ While the page has no destination or no ETA, it calculates nothing, and the line
 
 ### The ETA in another time zone
 
-Enter the ETA with the time zone set to `UTC`. With another time zone the unit uses the hours and minutes you entered as if they were `UTC`, so the prediction is for the wrong time, while the ETA on the page shows what you entered.
+Enter the ETA with the system time zone set to `UTC`. With another system time zone the unit uses the hours and minutes you entered as if they were `UTC`, so the prediction is for the wrong time, while the ETA on the page shows what you entered.
 
 {/* kln90b#472: describes the current behavior; the fix makes the unit predict for the ETA in the time zone shown */}
 

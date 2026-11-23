@@ -16,7 +16,7 @@ The CAL pages are left pages. Except for the waypoint and the date of CAL 7, the
 
 The pages take almost nothing from the aircraft. You enter the altitude, the altimeter setting, the temperatures and the speeds yourself, even in an installation with an air data system. Only CAL 3 reads the aircraft: the groundspeed and the track from the GPS, and the heading where the unit has a heading input. CAL 6 and CAL 7 use the clock of the unit, and CAL 7 starts from the active flight plan.
 
-The unit keeps the entries of CAL 1 to CAL 5 while it is off. CAL 6 and CAL 7 forget theirs at every power-on and start again from the time and the date of the unit and from the system time zone, the zone that SET 2 sets.
+The unit keeps the entries of CAL 1 to CAL 5 while it is off. CAL 6 and CAL 7 forget theirs at every power-on and start again from the time and the date of the unit.
 
 Some entries are shared:
 
@@ -48,14 +48,14 @@ CAL 2 works out the true airspeed from the calibrated airspeed, the indicated al
 
 <KlnScreen screen="pages/cal/cal-2" />
 
-A unit that was never given an altimeter setting shows a true airspeed of `0` until you enter one. The true airspeed is rounded to whole knots.
+The true airspeed is rounded to whole knots.
 
 **Note:** CAL 2 hands its true airspeed to CAL 3 every time you show it, also when you change nothing. Turning the left inner knob from CAL 1 to CAL 3 passes CAL 2, so it replaces a true airspeed that you typed on CAL 3. Arriving at CAL 3 from CAL 4 does not pass CAL 2.
 
 ## CAL 3: wind
 
 <Callout kind="availability">
-The unit takes the heading from the aircraft only if it is installed with a heading input. Not every aircraft has one. With a heading input, the heading line of CAL 3 is blank; without one, you enter the heading yourself.
+The unit takes the heading from the aircraft only if it is installed with a heading input. Not every aircraft has one. Without one, you enter the heading yourself.
 </Callout>
 
 CAL 3 works out the wind from your true airspeed, your heading and your movement over the ground. It shows the head or tail component of the wind, the direction the wind blows from and its speed. You use it in flight, to find out what the wind does to your groundspeed.
@@ -68,7 +68,7 @@ With a heading input, the heading line is blank and the unit uses the heading of
 
 <KlnScreen screen="pages/cal/cal-3-heading" />
 
-The page does not check that the GPS has a position. Without a fix, it calculates with the last groundspeed and track, which are 0 and 000 after power-on; on the ground, the groundspeed is 0. In both cases the wind it shows is as strong as the true airspeed and blows from your heading. Read the wind only in flight, with the unit NAV ready. {/* kln90b#529: describes the current behavior; the fix shows dashes for the wind values while the unit is not NAV ready */}
+The page does not check that the unit is NAV ready. Without a fix, it calculates with the last groundspeed and track, which are 0 and 000 after power-on; on the ground, the groundspeed is 0. In both cases the wind it shows is as strong as the true airspeed and blows from your heading. Read the wind only in flight, with the unit NAV ready. {/* kln90b#529: describes the current behavior; the fix shows dashes for the wind values while the unit is not NAV ready */}
 
 [Finding the wind in flight](/kln90b/operation/trip-planning/#finding-the-wind-in-flight) uses CAL 2 and CAL 3 together.
 
@@ -100,7 +100,7 @@ CAL 6 shows the same moment in two time zones. You use it to find the time somew
 CAL 6 is no clock. It takes the time of the unit the first time you show it after power-on and keeps that time, however long you stay on other pages, until you turn the unit off or enter a time. Enter the present time, which you can read on SET 2, before you convert.
 </Callout>
 
-The upper zone starts as the system time zone, the lower zone as `UTC`. Entering a time in either zone changes the other time at once. Choosing another zone keeps the moment and changes the time of that zone, so the time of the zone you changed moves, and the other stays. The pair shows no date: a conversion across midnight shows only the time. The unit keeps the zones of CAL 6 until the next power-on and does not write them back to the system time zone.
+The upper zone starts as the system time zone, the lower zone as `UTC`. Entering a time in either zone changes the other time at once. Choosing another zone keeps the moment and changes the time of that zone, so the time of the zone you changed moves, and the other stays. The pair shows no date: a conversion across midnight shows only the time.
 
 The time you enter on CAL 6 does not set the clock of the unit; SET 2 does ([SET 2: date, time and time zone](/kln90b/pages/set/#set-2-date-time-and-time-zone)).
 
@@ -110,7 +110,7 @@ CAL 7 gives the times of sunrise and sunset at a waypoint on a date. You use it 
 
 <KlnScreen screen="pages/cal/cal-7" />
 
-The first time you show CAL 7 after power-on, it starts with the destination waypoint of the active flight plan, or with the waypoint of a [direct-to](/kln90b/operation/direct-to/) outside the flight plan, with today's date in the time zone that the page shows, and with the system time zone. Where FPL 0 ends in an approach, the destination is its missed approach point, not the airport. Without a flight plan or a direct-to, the waypoint is blank, and `RISE` and `SET` show `--:--`.
+The first time you show CAL 7 after power-on, it starts with the destination waypoint of the active flight plan, or with the waypoint of a [direct-to](/kln90b/operation/direct-to/) outside the flight plan, with today's date in the time zone that the page shows, and with the system time zone. Where FPL 0 holds an approach, the destination is its missed approach point while that lies ahead, not the airport. Without a flight plan or a direct-to, the waypoint is blank, and `RISE` and `SET` show `--:--`.
 
 <KlnScreen screen="pages/cal/cal-7-blank" />
 
@@ -120,7 +120,7 @@ The times change only after <kbd>ENT</kbd> takes the date.
 
 <KlnScreen screen="pages/cal/cal-7-date-entry" />
 
-The date accepts the years 1988 to 2087. A date that does not exist, such as 30 FEB, raises `INVALID ENT` and leaves the old date. The date does not follow the clock: after midnight it stays on the day you started with, until you enter another.
+The date accepts the years 1988 to 2087. A date that does not exist, such as 30 FEB, raises [`INVALID ENT`](/kln90b/lists/status-line-messages/#invalid-ent) and leaves the old date. The date does not follow the clock: after midnight it stays on the day you started with, until you enter another.
 
 Where the sun does not rise or does not set on the date, in the far north in summer or in winter, both lines show `--:--`; the page does not tell the two cases apart, nor from a blank waypoint.
 

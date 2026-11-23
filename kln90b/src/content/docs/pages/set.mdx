@@ -9,7 +9,7 @@ import KlnScreen from '../../../components/KlnScreen.astro';
 import Callout from '../../../components/Callout.astro';
 import Term from '../../../components/Term.astro';
 
-The SET pages, the setup pages of the KLN 90B, hold the initial position, the date, the time and the time zone, and the options of functions that other pages explain, such as turn anticipation or the airspace alert. Each section below says what its page sets and links to the page that explains the function. SET 0, at the end, shows the update pages of the database but loads nothing, because the unit takes its database from the simulator.
+The SET pages, the setup pages of the KLN 90B, hold the initial position, the date, the time and the time zone, and the options of functions that other pages explain, such as [turn anticipation](/kln90b/operation/sequencing/#turn-anticipation) or the [airspace alert](/kln90b/operation/alerts/#the-airspace-alert). Each section below says what its page sets and links to the page that explains the function. SET 0, at the end, shows the update pages of the database but loads nothing, because the unit takes its database from the simulator.
 
 ## The SET pages: settings and entries
 
@@ -38,7 +38,7 @@ Once the unit is NAV ready, the satellites supply the date and the time, and the
 
 <KlnScreen screen="pages/set/set-2-date-entry" />
 
-The date and the time are entered in the time zone that the page shows. The time zone is the same on every page that shows a time; D/T 2 and D/T 4 change it too ([The time zone](/kln90b/pages/dt/#the-time-zone)).
+The date and the time are entered in the time zone that the page shows. The time zone is the system time zone, which every page that shows a time shares ([The time zone](/kln90b/operation/trip-planning/#the-time-zone)).
 
 A date or a time that moves the database from current to expired, or back, raises `RECYCLE POWER TO USE` `CORRECT DATA BASE DATA` ([`RECYCLE POWER TO USE`](/kln90b/operation/waypoints/#recycle-power-to-use)). After a loss of the unit's memory the clock starts decades off: enter the right date on SET 2 before the unit is NAV ready, because otherwise the first position sets a date that is decades wrong and keeps it ([The battery](/kln90b/operation/failures/#the-battery)).
 
@@ -50,11 +50,11 @@ SET 2 adds a line, `MAG V`, where you enter a magnetic variation, while the unit
 
 ## SET 3: nearest airport criteria
 
-SET 3 sets the minimum runway length and the runway surface that an airport needs to be in the nearest list. Both settings change at once.
+SET 3 sets the minimum runway length and the runway surface that an airport needs to be in the [nearest list](/kln90b/operation/nearest/). Both settings change at once, and so does the nearest list.
 
 <KlnScreen screen="pages/set/set-3" />
 
-The nearest list follows a change at once. The second screen shows the minimum length after one step.
+With the cursor on, the left inner knob changes the minimum length by one step:
 
 <KlnScreen screen="pages/set/set-3-cursor" />
 
@@ -63,11 +63,11 @@ The nearest list follows a change at once. The second screen shows the minimum l
 ## SET 4: flight timer
 
 {/* kln90b#522: the timer runs at 30 kt or more now; the fix makes it run only above 30 kt */}
-SET 4 sets when the flight timer runs: while the groundspeed is above the threshold of `GS > 30kt`, or for as long as the unit is on (`POWER IS ON`). The change takes effect at once, also while the timer runs.
+SET 4 sets when the [flight timer](/kln90b/operation/trip-planning/#the-flight-timer) runs: with `GS > 30kt`, while the aircraft moves, or for as long as the unit is on (`POWER IS ON`). The change takes effect at once, also while the timer runs.
 
 <KlnScreen screen="pages/set/set-4" />
 
-The second screen shows `POWER IS ON` chosen.
+With the cursor on, the left inner knob chooses between the two conditions; here `POWER IS ON` is chosen:
 
 <KlnScreen screen="pages/set/set-4-cursor" />
 
@@ -76,7 +76,7 @@ The flight timer itself is on D/T 4; [The flight timer](/kln90b/operation/trip-p
 ## SET 5: height above airport alert
 
 <Callout kind="availability">
-The height above airport alert comes with altitude alerting: an installation with one has the other. Its tones also need an audio output of the aircraft. Without altitude alerting, SET 5 shows `FEATURE DISABLED` and nothing on it can be changed.
+The [height above airport alert](/kln90b/operation/alerts/#the-height-above-airport-alert) comes with altitude alerting: an installation with one has the other. Its tones also need an audio output of the aircraft.
 </Callout>
 
 SET 5 turns the height above airport alert on and off and sets its offset height.
@@ -87,7 +87,7 @@ With the alert off, the page has the one setting. Turning it on adds the offset 
 
 <KlnScreen screen="pages/set/set-5-on" />
 
-In an installation without altitude alerting the page shows this instead:
+Without altitude alerting, SET 5 shows `FEATURE DISABLED` and nothing on it can be changed:
 
 <KlnScreen screen="pages/set/set-5-disabled" />
 
@@ -99,7 +99,7 @@ SET 6 turns turn anticipation on and off. The setting changes at once.
 
 <KlnScreen screen="pages/set/set-6" />
 
-The second screen shows the cursor on and `DISABLE` chosen.
+With the cursor on, the left inner knob chooses between `ENABLE` and `DISABLE`; here `DISABLE` is chosen:
 
 <KlnScreen screen="pages/set/set-6-cursor" />
 
@@ -107,11 +107,11 @@ The second screen shows the cursor on and `DISABLE` chosen.
 
 ## SET 7: baro setting units
 
-SET 7 chooses the unit of the altimeter baro setting: inches or millibars. It applies to every page that takes the baro setting, such as the ALT page, the Self Test page, CAL 1 and CAL 2.
+SET 7 chooses the unit of the altimeter baro setting: inches or millibars. It applies to the baro setting on the ALT page and the Self Test page, and to the altimeter setting of CAL 1 and CAL 2.
 
 <KlnScreen screen="pages/set/set-7" />
 
-The second screen shows the cursor on and millibars chosen.
+With the cursor on, the left inner knob chooses between inches and millibars; here millibars are chosen:
 
 <KlnScreen screen="pages/set/set-7-cursor" />
 
@@ -122,8 +122,6 @@ The second screen shows the cursor on and millibars chosen.
 SET 8 turns the airspace alert on and off and sets its vertical buffer. It is on every installation of the unit, with or without altitude alerting.
 
 <KlnScreen screen="pages/set/set-8" />
-
-The cursor visits only the ten thousands, the thousands and the hundreds of the vertical buffer, because it is set in steps of the hundreds.
 
 <KlnScreen screen="pages/set/set-8-cursor" />
 
@@ -136,14 +134,14 @@ With the alert disabled, the buffer is not shown and the cursor cannot go to it.
 ## SET 9: volume of the aural alarm
 
 <Callout kind="availability">
-The aural alarm comes with altitude alerting and needs an audio output of the aircraft. Whether the tones get louder with the volume you set depends on the installation. Without altitude alerting, SET 9 shows `FEATURE DISABLED` and nothing on it can be changed.
+The aural alarm comes with altitude alerting and needs an audio output of the aircraft. Whether the tones get louder with the volume you set depends on the installation.
 </Callout>
 
 SET 9 sets the volume of the aural alarm. The setting changes at once.
 
 <KlnScreen screen="pages/set/set-9" />
 
-In an installation without altitude alerting the page shows this instead:
+Without altitude alerting, SET 9 shows `FEATURE DISABLED` and nothing on it can be changed:
 
 <KlnScreen screen="pages/set/set-9-disabled" />
 
@@ -159,7 +157,7 @@ SET 10 chooses how the receiver acquires the satellites at power-on, `REAL` or `
 
 <KlnScreen screen="pages/set/set-10" />
 
-The unit stores the mode at once. `FAST` chosen while the unit is not NAV ready restarts the search at once; `FAST` chosen while it is NAV ready, and `REAL` at any time, take effect at the next power-on ([Real and fast acquisition](/kln90b/operation/gps-receiver/#real-and-fast-acquisition)).
+When a mode takes effect depends on the mode and on whether the unit is NAV ready ([Real and fast acquisition](/kln90b/operation/gps-receiver/#real-and-fast-acquisition)).
 
 <KlnScreen screen="pages/set/set-10-real" />
 

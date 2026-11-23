@@ -16,7 +16,7 @@ As written, with the anchors:
 4. `APT 2: city, elevation, time zone and approaches`.
 5. `APT 3: runways`.
 6. `APT 4: communication frequencies`.
-7. `APT 5: remarks`.
+7. `APT 5: airport remarks` (`#apt-5-airport-remarks`, renamed in the final pass).
 8. `APT 6: services`.
 9. `APT 7: SID and STAR procedures`, with `#selecting-a-sid-or-a-star`, `#questions-before-the-load`,
    `#where-the-procedure-goes-in-fpl-0`, `#what-the-unit-keeps-of-a-procedure`.

@@ -10,7 +10,7 @@ import Callout from '../../../components/Callout.astro';
 import Term from '../../../components/Term.astro';
 import AirspaceAlert from '../../../components/drawings/AirspaceAlert.astro';
 
-The KLN 90B watches your altitude and the airspace around you. It sounds tones when you approach, reach or leave the selected altitude, and when you are low near the airport you fly to, and it posts the special use airspace alert, a message on the MSG page, when you are about to enter special use airspace or are inside it; the airspace alert needs no installation. You set the altimeter baro setting and the altitude alert on the ALT page, which the <kbd>ALT</kbd> button opens.
+The KLN 90B watches your altitude and the airspace around you. It sounds tones when you approach, reach or leave the selected altitude, and when you are low near the airport you fly to. It also posts the special use airspace alert, a message on the MSG page, when you are about to enter special use airspace or are inside it. You set the altimeter baro setting and the altitude alert on the ALT page, which the <kbd>ALT</kbd> button opens.
 
 ## The ALT page
 
@@ -20,7 +20,7 @@ The <kbd>ALT</kbd> button opens the ALT page on the left side and NAV 4 on the r
 
 The arrow after `ON` on the line of the alert points at the selected altitude on NAV 4, which is the altitude the alert uses; here it is 9,000 ft, with the right cursor on its thousands digit.
 
-The page has three entries: the baro setting, the altitude alert and, while the alert is on, the warn altitude. The left outer knob moves the cursor through them, with three stops in the baro setting, and the left inner knob changes the entry under it; the entries are fields that [the knob changes directly](/kln90b/unit/controls-and-display/#fields-the-knob-changes-directly). The unit keeps all three across a power-off; the selected altitude it forgets at every power-on.
+The page has three entries: the baro setting, the altitude alert and, while the alert is on, the warn altitude. The left outer knob moves the cursor through them, and the left inner knob changes the entry under it; the entries are fields that [the knob changes directly](/kln90b/unit/controls-and-display/#fields-the-knob-changes-directly). The unit keeps all three across a power-off.
 
 <KlnScreen screen="alerts/alt-page-off" />
 
@@ -119,9 +119,9 @@ The special use airspace alert posts a message on the MSG page when the track of
 
 The unit watches Class B and Class C airspace and the alert, danger, MOA, prohibited, restricted, training and warning areas. It does not watch Class D or other controlled airspace.
 
-<AirspaceAlert caption="Above, an area seen from above with the margin of 2 NM around it. The unit looks along your track for the next 10 minutes at your groundspeed: the aircraft on the right meets the area and the one beside it passes within 2 NM, so both raise the alert, and the aircraft on the left passes clear. Below, the same area seen from the side: the vertical buffer of SET 8 widens it above the ceiling and below the floor, and an aircraft over the area within the buffer is inside it for the unit and gets INSIDE SPC USE AIRSPACE, while one outside the buffer gets nothing." />
+<AirspaceAlert caption="Above, an area seen from above with the margin around it. The unit looks ahead along your actual track at your groundspeed: the aircraft on the right meets the area and the one beside it passes within the margin, so both raise the alert, and the aircraft on the left passes clear. Below, the same area seen from the side: the vertical buffer of SET 8 widens it above the ceiling and below the floor, and an aircraft over the area within the buffer is inside it for the unit and gets INSIDE SPC USE AIRSPACE, while one outside the buffer gets nothing." />
 
-The unit looks ahead along a straight line: your present track at your present groundspeed, to where the aircraft would be in 10 minutes. A turn in the flight plan does not count, and nothing alerts while the unit has no position it can navigate with. It checks the areas near you every few seconds, so a message can come a little after the line has met an area.
+The unit looks ahead along a straight line: your actual track at your present groundspeed, as far as that time takes you. A turn in the flight plan does not count, and nothing alerts while the unit has no position it can navigate with. It checks the areas near you every few seconds, so a message can come a little after the line has met an area.
 
 The altitude matters too. An area counts when your indicated altitude lies between its floor minus the buffer and its ceiling plus the buffer. SET 8 holds the vertical buffer, from 0 to 99,900 ft in steps of 100 ft, 500 ft to start with. Without an altitude input every altitude counts as inside, so the alert speaks for every area ahead. A limit above ground level counts as the ground, for a floor, and as unlimited, for a ceiling. For Class B and Class C the unit looks only at the outer lateral limit and the ceiling: a shelf of the airspace alerts at any altitude below the ceiling plus the buffer.
 
@@ -150,9 +150,9 @@ AIRSPACE ALERT:
 
 <KlnScreen screen="alerts/airspace-alert" />
 
-The type is `CL B` or `CL C` for Class B and C, `ALRT` for an alert area, `DNGR` for a danger area, `MOA`, `PROH` for a prohibited, `REST` for a restricted, `TRNG` for a training and `WARN` for a warning area. The limits line reads `1000FT to 18000FT`, `ABOVE 1000FT` where the area has no ceiling and `BELOW 7000FT` where it has no floor; Class B and C always show the ceiling alone. The line is missing where neither limit is above mean sea level.
+The field explanations of the screen give the area types and the forms of the limits line.
 
-Check your track and your altitude against the area. Reading the message does not remove it. It stays on the MSG page until the reason ends: you turn away or climb out of the buffer, or you enter the area, which replaces it with `INSIDE SPC USE AIRSPACE`. You can have several messages at once, one for each area.
+Check your actual track and your altitude against the area. Reading the message does not remove it. It stays on the MSG page until the reason ends: you turn away or climb out of the buffer, or you enter the area, which replaces it with `INSIDE SPC USE AIRSPACE`. You can have several messages at once, one for each area.
 
 ### `INSIDE SPC USE AIRSPACE`
 

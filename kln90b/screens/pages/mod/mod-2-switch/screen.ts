@@ -2,7 +2,7 @@ import {defineScreen, panelXml} from '../../../../generator/api.ts';
 import {BOOT, flyAndAdjust} from '../../../shared/kpdx-ksea.ts';
 
 defineScreen(import.meta.url, {
-	title: 'MOD 2 in leg mode with the GPS CRS button of the aircraft',
+	title: 'MOD 2 in leg mode with the GPS CRS switch of the aircraft',
 	show: 'left',
 	boot: {...BOOT, panelXml: panelXml({'Input.ExternalSwitches.LegObsSwitchInstalled': true})},
 	steps: async u => {

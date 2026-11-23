@@ -72,7 +72,7 @@ To load a STAR:
 
 <KlnScreen screen="sid-star/star-header" />
 
-FPL 0 holds one STAR, as it holds one SID: a second STAR replaces the first after the question, whatever its airport. A STAR of an airport that FPL 0 does not hold brings its airport along, as the last waypoint of FPL 0. The approach is loaded the same way on APT 8, before or after the STAR; the order in FPL 0 comes out the same. The approach needs its transition too, and it starts only at an <Term t="IAF" />: you select one of its initial approach fixes, and an intermediate fix cannot be the start ([Non-precision approaches](/kln90b/operation/approaches/)).
+FPL 0 holds one STAR, as it holds one SID: a second STAR replaces the first after the question, whatever its airport. A STAR of an airport that FPL 0 does not hold brings its airport along, as the last waypoint of FPL 0. The approach is loaded the same way on APT 8, before or after the STAR; the order in FPL 0 comes out the same.
 
 ## A transition must be selected
 
@@ -83,6 +83,8 @@ The transition often starts at a waypoint that is already in FPL 0, or runs over
 <KlnScreen screen="sid-star/duplicates" />
 
 Two copies in a row form a leg of no length, at which the unit flies over the waypoint instead of anticipating the turn. Copies in different places make the unit fly to the waypoint twice. Look for both in FPL 0 after every load, because only some of them raise a message (next section).
+
+**An approach starts only at an <Term t="IAF" />.** You select one of its initial approach fixes on APT 8; an intermediate fix or the <Term t="FAF" /> cannot be the start ([An approach starts only at an IAF](/kln90b/operation/approaches/#an-approach-starts-only-at-an-iaf)).
 
 ### `REDUNDANT WPTS IN FPL`
 
@@ -110,7 +112,7 @@ The unit does not check where the airport stands: a SID goes after its airport e
 
 ## The procedure in FPL 0
 
-A loaded procedure stands in FPL 0 as a header and its waypoints. The header names the procedure: `BANGR9-SID` for a SID, `CHINS5-STAR` for a STAR. It counts as no waypoint and has no number; the waypoints of the procedure are numbered with the rest of FPL 0 and carry a period after the number ([Procedure headers](/kln90b/pages/fpl/#procedure-headers)). An approach has a header of its own form ([Non-precision approaches](/kln90b/operation/approaches/)).
+A loaded procedure stands in FPL 0 as a header and its waypoints. The header names the procedure: `BANGR9-SID` for a SID, `CHINS5-STAR` for a STAR. It counts as no waypoint and has no number; the waypoints of the procedure are numbered with the rest of FPL 0 and carry a period after the number ([Procedure headers](/kln90b/pages/fpl/#procedure-headers)). An approach has a header of its own form ([The approach in FPL 0](/kln90b/operation/approaches/#the-approach-in-fpl-0)).
 
 <KlnScreen screen="pages/fpl/fpl-0-procedures" />
 
@@ -147,7 +149,7 @@ To change a SID or a STAR:
 4. Press the right <kbd>CRSR</kbd> and select the procedure, its runway and its transition as when you loaded it ([Loading a SID](#loading-a-sid)).
 5. Press <kbd>ENT</kbd> on `LOAD IN FPL`, and <kbd>ENT</kbd> again to approve the question to replace the procedure. The new procedure takes the place of the old one.
 
-Until you approve the replacement, the old procedure stays in FPL 0; turn the right cursor off to keep it. When the active leg belongs to the procedure you replace, the unit makes the leg of FPL 0 closest to the aircraft the active leg. On an approach header the question reads `CHANGE APR?` and opens APT 8 ([Non-precision approaches](/kln90b/operation/approaches/)).
+Until you approve the replacement, the old procedure stays in FPL 0; turn the right cursor off to keep it. When the active leg belongs to the procedure you replace, the unit makes the leg of FPL 0 closest to the aircraft the active leg. On an approach header the question reads `CHANGE APR?` and opens APT 8 ([Changing or deleting an approach](/kln90b/operation/approaches/#changing-or-deleting-an-approach)).
 
 ## Deleting a procedure
 
@@ -176,7 +178,7 @@ The waypoints of a SID or a STAR can be inserted and deleted one by one, like en
 
 <kbd>CLR</kbd> on a waypoint of a SID or a STAR asks `DEL` and the identifier, as on any waypoint, and <kbd>ENT</kbd> deletes it. When you delete the last waypoint of a procedure, its header goes too. Deleting the airport of a procedure deletes only the airport; the procedure stays. [Adding a waypoint](/kln90b/operation/flight-plans/#adding-a-waypoint) and [Deleting a waypoint](/kln90b/operation/flight-plans/#deleting-a-waypoint) give the steps.
 
-The waypoints of an approach cannot be edited: the unit answers `INVALID ADD` and `INVALID DEL` ([Non-precision approaches](/kln90b/operation/approaches/)). The waypoints of a DME arc in a SID or a STAR are covered in [DME arcs](/kln90b/operation/dme-arcs/).
+The waypoints of an approach cannot be edited: the unit answers `INVALID ADD` and `INVALID DEL` ([`INVALID ADD` and `INVALID DEL`](/kln90b/operation/approaches/#invalid-add-and-invalid-del)). The waypoints of a DME arc in a SID or a STAR are covered in [DME arcs](/kln90b/operation/dme-arcs/).
 
 ## Flying a SID or a STAR
 

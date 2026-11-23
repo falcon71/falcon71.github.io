@@ -5,6 +5,8 @@ sidebar:
   order: 2
 ---
 
+import Term from '../../../components/Term.astro';
+
 Look up a message here as the status line shows it. Each entry gives the cause and what to do, and links to the section that explains the message at length. A value is marked in lowercase: `nnn` stands for a number.
 
 [Messages](/kln90b/operation/messages/#status-line-messages) explains how the status line shows these messages, and how they appear on the message page for as long as they are shown. The longer messages that you read on the message page are in [Message page messages](/kln90b/lists/messages/).
@@ -27,7 +29,7 @@ You are creating a user waypoint on an APT, VOR, NDB, INT or SUP page, and the w
 
 ## `FPL FULL`
 
-The unit could not make room for a waypoint in a flight plan. In a full numbered flight plan it refuses the waypoint you approved. In a full FPL 0 whose first waypoint is part of the active leg it asks nothing and answers so at the approval, and it does the same when loading a SID, a STAR or an approach would need a deletion that it must not make. Delete waypoints yourself and try again. See [`FPL FULL`](/kln90b/operation/flight-plans/#fpl-full), [The question to make room in FPL 0](/kln90b/operation/flight-plans/#the-question-to-make-room-in-fpl-0) and [The question to make room for a procedure](/kln90b/operation/departures-arrivals/#the-question-to-make-room-for-a-procedure).
+The unit could not make room for a waypoint in a flight plan. In a full numbered flight plan it refuses the waypoint you approved. In a full FPL 0 whose first waypoint is part of the active leg it asks no question to make room and shows `FPL FULL` when you approve the waypoint, and it does the same when loading a <Term t="SID" />, a <Term t="STAR" /> or an approach would need a deletion that it must not make. Delete waypoints yourself and try again. See [`FPL FULL`](/kln90b/operation/flight-plans/#fpl-full), [The question to make room in FPL 0](/kln90b/operation/flight-plans/#the-question-to-make-room-in-fpl-0) and [The question to make room for a procedure](/kln90b/operation/departures-arrivals/#the-question-to-make-room-for-a-procedure).
 
 ## `IN ACT LIST`
 
@@ -55,7 +57,7 @@ You entered a VNAV waypoint on NAV 4 that VNAV cannot use. The unit keeps the VN
 
 ## `NO ACTV WPT`
 
-You changed to OBS mode with no active waypoint: <kbd>ENT</kbd> on MOD 2 cannot change to OBS mode, and the unit stays in leg mode; the GPS CRS switch changes to OBS mode all the same. Make a direct-to or activate a flight plan first. See [`NO ACTV WPT` in the status line](/kln90b/operation/modes-of-operation/#no-actv-wpt-in-the-status-line).
+You changed to OBS mode with no active waypoint. With the GPS CRS switch the unit changes to OBS mode all the same; <kbd>ENT</kbd> on MOD 2 cannot, and the unit stays in leg mode. Make a direct-to or activate a flight plan first. See [`NO ACTV WPT` in the status line](/kln90b/operation/modes-of-operation/#no-actv-wpt-in-the-status-line).
 
 ## `NO APPROACH`
 
@@ -95,7 +97,7 @@ You turned the cursor on, on APT 7 or APT 8, while the database is expired. It r
 
 ## `RMKS FULL`
 
-You entered an airport remark on APT 5, and the unit could not store it, because the airport remarks are full. Delete the remarks of an airport on OTH 4 to make room; the remarks of an airport that already has some can always be changed. See [APT 5: remarks](/kln90b/pages/apt/#apt-5-remarks).
+You entered an airport remark on APT 5, and the unit could not store it, because the airport remarks are full. Delete the remarks of an airport on OTH 4 to make room; the remarks of an airport that already has some can always be changed. See [APT 5: airport remarks](/kln90b/pages/apt/#apt-5-airport-remarks).
 
 ## `SERVICED`
 
@@ -107,4 +109,4 @@ You pressed <kbd>CLR</kbd> on OTH 3 on a user waypoint that a flight plan holds,
 
 ## `USR DB FULL`
 
-The user database is full, and the unit cannot store another waypoint. Nothing is created. It appears when you create a user waypoint on an APT, VOR, NDB, INT or SUP page, when the REF page or the CTR pages cannot add a waypoint of their own, and when a route from the EFB has a waypoint to create. Delete a user waypoint on OTH 3 to make room. See [`USR DB FULL`](/kln90b/operation/user-waypoints/#usr-db-full).
+The user database is full, and the unit cannot store another waypoint. Nothing is created. It appears when you create a user waypoint on an APT, VOR, NDB, INT or SUP page, when the REF page or the CTR pages cannot add a waypoint of their own, and when a route from the <Term t="EFB" /> has a waypoint to create. Delete a user waypoint on OTH 3 to make room. See [`USR DB FULL`](/kln90b/operation/user-waypoints/#usr-db-full).

@@ -1,7 +1,7 @@
 import {defineScreen, panelXml, place, wait} from '../../../generator/api.ts';
 
 defineScreen(import.meta.url, {
-	title: 'The VFR-only page',
+	title: 'The VFR-only warning page',
 	show: 'both',
 	boot: {position: place('KSEA'), panelXml: panelXml({VFROnly: true})},
 	steps: async u => {

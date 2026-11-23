@@ -33,7 +33,7 @@ After a [direct-to](/kln90b/operation/direct-to/) the Direct To symbol takes the
 
 ### NAV 1 in OBS mode
 
-In [OBS mode](/kln90b/operation/modes-of-operation/#obs-mode) the active waypoint stays active when you pass it, and the D-bar measures from the selected course through it. NAV 1 shows the active waypoint after the arrow and leaves the place in front of the arrow blank, because the course line starts at no waypoint. The bearing is the course to the waypoint as measured at the waypoint, so that it equals the [selected course](/kln90b/operation/modes-of-operation/#the-selected-course), which NAV 3 shows, while you are on the course line.
+In OBS mode NAV 1 shows the active waypoint after the arrow and leaves the place in front of the arrow blank, because the course line starts at no waypoint. The D-bar measures from the selected course through the active waypoint, which stays active when you pass it ([OBS mode](/kln90b/operation/modes-of-operation/#obs-mode)). The bearing is the course to the waypoint as measured at the waypoint, so that it equals the [selected course](/kln90b/operation/modes-of-operation/#the-selected-course), which NAV 3 shows, while you are on the course line.
 
 <KlnScreen screen="pages/nav/nav-1-obs" />
 
@@ -45,7 +45,7 @@ With no active waypoint the top line is blank, `F L A G` replaces the middle of 
 
 ### NAV 1 without a position
 
-Without a position the unit cannot navigate: `F L A G` shows in the D-bar, and the distance, the groundspeed, the time and the bearing show dashes. The waypoints of the leg stay on the top line, because the unit still knows the leg. The unit has no position before it is NAV ready and after it has lost the satellites ([Losing the position in flight](/kln90b/operation/gps-receiver/#losing-the-position-in-flight)).
+Without a position the unit flags its navigation: `F L A G`, the NAV flag, shows in the D-bar, and the distance, the groundspeed, the time and the bearing show dashes. The waypoints of the leg stay on the top line, because the unit still knows the leg. The unit has no position before it is NAV ready, and in flight while it has lost the satellites ([Losing the position in flight](/kln90b/operation/gps-receiver/#losing-the-position-in-flight)).
 
 <KlnScreen screen="pages/nav/nav-1-no-gps" />
 
@@ -55,11 +55,11 @@ In Approach Arm-Leg mode, Approach Arm-OBS mode and Approach Active-Leg mode NAV
 
 ## Super NAV 1: NAV 1 on the whole screen
 
-Super NAV 1 shows the data of NAV 1 on the whole screen.
+Super NAV 1 shows the data of NAV 1 on the whole screen. It appears while both sides show NAV 1 ([Pages that use the whole screen](/kln90b/unit/controls-and-display/#pages-that-use-the-whole-screen)).
 
 <KlnScreen screen="pages/nav/super-nav-1" />
 
-It differs from NAV 1 in three ways. The D-bar is longer, with its dots further apart. The distance and the groundspeed stand on the left and the time and the bearing on the right. The active waypoint carries the suffix of an approach waypoint, which NAV 1 leaves out: `-i` for an initial approach fix, `-f` for the final approach fix, `-m` for the missed approach point and `-h` for the missed approach holding point.
+It differs from NAV 1 in three ways. The D-bar is longer, with its dots further apart. The distance and the groundspeed stand on the left and the time and the bearing on the right. The active waypoint carries the suffix of an approach waypoint, which NAV 1 leaves out ([The approach in FPL 0](/kln90b/operation/approaches/#the-approach-in-fpl-0)).
 
 <KlnScreen screen="pages/nav/super-nav-1-approach" />
 
@@ -81,7 +81,7 @@ Without a position the page shows only dashes, never the last position.
 
 ## NAV 3: tracks and minimum safe altitudes
 
-NAV 3 shows the course of the leg and your actual track side by side, the direction to fly to get back on course, and the minimum safe altitudes of your position and your route. Use it to compare the course of the leg with your actual track and the course indicator of the aircraft, and to see how high the terrain around you and ahead is.
+NAV 3 shows the course of the leg and your actual track side by side, the direction to fly to get back on course, and the minimum safe altitudes of your position and your route. Use it to compare the course of the leg with your actual track and the external indicator, and to see how high the terrain around you and ahead is.
 
 <KlnScreen screen="pages/nav/nav-3" />
 
@@ -97,7 +97,7 @@ In OBS mode `OBS` and the [selected course](/kln90b/operation/modes-of-operation
 
 ### NAV 3 without an active waypoint
 
-Without an active waypoint there is no leg, so `DTK`, `FLY` and `ESA` show dashes. `TK` shows your actual track at a groundspeed of 2 kt or more, and `MSA` goes on showing the sector you are in.
+Without an active waypoint there is no leg, so `DTK`, `FLY` and `ESA` show dashes. `TK` shows your actual track, unless the unit shows no actual track ([The map is blank in actual track up](#the-map-is-blank-in-actual-track-up)), and `MSA` goes on showing the sector you are in.
 
 <KlnScreen screen="pages/nav/nav-3-no-wpt" />
 
@@ -125,7 +125,7 @@ NAV 4 shows your altitude and holds the entries of VNAV: the selected altitude, 
 
 <KlnScreen screen="pages/nav/nav-4" />
 
-The unit forgets the entries of NAV 4 at every power-on ([Power-on and initialization](/kln90b/unit/power-on/)). The cursor arriving on the angle can start VNAV ([Starting VNAV](/kln90b/operation/vnav/#starting-vnav)). You enter the VNAV waypoint like any waypoint identifier ([Waypoints and the database](/kln90b/operation/waypoints/)); [Which waypoint VNAV can use](/kln90b/operation/vnav/#which-waypoint-vnav-can-use) says which ones it takes.
+The unit forgets the entries of NAV 4 at every power-on ([What the unit keeps while it is off](/kln90b/unit/power-on/#what-the-unit-keeps-while-it-is-off)). The cursor arriving on the angle can start VNAV ([Starting VNAV](/kln90b/operation/vnav/#starting-vnav)). You enter the VNAV waypoint like any waypoint identifier ([Waypoints and the database](/kln90b/operation/waypoints/)); [Which waypoint VNAV can use](/kln90b/operation/vnav/#which-waypoint-vnav-can-use) says which ones it takes.
 
 ### NAV 4 without an altitude input
 
@@ -178,7 +178,7 @@ The map orientation says which direction points to the top of the map. With the 
 
 <KlnScreen screen="pages/nav/nav-5-cursor" />
 
-With the cursor off, the field shows `N^` for north up and otherwise the direction that is up, as a magnetic course in whole degrees, so that you can read your actual track from it. It shows `---°` where the unit does not know that direction: in desired track up while there is no active waypoint, and in actual track up below a groundspeed of 2 kt. Desired track up without an active waypoint draws the map pointing north.
+With the cursor off, the field shows `N^` for north up and otherwise the direction that is up, as a magnetic course in whole degrees, so that you can read your actual track from it. It shows `---°` where the unit does not know that direction: in desired track up while there is no active waypoint, and in actual track up while the unit shows no actual track. Desired track up without an active waypoint draws the map pointing north.
 
 In the example the aircraft flies the first leg of a route in actual track up. The active leg runs up the map, and the waypoints show their numbers.
 
@@ -210,7 +210,7 @@ Super NAV 5 draws the map of NAV 5 on the whole screen, with a left side of navi
 
 The left <kbd>CRSR</kbd> turns on the cursor of the left side of Super NAV 5, the right <kbd>CRSR</kbd> opens the pop-up menu, and the right inner knob, pulled out, opens the window. Super NAV 5 keeps its own range scale, map orientation and pop-up menu entries while the unit is off, separately from those of NAV 5.
 
-The message prompt <Term t="MSG">`MSG`</Term> stands over the map above the range scale and behaves as on the status line ([What flashes](/kln90b/unit/controls-and-display/#what-flashes)).
+The message prompt <Term t="MSG">`MSG`</Term> stands over the map above the range scale and behaves as on the status line ([What flashes](/kln90b/unit/controls-and-display/#what-flashes)). Super NAV 5 has no status line, so a status line message shows only as `MSG` and on the MSG page ([Status line messages](/kln90b/operation/messages/#status-line-messages)).
 
 ### What Super NAV 5 draws
 
@@ -220,7 +220,7 @@ The legs of FPL 0, the course line of OBS mode, the direct-to arrow and the airc
 - An active waypoint that FPL 0 does not hold, after a direct-to or in OBS mode, carries a star without an identifier; the left side of Super NAV 5 names the waypoint. {/* kln90b#499: describes the current behavior; the fix makes the map write the identifier next to the star */}
 - The VOR, NDB and APT selections of the pop-up menu add the nearest VORs, NDBs and airports ([The VOR, NDB and APT selections](#the-vor-ndb-and-apt-selections)).
 
-The map is blank without a position, and in actual track up below a groundspeed of 2 kt ([The map is blank in actual track up](#the-map-is-blank-in-actual-track-up)); the left side stays.
+The map is blank without a position, and in actual track up while the unit shows no actual track ([The map is blank in actual track up](#the-map-is-blank-in-actual-track-up)); the left side stays.
 
 ### The left side of Super NAV 5
 
@@ -285,7 +285,7 @@ At a range scale of 2 NM or less the map draws an airport as its runways, each a
 
 ### The window
 
-The window shows a waypoint of FPL 0 at the bottom right while the right inner knob is pulled out ([Scanning](/kln90b/unit/controls-and-display/#scanning)). It starts on the active waypoint, or on the first waypoint of FPL 0 when none of its waypoints is active, and the knob steps through FPL 0, forward to the last waypoint and back to the first, without wrapping. The window lists FPL 0 as it was when you pulled the knob. A waypoint of an approach shows with its suffix (`-i`, `-f`, `-m` or `-h`). While FPL 0 is empty the window is a bar of six empty cells in inverse video, and pushing the knob in closes it.
+The window shows a waypoint of FPL 0 at the bottom right while the right inner knob is pulled out ([Scanning](/kln90b/unit/controls-and-display/#scanning)). It starts on the active waypoint, or on the first waypoint of FPL 0 when none of its waypoints is active, and the knob steps through FPL 0, forward to the last waypoint and back to the first, without wrapping. The window lists FPL 0 as it was when you pulled the knob. A waypoint of an approach shows with its suffix ([The approach in FPL 0](/kln90b/operation/approaches/#the-approach-in-fpl-0)). While FPL 0 is empty the window is a bar of six empty cells in inverse video, and pushing the knob in closes it.
 
 <KlnScreen screen="pages/nav/super-nav-5-window" />
 
@@ -295,10 +295,12 @@ The Direct To page offers the waypoint of the window as its default waypoint ([T
 
 While the window shows the DME arc waypoint, where a DME arc begins, <kbd>CLR</kbd> does not declutter: it shows `MOVE ?` in the window, and <kbd>ENT</kbd> then moves the start of the arc to where your actual track meets it ([Moving the DME arc waypoint](/kln90b/operation/dme-arcs/#moving-the-dme-arc-waypoint)). <kbd>CLR</kbd> again or a step of the knob cancels it.
 
-## Where to go next
+## Where the NAV pages are used
 
 - [Modes of operation](/kln90b/operation/modes-of-operation/): the active waypoint, leg mode and OBS mode, the selected course and the CDI scale factor.
 - [Sequencing and turn anticipation](/kln90b/operation/sequencing/): waypoint alerting and the transitions that the D-bar and `FLY` follow.
 - [Direct-to](/kln90b/operation/direct-to/): the Direct To symbol and the default waypoint.
+- [DME arcs](/kln90b/operation/dme-arcs/#nav-2-and-super-nav-5-on-an-arc): NAV 2 and Super NAV 5 on an arc.
+- [Non-precision approaches](/kln90b/operation/approaches/): the D-bar and the modes on NAV 1 and the map of Super NAV 5 along an approach.
 - [GPS reception and RAIM](/kln90b/operation/gps-receiver/): why the unit has no position and what the altitude input does.
 - [Setting up a descent or a climb](/kln90b/operation/vnav/#setting-up-a-descent-or-a-climb) and [Altitude alerting](/kln90b/operation/alerts/#altitude-alerting): the entries of NAV 4 at work.

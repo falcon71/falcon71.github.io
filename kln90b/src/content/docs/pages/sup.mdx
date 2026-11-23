@@ -9,9 +9,9 @@ import KlnScreen from '../../../components/KlnScreen.astro';
 
 The SUP page of the KLN 90B shows one supplemental waypoint: a user waypoint that is no airport, VOR, NDB or intersection. It is also the page on which a new waypoint is defined, from the page itself, from the Direct To page or from a flight plan.
 
-You enter an identifier, scan through the list, deal with duplicate identifiers and approve the page as on every waypoint page; [Waypoints and the database](/kln90b/operation/waypoints/) explains all of it. This chapter covers what the SUP page shows and does differently.
-
 ## SUP page: supplemental waypoints
+
+Entering an identifier, the scan, duplicate identifiers and approving the waypoint page work as on every waypoint page ([Waypoints and the database](/kln90b/operation/waypoints/)).
 
 The SUP page shows the identifier of the waypoint, the reference waypoint with the radial and the distance of the waypoint from it, and the latitude and the longitude. A supplemental waypoint is always a [user waypoint](/kln90b/operation/user-waypoints/), so every field except the identifier can be changed with the cursor.
 
@@ -35,7 +35,7 @@ When the identifier you enter has no match in the list, the SUP page shows `CREA
 
 <KlnScreen screen="direct-to/create-waypoint" />
 
-When you define a waypoint by a reference, a radial and a distance, enter the reference first: if you enter it last, nothing is created. {/* kln90b#488: describes the current behavior; the fix creates the waypoint whatever the order */}
+[Creating a waypoint from a reference waypoint](/kln90b/operation/user-waypoints/#creating-a-waypoint-from-a-reference-waypoint) says in which order to enter the reference, the radial and the distance.
 
 <KlnScreen screen="pages/sup/sup-create-by-radial" />
 

@@ -1,6 +1,6 @@
 ---
 title: TRI pages
-description: What the TRI pages show (the true airspeed and wind, the distance, bearing, groundspeed, time and fuel of a trip, the minimum en route safe altitude and the airspaces along the route), which entries they share and when they show dashes.
+description: What the TRI pages show (the true airspeed and wind, the distance, bearing, groundspeed, time and fuel of a trip, the minimum en route safe altitude and the areas of special use airspace along the route), which entries they share and when they show dashes.
 sidebar:
   order: 1
 ---
@@ -9,13 +9,13 @@ import KlnScreen from '../../../components/KlnScreen.astro';
 import Callout from '../../../components/Callout.astro';
 import Term from '../../../components/Term.astro';
 
-The TRI pages of the KLN 90B are its trip planning pages, on the left side. TRI 0 holds the true airspeed and the wind. TRI 1, TRI 3 and TRI 5 give the distance, the time and the fuel of a trip from your present position, between two waypoints or along a flight plan. TRI 2, TRI 4 and TRI 6 give the minimum en route safe altitude and the airspaces along the same route.
+The TRI pages of the KLN 90B are its trip planning pages, on the left side. TRI 0 holds the true airspeed and the wind. TRI 1, TRI 3 and TRI 5 give the distance, the time and the fuel of a trip from your present position, between two waypoints or along a flight plan. TRI 2, TRI 4 and TRI 6 give the minimum en route safe altitude and the areas of special use airspace along the same route.
 
 ## The TRI pages: planning a trip
 
 The TRI pages plan with what you enter. The true airspeed and the wind come from TRI 0, the fuel flow and the reserve fuel from the TRI pages themselves, and nothing comes from the sensors of the aircraft. Nothing you enter on them changes the navigation, so you can plan an alternate in flight. The fuel entries are the TRI pages' own and separate from the fuel management pages OTH 5 to OTH 8. [Trip planning and calculators](/kln90b/operation/trip-planning/) explains planning as a task.
 
-The pages after TRI 0 come in pairs, and the first page of a pair gives the figures, the second the safe altitude and the airspaces:
+The pages after TRI 0 come in pairs, and the first page of a pair gives the figures, the second the safe altitude and the areas of special use airspace:
 
 - TRI 1 and TRI 2 plan from your present position to one waypoint.
 - TRI 3 and TRI 4 plan between two waypoints, which are not those of TRI 1 and TRI 2.
@@ -23,7 +23,7 @@ The pages after TRI 0 come in pairs, and the first page of a pair gives the figu
 
 The two pages of a pair show the same entry, so that a waypoint or a flight plan number that you change on one is changed on the other. The left inner knob goes from the first page of a pair to the second ([Pages with a plus sign](/kln90b/unit/controls-and-display/#pages-with-a-plus-sign) says how it steps through a list of several pages).
 
-The unit keeps every entry of the TRI pages while it is off. A digit takes effect at once, and a waypoint is approved with <kbd>ENT</kbd> ([Entering data with the cursor](/kln90b/unit/controls-and-display/#entering-data-with-the-cursor)). An identifier that no waypoint has raises `NO SUCH WPT`, and the TRI pages do not offer to create a waypoint. <kbd>CLR</kbd> and then <kbd>ENT</kbd> blank a waypoint, and the figures go to dashes. At the next power-on the unit looks the waypoints up in the database again, and a waypoint that the database no longer holds is blank.
+The unit keeps every entry of the TRI pages while it is off. A digit takes effect at once, and a waypoint is approved with <kbd>ENT</kbd> ([Entering data with the cursor](/kln90b/unit/controls-and-display/#entering-data-with-the-cursor)). An identifier that no waypoint has raises [`NO SUCH WPT`](/kln90b/lists/status-line-messages/#no-such-wpt), and the TRI pages do not offer to create a waypoint. <kbd>CLR</kbd> and then <kbd>ENT</kbd> blank a waypoint, and the figures go to dashes. At the next power-on the unit looks the waypoints up in the database again, and a waypoint that the database no longer holds is blank.
 
 <Callout kind="info">
 A TRI page works out its figures when you select it or approve a waypoint on it, and keeps them while it is shown. On TRI 1 and TRI 2 the distance, the bearing, the time, the safe altitude and the list of airspaces therefore stay as they were when the aircraft moves on, and a page that you selected before the unit was NAV ready stays dashed. Turn to another page and back to get the figures of the moment.
@@ -37,11 +37,7 @@ TRI 0 holds the true airspeed and the wind that TRI 1, TRI 3 and TRI 5 plan with
 
 <KlnScreen screen="pages/tri/tri-0" />
 
-A new unit holds a true airspeed of 150 kt and no wind (direction `000`, speed `000` kt), with which the groundspeed is the true airspeed. Set both before you trust a time. You set the wind direction in two steps: first the tens of degrees (`00` to `35`), then the last digit, so 360° cannot be entered.
-
-<Callout kind="info">
-The wind direction is a true direction, and it is the direction the wind blows from. The bearings on TRI 1 and TRI 3 are magnetic.
-</Callout>
+You set the wind direction in two steps: first the tens of degrees (`00` to `35`), then the last digit, so 360° cannot be entered. The wind direction is true and is the direction the wind blows from; the bearings on TRI 1 and TRI 3 are magnetic.
 
 The unit works out the groundspeed with the true course of the leg, so the difference between the true wind and the magnetic bearing needs no correction from you. CAL 3 and OTH 9 have a wind of their own, which TRI 0 neither changes nor reads.
 
@@ -67,20 +63,15 @@ TRI 1 needs a unit that is NAV ready ([GPS reception and RAIM](/kln90b/operation
 
 <KlnScreen screen="pages/tri/tri-1-no-fix" />
 
-### The limits of the values
-
-- A distance above 9,999 NM shows dashes, and so does a time of 100 hours or more.
-- A groundspeed above 999 kt shows dashes, but the time and the fuel required are still computed from it.
-
 [Planning from the present position](/kln90b/operation/trip-planning/#planning-from-the-present-position) gives the steps.
 
 ## TRI 2: safe altitude and airspaces from the present position
 
-TRI 2 shows the minimum en route safe altitude and the airspaces along the route that TRI 1 plans: from your present position to its waypoint. The waypoint is the one of TRI 1, and entering it here changes TRI 1.
+TRI 2 shows the minimum en route safe altitude and the areas of special use airspace along the route that TRI 1 plans: from your present position to its waypoint. The waypoint is the one of TRI 1, and entering it here changes TRI 1.
 
 <KlnScreen screen="pages/tri/tri-2" />
 
-`ESA` is the highest minimum safe altitude of the one-degree sectors that the route passes through. [Minimum safe altitudes](/kln90b/pages/nav/#minimum-safe-altitudes) explains where the value comes from and what it leaves out. The lines below it are the list of [the airspaces along the route](#the-airspaces-along-the-route). A route with no airspace on it shows only the `ESA` line.
+`ESA` is the minimum en route safe altitude ([Minimum safe altitudes](/kln90b/pages/nav/#minimum-safe-altitudes) explains where the value comes from and what it leaves out). The lines below it are the list of [areas of special use airspace along the route](#the-airspaces-along-the-route). A route with no airspace on it shows only the `ESA` line.
 
 <KlnScreen screen="pages/tri/tri-2-none" />
 
@@ -92,13 +83,13 @@ TRI 3 gives the same figures as TRI 1 for a route from one waypoint to another t
 
 <KlnScreen screen="pages/tri/tri-3" />
 
-The cursor comes on at the from waypoint, and when you approve it, it moves on to the to waypoint. The bearing is magnetic, with the magnetic variation at the from waypoint. TRI 3 needs no GPS position. With either waypoint blank it shows the dashes of TRI 1 without a position, with a groundspeed of `000`. With the two waypoints the same, it shows a distance of 0, and dashes for the bearing, the groundspeed, the time and the fuel required. The limits of the values are those of TRI 1.
+The cursor comes on at the "from" waypoint, and when you approve it, it moves on to the "to" waypoint. The bearing is magnetic, with the magnetic variation at the "from" waypoint. TRI 3 needs no GPS position. With either waypoint blank it shows the dashes of TRI 1 without a position, with a groundspeed of `000`. With the two waypoints the same, it shows a distance of 0, and dashes for the bearing, the groundspeed, the time and the fuel required.
 
 [Planning between two waypoints](/kln90b/operation/trip-planning/#planning-between-two-waypoints) gives the steps.
 
 ## TRI 4: safe altitude and airspaces between two waypoints
 
-TRI 4 shows the minimum en route safe altitude and the airspaces along the route of TRI 3. Its from waypoint and its to waypoint are those of TRI 3, and you can change them on either page.
+TRI 4 shows the minimum en route safe altitude and the areas of special use airspace along the route of TRI 3. Its "from" waypoint and its "to" waypoint are those of TRI 3, and you can change them on either page.
 
 <KlnScreen screen="pages/tri/tri-4" />
 
@@ -112,7 +103,7 @@ TRI 5 gives the total distance, the time and the fuel of a whole flight plan, fr
 
 <KlnScreen screen="pages/tri/tri-5" />
 
-The number runs from 0, the active flight plan, to 25, and goes around at both ends. The figures follow when the number changes. The flight plan does not have to be active, and TRI 5 always plans the whole of it: not from your present position, not from the active leg. The waypoints of a SID, a STAR and an approach count like any others, and so do the legs of the missed approach, so the distance and the time of an approach in the flight plan run past the missed approach point. A waypoint that follows itself adds nothing. TRI 5 needs no GPS position.
+The number runs from 0, the active flight plan, to 25, and goes around at both ends. The figures follow when the number changes. The flight plan does not have to be active, and TRI 5 always plans the whole of it: not from your present position, not from the active leg. The waypoints of a <Term t="SID" />, a <Term t="STAR" /> and an approach count like any others, and so do the legs of the missed approach, so the distance and the time of an approach in the flight plan run past the missed approach point. A waypoint that follows itself adds nothing. TRI 5 needs no GPS position.
 
 The wind applies to the course of every leg, and the groundspeed on the page is the total distance over the total time. A flight plan with fewer than two waypoints has no distance:
 
@@ -124,11 +115,11 @@ A flight plan with one waypoint shows that waypoint and a blank for the last. TR
 
 ## TRI 6: safe altitude and airspaces along a flight plan
 
-TRI 6 shows the minimum en route safe altitude and the airspaces along the whole flight plan of TRI 5, at the same flight plan number.
+TRI 6 shows the minimum en route safe altitude and the areas of special use airspace along the whole flight plan of TRI 5, at the same flight plan number.
 
 <KlnScreen screen="pages/tri/tri-6" />
 
-`ESA` is the highest of the `ESA` values of all its legs, and the list holds the airspaces along every leg, each once. A flight plan with fewer than two waypoints shows only the heading. TRI 6 needs no GPS position.
+`ESA` is the highest of the `ESA` values of all its legs, and the list holds the areas of special use airspace along every leg, each once. A flight plan with fewer than two waypoints shows only the heading. TRI 6 needs no GPS position.
 
 ## The airspaces along the route
 

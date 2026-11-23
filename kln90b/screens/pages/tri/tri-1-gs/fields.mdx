@@ -11,7 +11,7 @@
 </Field>
 
 <Field id="gs" title="Groundspeed">
-	`GS` is the groundspeed in knots, three digits, followed by `kt`. The unit works it out from the true airspeed and the wind of TRI 0 on the course of the route; the unit holds the course against the wind, so a crosswind lowers it. The inner knob changes the digit under the cursor and the page takes the groundspeed you typed: the time and the fuel required follow at once. The unit forgets the typed value when you leave the page or enter another waypoint. It shows dashes above 999 kt, and `000` while the route has no two ends.
+	`GS` is the groundspeed in knots, three digits, followed by `kt`. The unit works it out from the true airspeed and the wind of TRI 0 on the course of the route; the unit holds the course against the wind, so a crosswind lowers it. The inner knob changes the digit under the cursor and the page takes the groundspeed you typed: the time and the fuel required follow at once. The unit forgets the typed value when you leave the page or enter another waypoint. Above 999 kt it shows dashes, but the time and the fuel required are still computed from it; it shows `000` while the route has no two ends.
 </Field>
 
 <Field id="ete" title="Estimated time en route">
@@ -19,17 +19,17 @@
 </Field>
 
 <Field id="ff" title="Fuel flow">
-	`FF` is the fuel flow per hour, as a number from 00000.0 to 99999.9 in the unit you use for the fuel; the unit shows none. The cursor stops on every digit, the tenth included, and the inner knob changes a digit at once, without <kbd>ENT</kbd>. The unit keeps it while it is off. TRI 1, TRI 3 and TRI 5 show the same entry, and it is not a reading of a fuel management system.
+	`FF` is the fuel flow per hour, as a number from 00000.0 to 99999.9 in the unit you use for the fuel; the unit shows none. The inner knob changes a digit at once, without <kbd>ENT</kbd>. The unit keeps it while it is off. TRI 1, TRI 3 and TRI 5 show the same entry, and it is not a reading of a fuel management system.
 </Field>
 
 <Field id="res" title="Reserve fuel">
-	`RES` is the reserve fuel, as a number from 00000.0 to 99999.9 in the unit you use for the fuel flow; the unit shows none. The cursor stops on every digit, the tenth included, and the inner knob changes a digit at once, without <kbd>ENT</kbd>. The unit adds it once to the fuel of the trip and keeps it while it is off. TRI 1, TRI 3 and TRI 5 show the same entry, and it is not that of OTH 5 to OTH 8.
+	`RES` is the reserve fuel, as a number from 00000.0 to 99999.9 in the unit you use for the fuel flow; the unit shows none. The inner knob changes a digit at once, without <kbd>ENT</kbd>. The unit adds it once to the fuel of the trip and keeps it while it is off. TRI 1, TRI 3 and TRI 5 show the same entry, and it is not that of OTH 5 to OTH 8.
 </Field>
 
 <Field id="freq" title="Fuel required">
-	`F REQ` is the fuel the trip needs: the time en route at the fuel flow, plus the reserve. It is in the unit of the fuel flow and shows a tenth below 100 (`20.4`) and whole units from 100. It shows dashes while the time shows dashes and from 100,000 on. With a fuel flow of 0 it equals the reserve.
+	`F REQ` is the fuel the trip needs: the estimated time en route at the fuel flow, plus the reserve. It is in the unit of the fuel flow and shows a tenth below 100 (`20.4`) and whole units from 100. It shows dashes while the time shows dashes and from 100,000 on. With a fuel flow of 0 it equals the reserve.
 </Field>
 
-<Field id="cursor" title="The CRSR annunciation">
-	`CRSR` takes the place of the page identification of the left side while that side's cursor is on.
+<Field id="cursor" title="CRSR annunciation">
+	<Term t="CRSR">`CRSR`</Term> takes the place of the page identification of the left side while that side's cursor is on.
 </Field>

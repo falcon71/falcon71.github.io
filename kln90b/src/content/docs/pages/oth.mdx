@@ -1,6 +1,6 @@
 ---
 title: OTH pages
-description: What the OTH pages show (the Center at your position, user waypoints, airports with remarks, fuel and air data), how to enter the fuel on board and the fuel reserve, what SET FUEL ON BOARD asks, which pages your unit has and how the air data pages are named.
+description: What the OTH pages show (the Center at your position, user waypoints, airport remarks, fuel and air data), how to enter the fuel on board and the fuel reserve, what SET FUEL ON BOARD asks, which pages your unit has and how the air data pages are named.
 sidebar:
   order: 9
 ---
@@ -9,7 +9,7 @@ import KlnScreen from '../../../components/KlnScreen.astro';
 import Callout from '../../../components/Callout.astro';
 import Term from '../../../components/Term.astro';
 
-The OTH pages of the KLN 90B are the left pages for what belongs nowhere else: flight service stations (OTH 1), the Center at your position (OTH 2), your user waypoints (OTH 3) and the airports with your remarks (OTH 4). With a fuel management system the unit also has the fuel management pages OTH 5 to OTH 8, and with an air data system the air data pages. You enter the fuel reserve here and, where the aircraft does not send it, the fuel on board.
+The OTH pages of the KLN 90B are the left pages for what belongs nowhere else: flight service stations (OTH 1), the Center at your position (OTH 2), your user waypoints (OTH 3) and the airports with your airport remarks (OTH 4). With a fuel management system the unit also has the fuel management pages OTH 5 to OTH 8, and with an air data system the air data pages. You enter the fuel reserve here and, where the aircraft does not send it, the fuel on board.
 
 ## The OTH pages: which pages your unit has
 
@@ -48,7 +48,7 @@ OTH 3 lists every user waypoint, with its waypoint type and the flight plan that
 
 <KlnScreen screen="pages/oth/oth-3-user-waypoints" />
 
-With the cursor on, the left outer knob moves from row to row and scrolls the list. <kbd>CLR</kbd> on a row refuses the active waypoint with `ACTIVE WPT` and a waypoint that a flight plan holds with `USED IN FPL`.
+With the cursor on, the left outer knob moves from row to row and scrolls the list. <kbd>CLR</kbd> on a row refuses the active waypoint with [`ACTIVE WPT`](/kln90b/lists/status-line-messages/#active-wpt) and a waypoint that a flight plan holds with [`USED IN FPL`](/kln90b/lists/status-line-messages/#used-in-fpl).
 
 <KlnScreen screen="pages/oth/oth-3-used-in-fpl" />
 
@@ -60,18 +60,18 @@ Any other waypoint turns its row into the question to delete it.
 
 ## OTH 4: airports with remarks
 
-OTH 4 lists, in alphabetical order, the airports for which you wrote remarks on APT 5, and it is where you delete them. An airport whose remark lines you blanked out on APT 5 stays on the list until you delete it here.
+OTH 4 lists, in alphabetical order, the airports for which you wrote airport remarks on APT 5, and it is where you delete them. An airport whose remark lines you blanked out on APT 5 stays on the list until you delete it here.
 
 <KlnScreen screen="pages/oth/oth-4-remarks" />
 
-To delete the remarks of an airport:
+To delete the airport remarks of one airport:
 
 1. Turn the left outer knob to the OTH pages and the left inner knob to OTH 4.
-2. Press the left <kbd>CRSR</kbd> button. The cursor is on the top row shown.
+2. Press the left <kbd>CRSR</kbd>. The cursor is on the top row shown.
 3. Turn the left outer knob to the airport.
 4. Press <kbd>CLR</kbd>. The row turns into the question `DEL` and the identifier.
 5. Press <kbd>ENT</kbd> to delete all three remark lines of the airport, or <kbd>CLR</kbd> to keep them.
-6. Press the left <kbd>CRSR</kbd> button to turn the cursor off.
+6. Press the left <kbd>CRSR</kbd> to turn the cursor off.
 
 <KlnScreen screen="pages/oth/oth-4-delete-question" />
 
@@ -114,7 +114,7 @@ The unit does not burn the fuel you entered down. It shows the value until you c
 
 ### `SET FUEL ON BOARD`
 
-Where the aircraft does not send the fuel on board, the unit asks for it at every power-on, once the power-on pages are done. The message page shows:
+Where the aircraft does not send the fuel on board, the unit asks for it with the message [`SET FUEL ON BOARD`](/kln90b/lists/messages/#set-fuel-on-board) at every power-on, once the power-on pages are done. The message page shows:
 
 ```
 SET FUEL ON BOARD
@@ -132,9 +132,10 @@ The fuel reserve is the fuel you want to land with: the unit takes it off the la
 To set the fuel reserve:
 
 1. Turn the left outer knob to the OTH pages and the left inner knob to OTH 5.
-2. Press the left <kbd>CRSR</kbd>. Where you enter the fuel on board, the cursor starts on it; turn the left outer knob one step clockwise. The cursor is now on the first digit of the fuel reserve, `RES`.
-3. Turn the left inner knob to set the digit, and the left outer knob one step clockwise to the next digit. Repeat for each digit.
-4. Press the left <kbd>CRSR</kbd> to turn the cursor off.
+2. Press the left <kbd>CRSR</kbd>.
+3. Where the cursor is on the fuel on board, turn the left outer knob one step clockwise. The cursor is now on the first digit of the fuel reserve, `RES`.
+4. Turn the left inner knob to set the digit, and the left outer knob one step clockwise to the next digit. Repeat for each digit.
+5. Press the left <kbd>CRSR</kbd> to turn the cursor off.
 
 <KlnScreen screen="pages/oth/oth-5-reserve-entry" />
 
@@ -199,4 +200,4 @@ Everything this chapter says about OTH 9 holds for the page shown as `OTH 5`, an
 - [User waypoints](/kln90b/operation/user-waypoints/): deleting a user waypoint with OTH 3.
 - [Trip planning and calculators](/kln90b/operation/trip-planning/): the TRI pages with their own fuel entries and the CAL pages.
 - [Simulated failures](/kln90b/operation/failures/): when an input from the aircraft fails, the figures that depend on it show dashes.
-- APT 5 holds the remarks that OTH 4 lists.
+- APT 5 holds the airport remarks that OTH 4 lists.

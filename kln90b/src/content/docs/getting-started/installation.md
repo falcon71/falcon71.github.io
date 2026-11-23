@@ -53,7 +53,7 @@ An aircraft can include its own copy of the unit and then needs no package from 
 
 Aircraft developers find everything they need on the [wiki](https://github.com/falcon71/kln90b/wiki).
 
-## Next steps
+## Where to go next
 
 - [Quickstart](/kln90b/getting-started/quickstart/): the screen, the knobs and the cursor, in a few minutes.
 - [Tutorial flight 1](/kln90b/getting-started/tutorial-1/): a short flight with direct-to navigation.

@@ -9,11 +9,11 @@ import KlnScreen from '../../../components/KlnScreen.astro';
 import Term from '../../../components/Term.astro';
 import DirectToKey from '../../../components/DirectToKey.astro';
 
-The FPL pages of the KLN 90B hold the flight plans. FPL 0 is the active flight plan, the one the unit flies, and it draws the active leg; FPL 1 to FPL 25 are numbered flight plans that you prepare in advance and copy into FPL 0 to fly them. This chapter says what each page shows; the tasks are in [Flight plans](/kln90b/operation/flight-plans/).
+The FPL pages of the KLN 90B hold the flight plans. FPL 0 is the active flight plan, the one the unit flies, and it draws the active leg; FPL 1 to 25 are numbered flight plans that you prepare in advance and copy into FPL 0 to fly them. This chapter says what each page shows; the tasks are in [Flight plans](/kln90b/operation/flight-plans/).
 
 ## The FPL pages: waypoints in a list
 
-The FPL pages are on the left side: turn the left outer knob to the FPL pages and the left inner knob to the number ([Selecting a page](/kln90b/unit/controls-and-display/#selecting-a-page)). The status line writes the number without a space from 10 on (`FPL 0`, `FPL 3`, `FPL10`). The unit keeps the flight plans while it is off; [What the unit keeps while it is off](/kln90b/unit/power-on/#what-the-unit-keeps-while-it-is-off) says what becomes of the procedures in FPL 0.
+The FPL pages are on the left side: you select them as every page ([Selecting a page](/kln90b/unit/controls-and-display/#selecting-a-page)). The status line writes the number without a space from 10 on (`FPL 0`, `FPL 3`, `FPL10`). The unit keeps the flight plans while it is off; [What the unit keeps while it is off](/kln90b/unit/power-on/#what-the-unit-keeps-while-it-is-off) says what becomes of the procedures in FPL 0.
 
 A row holds, from the left, the active leg symbol (FPL 0 only), the number of the waypoint, a separator and the identifier. The separator is a colon for a waypoint that you entered, a period for a waypoint of a <Term t="SID" /> or a <Term t="STAR" />, and a blank for a waypoint of an approach. The numbers count every leg of the flight plan, so the legs of a procedure take numbers too. The row after the last waypoint is the blank waypoint position, where the next waypoint goes.
 
@@ -38,7 +38,7 @@ The symbol is gone in these cases:
 - **An entry is open on the page:** a new waypoint that you are entering, a question about a waypoint, or a waypoint that waits for its approval.
 - **The unit is not NAV ready,** or it has no active leg, which includes an FPL 0 of fewer than two waypoints.
 - **The cursor is on the header of the leg:** the header carries no shaft then.
-- **The page is a numbered flight plan:** FPL 1 to FPL 25 never show it.
+- **The page is a numbered flight plan:** FPL 1 to 25 never show it.
 
 <KlnScreen screen="pages/fpl/fpl-0-no-fix" />
 
@@ -50,11 +50,11 @@ A SID, a STAR and an approach that you load stand in FPL 0 as a header and the w
 
 <KlnScreen screen="pages/fpl/fpl-0-procedures" />
 
-The waypoints of an approach have no separator, and a suffix after the identifier marks the role of a waypoint: `-I` the <Term t="IAF" />, `-F` the <Term t="FAF" />, `-M` the <Term t="MAP" /> and `-H` the <Term t="MAHP" />. The cursor can rest on these waypoints, but the knobs and <kbd>ENT</kbd> cannot change them and answer `INVALID ADD`; <kbd>CLR</kbd> answers `INVALID DEL`.
+The waypoints of an approach have no separator, and a suffix after the identifier marks the role of a waypoint ([The approach in FPL 0](/kln90b/operation/approaches/#the-approach-in-fpl-0)). The cursor can rest on these waypoints, but the knobs and <kbd>ENT</kbd> cannot change them and answer [`INVALID ADD`](/kln90b/operation/approaches/#invalid-add-and-invalid-del); <kbd>CLR</kbd> answers `INVALID DEL`.
 
 <KlnScreen screen="pages/fpl/fpl-0-approach" />
 
-After the missed approach point the page shows the fence, the line `*NO WPT SEQ`: the unit does not sequence past that point by itself ([When the unit does not sequence](/kln90b/operation/sequencing/#when-the-unit-does-not-sequence); what to do is in [Non-precision approaches](/kln90b/operation/approaches/)).
+After the missed approach point the page shows the fence, the line `*NO WPT SEQ`: the unit does not sequence past that point by itself ([When the unit does not sequence](/kln90b/operation/sequencing/#when-the-unit-does-not-sequence); what to do is in [The missed approach](/kln90b/operation/approaches/#the-missed-approach)).
 
 <KlnScreen screen="pages/fpl/fpl-0-approach-end" />
 
@@ -110,7 +110,7 @@ An empty numbered flight plan shows `LOAD FPL 0?` on the top line and the blank 
 
 <KlnScreen screen="pages/fpl/fpl-0-cursor" />
 
-A step of the left inner knob on a waypoint opens a new entry in front of it. The unit fills in the rest of the identifier from the database as you enter it. While the entry is open, the page shows no active leg symbol.
+A step of the left inner knob on a waypoint opens a new entry in front of it. While the entry is open, the page shows no active leg symbol.
 
 <KlnScreen screen="pages/fpl/fpl-0-insert" />
 
@@ -126,7 +126,7 @@ These questions are page states of their own.
 
 **`MOVE ?`** replaces the row of the DME arc waypoint of an approach in FPL 0 when you press <kbd>CLR</kbd> on it, instead of `INVALID DEL`; a second <kbd>CLR</kbd> withdraws it. On the DME arc waypoint of a SID or a STAR, <kbd>CLR</kbd> asks `DEL` instead ([Moving the DME arc waypoint](/kln90b/operation/dme-arcs/#moving-the-dme-arc-waypoint)). {/* kln90b#509: describes the current behavior; the fix makes FPL 0 offer MOVE ? for the arcs of SIDs and STARs too */}
 
-**`DELETE FPL?`** asks about the whole flight plan. <kbd>CLR</kbd> with the cursor off turns the cursor on and replaces the top line with the question, which flashes. It works on every FPL page, FPL 0 and a plan with waypoints included. <kbd>ENT</kbd> deletes every waypoint of the plan and turns the cursor off. A numbered flight plan then shows `LOAD FPL 0?`, and an FPL 0 without waypoints has no active leg. <kbd>CLR</kbd> again withdraws the question and turns the cursor off. A <kbd>CLR</kbd> that you meant for a field on the right page can start it; [`DELETE FPL?`](/kln90b/operation/flight-plans/#delete-fpl) explains how.
+**`DELETE FPL?`** asks about the whole flight plan and replaces the top line, which flashes. It works on every FPL page, FPL 0 and a plan with waypoints included. <kbd>ENT</kbd> deletes every waypoint of the plan. A numbered flight plan then shows `LOAD FPL 0?`, and an FPL 0 without waypoints has no active leg. How you ask for the question and withdraw it, and how a <kbd>CLR</kbd> that you meant for the right page can start it, is in [`DELETE FPL?`](/kln90b/operation/flight-plans/#delete-fpl).
 
 <KlnScreen screen="pages/fpl/fpl-1-delete-question" />
 
@@ -137,4 +137,6 @@ These questions are page states of their own.
 - [Flight plans](/kln90b/operation/flight-plans/): creating a flight plan, adding and deleting waypoints, activating, inverting, storing and deleting a flight plan, and flying and editing the active flight plan.
 - [Procedures in the flight plan](/kln90b/operation/flight-plans/#procedures-in-the-flight-plan) and [SID and STAR procedures](/kln90b/operation/departures-arrivals/): the headers of FPL 0.
 - [Direct-to](/kln90b/operation/direct-to/): flying direct to a waypoint of FPL 0, started with <DirectToKey /> from FPL 0.
+- [Non-precision approaches](/kln90b/operation/approaches/#the-approach-in-fpl-0): the approach in FPL 0, whose waypoints cannot be changed, and [changing or deleting it](/kln90b/operation/approaches/#changing-or-deleting-an-approach) from its header.
+- [DME arcs](/kln90b/operation/dme-arcs/#move--in-fpl-0): `MOVE ?` on the DME arc waypoint.
 - [Page pairs](/kln90b/unit/controls-and-display/#page-pairs): the D/T pages, the REF page and CTR 1 follow the FPL page on the left.

@@ -12,23 +12,23 @@ The MOD pages of the KLN 90B select the course mode: MOD 1 is the page of [leg m
 
 ## The MOD pages: one page for each course mode
 
-The page of the course mode the unit navigates in shows `ACTIVE MODE` at the top. The page of the other mode shows `PRESS ENT` `TO ACTIVATE`, the enter prompt `ENT` flashes in the status line while it is shown, and <kbd>ENT</kbd> changes to its mode, with the cursor on or off. MOD 1 counts Approach Arm-Leg mode and Approach Active-Leg mode as leg mode, and MOD 2 counts Approach Arm-OBS mode as OBS mode.
-
-The CDI scale factor at the bottom is one setting, shown on both pages: a change on one shows on the other.
-
-### With the GPS CRS switch of the aircraft
-
 <Callout kind="availability">
-In some aircraft the unit is installed with a GPS CRS switch that selects leg or OBS mode. Whether your aircraft has one depends on how the unit is installed.
+Whether the aircraft has a GPS CRS switch depends on how the unit is installed. Most installations have one; without it, <kbd>ENT</kbd> on the MOD pages changes the course mode.
 </Callout>
 
-With a GPS CRS switch, the switch changes the course mode and <kbd>ENT</kbd> does nothing on the MOD pages. The page of the mode that is not active shows `PRESS GPS` `CRS FOR` instead, with no enter prompt, and the mode name below completes the sentence: `PRESS GPS CRS FOR OBS` on MOD 2, `PRESS GPS CRS FOR LEG` on MOD 1.
+The page of the course mode the unit navigates in shows `ACTIVE MODE` at the top. With a GPS CRS switch, the page of the other mode shows `PRESS GPS` `CRS FOR` instead, with no enter prompt, and the mode name below completes the sentence: `PRESS GPS CRS FOR OBS` on MOD 2, `PRESS GPS CRS FOR LEG` on MOD 1. The switch changes the course mode, and <kbd>ENT</kbd> does nothing on the MOD pages ([Selecting leg or OBS mode](/kln90b/operation/modes-of-operation/#selecting-leg-or-obs-mode)). MOD 1 counts Approach Arm-Leg mode and Approach Active-Leg mode as leg mode, and MOD 2 counts Approach Arm-OBS mode as OBS mode.
 
 <KlnScreen screen="pages/mod/mod-2-switch" />
 
+The CDI scale factor at the bottom is one setting, shown on both pages: a change on one shows on the other.
+
+### Without a GPS CRS switch
+
+The page of the other mode shows `PRESS ENT` `TO ACTIVATE`, the enter prompt `ENT` flashes in the status line while it is shown, and <kbd>ENT</kbd> changes to its mode, with the cursor on or off ([Without a GPS CRS switch](/kln90b/operation/modes-of-operation/#without-a-gps-crs-switch)). The screens of MOD 1 and MOD 2 below show this prompt.
+
 ## MOD 1: leg mode
 
-MOD 1 shows whether leg mode is active and holds the CDI scale factor. You use it to change from OBS mode back to leg mode and to change the CDI scale factor.
+MOD 1 shows whether leg mode is active and holds the CDI scale factor. You use it to see whether leg mode is active and to change the CDI scale factor; without a GPS CRS switch, you also use it to change back to leg mode.
 
 <KlnScreen screen="pages/mod/mod-1-leg" />
 
@@ -36,19 +36,21 @@ The cursor goes only to the CDI scale factor.
 
 <KlnScreen screen="pages/mod/mod-1-cursor" />
 
-In OBS mode the page asks you to press <kbd>ENT</kbd> for leg mode.
+In OBS mode the page tells you to set the GPS CRS switch to leg mode, `PRESS GPS CRS FOR LEG`; without a switch, it asks you to press <kbd>ENT</kbd>.
+
+<KlnScreen screen="pages/mod/mod-1-switch" />
 
 <KlnScreen screen="pages/mod/mod-1-obs" />
 
-[Selecting leg or OBS mode](/kln90b/operation/modes-of-operation/#selecting-leg-or-obs-mode) and [The CDI scale factor](/kln90b/operation/modes-of-operation/#the-cdi-scale-factor) describe the tasks that use MOD 1.
+[Selecting leg or OBS mode](/kln90b/operation/modes-of-operation/#selecting-leg-or-obs-mode), [The CDI scale factor](/kln90b/operation/modes-of-operation/#the-cdi-scale-factor) and [The CDI scale factor along the approach](/kln90b/operation/approaches/#the-cdi-scale-factor-along-the-approach) describe the tasks that use MOD 1.
 
 ## MOD 2: OBS mode
 
-MOD 2 shows whether OBS mode is active, the selected course and the CDI scale factor. You use it to change to OBS mode and to set the selected course.
+MOD 2 shows whether OBS mode is active, the selected course and the CDI scale factor. You use it to see whether OBS mode is active and to set the selected course; without a GPS CRS switch, you also use it to change to OBS mode.
 
 <KlnScreen screen="pages/mod/mod-2-obs" />
 
-In leg mode the page asks you to press <kbd>ENT</kbd> for OBS mode.
+In leg mode the page shows `PRESS GPS CRS FOR OBS` with a GPS CRS switch and `PRESS ENT` `TO ACTIVATE` without one, as the screen shows.
 
 <KlnScreen screen="pages/mod/mod-2-leg" />
 

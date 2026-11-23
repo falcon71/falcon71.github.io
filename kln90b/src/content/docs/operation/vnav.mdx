@@ -34,10 +34,11 @@ To plan a descent or a climb:
 4. Turn the left outer knob to the waypoint. It shows the VNAV waypoint, which is the active waypoint unless you entered another one. To end the path at another waypoint, enter its identifier and approve its waypoint page.
 5. Turn the left outer knob to the offset and enter the distance before the waypoint where the path is to end.
 6. Turn the left outer knob onto the angle. VNAV starts at the angle the field shows, the angle that takes you from your altitude to the end of the path ([Starting VNAV](#starting-vnav)).
-7. To fly another angle, enter it with the left inner knob, the units first, then the tenths. VNAV starts again at that angle.
-8. Press the left <kbd>CRSR</kbd> to turn the cursor off.
+7. To fly another angle, turn the left inner knob until the units show the number you want.
+8. Turn the left outer knob one step clockwise to the tenths, and turn the left inner knob until they show the number you want. VNAV starts again at that angle.
+9. Press the left <kbd>CRSR</kbd> to turn the cursor off.
 
-[When VNAV ends](#when-vnav-ends) says how you stop VNAV. The <kbd>ALT</kbd> button also shows NAV 4, on the right side and with the cursor on, and the selected altitude is the altitude the altitude alert watches ([Altitude alerting](/kln90b/operation/alerts/#altitude-alerting)). The unit forgets every entry of NAV 4 at power-on.
+[When VNAV ends](#when-vnav-ends) says how you stop VNAV. The <kbd>ALT</kbd> button also shows NAV 4, on the right side and with the cursor on, and the selected altitude is the altitude the altitude alert watches ([Altitude alerting](/kln90b/operation/alerts/#altitude-alerting)). The unit forgets every entry of NAV 4 at power-on ([What the unit keeps while it is off](/kln90b/unit/power-on/#what-the-unit-keeps-while-it-is-off)).
 
 <Callout kind="info">
 Plan an offset of at least 1 NM when the VNAV waypoint is one the unit does not sequence past, such as the last waypoint of FPL 0 or the waypoint of a direct-to that FPL 0 does not hold. With an offset of `00` VNAV does not end there by itself ([When VNAV ends](#when-vnav-ends)). {/* kln90b#516: describes the current behavior; the fix ends VNAV at the waypoint, and this box may go */}
@@ -55,7 +56,7 @@ Without an altitude input the unit does not know your altitude, so you enter it 
 
 VNAV starts when the cursor arrives on the angle, or when you enter a digit of the angle. Either way it starts only from an angle other than `0.0`.
 
-- **The cursor arrives on the angle.** VNAV starts at the angle the field shows. That vertical path runs from where you are, so VNAV is active at once, and the advisory altitude is your present altitude. Only the arrival starts it: while VNAV is armed or active, the cursor on the angle changes nothing.
+- **The cursor arrives on the angle.** VNAV starts at the angle the field shows. That vertical path runs from where you are, so VNAV is active at once, and the advisory altitude is your present altitude. Only the arrival of the cursor starts it: while VNAV is armed or active, the cursor on the angle changes nothing.
 - **You enter an angle.** VNAV starts again at the new angle, whatever its state was. A path steeper than the one from where you are begins ahead of you, and VNAV is armed until you reach the descent point. A shallower one has begun already: VNAV is active at once, with an advisory altitude below yours in a descent.
 
 An angle entered on top of the one the cursor started with is the usual way to fly a standard descent angle: the field first shows the angle for where you are, and you change it to the angle you want. Before VNAV starts, the field works the angle out anew all the time, so at a constant altitude it grows as you come closer. You can also wait until it shows the angle you want and then move the cursor onto it.
@@ -107,7 +108,7 @@ CAL 4 works out the angle for a groundspeed and a vertical speed, or the vertica
 
 ## Which waypoint VNAV can use
 
-The VNAV waypoint is the active waypoint until you enter another one. In leg mode you can also enter any waypoint of FPL 0 after the active waypoint, the waypoints of a loaded SID, STAR or approach included; the path is then measured along the legs. The unit measures each leg as a straight line from waypoint to waypoint, so a DME arc counts as the straight line between its ends, and the path to a waypoint after an arc begins later than the arc's length needs.
+The VNAV waypoint is the active waypoint until you enter another one. In leg mode you can also enter any waypoint of FPL 0 after the active waypoint, the waypoints of a loaded <Term t="SID" />, <Term t="STAR" /> or approach included; the path is then measured along the legs. The unit measures each leg as a straight line from waypoint to waypoint, so a DME arc counts as the straight line between its ends, and the path to a waypoint after an arc begins later than the arc's length needs.
 
 In [OBS mode](/kln90b/operation/modes-of-operation/#obs-mode), and during a direct-to to a waypoint that FPL 0 does not hold, only the active waypoint will do. Without an active waypoint NAV 4 takes no waypoint, and VNAV cannot start ([The active waypoint](/kln90b/operation/modes-of-operation/#the-active-waypoint)).
 
@@ -115,7 +116,7 @@ Entering the waypoint that is already the VNAV waypoint changes nothing. A diffe
 
 ### `INVALID VNV`
 
-`INVALID VNV` in the status line means that VNAV cannot use the waypoint you entered: a waypoint of FPL 0 before the active waypoint, one that is not in FPL 0, or in OBS mode or during a direct-to outside FPL 0 any waypoint but the active one. The unit keeps the VNAV waypoint it had, and a running VNAV goes on. Enter a waypoint VNAV can use ([Which waypoint VNAV can use](#which-waypoint-vnav-can-use)). The message stays in the status line for a few seconds ([The status line](/kln90b/operation/messages/#status-line-messages)).
+`INVALID VNV` in the status line means that VNAV cannot use the waypoint you entered: a waypoint of FPL 0 before the active waypoint, one that is not in FPL 0, or in OBS mode or during a direct-to outside FPL 0 any waypoint but the active one. The unit keeps the VNAV waypoint it had, and a running VNAV goes on. Enter a waypoint VNAV can use ([Which waypoint VNAV can use](#which-waypoint-vnav-can-use)). The message stays in the status line for a few seconds ([Status line messages](/kln90b/operation/messages/#status-line-messages)).
 
 <KlnScreen screen="vnav/invalid-vnv" />
 

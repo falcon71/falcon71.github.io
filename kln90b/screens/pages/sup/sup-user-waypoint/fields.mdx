@@ -1,9 +1,9 @@
 <Field id="ident" title="Identifier of the user waypoint">
-	The identifier of the [user waypoint](/kln90b/operation/user-waypoints/). A `›` in front of it means that the waypoint is the [active waypoint](/kln90b/operation/modes-of-operation/#the-active-waypoint). The identifier cannot be changed after the waypoint is created.
+	The identifier of the [user waypoint](/kln90b/operation/user-waypoints/). The arrow in front of it means that the waypoint is the [active waypoint](/kln90b/operation/modes-of-operation/#the-active-waypoint). The identifier cannot be changed after the waypoint is created.
 </Field>
 
 <Field id="ref" title="Reference waypoint">
-	The waypoint that `RAD` and `DIS` are measured from. For a waypoint that was not made from a reference, the unit fills it in with the VOR nearest to the waypoint after a search, and the field shows dashes until it has found one ([The reference waypoint](/kln90b/pages/int/#the-reference-waypoint)). You can enter any waypoint instead: the unit shows it on its waypoint page for approval, and the page then shows radial and distance from it. A new reference moves nothing. <kbd>CLR</kbd> on `REF` dashes the reference but leaves `RAD` and `DIS` as they were, and a radial or a distance you enter afterwards then moves nothing. {/* kln90b#490: describes the current behavior; the fix keeps RAD and DIS in step with the position */}
+	The waypoint that `RAD` and `DIS` are measured from. For a waypoint that was not made from a reference, the unit fills it in with the VOR nearest to the waypoint after a search, and the field shows underscores until it has found one ([The reference waypoint](/kln90b/pages/int/#the-reference-waypoint)). You can enter any waypoint instead: the unit shows it on its waypoint page for approval, and the page then shows radial and distance from it. A new reference moves nothing. <kbd>CLR</kbd> on `REF` empties the reference, which then shows underscores, but leaves `RAD` and `DIS` as they were, and a radial or a distance you enter afterwards then moves nothing. {/* kln90b#490: describes the current behavior; the fix keeps RAD and DIS in step with the position */}
 </Field>
 
 <Field id="rad" title="Radial from the reference waypoint">

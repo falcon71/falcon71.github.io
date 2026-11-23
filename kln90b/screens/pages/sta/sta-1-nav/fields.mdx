@@ -1,16 +1,7 @@
 <Field id="state" title="GPS state">
-	`STATE` and the GPS state, five characters long:
+	`STATE` and the GPS state, five characters long: `INIT`, `ACQ`, `TRAN`, `NAV`, `NAV A`, `NAV D`, `DEGRD` or `FAILR`. The unit has a position in the four navigation states and in none of the others; `DEGRD` means that the geometry of the satellites is too poor for <Term t="RAIM" /> in the present phase of flight.
 
-	- `ACQ`, acquisition: the unit has no position and is acquiring the satellites it expects to find.
-	- `INIT`, initialization: the unit has no position and searches for satellites without knowing where they are, or collects the almanac data.
-	- `TRAN`, transition: the receiver has a position that the unit has not accepted yet. It lasts about a second.
-	- `NAV`, navigation: the unit has a position from the satellites alone.
-	- `NAV A`, navigation with altitude aiding: the unit has a position and uses the altitude input as one more measurement.
-	- `NAV D`, navigation with data collection: the unit navigates while the receiver collects the ephemeris data of a satellite it has just found.
-	- `DEGRD`, navigation with position degradation: the unit has a position, but the geometry of the satellites is too poor for <Term t="RAIM" /> in the present phase of flight.
-	- `FAILR`, receiver failure: the receiver has failed.
-
-	`FAILR` takes precedence over all other states, `DEGRD` over `NAV D`, and `NAV D` over `NAV A`: `NAV A` does not show while either of the others does, although the altitude input is still in use. [The GPS states](/kln90b/operation/gps-receiver/#the-gps-states) explains how one state follows another.
+	`FAILR` takes precedence over all other states, `DEGRD` over `NAV D`, and `NAV D` over `NAV A`: `NAV A` does not show while either of the others does, although the altitude input is still in use. [The GPS states](/kln90b/operation/gps-receiver/#the-gps-states) says what each state means and how one follows another.
 </Field>
 
 <Field id="sv" title="Satellite number">

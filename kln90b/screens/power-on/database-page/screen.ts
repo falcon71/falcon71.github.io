@@ -1,7 +1,7 @@
 import {defineScreen, place, wait} from '../../../generator/api.ts';
 
 defineScreen(import.meta.url, {
-	title: 'The database page of a current database',
+	title: 'The Database page of a current database',
 	show: 'both',
 	boot: {position: place('KSEA')},
 	steps: async u => {

@@ -10,7 +10,7 @@ import Callout from '../../../components/Callout.astro';
 import Term from '../../../components/Term.astro';
 import CdiScale from '../../../components/drawings/CdiScale.astro';
 
-The KLN 90B always navigates to one waypoint, the active waypoint, in one of two course modes. In leg mode it flies the legs of the flight plan or a direct-to and moves on from waypoint to waypoint by itself; in OBS mode it flies a course that you select through the active waypoint and stays on that waypoint. You change the course mode on MOD 1 and MOD 2, or with the GPS CRS switch where the aircraft has one, and the mode annunciation in the status line shows which mode is active.
+The KLN 90B always navigates to one waypoint, the active waypoint, in one of two course modes. In leg mode it flies the legs of the flight plan or a direct-to and moves on from waypoint to waypoint by itself; in OBS mode it flies a course that you select through the active waypoint and stays on that waypoint. You change the course mode with the GPS CRS switch of the aircraft, often labeled LEG/OBS, or with <kbd>ENT</kbd> on MOD 1 and MOD 2 where the aircraft has no such switch; the mode annunciation in the status line shows which mode is active.
 
 ## The active waypoint
 
@@ -30,11 +30,11 @@ The waypoint pages (APT, VOR, NDB, INT and SUP) show the arrow before the identi
 
 ### No active waypoint
 
-There is no active waypoint while FPL 0 is empty or holds a single waypoint and no direct-to is active. NAV 1 then shows `F L A G` and dashes ([NAV 1 without an active waypoint](/kln90b/pages/nav/#nav-1-without-an-active-waypoint)). The unit stays in leg mode, and MOD 2 cannot change it to OBS mode ([`NO ACTV WPT` in the status line](#no-actv-wpt-in-the-status-line)).
+There is no active waypoint while FPL 0 is empty or holds a single waypoint and no direct-to is active. NAV 1 then shows `F L A G` and dashes ([NAV 1 without an active waypoint](/kln90b/pages/nav/#nav-1-without-an-active-waypoint)). Before the unit is NAV ready no leg is active either, unless the unit kept one while it was off ([What the unit keeps while it is off](/kln90b/unit/power-on/#what-the-unit-keeps-while-it-is-off)). The GPS CRS switch still changes to OBS mode, with `NO ACTV WPT` in the status line; in an aircraft without one, <kbd>ENT</kbd> on MOD 2 cannot change to OBS mode, and the unit stays in leg mode ([`NO ACTV WPT` in the status line](#no-actv-wpt-in-the-status-line)).
 
 ## Leg mode
 
-Leg mode is the normal course mode of the unit, and every power-on starts in it. The unit flies the active leg: the <Term t="DTK" /> is the course of the leg at the point abeam the aircraft, and the D-bar shows how far you are off the leg. Because a leg is a great circle, the desired track of a long leg changes along the way.
+Leg mode is the normal course mode of the unit, and every power-on starts in it. The unit flies the active leg: the <Term t="DTK" /> is the course of the leg at the point abeam the aircraft, and the D-bar shows how far you are off the leg. The desired track is measured with the magnetic variation at the aircraft ([Magnetic variation](#magnetic-variation)). Because a leg is a great circle, the desired track of a long leg changes along the way.
 
 <KlnScreen screen="navigation/leg" />
 
@@ -57,11 +57,27 @@ In OBS mode:
 - [Waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting) still tells you that you are about to reach the active waypoint.
 - An approach in approach arm mode never becomes active, and a change to OBS mode in approach active mode returns the unit to approach arm mode ([The mode annunciations](#the-mode-annunciations)).
 
-A direct-to in OBS mode keeps OBS mode and sets the course through the new waypoint; [Flying a direct-to in OBS mode](/kln90b/operation/direct-to/#flying-a-direct-to-in-obs-mode) explains its two forms. At the fix of a holding pattern or a procedure turn of a SID, a STAR or an approach, the unit tells you with `IF REQUIRED SELECT OBS` that you may need OBS mode ([`IF REQUIRED SELECT OBS`](/kln90b/operation/departures-arrivals/#if-required-select-obs)).
+A direct-to in OBS mode keeps OBS mode and sets the course through the new waypoint; [Flying a direct-to in OBS mode](/kln90b/operation/direct-to/#flying-a-direct-to-in-obs-mode) explains its two forms. At the fix of a holding pattern or a procedure turn of a <Term t="SID" />, a <Term t="STAR" /> or an approach, the unit tells you with `IF REQUIRED SELECT OBS` that you may need OBS mode ([`IF REQUIRED SELECT OBS`](/kln90b/operation/departures-arrivals/#if-required-select-obs)).
 
 ### Selecting leg or OBS mode
 
-MOD 1 is the page of leg mode and MOD 2 the page of OBS mode. The page of the course mode that is active shows `ACTIVE MODE`; the other shows `PRESS ENT` `TO ACTIVATE`, and <kbd>ENT</kbd> changes to its mode, with the cursor on or off.
+You select the course mode with the GPS CRS switch of the aircraft. In an aircraft without that switch, you select it on MOD 1, the page of leg mode, and MOD 2, the page of OBS mode ([Without a GPS CRS switch](#without-a-gps-crs-switch)).
+
+<Callout kind="availability">
+Whether the aircraft has a GPS CRS switch depends on how the unit is installed. Most installations have one; without it, <kbd>ENT</kbd> on the MOD pages changes the course mode.
+</Callout>
+
+To change to OBS mode, set the GPS CRS switch to OBS. The mode annunciation changes to `ENR:` with the course, and MOD 2 shows `ACTIVE MODE`. To change back to leg mode, set it to LEG. [Changing between the modes](#changing-between-the-modes) says which leg the unit flies then.
+
+With a GPS CRS switch the course mode follows the switch, and <kbd>ENT</kbd> does nothing on the MOD pages. The page of the mode that is not active shows `PRESS GPS` `CRS FOR` and the mode below it: MOD 2 in leg mode, MOD 1 in OBS mode.
+
+<KlnScreen screen="pages/mod/mod-2-switch" />
+
+The switch changes to OBS mode even without an active waypoint; the status line shows `NO ACTV WPT`, and the unit is in OBS mode all the same. When the switch selects OBS mode at power-on, the unit shows [the OBS warning page](/kln90b/unit/power-on/#the-obs-warning-page) until the switch selects leg mode.
+
+#### Without a GPS CRS switch
+
+In an aircraft without a GPS CRS switch, MOD 1 is the page of leg mode and MOD 2 the page of OBS mode. The page of the course mode that is active shows `ACTIVE MODE`; the other shows `PRESS ENT` `TO ACTIVATE`, and <kbd>ENT</kbd> changes to its mode, with the cursor on or off.
 
 To change to OBS mode:
 
@@ -71,21 +87,9 @@ To change to OBS mode:
 
 2. Press <kbd>ENT</kbd>. MOD 2 shows `ACTIVE MODE` and the selected course, and the mode annunciation changes to `ENR:` with the course.
 
-To change back to leg mode, turn the left inner knob to MOD 1 and press <kbd>ENT</kbd>. [Changing between the modes](#changing-between-the-modes) says which leg the unit flies then.
+To change back to leg mode, turn the left inner knob to MOD 1 and press <kbd>ENT</kbd>.
 
-#### With the GPS CRS switch of the aircraft
-
-<Callout kind="availability">
-In some aircraft the unit is installed with a GPS CRS switch that selects leg or OBS mode. Whether your aircraft has one depends on how the unit is installed.
-</Callout>
-
-With a GPS CRS switch the course mode follows the switch, and <kbd>ENT</kbd> does nothing on the MOD pages. The page of the mode that is not active shows `PRESS GPS` `CRS FOR` and the mode below it: MOD 2 in leg mode, MOD 1 in OBS mode.
-
-<KlnScreen screen="pages/mod/mod-2-switch" />
-
-The switch changes to OBS mode even without an active waypoint; the status line shows `NO ACTV WPT`, and the unit is in OBS mode all the same. When the switch selects OBS mode at power-on, the unit shows [the OBS warning page](/kln90b/unit/power-on/#the-obs-warning-page) until the switch selects leg mode.
-
-#### `NO ACTV WPT` in the status line
+##### `NO ACTV WPT` in the status line
 
 `NO ACTV WPT` appears for a moment when <kbd>ENT</kbd> on MOD 2 cannot change to OBS mode, because there is no active waypoint ([No active waypoint](#no-active-waypoint)). The unit stays in leg mode. Make a direct-to or activate a flight plan first.
 
@@ -104,7 +108,7 @@ The selected course is the course through the active waypoint that the unit flie
 Where the unit chooses the course, it takes the course of the active leg at the active waypoint. The course line is then the leg you were flying, and the D-bar stays where it was. On a DME arc it is not: the line runs straight through the end of the arc, and the D-bar jumps ([An arc in OBS mode](/kln90b/operation/dme-arcs/#an-arc-in-obs-mode)).
 
 <Callout kind="info">
-Where the unit reads the external indicator, OBS mode takes the course the indicator shows at that moment. If the indicator is not on the desired track, the D-bar jumps when you change to OBS mode. Set the indicator to the course you want before you press <kbd>ENT</kbd>.
+Where the unit reads the external indicator, OBS mode takes the course the indicator shows at that moment. If the indicator is not on the desired track, the D-bar jumps when you change to OBS mode. Set the indicator to the course you want before you change to OBS mode.
 </Callout>
 
 To change the selected course on the unit, the unit must be in OBS mode, and MOD 2 must show `OBS:` with a colon. Then:
@@ -163,7 +167,7 @@ The change of course mode itself raises no course message. The one exception is 
 
 <KlnScreen screen="navigation/obs-to-leg" />
 
-When the active waypoint ahead is the <Term t="IAF" /> or the <Term t="MAHP" /> of an approach and the same fix is also its <Term t="FAF" />, the change to leg mode makes the FAF the active waypoint, so that the approach goes on from there ([Non-precision approaches](/kln90b/operation/approaches/)).
+When the active waypoint ahead is the <Term t="IAF" /> or the <Term t="MAHP" /> of an approach and the same fix is also its <Term t="FAF" />, the change to leg mode makes the FAF the active waypoint, so that the approach goes on from there ([Course reversals and holds in an approach](/kln90b/operation/approaches/#course-reversals-and-holds-in-an-approach)).
 
 ## The mode annunciations
 
@@ -189,7 +193,7 @@ The mode annunciation, in the middle part of the status line, shows the mode of 
 
   <KlnScreen screen="navigation/apr-leg" rows="7" />
 
-The unit arms the approach in FPL 0 by itself near the airport, or when you press the GPS APR switch, and it activates it near the FAF; [Non-precision approaches](/kln90b/operation/approaches/) explains both. The change between leg and OBS mode carries the approach mode with it: `ARM-LEG` becomes `ARM:` and back, and OBS mode in approach active mode returns to `ARM:`.
+The unit arms the approach in FPL 0 by itself near the airport, or when you press the GPS APR switch ([Arming the approach](/kln90b/operation/approaches/#arming-the-approach)), and it activates it near the FAF ([Activating the approach](/kln90b/operation/approaches/#activating-the-approach)). The change between leg and OBS mode carries the approach mode with it: `ARM-LEG` becomes `ARM:` and back, and OBS mode in approach active mode returns to `ARM:`.
 
 Super NAV 5, which has no status line, shows the mode on [its left side](/kln90b/pages/nav/#the-left-side-of-super-nav-5) in the same words, without the colon in OBS mode (`ENR090`). [The status line](/kln90b/unit/controls-and-display/#the-status-line) says when the mode annunciation is blank or covered.
 
@@ -216,22 +220,13 @@ Which scale factors you can select depends on the mode:
 - **Approach arm mode** (`ARM-LEG`, `ARM:`): ±0.30 and ±1.00 NM, and ±5.00 NM only while the scale factor is still ±5.00 NM. Once you leave ±5.00 NM in approach arm mode, you cannot select it again.
 - **Approach active mode** (`APR-LEG`): ±0.30 NM only.
 
-The approach modes change the scale factor by themselves:
-
-- **When the approach arms near the airport:** a scale factor above ±1.00 NM goes down to ±1.00 NM gradually over 30 seconds. A scale factor of ±0.30 NM that you selected stays. MOD 1 and MOD 2 show `1.00` as soon as the change starts.
-- **Approach active mode:** the scale factor goes down gradually as you approach the FAF and is ±0.30 NM at the FAF and after it. MOD 1 and MOD 2 show `0.30` at once.
-- **Back to approach arm mode** (with the GPS APR switch, a direct-to or OBS mode): ±1.00 NM at once.
-- **Back to en route** (when you disarm the approach with the GPS APR switch or remove it from FPL 0): ±5.00 NM at once.
-
-[Non-precision approaches](/kln90b/operation/approaches/) says where the approach arms and activates.
-
-<KlnScreen screen="navigation/arm-leg" />
-
-En route the scale factor changes only when you change it.
+The approach modes narrow and widen the scale factor by themselves ([The CDI scale factor along the approach](/kln90b/operation/approaches/#the-cdi-scale-factor-along-the-approach)). En route the scale factor changes only when you change it.
 
 ## Magnetic variation
 
-The unit shows courses and bearings as magnetic. In its primary coverage area, from 74°N to 60°S, it knows the magnetic variation and uses the variation at the aircraft's position. A VOR's radials use its published magnetic variation instead, and in OBS mode the selected course, the bearing on NAV 1 and the track on NAV 3 use the variation of the active waypoint ([The selected course](#the-selected-course)).
+The unit shows courses and bearings as magnetic. In its primary coverage area, from 74°N to 60°S, it knows the magnetic variation and uses the variation at the aircraft's position. The radials from a VOR on NAV 2 and in the `RAD` field of the INT and SUP pages use its published magnetic variation instead, and in OBS mode the selected course, the bearing on NAV 1 and the track on NAV 3 use the variation of the active waypoint ([The selected course](#the-selected-course)).
+
+In leg mode the desired track uses the variation at the aircraft too, not the published variation of a VOR, so a leg along a charted VOR radial can read a few degrees off the radial: the leg from YKM to TITON along the 284 radial of YKM reads 290°.
 
 ### Flying without a magnetic variation
 

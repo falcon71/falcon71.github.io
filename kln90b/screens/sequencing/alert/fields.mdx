@@ -1,5 +1,5 @@
 <Field id="plan" title="Flight plan">
-	The waypoints of FPL 0, one per row. The arrow in front of KPDX marks the waypoint the active leg starts from, and the arrow in front of KOLM the active waypoint. During [waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting) the arrow of the active waypoint flashes. The blank row at the end is where a waypoint is added.
+	The waypoints of FPL 0, one per row. The tail of the [active leg symbol](/kln90b/pages/fpl/#the-active-leg-symbol) in front of KPDX marks the waypoint the active leg starts from, and its head in front of KOLM the active waypoint. During [waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting) the head flashes. The blank row at the end is where a waypoint is added.
 </Field>
 
 <Field id="from" title="From waypoint">
@@ -7,11 +7,11 @@
 </Field>
 
 <Field id="to" title="Active waypoint">
-	The identifier of the active waypoint. The `›` in front of it marks it as the active waypoint and flashes during [waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting).
+	The identifier of the active waypoint. The arrow in front of it marks it as the active waypoint and flashes during [waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting).
 </Field>
 
 <Field id="cdi" title="D-bar">
-	The D-bar moves along the scale with the cross-track error from the desired track. On the center mark it shows that the aircraft is on the desired track. The center mark shows whether the active waypoint lies ahead of the aircraft (to) or behind it (from).
+	The D-bar shows the cross-track error from the desired track: the bar stands on the side the course lies on, so you fly toward it. Each of the five dots on either side is a fifth of the CDI scale factor, and the outer dot is full scale; beyond it the bar stays at the end. The TO/FROM indicator in the middle shows TO while the active waypoint lies ahead, FROM once it lies behind.
 </Field>
 
 <Field id="dis" title="Distance to the active waypoint">

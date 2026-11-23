@@ -21,7 +21,7 @@ The unit turns the course on the external indicator itself, and the indicator ha
 
 ## `ADJ NAV IND CRS TO nnn°`
 
-The unit asks you to turn the external indicator to the desired track `nnn`, as a magnetic course. It appears in leg mode only, and only where the unit does not turn the indicator. Where the unit reads the indicator, it comes when the indicator is more than 5° off the desired track, at a change to the next leg at once and otherwise after 12 seconds. Where it cannot read the indicator, it comes at a change to the next leg that changes the desired track by more than 5°. It goes once you have read it, and when the indicator is within 5°; where the unit reads the indicator and you leave it off, it comes back unread after 12 seconds. Where the unit cannot read the indicator, a message that came with a turn also goes when the turn ends, and the next change of leg replaces it with the new course. [`ADJ NAV IND CRS TO nnn°`](/kln90b/operation/modes-of-operation/#adj-nav-ind-crs-to-nnn) gives the rules.
+The unit asks you to turn the external indicator to the desired track `nnn`, as a magnetic course. It appears in leg mode only, and only where the unit does not turn the indicator. Turn the indicator to the course shown. The message goes once you have read it, and where the unit reads the indicator, when the indicator is on the course; if you leave the indicator off, it comes back unread. [`ADJ NAV IND CRS TO nnn°`](/kln90b/operation/modes-of-operation/#adj-nav-ind-crs-to-nnn) gives the rules.
 
 ## `AIRSPACE ALERT:`
 
@@ -31,7 +31,7 @@ AIRSPACE ALERT:
  BELOW 7000FT
 ```
 
-The track of the next 10 minutes meets an area of special use airspace, or the area lies within 2 NM, and you are within the area's altitude limits, with the vertical buffer, but not yet inside it laterally. The lines below the first are an example. The second names the area with its type at the right end, the third gives its limits above mean sea level and is missing where the area has none. The message stays while the unit still warns of the area, also after you have read it; it is replaced by `INSIDE SPC USE AIRSPACE` when you enter the area. Check your track and your altitude against the area. [`AIRSPACE ALERT:`](/kln90b/operation/alerts/#airspace-alert) explains the types and the limits and how you turn the alert on.
+Your track ahead meets an area of special use airspace, or passes close to one, and you are within the area's altitude limits, with the vertical buffer, but not yet inside it laterally. The lines below the first are an example. The second names the area with its type at the right end, the third gives its limits above mean sea level and is missing where the area has none. The message stays while the unit still warns of the area, also after you have read it; it is replaced by `INSIDE SPC USE AIRSPACE` when you enter the area. Check your actual track and your altitude against the area. [`AIRSPACE ALERT:`](/kln90b/operation/alerts/#airspace-alert) explains the types and the limits and how you turn the alert on.
 
 ## `ALTITUDE FAIL`
 
@@ -51,7 +51,7 @@ The driver of the ARM annunciator, the remote mounted annunciator of the GPS APR
 
 ## `ARM GPS APPROACH`
 
-The unit is not in approach arm mode, although the <Term t="FAF" /> is the active waypoint and 3 NM away or less: the unit arms an approach by itself, so you disarmed it with the GPS APR switch. Press the GPS APR switch to arm the approach. The message stays while the situation lasts and goes with the arming. [`ARM GPS APPROACH`](/kln90b/operation/approaches/#arm-gps-approach) explains it.
+The unit is not in approach arm mode, although the <Term t="FAF" /> is the active waypoint and 3 NM away or less: the unit arms an approach by itself, usually because you disarmed it with the GPS APR switch. Press the GPS APR switch to arm the approach. The message stays while the situation lasts and goes with the arming. [`ARM GPS APPROACH`](/kln90b/operation/approaches/#arm-gps-approach) explains it.
 
 ## `BAD SATELLITE GEOMETRY` `AND RAIM NOT AVAILABLE`
 
@@ -118,7 +118,7 @@ EEPROM FAILURE: IC1045
  EXTERNAL D-BAR INVALID
 ```
 
-The memory that holds the unit's calibration has failed. Do not fly by the GPS deviation on the CDI or HSI while the message stands; the D-bar on the unit's own screen is right. The unit reads the memory only at power-on, so the message comes at the first power-on after the failure, once the power-on pages are done, and the Self Test page shows `TEST FAIL`. It stays until the failure is repaired, which takes effect at the next power-on. See [The memory of the unit](/kln90b/operation/failures/#the-memory-of-the-unit).
+The memory that holds the unit's calibration has failed. Do not fly by the deviation of the unit on the CDI or HSI while the message stands; the D-bar on the unit's own screen is right. The unit reads the memory only at power-on, so the message comes at the first power-on after the failure, once the power-on pages are done, and the Self Test page shows `TEST FAIL`. It stays until the failure is repaired, which takes effect at the next power-on. See [The memory of the unit](/kln90b/operation/failures/#the-memory-of-the-unit).
 
 ## `IF REQUIRED SELECT OBS`
 
@@ -180,7 +180,7 @@ The first position after a power-on is more than 2 NM from the position stored a
 
 ## `PRESS ALT TO SET BARO`
 
-The unit has changed to an approach arm mode, and you have not shown the ALT page since. Press <kbd>ALT</kbd>, check the baro setting, and press <kbd>ALT</kbd> again; the message goes once the ALT page has been shown. It does not appear where an air data system supplies the baro setting. [`PRESS ALT TO SET BARO`](/kln90b/operation/approaches/#press-alt-to-set-baro) explains it.
+The unit has changed to an approach arm mode, and you have not shown the ALT page since. Press <kbd>ALT</kbd>, check the [baro setting](/kln90b/operation/alerts/#the-baro-setting), and press <kbd>ALT</kbd> again; the message goes once the ALT page has been shown. It does not appear where an air data system supplies the baro setting. [`PRESS ALT TO SET BARO`](/kln90b/operation/approaches/#press-alt-to-set-baro) explains it.
 
 {/* kln90b#513: describes the current behavior; the fix makes the message come only on the change from an en route mode into an arm mode */}
 

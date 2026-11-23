@@ -1,7 +1,7 @@
 import {defineScreen, place, wait} from '../../../generator/api.ts';
 
 defineScreen(import.meta.url, {
-	title: 'The database page of an expired database',
+	title: 'The Database page of an expired database',
 	show: 'both',
 	// A date after the end of the cycle of the database, which is how the unit finds the database expired
 	boot: {position: place('KSEA'), start: new Date('2026-07-01T12:00:00Z')},

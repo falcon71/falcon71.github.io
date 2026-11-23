@@ -8,15 +8,17 @@ sidebar:
 import KlnScreen from '../../../components/KlnScreen.astro';
 import Term from '../../../components/Term.astro';
 
-The VOR page of the KLN 90B shows one VOR: its frequency, its class, the published magnetic variation of the station and its position. You use it to look up a station and to define a VOR of your own. Entering an identifier, scanning and approving the page work as on every waypoint page; see [Waypoints and the database](/kln90b/operation/waypoints/).
+The VOR page of the KLN 90B shows one VOR: its frequency, its class, the published magnetic variation of the station and its position. You use it to look up a station and to define a VOR of your own.
 
 ## VOR page: frequency, class and position of a station
+
+Entering an identifier, the scan, duplicate identifiers and approving the waypoint page work as on every waypoint page ([Waypoints and the database](/kln90b/operation/waypoints/)).
 
 The VOR page belongs to the right side and has a single page. The top line shows the identifier, a `D` when the station has DME, and at the right end the rank of a [nearest](#a-nearest-vor) VOR.
 
 <KlnScreen screen="pages/vor/vor-pae" />
 
-On a VOR of the database you can change only the identifier; on a nearest VOR the cursor can also rest on the rank (see below). The name, the class, the frequency, the published magnetic variation and the position are read-only. A `›` in the first column marks the VOR as the [active waypoint](/kln90b/operation/modes-of-operation/#the-active-waypoint); it flashes during [waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting). When the active waypoint is a VOR, the [ACT pages](/kln90b/pages/act/) show this page for it.
+On a VOR of the database you can change only the identifier; on a nearest VOR the cursor can also rest on the rank (see below). The name, the class, the frequency, the published magnetic variation and the position are read-only. The arrow in the first column marks the VOR as the [active waypoint](/kln90b/operation/modes-of-operation/#the-active-waypoint); it flashes during [waypoint alerting](/kln90b/operation/sequencing/#waypoint-alerting). When the active waypoint is a VOR, the [ACT pages](/kln90b/pages/act/) show this page for it.
 
 The identifier you type finds VOR, VOR/DME and VORTAC stations, DME-only stations and your own user-defined VORs. The scan does not make that distinction: it steps through every station of the complete list, so it also stops on any localizer, VOT or TACAN-only station that the navigation data lists. Such a station shows no `D`, and an identifier of more than three characters, a localizer's, is cut to three. {/* kln90b#489: describes the current behavior; the fix makes the scan skip localizers and VOTs, as typed entry does */}
 
@@ -24,11 +26,11 @@ When the complete list holds no VOR, the page shows empty fields and the status 
 
 ### A nearest VOR
 
-The page changes when you reach a VOR through the [nearest list](/kln90b/operation/nearest/): `NR` (for nearest) and the rank, counted from `NR 1` for the nearest VOR, appear at the right of the top line, and the bearing and the distance from the aircraft replace the position. A VOR that you enter by its identifier shows the plain page, even when it is the nearest.
+The page changes when you reach a VOR through the [nearest list](/kln90b/operation/nearest/): the rank (`NR 2`) appears at the right of the top line, and the bearing and the distance from the aircraft replace the position. A VOR that you enter by its identifier shows the plain page, even when it is the nearest.
 
 <KlnScreen screen="pages/vor/vor-nearest" />
 
-With the cursor on the rank, the page follows the list: it shows whichever VOR holds that rank as the aircraft moves. Entering another identifier turns the page back into the plain VOR page.
+With the cursor on the rank, the page follows the list ([The cursor on the rank](/kln90b/operation/nearest/#the-cursor-on-the-rank)). Entering another identifier turns the page back into the plain VOR page.
 
 ### A user-defined VOR
 

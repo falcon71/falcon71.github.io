@@ -1,9 +1,9 @@
 <Field id="ident" title="Identifier of the user-defined intersection">
-	The identifier of the [user-defined intersection](/kln90b/operation/user-waypoints/). A `›` in front of it means that the intersection is the [active waypoint](/kln90b/operation/modes-of-operation/#the-active-waypoint). The unit lists it with the intersections of the database, in alphabetical order. The identifier cannot be changed after the intersection is created.
+	The identifier of the [user-defined intersection](/kln90b/operation/user-waypoints/). The arrow in front of it means that the intersection is the [active waypoint](/kln90b/operation/modes-of-operation/#the-active-waypoint). The unit lists it with the intersections of the database, in alphabetical order. The identifier cannot be changed after the intersection is created.
 </Field>
 
 <Field id="ref" title="Reference waypoint">
-	The waypoint that `RAD` and `DIS` are measured from: the VOR nearest to the intersection, which the unit finds after a search ([The reference waypoint](/kln90b/pages/int/#the-reference-waypoint)), or the waypoint of any type that you entered. A user VOR counts as a VOR. A new reference moves nothing: the page then shows radial and distance from it. <kbd>CLR</kbd> on `REF` dashes the reference but leaves `RAD` and `DIS` as they were, and a radial or a distance you enter afterwards then moves nothing. {/* kln90b#490: describes the current behavior; the fix keeps RAD and DIS in step with the position */} The reference is not stored with the intersection.
+	The waypoint that `RAD` and `DIS` are measured from: the VOR nearest to the intersection, which the unit finds after a search ([The reference waypoint](/kln90b/pages/int/#the-reference-waypoint)), or the waypoint of any type that you entered. A user VOR counts as a VOR. A new reference moves nothing: the page then shows radial and distance from it. <kbd>CLR</kbd> on `REF` empties the reference, which then shows underscores, but leaves `RAD` and `DIS` as they were, and a radial or a distance you enter afterwards then moves nothing. {/* kln90b#490: describes the current behavior; the fix keeps RAD and DIS in step with the position */} The reference is not stored with the intersection.
 </Field>
 
 <Field id="rad" title="Radial from the reference waypoint">

@@ -17,12 +17,12 @@ The airports, the VORs and the NDBs each have a nearest list; intersections and 
 What a list holds depends on the waypoint type:
 
 - **Airports** that meet the nearest airport criteria of SET 3 ([Setting the nearest airport criteria](#setting-the-nearest-airport-criteria)). A heliport never counts, nor does a closed airport.
-- **VORs** of the types VOR, VOR/DME and VORTAC, whatever their class, terminal VORs included. A DME without a VOR, a localizer, a VOT and a TACAN-only station are not in the list. NAV 2 shows the nearest VOR from a search of its own, which looks only for low and high altitude VORs.
+- **VORs** of the types VOR, VOR/DME and VORTAC, whatever their class, terminal VORs included. A DME without a VOR, a localizer, a VOT and a TACAN-only station are not in the list. NAV 2 shows the nearby VOR from a search of its own, which looks only for low and high altitude VORs.
 - **NDBs** of every kind.
 
 Your own waypoints take part in the list of their type, mixed in with those of the database: a user-defined VOR, NDB or airport competes for its place by distance like any other. A user waypoint therefore shows `NR 1` when it is the nearest.
 
-The lists measure from the position of the unit. Before the unit is NAV ready, or after it has lost its position, the unit keeps the last position it knew, so that the lists and the bearings and distances of the nearest pages stay where the last fix left them. Unlike the other pages that need a position ([Initializing the position and the time](/kln90b/unit/power-on/#initializing-the-position-and-the-time)), they show no dashes then.
+The lists measure from the position of the unit. Before the unit is NAV ready, or while it flags its navigation, the unit keeps the last position it knew, so that the lists and the bearings and distances of the nearest pages stay where the last fix left them. Unlike the other pages that need a position ([Initializing the position and the time](/kln90b/unit/power-on/#initializing-the-position-and-the-time)), they show no dashes then.
 
 The unit recalculates the distance, the bearing and the order every second, so the rank of a waypoint changes within a second when another one comes nearer. It looks for waypoints that have come into range or dropped out every few seconds, so a waypoint enters or leaves the list with that delay. A list can be empty for a few seconds only when you load an aircraft with the unit already running, which shows its pages as soon as its data has loaded.
 
@@ -87,11 +87,11 @@ To show the nearest airport:
 
 You need no message for this: when the unit holds none, the MSG page is blank and <kbd>ENT</kbd> works all the same. When it holds messages, the page shows them, and <kbd>ENT</kbd> takes you on from the message page that is shown ([Messages](/kln90b/operation/messages/#showing-the-nearest-airport-from-the-msg-page)).
 
-The airport is the first entry of the nearest airport list, so the nearest airport criteria and the 200 NM apply. The page is an ordinary nearest page: with the right inner knob pulled out, one step clockwise shows `NR 2`, and the page stays on this airport when another one becomes nearer. To keep it on the nearest airport, put the cursor on the rank ([The cursor on the rank](#the-cursor-on-the-rank)). To fly there, see [Flying to a nearest waypoint](#flying-to-a-nearest-waypoint).
+The airport is the first entry of the nearest airport list, so the nearest airport criteria and the range of the list apply. The page is an ordinary nearest page: with the right inner knob pulled out, one step clockwise shows `NR 2`, and the page stays on this airport when another one becomes nearer. To keep it on the nearest airport, put the cursor on the rank ([The cursor on the rank](#the-cursor-on-the-rank)). To fly there, see [Flying to a nearest waypoint](#flying-to-a-nearest-waypoint).
 
 ## No airport in the nearest list
 
-When no airport meets the criteria within 200 NM, <kbd>MSG</kbd> and <kbd>ENT</kbd> show no airport: the blank MSG page stays on the screen, and the unit gives no message. Press <kbd>MSG</kbd> to close it ([Reading the messages](/kln90b/operation/messages/#reading-the-messages)).
+When no airport meets the criteria within the range of the list, <kbd>MSG</kbd> and <kbd>ENT</kbd> show no airport: the blank MSG page stays on the screen, and the unit gives no message. Press <kbd>MSG</kbd> to close it ([Reading the messages](/kln90b/operation/messages/#reading-the-messages)).
 
 {/* kln90b#494: describes the current behavior; the fix makes ENT remove the MSG page and leave both sides as they were */}
 

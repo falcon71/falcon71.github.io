@@ -1,10 +1,10 @@
 <Field id="to" title="Active waypoint">
-	The `›` and the active waypoint after it. In OBS mode the waypoint stays the active waypoint when you pass it, and the place in front of the arrow stays blank, because the leg of OBS mode starts at no waypoint.
+	The arrow and the active waypoint after it. In OBS mode the waypoint stays the active waypoint when you pass it, and the place in front of the arrow stays blank, because the leg of OBS mode starts at no waypoint.
 </Field>
 
 <Field id="obs" title="Selected course">
 	<p>In OBS mode `OBS` and the [selected course](/kln90b/operation/modes-of-operation/#the-selected-course) take the place of <Term t="DTK">`DTK`</Term>, in whole degrees magnetic. With a colon (`OBS:`), you set the course on the unit: with the cursor on it, each step of the inner knob turns it by 1°, and the course takes effect at once without <kbd>ENT</kbd>. Without a colon the unit takes the course from the external indicator, and the cursor skips the field.</p>
-	<p>The number flashes while the external indicator is set too far off the course ([The selected course](/kln90b/operation/modes-of-operation/#the-selected-course)).</p>
+	<p>The number flashes while an external indicator that the unit reads is more than 10° off it ([The course messages](/kln90b/operation/modes-of-operation/#the-course-messages)).</p>
 </Field>
 
 <Field id="tk" title="Actual track">
@@ -24,6 +24,6 @@
 	The minimum en route safe altitude: the highest minimum safe altitude of every sector between the aircraft and the active waypoint and, with an active waypoint of FPL 0 in leg mode, along the rest of FPL 0 to the destination or the missed approach point. In OBS mode it covers only the way to the active waypoint. It is never lower than `MSA`. It shows `-----` without an active waypoint and when a sector lies outside the data of the unit. Without a position it still shows a value, worked out from the last position the unit knew. {/* kln90b#502: describes the current behavior; the fix makes ESA show dashes without a position */} [Minimum safe altitudes](/kln90b/pages/nav/#minimum-safe-altitudes) explains the sectors.
 </Field>
 
-<Field id="crsr" title="Cursor annunciation">
+<Field id="crsr" title="CRSR annunciation">
 	<Term t="CRSR">`CRSR`</Term> replaces the page identification while the cursor of the side is on. Pressing the <kbd>CRSR</kbd> button of that side turns it off again.
 </Field>

@@ -8,7 +8,7 @@ sidebar:
 import KlnScreen from '../../../components/KlnScreen.astro';
 import Term from '../../../components/Term.astro';
 
-The TRI pages plan a trip from the true airspeed, the wind and the fuel flow that you enter: they give the distance, the time, the fuel, the safe altitude and the airspaces along the route. The Calculator pages calculate altitudes, airspeeds, wind, descent angles, temperatures, times and sunrise. One time zone, chosen on any page that shows a time, applies to every time the unit shows, and D/T 4 shows the flight timer that SET 4 controls.
+The TRI pages plan a trip from the true airspeed, the wind and the fuel flow that you enter: they give the distance, the time, the fuel, the safe altitude and the airspaces along the route. The Calculator pages calculate altitudes, airspeeds, wind, descent angles, temperatures, times and sunrise. One system time zone, chosen on any page that shows the clock, applies to the clock and to the times of flight (ETAs, departure time, present time), and D/T 4 shows the flight timer that SET 4 controls.
 
 ## Planning a trip
 
@@ -50,7 +50,7 @@ Enter the fuel flow and the reserve fuel in the same unit, whichever you like; t
 
 TRI 1 computes its figures when you approve the waypoint or select the page, and does not follow the aircraft. Select the page again for the figures of the moment ([The TRI pages](/kln90b/pages/tri/#the-tri-pages-planning-a-trip)). {/* kln90b#528: describes the current behavior; the fix updates the figures while the page is shown */}
 
-To see the time and the fuel at a speed other than the computed one, such as your climb speed, move the cursor to the `GS` and enter that speed.
+To see the time and the fuel at a speed other than the computed one, such as your climb speed, move the cursor to `GS`, the groundspeed, and enter that speed.
 
 ### Planning between two waypoints
 
@@ -97,7 +97,7 @@ The time zone and the flight timer decide what the times on D/T 4 and the other 
 
 ### The time zone
 
-The unit has one time zone, the system time zone, for every page that shows a time: D/T 2, D/T 4, SET 2, STA 5 and the Self Test page all show and change the same zone. Every time the unit shows (the ETAs, the departure time and the present time) is in that zone at once, and the unit keeps the zone while it is off.
+The unit has one time zone, the system time zone, for every page that shows the clock: D/T 2, D/T 4, SET 2, STA 5 and the Self Test page all show and change the same zone. The clock and the times of flight (the ETAs, the departure time and the present time) are in that zone at once, and the unit keeps the zone while it is off.
 
 To choose the system time zone:
 
@@ -142,9 +142,9 @@ The flight timer counts the time of your flight. D/T 4 shows the time at which i
 
 <KlnScreen screen="pages/dt/dt-4" />
 
-With `GS > 30kt`, the choice of a new unit, the timer counts while the groundspeed is 30 kt or more. {/* kln90b#522: describes the current behavior; the fix makes the timer start above 30 kt as SET 4 says */} Below that speed it stops and keeps its count, and it goes on from there when you speed up again, so a stop on the way does not reset it. `DEP` is the time at which the groundspeed first reached 30 kt.
+With `GS > 30kt`, the choice of a new unit, the timer counts while the groundspeed is 30 kt or more. {/* kln90b#522: describes the current behavior; the fix makes the timer start above 30 kt as SET 4 says */} Below that speed it stops and keeps its count, and it goes on from there when you speed up again, so a stop on the way does not reset it. `DEP` is the time at which the groundspeed first reached that speed.
 
-With `POWER IS ON`, the timer counts for as long as the unit is on, and `DEP` is the time of its first second. Where you choose `POWER IS ON` while the unit is on, the timer goes on from its count and counts every second from then on; the time below 30 kt before your choice stays uncounted, and `DEP` keeps the departure time it had.
+With `POWER IS ON`, the timer counts for as long as the unit is on, and `DEP` is the time of its first second. Where you choose `POWER IS ON` while the unit is on, the timer goes on from its count and counts every second from then on; the time below that speed before your choice stays uncounted, and `DEP` keeps the departure time it had.
 
 To choose when the flight timer counts:
 
@@ -177,6 +177,8 @@ CAL 4 gives you the angle that you then enter on NAV 4; [The angle](/kln90b/oper
 
 CAL 3 works out the wind from the difference between the speed you fly through the air and the speed over the ground. It needs the true airspeed, which CAL 2 calculates from the calibrated airspeed, the altitude, the altimeter setting and the total air temperature. You need a GPS fix and the aircraft in steady flight, because the wind is worked out from the groundspeed and the track at that moment.
 
+Where CAL 3 shows a `HDG` line, you enter the heading in steps 6 to 8. Where the unit takes the heading from the aircraft, that line stays blank, and you go on with step 9.
+
 To find the wind in flight:
 
 1. Turn the left outer knob to the CAL pages and the left inner knob to CAL 2.
@@ -187,8 +189,10 @@ To find the wind in flight:
 
 4. Press the left <kbd>CRSR</kbd> to turn the cursor off.
 5. Turn the left inner knob one step to CAL 3. CAL 2 hands its true airspeed to CAL 3 whenever it is shown, so the true airspeed on CAL 3 is now the one you found.
-6. Where CAL 3 shows a `HDG` line, press the left <kbd>CRSR</kbd>, enter the magnetic heading you are flying and turn the cursor off. Where the unit takes the heading from the aircraft, that line stays blank.
-7. Read the wind. The unit works it out again every second, so keep the heading steady until the figures settle.
+6. Press the left <kbd>CRSR</kbd>. The cursor is on the heading.
+7. Enter the magnetic heading you are flying with the left knobs.
+8. Press the left <kbd>CRSR</kbd> to turn the cursor off.
+9. Read the wind. The unit works it out again every second, so keep the heading steady until the figures settle.
 
 <KlnScreen screen="pages/cal/cal-3" />
 
